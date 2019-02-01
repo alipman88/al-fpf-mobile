@@ -63,3 +63,7 @@ When you open the developer menu in the app, and click to start debugging, the R
 ## Redux
 
 Redux boilerplate handled by using [https://redux-starter-kit.js.org/](https://redux-starter-kit.js.org/)
+
+## Linting & Prettier
+
+This project uses ESLint & prettier. The project has the necessary dependencies, but you can also configure your editor to leverage the eslint config & to use prettier formatting on save
