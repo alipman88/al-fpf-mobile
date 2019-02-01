@@ -39,6 +39,7 @@
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		9AD2E5EB2204AE9B0065600F /* libRNSensitiveInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD2E5EA2204AE8E0065600F /* libRNSensitiveInfo.a */; };
+		A31A9C07AC8E48C5A15E034F /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 64016891F8CD42D88B3017AB /* libRNGestureHandler.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		CB5648833EA2423591E20C92 /* libReactNativeConfig-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6CD66389FFD4D3E950D05ED /* libReactNativeConfig-tvOS.a */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
@@ -284,6 +285,13 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		9A2EC5702204E65300B220DD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 253516970FCB4906A990C2E4 /* RNGestureHandler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNGestureHandler;
+		};
 		9AD2E5D52204A88F0065600F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
@@ -362,10 +370,12 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = FrontPorchForum/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = FrontPorchForum/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		253516970FCB4906A990C2E4 /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNGestureHandler.xcodeproj; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* FrontPorchForum-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FrontPorchForum-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* FrontPorchForum-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FrontPorchForum-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
+		64016891F8CD42D88B3017AB /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		8E64BD6A31F548FF8A269EBA /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
@@ -405,6 +415,7 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				1C735EB7A9A44BE6A0F69240 /* libReactNativeConfig.a in Frameworks */,
+				A31A9C07AC8E48C5A15E034F /* libRNGestureHandler.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -597,6 +608,7 @@
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				8E64BD6A31F548FF8A269EBA /* ReactNativeConfig.xcodeproj */,
+				253516970FCB4906A990C2E4 /* RNGestureHandler.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -636,11 +648,20 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		9A2EC56D2204E65300B220DD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9A2EC5712204E65300B220DD /* libRNGestureHandler.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		9AD2E5AF2204A88E0065600F /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
 				ECE79D427B77446784A20CD1 /* libReactNativeConfig.a */,
 				C6CD66389FFD4D3E950D05ED /* libReactNativeConfig-tvOS.a */,
+				64016891F8CD42D88B3017AB /* libRNGestureHandler.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -833,6 +854,10 @@
 				{
 					ProductGroup = 9AD2E5DD2204A88F0065600F /* Products */;
 					ProjectRef = 8E64BD6A31F548FF8A269EBA /* ReactNativeConfig.xcodeproj */;
+				},
+				{
+					ProductGroup = 9A2EC56D2204E65300B220DD /* Products */;
+					ProjectRef = 253516970FCB4906A990C2E4 /* RNGestureHandler.xcodeproj */;
 				},
 				{
 					ProductGroup = 9AD2E5E62204AE8E0065600F /* Products */;
@@ -1074,6 +1099,13 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		9A2EC5712204E65300B220DD /* libRNGestureHandler.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNGestureHandler.a;
+			remoteRef = 9A2EC5702204E65300B220DD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		9AD2E5D62204A88F0065600F /* libjsi.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1271,12 +1303,14 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
+					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 				);
 				INFOPLIST_FILE = FrontPorchForumTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -1298,12 +1332,14 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
+					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 				);
 				INFOPLIST_FILE = FrontPorchForumTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -1328,6 +1364,7 @@
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 					"$(SRCROOT)/../../React/**",
 					"$(SRCROOT)/../react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 				);
 				INFOPLIST_FILE = FrontPorchForum/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
@@ -1355,6 +1392,7 @@
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 					"$(SRCROOT)/../../React/**",
 					"$(SRCROOT)/../react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 				);
 				INFOPLIST_FILE = FrontPorchForum/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
@@ -1387,11 +1425,13 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
+					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 				);
 				INFOPLIST_FILE = "FrontPorchForum-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -1422,11 +1462,13 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
+					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 				);
 				INFOPLIST_FILE = "FrontPorchForum-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -1456,11 +1498,13 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
+					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 				);
 				INFOPLIST_FILE = "FrontPorchForum-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -1490,11 +1534,13 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
+					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 				);
 				INFOPLIST_FILE = "FrontPorchForum-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
