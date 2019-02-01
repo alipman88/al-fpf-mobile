@@ -18,6 +18,12 @@ export ANDROID_HOME=$HOME/Library/Android/sdk
 
 ### JS tools
 
+Install watchman so the node server that delivers our JS code can work.
+
+```
+brew install watchman
+```
+
 Then install the node dependencies using yarn.
 
 ```
@@ -53,3 +59,7 @@ brew cask install react-native-debugger
 Then before running `yarn ios` or `yarn android`, start the node server yourself by running `yarn startdebug` then run the respected command to run on iOS or Android.
 
 When you open the developer menu in the app, and click to start debugging, the React Native Debugger app will launch.
+
+## Redux
+
+Redux boilerplate handled by using [https://redux-starter-kit.js.org/](https://redux-starter-kit.js.org/)
