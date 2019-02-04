@@ -7,4 +7,17 @@ describe('currentUser reducer', () => {
       accessToken: null
     })
   })
+
+  test('setAccessToken sets the token', () => {
+    const state = {
+      secured: {
+        currentUser: currentUser.reducer(
+          undefined,
+          currentUser.actions.setAccessToken('token')
+        )
+      }
+    }
+
+    expect(currentUser.selectors.getAccessToken(state)).toEqual('token')
+  })
 })
