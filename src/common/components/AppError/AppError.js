@@ -22,7 +22,7 @@ export class AppError extends React.Component {
         autoHide={false}
         icon='auto'
         position='top'
-        onPress={() => this.props.setAppError(null)}
+        onPress={() => this.props.setAppError('')}
       />
     )
   }
