@@ -1,10 +1,10 @@
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux'
-// import { AsyncStorage } from 'react-native'
+import { AsyncStorage } from 'react-native'
 import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk'
 import { persistStore, persistReducer } from 'redux-persist'
 import createSensitiveStorage from 'redux-persist-sensitive-storage'
-// import mainReducer from './mainReducer'
+import mainReducer from './mainReducer'
 import securedReducer from './securedReducer'
 
 const loggerMiddleware = createLogger({
@@ -16,10 +16,11 @@ const sensitiveStorage = createSensitiveStorage({
   sharedPreferencesName: 'frontPorchForumSharedPrefs'
 })
 
-// const mainPersistConfig = {
-//   key: 'main',
-//   storage: AsyncStorage
-// }
+const mainPersistConfig = {
+  key: 'main',
+  storage: AsyncStorage,
+  blacklist: ['appError']
+}
 
 const securedPersistConfig = {
   key: 'token',
@@ -27,7 +28,7 @@ const securedPersistConfig = {
 }
 
 const reducer = combineReducers({
-  // main: persistReducer(mainPersistConfig, mainReducer),
+  main: persistReducer(mainPersistConfig, mainReducer),
   secured: persistReducer(securedPersistConfig, securedReducer)
 })
 

@@ -1,4 +1,4 @@
-import { createSlice } from 'redux-starter-kit'
+import { createSlice, createSelector } from 'redux-starter-kit'
 
 export const currentUser = createSlice({
   slice: 'currentUser',
@@ -6,9 +6,17 @@ export const currentUser = createSlice({
     accessToken: null
   },
   reducers: {
-    setAccessToken: (state, accessToken) => ({
+    setAccessToken: (state, action) => ({
       ...state,
-      accessToken
+      accessToken: action.payload
     })
   }
 })
+
+currentUser.selectors = {
+  ...currentUser.selectors,
+  getAccessToken: createSelector(
+    ['secured.currentUser'],
+    currentUser => currentUser.accessToken
+  )
+}

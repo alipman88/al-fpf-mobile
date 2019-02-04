@@ -1,12 +1,8 @@
-import React from 'react'
-import { Text } from '@components/Text'
+import { connect } from 'react-redux'
+import { SplashScreen as SplashScreenComponent } from './SplashScreen'
+import { appError } from '@components/AppError/slice'
 
-export class SplashScreen extends React.Component {
-  componentDidMount() {
-    // TODO: check login state, and push user to home screen
-  }
-
-  render() {
-    return <Text>hi</Text>
-  }
-}
+export const SplashScreen = connect(
+  null,
+  { setAppError: appError.actions.setAppError }
+)(SplashScreenComponent)
