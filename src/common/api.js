@@ -7,3 +7,18 @@ export const api = axios({
     Authorization: Config.API_KEY
   }
 })
+
+export const apiRequestThunk = (
+  request,
+  requestAction,
+  successAction,
+  failureAction
+) => async dispatch => {
+  dispatch(requestAction())
+  try {
+    const response = await request()
+    dispatch(successAction(response))
+  } catch (e) {
+    dispatch(failureAction(e))
+  }
+}
