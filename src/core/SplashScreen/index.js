@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { Text } from '@components/Text'
 
 export class SplashScreen extends React.Component {
   componentDidMount() {
