@@ -1,9 +1,11 @@
 import { createSwitchNavigator, createAppContainer } from 'react-navigation'
 import { SplashScreen } from './SplashScreen'
+import { UnauthenticatedStack } from './UnauthenticatedStack'
 
 const SwitchNavigator = createSwitchNavigator(
   {
-    SplashScreen
+    SplashScreen,
+    UnauthenticatedStack
   },
   {
     initialRouteName: 'SplashScreen'

@@ -1,17 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { TouchableOpacity } from 'react-native'
+import { ScreenContainer } from '@components/ScreenContainer'
 import { Text } from '@components/Text'
 
 export class SplashScreen extends React.Component {
-  componentDidMount() {
-    this.props.setAppError('Test')
-  }
-
   render() {
-    return <Text>hi</Text>
+    return (
+      <ScreenContainer>
+        <Text>hi</Text>
+        <TouchableOpacity
+          onPress={() => this.props.navigation.navigate('Login')}
+        >
+          <Text>Login Screen</Text>
+        </TouchableOpacity>
+      </ScreenContainer>
+    )
   }
 }
 
 SplashScreen.propTypes = {
-  setAppError: PropTypes.func.isRequired
+  navigation: PropTypes.object
 }

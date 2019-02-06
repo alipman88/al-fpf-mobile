@@ -6,17 +6,15 @@ import { store, persistor } from '@common/store'
 import { SwitchNavigatorContainer } from '@core/switchNavigator'
 import { AppError } from '@components/AppError'
 
-import { Container } from './styledComponents'
-
 export class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <Container>
+          <React.Fragment>
             <SwitchNavigatorContainer />
             <AppError />
-          </Container>
+          </React.Fragment>
         </PersistGate>
       </Provider>
     )
