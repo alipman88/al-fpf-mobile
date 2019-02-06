@@ -4,6 +4,6 @@ import Config from 'react-native-config'
 export const api = axios.create({
   baseURL: Config.API_HOST,
   headers: {
-    'X-API-KEY': Config.API_KEY
+    'X-API-KEY': `Bearer ${Config.API_KEY}`
   }
 })
