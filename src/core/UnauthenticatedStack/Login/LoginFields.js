@@ -3,11 +3,14 @@ import PropTypes from 'prop-types'
 import { TouchableOpacity } from 'react-native'
 import { TextInput } from '@components/TextInput'
 import { Button } from '@components/Button'
+import logoImage from '@assets/images/fpf-logo.png'
 
 import {
   BottomContainer,
   Container,
   FieldContainer,
+  Logo,
+  LogoContainer,
   ResetPassword
 } from './styledComponents'
 
@@ -22,6 +25,9 @@ export const LoginFields = ({
 }) => {
   return (
     <Container>
+      <LogoContainer>
+        <Logo source={logoImage} resizeMode='contain' />
+      </LogoContainer>
       <FieldContainer>
         <TextInput
           label='Email'

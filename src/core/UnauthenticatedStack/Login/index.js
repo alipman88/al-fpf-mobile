@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { Platform } from 'react-native'
 
 import { KeyboardAwareScrollView } from '@components/KeyboardAwareScrollView'
 import { api } from '@common/api'
@@ -14,8 +15,8 @@ import { LoginFields } from './LoginFields'
 
 export const LoginComponent = ({ setAppError, setAccessToken }) => {
   return (
-    <ScreenContainer>
-      <KeyboardAwareScrollView>
+    <ScreenContainer grassBackground>
+      <KeyboardAwareScrollView enableOnAndroid>
         <Formik
           initialValues={{ email: '', password: '' }}
           onSubmit={async (values, actions) => {
