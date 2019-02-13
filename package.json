@@ -2,6 +2,11 @@
   "name": "FrontPorchForum",
   "version": "0.0.1",
   "private": true,
+  "rnpm": {
+    "assets": [
+      "./src/assets/fonts"
+    ]
+  },
   "scripts": {
     "start": "react-native start --port 8081",
     "startdebug": "REACT_DEBUGGER=\"open -g 'rndebugger://set-debugger-loc?port=8081' ||\" yarn start",

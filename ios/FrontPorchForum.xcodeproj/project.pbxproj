@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -44,6 +43,11 @@
 		CB5648833EA2423591E20C92 /* libReactNativeConfig-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6CD66389FFD4D3E950D05ED /* libReactNativeConfig-tvOS.a */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
+		FDA3D663453D43F9AF6FE4DD /* Proxima Nova Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 62B24DD67B534CE68264F069 /* Proxima Nova Semibold.otf */; };
+		CCE1DA523110429295A6D21F /* Proxima Nova Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 242E86F2185C43BC97A47F2E /* Proxima Nova Thin.otf */; };
+		C4BEDA7503734CEEB59E5596 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = FA174A7985C3493EAEB93EEB /* ProximaNova-Regular.otf */; };
+		49A869758CA447DBA2A929DC /* ProximaNova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 20728C53B8F34FB1BF296047 /* ProximaNova-Semibold.otf */; };
+		8C58751EC31B4198B53E8EC8 /* ProximaNova-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6A77E211D5364283A316FC0E /* ProximaNova-Thin.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -385,6 +389,11 @@
 		ECE79D427B77446784A20CD1 /* libReactNativeConfig.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeConfig.a; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		62B24DD67B534CE68264F069 /* Proxima Nova Semibold.otf */ = {isa = PBXFileReference; name = "Proxima Nova Semibold.otf"; path = "../src/assets/fonts/Proxima Nova Semibold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		242E86F2185C43BC97A47F2E /* Proxima Nova Thin.otf */ = {isa = PBXFileReference; name = "Proxima Nova Thin.otf"; path = "../src/assets/fonts/Proxima Nova Thin.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FA174A7985C3493EAEB93EEB /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; name = "ProximaNova-Regular.otf"; path = "../src/assets/fonts/ProximaNova-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		20728C53B8F34FB1BF296047 /* ProximaNova-Semibold.otf */ = {isa = PBXFileReference; name = "ProximaNova-Semibold.otf"; path = "../src/assets/fonts/ProximaNova-Semibold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6A77E211D5364283A316FC0E /* ProximaNova-Thin.otf */ = {isa = PBXFileReference; name = "ProximaNova-Thin.otf"; path = "../src/assets/fonts/ProximaNova-Thin.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -631,6 +640,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				9AD2E5AF2204A88E0065600F /* Recovered References */,
+				5B1FF356EC48437AA3A68C38 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -691,6 +701,19 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		5B1FF356EC48437AA3A68C38 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				62B24DD67B534CE68264F069 /* Proxima Nova Semibold.otf */,
+				242E86F2185C43BC97A47F2E /* Proxima Nova Thin.otf */,
+				FA174A7985C3493EAEB93EEB /* ProximaNova-Regular.otf */,
+				20728C53B8F34FB1BF296047 /* ProximaNova-Semibold.otf */,
+				6A77E211D5364283A316FC0E /* ProximaNova-Thin.otf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -1178,6 +1201,11 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				FDA3D663453D43F9AF6FE4DD /* Proxima Nova Semibold.otf in Resources */,
+				CCE1DA523110429295A6D21F /* Proxima Nova Thin.otf in Resources */,
+				C4BEDA7503734CEEB59E5596 /* ProximaNova-Regular.otf in Resources */,
+				49A869758CA447DBA2A929DC /* ProximaNova-Semibold.otf in Resources */,
+				8C58751EC31B4198B53E8EC8 /* ProximaNova-Thin.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
