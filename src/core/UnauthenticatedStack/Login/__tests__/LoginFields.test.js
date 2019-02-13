@@ -1,4 +1,5 @@
 import React from 'react'
+import { Linking, TouchableOpacity } from 'react-native'
 import { shallow } from 'enzyme'
 import { LoginFields } from '../LoginFields'
 import { TextInput } from '@components/TextInput'
@@ -56,5 +57,15 @@ describe('LoginFields', () => {
     wrapper.find(Button).simulate('press')
 
     expect(defaultProps.handleSubmit).toHaveBeenCalled()
+  })
+
+  test('Forgot password link opens a webpage', () => {
+    const wrapper = shallow(<LoginFields {...defaultProps} />)
+    jest.spyOn(Linking, 'openURL').mockImplementation(() => ({}))
+    wrapper.find(TouchableOpacity).simulate('press')
+    expect(Linking.openURL).toHaveBeenCalledWith(
+      'https://frontporchforum.com/passwords/new'
+    )
+    Linking.openURL.mockRestore()
   })
 })

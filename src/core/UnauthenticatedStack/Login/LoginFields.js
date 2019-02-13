@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { TouchableOpacity } from 'react-native'
+import { Linking, TouchableOpacity } from 'react-native'
 import { TextInput } from '@components/TextInput'
 import { Button } from '@components/Button'
 import logoImage from '@assets/images/fpf-logo.png'
@@ -52,7 +52,11 @@ export const LoginFields = ({
         <Button onPress={handleSubmit} disabled={isSubmitting}>
           Log in
         </Button>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            Linking.openURL('https://frontporchforum.com/passwords/new')
+          }
+        >
           <ResetPassword>Reset Password</ResetPassword>
         </TouchableOpacity>
       </BottomContainer>
