@@ -12,8 +12,9 @@ import { Formik } from 'formik'
 import { validations } from './validations'
 import { ScreenContainer } from '@components/ScreenContainer'
 import { LoginFields } from './LoginFields'
+import { createResetStackTo } from '@common/utils/navigation'
 
-export const LoginComponent = ({ setAppError, setAccessToken }) => {
+export const LoginComponent = ({ navigation, setAppError, setAccessToken }) => {
   return (
     <ScreenContainer grassBackground>
       <KeyboardAwareScrollView enableOnAndroid>
@@ -23,8 +24,9 @@ export const LoginComponent = ({ setAppError, setAccessToken }) => {
             actions.setSubmitting(true)
             try {
               const response = await api.post('/login', values)
-              setAccessToken(response.access_token)
-              // TODO: Redirect to home tabs
+              setAccessToken(response.data.access_token)
+              navigation.navigate('AuthenticatedStack')
+              navigation.dispatch(createResetStackTo('Home'))
             } catch (e) {
               setAppError(responseError(e))
             }
@@ -58,6 +60,7 @@ export const LoginComponent = ({ setAppError, setAccessToken }) => {
 }
 
 LoginComponent.propTypes = {
+  navigation: PropTypes.object.isRequired,
   setAppError: PropTypes.func.isRequired,
   setAccessToken: PropTypes.func.isRequired
 }

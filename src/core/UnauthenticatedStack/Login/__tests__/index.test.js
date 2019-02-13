@@ -4,16 +4,23 @@ import { Formik } from 'formik'
 
 import { api } from '@common/api'
 import { LoginComponent } from '../index'
+import { createResetStackTo } from '@common/utils/navigation'
 
 describe('LoginComponent', () => {
   const defaultProps = {
     setAppError: jest.fn(),
-    setAccessToken: jest.fn()
+    setAccessToken: jest.fn(),
+    navigation: {
+      dispatch: jest.fn(),
+      navigate: jest.fn()
+    }
   }
 
   afterEach(() => {
     defaultProps.setAppError.mockReset()
     defaultProps.setAccessToken.mockReset()
+    defaultProps.navigation.dispatch.mockReset()
+    defaultProps.navigation.navigate.mockReset()
   })
 
   describe('onSubmit', () => {
@@ -21,7 +28,9 @@ describe('LoginComponent', () => {
       const wrapper = shallow(<LoginComponent {...defaultProps} />)
       const setSubmitting = jest.fn()
       jest.spyOn(api, 'post').mockImplementation(() => ({
-        access_token: 'abc123'
+        data: {
+          access_token: 'abc123'
+        }
       }))
       await wrapper
         .find(Formik)
@@ -35,6 +44,12 @@ describe('LoginComponent', () => {
       expect(api.post).toHaveBeenCalled()
       expect(setSubmitting).toHaveBeenCalledWith(true)
       expect(defaultProps.setAccessToken).toHaveBeenCalledWith('abc123')
+      expect(defaultProps.navigation.navigate).toHaveBeenCalledWith(
+        'AuthenticatedStack'
+      )
+      expect(defaultProps.navigation.dispatch).toHaveBeenCalledWith(
+        createResetStackTo('Home')
+      )
 
       api.post.mockRestore()
     })

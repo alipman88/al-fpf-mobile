@@ -3,7 +3,7 @@ import { createSlice, createSelector } from 'redux-starter-kit'
 export const currentUser = createSlice({
   slice: 'currentUser',
   initialState: {
-    accessToken: null
+    accessToken: ''
   },
   reducers: {
     setAccessToken: (state, action) => ({
