@@ -45,10 +45,8 @@
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		C4BEDA7503734CEEB59E5596 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = FA174A7985C3493EAEB93EEB /* ProximaNova-Regular.otf */; };
 		CB5648833EA2423591E20C92 /* libReactNativeConfig-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6CD66389FFD4D3E950D05ED /* libReactNativeConfig-tvOS.a */; };
-		CCE1DA523110429295A6D21F /* Proxima Nova Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 242E86F2185C43BC97A47F2E /* Proxima Nova Thin.otf */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
-		FDA3D663453D43F9AF6FE4DD /* Proxima Nova Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 62B24DD67B534CE68264F069 /* Proxima Nova Semibold.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -376,13 +374,11 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = FrontPorchForum/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		20728C53B8F34FB1BF296047 /* ProximaNova-Semibold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "ProximaNova-Semibold.otf"; path = "../src/assets/fonts/ProximaNova-Semibold.otf"; sourceTree = "<group>"; };
-		242E86F2185C43BC97A47F2E /* Proxima Nova Thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Proxima Nova Thin.otf"; path = "../src/assets/fonts/Proxima Nova Thin.otf"; sourceTree = "<group>"; };
 		253516970FCB4906A990C2E4 /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNGestureHandler.xcodeproj; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* FrontPorchForum-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FrontPorchForum-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* FrontPorchForum-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FrontPorchForum-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
-		62B24DD67B534CE68264F069 /* Proxima Nova Semibold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Proxima Nova Semibold.otf"; path = "../src/assets/fonts/Proxima Nova Semibold.otf"; sourceTree = "<group>"; };
 		64016891F8CD42D88B3017AB /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
 		6A77E211D5364283A316FC0E /* ProximaNova-Thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "ProximaNova-Thin.otf"; path = "../src/assets/fonts/ProximaNova-Thin.otf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -586,8 +582,6 @@
 		5B1FF356EC48437AA3A68C38 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				62B24DD67B534CE68264F069 /* Proxima Nova Semibold.otf */,
-				242E86F2185C43BC97A47F2E /* Proxima Nova Thin.otf */,
 				FA174A7985C3493EAEB93EEB /* ProximaNova-Regular.otf */,
 				20728C53B8F34FB1BF296047 /* ProximaNova-Semibold.otf */,
 				6A77E211D5364283A316FC0E /* ProximaNova-Thin.otf */,
@@ -1201,8 +1195,6 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				FDA3D663453D43F9AF6FE4DD /* Proxima Nova Semibold.otf in Resources */,
-				CCE1DA523110429295A6D21F /* Proxima Nova Thin.otf in Resources */,
 				C4BEDA7503734CEEB59E5596 /* ProximaNova-Regular.otf in Resources */,
 				49A869758CA447DBA2A929DC /* ProximaNova-Semibold.otf in Resources */,
 				8C58751EC31B4198B53E8EC8 /* ProximaNova-Thin.otf in Resources */,
