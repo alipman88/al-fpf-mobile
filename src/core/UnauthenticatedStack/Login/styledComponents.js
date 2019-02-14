@@ -1,4 +1,5 @@
 import styled from 'styled-components/native'
+import { Text } from '@components/Text'
 
 export const Container = styled.View`
   justify-content: space-between;
@@ -30,4 +31,10 @@ export const LogoContainer = styled.View`
 
 export const Logo = styled.Image`
   width: 100%;
+`
+
+export const Version = styled(Text)`
+  position: absolute;
+  left: 0;
+  bottom: 0;
 `

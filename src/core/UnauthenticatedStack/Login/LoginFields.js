@@ -1,9 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Linking, TouchableOpacity } from 'react-native'
+import DeviceInfo from 'react-native-device-info'
+
 import { TextInput } from '@components/TextInput'
 import { Button } from '@components/Button'
 import logoImage from '@assets/images/fpf-logo.png'
+import { Version } from './styledComponents'
 
 import {
   BottomContainer,
@@ -59,6 +62,9 @@ export const LoginFields = ({
         >
           <ResetPassword>Reset Password</ResetPassword>
         </TouchableOpacity>
+        <Version>
+          v{DeviceInfo.getVersion()} #{DeviceInfo.getBuildNumber()}
+        </Version>
       </BottomContainer>
     </Container>
   )
