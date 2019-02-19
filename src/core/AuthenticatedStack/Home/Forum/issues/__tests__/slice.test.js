@@ -5,14 +5,14 @@ describe('issues - slice', () => {
     const data = issues.reducer(undefined, {})
     expect(data).toEqual({
       issues: [],
-      currentIssueId: 0
+      currentIssueNumber: 0
     })
   })
 
   test('setIssues sets the array', () => {
     const state = issues.reducer(
       undefined,
-      issues.actions.setIssues([{ id: 1 }])
+      issues.actions.setIssues([{ id: 1, number: 32 }])
     )
     const data = issues.selectors.getIssues({
       main: {
@@ -20,14 +20,14 @@ describe('issues - slice', () => {
       }
     })
 
-    expect(data).toEqual([{ id: 1 }])
+    expect(data).toEqual([{ id: 1, number: 32 }])
 
     expect(
-      issues.selectors.getCurrentIssueId({
+      issues.selectors.getCurrentIssueNumber({
         main: {
           issues: state
         }
       })
-    ).toEqual(1)
+    ).toEqual(32)
   })
 })

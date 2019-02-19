@@ -4,15 +4,16 @@ export const issues = createSlice({
   slice: 'issues',
   initialState: {
     issues: [],
-    currentIssueId: 0
+    currentIssueNumber: 0
   },
   reducers: {
     setIssues: (state, action) => {
-      const currentIssueId = state.currentIssueId || action.payload[0].id
+      const currentIssueNumber =
+        state.currentIssueNumber || action.payload[0].number
       return {
         ...state,
         issues: action.payload,
-        currentIssueId
+        currentIssueNumber
       }
     }
   }
@@ -26,8 +27,8 @@ issues.selectors = {
     [path],
     issues => issues.issues
   ),
-  getCurrentIssueId: createSelector(
+  getCurrentIssueNumber: createSelector(
     [path],
-    issues => issues.currentIssueId
+    issues => issues.currentIssueNumber
   )
 }
