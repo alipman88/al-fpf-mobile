@@ -4,7 +4,8 @@ describe('areas - slice', () => {
   test('areas returns an empty array', () => {
     const data = areas.reducer(undefined, {})
     expect(data).toEqual({
-      areas: []
+      areas: [],
+      currentAreaId: 0
     })
   })
 
@@ -17,5 +18,13 @@ describe('areas - slice', () => {
     })
 
     expect(data).toEqual([{ id: 1 }])
+
+    expect(
+      areas.selectors.getCurrentAreaId({
+        main: {
+          areas: state
+        }
+      })
+    ).toEqual(1)
   })
 })
