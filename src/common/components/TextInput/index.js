@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Error, Container, Input, Label } from './styledComponents'
+import { TouchableWithoutFeedback } from 'react-native'
+import { Error, Container, Input, Label, Icon } from './styledComponents'
 
 export const TextInput = ({
   autoCapitalize,
@@ -10,6 +11,9 @@ export const TextInput = ({
   value,
   secureTextEntry,
   onBlur,
+  hasIcon,
+  onTapIcon,
+  iconSrc,
   touched,
   error
 }) => {
@@ -25,6 +29,12 @@ export const TextInput = ({
         onBlur={onBlur}
         value={value}
       />
+      {hasIcon && (
+        <TouchableWithoutFeedback onPress={onTapIcon}>
+          <Icon source={iconSrc} />
+        </TouchableWithoutFeedback>
+      )}
+
       {touched && error && <Error>{error}</Error>}
     </Container>
   )
@@ -38,6 +48,9 @@ TextInput.propTypes = {
   onChangeText: PropTypes.func.isRequired,
   secureTextEntry: PropTypes.bool,
   onBlur: PropTypes.func,
+  hasIcon: PropTypes.bool,
+  onTapIcon: PropTypes.func,
+  iconSrc: PropTypes.number, //image imports resolve as reference numbers
   touched: PropTypes.bool,
   value: PropTypes.string
 }

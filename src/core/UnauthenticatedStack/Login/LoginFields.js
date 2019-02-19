@@ -4,6 +4,7 @@ import { Linking, TouchableOpacity } from 'react-native'
 import DeviceInfo from 'react-native-device-info'
 
 import { TextInput } from '@components/TextInput'
+import { PasswordInput } from '@components/PasswordInput'
 import { Button } from '@components/Button'
 import logoImage from '@assets/images/fpf-logo.png'
 import { Version } from './styledComponents'
@@ -41,14 +42,12 @@ export const LoginFields = ({
           value={values.email}
           autoCapitalize='none'
         />
-        <TextInput
-          label='Password'
+        <PasswordInput
           error={errors.password}
-          onChangeText={value => setFieldValue('password', value)}
-          onBlur={() => setFieldTouched('password')}
-          secureTextEntry
           touched={touched.password}
           value={values.password}
+          setFieldValue={setFieldValue}
+          setFieldTouched={setFieldTouched}
         />
       </FieldContainer>
       <BottomContainer>

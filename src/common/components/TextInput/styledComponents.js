@@ -23,3 +23,11 @@ export const Error = styled(Text)`
   font-size: 14;
   margin-top: 4;
 `
+export const Icon = styled.Image`
+  height: 25;
+  width: 40;
+  position: absolute;
+  resize-mode: contain;
+  right: 10;
+  top: 25;
+`

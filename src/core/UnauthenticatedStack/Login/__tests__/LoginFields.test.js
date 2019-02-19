@@ -29,12 +29,6 @@ describe('LoginFields', () => {
       .first()
       .simulate('blur')
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('email')
-
-    wrapper
-      .find(TextInput)
-      .at(1)
-      .simulate('blur')
-    expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('password')
   })
 
   test('setFieldValue called onChangeText', () => {
@@ -44,12 +38,6 @@ describe('LoginFields', () => {
       .first()
       .simulate('changeText', 'value')
     expect(defaultProps.setFieldValue).toHaveBeenCalledWith('email', 'value')
-
-    wrapper
-      .find(TextInput)
-      .at(1)
-      .simulate('changeText', 'pass')
-    expect(defaultProps.setFieldValue).toHaveBeenCalledWith('password', 'pass')
   })
 
   test('submit button calls handleSubmit', () => {
