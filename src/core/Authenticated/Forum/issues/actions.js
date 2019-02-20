@@ -8,6 +8,7 @@ export const getIssues = areaId => async (dispatch, getState) => {
     const response = await getAuthorized(`/areas/${areaId}/issues`, getState())
     dispatch(issues.actions.setIssues(response.data.issues))
   } catch (e) {
+    console.log(e.response)
     dispatch(appError.actions.setAppError(responseError(e)))
   }
 }
