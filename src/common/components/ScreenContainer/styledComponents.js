@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
 
 export const ScreenWrapper = styled.View`
-  background-color: white;
+  background-color: ${({ grey }) => (grey ? '#f2f2f2' : 'white')};
   flex: 1;
 `
 

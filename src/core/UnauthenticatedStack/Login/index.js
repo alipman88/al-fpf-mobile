@@ -11,7 +11,6 @@ import { Formik } from 'formik'
 import { validations } from './validations'
 import { ScreenContainer } from '@components/ScreenContainer'
 import { LoginFields } from './LoginFields'
-import { createResetStackTo } from '@common/utils/navigation'
 
 export const LoginComponent = ({ navigation, setAppError, setAccessToken }) => {
   return (
@@ -24,8 +23,7 @@ export const LoginComponent = ({ navigation, setAppError, setAccessToken }) => {
             try {
               const response = await api.post('/login', values)
               setAccessToken(response.data.access_token)
-              navigation.navigate('AuthenticatedStack')
-              navigation.dispatch(createResetStackTo('Home'))
+              navigation.navigate('Authenticated')
             } catch (e) {
               setAppError(responseError(e))
             }

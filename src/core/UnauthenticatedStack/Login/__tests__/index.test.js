@@ -4,7 +4,6 @@ import { Formik } from 'formik'
 
 import { api } from '@common/api'
 import { LoginComponent } from '../index'
-import { createResetStackTo } from '@common/utils/navigation'
 
 describe('LoginComponent', () => {
   const defaultProps = {
@@ -45,10 +44,7 @@ describe('LoginComponent', () => {
       expect(setSubmitting).toHaveBeenCalledWith(true)
       expect(defaultProps.setAccessToken).toHaveBeenCalledWith('abc123')
       expect(defaultProps.navigation.navigate).toHaveBeenCalledWith(
-        'AuthenticatedStack'
-      )
-      expect(defaultProps.navigation.dispatch).toHaveBeenCalledWith(
-        createResetStackTo('Home')
+        'Authenticated'
       )
 
       api.post.mockRestore()

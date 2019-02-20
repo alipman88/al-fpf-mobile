@@ -18,11 +18,12 @@ import moreDefault from '@assets/images/global-assets/main-navigation/more-defau
 import searchActive from '@assets/images/global-assets/main-navigation/search-active.png'
 import searchDefault from '@assets/images/global-assets/main-navigation/search-default.png'
 
-export const Home = createBottomTabNavigator(
+export const Authenticated = createBottomTabNavigator(
   {
     Compose: {
       screen: Compose,
       navigationOptions: () => ({
+        title: 'Compose',
         /* eslint-disable-next-line react/prop-types */
         tabBarLabel: ({ focused }) => (
           <NavLabel focused={focused}>Compose</NavLabel>
@@ -36,6 +37,7 @@ export const Home = createBottomTabNavigator(
     Forum: {
       screen: Forum,
       navigationOptions: () => ({
+        title: 'Forum',
         /* eslint-disable-next-line react/prop-types */
         tabBarLabel: ({ focused }) => (
           <NavLabel focused={focused}>Forum</NavLabel>

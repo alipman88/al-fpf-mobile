@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 export class SplashScreen extends React.Component {
   componentDidMount() {
     if (this.props.accessToken) {
-      this.props.navigation.navigate('AuthenticatedStack')
+      this.props.navigation.navigate('Authenticated')
     } else {
       this.props.navigation.navigate('UnauthenticatedStack')
     }

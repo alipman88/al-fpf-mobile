@@ -7,6 +7,10 @@ import { ScreenContainer } from '@components/ScreenContainer'
 import { Text } from '@components/Text'
 
 export class Forum extends React.Component {
+  static navigationOptions = {
+    title: 'Forum'
+  }
+
   componentDidMount() {
     this.props.getAreas()
   }
@@ -15,7 +19,7 @@ export class Forum extends React.Component {
     const { navigation, setAccessToken } = this.props
 
     return (
-      <ScreenContainer>
+      <ScreenContainer grey>
         <Text>Forum</Text>
         <TouchableOpacity
           onPress={() => {

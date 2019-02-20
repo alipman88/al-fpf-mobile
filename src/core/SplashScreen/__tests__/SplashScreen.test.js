@@ -23,14 +23,14 @@ describe('SplashScreen', () => {
     )
   })
 
-  test('navigates to AuthenticatedStack', () => {
+  test('navigates to Authenticated', () => {
     const wrapper = shallow(
       <SplashScreen {...defaultProps} accessToken='abc' />
     )
     wrapper.instance().componentDidMount()
 
     expect(defaultProps.navigation.navigate).toHaveBeenCalledWith(
-      'AuthenticatedStack'
+      'Authenticated'
     )
   })
 })
