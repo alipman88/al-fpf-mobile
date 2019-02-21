@@ -8,6 +8,7 @@ export const Container = styled.View`
 export const Label = styled(Text)`
   font-size: 15;
   margin-bottom: 3;
+  font-weight: bold;
 `
 
 export const Input = styled.TextInput`
@@ -16,6 +17,7 @@ export const Input = styled.TextInput`
   border-color: ${({ hasError }) => (hasError ? '#dc4558' : '#d5dde1')};
   background-color: ${({ hasError }) => (hasError ? '#ffebeb' : '#fff')};
   height: 40;
+  padding-horizontal: 4;
 `
 
 export const Error = styled(Text)`

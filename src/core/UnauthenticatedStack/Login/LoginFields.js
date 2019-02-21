@@ -59,7 +59,7 @@ export const LoginFields = ({
             Linking.openURL('https://frontporchforum.com/passwords/new')
           }
         >
-          <ResetPassword>Reset Password</ResetPassword>
+          <ResetPassword>Forgot Password</ResetPassword>
         </TouchableOpacity>
         <Version>
           v{DeviceInfo.getVersion()} #{DeviceInfo.getBuildNumber()}
