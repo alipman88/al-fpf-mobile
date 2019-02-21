@@ -21,8 +21,7 @@ export class Post extends React.Component {
       categories,
       user_first_name: firstName,
       user_last_name: lastName,
-      user_location: userLocation,
-      user_official_title: userTitle
+      user_profile_name: userDetails
     } = this.props.post
 
     return (
@@ -30,7 +29,7 @@ export class Post extends React.Component {
         <CardContent>
           <Header>{title}</Header>
           <Name>{`${firstName} ${lastName}`}</Name>
-          <Text>{`${userTitle}, ${userLocation}`}</Text>
+          <Text>{userDetails}</Text>
           <ContentText ellipsizeMode='tail' numberOfLines={15}>{content}</ContentText>
           <Category>{categories}</Category>
         </CardContent>

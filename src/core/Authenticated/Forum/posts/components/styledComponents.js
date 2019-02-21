@@ -10,6 +10,8 @@ export const Card = styled.View`
   border-radius: 5;
   flex-direction: column;
   justify-content: space-between;
+  background-color: #fff;
+  margin-bottom: 10;
 `
 export const CardContent = styled.View`
   padding: 16px;
