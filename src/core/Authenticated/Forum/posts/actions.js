@@ -26,7 +26,6 @@ export const getPosts = issueNumber => async (dispatch, getState) => {
       })
     )
   } catch (e) {
-    console.log(e)
     dispatch(appError.actions.setAppError(responseError(e)))
   }
 }

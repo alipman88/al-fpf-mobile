@@ -13,10 +13,7 @@ export class Forum extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getAreas()
-    this.props.getIssues(this.props.currentAreaId)
-    this.props.getPosts(this.props.currentIssueNum)
-    console.log(this.props)
+    this.props.setupForumData()
   }
 
   render() {
@@ -34,8 +31,7 @@ export class Forum extends React.Component {
 }
 
 Forum.propTypes = {
-  getAreas: PropTypes.func.isRequired,
-  getIssues: PropTypes.func.isRequired,
+  setupForumData: PropTypes.func.isRequired,
   navigation: PropTypes.object.isRequired,
   setAccessToken: PropTypes.func.isRequired
 }

@@ -2,9 +2,10 @@ import { connect } from 'react-redux'
 import { Forum as ForumComponent } from './Forum'
 import { createStackNavForTab } from '../createStackNavForTab'
 import { currentUser } from '@common/currentUser'
-import { areas, getAreas } from '@common/areas'
-import { issues, getIssues } from './issues'
-import { posts, getPosts } from './posts'
+import { areas } from '@common/areas'
+import { issues } from './issues'
+import { posts } from './posts'
+import { setupForumData } from './setupForumData.js'
 
 const mapStateToProps = state => ({
   areas: areas.selectors.getAreas(state),
@@ -19,9 +20,7 @@ export const Forum = createStackNavForTab({
     mapStateToProps,
     {
       setAccessToken: currentUser.actions.setAccessToken,
-      getAreas,
-      getIssues,
-      getPosts
+      setupForumData
     }
   )(ForumComponent)
 })
