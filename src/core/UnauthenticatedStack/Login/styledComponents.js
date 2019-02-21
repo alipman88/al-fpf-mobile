@@ -7,7 +7,7 @@ export const Container = styled.View`
 `
 
 export const FieldContainer = styled.View`
-  flex: 1;
+  flex: 2;
 `
 
 export const BottomContainer = styled.View`

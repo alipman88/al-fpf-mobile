@@ -15,7 +15,10 @@ import { LoginFields } from './LoginFields'
 export const LoginComponent = ({ navigation, setAppError, setAccessToken }) => {
   return (
     <ScreenContainer grassBackground>
-      <KeyboardAwareScrollView enableOnAndroid>
+      <KeyboardAwareScrollView
+        enableOnAndroid
+        keyboardShouldPersistTaps='handled'
+      >
         <Formik
           initialValues={{ email: '', password: '' }}
           onSubmit={async (values, actions) => {
