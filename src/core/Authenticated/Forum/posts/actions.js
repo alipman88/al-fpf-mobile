@@ -16,7 +16,7 @@ export const getPosts = issueNumber => async (dispatch, getState) => {
 
   try {
     const response = await getAuthorized(
-      `/areas/${issue.area_id}/issues/${issue.number}/posts`,
+      `/areas/${issue.area_id}/issues/${issue.number}/contents`,
       getState()
     )
     dispatch(

@@ -44,7 +44,7 @@ describe('posts - actions', () => {
       }))
       await getPosts(32)(dispatch, getState)
 
-      expect(getSpy).toHaveBeenCalledWith('/areas/55/issues/32/posts', {
+      expect(getSpy).toHaveBeenCalledWith('/areas/55/issues/32/contents', {
         headers: {
           Authorization: 'Bearer abc123'
         }

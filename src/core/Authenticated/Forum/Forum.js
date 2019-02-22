@@ -1,10 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { TouchableOpacity } from 'react-native'
+import { ScrollView } from 'react-native'
 
-import { createResetStackTo } from '@common/utils/navigation'
 import { ScreenContainer } from '@components/ScreenContainer'
-import { Text } from '@components/Text'
+import { Post } from './posts/components/Post'
 
 export class Forum extends React.Component {
   static navigationOptions = {
@@ -12,31 +11,22 @@ export class Forum extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getAreas()
+    this.props.setupForumData()
   }
 
   render() {
-    const { navigation, setAccessToken } = this.props
-
+    const posts = this.props.posts[this.props.currentIssueNum] || []
+    const postRender = posts.map(post => <Post post={post} key={post.id} />)
     return (
       <ScreenContainer grey>
-        <Text>Forum</Text>
-        <TouchableOpacity
-          onPress={() => {
-            setAccessToken('')
-            navigation.navigate('UnauthenticatedStack')
-            navigation.dispatch(createResetStackTo('Login'))
-          }}
-        >
-          <Text>Logout</Text>
-        </TouchableOpacity>
+        <ScrollView>{postRender}</ScrollView>
       </ScreenContainer>
     )
   }
 }
 
 Forum.propTypes = {
-  getAreas: PropTypes.func.isRequired,
-  navigation: PropTypes.object.isRequired,
-  setAccessToken: PropTypes.func.isRequired
+  setupForumData: PropTypes.func.isRequired,
+  posts: PropTypes.object.isRequired,
+  currentIssueNum: PropTypes.number.isRequired
 }
