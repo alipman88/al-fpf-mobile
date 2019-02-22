@@ -1,9 +1,9 @@
-import { getAreas } from '@common/areas'
-import { getIssues } from './issues'
+import { getAreas, areas } from '@common/areas'
+import { getIssues, issues } from './issues'
 import { getPosts } from './posts'
 
 export const setupForumData = () => async (dispatch, getState) => {
-  await getAreas()
-  await getIssues(getState().main.areas.currentAreaId)
-  await getPosts(getState().main.issues.currentIssueNum)
+  await dispatch(getAreas())
+  await dispatch(getIssues(areas.selectors.getCurrentAreaId(getState())))
+  await dispatch(getPosts(issues.selectors.getCurrentIssueNumber(getState())))
 }
