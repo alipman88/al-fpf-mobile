@@ -1,10 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { TouchableOpacity, ScrollView } from 'react-native'
+import { ScrollView } from 'react-native'
 
-import { createResetStackTo } from '@common/utils/navigation'
 import { ScreenContainer } from '@components/ScreenContainer'
-import { Text } from '@components/Text'
 import { Post } from './posts/components/Post'
 
 export class Forum extends React.Component {
@@ -17,14 +15,11 @@ export class Forum extends React.Component {
   }
 
   render() {
-    const { navigation, setAccessToken } = this.props
-    const posts = this.props.posts[this.props.currentIssueNum]
-    const postRender = posts.map(post => <Post post={post} key={post.id * Math.random()}/>)
+    const posts = this.props.posts[this.props.currentIssueNum] || []
+    const postRender = posts.map(post => <Post post={post} key={post.id} />)
     return (
       <ScreenContainer grey>
-        <ScrollView >
-          {postRender}
-        </ScrollView>
+        <ScrollView>{postRender}</ScrollView>
       </ScreenContainer>
     )
   }
@@ -32,6 +27,6 @@ export class Forum extends React.Component {
 
 Forum.propTypes = {
   setupForumData: PropTypes.func.isRequired,
-  navigation: PropTypes.object.isRequired,
-  setAccessToken: PropTypes.func.isRequired
+  posts: PropTypes.object.isRequired,
+  currentIssueNum: PropTypes.number.isRequired
 }
