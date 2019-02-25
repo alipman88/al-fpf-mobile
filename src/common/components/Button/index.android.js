@@ -8,11 +8,11 @@ const Wrapper = styled.View`
   ${WrapperStyles}
 `
 
-export const Button = ({ children, disabled, onPress }) => {
+export const Button = ({ children, disabled, onPress, color }) => {
   return (
     <TouchableNativeFeedback disabled={disabled} onPress={onPress}>
       <Wrapper>
-        <ButtonText>{children}</ButtonText>
+        <ButtonText color={color}>{children}</ButtonText>
       </Wrapper>
     </TouchableNativeFeedback>
   )
@@ -21,5 +21,6 @@ export const Button = ({ children, disabled, onPress }) => {
 Button.propTypes = {
   children: PropTypes.node,
   disabled: PropTypes.bool,
+  color: PropTypes.string,
   onPress: PropTypes.func.isRequired
 }

@@ -14,9 +14,19 @@ export class Forum extends React.Component {
     this.props.setupForumData()
   }
 
+  handlePostButtonPress(type, target = null) {
+    console.log('not implemented', type, target)
+  }
+
   render() {
     const posts = this.props.posts[this.props.currentIssueNum] || []
-    const postRender = posts.map(post => <Post post={post} key={post.id} />)
+    const postRender = posts.map(post => (
+      <Post
+        post={post}
+        onButtonPress={this.handlePostButtonPress}
+        key={post.id}
+      />
+    ))
     return (
       <ScreenContainer grey>
         <ScrollView>{postRender}</ScrollView>

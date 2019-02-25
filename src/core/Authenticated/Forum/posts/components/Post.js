@@ -1,26 +1,34 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Button } from '@components/Button'
 import { Text } from '@components/Text'
 import {
+  Bottom,
+  Category,
+  CategoryContainer,
   Card,
   CardContent,
   ContentText,
   Header,
   Name,
-  Category,
-  Bottom
+  PostButton,
+  VerticalDivider
 } from './styledComponents'
 
-export const Post = ({ post }) => {
+export const Post = ({ post, onButtonPress }) => {
   const {
     content,
     title,
     categories,
     user_first_name: firstName,
     user_last_name: lastName,
+    user_email: email,
     user_profile_name: userDetails
   } = post
 
+  const categoryRender = categories.map(cat => (
+    <Category key={cat}>{cat}</Category>
+  ))
   return (
     <Card>
       <CardContent>
@@ -30,13 +38,28 @@ export const Post = ({ post }) => {
         <ContentText ellipsizeMode='tail' numberOfLines={15}>
           {content}
         </ContentText>
-        <Category>{categories}</Category>
+        <CategoryContainer>{categoryRender}</CategoryContainer>
       </CardContent>
-      <Bottom />
+      <Bottom>
+        <PostButton>
+          <Button color={'#fff'} onPress={() => onButtonPress('email', email)}>
+            Email author
+          </Button>
+        </PostButton>
+
+        <VerticalDivider />
+
+        <PostButton>
+          <Button color={'#fff'} onPress={() => onButtonPress('reply')}>
+            Reply to forum
+          </Button>
+        </PostButton>
+      </Bottom>
     </Card>
   )
 }
 
 Post.propTypes = {
-  post: PropTypes.object.isRequired
+  post: PropTypes.object.isRequired,
+  onButtonPress: PropTypes.func.isRequired
 }

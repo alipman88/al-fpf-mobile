@@ -7,10 +7,10 @@ const Wrapper = styled.TouchableOpacity`
   ${WrapperStyles}
 `
 
-export const Button = ({ children, disabled, onPress }) => {
+export const Button = ({ children, disabled, onPress, color }) => {
   return (
     <Wrapper disabled={disabled} onPress={onPress}>
-      <ButtonText>{children}</ButtonText>
+      <ButtonText color={color}>{children}</ButtonText>
     </Wrapper>
   )
 }
@@ -18,5 +18,6 @@ export const Button = ({ children, disabled, onPress }) => {
 Button.propTypes = {
   children: PropTypes.node,
   disabled: PropTypes.bool,
+  color: PropTypes.string,
   onPress: PropTypes.func.isRequired
 }

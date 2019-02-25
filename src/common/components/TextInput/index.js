@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { TouchableWithoutFeedback } from 'react-native'
 import { FormError } from '@components/FormError'
-import { Error, Container, Input, Icon } from './styledComponents'
+import { Container, Input, Icon } from './styledComponents'
 import { FormFieldLabel } from '@components/FormFieldLabel'
 
 export const TextInput = ({

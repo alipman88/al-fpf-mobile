@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
-import { Text } from '@components/Text'
 import { Pill } from '@components/Pill'
+import { Text } from '@components/Text'
 
 export const Card = styled.View`
   min-height: 328;
@@ -30,12 +30,28 @@ export const ContentText = styled(Text)`
   font-size: 16;
   padding-top: 14px;
 `
+export const CategoryContainer = styled.View`
+  flex-direction: row;
+`
 export const Category = styled(Pill)`
   margin-top: 12;
   margin-bottom: 12;
+  margin-right: 10;
 `
 export const Bottom = styled.View`
   height: 64;
   border-top-width: 1;
   border-top-color: #ebecf1;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+`
+export const PostButton = styled.View`
+  width: 124;
+  align-items: stretch;
+`
+export const VerticalDivider = styled.View`
+  width: 1;
+  height: 100%;
+  background-color: #ebecf1;
 `
