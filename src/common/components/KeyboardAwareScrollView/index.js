@@ -37,26 +37,20 @@ export class KeyboardAwareScrollView extends React.Component {
   }
 
   render() {
-    const { children, ...otherProps } = this.props
+    const { children, stretchToHeightOfScreen, ...otherProps } = this.props
+    const style =
+      stretchToHeightOfScreen && !this.state.keyboardOpen
+        ? { flex: 1 }
+        : undefined
     return (
-      <Base
-        {...otherProps}
-        contentContainerStyle={
-          this.state.keyboardOpen ? undefined : { flex: 1 }
-        }
-      >
+      <Base {...otherProps} contentContainerStyle={style}>
         {children}
       </Base>
     )
   }
 }
 
-// export const KeyboardAwareScrollView = ({ children, ...props }) => (
-//   <Base {...props} contentContainerStyle={{ flex: 1 }}>
-//     {children}
-//   </Base>
-// )
-
 KeyboardAwareScrollView.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  stretchToHeightOfScreen: PropTypes.bool
 }

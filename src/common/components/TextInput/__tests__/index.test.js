@@ -2,8 +2,9 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import { TextInput } from '../index'
+import { FormError } from '@components/FormError'
 import { TouchableWithoutFeedback } from 'react-native'
-import { Error, Input, Icon } from '../styledComponents'
+import { Input, Icon } from '../styledComponents'
 
 describe('TextInput', () => {
   const defaultProps = {
@@ -28,7 +29,7 @@ describe('TextInput', () => {
       <TextInput {...defaultProps} touched error='Some error' />
     )
 
-    expect(wrapper.find(Error).length).toEqual(1)
+    expect(wrapper.find(FormError).length).toEqual(1)
   })
 
   test('it shows an Icon if hasIcon is true', () => {

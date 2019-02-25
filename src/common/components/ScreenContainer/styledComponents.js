@@ -1,4 +1,5 @@
 import styled from 'styled-components/native'
+import { screenPadding } from '@common/styles/screenPadding'
 
 export const ScreenWrapper = styled.View`
   background-color: ${({ grey }) => (grey ? '#f2f2f2' : 'white')};
@@ -11,8 +12,7 @@ export const SafeAreaViewContainer = styled.SafeAreaView`
 
 export const ContentWrapper = styled.View`
   flex: 1;
-  padding-horizontal: 20;
-  padding-top: 30;
+  ${({ withPadding }) => (withPadding ? screenPadding : '')}
 `
 
 export const GrassContainer = styled.View`

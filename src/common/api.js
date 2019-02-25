@@ -18,3 +18,9 @@ export const getAuthorized = (uri, state, options = {}) =>
     headers: getAuthorizedHeaders(state),
     ...options
   })
+
+export const postAuthorized = (uri, data, state, options = {}) =>
+  api.post(uri, data, {
+    headers: getAuthorizedHeaders(state),
+    ...options
+  })

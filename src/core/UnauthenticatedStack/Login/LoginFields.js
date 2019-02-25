@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Linking, TouchableOpacity } from 'react-native'
 import DeviceInfo from 'react-native-device-info'
+import Spinner from 'react-native-loading-spinner-overlay'
 
 import { TextInput } from '@components/TextInput'
 import { PasswordInput } from '@components/PasswordInput'
@@ -13,6 +14,7 @@ import {
   BottomContainer,
   Container,
   FieldContainer,
+  FormContainer,
   Logo,
   LogoContainer,
   ResetPassword
@@ -29,27 +31,32 @@ export const LoginFields = ({
 }) => {
   return (
     <Container>
+      <Spinner visible={isSubmitting} />
       <LogoContainer>
         <Logo source={logoImage} resizeMode='contain' />
       </LogoContainer>
-      <FieldContainer>
-        <TextInput
-          label='Email'
-          error={errors.email}
-          onChangeText={value => setFieldValue('email', value)}
-          onBlur={() => setFieldTouched('email')}
-          touched={touched.email}
-          value={values.email}
-          autoCapitalize='none'
-        />
-        <PasswordInput
-          error={errors.password}
-          touched={touched.password}
-          value={values.password}
-          setFieldValue={setFieldValue}
-          setFieldTouched={setFieldTouched}
-        />
-      </FieldContainer>
+      <FormContainer>
+        <FieldContainer>
+          <TextInput
+            label='Email'
+            error={errors.email}
+            onChangeText={value => setFieldValue('email', value)}
+            onBlur={() => setFieldTouched('email')}
+            touched={touched.email}
+            value={values.email}
+            autoCapitalize='none'
+          />
+        </FieldContainer>
+        <FieldContainer>
+          <PasswordInput
+            error={errors.password}
+            touched={touched.password}
+            value={values.password}
+            setFieldValue={setFieldValue}
+            setFieldTouched={setFieldTouched}
+          />
+        </FieldContainer>
+      </FormContainer>
       <BottomContainer>
         <Button onPress={handleSubmit} disabled={isSubmitting}>
           Log in

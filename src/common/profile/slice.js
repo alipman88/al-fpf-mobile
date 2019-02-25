@@ -1,3 +1,4 @@
+import get from 'lodash/get'
 import { createSlice, createSelector } from 'redux-starter-kit'
 
 export const profile = createSlice({
@@ -5,17 +6,40 @@ export const profile = createSlice({
   initialState: {
     user: {
       profiles: []
-    }
+    },
+    loading: false,
+    currentProfileId: 0
   },
   reducers: {
+    setLoading: (state, action) => ({
+      ...state,
+      loading: action.payload
+    }),
     setUserProfile: (state, action) => {
       return {
         ...state,
-        user: action.payload
+        user: action.payload,
+        currentProfileId:
+          state.currentProfileId || get(action, 'payload.profiles[0].id', 0)
       }
     }
   }
 })
+
+const getCurrentProfileId = createSelector(
+  ['main.profile'],
+  profile => profile.currentProfileId
+)
+
+const getProfiles = createSelector(
+  ['main.profile'],
+  profile => profile.user.profiles || []
+)
+
+const getCurrentProfile = createSelector(
+  [getProfiles, getCurrentProfileId],
+  (profiles, id) => profiles.find(profile => profile.id === id)
+)
 
 profile.selectors = {
   ...profile.selectors,
@@ -23,8 +47,11 @@ profile.selectors = {
     ['main.profile'],
     profile => profile.user
   ),
-  getProfiles: createSelector(
+  getProfiles,
+  getLoading: createSelector(
     ['main.profile'],
-    profile => profile.user.profiles || []
-  )
+    profile => profile.loading
+  ),
+  getCurrentProfileId,
+  getCurrentProfile
 }

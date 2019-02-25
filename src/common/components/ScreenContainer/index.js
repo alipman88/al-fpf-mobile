@@ -12,7 +12,12 @@ import {
 
 import grassImage from '@assets/images/fpf-grass.png'
 
-export const ScreenContainer = ({ children, grassBackground, grey }) => {
+export const ScreenContainer = ({
+  children,
+  grassBackground,
+  grey,
+  withPadding
+}) => {
   return (
     <ScreenWrapper grey={grey}>
       <StatusBar barStyle='dark-content' />
@@ -23,7 +28,7 @@ export const ScreenContainer = ({ children, grassBackground, grey }) => {
         </GrassContainer>
       )}
       <SafeAreaViewContainer>
-        <ContentWrapper>{children}</ContentWrapper>
+        <ContentWrapper withPadding={withPadding}>{children}</ContentWrapper>
       </SafeAreaViewContainer>
     </ScreenWrapper>
   )
@@ -32,5 +37,10 @@ export const ScreenContainer = ({ children, grassBackground, grey }) => {
 ScreenContainer.propTypes = {
   children: PropTypes.node,
   grassBackground: PropTypes.bool,
-  grey: PropTypes.bool
+  grey: PropTypes.bool,
+  withPadding: PropTypes.bool
+}
+
+ScreenContainer.defaultProps = {
+  withPadding: true
 }

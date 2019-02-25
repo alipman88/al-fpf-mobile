@@ -6,8 +6,12 @@ export const Container = styled.View`
   flex: 1;
 `
 
-export const FieldContainer = styled.View`
+export const FormContainer = styled.View`
   flex: 2;
+`
+
+export const FieldContainer = styled.View`
+  margin-bottom: 14;
 `
 
 export const BottomContainer = styled.View`

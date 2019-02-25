@@ -1,5 +1,5 @@
 import { api } from '@common/api'
-import { getProfile } from '../actions'
+import { getProfiles } from '../actions'
 import { profile } from '../slice'
 import { appError } from '@components/AppError/slice'
 
@@ -17,7 +17,7 @@ describe('profile - actions', () => {
     dispatch.mockReset()
   })
 
-  describe('getProfile', () => {
+  describe('getProfiles', () => {
     test('fetches profile', async () => {
       const getSpy = jest.spyOn(api, 'get').mockImplementation(() => ({
         data: {
@@ -31,13 +31,15 @@ describe('profile - actions', () => {
           }
         }
       }))
-      await getProfile()(dispatch, getState)
+      await getProfiles()(dispatch, getState)
 
       expect(getSpy).toHaveBeenCalledWith('/users', {
         headers: {
           Authorization: 'Bearer abc123'
         }
       })
+      expect(dispatch).toHaveBeenCalledWith(profile.actions.setLoading(true))
+      expect(dispatch).toHaveBeenCalledWith(profile.actions.setLoading(false))
       expect(dispatch).toHaveBeenCalledWith(
         profile.actions.setUserProfile({
           id: 1,
@@ -58,7 +60,7 @@ describe('profile - actions', () => {
 
       const dispatch = jest.fn()
 
-      await getProfile()(dispatch, getState)
+      await getProfiles()(dispatch, getState)
 
       expect(getSpy).toHaveBeenCalledWith('/users', {
         headers: {

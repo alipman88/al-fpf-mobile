@@ -1,13 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { TouchableWithoutFeedback } from 'react-native'
-import { Error, Container, Input, Label, Icon } from './styledComponents'
+import { FormError } from '@components/FormError'
+import { Error, Container, Input, Icon } from './styledComponents'
+import { FormFieldLabel } from '@components/FormFieldLabel'
 
 export const TextInput = ({
   autoCapitalize,
   keyboardType,
   onChangeText,
   label,
+  multiline,
   value,
   secureTextEntry,
   onBlur,
@@ -19,11 +22,12 @@ export const TextInput = ({
 }) => {
   return (
     <Container>
-      <Label>{label}</Label>
+      <FormFieldLabel>{label}</FormFieldLabel>
       <Input
         autoCapitalize={autoCapitalize}
         keyboardType={keyboardType}
         hasError={touched && Boolean(error)}
+        multiline={multiline}
         onChangeText={onChangeText}
         secureTextEntry={secureTextEntry}
         onBlur={onBlur}
@@ -35,7 +39,7 @@ export const TextInput = ({
         </TouchableWithoutFeedback>
       )}
 
-      {touched && error && <Error>{error}</Error>}
+      {touched && Boolean(error) && <FormError>{error}</FormError>}
     </Container>
   )
 }
@@ -43,14 +47,15 @@ export const TextInput = ({
 TextInput.propTypes = {
   autoCapitalize: PropTypes.string,
   error: PropTypes.string,
+  hasIcon: PropTypes.bool,
   keyboardType: PropTypes.string,
+  iconSrc: PropTypes.number, //image imports resolve as reference numbers
   label: PropTypes.string.isRequired,
+  multiline: PropTypes.bool,
   onChangeText: PropTypes.func.isRequired,
   secureTextEntry: PropTypes.bool,
   onBlur: PropTypes.func,
-  hasIcon: PropTypes.bool,
   onTapIcon: PropTypes.func,
-  iconSrc: PropTypes.number, //image imports resolve as reference numbers
   touched: PropTypes.bool,
   value: PropTypes.string
 }

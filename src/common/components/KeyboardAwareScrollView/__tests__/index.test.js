@@ -33,6 +33,13 @@ describe('KeyboardAwareScrollView', () => {
     wrapper.setState({ keyboardOpen: true })
     wrapper.instance().keyboardDidHide()
     expect(wrapper.state().keyboardOpen).toEqual(false)
+  })
+
+  test('keyboardDidHide with stretchToHeightOfScreen sets container style to flex', () => {
+    const wrapper = shallow(<KeyboardAwareScrollView stretchToHeightOfScreen />)
+    wrapper.setState({ keyboardOpen: true })
+    wrapper.instance().keyboardDidHide()
+    expect(wrapper.state().keyboardOpen).toEqual(false)
     expect(wrapper.find(Base).props().contentContainerStyle).toEqual({
       flex: 1
     })

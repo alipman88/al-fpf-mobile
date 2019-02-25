@@ -18,6 +18,7 @@ export const LoginComponent = ({ navigation, setAppError, setAccessToken }) => {
       <KeyboardAwareScrollView
         enableOnAndroid
         keyboardShouldPersistTaps='handled'
+        stretchToHeightOfScreen
       >
         <Formik
           initialValues={{ email: '', password: '' }}

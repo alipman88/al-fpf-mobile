@@ -1,24 +1,28 @@
 import styled from 'styled-components/native'
 
+import { Text } from '@components/Text'
+
 export const Container = styled.View``
 
-export const Input = styled.TextInput`
+export const SelectButton = styled.TouchableOpacity`
   border-radius: 5;
   border-width: 1;
   border-color: ${({ hasError }) => (hasError ? '#dc4558' : '#d5dde1')};
   background-color: ${({ hasError }) => (hasError ? '#ffebeb' : '#fff')};
+  height: 40;
+  justify-content: center;
   padding-horizontal: 4;
-  ${({ multiline }) =>
-    multiline ? 'height: 160; textAlignVertical: top' : 'height: 40;'}
-  font-family: ProximaNova-Regular;
+`
+
+export const SelectPlaceholder = styled(Text)`
+  font-size: 15;
   color: #000;
 `
 
-export const Icon = styled.Image`
-  height: 25;
-  width: 40;
+export const DownArrowWrapper = styled.View`
   position: absolute;
-  resize-mode: contain;
-  right: 10;
-  top: 25;
+  right: 5;
+  top: 0;
+  bottom: 0;
+  justify-content: center;
 `

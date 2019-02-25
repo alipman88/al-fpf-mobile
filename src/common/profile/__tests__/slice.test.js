@@ -6,7 +6,22 @@ describe('profile - slice', () => {
     expect(state).toEqual({
       user: {
         profiles: []
-      }
+      },
+      loading: false,
+      currentProfileId: 0
+    })
+  })
+
+  describe('setLoading', () => {
+    test('sets loading state', () => {
+      const state = profile.reducer(undefined, profile.actions.setLoading(true))
+      const data = profile.selectors.getLoading({
+        main: {
+          profile: state
+        }
+      })
+
+      expect(data).toEqual(true)
     })
   })
 
@@ -61,9 +76,7 @@ describe('profile - slice', () => {
       const state = profile.reducer(
         undefined,
         profile.actions.setUserProfile({
-          user: {
-            id: 1
-          }
+          id: 1
         })
       )
 
@@ -74,6 +87,38 @@ describe('profile - slice', () => {
       })
 
       expect(data).toEqual([])
+    })
+  })
+
+  describe('getCurrentProfile selector', () => {
+    test('can get both the ID & the profile object', () => {
+      const state = profile.reducer(
+        undefined,
+        profile.actions.setUserProfile({
+          id: 1,
+          profiles: [
+            {
+              id: 3
+            }
+          ]
+        })
+      )
+
+      expect(
+        profile.selectors.getCurrentProfileId({
+          main: {
+            profile: state
+          }
+        })
+      ).toEqual(3)
+
+      expect(
+        profile.selectors.getCurrentProfile({
+          main: {
+            profile: state
+          }
+        })
+      ).toEqual({ id: 3 })
     })
   })
 })
