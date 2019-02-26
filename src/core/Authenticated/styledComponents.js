@@ -5,6 +5,6 @@ export const Icon = styled.Image`
   height: ${({ height }) => height};
 `
 
-export const IconContainer = styled.View`
+export const IconContainer = styled.TouchableOpacity`
   padding-horizontal: 20;
 `

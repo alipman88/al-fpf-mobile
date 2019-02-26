@@ -15,8 +15,6 @@ import { FormFieldLabel } from '@components/FormFieldLabel'
 import { KeyboardAwareScrollView } from '@components/KeyboardAwareScrollView'
 import { getProfileDisplayName } from '@common/utils/getProfileDisplayName'
 
-import { categories } from './categories'
-
 import {
   ButtonSpacer,
   FormContainer,
@@ -42,6 +40,7 @@ export class ComposeFields extends React.Component {
   render() {
     const {
       areas,
+      categories,
       errors,
       handleSubmit,
       isSubmitting,
@@ -216,6 +215,7 @@ export class ComposeFields extends React.Component {
 
 ComposeFields.propTypes = {
   areas: PropTypes.array.isRequired,
+  categories: PropTypes.array.isRequired,
   errors: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   isSubmitting: PropTypes.bool,

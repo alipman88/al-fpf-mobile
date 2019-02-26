@@ -18,13 +18,16 @@ describe('areas - slice', () => {
     })
 
     expect(data).toEqual([{ id: 1 }])
+  })
 
+  test('setCurrentAreaId', () => {
+    const state = areas.reducer(undefined, areas.actions.setCurrentAreaId(3))
     expect(
       areas.selectors.getCurrentAreaId({
         main: {
           areas: state
         }
       })
-    ).toEqual(1)
+    ).toEqual(3)
   })
 })

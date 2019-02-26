@@ -1,0 +1,72 @@
+import { api } from '@common/api'
+import { getAppSettings } from '../actions'
+import { appSettings } from '../slice'
+import { appError } from '@components/AppError/slice'
+
+describe('appSettings - actions', () => {
+  const dispatch = jest.fn()
+  const getState = () => ({
+    secured: {
+      currentUser: {
+        accessToken: 'abc123'
+      }
+    }
+  })
+
+  afterEach(() => {
+    dispatch.mockReset()
+  })
+
+  describe('getAppSettings', () => {
+    test('fetches profile', async () => {
+      const getSpy = jest.spyOn(api, 'get').mockImplementation(() => ({
+        data: {
+          post_truncate_length: 500,
+          categories: [{ id: 1 }]
+        }
+      }))
+      await getAppSettings()(dispatch, getState)
+
+      expect(getSpy).toHaveBeenCalledWith('/settings', {
+        headers: {
+          Authorization: 'Bearer abc123'
+        }
+      })
+      expect(dispatch).toHaveBeenCalledWith(
+        appSettings.actions.setLoading(true)
+      )
+      expect(dispatch).toHaveBeenCalledWith(
+        appSettings.actions.setLoading(false)
+      )
+      expect(dispatch).toHaveBeenCalledWith(
+        appSettings.actions.setAppSettings({
+          post_truncate_length: 500,
+          categories: [{ id: 1 }]
+        })
+      )
+      getSpy.mockRestore()
+    })
+
+    test('an api error dispatches an error message', async () => {
+      const getSpy = jest.spyOn(api, 'get').mockImplementation(() => {
+        throw new Error('boom')
+      })
+
+      const dispatch = jest.fn()
+
+      await getAppSettings()(dispatch, getState)
+
+      expect(getSpy).toHaveBeenCalledWith('/settings', {
+        headers: {
+          Authorization: 'Bearer abc123'
+        }
+      })
+
+      expect(dispatch).toHaveBeenCalledWith(
+        appError.actions.setAppError('boom')
+      )
+
+      getSpy.mockRestore()
+    })
+  })
+})

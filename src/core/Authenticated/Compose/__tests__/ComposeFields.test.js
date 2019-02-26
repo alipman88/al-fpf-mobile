@@ -45,6 +45,18 @@ describe('Compose', () => {
         ]
       }
     ],
+    categories: [
+      {
+        id: 3,
+        name: 'Lost and Found',
+        faq: 'About L&F'
+      },
+      {
+        id: 4,
+        name: 'Announcements',
+        faq: 'Announcements to the community'
+      }
+    ],
     errors: {},
     handleSubmit: jest.fn(),
     loading: false,

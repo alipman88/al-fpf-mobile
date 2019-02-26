@@ -14,8 +14,19 @@ describe('Compose', () => {
         name: 'River'
       }
     ],
+    categories: [
+      {
+        id: 3,
+        name: 'Lost and Found',
+        faq: 'About L&F'
+      },
+      {
+        id: 4,
+        name: 'Announcements',
+        faq: 'Announcements to the community'
+      }
+    ],
     currentAreaId: 1,
-    getProfiles: jest.fn(),
     loading: false,
     navigation: {},
     profiles: [
@@ -33,15 +44,7 @@ describe('Compose', () => {
   }
 
   afterEach(() => {
-    defaultProps.getProfiles.mockReset()
     defaultProps.submitPost.mockReset()
-  })
-
-  describe('componentDidMount', () => {
-    test('fetches getProfiles', () => {
-      shallow(<Compose {...defaultProps} />)
-      expect(defaultProps.getProfiles).toHaveBeenCalled()
-    })
   })
 
   describe('onSubmit', () => {

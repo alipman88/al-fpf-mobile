@@ -8,11 +8,15 @@ export const areas = createSlice({
   },
   reducers: {
     setAreas: (state, action) => {
-      const currentAreaId = state.currentAreaId || action.payload[0].id
       return {
         ...state,
-        areas: action.payload,
-        currentAreaId
+        areas: action.payload
+      }
+    },
+    setCurrentAreaId: (state, action) => {
+      return {
+        ...state,
+        currentAreaId: action.payload
       }
     }
   }

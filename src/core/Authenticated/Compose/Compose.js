@@ -9,15 +9,9 @@ import { validations } from './validations'
 
 import { ComposeFields } from './ComposeFields'
 
-import { categories } from './categories'
-
 export class Compose extends React.Component {
   static navigationOptions = {
     title: 'Compose'
-  }
-
-  componentDidMount() {
-    this.props.getProfiles()
   }
 
   getAreasForProfile(profiles, areas, profileIndex) {
@@ -43,13 +37,19 @@ export class Compose extends React.Component {
       content: values.message,
       is_shared: values.isShared,
       area_ids: values.forums,
-      category_ids: [categories[values.category].id]
+      category_ids: [this.props.categories[values.category].id]
     }
     this.props.submitPost(navigation, postBody, actions.setSubmitting)
   }
 
   render() {
-    const { currentProfileId, areas, loading, profiles } = this.props
+    const {
+      categories,
+      currentProfileId,
+      areas,
+      loading,
+      profiles
+    } = this.props
 
     const profile = profiles.findIndex(
       profile => profile.id === currentProfileId
@@ -79,6 +79,7 @@ export class Compose extends React.Component {
           }) => (
             <ComposeFields
               areas={areas}
+              categories={categories}
               errors={errors}
               handleSubmit={handleSubmit}
               isSubmitting={isSubmitting}
@@ -98,9 +99,9 @@ export class Compose extends React.Component {
 
 Compose.propTypes = {
   areas: PropTypes.array.isRequired,
+  categories: PropTypes.array.isRequired,
   // not used yet, removed, but it will be in another ticket
   currentAreaId: PropTypes.number.isRequired,
-  getProfiles: PropTypes.func.isRequired,
   loading: PropTypes.bool,
   navigation: PropTypes.object.isRequired,
   profiles: PropTypes.array.isRequired,
