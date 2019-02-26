@@ -7,12 +7,19 @@ import { Post } from './posts/components/Post'
 import { InThisIssue } from './InThisIssue'
 
 export class Forum extends React.Component {
-  static navigationOptions = {
-    title: 'Forum'
+  static navigationOptions = ({ navigation }) => {
+    const { params } = navigation.state
+    return {
+      title: params ? params.navTitle : 'Forum'
+    }
   }
 
   componentDidMount() {
     this.props.setupForumData()
+    const currentArea = this.props.areas.find(
+      a => a.id === this.props.currentAreaId
+    )
+    this.props.navigation.setParams({ navTitle: currentArea.name })
   }
 
   handlePostButtonPress(type, target = null) {
@@ -42,5 +49,8 @@ export class Forum extends React.Component {
 Forum.propTypes = {
   setupForumData: PropTypes.func.isRequired,
   posts: PropTypes.object.isRequired,
+  areas: PropTypes.array.isRequred,
+  currentAreaId: PropTypes.number.isRequired,
+  navigation: PropTypes.object.isRequired,
   currentIssueNum: PropTypes.number.isRequired
 }

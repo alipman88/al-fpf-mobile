@@ -6,9 +6,13 @@ import { Post } from '../posts/components/Post'
 describe('Forum', () => {
   const defaultProps = {
     setupForumData: jest.fn(),
-    navigation: {},
+    navigation: {
+      setParams: jest.fn()
+    },
     setAccessToken: jest.fn(),
     currentIssueNum: 12,
+    currentAreaId: 1,
+    areas: [{ id: 1, name: 'Sparta' }],
     posts: {
       12: [
         {
@@ -39,5 +43,12 @@ describe('Forum', () => {
     const wrapper = shallow(<Forum {...defaultProps} />)
 
     expect(wrapper.find(Post).length).toEqual(1)
+  })
+
+  test('it sets the title as the current area name', () => {
+    shallow(<Forum {...defaultProps} />)
+    expect(defaultProps.navigation.setParams).toHaveBeenCalledWith({
+      navTitle: 'Sparta'
+    })
   })
 })
