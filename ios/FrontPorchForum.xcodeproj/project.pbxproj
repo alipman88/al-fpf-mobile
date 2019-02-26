@@ -41,6 +41,7 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8C58751EC31B4198B53E8EC8 /* ProximaNova-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6A77E211D5364283A316FC0E /* ProximaNova-Thin.otf */; };
 		9A0F91E4221DFCDB009A6B45 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A0F91E3221DFCDB009A6B45 /* MaterialIcons.ttf */; };
+		9A15BB9722259BAF002623F0 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A15BB6B22259BAF002623F0 /* EvilIcons.ttf */; };
 		9A2CEBF42215D128006483CF /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2CEBF12215D11C006483CF /* libRNDeviceInfo.a */; };
 		9AD2E5EB2204AE9B0065600F /* libRNSensitiveInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD2E5EA2204AE8E0065600F /* libRNSensitiveInfo.a */; };
 		A31A9C07AC8E48C5A15E034F /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 64016891F8CD42D88B3017AB /* libRNGestureHandler.a */; };
@@ -401,6 +402,7 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		8E64BD6A31F548FF8A269EBA /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
 		9A0F91E3221DFCDB009A6B45 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		9A15BB6B22259BAF002623F0 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		9A2CEBEB2215D11C006483CF /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/ios/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 		9AD2E5E52204AE8E0065600F /* RNSensitiveInfo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSensitiveInfo.xcodeproj; path = "../node_modules/react-native-sensitive-info/ios/RNSensitiveInfo.xcodeproj"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
@@ -605,6 +607,7 @@
 				20728C53B8F34FB1BF296047 /* ProximaNova-Semibold.otf */,
 				9A0F91E3221DFCDB009A6B45 /* MaterialIcons.ttf */,
 				6A77E211D5364283A316FC0E /* ProximaNova-Thin.otf */,
+				9A15BB6B22259BAF002623F0 /* EvilIcons.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1244,6 +1247,7 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				C4BEDA7503734CEEB59E5596 /* ProximaNova-Regular.otf in Resources */,
+				9A15BB9722259BAF002623F0 /* EvilIcons.ttf in Resources */,
 				49A869758CA447DBA2A929DC /* ProximaNova-Semibold.otf in Resources */,
 				8C58751EC31B4198B53E8EC8 /* ProximaNova-Thin.otf in Resources */,
 				9A0F91E4221DFCDB009A6B45 /* MaterialIcons.ttf in Resources */,

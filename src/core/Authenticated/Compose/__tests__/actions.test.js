@@ -25,8 +25,9 @@ describe('Compose - actions', () => {
   describe('submitPost', () => {
     test('calls api.post', async () => {
       const spy = jest.spyOn(api, 'post').mockImplementation(() => ({}))
+      const onSuccess = jest.fn()
 
-      await submitPost(navigation, { subject: 'Subject' }, setSubmitting)(
+      await submitPost(onSuccess, { subject: 'Subject' }, setSubmitting)(
         dispatch,
         getState
       )
@@ -42,7 +43,7 @@ describe('Compose - actions', () => {
         }
       )
       expect(setSubmitting).toHaveBeenCalledWith(false)
-      expect(navigation.navigate).toHaveBeenCalledWith('Forum')
+      expect(onSuccess).toHaveBeenCalled()
 
       spy.mockRestore()
     })
@@ -71,7 +72,6 @@ describe('Compose - actions', () => {
         appError.actions.setAppError('error')
       )
       expect(setSubmitting).toHaveBeenCalledWith(false)
-      expect(navigation.navigate).toHaveBeenCalledWith('Forum')
 
       spy.mockRestore()
     })

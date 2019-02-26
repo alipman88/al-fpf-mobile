@@ -65,7 +65,7 @@ describe('Compose', () => {
       )
 
       expect(defaultProps.submitPost).toHaveBeenCalledWith(
-        defaultProps.navigation,
+        expect.any(Function),
         {
           profile_id: 2,
           parent_post_id: 1,

@@ -4,6 +4,7 @@ import get from 'lodash/get'
 import { Formik } from 'formik'
 
 import { ScreenContainer } from '@components/ScreenContainer'
+import { Success } from './Success'
 
 import { validations } from './validations'
 
@@ -12,6 +13,10 @@ import { ComposeFields } from './ComposeFields'
 export class Compose extends React.Component {
   static navigationOptions = {
     title: 'Compose'
+  }
+
+  state = {
+    modalVisible: false
   }
 
   getAreasForProfile(profiles, areas, profileIndex) {
@@ -28,7 +33,7 @@ export class Compose extends React.Component {
   }
 
   onSubmit = (values, actions) => {
-    const { navigation, profiles } = this.props
+    const { profiles } = this.props
 
     const postBody = {
       profile_id: profiles[values.profile].id,
@@ -39,7 +44,13 @@ export class Compose extends React.Component {
       area_ids: values.forums,
       category_ids: [this.props.categories[values.category].id]
     }
-    this.props.submitPost(navigation, postBody, actions.setSubmitting)
+    this.props.submitPost(this.onSuccess, postBody, actions.setSubmitting)
+  }
+
+  onSuccess = () => {
+    this.setState({
+      modalVisible: true
+    })
   }
 
   render() {
@@ -72,24 +83,35 @@ export class Compose extends React.Component {
             errors,
             handleSubmit,
             isSubmitting,
+            resetForm,
             setFieldValue,
             setFieldTouched,
             touched,
             values
           }) => (
-            <ComposeFields
-              areas={areas}
-              categories={categories}
-              errors={errors}
-              handleSubmit={handleSubmit}
-              isSubmitting={isSubmitting}
-              loading={loading}
-              profiles={profiles}
-              setFieldValue={setFieldValue}
-              setFieldTouched={setFieldTouched}
-              touched={touched}
-              values={values}
-            />
+            <React.Fragment>
+              <ComposeFields
+                areas={areas}
+                categories={categories}
+                errors={errors}
+                handleSubmit={handleSubmit}
+                isSubmitting={isSubmitting}
+                loading={loading}
+                profiles={profiles}
+                setFieldValue={setFieldValue}
+                setFieldTouched={setFieldTouched}
+                touched={touched}
+                values={values}
+              />
+              {this.state.modalVisible && (
+                <Success
+                  onClose={() => {
+                    this.setState({ modalVisible: false })
+                    resetForm()
+                  }}
+                />
+              )}
+            </React.Fragment>
           )}
         />
       </ScreenContainer>
