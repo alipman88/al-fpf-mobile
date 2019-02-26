@@ -3,7 +3,8 @@ import { createSlice, createSelector } from 'redux-starter-kit'
 export const posts = createSlice({
   slice: 'posts',
   initialState: {
-    postsByIssue: {}
+    postsByIssue: {},
+    headlinesByIssue: {}
   },
   reducers: {
     setPostsForIssue: (state, action) => ({
@@ -11,6 +12,10 @@ export const posts = createSlice({
       postsByIssue: {
         ...state.postsByIssue,
         [action.payload.issueNumber]: action.payload.posts
+      },
+      headlinesByIssue: {
+        ...state.headlinesByIssue,
+        [action.payload.issueNumber]: action.payload.headlines
       }
     })
   }
@@ -23,5 +28,9 @@ posts.selectors = {
   getPostsByIssue: createSelector(
     [path],
     posts => posts.postsByIssue
+  ),
+  getHeadlinesByIssue: createSelector(
+    [path],
+    posts => posts.headlinesByIssue
   )
 }

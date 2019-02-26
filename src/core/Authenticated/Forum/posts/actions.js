@@ -19,9 +19,13 @@ export const getPosts = issueNumber => async (dispatch, getState) => {
       `/areas/${issue.area_id}/issues/${issue.number}/contents`,
       getState()
     )
+
+    const { posts: postsData, headlines } = response.data
+
     dispatch(
       posts.actions.setPostsForIssue({
-        posts: response.data.posts,
+        posts: postsData,
+        headlines,
         issueNumber: issue.number
       })
     )

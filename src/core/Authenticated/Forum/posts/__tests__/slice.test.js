@@ -4,6 +4,7 @@ describe('posts - slice', () => {
   test('posts returns an empty object', () => {
     const state = posts.reducer(undefined, {})
     expect(state).toEqual({
+      headlinesByIssue: {},
       postsByIssue: {}
     })
   })
@@ -21,11 +22,12 @@ describe('posts - slice', () => {
             {
               id: 2
             }
-          ]
+          ],
+          headlines: ['An interesting headline']
         })
       )
 
-      const data = posts.selectors.getPostsByIssue({
+      let data = posts.selectors.getPostsByIssue({
         main: {
           posts: state
         }
@@ -40,6 +42,16 @@ describe('posts - slice', () => {
             id: 2
           }
         ]
+      })
+
+      data = posts.selectors.getHeadlinesByIssue({
+        main: {
+          posts: state
+        }
+      })
+
+      expect(data).toEqual({
+        1: ['An interesting headline']
       })
     })
   })

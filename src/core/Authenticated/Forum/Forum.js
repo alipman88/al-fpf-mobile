@@ -4,6 +4,7 @@ import { ScrollView } from 'react-native'
 
 import { ScreenContainer } from '@components/ScreenContainer'
 import { Post } from './posts/components/Post'
+import { InThisIssue } from './InThisIssue'
 
 export class Forum extends React.Component {
   static navigationOptions = {
@@ -29,7 +30,10 @@ export class Forum extends React.Component {
     ))
     return (
       <ScreenContainer grey>
-        <ScrollView>{postRender}</ScrollView>
+        <ScrollView>
+          <InThisIssue />
+          {postRender}
+        </ScrollView>
       </ScreenContainer>
     )
   }
