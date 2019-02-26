@@ -2,7 +2,7 @@ import React from 'react'
 import { createBottomTabNavigator } from 'react-navigation'
 
 import { Compose } from './Compose'
-import { Forum } from './Forum'
+import { Forum } from './Forum/components/Forum'
 import { More } from './More'
 import { Search } from './Search'
 

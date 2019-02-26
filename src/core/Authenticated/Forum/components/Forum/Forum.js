@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import { ScrollView } from 'react-native'
 
 import { ScreenContainer } from '@components/ScreenContainer'
-import { Post } from './posts/components/Post'
-import { InThisIssue } from './InThisIssue'
+import { Post } from '../Post'
+import { InThisIssue } from '../InThisIssue'
+import { OtherIssues } from '../OtherIssues'
 
 export class Forum extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -38,6 +39,7 @@ export class Forum extends React.Component {
     return (
       <ScreenContainer grey>
         <ScrollView>
+          <OtherIssues />
           <InThisIssue />
           {postRender}
         </ScrollView>

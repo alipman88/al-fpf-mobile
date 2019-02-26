@@ -14,11 +14,11 @@ export const setupForumData = () => async (dispatch, getState) => {
   if (currentAreaId === 0) {
     const currentProfile = profile.selectors.getCurrentProfile(getState())
     const userAreas = areas.selectors.getAreas(getState())
-    // set the current area id to the first one in the profile
+    // set the current area id tothe first one in the profile
     dispatch(
       areas.actions.setCurrentAreaId(
         userAreas.find(area => currentProfile.area_ids.indexOf(area.id) !== -1)
-          .id
+          .id || userAreas[0].id
       )
     )
   }

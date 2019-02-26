@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { Forum } from '../Forum'
-import { Post } from '../posts/components/Post'
+import { Forum } from '../Forum/Forum'
+import { Post } from '../Post'
 
 describe('Forum', () => {
   const defaultProps = {

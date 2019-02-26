@@ -23,6 +23,10 @@ const path = 'main.issues'
 
 issues.selectors = {
   ...issues.selectors,
+  getLatestIssues: createSelector(
+    [path],
+    issues => issues.issues.slice(0, 5)
+  ),
   getIssues: createSelector(
     [path],
     issues => issues.issues
