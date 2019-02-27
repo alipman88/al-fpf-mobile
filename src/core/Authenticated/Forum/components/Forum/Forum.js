@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { ScrollView } from 'react-native'
+import get from 'lodash/get'
 
 import { ScreenContainer } from '@components/ScreenContainer'
 import { Post } from '../Post'
@@ -17,10 +18,20 @@ export class Forum extends React.Component {
 
   componentDidMount() {
     this.props.setupForumData()
+    this.setTitleFromArea()
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.areas !== this.props.areas) {
+      this.setTitleFromArea()
+    }
+  }
+
+  setTitleFromArea() {
     const currentArea = this.props.areas.find(
       a => a.id === this.props.currentAreaId
     )
-    this.props.navigation.setParams({ navTitle: currentArea.name })
+    this.props.navigation.setParams({ navTitle: get(currentArea, 'name', '') })
   }
 
   handlePostButtonPress(type, target = null) {
@@ -51,7 +62,7 @@ export class Forum extends React.Component {
 Forum.propTypes = {
   setupForumData: PropTypes.func.isRequired,
   posts: PropTypes.object.isRequired,
-  areas: PropTypes.array.isRequred,
+  areas: PropTypes.array.isRequired,
   currentAreaId: PropTypes.number.isRequired,
   navigation: PropTypes.object.isRequired,
   currentIssueNum: PropTypes.number.isRequired

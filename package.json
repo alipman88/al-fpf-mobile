@@ -67,6 +67,9 @@
     "verbose": true,
     "setupFiles": [
       "./jest.setup.js"
-    ]
+    ],
+    "moduleNameMapper": {
+      "@common/(.*)$": "<rootDir>/src/common/$1"
+    }
   }
 }

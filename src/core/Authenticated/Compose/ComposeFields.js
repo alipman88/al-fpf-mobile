@@ -83,7 +83,8 @@ export class ComposeFields extends React.Component {
                     areas,
                     index
                   )
-                  setFieldValue('forums', [newFilteredAreas[0].id])
+                  const areaId = get(newFilteredAreas, '[0].id', 0)
+                  setFieldValue('forums', areaId ? [areaId] : [])
                 }}
                 title='Select Profile'
                 value={values.profile}

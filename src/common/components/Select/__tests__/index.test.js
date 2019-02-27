@@ -9,6 +9,7 @@ describe('Select', () => {
     items: [],
     label: 'Label',
     onValueChange: jest.fn(),
+    placeholder: 'select',
     title: 'Select Things',
     value: 0
   }

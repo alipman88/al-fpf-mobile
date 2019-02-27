@@ -9,20 +9,23 @@ export const setupForumData = () => async (dispatch, getState) => {
   await dispatch(getAppSettings())
   await dispatch(getAreas())
 
-  const currentAreaId = areas.selectors.getCurrentAreaId(getState())
+  let currentAreaId = areas.selectors.getCurrentAreaId(getState())
   // default state, none set
   if (currentAreaId === 0) {
     const currentProfile = profile.selectors.getCurrentProfile(getState())
     const userAreas = areas.selectors.getAreas(getState())
-    // set the current area id tothe first one in the profile
-    dispatch(
-      areas.actions.setCurrentAreaId(
-        userAreas.find(area => currentProfile.area_ids.indexOf(area.id) !== -1)
-          .id || userAreas[0].id
-      )
+    const firstArea = userAreas.find(
+      area => currentProfile.area_ids.indexOf(area.id) !== -1
     )
+    if (firstArea) {
+      // set the current area id to the first one in the profile
+      dispatch(areas.actions.setCurrentAreaId(firstArea.id))
+      currentAreaId = firstArea.id
+    }
   }
 
-  await dispatch(getIssues(areas.selectors.getCurrentAreaId(getState())))
-  await dispatch(getPosts(issues.selectors.getCurrentIssueNumber(getState())))
+  if (currentAreaId !== 0) {
+    await dispatch(getIssues(currentAreaId))
+    await dispatch(getPosts(issues.selectors.getCurrentIssueNumber(getState())))
+  }
 }
