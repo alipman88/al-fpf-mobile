@@ -1,4 +1,5 @@
 import { createSlice, createSelector } from 'redux-starter-kit'
+import { resetAction } from '@common/resetAction'
 
 export const posts = createSlice({
   slice: 'posts',
@@ -18,6 +19,9 @@ export const posts = createSlice({
         [action.payload.issueNumber]: action.payload.headlines
       }
     })
+  },
+  extraReducers: {
+    [resetAction]: () => ({ postsByIssue: {}, headlinesByIssue: {} })
   }
 })
 

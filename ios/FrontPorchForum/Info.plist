@@ -41,6 +41,7 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Ionicons.ttf</string>
 		<string>EvilIcons.ttf</string>
 		<string>MaterialIcons.ttf</string>
 		<string>ProximaNova-Regular.otf</string>

@@ -1,4 +1,5 @@
 import { createSlice, createSelector } from 'redux-starter-kit'
+import { resetAction } from '@common/resetAction'
 
 export const currentUser = createSlice({
   slice: 'currentUser',
@@ -9,6 +10,11 @@ export const currentUser = createSlice({
     setAccessToken: (state, action) => ({
       ...state,
       accessToken: action.payload
+    })
+  },
+  extraReducers: {
+    [resetAction]: state => ({
+      accessToken: ''
     })
   }
 })

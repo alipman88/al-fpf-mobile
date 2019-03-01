@@ -14,6 +14,7 @@ import { Select } from '@components/Select'
 import { FormFieldLabel } from '@components/FormFieldLabel'
 import { KeyboardAwareScrollView } from '@components/KeyboardAwareScrollView'
 import { getProfileDisplayName } from '@common/utils/getProfileDisplayName'
+import { Event } from '../Event'
 
 import {
   ButtonSpacer,
@@ -21,9 +22,13 @@ import {
   FieldWrapper,
   InputDetails,
   ButtonContainer
-} from './styledComponents'
+} from '../styledComponents'
 
 export class ComposeFields extends React.Component {
+  state = {
+    duplicatePost: false
+  }
+
   getAreasForProfile(profiles, areas, profileIndex) {
     const profileAreaIds = get(
       profiles,
@@ -37,12 +42,25 @@ export class ComposeFields extends React.Component {
     return areas.filter(area => profileAreaIds[area.id])
   }
 
+  handleSubmit = () => {
+    if (this.state.duplicatePost) {
+      this.props.resetForm()
+      this.setState({ duplicatePost: false })
+      this.props.navigation.navigate('Forum')
+    } else {
+      this.props.handleSubmit()
+    }
+  }
+
+  setDuplicateState = duplicatePost => {
+    this.setState({ duplicatePost })
+  }
+
   render() {
     const {
       areas,
       categories,
       errors,
-      handleSubmit,
       isSubmitting,
       loading,
       profiles,
@@ -51,6 +69,8 @@ export class ComposeFields extends React.Component {
       touched,
       values
     } = this.props
+
+    const { duplicatePost } = this.state
 
     const filteredAreas = this.getAreasForProfile(
       profiles,
@@ -148,27 +168,26 @@ export class ComposeFields extends React.Component {
           <FieldWrapper>
             <Select
               placeholder={get(
-                categories,
-                `[${values.category}].name`,
+                values.category,
+                'name',
                 'Select category that best applies'
               )}
               label='Category'
               items={categories.map(category => category.name)}
               onValueChange={index => {
                 setFieldTouched('category', true)
-                setFieldValue('category', index)
+                setFieldValue('category', categories[index])
               }}
               title='Select Category'
-              value={values.category}
+              value={categories.findIndex(
+                category => category.id === get(values, 'category.id')
+              )}
               error={errors.category}
               touched={touched.category}
             />
-            {Boolean(values.category) &&
-              Boolean(get(categories, `[${values.category}].faq`)) && (
-                <InputDetails>
-                  {get(categories, `[${values.category}].faq`)}
-                </InputDetails>
-              )}
+            {Boolean(get(values.category, 'faq')) && (
+              <InputDetails>{get(values.category, 'faq')}</InputDetails>
+            )}
           </FieldWrapper>
           <FieldWrapper>
             <TextInput
@@ -180,34 +199,50 @@ export class ComposeFields extends React.Component {
               label='Subject'
             />
           </FieldWrapper>
-          <FieldWrapper>
-            <TextInput
-              error={errors.message}
-              onChangeText={value => setFieldValue('message', value)}
-              onBlur={() => setFieldTouched('message')}
-              touched={touched.message}
-              value={values.message}
-              label='Message'
-              multiline
+          {get(values.category, 'is_event', false) && (
+            <Event
+              errors={errors}
+              setFieldTouched={setFieldTouched}
+              setFieldValue={setFieldValue}
+              setDuplicateState={this.setDuplicateState}
+              touched={touched}
+              values={values}
             />
-          </FieldWrapper>
+          )}
+          {!duplicatePost && (
+            <FieldWrapper>
+              <TextInput
+                error={errors.message}
+                onChangeText={value => setFieldValue('message', value)}
+                onBlur={() => setFieldTouched('message')}
+                touched={touched.message}
+                value={values.message}
+                label='Message'
+                multiline
+              />
+            </FieldWrapper>
+          )}
         </FormContainer>
         <ButtonContainer>
-          <Checkbox
-            value={values.isShared}
-            onPress={value => {
-              setFieldTouched('isShared', true)
-              setFieldValue('isShared', value)
-            }}
-          >
-            Allow people in neighboring FPFs (
-            {flatten(filteredAreas.map(area => area.neighbor_areas))
-              .map(area => area.name)
-              .join(', ')}
-            ) to see this posting
-          </Checkbox>
+          {!duplicatePost && (
+            <Checkbox
+              value={values.isShared}
+              onPress={value => {
+                setFieldTouched('isShared', true)
+                setFieldValue('isShared', value)
+              }}
+            >
+              Allow people in neighboring FPFs (
+              {flatten(filteredAreas.map(area => area.neighbor_areas))
+                .map(area => area.name)
+                .join(', ')}
+              ) to see this posting
+            </Checkbox>
+          )}
           <ButtonSpacer />
-          <Button onPress={() => handleSubmit()}>Submit posting</Button>
+          <Button onPress={this.handleSubmit}>
+            {duplicatePost ? 'Cancel' : 'Submit posting'}
+          </Button>
         </ButtonContainer>
       </KeyboardAwareScrollView>
     )
@@ -221,7 +256,9 @@ ComposeFields.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   isSubmitting: PropTypes.bool,
   loading: PropTypes.bool,
+  navigation: PropTypes.object.isRequired,
   profiles: PropTypes.array.isRequired,
+  resetForm: PropTypes.func.isRequired,
   setFieldTouched: PropTypes.func.isRequired,
   setFieldValue: PropTypes.func.isRequired,
   touched: PropTypes.object.isRequired,

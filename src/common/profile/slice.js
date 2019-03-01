@@ -1,14 +1,19 @@
 import get from 'lodash/get'
 import { createSlice, createSelector } from 'redux-starter-kit'
+import { resetAction } from '@common/resetAction'
+
+const initialState = {
+  user: {
+    profiles: []
+  },
+  loading: false,
+  currentProfileId: 0
+}
 
 export const profile = createSlice({
   slice: 'profile',
   initialState: {
-    user: {
-      profiles: []
-    },
-    loading: false,
-    currentProfileId: 0
+    ...initialState
   },
   reducers: {
     setLoading: (state, action) => ({
@@ -23,6 +28,11 @@ export const profile = createSlice({
           state.currentProfileId || get(action, 'payload.profiles[0].id', 0)
       }
     }
+  },
+  extraReducers: {
+    [resetAction]: () => ({
+      ...initialState
+    })
   }
 })
 

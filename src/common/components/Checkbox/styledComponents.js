@@ -5,7 +5,7 @@ export const Button = styled.View`
   border-radius: 4;
   border-width: 1;
   border-color: #90a780;
-  background-color: ${({ checked }) => (checked ? '#90A780' : 'transparent')};
+  background-color: ${({ checked }) => (checked ? '#355768' : 'transparent')};
   height: 18;
   width: 18;
   align-items: center;

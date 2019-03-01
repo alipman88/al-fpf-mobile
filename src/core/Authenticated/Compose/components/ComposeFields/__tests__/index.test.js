@@ -1,8 +1,10 @@
 import React from 'react'
-import { ComposeFields } from '../ComposeFields'
+import { ComposeFields } from '../index'
 import { shallow } from 'enzyme'
 import SectionedMultiSelect from 'react-native-sectioned-multi-select'
 
+import { Checkbox } from '@components/Checkbox'
+import { TextInput } from '@components/TextInput'
 import { Select } from '@components/Select'
 
 describe('Compose', () => {
@@ -60,6 +62,9 @@ describe('Compose', () => {
     errors: {},
     handleSubmit: jest.fn(),
     loading: false,
+    navigation: {
+      navigate: jest.fn()
+    },
     profiles: [
       {
         id: 1,
@@ -70,6 +75,7 @@ describe('Compose', () => {
         area_ids: [2, 3]
       }
     ],
+    resetForm: jest.fn(),
     setFieldTouched: jest.fn(),
     setFieldValue: jest.fn(),
     touched: {},
@@ -80,6 +86,8 @@ describe('Compose', () => {
     defaultProps.handleSubmit.mockReset()
     defaultProps.setFieldTouched.mockReset()
     defaultProps.setFieldValue.mockReset()
+    defaultProps.resetForm.mockReset()
+    defaultProps.navigation.navigate.mockReset()
   })
 
   describe('defaultProps', () => {
@@ -148,6 +156,35 @@ describe('Compose', () => {
     expect(wrapper.find(SectionedMultiSelect).length).toEqual(1)
   })
 
+  test('Hide message & checkbox if theres a duplicate post', () => {
+    const wrapper = shallow(<ComposeFields {...defaultProps} />)
+    wrapper.setState({ duplicatePost: true })
+
+    expect(wrapper.find(Checkbox).length).toEqual(0)
+    const labels = wrapper
+      .find(TextInput)
+      .map(component => component.props().label)
+    expect(labels).toEqual(['Subject'])
+  })
+
+  describe('handleSubmit', () => {
+    test('duplicate post, it resets the form and navigates the user', () => {
+      const wrapper = shallow(<ComposeFields {...defaultProps} />)
+      wrapper.setState({ duplicatePost: true })
+
+      wrapper.instance().handleSubmit()
+      expect(defaultProps.resetForm).toHaveBeenCalled()
+      expect(wrapper.state().duplicatePost).toEqual(false)
+      expect(defaultProps.navigation.navigate).toHaveBeenCalledWith('Forum')
+    })
+
+    test('no duplicate post, calls handleSumbit prop', () => {
+      const wrapper = shallow(<ComposeFields {...defaultProps} />)
+      wrapper.instance().handleSubmit()
+      expect(defaultProps.handleSubmit).toHaveBeenCalled()
+    })
+  })
+
   describe('getAreasForProfile', () => {
     test('returns areas for the given profile', () => {
       const wrapper = shallow(<ComposeFields {...defaultProps} />)
@@ -160,6 +197,15 @@ describe('Compose', () => {
         .instance()
         .getAreasForProfile(defaultProps.profiles, defaultProps.areas, 1)
       expect(areas.map(area => area.id)).toEqual([2, 3])
+    })
+  })
+
+  // its' a simple function, but useful to test since it gets passed to the Event component
+  describe('setDuplicateState', () => {
+    test('it changes the state value', () => {
+      const wrapper = shallow(<ComposeFields {...defaultProps} />)
+      wrapper.instance().setDuplicateState(true)
+      expect(wrapper.state().duplicatePost).toEqual(true)
     })
   })
 })

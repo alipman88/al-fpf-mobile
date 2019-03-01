@@ -4,11 +4,11 @@ import get from 'lodash/get'
 import { Formik } from 'formik'
 
 import { ScreenContainer } from '@components/ScreenContainer'
-import { Success } from './Success'
+import { Success } from './components/Success'
 
 import { validations } from './validations'
 
-import { ComposeFields } from './ComposeFields'
+import { ComposeFields } from './components/ComposeFields'
 
 export class Compose extends React.Component {
   static navigationOptions = {
@@ -34,6 +34,14 @@ export class Compose extends React.Component {
 
   onSubmit = (values, actions) => {
     const { profiles } = this.props
+    const { category } = values
+
+    const event = {}
+    if (category.is_event) {
+      event.start_date = values.fromDate
+      event.end_date = values.toDate
+      event.title = values.subject
+    }
 
     const postBody = {
       profile_id: profiles[values.profile].id,
@@ -42,7 +50,8 @@ export class Compose extends React.Component {
       content: values.message,
       is_shared: values.isShared,
       area_ids: values.forums,
-      category_ids: [this.props.categories[values.category].id]
+      category_ids: [category.id],
+      event
     }
     this.props.submitPost(this.onSuccess, postBody, actions.setSubmitting)
   }
@@ -59,6 +68,7 @@ export class Compose extends React.Component {
       currentProfileId,
       areas,
       loading,
+      navigation,
       profiles
     } = this.props
 
@@ -75,7 +85,9 @@ export class Compose extends React.Component {
             category: undefined,
             subject: '',
             message: '',
-            isShared: false
+            isShared: false,
+            fromDate: null,
+            toDate: null
           }}
           validationSchema={validations}
           onSubmit={this.onSubmit}
@@ -97,7 +109,9 @@ export class Compose extends React.Component {
                 handleSubmit={handleSubmit}
                 isSubmitting={isSubmitting}
                 loading={loading}
+                navigation={navigation}
                 profiles={profiles}
+                resetForm={resetForm}
                 setFieldValue={setFieldValue}
                 setFieldTouched={setFieldTouched}
                 touched={touched}
