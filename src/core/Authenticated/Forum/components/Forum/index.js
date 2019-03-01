@@ -11,7 +11,8 @@ const mapStateToProps = state => ({
   areas: areas.selectors.getAreas(state),
   currentAreaId: areas.selectors.getCurrentAreaId(state),
   currentIssueNum: issues.selectors.getCurrentIssueNumber(state),
-  posts: posts.selectors.getPostsByIssue(state)
+  posts: posts.selectors.getPostsByIssue(state),
+  ads: posts.selectors.getAdsByIssue(state)
 })
 
 export const Forum = createStackNavForTab({

@@ -5,18 +5,23 @@ export const posts = createSlice({
   slice: 'posts',
   initialState: {
     postsByIssue: {},
-    headlinesByIssue: {}
+    headlinesByIssue: {},
+    adsByIssue: {}
   },
   reducers: {
-    setPostsForIssue: (state, action) => ({
+    setPostsForIssue: (state, { payload }) => ({
       ...state,
       postsByIssue: {
         ...state.postsByIssue,
-        [action.payload.issueNumber]: action.payload.posts
+        [payload.issueNumber]: payload.posts
       },
       headlinesByIssue: {
         ...state.headlinesByIssue,
-        [action.payload.issueNumber]: action.payload.headlines
+        [payload.issueNumber]: payload.headlines
+      },
+      adsByIssue: {
+        ...state.adsByIssue,
+        [payload.issueNumber]: payload.ads
       }
     })
   },
@@ -36,5 +41,9 @@ posts.selectors = {
   getHeadlinesByIssue: createSelector(
     [path],
     posts => posts.headlinesByIssue
+  ),
+  getAdsByIssue: createSelector(
+    [path],
+    posts => posts.adsByIssue
   )
 }

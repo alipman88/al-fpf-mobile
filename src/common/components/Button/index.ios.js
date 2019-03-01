@@ -5,11 +5,12 @@ import { ButtonText, WrapperStyles } from './styledComponents'
 
 const Wrapper = styled.TouchableOpacity`
   ${WrapperStyles}
+  ${({ fullWidth }) => (fullWidth ? 'width: 100%;' : '')}
 `
 
-export const Button = ({ children, disabled, onPress, color }) => {
+export const Button = ({ children, disabled, fullWidth, onPress, color }) => {
   return (
-    <Wrapper disabled={disabled} onPress={onPress}>
+    <Wrapper disabled={disabled} fullWidth={fullWidth} onPress={onPress}>
       <ButtonText color={color}>{children}</ButtonText>
     </Wrapper>
   )
@@ -18,6 +19,7 @@ export const Button = ({ children, disabled, onPress, color }) => {
 Button.propTypes = {
   children: PropTypes.node,
   disabled: PropTypes.bool,
+  fullWidth: PropTypes.bool,
   color: PropTypes.string,
   onPress: PropTypes.func.isRequired
 }

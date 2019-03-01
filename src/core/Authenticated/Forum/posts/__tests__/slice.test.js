@@ -5,7 +5,8 @@ describe('posts - slice', () => {
     const state = posts.reducer(undefined, {})
     expect(state).toEqual({
       headlinesByIssue: {},
-      postsByIssue: {}
+      postsByIssue: {},
+      adsByIssue: {}
     })
   })
 
@@ -23,7 +24,12 @@ describe('posts - slice', () => {
               id: 2
             }
           ],
-          headlines: ['An interesting headline']
+          headlines: ['An interesting headline'],
+          ads: [
+            {
+              id: 5
+            }
+          ]
         })
       )
 
@@ -52,6 +58,20 @@ describe('posts - slice', () => {
 
       expect(data).toEqual({
         1: ['An interesting headline']
+      })
+
+      data = posts.selectors.getAdsByIssue({
+        main: {
+          posts: state
+        }
+      })
+
+      expect(data).toEqual({
+        1: [
+          {
+            id: 5
+          }
+        ]
       })
     })
   })

@@ -1,9 +1,15 @@
-import styled from 'styled-components/native'
-import { Text } from '@components/Text'
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export const Pill = styled(Text)`
-  background-color: #ebecf1;
-  padding: 7px 10px;
-  border-radius: 50;
-  align-self: flex-start;
-`
+import { Container, Label } from './styledComponents'
+
+export const Pill = ({ children, style }) => (
+  <Container style={style}>
+    <Label>{children}</Label>
+  </Container>
+)
+
+Pill.propTypes = {
+  children: PropTypes.node.isRequired,
+  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired
+}

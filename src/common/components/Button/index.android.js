@@ -6,12 +6,13 @@ import { ButtonText, WrapperStyles } from './styledComponents'
 
 const Wrapper = styled.View`
   ${WrapperStyles}
+  ${({ fullWidth }) => (fullWidth ? 'width: 100%;' : '')}
 `
 
-export const Button = ({ children, disabled, onPress, color }) => {
+export const Button = ({ children, disabled, fullWidth, onPress, color }) => {
   return (
     <TouchableNativeFeedback disabled={disabled} onPress={onPress}>
-      <Wrapper>
+      <Wrapper fullWidth={fullWidth}>
         <ButtonText color={color}>{children}</ButtonText>
       </Wrapper>
     </TouchableNativeFeedback>
@@ -21,6 +22,7 @@ export const Button = ({ children, disabled, onPress, color }) => {
 Button.propTypes = {
   children: PropTypes.node,
   disabled: PropTypes.bool,
+  fullWidth: PropTypes.bool,
   color: PropTypes.string,
   onPress: PropTypes.func.isRequired
 }

@@ -20,13 +20,14 @@ export const getPosts = issueNumber => async (dispatch, getState) => {
       getState()
     )
 
-    const { posts: postsData, headlines } = response.data
+    const { posts: postsData, headlines, ads } = response.data
 
     dispatch(
       posts.actions.setPostsForIssue({
         posts: postsData,
         headlines,
-        issueNumber: issue.number
+        issueNumber: issue.number,
+        ads
       })
     )
   } catch (e) {

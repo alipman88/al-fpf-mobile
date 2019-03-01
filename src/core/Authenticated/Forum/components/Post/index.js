@@ -3,17 +3,14 @@ import PropTypes from 'prop-types'
 import { Button } from '@components/Button'
 import { Text } from '@components/Text'
 import {
-  Bottom,
   Category,
   CategoryContainer,
   Card,
-  CardContent,
-  ContentText,
-  Header,
   Name,
-  PostButton,
-  VerticalDivider
+  PostButton
 } from './styledComponents'
+
+import { CardContent, ContentText, Header, Bottom } from '../sharedStyles'
 
 export const Post = ({ post, onButtonPress }) => {
   const {
@@ -46,8 +43,6 @@ export const Post = ({ post, onButtonPress }) => {
             Email author
           </Button>
         </PostButton>
-
-        <VerticalDivider />
 
         <PostButton>
           <Button color={'#fff'} onPress={() => onButtonPress('reply')}>
