@@ -5,6 +5,7 @@ import get from 'lodash/get'
 import range from 'lodash/range'
 
 import { ScreenContainer } from '@components/ScreenContainer'
+import { ForumContainer } from './styledComponents'
 import { Post } from '../Post'
 import { Advertisement } from '../Advertisement'
 import { InThisIssue } from '../InThisIssue'
@@ -74,11 +75,13 @@ export class Forum extends React.Component {
     }
 
     return (
-      <ScreenContainer grey>
+      <ScreenContainer withPadding={false} grey>
         <ScrollView>
           <OtherIssues />
-          <InThisIssue />
-          {postRender}
+          <ForumContainer>
+            <InThisIssue />
+            {postRender}
+          </ForumContainer>
         </ScrollView>
       </ScreenContainer>
     )

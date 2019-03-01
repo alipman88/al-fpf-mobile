@@ -1,28 +1,60 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { View } from 'react-native'
 import { IssueTab } from './IssueTab'
 import { IssueScrollView } from './styledComponents'
 
 export class OtherIssues extends React.Component {
+  onTapIssue = number => {
+    this.props.setCurrentIssueNumber(number)
+    this.props.getPosts(number)
+  }
+
+  scrollFocusedIssue = () => {
+    if (this.focusedIssue) {
+      this.focusedIssue.measure((x, y, width, height, pageX, pageY) => {
+        this.scrollViewRef.scrollTo({ x: pageX, y: pageY, animated: true })
+      })
+    } else {
+      this.scrollViewRef.scrollToEnd({ animated: true })
+    }
+  }
+
   render() {
     const { issues, currentIssueNumber } = this.props
     const issuesRender = issues
-      .map(i => (
-        <IssueTab
-          issue={i}
-          key={i.id}
-          focused={i.number === currentIssueNumber}
-        />
-      ))
+      .map(i => {
+        const focused = currentIssueNumber === i.number
+        return (
+          <View
+            onLayout={this.scrollFocusedIssue}
+            key={i.id}
+            ref={
+              focused
+                ? ref => {
+                    this.focusedIssue = ref
+                  }
+                : undefined
+            }
+          >
+            <IssueTab
+              issue={i}
+              key={i.id}
+              focused={focused}
+              onTapIssue={this.onTapIssue}
+            />
+          </View>
+        )
+      })
       .reverse()
 
     return (
       <IssueScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        ref={ref => (this.scrollView = ref)}
-        onContentSizeChange={(contentWidth, contentHeight) => {
-          this.scrollView.scrollToEnd({ animated: true })
+        onContentSizeChange={this.scrollFocusedIssue}
+        ref={ref => {
+          this.scrollViewRef = ref
         }}
       >
         {issuesRender}
@@ -33,5 +65,7 @@ export class OtherIssues extends React.Component {
 
 OtherIssues.propTypes = {
   issues: PropTypes.array.isRequired,
-  currentIssueNumber: PropTypes.number.isRequired
+  currentIssueNumber: PropTypes.number.isRequired,
+  getPosts: PropTypes.func.isRequired,
+  setCurrentIssueNumber: PropTypes.func.isRequired
 }

@@ -8,6 +8,12 @@ export const issues = createSlice({
     currentIssueNumber: 0
   },
   reducers: {
+    setCurrentIssueNumber: (state, action) => {
+      return {
+        ...state,
+        currentIssueNumber: action.payload
+      }
+    },
     setIssues: (state, action) => {
       const currentIssueNumber =
         state.currentIssueNumber || action.payload[0].number

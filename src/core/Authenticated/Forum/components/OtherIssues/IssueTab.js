@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { format } from 'date-fns'
-import { View } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import {
   IssueBox,
   IssueText,
@@ -9,17 +9,24 @@ import {
   Triangle
 } from './styledComponents'
 
-export const IssueTab = ({ issue, focused }) => (
-  <View>
-    <IssueBox focused={focused}>
-      <IssueTextBold>Issue #{issue.number}</IssueTextBold>
-      <IssueText>{format(new Date(issue.sent_at), 'MMM D YYYY')}</IssueText>
-    </IssueBox>
-    {focused && <Triangle />}
-  </View>
-)
+export class IssueTab extends React.Component {
+  render() {
+    const { issue, focused, onTapIssue } = this.props
+
+    return (
+      <TouchableOpacity onPress={() => onTapIssue(issue.number)}>
+        <IssueBox focused={focused}>
+          <IssueTextBold>Issue #{issue.number}</IssueTextBold>
+          <IssueText>{format(new Date(issue.sent_at), 'MMM D YYYY')}</IssueText>
+        </IssueBox>
+        {focused && <Triangle />}
+      </TouchableOpacity>
+    )
+  }
+}
 
 IssueTab.propTypes = {
   issue: PropTypes.object.isRequired,
-  focused: PropTypes.bool.isRequired
+  focused: PropTypes.bool.isRequired,
+  onTapIssue: PropTypes.func.isRequired
 }

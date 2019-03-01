@@ -12,7 +12,7 @@ export const IssueText = styled(Text)`
 export const IssueScrollView = styled.ScrollView`
   flex:1
   flex-direction: row;
-  margin-bottom: 15;
+  margin-vertical: 15;
 `
 
 export const IssueBox = styled.View`
@@ -21,7 +21,7 @@ export const IssueBox = styled.View`
   background-color: ${props =>
     props.focused ? '#97b57b' : 'rgba(151, 181, 123, 0.5)'};
   border-radius: 4;
-  margin-right: 11px;
+  margin-horizontal: 11;
   align-items: center;
   justify-content: center;
 `
@@ -38,5 +38,5 @@ export const Triangle = styled.View`
   border-right-color: transparent;
   border-bottom-color: transparent;
   border-left-color: transparent;
-  margin-left: 62;
+  margin-left: 72;
 `

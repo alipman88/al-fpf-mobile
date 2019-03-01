@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { issues } from '../../issues'
+import { getPosts } from '../../posts'
 import { OtherIssues as OtherIssuesComponent } from './OtherIssues'
 
 const mapStateToProps = state => {
@@ -9,4 +10,10 @@ const mapStateToProps = state => {
   }
 }
 
-export const OtherIssues = connect(mapStateToProps)(OtherIssuesComponent)
+export const OtherIssues = connect(
+  mapStateToProps,
+  {
+    setCurrentIssueNumber: issues.actions.setCurrentIssueNumber,
+    getPosts
+  }
+)(OtherIssuesComponent)
