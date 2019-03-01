@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { ScrollView } from 'react-native'
 import get from 'lodash/get'
-import range from 'lodash/range'
 
 import { ScreenContainer } from '@components/ScreenContainer'
 import { ForumContainer } from './styledComponents'

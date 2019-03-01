@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView } from 'react-native'
+import { ForumContainer } from '../Forum/styledComponents'
 import { shallow } from 'enzyme'
 import { Forum } from '../Forum/Forum'
 import { Post } from '../Post'
@@ -96,9 +96,9 @@ describe('Forum', () => {
 
   test('renders posts & ads in the right order', () => {
     const wrapper = shallow(<Forum {...defaultProps} />)
-    const children = wrapper.find(ScrollView).children()
-    // start index at 2, skip the first two components
-    for (let i = 2; i < children.length; i++) {
+    const children = wrapper.find(ForumContainer).children()
+    // start index at 1, skip the first component
+    for (let i = 1; i < children.length; i++) {
       const component = children.at(i)
       if (i === 4 || i === 6 || i === 8) {
         expect(component.is(Advertisement))
@@ -107,15 +107,15 @@ describe('Forum', () => {
       }
     }
 
-    expect(children.length).toEqual(9)
+    expect(children.length).toEqual(8)
   })
 
   test('one post, 3 ads, renders 1 & 1', () => {
     const posts = { 12: defaultProps.posts[12].slice(0, 1) }
     const wrapper = shallow(<Forum {...defaultProps} posts={posts} />)
-    const children = wrapper.find(ScrollView).children()
+    const children = wrapper.find(ForumContainer).children()
 
-    for (let i = 2; i < children.length; i++) {
+    for (let i = 1; i < children.length; i++) {
       const component = children.at(i)
       if (i === 2) {
         expect(component.is(Post))
@@ -124,6 +124,6 @@ describe('Forum', () => {
       }
     }
 
-    expect(children.length).toEqual(4)
+    expect(children.length).toEqual(3)
   })
 })
