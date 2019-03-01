@@ -13,7 +13,7 @@ export class OtherIssues extends React.Component {
   scrollFocusedIssue = () => {
     if (this.focusedIssue) {
       this.focusedIssue.measure((x, y, width, height, pageX, pageY) => {
-        this.scrollViewRef.scrollTo({ x: pageX, y: pageY, animated: true })
+        this.scrollViewRef.scrollTo({ x: pageX, animated: true })
       })
     } else {
       this.scrollViewRef.scrollToEnd({ animated: true })
