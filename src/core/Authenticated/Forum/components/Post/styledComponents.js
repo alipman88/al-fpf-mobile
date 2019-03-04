@@ -4,7 +4,6 @@ import { Text } from '@components/Text'
 
 export const Card = styled.View`
   min-height: 328;
-  max-height: 520;
   border-color: #ebecf1;
   border-width: 1;
   border-radius: 5;

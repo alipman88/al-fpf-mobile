@@ -23,9 +23,6 @@ export const Post = ({ post, onButtonPress }) => {
     user_profile_name: userDetails
   } = post
 
-  const categoryRender = categories.map(cat => (
-    <Category key={cat}>{cat}</Category>
-  ))
   return (
     <Card>
       <CardContent>
@@ -35,7 +32,11 @@ export const Post = ({ post, onButtonPress }) => {
         <ContentText ellipsizeMode='tail' numberOfLines={15}>
           {content}
         </ContentText>
-        <CategoryContainer>{categoryRender}</CategoryContainer>
+        {categories.map(category => (
+          <CategoryContainer key={category}>
+            <Category>{category}</Category>
+          </CategoryContainer>
+        ))}
       </CardContent>
       <Bottom>
         <PostButton>
