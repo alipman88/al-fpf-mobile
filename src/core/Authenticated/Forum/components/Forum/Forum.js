@@ -49,7 +49,7 @@ export class Forum extends React.Component {
     let adOffset = 0
     for (let index = 0; index < maxIndex; index++) {
       // out of posts, no ads rendered yet
-      if (index - adOffset >= posts.length && adOffset === 0 && adOffset[0]) {
+      if (index - adOffset >= posts.length && adOffset === 0 && ads[0]) {
         const ad = ads[adOffset]
         // add one ad, then exit
         postRender.push(<Advertisement ad={ad} key={ad.id} />)

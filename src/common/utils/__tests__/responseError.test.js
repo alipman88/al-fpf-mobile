@@ -14,4 +14,16 @@ describe('responseError', () => {
     }
     expect(responseError(error)).toEqual('Request failed')
   })
+
+  test('returns base error message for errors key', () => {
+    const error = new Error('boom')
+    error.response = {
+      data: {
+        errors: {
+          base: ['Request failed']
+        }
+      }
+    }
+    expect(responseError(error)).toEqual('Request failed')
+  })
 })
