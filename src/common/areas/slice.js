@@ -1,11 +1,15 @@
 import { createSlice, createSelector } from 'redux-starter-kit'
 import { resetAction } from '@common/resetAction'
 
+const initialState = {
+  areas: [],
+  currentAreaId: 0
+}
+
 export const areas = createSlice({
   slice: 'areas',
   initialState: {
-    areas: [],
-    currentAreaId: 0
+    ...initialState
   },
   reducers: {
     setAreas: (state, action) => {
@@ -23,8 +27,7 @@ export const areas = createSlice({
   },
   extraReducers: {
     [resetAction]: () => ({
-      areas: [],
-      currentAreaId: 0
+      ...initialState
     })
   }
 })

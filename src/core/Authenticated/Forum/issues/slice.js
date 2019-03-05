@@ -1,11 +1,15 @@
 import { createSlice, createSelector } from 'redux-starter-kit'
 import { resetAction } from '@common/resetAction'
 
+const initialState = {
+  issues: [],
+  currentIssueNumber: 0
+}
+
 export const issues = createSlice({
   slice: 'issues',
   initialState: {
-    issues: [],
-    currentIssueNumber: 0
+    ...initialState
   },
   reducers: {
     setCurrentIssueNumber: (state, action) => {
@@ -25,7 +29,7 @@ export const issues = createSlice({
     }
   },
   extraReducers: {
-    [resetAction]: () => ({ issues: [], currentIssueNumber: 0 })
+    [resetAction]: () => ({ ...initialState })
   }
 })
 
