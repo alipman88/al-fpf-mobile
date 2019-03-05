@@ -130,6 +130,8 @@ export class ComposeFields extends React.Component {
                 uniqueKey='id'
                 subKey='children'
                 selectText='Select Forums'
+                readOnlyHeadings={true}
+                searchPlaceholderText='Search Forums'
                 onSelectedItemsChange={selectedItems => {
                   setFieldTouched('forums', true)
                   setFieldValue('forums', selectedItems)
