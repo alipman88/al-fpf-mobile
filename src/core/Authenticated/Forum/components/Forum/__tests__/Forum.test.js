@@ -1,9 +1,9 @@
 import React from 'react'
-import { ForumContainer } from '../Forum/styledComponents'
+import { ForumContainer } from '../styledComponents'
 import { shallow } from 'enzyme'
-import { Forum } from '../Forum/Forum'
-import { Post } from '../Post'
-import { Advertisement } from '../Advertisement'
+import { Forum } from '../Forum'
+import { Post } from '../../Post'
+import { Advertisement } from '../../Advertisement'
 
 describe('Forum', () => {
   const defaultProps = {
@@ -14,7 +14,7 @@ describe('Forum', () => {
     setAccessToken: jest.fn(),
     currentIssueNum: 12,
     currentAreaId: 1,
-    areas: [{ id: 1, name: 'Sparta' }],
+    areas: [{ id: 1, name: 'Sparta' }, { id: 2, name: 'Athena' }],
     posts: {
       12: [
         {
@@ -88,9 +88,14 @@ describe('Forum', () => {
   })
 
   test('it sets the title as the current area name', () => {
-    shallow(<Forum {...defaultProps} />)
+    const wrapper = shallow(<Forum {...defaultProps} />)
     expect(defaultProps.navigation.setParams).toHaveBeenCalledWith({
       navTitle: 'Sparta'
+    })
+
+    wrapper.setProps({ currentAreaId: 2 })
+    expect(defaultProps.navigation.setParams).toHaveBeenCalledWith({
+      navTitle: 'Athena'
     })
   })
 
