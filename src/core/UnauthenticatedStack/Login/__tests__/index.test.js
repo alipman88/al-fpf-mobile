@@ -66,7 +66,7 @@ describe('LoginComponent', () => {
       expect(setSubmitting).toHaveBeenCalledWith(false)
       expect(api.post).toHaveBeenCalled()
       expect(setSubmitting).toHaveBeenCalledWith(true)
-      expect(setFieldError).toHaveBeenCalledWith('boom')
+      expect(setFieldError).toHaveBeenCalledWith('email', 'boom')
 
       api.post.mockRestore()
     })
