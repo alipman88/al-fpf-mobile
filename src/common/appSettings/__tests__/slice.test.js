@@ -15,7 +15,7 @@ describe('appSettings - slice', () => {
       const state = appSettings.reducer(
         undefined,
         appSettings.actions.setAppSettings({
-          post_truncate_length: 450,
+          posting_truncate_length: 450,
           categories: [
             {
               id: 1,

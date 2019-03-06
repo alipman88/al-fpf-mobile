@@ -21,7 +21,7 @@ describe('appSettings - actions', () => {
     test('fetches profile', async () => {
       const getSpy = jest.spyOn(api, 'get').mockImplementation(() => ({
         data: {
-          post_truncate_length: 500,
+          posting_truncate_length: 500,
           categories: [{ id: 1 }]
         }
       }))
@@ -40,7 +40,7 @@ describe('appSettings - actions', () => {
       )
       expect(dispatch).toHaveBeenCalledWith(
         appSettings.actions.setAppSettings({
-          post_truncate_length: 500,
+          posting_truncate_length: 500,
           categories: [{ id: 1 }]
         })
       )

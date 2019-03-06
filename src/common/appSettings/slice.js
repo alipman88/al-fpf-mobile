@@ -10,7 +10,7 @@ export const appSettings = createSlice({
   reducers: {
     setAppSettings: (state, { payload }) => ({
       ...state,
-      postTruncateLength: payload.post_truncate_length,
+      postTruncateLength: payload.posting_truncate_length,
       categories: payload.categories
     }),
     setLoading: (state, { payload }) => ({
@@ -34,6 +34,11 @@ appSettings.selectors = {
   getCategories: createSelector(
     [getAppSettings],
     appSettings => appSettings.categories
+  ),
+
+  getPostTruncateLength: createSelector(
+    [getAppSettings],
+    appSettings => appSettings.postTruncateLength
   ),
 
   getLoading: createSelector(
