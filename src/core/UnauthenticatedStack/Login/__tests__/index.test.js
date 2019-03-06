@@ -7,7 +7,6 @@ import { LoginComponent } from '../index'
 
 describe('LoginComponent', () => {
   const defaultProps = {
-    setAppError: jest.fn(),
     setAccessToken: jest.fn(),
     navigation: {
       dispatch: jest.fn(),
@@ -16,7 +15,6 @@ describe('LoginComponent', () => {
   }
 
   afterEach(() => {
-    defaultProps.setAppError.mockReset()
     defaultProps.setAccessToken.mockReset()
     defaultProps.navigation.dispatch.mockReset()
     defaultProps.navigation.navigate.mockReset()
@@ -50,9 +48,10 @@ describe('LoginComponent', () => {
       api.post.mockRestore()
     })
 
-    test('api request fails, dispatches error', async () => {
+    test('api request fails, sets error', async () => {
       const wrapper = shallow(<LoginComponent {...defaultProps} />)
       const setSubmitting = jest.fn()
+      const setFieldError = jest.fn()
       jest.spyOn(api, 'post').mockImplementation(() => {
         throw new Error('boom')
       })
@@ -61,13 +60,13 @@ describe('LoginComponent', () => {
         .props()
         .onSubmit(
           { email: 'test@example.com', password: 'passpass' },
-          { setSubmitting }
+          { setSubmitting, setFieldError }
         )
 
       expect(setSubmitting).toHaveBeenCalledWith(false)
       expect(api.post).toHaveBeenCalled()
       expect(setSubmitting).toHaveBeenCalledWith(true)
-      expect(defaultProps.setAppError).toHaveBeenCalledWith('boom')
+      expect(setFieldError).toHaveBeenCalledWith('boom')
 
       api.post.mockRestore()
     })

@@ -9,7 +9,7 @@ describe('responseError', () => {
     const error = new Error('boom')
     error.response = {
       data: {
-        error: 'Request failed'
+        errors: 'Request failed'
       }
     }
     expect(responseError(error)).toEqual('Request failed')

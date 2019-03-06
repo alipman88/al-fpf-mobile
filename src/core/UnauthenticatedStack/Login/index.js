@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 
 import { KeyboardAwareScrollView } from '@components/KeyboardAwareScrollView'
 import { api } from '@common/api'
-import { appError } from '@components/AppError/slice'
 import { currentUser } from '@common/currentUser'
 import { responseError } from '@common/utils/responseError'
 import { Formik } from 'formik'
@@ -12,7 +11,7 @@ import { validations } from './validations'
 import { ScreenContainer } from '@components/ScreenContainer'
 import { LoginFields } from './LoginFields'
 
-export const LoginComponent = ({ navigation, setAppError, setAccessToken }) => {
+export const LoginComponent = ({ navigation, setAccessToken }) => {
   return (
     <ScreenContainer grassBackground>
       <KeyboardAwareScrollView
@@ -29,7 +28,7 @@ export const LoginComponent = ({ navigation, setAppError, setAccessToken }) => {
               setAccessToken(response.data.access_token)
               navigation.navigate('Authenticated')
             } catch (e) {
-              setAppError(responseError(e))
+              actions.setFieldError('email', responseError(e))
             }
 
             actions.setSubmitting(false)
@@ -62,14 +61,12 @@ export const LoginComponent = ({ navigation, setAppError, setAccessToken }) => {
 
 LoginComponent.propTypes = {
   navigation: PropTypes.object.isRequired,
-  setAppError: PropTypes.func.isRequired,
   setAccessToken: PropTypes.func.isRequired
 }
 
 export const Login = connect(
   null,
   {
-    setAppError: appError.actions.setAppError,
     setAccessToken: currentUser.actions.setAccessToken
   }
 )(LoginComponent)
