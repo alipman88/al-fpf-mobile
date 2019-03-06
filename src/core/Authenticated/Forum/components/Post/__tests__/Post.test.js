@@ -1,7 +1,9 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { Button } from '@components/Button'
-import { Category } from '../Post/styledComponents'
+import { Category, TextButton } from '../styledComponents'
+import { ContentText } from '../../sharedStyles'
+import { TouchableOpacity } from 'react-native'
 import { Post } from '../Post'
 
 describe('Forum', () => {
@@ -16,7 +18,8 @@ describe('Forum', () => {
       user_last_name: 'test',
       user_email: 'test@testmail.test',
       user_profile_name: 'Mayor, Test Ontario'
-    }
+    },
+    postTruncateLength: 100
   }
 
   afterEach(() => {
@@ -39,5 +42,28 @@ describe('Forum', () => {
       .last()
       .simulate('press')
     expect(defaultProps.onButtonPress).toHaveBeenCalledWith('reply')
+  })
+
+  test('show more button displays on long posts and works', () => {
+    const props = {
+        ...defaultProps,
+        postTruncateLength: 20
+      }
+    const wrapper = shallow(<Post {...props} />)
+    expect(wrapper.find(ContentText).last().text()).toEqual('Test test test teste...')
+
+    const getButton = (wrapper) => {
+      return wrapper
+        .find(TouchableOpacity)
+        .last()
+    }
+    
+    expect(getButton(wrapper).find(TextButton).last().text()).toEqual('Show more')
+    
+    getButton(wrapper).simulate('press')
+    
+    expect(wrapper.find(ContentText).last().text()).toEqual(defaultProps.post.content)
+    
+    expect(getButton(wrapper).find(TextButton).last().text()).toEqual('Show less')
   })
 })
