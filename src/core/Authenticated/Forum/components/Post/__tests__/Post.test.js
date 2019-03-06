@@ -46,24 +46,42 @@ describe('Forum', () => {
 
   test('show more button displays on long posts and works', () => {
     const props = {
-        ...defaultProps,
-        postTruncateLength: 20
-      }
-    const wrapper = shallow(<Post {...props} />)
-    expect(wrapper.find(ContentText).last().text()).toEqual('Test test test teste...')
-
-    const getButton = (wrapper) => {
-      return wrapper
-        .find(TouchableOpacity)
-        .last()
+      ...defaultProps,
+      postTruncateLength: 20
     }
-    
-    expect(getButton(wrapper).find(TextButton).last().text()).toEqual('Show more')
-    
+    const wrapper = shallow(<Post {...props} />)
+    expect(
+      wrapper
+        .find(ContentText)
+        .last()
+        .text()
+    ).toEqual('Test test test teste...')
+
+    const getButton = wrapper => {
+      return wrapper.find(TouchableOpacity).last()
+    }
+
+    expect(
+      getButton(wrapper)
+        .find(TextButton)
+        .last()
+        .text()
+    ).toEqual('Show more')
+
     getButton(wrapper).simulate('press')
-    
-    expect(wrapper.find(ContentText).last().text()).toEqual(defaultProps.post.content)
-    
-    expect(getButton(wrapper).find(TextButton).last().text()).toEqual('Show less')
+
+    expect(
+      wrapper
+        .find(ContentText)
+        .last()
+        .text()
+    ).toEqual(defaultProps.post.content)
+
+    expect(
+      getButton(wrapper)
+        .find(TextButton)
+        .last()
+        .text()
+    ).toEqual('Show less')
   })
 })

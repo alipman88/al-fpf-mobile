@@ -25,13 +25,23 @@ export class Post extends React.Component {
 
   formatContent(content) {
     if (content.length > this.props.postTruncateLength) {
-      return this.state.showMore ? content : content.substring(0, this.props.postTruncateLength) + '...'
+      return this.state.showMore
+        ? content
+        : `${content.substring(0, this.props.postTruncateLength)}...`
     }
     return content
   }
 
   render() {
-    const { title, user_first_name, user_last_name, email, user_profile_name, content, categories } = this.props.post
+    const {
+      title,
+      user_first_name,
+      user_last_name,
+      email,
+      user_profile_name,
+      content,
+      categories
+    } = this.props.post
     return (
       <Card>
         <CardContent>
@@ -41,11 +51,13 @@ export class Post extends React.Component {
           <ContentText ellipsizeMode='tail'>
             {this.formatContent(content)}
           </ContentText>
-          { content.length > this.props.postTruncateLength &&
+          {content.length > this.props.postTruncateLength && (
             <TouchableOpacity onPress={() => this.toggleShowMore()}>
-              <TextButton>Show {this.state.showMore ? 'less' : 'more'}</TextButton>
+              <TextButton>
+                Show {this.state.showMore ? 'less' : 'more'}
+              </TextButton>
             </TouchableOpacity>
-          }
+          )}
           {categories.map(category => (
             <CategoryContainer key={category}>
               <Category>{category}</Category>
@@ -54,13 +66,19 @@ export class Post extends React.Component {
         </CardContent>
         <Bottom>
           <PostButton>
-            <Button color={'#fff'} onPress={() => this.props.onButtonPress('email', email)}>
+            <Button
+              color={'#fff'}
+              onPress={() => this.props.onButtonPress('email', email)}
+            >
               Email author
             </Button>
           </PostButton>
-  
+
           <PostButton>
-            <Button color={'#fff'} onPress={() => this.props.onButtonPress('reply')}>
+            <Button
+              color={'#fff'}
+              onPress={() => this.props.onButtonPress('reply')}
+            >
               Reply to forum
             </Button>
           </PostButton>
