@@ -4,6 +4,7 @@ import { shallow } from 'enzyme'
 import { Forum } from '../Forum'
 import { Post } from '../../Post'
 import { Advertisement } from '../../Advertisement'
+import { NeighboringContent } from '../../NeighboringContent'
 
 describe('Forum', () => {
   const defaultProps = {
@@ -12,8 +13,9 @@ describe('Forum', () => {
       setParams: jest.fn()
     },
     setAccessToken: jest.fn(),
-    currentIssueNum: 12,
+    currentIssueId: 12,
     currentAreaId: 1,
+    issues: [{ id: 12 }, { id: 13 }],
     areas: [{ id: 1, name: 'Sparta' }, { id: 2, name: 'Athena' }],
     posts: {
       12: [
@@ -87,6 +89,16 @@ describe('Forum', () => {
     expect(wrapper.find(Post).length).toEqual(4)
   })
 
+  test('it renders neighboring content', () => {
+    const wrapper = shallow(<Forum {...defaultProps} />)
+    expect(wrapper.find(NeighboringContent).length).toEqual(1)
+  })
+
+  test('doesnt render neighboring content if not latest issue', () => {
+    const wrapper = shallow(<Forum {...defaultProps} currentIssueId={13} />)
+    expect(wrapper.find(NeighboringContent).length).toEqual(0)
+  })
+
   test('it sets the title as the current area name', () => {
     const wrapper = shallow(<Forum {...defaultProps} />)
     expect(defaultProps.navigation.setParams).toHaveBeenCalledWith({
@@ -112,7 +124,7 @@ describe('Forum', () => {
       }
     }
 
-    expect(children.length).toEqual(8)
+    expect(children.length).toEqual(9)
   })
 
   test('one post, 3 ads, renders 1 & 1', () => {
@@ -129,6 +141,6 @@ describe('Forum', () => {
       }
     }
 
-    expect(children.length).toEqual(3)
+    expect(children.length).toEqual(4)
   })
 })

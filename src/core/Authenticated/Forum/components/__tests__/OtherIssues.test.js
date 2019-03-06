@@ -12,9 +12,9 @@ describe('OtherIssues selector', () => {
       { id: 4, number: 40, sent_at: '04-01-2001' },
       { id: 5, number: 50, sent_at: '05-01-2001' }
     ],
-    currentIssueNumber: 1,
+    currentIssueId: 1,
     getPosts: jest.fn(),
-    setCurrentIssueNumber: jest.fn()
+    setCurrentIssueId: jest.fn()
   }
 
   test('it creates 5 tabs to choose from', () => {
@@ -22,7 +22,7 @@ describe('OtherIssues selector', () => {
     expect(wrapper.find(IssueTab).length).toEqual(5)
   })
 
-  test('it sets the currentIssueNumber onPress', () => {
+  test('it sets the currentIssueId onPress', () => {
     const wrapper = shallow(<OtherIssues {...defaultProps} />)
 
     wrapper
@@ -30,9 +30,9 @@ describe('OtherIssues selector', () => {
       .findWhere(i => i.props().issue.number === 40)
       .first()
       .props()
-      .onTapIssue(40)
+      .onTapIssue(4)
 
-    expect(defaultProps.setCurrentIssueNumber).toHaveBeenCalledWith(40)
-    expect(defaultProps.getPosts).toHaveBeenCalledWith(40)
+    expect(defaultProps.setCurrentIssueId).toHaveBeenCalledWith(4)
+    expect(defaultProps.getPosts).toHaveBeenCalledWith(4)
   })
 })

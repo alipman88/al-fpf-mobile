@@ -44,7 +44,7 @@ describe('setupForumData', () => {
               number: 1
             }
           ],
-          currentIssueNumber: 1
+          currentIssueId: 1
         }
       }
     })
@@ -78,7 +78,7 @@ describe('setupForumData', () => {
               number: 1
             }
           ],
-          currentIssueNumber: 1
+          currentIssueId: 1
         },
         profile: {
           user: {

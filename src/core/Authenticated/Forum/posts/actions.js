@@ -1,16 +1,18 @@
 import { issues } from '../issues/slice'
+import { areas } from '@common/areas'
 import { posts } from './slice'
 import { getAuthorized } from '@common/api'
 import { appError } from '@components/AppError/slice'
 import { responseError } from '@common/utils/responseError'
 
-export const getPosts = issueNumber => async (dispatch, getState) => {
+export const getPosts = issueId => async (dispatch, getState) => {
+  const currentAreaId = areas.selectors.getCurrentAreaId(getState())
   const issue = issues.selectors
-    .getIssues(getState())
-    .find(issue => issue.number === issueNumber)
+    .getIssuesForArea(getState(), currentAreaId)
+    .find(issue => issue.id === issueId)
 
   if (!issue) {
-    console.error(`Could not find an issue by number ${issueNumber}`)
+    console.error(`Could not find an issue by id ${issueId}`)
     return
   }
 
@@ -20,14 +22,20 @@ export const getPosts = issueNumber => async (dispatch, getState) => {
       getState()
     )
 
-    const { posts: postsData, headlines, ads } = response.data
+    const {
+      posts: postsData,
+      headlines,
+      ads,
+      news_from_neighboring_nfs
+    } = response.data
 
     dispatch(
       posts.actions.setPostsForIssue({
         posts: postsData,
         headlines,
-        issueNumber: issue.number,
-        ads
+        issueId: issue.id,
+        ads,
+        newsFromNeighboringNfs: news_from_neighboring_nfs
       })
     )
   } catch (e) {

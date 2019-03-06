@@ -7,13 +7,17 @@ import { issues } from '../../issues'
 import { posts } from '../../posts'
 import { setupForumData } from '../../setupForumData.js'
 
-const mapStateToProps = state => ({
-  areas: areas.selectors.getAreas(state),
-  currentAreaId: areas.selectors.getCurrentAreaId(state),
-  currentIssueNum: issues.selectors.getCurrentIssueNumber(state),
-  posts: posts.selectors.getPostsByIssue(state),
-  ads: posts.selectors.getAdsByIssue(state)
-})
+const mapStateToProps = state => {
+  const areaId = areas.selectors.getCurrentAreaId(state)
+  return {
+    areas: areas.selectors.getAreas(state),
+    currentAreaId: areas.selectors.getCurrentAreaId(state),
+    currentIssueId: issues.selectors.getCurrentIssueId(state),
+    issues: issues.selectors.getLatestIssues(state, areaId),
+    posts: posts.selectors.getPostsByIssue(state),
+    ads: posts.selectors.getAdsByIssue(state)
+  }
+}
 
 export const Forum = createStackNavForTab({
   Forum: connect(

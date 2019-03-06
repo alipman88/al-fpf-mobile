@@ -14,7 +14,7 @@ export class IssueTab extends React.Component {
     const { issue, focused, onTapIssue } = this.props
 
     return (
-      <TouchableOpacity onPress={() => onTapIssue(issue.number)}>
+      <TouchableOpacity onPress={() => onTapIssue(issue.id)}>
         <IssueBox focused={focused}>
           <IssueTextBold>Issue #{issue.number}</IssueTextBold>
           <IssueText>{format(new Date(issue.sent_at), 'MMM D YYYY')}</IssueText>

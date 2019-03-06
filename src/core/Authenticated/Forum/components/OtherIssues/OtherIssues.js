@@ -5,9 +5,9 @@ import { IssueTab } from './IssueTab'
 import { IssueScrollView } from './styledComponents'
 
 export class OtherIssues extends React.Component {
-  onTapIssue = number => {
-    this.props.setCurrentIssueNumber(number)
-    this.props.getPosts(number)
+  onTapIssue = id => {
+    this.props.setCurrentIssueId(id)
+    this.props.getPosts(id)
   }
 
   scrollFocusedIssue = () => {
@@ -21,10 +21,10 @@ export class OtherIssues extends React.Component {
   }
 
   render() {
-    const { issues, currentIssueNumber } = this.props
+    const { issues, currentIssueId } = this.props
     const issuesRender = issues
       .map(i => {
-        const focused = currentIssueNumber === i.number
+        const focused = currentIssueId === i.id
         return (
           <View
             onLayout={this.scrollFocusedIssue}
@@ -65,7 +65,7 @@ export class OtherIssues extends React.Component {
 
 OtherIssues.propTypes = {
   issues: PropTypes.array.isRequired,
-  currentIssueNumber: PropTypes.number.isRequired,
+  currentIssueId: PropTypes.number.isRequired,
   getPosts: PropTypes.func.isRequired,
-  setCurrentIssueNumber: PropTypes.func.isRequired
+  setCurrentIssueId: PropTypes.func.isRequired
 }

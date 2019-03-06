@@ -9,6 +9,7 @@ import { Post } from '../Post'
 import { Advertisement } from '../Advertisement'
 import { InThisIssue } from '../InThisIssue'
 import { OtherIssues } from '../OtherIssues'
+import { NeighboringContent } from '../NeighboringContent'
 
 export class Forum extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -44,8 +45,10 @@ export class Forum extends React.Component {
   }
 
   render() {
-    const posts = this.props.posts[this.props.currentIssueNum] || []
-    const ads = this.props.ads[this.props.currentIssueNum] || []
+    const { currentIssueId, issues } = this.props
+
+    const posts = this.props.posts[currentIssueId] || []
+    const ads = this.props.ads[currentIssueId] || []
 
     const maxIndex = posts.length + Math.max(3, ads.length)
     const postRender = []
@@ -83,6 +86,9 @@ export class Forum extends React.Component {
           <ForumContainer>
             <InThisIssue />
             {postRender}
+            {get(issues, '[0].id', 0) === currentIssueId ? (
+              <NeighboringContent />
+            ) : null}
           </ForumContainer>
         </ScrollView>
       </ScreenContainer>
@@ -95,7 +101,8 @@ Forum.propTypes = {
   posts: PropTypes.object.isRequired,
   ads: PropTypes.object.isRequired,
   areas: PropTypes.array.isRequired,
+  issues: PropTypes.array.isRequired,
   currentAreaId: PropTypes.number.isRequired,
   navigation: PropTypes.object.isRequired,
-  currentIssueNum: PropTypes.number.isRequired
+  currentIssueId: PropTypes.number.isRequired
 }

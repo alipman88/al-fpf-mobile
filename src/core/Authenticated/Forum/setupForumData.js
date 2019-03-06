@@ -26,6 +26,6 @@ export const setupForumData = () => async (dispatch, getState) => {
 
   if (currentAreaId !== 0) {
     await dispatch(getIssues(currentAreaId))
-    await dispatch(getPosts(issues.selectors.getCurrentIssueNumber(getState())))
+    await dispatch(getPosts(issues.selectors.getCurrentIssueId(getState())))
   }
 }

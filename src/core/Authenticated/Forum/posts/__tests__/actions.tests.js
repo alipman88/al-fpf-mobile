@@ -7,13 +7,18 @@ describe('posts - actions', () => {
   const getState = () => ({
     main: {
       issues: {
-        issues: [
-          {
-            number: 32,
-            id: 1,
-            area_id: 55
-          }
-        ]
+        issuesByAreaId: {
+          55: [
+            {
+              id: 1,
+              number: 32,
+              area_id: 55
+            }
+          ]
+        }
+      },
+      areas: {
+        currentAreaId: 55
       }
     },
     secured: {
@@ -30,7 +35,7 @@ describe('posts - actions', () => {
   describe('getPosts', () => {
     test('issue number not found, no API requests made', async () => {
       const getSpy = jest.spyOn(api, 'get').mockImplementation(() => {})
-      await getPosts(1)(dispatch, getState)
+      await getPosts(5)(dispatch, getState)
 
       expect(getSpy).not.toHaveBeenCalled()
       getSpy.mockRestore()
@@ -39,10 +44,13 @@ describe('posts - actions', () => {
     test('issue found, fetches posts', async () => {
       const getSpy = jest.spyOn(api, 'get').mockImplementation(() => ({
         data: {
-          posts: [{ id: 1 }]
+          posts: [{ id: 1 }],
+          ads: [{ id: 2 }],
+          headlines: ['Headline'],
+          news_from_neighboring_nfs: [{ id: 3 }]
         }
       }))
-      await getPosts(32)(dispatch, getState)
+      await getPosts(1)(dispatch, getState)
 
       expect(getSpy).toHaveBeenCalledWith('/areas/55/issues/32/contents', {
         headers: {
@@ -50,7 +58,13 @@ describe('posts - actions', () => {
         }
       })
       expect(dispatch).toHaveBeenCalledWith(
-        posts.actions.setPostsForIssue({ issueNumber: 32, posts: [{ id: 1 }] })
+        posts.actions.setPostsForIssue({
+          issueId: 1,
+          posts: [{ id: 1 }],
+          ads: [{ id: 2 }],
+          headlines: ['Headline'],
+          newsFromNeighboringNfs: [{ id: 3 }]
+        })
       )
       getSpy.mockRestore()
     })

@@ -28,7 +28,9 @@ describe('issues actions', () => {
       }
     })
 
-    expect(dispatch).toHaveBeenCalledWith(issues.actions.setIssues([{ id: 1 }]))
+    expect(dispatch).toHaveBeenCalledWith(
+      issues.actions.setIssues({ areaId: 1, issues: [{ id: 1 }] })
+    )
 
     getSpy.mockRestore()
   })

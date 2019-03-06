@@ -4,7 +4,8 @@ import { resetAction } from '@common/resetAction'
 const initialState = {
   postsByIssue: {},
   headlinesByIssue: {},
-  adsByIssue: {}
+  adsByIssue: {},
+  newsFromNeighboringNfsByIssue: {}
 }
 
 export const posts = createSlice({
@@ -17,15 +18,19 @@ export const posts = createSlice({
       ...state,
       postsByIssue: {
         ...state.postsByIssue,
-        [payload.issueNumber]: payload.posts
+        [payload.issueId]: payload.posts
       },
       headlinesByIssue: {
         ...state.headlinesByIssue,
-        [payload.issueNumber]: payload.headlines
+        [payload.issueId]: payload.headlines
       },
       adsByIssue: {
         ...state.adsByIssue,
-        [payload.issueNumber]: payload.ads
+        [payload.issueId]: payload.ads
+      },
+      newsFromNeighboringNfsByIssue: {
+        ...state.newsFromNeighboringNfsByIssue,
+        [payload.issueId]: payload.newsFromNeighboringNfs
       }
     })
   },
@@ -51,5 +56,9 @@ posts.selectors = {
   getAdsByIssue: createSelector(
     [path],
     posts => posts.adsByIssue
+  ),
+  getNewsFromNeighboringNfsByIssue: createSelector(
+    [path],
+    posts => posts.newsFromNeighboringNfsByIssue || {}
   )
 }

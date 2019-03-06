@@ -6,7 +6,8 @@ describe('posts - slice', () => {
     expect(state).toEqual({
       headlinesByIssue: {},
       postsByIssue: {},
-      adsByIssue: {}
+      adsByIssue: {},
+      newsFromNeighboringNfsByIssue: {}
     })
   })
 
@@ -15,7 +16,7 @@ describe('posts - slice', () => {
       const state = posts.reducer(
         undefined,
         posts.actions.setPostsForIssue({
-          issueNumber: 1,
+          issueId: 1,
           posts: [
             {
               id: 1
@@ -28,6 +29,11 @@ describe('posts - slice', () => {
           ads: [
             {
               id: 5
+            }
+          ],
+          newsFromNeighboringNfs: [
+            {
+              area_name: 'Other Area'
             }
           ]
         })
@@ -70,6 +76,20 @@ describe('posts - slice', () => {
         1: [
           {
             id: 5
+          }
+        ]
+      })
+
+      data = posts.selectors.getNewsFromNeighboringNfsByIssue({
+        main: {
+          posts: state
+        }
+      })
+
+      expect(data).toEqual({
+        1: [
+          {
+            area_name: 'Other Area'
           }
         ]
       })

@@ -1,9 +1,11 @@
 import { createSlice, createSelector } from 'redux-starter-kit'
+import keyBy from 'lodash/keyBy'
+
 import { resetAction } from '@common/resetAction'
 
 const initialState = {
-  issues: [],
-  currentIssueNumber: 0
+  issuesByAreaId: {},
+  currentIssueId: 0
 }
 
 export const issues = createSlice({
@@ -12,19 +14,25 @@ export const issues = createSlice({
     ...initialState
   },
   reducers: {
-    setCurrentIssueNumber: (state, action) => {
+    setCurrentIssueId: (state, action) => {
       return {
         ...state,
-        currentIssueNumber: action.payload
+        currentIssueId: action.payload
       }
     },
-    setIssues: (state, action) => {
-      const currentIssueNumber =
-        state.currentIssueNumber || action.payload[0].number
+    setIssues: (state, { payload: { issues, areaId } }) => {
+      const currentIssueId = state.currentIssueId || issues[0].id
+      const existingIssues = state.issuesByAreaId[areaId] || []
+      const existingIssueIds = keyBy(existingIssues, 'id')
       return {
         ...state,
-        issues: action.payload,
-        currentIssueNumber
+        issuesByAreaId: {
+          ...state.issuesByAreaId,
+          [areaId]: existingIssues.concat(
+            issues.filter(issue => !existingIssueIds[issue.id])
+          )
+        },
+        currentIssueId
       }
     }
   },
@@ -35,18 +43,25 @@ export const issues = createSlice({
 
 const path = 'main.issues'
 
+const getIssuesForArea = (state, areaId) => {
+  const issuesByAreaId = issues.selectors.getIssues(state)
+  return issuesByAreaId[areaId] || []
+}
+
+const getLatestIssues = (state, areaId) => {
+  return getIssuesForArea(state, areaId).slice(0, 5)
+}
+
 issues.selectors = {
   ...issues.selectors,
-  getLatestIssues: createSelector(
-    [path],
-    issues => issues.issues.slice(0, 5)
-  ),
   getIssues: createSelector(
     [path],
-    issues => issues.issues
+    issues => issues.issuesByAreaId
   ),
-  getCurrentIssueNumber: createSelector(
+  getCurrentIssueId: createSelector(
     [path],
-    issues => issues.currentIssueNumber
-  )
+    issues => issues.currentIssueId
+  ),
+  getLatestIssues,
+  getIssuesForArea
 }
