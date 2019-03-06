@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 import { Pill } from '@components/Pill'
-import { Text } from '@components/Text'
+import { Text, TextSemibold } from '@components/Text'
 
 export const Card = styled.View`
   min-height: 328;
@@ -29,4 +29,9 @@ export const Category = styled(Pill)`
 export const PostButton = styled.View`
   width: 124;
   align-items: stretch;
+`
+export const TextButton = styled(TextSemibold)`
+  color: #d77400;
+  text-decoration-color: #d77400;
+  margin-top: 10;
 `
