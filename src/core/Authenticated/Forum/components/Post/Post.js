@@ -73,6 +73,6 @@ export class Post extends React.Component {
 Post.propTypes = {
   post: PropTypes.object.isRequired,
   onButtonPress: PropTypes.func.isRequired,
-  postTruncateLength: PropTypes.number,
+  postTruncateLength: PropTypes.number.isRequired,
   key: PropTypes.number
 }
