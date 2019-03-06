@@ -21,8 +21,6 @@ export class Post extends React.Component {
 
   toggleShowMore() {
     this.setState({ showMore: !this.state.showMore })
-    console.log('showMore is: ')
-    console.log(this.state.showMore)
   }
 
   formatContent(content) {
