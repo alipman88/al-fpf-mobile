@@ -53,10 +53,8 @@ describe('setupForumData', () => {
     expect(dispatch).toHaveBeenCalledWith('getProfiles')
     expect(dispatch).toHaveBeenCalledWith('getAppSettings')
     expect(dispatch).toHaveBeenCalledWith('getAreas')
-    expect(dispatch).toHaveBeenCalledWith('getIssues')
-    expect(dispatch).toHaveBeenCalledWith('getPosts')
 
-    expect(dispatch).toHaveBeenCalledTimes(5)
+    expect(dispatch).toHaveBeenCalledTimes(3)
   })
 
   test('currentAreaId 0, code selects an area from the profile', async () => {
@@ -98,10 +96,8 @@ describe('setupForumData', () => {
     expect(dispatch).toHaveBeenCalledWith('getProfiles')
     expect(dispatch).toHaveBeenCalledWith('getAppSettings')
     expect(dispatch).toHaveBeenCalledWith('getAreas')
-    expect(dispatch).toHaveBeenCalledWith('getIssues')
-    expect(dispatch).toHaveBeenCalledWith('getPosts')
     expect(dispatch).toHaveBeenCalledWith(areas.actions.setCurrentAreaId(2))
 
-    expect(dispatch).toHaveBeenCalledTimes(6)
+    expect(dispatch).toHaveBeenCalledTimes(4)
   })
 })

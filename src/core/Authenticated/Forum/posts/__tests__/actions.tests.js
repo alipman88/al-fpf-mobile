@@ -13,12 +13,26 @@ describe('posts - actions', () => {
               id: 1,
               number: 32,
               area_id: 55
+            },
+            {
+              id: 2,
+              number: 2,
+              area_id: 10
             }
           ]
         }
       },
       areas: {
         currentAreaId: 55
+      },
+      posts: {
+        postsByIssue: {
+          2: [
+            {
+              id: 1
+            }
+          ]
+        }
       }
     },
     secured: {
@@ -36,6 +50,15 @@ describe('posts - actions', () => {
     test('issue number not found, no API requests made', async () => {
       const getSpy = jest.spyOn(api, 'get').mockImplementation(() => {})
       await getPosts(5)(dispatch, getState)
+
+      expect(getSpy).not.toHaveBeenCalled()
+      getSpy.mockRestore()
+    })
+
+    test('doesnt fetch posts if we have posts for that issue', () => {
+      const getSpy = jest.spyOn(api, 'get')
+
+      getPosts(2)(dispatch, getState)
 
       expect(getSpy).not.toHaveBeenCalled()
       getSpy.mockRestore()

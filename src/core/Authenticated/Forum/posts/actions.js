@@ -16,6 +16,12 @@ export const getPosts = issueId => async (dispatch, getState) => {
     return
   }
 
+  const postsByIssue = posts.selectors.getPostsByIssue(getState())
+
+  if (postsByIssue[issue.id]) {
+    return
+  }
+
   try {
     const response = await getAuthorized(
       `/areas/${issue.area_id}/issues/${issue.number}/contents`,

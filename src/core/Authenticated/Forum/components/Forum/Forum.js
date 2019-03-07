@@ -30,6 +30,23 @@ export class Forum extends React.Component {
       prevProps.currentAreaId !== this.props.currentAreaId
     ) {
       this.setTitleFromArea()
+      this.props.getIssues(this.props.currentAreaId)
+    }
+
+    const { issues } = this.props
+
+    if (prevProps.issues !== issues) {
+      // if this list of issues doesnt have the current id, set a new one
+      if (
+        issues.length > 0 &&
+        !issues.find(issue => issue.id === this.props.currentIssueId)
+      ) {
+        this.props.setCurrentIssueId(this.props.issues[0].id)
+      }
+    }
+
+    if (prevProps.currentIssueId !== this.props.currentIssueId) {
+      this.props.getPosts(this.props.currentIssueId)
     }
   }
 
@@ -37,7 +54,17 @@ export class Forum extends React.Component {
     const currentArea = this.props.areas.find(
       a => a.id === this.props.currentAreaId
     )
-    this.props.navigation.setParams({ navTitle: get(currentArea, 'name', '') })
+
+    let name = ''
+    if (currentArea) {
+      name = get(currentArea, 'name', '')
+    } else {
+      name = this.props.neighboringAreas[this.props.currentAreaId]
+    }
+
+    this.props.navigation.setParams({
+      navTitle: name
+    })
   }
 
   handleReplyPress = ({ parentPostId, subject }) => {
@@ -97,12 +124,16 @@ export class Forum extends React.Component {
 }
 
 Forum.propTypes = {
-  setupForumData: PropTypes.func.isRequired,
-  posts: PropTypes.object.isRequired,
   ads: PropTypes.object.isRequired,
   areas: PropTypes.array.isRequired,
-  issues: PropTypes.array.isRequired,
   currentAreaId: PropTypes.number.isRequired,
+  currentIssueId: PropTypes.number.isRequired,
+  getPosts: PropTypes.func.isRequired,
+  getIssues: PropTypes.func.isRequired,
+  issues: PropTypes.array.isRequired,
   navigation: PropTypes.object.isRequired,
-  currentIssueId: PropTypes.number.isRequired
+  neighboringAreas: PropTypes.object.isRequired,
+  setCurrentIssueId: PropTypes.func.isRequired,
+  setupForumData: PropTypes.func.isRequired,
+  posts: PropTypes.object.isRequired
 }

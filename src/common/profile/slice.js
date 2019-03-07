@@ -27,7 +27,11 @@ export const profile = createSlice({
         currentProfileId:
           state.currentProfileId || get(action, 'payload.profiles[0].id', 0)
       }
-    }
+    },
+    setCurrentProfileId: (state, action) => ({
+      ...state,
+      currentProfileId: action.payload
+    })
   },
   extraReducers: {
     [resetAction]: () => ({
@@ -48,7 +52,7 @@ const getProfiles = createSelector(
 
 const getCurrentProfile = createSelector(
   [getProfiles, getCurrentProfileId],
-  (profiles, id) => profiles.find(profile => profile.id === id)
+  (profiles, id) => profiles.find(profile => profile.id === id) || {}
 )
 
 profile.selectors = {

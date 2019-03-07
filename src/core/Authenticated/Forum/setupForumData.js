@@ -1,6 +1,4 @@
 import { getAreas, areas } from '@common/areas'
-import { getIssues, issues } from './issues'
-import { getPosts } from './posts'
 import { getProfiles, profile } from '@common/profile'
 import { getAppSettings } from '@common/appSettings'
 
@@ -22,10 +20,5 @@ export const setupForumData = () => async (dispatch, getState) => {
       dispatch(areas.actions.setCurrentAreaId(firstArea.id))
       currentAreaId = firstArea.id
     }
-  }
-
-  if (currentAreaId !== 0) {
-    await dispatch(getIssues(currentAreaId))
-    await dispatch(getPosts(issues.selectors.getCurrentIssueId(getState())))
   }
 }

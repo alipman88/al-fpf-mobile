@@ -17,6 +17,9 @@ describe('Forum', () => {
     currentAreaId: 1,
     issues: [{ id: 12 }, { id: 13 }],
     areas: [{ id: 1, name: 'Sparta' }, { id: 2, name: 'Athena' }],
+    getIssues: jest.fn(),
+    getPosts: jest.fn(),
+    setCurrentIssueId: jest.fn(),
     posts: {
       12: [
         {
@@ -75,6 +78,9 @@ describe('Forum', () => {
   afterEach(() => {
     defaultProps.setupForumData.mockReset()
     defaultProps.setAccessToken.mockReset()
+    defaultProps.getIssues.mockReset()
+    defaultProps.getPosts.mockReset()
+    defaultProps.setCurrentIssueId.mockReset()
   })
 
   test('calls setupForumData on mount', () => {
@@ -142,5 +148,52 @@ describe('Forum', () => {
     }
 
     expect(children.length).toEqual(4)
+  })
+
+  describe('componentDidUpdate', () => {
+    test('areas changing loads issues', () => {
+      const wrapper = shallow(<Forum {...defaultProps} />)
+      wrapper.setProps({
+        areas: [
+          { id: 1, name: 'Sparta' },
+          { id: 2, name: 'Athena' },
+          { id: 3, name: '' }
+        ]
+      })
+
+      expect(defaultProps.getIssues).toHaveBeenCalledWith(
+        defaultProps.currentAreaId
+      )
+    })
+
+    test('changing area id pulls issues for that area', () => {
+      const wrapper = shallow(<Forum {...defaultProps} />)
+      wrapper.setProps({ currentAreaId: 2 })
+      expect(defaultProps.getIssues).toHaveBeenCalledWith(2)
+    })
+
+    test('if issues change, but no length, do not set new currentIssueId', () => {
+      const wrapper = shallow(<Forum {...defaultProps} />)
+      wrapper.setProps({ issues: [] })
+      expect(defaultProps.setCurrentIssueId).not.toHaveBeenCalled()
+    })
+
+    test('if issues change, and id is in list, dont change', () => {
+      const wrapper = shallow(<Forum {...defaultProps} />)
+      wrapper.setProps({ issues: [{ id: 12 }] })
+      expect(defaultProps.setCurrentIssueId).not.toHaveBeenCalled()
+    })
+
+    test('if issues change, and id is not in list, set current issue to first one', () => {
+      const wrapper = shallow(<Forum {...defaultProps} />)
+      wrapper.setProps({ issues: [{ id: 15 }, { id: 14 }] })
+      expect(defaultProps.setCurrentIssueId).toHaveBeenCalledWith(15)
+    })
+
+    test('if currentIssueId changes, get posts', () => {
+      const wrapper = shallow(<Forum {...defaultProps} />)
+      wrapper.setProps({ currentIssueId: 45 })
+      expect(defaultProps.getPosts).toHaveBeenCalledWith(45)
+    })
   })
 })

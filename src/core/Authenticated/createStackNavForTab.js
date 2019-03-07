@@ -3,7 +3,7 @@ import React from 'react'
 
 import { createResetStackTo } from '@common/utils/navigation'
 import profileIcon from '@assets/images/global-assets/top-nav-elements/profile-icon.png'
-import trioBirds from '@assets/images/global-assets/trio-birds.png'
+import { DrawerNavIcon } from './DrawerNavIcon'
 import { TopNavIcon } from './TopNavIcon'
 import { store } from '@common/store'
 import { resetAction } from '@common/resetAction'
@@ -11,7 +11,7 @@ import { resetAction } from '@common/resetAction'
 export const createStackNavForTab = screens =>
   createStackNavigator(screens, {
     defaultNavigationOptions: ({ navigation }) => ({
-      headerLeft: <TopNavIcon source={trioBirds} width={36} height={26} />,
+      headerLeft: <DrawerNavIcon />,
       headerRight: (
         <TopNavIcon
           source={profileIcon}

@@ -32,6 +32,7 @@
     "react-native-picker-module": "^0.1.2",
     "react-native-sectioned-multi-select": "^0.6.5",
     "react-native-sensitive-info": "^5.2.7",
+    "react-native-side-menu": "^1.1.3",
     "react-native-vector-icons": "^6.3.0",
     "react-navigation": "^3.1.2",
     "react-redux": "^6.0.0",
@@ -71,6 +72,7 @@
       "./jest.setup.js"
     ],
     "moduleNameMapper": {
+      "@app/(.*)$": "<rootDir>/src/app/$1",
       "@common/(.*)$": "<rootDir>/src/common/$1"
     }
   }

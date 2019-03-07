@@ -5,19 +5,37 @@ describe('areas - slice', () => {
     const data = areas.reducer(undefined, {})
     expect(data).toEqual({
       areas: [],
-      currentAreaId: 0
+      currentAreaId: 0,
+      neighboringAreas: {}
     })
   })
 
   test('setAreas sets the array', () => {
-    const state = areas.reducer(undefined, areas.actions.setAreas([{ id: 1 }]))
-    const data = areas.selectors.getAreas({
+    const state = areas.reducer(
+      undefined,
+      areas.actions.setAreas([
+        { id: 1, neighbor_areas: [{ id: 2, name: 'neighbor' }] }
+      ])
+    )
+    let data = areas.selectors.getAreas({
       main: {
         areas: state
       }
     })
 
-    expect(data).toEqual([{ id: 1 }])
+    expect(data).toEqual([
+      { id: 1, neighbor_areas: [{ id: 2, name: 'neighbor' }] }
+    ])
+
+    data = areas.selectors.getNeighboringAreas({
+      main: {
+        areas: state
+      }
+    })
+
+    expect(data).toEqual({
+      2: 'neighbor'
+    })
   })
 
   test('setCurrentAreaId', () => {

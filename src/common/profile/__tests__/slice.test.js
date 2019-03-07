@@ -121,4 +121,20 @@ describe('profile - slice', () => {
       ).toEqual({ id: 3 })
     })
   })
+
+  describe('setCurrentProfileId', () => {
+    test('overrides the currentProfileId', () => {
+      const state = profile.reducer(
+        undefined,
+        profile.actions.setCurrentProfileId(105)
+      )
+      expect(
+        profile.selectors.getCurrentProfileId({
+          main: {
+            profile: state
+          }
+        })
+      ).toEqual(105)
+    })
+  })
 })
