@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Button } from '@components/Button'
 import { Text } from '@components/Text'
-import { TouchableOpacity } from 'react-native'
+import { TouchableOpacity, Linking } from 'react-native'
 import {
   Category,
   CategoryContainer,
@@ -34,30 +34,36 @@ export class Post extends React.Component {
 
   render() {
     const {
-      title,
-      user_first_name,
-      user_last_name,
-      email,
-      user_profile_name,
+      id,
       content,
-      categories
+      title,
+      categories,
+      user_first_name: firstName,
+      user_last_name: lastName,
+      user_email: email,
+      user_profile_name: userDetails
     } = this.props.post
+
+    const { onReplyPress, postTruncateLength } = this.props
+
     return (
       <Card>
         <CardContent>
           <Header>{title}</Header>
-          <Name>{`${user_first_name} ${user_last_name}`}</Name>
-          <Text>{user_profile_name}</Text>
-          <ContentText ellipsizeMode='tail'>
+          <Name>{`${firstName} ${lastName}`}</Name>
+          <Text>{userDetails}</Text>
+          <ContentText ellipsizeMode='tail' numberOfLines={15}>
             {this.formatContent(content)}
           </ContentText>
-          {content.length > this.props.postTruncateLength && (
+
+          {content.length > postTruncateLength && (
             <TouchableOpacity onPress={() => this.toggleShowMore()}>
               <TextButton>
                 Show {this.state.showMore ? 'less' : 'more'}
               </TextButton>
             </TouchableOpacity>
           )}
+
           {categories.map(category => (
             <CategoryContainer key={category}>
               <Category>{category}</Category>
@@ -68,7 +74,9 @@ export class Post extends React.Component {
           <PostButton>
             <Button
               color={'#fff'}
-              onPress={() => this.props.onButtonPress('email', email)}
+              onPress={() =>
+                Linking.openURL(`mailto:${email}?subject=RE: ${title}`)
+              }
             >
               Email author
             </Button>
@@ -77,7 +85,7 @@ export class Post extends React.Component {
           <PostButton>
             <Button
               color={'#fff'}
-              onPress={() => this.props.onButtonPress('reply')}
+              onPress={() => onReplyPress({ parentPostId: id, subject: title })}
             >
               Reply to forum
             </Button>
@@ -90,7 +98,7 @@ export class Post extends React.Component {
 
 Post.propTypes = {
   post: PropTypes.object.isRequired,
-  onButtonPress: PropTypes.func.isRequired,
+  onReplyPress: PropTypes.func.isRequired,
   postTruncateLength: PropTypes.number.isRequired,
   key: PropTypes.number
 }

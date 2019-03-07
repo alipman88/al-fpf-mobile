@@ -40,8 +40,8 @@ export class Forum extends React.Component {
     this.props.navigation.setParams({ navTitle: get(currentArea, 'name', '') })
   }
 
-  handlePostButtonPress(type, target = null) {
-    console.log('not implemented', type, target)
+  handleReplyPress = ({ parentPostId, subject }) => {
+    this.props.navigation.push('Compose', { parentPostId, subject })
   }
 
   render() {
@@ -72,7 +72,7 @@ export class Forum extends React.Component {
         postRender.push(
           <Post
             post={post}
-            onButtonPress={this.handlePostButtonPress}
+            onReplyPress={this.handleReplyPress}
             key={post.id}
           />
         )

@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { OtherIssues } from '../OtherIssues/OtherIssues'
-import { IssueTab } from '../OtherIssues/IssueTab'
+import { OtherIssues } from '../OtherIssues'
+import { IssueTab } from '../IssueTab'
 
 describe('OtherIssues selector', () => {
   const defaultProps = {

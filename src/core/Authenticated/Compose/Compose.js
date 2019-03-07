@@ -33,19 +33,21 @@ export class Compose extends React.Component {
   }
 
   onSubmit = (values, actions) => {
-    const { profiles } = this.props
+    const { profiles, navigation } = this.props
     const { category } = values
-
-    const event = {}
-    if (category.is_event) {
-      event.start_date = values.fromDate
-      event.end_date = values.toDate
-      event.title = values.subject
-    }
+    const parentId = navigation.getParam('parentPostId') || null
+    const event = category.is_event
+      ? {
+          parent_event_id: parentId,
+          start_date: values.fromDate,
+          end_date: values.toDate,
+          title: values.subject
+        }
+      : {}
 
     const postBody = {
+      parent_post_id: parentId,
       profile_id: profiles[values.profile].id,
-      parent_post_id: values.parentPostId,
       title: values.subject,
       content: values.message,
       is_shared: values.isShared,
@@ -76,6 +78,8 @@ export class Compose extends React.Component {
       profile => profile.id === currentProfileId
     )
 
+    const isReply = !!navigation.getParam('parentPostId')
+    const subject = isReply ? `RE: ${navigation.getParam('subject')}` : ''
     return (
       <ScreenContainer grey withPadding={false}>
         <Formik
@@ -83,7 +87,7 @@ export class Compose extends React.Component {
             forums: profile ? [profile.area_ids[0]] : [],
             profile,
             category: undefined,
-            subject: '',
+            subject: subject,
             message: '',
             isShared: false,
             fromDate: null,
