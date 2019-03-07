@@ -6,11 +6,13 @@ export const getProfileDisplayName = (profile = {}) => {
 
   switch (planType) {
     case profileTypes.NEIGHBOR:
-      return `${profile.street_number} ${profile.street_name} ${profile.city}`
+      return `Neighbor: ${profile.street_number} ${profile.street_name} ${
+        profile.city
+      }`
     case profileTypes.BUSINESS:
-      return profile.name
+      return `Business: ${profile.name}`
     case profileTypes.GOVERNMENT:
-      return `${profile.name} ${profile.jurisdiction}`
+      return `Government: ${profile.name} ${profile.jurisdiction}`
     default:
       return profile.name
   }

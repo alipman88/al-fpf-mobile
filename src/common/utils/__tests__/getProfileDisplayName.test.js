@@ -11,7 +11,7 @@ describe('getProfileDisplayName', () => {
         street_name: 'Yonge St',
         city: 'Toronto'
       })
-    ).toEqual('100 Yonge St Toronto')
+    ).toEqual('Neighbor: 100 Yonge St Toronto')
   })
 
   test('business returns name', () => {
@@ -22,7 +22,7 @@ describe('getProfileDisplayName', () => {
         },
         name: 'Front Porch Forum'
       })
-    ).toEqual('Front Porch Forum')
+    ).toEqual('Business: Front Porch Forum')
   })
 
   test('government returns name + jurisdiction', () => {
@@ -34,7 +34,7 @@ describe('getProfileDisplayName', () => {
         name: 'City Hall',
         jurisdiction: 'Newport'
       })
-    ).toEqual('City Hall Newport')
+    ).toEqual('Government: City Hall Newport')
   })
 
   test('no plan type returns name', () => {
