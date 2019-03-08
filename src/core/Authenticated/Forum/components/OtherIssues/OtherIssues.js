@@ -8,6 +8,13 @@ export class OtherIssues extends React.Component {
   onTapIssue = id => {
     this.props.setCurrentIssueId(id)
     this.props.getPosts(id)
+    if (this.props.issues.find(issue => issue.id === id).isUnread) {
+      this.props.toggleIssueUnread({
+        id: id,
+        isUnread: false,
+        areaId: this.props.currentAreaId
+      })
+    }
   }
 
   scrollFocusedIssue = () => {
@@ -21,7 +28,7 @@ export class OtherIssues extends React.Component {
   }
 
   render() {
-    const { issues, currentIssueId } = this.props
+    const { issues, currentIssueId, currentAreaId } = this.props
     const issuesRender = issues
       .map(i => {
         const focused = currentIssueId === i.id
@@ -41,6 +48,9 @@ export class OtherIssues extends React.Component {
               issue={i}
               key={i.id}
               focused={focused}
+              isUnread={!!i.isUnread}
+              currentAreaId={currentAreaId}
+              toggleIssueUnread={this.props.toggleIssueUnread}
               onTapIssue={this.onTapIssue}
             />
           </View>
@@ -66,6 +76,8 @@ export class OtherIssues extends React.Component {
 OtherIssues.propTypes = {
   issues: PropTypes.array.isRequired,
   currentIssueId: PropTypes.number.isRequired,
+  currentAreaId: PropTypes.number.isRequired,
   getPosts: PropTypes.func.isRequired,
-  setCurrentIssueId: PropTypes.func.isRequired
+  setCurrentIssueId: PropTypes.func.isRequired,
+  toggleIssueUnread: PropTypes.func.isRequired
 }

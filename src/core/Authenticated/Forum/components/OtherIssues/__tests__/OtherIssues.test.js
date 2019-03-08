@@ -13,8 +13,10 @@ describe('OtherIssues selector', () => {
       { id: 5, number: 50, sent_at: '05-01-2001' }
     ],
     currentIssueId: 1,
+    currentAreaId: 1,
     getPosts: jest.fn(),
-    setCurrentIssueId: jest.fn()
+    setCurrentIssueId: jest.fn(),
+    toggleIssueUnread: jest.fn()
   }
 
   test('it creates 5 tabs to choose from', () => {

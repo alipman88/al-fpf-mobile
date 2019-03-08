@@ -9,6 +9,12 @@ describe('issues actions', () => {
       currentUser: {
         accessToken: 'abc123'
       }
+    },
+    main: {
+      issues: {
+        firstLoadOfIssues: true,
+        issuesByAreaId: {}
+      }
     }
   })
 
@@ -31,6 +37,34 @@ describe('issues actions', () => {
     expect(dispatch).toHaveBeenCalledWith(
       issues.actions.setIssues({ issues: [{ id: 1 }], areaId: 1 })
     )
+
+    getSpy.mockRestore()
+  })
+
+  test('sets firstLoadOfIssues to false if issues already set', async () => {
+    const getSpy = jest.spyOn(api, 'get').mockImplementation(() => ({
+      data: {
+        issues: [{ id: 1 }]
+      }
+    }))
+
+    const state = () => ({
+      ...getState(),
+      main: {
+        issues: {
+          firstLoadOfIssues: true,
+          issuesByAreaId: {
+            3: [{ id: 1 }]
+          }
+        }
+      }
+    })
+
+    const dispatch = jest.fn()
+
+    await getIssues(1)(dispatch, state)
+
+    expect(dispatch).toHaveBeenCalledWith(issues.actions.setFirstLoadFalse())
 
     getSpy.mockRestore()
   })

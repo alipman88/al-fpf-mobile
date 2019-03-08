@@ -13,7 +13,10 @@ describe('IssueTab', () => {
       id: 55
     },
     focused: true,
-    onTapIssue: jest.fn()
+    isUnread: false,
+    currentAreaId: 1,
+    onTapIssue: jest.fn(),
+    toggleIssueUnread: jest.fn()
   }
 
   afterEach(() => {

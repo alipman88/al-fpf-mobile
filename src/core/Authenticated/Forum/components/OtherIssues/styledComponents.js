@@ -12,16 +12,17 @@ export const IssueText = styled(Text)`
 export const IssueScrollView = styled.ScrollView`
   flex:1
   flex-direction: row;
-  margin-vertical: 15;
+  margin-bottom: 10;
 `
 
 export const IssueBox = styled.View`
   height: 53;
   width: 140;
-  background-color: ${props =>
-    props.focused ? '#97b57b' : 'rgba(151, 181, 123, 0.5)'};
+  background-color: ${({ focused }) =>
+    focused ? '#97b57b' : 'rgba(151, 181, 123, 0.5)'};
   border-radius: 4;
   margin-horizontal: 11;
+  margin-top: ${({ isUnread }) => (isUnread ? '0' : '12')};
   align-items: center;
   justify-content: center;
 `
@@ -39,4 +40,15 @@ export const Triangle = styled.View`
   border-bottom-color: transparent;
   border-left-color: transparent;
   margin-left: 72;
+`
+
+export const UnreadMarker = styled.View`
+  height: 12;
+  width: 12;
+  border-radius: 50;
+  background-color: ${({ focused }) => (focused ? '#d00207' : '#e8acb3')};
+  align-self: flex-end;
+  right: 7;
+  top: 8;
+  z-index: 10;
 `

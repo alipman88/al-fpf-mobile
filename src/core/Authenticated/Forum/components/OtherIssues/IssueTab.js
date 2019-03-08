@@ -6,16 +6,34 @@ import {
   IssueBox,
   IssueText,
   IssueTextBold,
-  Triangle
+  Triangle,
+  UnreadMarker
 } from './styledComponents'
 
 export class IssueTab extends React.Component {
   render() {
-    const { issue, focused, onTapIssue } = this.props
+    const {
+      issue,
+      focused,
+      onTapIssue,
+      isUnread,
+      toggleIssueUnread,
+      currentAreaId
+    } = this.props
 
     return (
-      <TouchableOpacity onPress={() => onTapIssue(issue.id)}>
-        <IssueBox focused={focused}>
+      <TouchableOpacity
+        onPress={() => onTapIssue(issue.id)}
+        onLongPress={() =>
+          toggleIssueUnread({
+            id: issue.id,
+            isUnread: true,
+            areaId: currentAreaId
+          })
+        }
+      >
+        {isUnread && <UnreadMarker focused={focused} />}
+        <IssueBox focused={focused} isUnread={isUnread}>
           <IssueTextBold>Issue #{issue.number}</IssueTextBold>
           <IssueText>{format(new Date(issue.sent_at), 'MMM D YYYY')}</IssueText>
         </IssueBox>
@@ -28,5 +46,8 @@ export class IssueTab extends React.Component {
 IssueTab.propTypes = {
   issue: PropTypes.object.isRequired,
   focused: PropTypes.bool.isRequired,
-  onTapIssue: PropTypes.func.isRequired
+  onTapIssue: PropTypes.func.isRequired,
+  toggleIssueUnread: PropTypes.func.isRequired,
+  isUnread: PropTypes.bool.isRequired,
+  currentAreaId: PropTypes.number.isRequired
 }

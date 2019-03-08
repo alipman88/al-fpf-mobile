@@ -5,7 +5,8 @@ import { resetAction } from '@common/resetAction'
 
 const initialState = {
   issuesByAreaId: {},
-  currentIssueId: 0
+  currentIssueId: 0,
+  firstLoadOfIssues: true
 }
 
 export const issues = createSlice({
@@ -20,17 +21,43 @@ export const issues = createSlice({
         currentIssueId: action.payload
       }
     },
-    setIssues: (state, { payload: { issues, areaId } }) => {
-      const currentIssueId = state.currentIssueId || issues[0].id
-      const existingIssues = state.issuesByAreaId[areaId] || []
-      const existingIssueIds = keyBy(existingIssues, 'id')
+    toggleIssueUnread: (state, action) => {
+      const { id, isUnread, areaId } = action.payload
+      const issues = state.issuesByAreaId[areaId].map(issue => {
+        return issue.id === id ? { ...issue, isUnread: isUnread } : issue
+      })
       return {
         ...state,
         issuesByAreaId: {
           ...state.issuesByAreaId,
-          [areaId]: existingIssues.concat(
-            issues.filter(issue => !existingIssueIds[issue.id])
-          )
+          [areaId]: issues
+        }
+      }
+    },
+    setFirstLoadFalse: state => {
+      return {
+        ...state,
+        firstLoadOfIssues: false
+      }
+    },
+    setIssues: (state, { payload: { issues, areaId } }) => {
+      const currentIssueId = state.currentIssueId || issues[0].id
+      const existingIssues = state.issuesByAreaId[areaId] || []
+      const existingIssueIds = keyBy(existingIssues, 'id')
+
+      const newIssues = existingIssues.concat(
+        issues
+          .filter(issue => !existingIssueIds[issue.id])
+          .map(issue => {
+            issue.isUnread = !state.firstLoadOfIssues
+            return issue
+          })
+      )
+      return {
+        ...state,
+        issuesByAreaId: {
+          ...state.issuesByAreaId,
+          [areaId]: newIssues
         },
         currentIssueId
       }
@@ -54,6 +81,10 @@ const getLatestIssues = (state, areaId) => {
 
 issues.selectors = {
   ...issues.selectors,
+  getFirstLoadIssues: createSelector(
+    [path],
+    issues => issues.firstLoadOfIssues
+  ),
   getIssues: createSelector(
     [path],
     issues => issues.issuesByAreaId
