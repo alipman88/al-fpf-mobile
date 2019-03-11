@@ -26,8 +26,9 @@ export class Forum extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (
-      prevProps.areas !== this.props.areas ||
-      prevProps.currentAreaId !== this.props.currentAreaId
+      this.props.currentAreaId !== 0 &&
+      (prevProps.areas !== this.props.areas ||
+        prevProps.currentAreaId !== this.props.currentAreaId)
     ) {
       this.setTitleFromArea()
       this.props.getIssues(this.props.currentAreaId)
