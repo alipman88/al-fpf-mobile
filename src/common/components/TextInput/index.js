@@ -1,20 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { TouchableWithoutFeedback } from 'react-native'
+import { TouchableWithoutFeedback, View } from 'react-native'
 import { FormError } from '@components/FormError'
-import { Container, Input, Icon } from './styledComponents'
+import { Container, Input, Icon, ForwardIcon } from './styledComponents'
 import { FormFieldLabel } from '@components/FormFieldLabel'
 
 export const TextInput = ({
   autoCapitalize,
+  forwardIcon,
   keyboardType,
   onChangeText,
   label,
   multiline,
+  placeholder,
   value,
+  returnKeyType,
   secureTextEntry,
   onBlur,
-  hasIcon,
+  onSubmitEditing,
   onTapIcon,
   iconSrc,
   touched,
@@ -22,18 +25,26 @@ export const TextInput = ({
 }) => {
   return (
     <Container>
-      <FormFieldLabel>{label}</FormFieldLabel>
-      <Input
-        autoCapitalize={autoCapitalize}
-        keyboardType={keyboardType}
-        hasError={touched && Boolean(error)}
-        multiline={multiline}
-        onChangeText={onChangeText}
-        secureTextEntry={secureTextEntry}
-        onBlur={onBlur}
-        value={value}
-      />
-      {hasIcon && (
+      {Boolean(label) && <FormFieldLabel>{label}</FormFieldLabel>}
+      <View>
+        <Input
+          autoCapitalize={autoCapitalize}
+          keyboardType={keyboardType}
+          hasError={touched && Boolean(error)}
+          hasForwardIcon={Boolean(forwardIcon)}
+          multiline={multiline}
+          onChangeText={onChangeText}
+          placeholder={placeholder}
+          placeholderTextColor='#c5c5c5'
+          returnKeyType={returnKeyType}
+          secureTextEntry={secureTextEntry}
+          onBlur={onBlur}
+          onSubmitEditing={onSubmitEditing}
+          value={value}
+        />
+        {Boolean(forwardIcon) && <ForwardIcon>{forwardIcon}</ForwardIcon>}
+      </View>
+      {Boolean(iconSrc) && (
         <TouchableWithoutFeedback onPress={onTapIcon}>
           <Icon source={iconSrc} />
         </TouchableWithoutFeedback>
@@ -47,15 +58,18 @@ export const TextInput = ({
 TextInput.propTypes = {
   autoCapitalize: PropTypes.string,
   error: PropTypes.string,
-  hasIcon: PropTypes.bool,
-  keyboardType: PropTypes.string,
+  forwardIcon: PropTypes.node,
   iconSrc: PropTypes.number, //image imports resolve as reference numbers
-  label: PropTypes.string.isRequired,
+  keyboardType: PropTypes.string,
+  label: PropTypes.string,
   multiline: PropTypes.bool,
   onChangeText: PropTypes.func.isRequired,
-  secureTextEntry: PropTypes.bool,
   onBlur: PropTypes.func,
+  onSubmitEditing: PropTypes.func,
   onTapIcon: PropTypes.func,
+  placeholder: PropTypes.string,
+  returnKeyType: PropTypes.string,
+  secureTextEntry: PropTypes.bool,
   touched: PropTypes.bool,
   value: PropTypes.string
 }

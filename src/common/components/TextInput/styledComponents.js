@@ -7,7 +7,8 @@ export const Input = styled.TextInput`
   border-width: 1;
   border-color: ${({ hasError }) => (hasError ? '#dc4558' : '#d5dde1')};
   background-color: ${({ hasError }) => (hasError ? '#ffebeb' : '#fff')};
-  padding-horizontal: 4;
+  padding-right: 4;
+  padding-left: ${({ hasForwardIcon }) => (hasForwardIcon ? 30 : 4)}
   ${({ multiline }) =>
     multiline ? 'height: 160; textAlignVertical: top' : 'height: 40;'}
   font-family: ProximaNova-Regular;
@@ -21,4 +22,10 @@ export const Icon = styled.Image`
   resize-mode: contain;
   right: 10;
   top: 25;
+`
+
+export const ForwardIcon = styled.View`
+  position: absolute;
+  left: 5;
+  top: 10;
 `

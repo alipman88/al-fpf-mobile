@@ -1,9 +1,10 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import { TouchableWithoutFeedback } from 'react-native'
 
 import { TextInput } from '../index'
 import { FormError } from '@components/FormError'
-import { TouchableWithoutFeedback } from 'react-native'
+import { FormFieldLabel } from '@components/FormFieldLabel'
 import { Input, Icon } from '../styledComponents'
 
 describe('TextInput', () => {
@@ -13,8 +14,6 @@ describe('TextInput', () => {
     value: '',
     touched: false,
     error: '',
-    hasIcon: false,
-    iconSrc: 0,
     onTapIcon: jest.fn()
   }
 
@@ -22,6 +21,7 @@ describe('TextInput', () => {
     const wrapper = shallow(<TextInput {...defaultProps} />)
     wrapper.find(Input).simulate('changeText', 'hello!')
     expect(defaultProps.onChangeText).toHaveBeenCalledWith('hello!')
+    expect(wrapper.find(FormFieldLabel).length).toEqual(1)
   })
 
   test('touched && error renders the error text', () => {
@@ -32,17 +32,22 @@ describe('TextInput', () => {
     expect(wrapper.find(FormError).length).toEqual(1)
   })
 
-  test('it shows an Icon if hasIcon is true', () => {
-    const wrapper = shallow(<TextInput {...defaultProps} hasIcon iconSrc={1} />)
+  test('it shows an Icon if theres an iconSrc', () => {
+    const wrapper = shallow(<TextInput {...defaultProps} iconSrc={1} />)
     expect(wrapper.find(Icon).length).toEqual(1)
   })
 
   test('callback called on Icon tap', () => {
-    const wrapper = shallow(<TextInput {...defaultProps} hasIcon iconSrc={1} />)
+    const wrapper = shallow(<TextInput {...defaultProps} iconSrc={1} />)
     wrapper
       .find(TouchableWithoutFeedback)
       .first()
       .simulate('press')
     expect(defaultProps.onTapIcon).toBeCalled()
+  })
+
+  test('no label removes FormFieldLabel', () => {
+    const wrapper = shallow(<TextInput {...defaultProps} label='' />)
+    expect(wrapper.find(FormFieldLabel).length).toEqual(0)
   })
 })

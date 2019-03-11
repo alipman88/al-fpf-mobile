@@ -1,6 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { DateTimeField } from '../index'
+import { Input } from '../styledComponents'
 import { FormError } from '@components/FormError'
 
 describe('DateTimeField', () => {
@@ -60,5 +61,11 @@ describe('DateTimeField', () => {
       <DateTimeField {...defaultProps} touched error='Invalid' />
     )
     expect(wrapper.find(FormError).length).toEqual(1)
+  })
+
+  test('dateOnly doesnt render time field', () => {
+    const wrapper = shallow(<DateTimeField {...defaultProps} dateOnly />)
+
+    expect(wrapper.find(Input).length).toEqual(1)
   })
 })

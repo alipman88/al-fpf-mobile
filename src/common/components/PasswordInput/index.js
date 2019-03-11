@@ -29,7 +29,6 @@ export class PasswordInput extends React.Component {
         iconSrc={
           this.state.showPassword ? passwordEyeInactive : passwordEyeActive
         }
-        hasIcon
         secureTextEntry={!this.state.showPassword}
         onTapIcon={() => this.toggleShowPassword()}
         onChangeText={value => setFieldValue('password', value)}

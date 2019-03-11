@@ -99,7 +99,15 @@ export class DateTimeField extends React.Component {
   }
 
   render() {
-    const { error, dateLabel, label, timeLabel, touched, value } = this.props
+    const {
+      error,
+      dateLabel,
+      dateOnly,
+      label,
+      timeLabel,
+      touched,
+      value
+    } = this.props
     const { date, time } = this.state
 
     return (
@@ -124,22 +132,26 @@ export class DateTimeField extends React.Component {
             onCancel={this.hideDatePicker}
           />
 
-          <Input
-            onPress={this.showTimePicker}
-            hasError={Boolean(error) && touched}
-          >
-            <Icon size={18} color='#c5c5c5' name='md-time' />
-            <InputText touched={touched}>
-              {(time && format(time, 'hh:mma')) || timeLabel}
-            </InputText>
-          </Input>
-          <DateTimePicker
-            mode='time'
-            date={value || new Date()}
-            isVisible={this.state.timeVisible}
-            onConfirm={this.handleTimePicked}
-            onCancel={this.hideTimePicker}
-          />
+          {!dateOnly && (
+            <React.Fragment>
+              <Input
+                onPress={this.showTimePicker}
+                hasError={Boolean(error) && touched}
+              >
+                <Icon size={18} color='#c5c5c5' name='md-time' />
+                <InputText touched={touched}>
+                  {(time && format(time, 'hh:mma')) || timeLabel}
+                </InputText>
+              </Input>
+              <DateTimePicker
+                mode='time'
+                date={value || new Date()}
+                isVisible={this.state.timeVisible}
+                onConfirm={this.handleTimePicked}
+                onCancel={this.hideTimePicker}
+              />
+            </React.Fragment>
+          )}
         </InputContainer>
         {touched && Boolean(error) && <FormError>{error}</FormError>}
       </Container>
@@ -149,6 +161,7 @@ export class DateTimeField extends React.Component {
 
 DateTimeField.propTypes = {
   dateLabel: PropTypes.string,
+  dateOnly: PropTypes.bool,
   // this function is called when a date is selected and there's no time
   // what do we default to?
   defaultTimeForDate: PropTypes.func,
