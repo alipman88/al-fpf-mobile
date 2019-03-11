@@ -84,7 +84,7 @@ export class Compose extends React.Component {
       <ScreenContainer grey withPadding={false}>
         <Formik
           initialValues={{
-            forums: profile ? [profile.area_ids[0]] : [],
+            forums: profile && profile.area_ids ? [profile.area_ids[0]] : [],
             profile,
             category: undefined,
             subject: subject,
