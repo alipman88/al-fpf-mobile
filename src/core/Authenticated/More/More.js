@@ -1,6 +1,27 @@
 import React from 'react'
-import { Text } from '@components/Text'
+import PropTypes from 'prop-types'
+import { Linking, ScrollView } from 'react-native'
+import { ExternalLink } from '@components/ExternalLink'
 import { ScreenContainer } from '@components/ScreenContainer'
+import {
+  PageWrapper,
+  PageHeader,
+  Card,
+  CenterImgContainer,
+  CardIcon,
+  CardTitle,
+  CardContent,
+  RightIcon,
+  FooterLinkWrapper,
+  FooterLink,
+  FooterText
+} from './styledComponents'
+import businessDirectoryIcon from '@assets/images/more-section/business-directory-icon.png'
+import calendarIcon from '@assets/images/more-section/calendar-icon.png'
+import donateIcon from '@assets/images/more-section/donate-icon.png'
+import openBookIcon from '@assets/images/more-section/open-book-icon.png'
+import speakerIcon from '@assets/images/more-section/speaker-icon.png'
+import linkIcon from '@assets/images/global-assets/external-link-icons/external-link-icon-blue.png'
 
 export class More extends React.Component {
   static navigationOptions = {
@@ -9,9 +30,123 @@ export class More extends React.Component {
 
   render() {
     return (
-      <ScreenContainer grey>
-        <Text>More</Text>
+      <ScreenContainer withPadding={false} grey>
+        <ScrollView>
+          <PageWrapper>
+            <PageHeader>
+              Check out additional services and features from FPF below!
+            </PageHeader>
+
+            <Card>
+              <CenterImgContainer>
+                <CardIcon source={businessDirectoryIcon} />
+              </CenterImgContainer>
+              <CardTitle>Business directory</CardTitle>
+              <CardContent>
+                Search 10,000 local businesses and nonprofits that participate
+                on Front Porch Forum.
+              </CardContent>
+              <CenterImgContainer>
+                <ExternalLink
+                  content='See business directory'
+                  url='https://frontporchforum.com/business_directories'
+                />
+              </CenterImgContainer>
+            </Card>
+
+            <Card>
+              <CenterImgContainer>
+                <CardIcon source={calendarIcon} />
+              </CenterImgContainer>
+              <CardTitle>Community Calendar</CardTitle>
+              <CardContent>
+                Learn about local events posted by your neighbors.
+              </CardContent>
+              <ExternalLink
+                content='Browse local events'
+                url={`https://frontporchforum.com/areas/${
+                  this.props.currentAreaId
+                }/calendar`}
+              />
+            </Card>
+
+            <Card>
+              <CenterImgContainer>
+                <CardIcon source={donateIcon} />
+              </CenterImgContainer>
+              <CardTitle>Donate</CardTitle>
+              <CardContent>
+                Your contribution will help us maintina, improve and grow our
+                community-building service.
+              </CardContent>
+              <ExternalLink
+                content='Donate Now'
+                url='https://frontporchforum.com/supporting-members'
+              />
+            </Card>
+
+            <Card>
+              <CenterImgContainer>
+                <CardIcon source={speakerIcon} />
+              </CenterImgContainer>
+              <CardTitle>Tell us what you think</CardTitle>
+              <CardContent>
+                As we work to improve this app, we would love to hear about your
+                experience!
+              </CardContent>
+              <ExternalLink
+                content='Share your feedback'
+                url='mailto:membersupport@frontporchforum.com?subject=FPF mobile app feedback'
+              />
+            </Card>
+
+            <Card>
+              <CenterImgContainer>
+                <CardIcon source={openBookIcon} />
+              </CenterImgContainer>
+              <CardTitle>Learn more about FPF</CardTitle>
+              <CardContent>
+                See a list of local participating officials, peruse our FAQ,
+                learn about advertising opportunities, contact customer support,
+                and more.
+              </CardContent>
+              <ExternalLink
+                content='Go to FrontPorchForum.com'
+                url='https://frontporchforum.com'
+              />
+            </Card>
+
+            <FooterLinkWrapper>
+              <FooterLink>
+                <FooterText
+                  onPress={() =>
+                    Linking.openURL(
+                      'https://frontporchforum.com/privacy-policy'
+                    )
+                  }
+                >
+                  Privacy policy
+                </FooterText>
+                <RightIcon source={linkIcon} />
+              </FooterLink>
+              <FooterLink>
+                <FooterText
+                  onPress={() =>
+                    Linking.openURL('https://frontporchforum.com/terms-of-use')
+                  }
+                >
+                  Terms of use
+                </FooterText>
+                <RightIcon source={linkIcon} />
+              </FooterLink>
+            </FooterLinkWrapper>
+          </PageWrapper>
+        </ScrollView>
       </ScreenContainer>
     )
   }
+}
+
+More.propTypes = {
+  currentAreaId: PropTypes.number.isRequired
 }

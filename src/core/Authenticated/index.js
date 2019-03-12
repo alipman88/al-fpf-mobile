@@ -48,19 +48,6 @@ export const Authenticated = createBottomTabNavigator(
         )
       })
     },
-    More: {
-      screen: More,
-      navigationOptions: () => ({
-        /* eslint-disable-next-line react/prop-types */
-        tabBarLabel: ({ focused }) => (
-          <NavLabel focused={focused}>More</NavLabel>
-        ),
-        /* eslint-disable-next-line react/prop-types */
-        tabBarIcon: ({ focused }) => (
-          <NavIcon source={focused ? moreActive : moreDefault} />
-        )
-      })
-    },
     Search: {
       screen: Search,
       navigationOptions: () => ({
@@ -71,6 +58,19 @@ export const Authenticated = createBottomTabNavigator(
         /* eslint-disable-next-line react/prop-types */
         tabBarIcon: ({ focused }) => (
           <NavIcon source={focused ? searchActive : searchDefault} />
+        )
+      })
+    },
+    More: {
+      screen: More,
+      navigationOptions: () => ({
+        /* eslint-disable-next-line react/prop-types */
+        tabBarLabel: ({ focused }) => (
+          <NavLabel focused={focused}>More</NavLabel>
+        ),
+        /* eslint-disable-next-line react/prop-types */
+        tabBarIcon: ({ focused }) => (
+          <NavIcon source={focused ? moreActive : moreDefault} />
         )
       })
     }
