@@ -33,9 +33,7 @@ export const FieldWrapper = styled.View`
   margin-bottom: 12;
 `
 
-export const Filters = styled.View`
-  padding-top: 7;
-`
+export const Filters = styled.View``
 
 export const ClearFilters = styled(TextSemibold)`
   color: #6b6e7d;
@@ -51,6 +49,7 @@ export const FiltersText = styled(TextSemibold)`
 export const FiltersToggle = styled.TouchableOpacity`
   flex-direction: row;
   margin-top: 19;
+  margin-bottom: 7;
 `
 
 export const ResultCounts = styled(TextSemibold)`

@@ -34,7 +34,7 @@ describe('TextInput', () => {
     expect(wrapper.find(FormError).length).toEqual(1)
   })
 
-  test('it shows an Icon if theres an iconSrc', () => {
+  test('it shows an Icon if theres a tapIcon', () => {
     const wrapper = shallow(
       <TextInput {...defaultProps} tapIcon={<TestIcon />} />
     )

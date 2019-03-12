@@ -10,6 +10,7 @@ import startOfDay from 'date-fns/start_of_day'
 import endOfDay from 'date-fns/end_of_day'
 import subYears from 'date-fns/sub_years'
 
+import { Button } from '@components/Button'
 import { DateTimeField } from '@components/DateTimeField'
 import { Multiselect } from '@components/Multiselect'
 import { Select } from '@components/Select'
@@ -179,6 +180,7 @@ export class SearchFields extends React.Component {
               </FieldWrapper>
             </Filters>
           )}
+          <Button onPress={() => handleSubmit()}>Search</Button>
         </PaddingContainer>
       </SearchFormContainer>
     )

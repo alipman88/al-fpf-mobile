@@ -90,7 +90,10 @@ export class Search extends React.Component {
             touched,
             values
           }) => (
-            <ScrollView contentContainerStyle={{ minHeight: '100%' }}>
+            <ScrollView
+              contentContainerStyle={{ minHeight: '100%' }}
+              keyboardShouldPersistTaps='handled'
+            >
               <SearchFields
                 areas={areas}
                 categories={categories}

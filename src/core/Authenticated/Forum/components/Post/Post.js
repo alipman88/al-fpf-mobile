@@ -12,6 +12,7 @@ import {
   TextButton
 } from './styledComponents'
 
+import { truncateText } from '@common/utils/truncateText'
 import { CardContent, ContentText, Header, Bottom } from '../sharedStyles'
 
 export class Post extends React.Component {
@@ -21,15 +22,6 @@ export class Post extends React.Component {
 
   toggleShowMore() {
     this.setState({ showMore: !this.state.showMore })
-  }
-
-  formatContent(content) {
-    if (content.length > this.props.postTruncateLength) {
-      return this.state.showMore
-        ? content
-        : `${content.substring(0, this.props.postTruncateLength)}...`
-    }
-    return content
   }
 
   render() {
@@ -53,7 +45,7 @@ export class Post extends React.Component {
           <Name>{`${firstName} ${lastName}`}</Name>
           <Text>{userDetails}</Text>
           <ContentText ellipsizeMode='tail' numberOfLines={15}>
-            {this.formatContent(content)}
+            {truncateText(content, postTruncateLength, !this.state.showMore)}
           </ContentText>
 
           {content.length > postTruncateLength && (

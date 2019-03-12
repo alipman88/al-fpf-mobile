@@ -1,6 +1,5 @@
 import styled from 'styled-components/native'
 
-import { paddingHorizontal } from '@common/styles/screenPadding'
 import { Text, TextSemibold } from '@components/Text'
 
 export const ResultsContainer = styled.View`
@@ -52,4 +51,10 @@ export const PostBody = styled(Text)`
   color: #4a4a4a;
   font-size: 16;
   margin-vertical: 10;
+`
+
+export const ShowMoreButton = styled(TextSemibold)`
+  color: #d77400;
+  text-decoration-color: #d77400;
+  margin-top: 10;
 `

@@ -5,22 +5,16 @@ import startOfDay from 'date-fns/start_of_day'
 import endOfDay from 'date-fns/end_of_day'
 import subYears from 'date-fns/sub_years'
 
+import { Post } from '../Post'
 import { SearchResults } from '../SearchResults'
 import { SearchHistory } from '../../SearchHistory'
-import { Post } from '../Post'
-import {
-  ResultCounts,
-  PostCategory,
-  PostContainer,
-  PostDate
-} from '../styledComponents'
+import { ResultCounts, PostContainer } from '../styledComponents'
 
 describe('SearchResults', () => {
   const defaultProps = {
     categories: [],
     minResultRange: 1,
     pageItemCount: 25,
-    postTruncateLength: 100,
     total: 25,
     search: jest.fn(),
     searched: false,
