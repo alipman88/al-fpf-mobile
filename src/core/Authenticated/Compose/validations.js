@@ -25,7 +25,7 @@ export const validations = yup.object().shape({
     .date()
     .nullable()
     .min(new Date(), 'To field must be after current date & time')
-    .test('toDate', 'To field must after From field', function(endDate) {
+    .test('toDate', 'To field must be after From field', function(endDate) {
       return (
         !this.parent.category.is_event || isAfter(endDate, this.parent.fromDate)
       )

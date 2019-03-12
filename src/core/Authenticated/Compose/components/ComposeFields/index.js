@@ -4,14 +4,12 @@ import get from 'lodash/get'
 import flatten from 'lodash/flatten'
 
 import Spinner from 'react-native-loading-spinner-overlay'
-import SectionedMultiSelect from 'react-native-sectioned-multi-select'
 
-import { FormError } from '@components/FormError'
 import { Button } from '@components/Button'
 import { Checkbox } from '@components/Checkbox'
 import { TextInput } from '@components/TextInput'
+import { Multiselect } from '@components/Multiselect'
 import { Select } from '@components/Select'
-import { FormFieldLabel } from '@components/FormFieldLabel'
 import { KeyboardAwareScrollView } from '@components/KeyboardAwareScrollView'
 import { getProfileDisplayName } from '@common/utils/getProfileDisplayName'
 import { Event } from '../Event'
@@ -78,7 +76,6 @@ export class ComposeFields extends React.Component {
       values.profile
     )
 
-    const forumsHasError = touched.forums && Boolean(errors.forums)
     return (
       <KeyboardAwareScrollView
         enableOnAndroid
@@ -115,56 +112,22 @@ export class ComposeFields extends React.Component {
           )}
           {filteredAreas.length > 1 && (
             <FieldWrapper>
-              <FormFieldLabel>Forums</FormFieldLabel>
-              <SectionedMultiSelect
-                items={[
-                  {
-                    name: 'Forums',
-                    id: 0,
-                    children: filteredAreas.map(area => ({
-                      id: area.id,
-                      name: area.name
-                    }))
-                  }
-                ]}
-                uniqueKey='id'
-                subKey='children'
+              <Multiselect
+                error={errors.forums}
+                fieldName='Forums'
+                items={filteredAreas.map(area => ({
+                  id: area.id,
+                  name: area.name
+                }))}
                 selectText='Select Forums'
-                readOnlyHeadings={true}
                 searchPlaceholderText='Search Forums'
                 onSelectedItemsChange={selectedItems => {
                   setFieldTouched('forums', true)
                   setFieldValue('forums', selectedItems)
                 }}
-                selectedItems={values.forums}
-                searchTextFontFamily={{
-                  fontFamily: 'ProximaNova-Regular'
-                }}
-                itemFontFamily={{ fontFamily: 'ProximaNova-Regular' }}
-                subItemFontFamily={{
-                  fontFamily: 'ProximaNova-Regular'
-                }}
-                confirmFontFamily={{
-                  fontFamily: 'ProximaNova-Regular'
-                }}
-                showDropDown={false}
-                expandDropDowns
-                colors={{ primary: '#f29426' }}
-                styles={{
-                  selectToggle: {
-                    borderRadius: 5,
-                    borderWidth: 1,
-                    borderColor: forumsHasError ? '#dc4558' : '#d5dde1',
-                    backgroundColor: forumsHasError ? '#ffebeb' : '#fff',
-                    paddingHorizontal: 4,
-                    height: 40
-                  },
-                  selectToggleText: {
-                    fontSize: 14
-                  }
-                }}
+                touched={touched.forums}
+                value={values.forums}
               />
-              {forumsHasError && <FormError>{errors.forums}</FormError>}
             </FieldWrapper>
           )}
           <FieldWrapper>

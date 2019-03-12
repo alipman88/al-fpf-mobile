@@ -12,6 +12,7 @@ import {
 
 describe('Search', () => {
   const defaultProps = {
+    categories: [],
     search: jest.fn()
   }
 
@@ -83,6 +84,17 @@ describe('Search', () => {
     expect(wrapper.find(PostDate).length).toEqual(1)
   })
 
+  test('no results, but search was performed, shows no posts msg', () => {
+    const wrapper = shallow(<Search {...defaultProps} />)
+
+    wrapper.setState({
+      searchResults: [],
+      searched: true
+    })
+
+    expect(wrapper.find(ResultCounts).text()).toEqual('No posts found')
+  })
+
   describe('onSubmit', () => {
     test('calls search', async () => {
       const wrapper = shallow(<Search {...defaultProps} />)
@@ -116,6 +128,7 @@ describe('Search', () => {
       })
 
       expect(wrapper.state()).toEqual({
+        searched: true,
         searchResults: [post],
         total: 5,
         page: 1,

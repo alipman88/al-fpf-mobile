@@ -2,14 +2,11 @@ import styled from 'styled-components/native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { Text } from '@components/Text'
 
-export const Container = styled.View`
-  flex-direction: column;
-`
+export const Container = styled.View``
 
 export const InputContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  flex: 1;
 `
 
 export const Input = styled.TouchableOpacity`

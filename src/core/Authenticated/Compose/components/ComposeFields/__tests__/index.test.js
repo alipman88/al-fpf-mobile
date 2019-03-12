@@ -1,8 +1,8 @@
 import React from 'react'
 import { ComposeFields } from '../index'
 import { shallow } from 'enzyme'
-import SectionedMultiSelect from 'react-native-sectioned-multi-select'
 
+import { Multiselect } from '@components/Multiselect'
 import { Checkbox } from '@components/Checkbox'
 import { TextInput } from '@components/TextInput'
 import { Select } from '@components/Select'
@@ -125,7 +125,7 @@ describe('Compose', () => {
     })
 
     test('area selection does not render', () => {
-      expect(wrapper.find(SectionedMultiSelect).length).toEqual(0)
+      expect(wrapper.find(Multiselect).length).toEqual(0)
     })
   })
 
@@ -153,7 +153,7 @@ describe('Compose', () => {
       />
     )
 
-    expect(wrapper.find(SectionedMultiSelect).length).toEqual(1)
+    expect(wrapper.find(Multiselect).length).toEqual(1)
   })
 
   test('Hide message & checkbox if theres a duplicate post', () => {

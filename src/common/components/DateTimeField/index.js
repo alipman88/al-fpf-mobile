@@ -112,12 +112,12 @@ export class DateTimeField extends React.Component {
 
     return (
       <Container>
-        <FormFieldLabel>{label}</FormFieldLabel>
+        {Boolean(label) && <FormFieldLabel>{label}</FormFieldLabel>}
         <InputContainer>
           <Input
             onPress={this.showDatePicker}
             hasError={Boolean(error) && touched}
-            marginRight={10}
+            marginRight={dateOnly ? 0 : 10}
           >
             <Icon size={18} color='#c5c5c5' name='ios-calendar' />
             <InputText touched={touched}>
@@ -166,7 +166,7 @@ DateTimeField.propTypes = {
   // what do we default to?
   defaultTimeForDate: PropTypes.func,
   error: PropTypes.string,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   onChangeValue: PropTypes.func.isRequired,
   timeLabel: PropTypes.string,
   touched: PropTypes.bool,

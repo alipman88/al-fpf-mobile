@@ -2,8 +2,6 @@ import React from 'react'
 import { ScrollView } from 'react-native'
 import PropTypes from 'prop-types'
 import { Formik } from 'formik'
-import Spinner from 'react-native-loading-spinner-overlay'
-import FeatherIcon from 'react-native-vector-icons/Feather'
 
 import format from 'date-fns/format'
 import subYears from 'date-fns/sub_years'
@@ -33,6 +31,7 @@ export class Search extends React.Component {
   }
 
   state = {
+    searched: false,
     searchResults: [],
     total: 0,
     page: 1,
@@ -41,13 +40,14 @@ export class Search extends React.Component {
   }
 
   render() {
-    const { searchResults, total, page, pageItemCount } = this.state
+    const { searched, searchResults, total, page, pageItemCount } = this.state
+    const { areas, categories } = this.props
 
     const minResultRange = (page - 1) * pageItemCount + 1
 
     return (
       <ScreenContainer grey withPadding={false}>
-        <ScrollView>
+        <ScrollView contentContainerStyle={{ minHeight: '100%' }}>
           <Formik
             initialValues={{
               fromDate: startOfDay(subYears(new Date(), 2)),
@@ -66,6 +66,7 @@ export class Search extends React.Component {
                 actions.setSubmitting,
                 ({ pagination, results }) => {
                   this.setState({
+                    searched: true,
                     searchResults: results,
                     total: pagination.total,
                     page: pagination.page,
@@ -79,16 +80,18 @@ export class Search extends React.Component {
             render={({
               errors,
               handleSubmit,
-              setTouched,
+              setFieldTouched,
               setFieldValue,
               isSubmitting,
               touched,
               values
             }) => (
               <SearchFields
+                areas={areas}
+                categories={categories}
                 errors={errors}
                 handleSubmit={handleSubmit}
-                setTouched={setTouched}
+                setFieldTouched={setFieldTouched}
                 setFieldValue={setFieldValue}
                 isSubmitting={isSubmitting}
                 touched={touched}
@@ -98,6 +101,12 @@ export class Search extends React.Component {
           />
           <ResultsContainer>
             <PaddingContainer>
+              {searched && searchResults.length === 0 ? (
+                <React.Fragment>
+                  <ResultCounts>No posts found</ResultCounts>
+                  <ResultsDivider />
+                </React.Fragment>
+              ) : null}
               {searchResults.length > 0 ? (
                 <React.Fragment>
                   <ResultCounts>
@@ -112,6 +121,7 @@ export class Search extends React.Component {
                 <PostContainer key={post.id}>
                   <PostHeader>{post.title}</PostHeader>
                   <PostAuthor>
+                    {post.area_name} - No. {post.issue_number} -{' '}
                     {post.user_first_name} {post.user_last_name} -{' '}
                     {post.user_email} - {post.user_profile_name}
                   </PostAuthor>
@@ -140,5 +150,7 @@ export class Search extends React.Component {
 }
 
 Search.propTypes = {
+  areas: PropTypes.array.isRequired,
+  categories: PropTypes.array.isRequired,
   search: PropTypes.func.isRequired
 }

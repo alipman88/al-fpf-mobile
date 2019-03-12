@@ -3,6 +3,7 @@ import { shallow } from 'enzyme'
 
 import { Select } from '../index'
 import { SelectButton } from '../styledComponents'
+import { FormFieldLabel } from '@components/FormFieldLabel'
 
 describe('Select', () => {
   const defaultProps = {
@@ -25,5 +26,10 @@ describe('Select', () => {
     wrapper.find(SelectButton).simulate('press')
     expect(Select.prototype.selectModuleRef.show).toHaveBeenCalled()
     delete Select.prototype.selectModuleRef
+  })
+
+  test('no FormFieldLabel if theres no label', () => {
+    const wrapper = shallow(<Select {...defaultProps} label='' />)
+    expect(wrapper.find(FormFieldLabel).length).toEqual(0)
   })
 })

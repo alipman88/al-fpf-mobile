@@ -16,6 +16,30 @@ export const SearchFormContainer = styled.View`
 export const ResultsContainer = styled.View`
   flex: 1;
   background-color: white;
+  align-self: stretch;
+`
+
+export const DateFieldContainer = styled.View`
+  flex: 1;
+  margin-right: ${({ marginRight }) => marginRight || 0};
+`
+
+export const DatesWrapper = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`
+
+export const FieldWrapper = styled.View`
+  margin-bottom: 12;
+`
+
+export const Filters = styled.View`
+  padding-top: 7;
+`
+
+export const ClearFilters = styled(TextSemibold)`
+  color: #6b6e7d;
+  font-size: 14;
 `
 
 export const FiltersText = styled(TextSemibold)`
@@ -24,7 +48,7 @@ export const FiltersText = styled(TextSemibold)`
   padding-left: 5;
 `
 
-export const FiltersToggle = styled.View`
+export const FiltersToggle = styled.TouchableOpacity`
   flex-direction: row;
   margin-top: 19;
 `

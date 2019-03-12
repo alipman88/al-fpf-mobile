@@ -16,7 +16,7 @@ export const search = (values, setSubmitting, callback) => async (
       })}`,
       {
         area_ids: values.forums.length > 0 ? values.forums : undefined,
-        category_ids: values.category ? [values.category] : undefined,
+        category_ids: values.category ? [values.category.id] : undefined,
         from: values.fromDate,
         to: values.toDate,
         query: values.keyword

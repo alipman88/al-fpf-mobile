@@ -24,7 +24,7 @@ describe('Search - actions', () => {
       await search(
         {
           forums: [1],
-          category: 1,
+          category: { id: 2 },
           fromDate: date,
           toDate: date,
           page: 1,
@@ -39,7 +39,7 @@ describe('Search - actions', () => {
         '/posts?count=10&page=1',
         {
           area_ids: [1],
-          category_ids: [1],
+          category_ids: [2],
           from: date,
           to: date,
           query: 'cats'

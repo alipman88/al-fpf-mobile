@@ -30,7 +30,7 @@ export class Select extends React.Component {
 
     return (
       <Container>
-        <FormFieldLabel>{label}</FormFieldLabel>
+        {Boolean(label) && <FormFieldLabel>{label}</FormFieldLabel>}
         <SelectButton
           onPress={() => this.selectModuleRef.show()}
           hasError={hasError}
@@ -58,7 +58,7 @@ export class Select extends React.Component {
 Select.propTypes = {
   error: PropTypes.string,
   items: PropTypes.array.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   onValueChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,

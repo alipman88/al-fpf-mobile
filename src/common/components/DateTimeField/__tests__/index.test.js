@@ -3,6 +3,7 @@ import { shallow } from 'enzyme'
 import { DateTimeField } from '../index'
 import { Input } from '../styledComponents'
 import { FormError } from '@components/FormError'
+import { FormFieldLabel } from '@components/FormFieldLabel'
 
 describe('DateTimeField', () => {
   const defaultProps = {
@@ -17,6 +18,11 @@ describe('DateTimeField', () => {
 
   afterEach(() => {
     defaultProps.onChangeValue.mockReset()
+  })
+
+  test('no FormFieldLabel if theres no label', () => {
+    const wrapper = shallow(<DateTimeField {...defaultProps} label='' />)
+    expect(wrapper.find(FormFieldLabel).length).toEqual(0)
   })
 
   test('updateFormDateValue combines date & time from state', () => {
@@ -66,6 +72,8 @@ describe('DateTimeField', () => {
   test('dateOnly doesnt render time field', () => {
     const wrapper = shallow(<DateTimeField {...defaultProps} dateOnly />)
 
-    expect(wrapper.find(Input).length).toEqual(1)
+    const input = wrapper.find(Input)
+    expect(input.length).toEqual(1)
+    expect(input.props().marginRight).toEqual(0)
   })
 })
