@@ -7,6 +7,7 @@ import endOfDay from 'date-fns/end_of_day'
 import subYears from 'date-fns/sub_years'
 
 import { DateTimeField } from '@components/DateTimeField'
+import { TextInput } from '@components/TextInput'
 import { SearchFields } from '../SearchFields'
 import { FieldWrapper, FiltersToggle } from '../styledComponents'
 import { Multiselect } from '@components/Multiselect'
@@ -22,6 +23,7 @@ describe('SearchFields', () => {
     ],
     errors: {},
     handleSubmit: jest.fn(),
+    onClearSearch: jest.fn(),
     setFieldTouched: jest.fn(),
     setFieldValue: jest.fn(),
     isSubmitting: false,
@@ -133,5 +135,29 @@ describe('SearchFields', () => {
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('fromDate', false)
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('toDate', false)
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('category', false)
+  })
+
+  test('tapping clear icon on text input, calls prop', () => {
+    const wrapper = shallow(<SearchFields {...defaultProps} />)
+    wrapper
+      .find(TextInput)
+      .props()
+      .onTapIcon()
+
+    expect(defaultProps.onClearSearch).toHaveBeenCalled()
+    expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('keyword', false)
+    expect(defaultProps.setFieldValue).toHaveBeenCalledWith('keyword', '')
+  })
+
+  test('no keyword does not pass an icon to text field', () => {
+    const wrapper = shallow(<SearchFields {...defaultProps} />)
+    expect(wrapper.find(TextInput).props().tapIcon).toEqual(null)
+  })
+
+  test('keyword sets the tapIcon to a component', () => {
+    const wrapper = shallow(
+      <SearchFields {...defaultProps} values={{ keyword: 'test' }} />
+    )
+    expect(wrapper.find(TextInput).props().tapIcon).not.toBe(null)
   })
 })

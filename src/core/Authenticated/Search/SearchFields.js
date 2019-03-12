@@ -60,6 +60,21 @@ export class SearchFields extends React.Component {
             returnKeyType='search'
             touched={touched.keyword}
             value={values.keyword}
+            onTapIcon={() => {
+              setFieldTouched('keyword', false)
+              setFieldValue('keyword', '')
+              this.props.onClearSearch()
+            }}
+            tapIcon={
+              Boolean(values.keyword) ? (
+                <Icon
+                  name='cancel'
+                  size={25}
+                  color='#9b9b9b'
+                  style={{ marginTop: 8 }}
+                />
+              ) : null
+            }
             onSubmitEditing={() => handleSubmit()}
           />
           <FiltersToggle
@@ -175,6 +190,7 @@ SearchFields.propTypes = {
   categories: PropTypes.array.isRequired,
   errors: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  onClearSearch: PropTypes.func.isRequired,
   setFieldTouched: PropTypes.func.isRequired,
   setFieldValue: PropTypes.func.isRequired,
   isSubmitting: PropTypes.bool,

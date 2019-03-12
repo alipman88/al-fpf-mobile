@@ -5,7 +5,9 @@ import { TouchableWithoutFeedback } from 'react-native'
 import { TextInput } from '../index'
 import { FormError } from '@components/FormError'
 import { FormFieldLabel } from '@components/FormFieldLabel'
-import { Input, Icon } from '../styledComponents'
+import { Input } from '../styledComponents'
+
+const TestIcon = () => null
 
 describe('TextInput', () => {
   const defaultProps = {
@@ -33,12 +35,16 @@ describe('TextInput', () => {
   })
 
   test('it shows an Icon if theres an iconSrc', () => {
-    const wrapper = shallow(<TextInput {...defaultProps} iconSrc={1} />)
-    expect(wrapper.find(Icon).length).toEqual(1)
+    const wrapper = shallow(
+      <TextInput {...defaultProps} tapIcon={<TestIcon />} />
+    )
+    expect(wrapper.find(TestIcon).length).toEqual(1)
   })
 
   test('callback called on Icon tap', () => {
-    const wrapper = shallow(<TextInput {...defaultProps} iconSrc={1} />)
+    const wrapper = shallow(
+      <TextInput {...defaultProps} tapIcon={<TestIcon />} />
+    )
     wrapper
       .find(TouchableWithoutFeedback)
       .first()

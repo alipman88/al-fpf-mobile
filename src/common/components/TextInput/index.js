@@ -2,7 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { TouchableWithoutFeedback, View } from 'react-native'
 import { FormError } from '@components/FormError'
-import { Container, Input, Icon, ForwardIcon } from './styledComponents'
+import {
+  Container,
+  Input,
+  IconContainer,
+  ForwardIcon
+} from './styledComponents'
 import { FormFieldLabel } from '@components/FormFieldLabel'
 
 export const TextInput = ({
@@ -19,7 +24,7 @@ export const TextInput = ({
   onBlur,
   onSubmitEditing,
   onTapIcon,
-  iconSrc,
+  tapIcon,
   touched,
   error
 }) => {
@@ -43,12 +48,12 @@ export const TextInput = ({
           value={value}
         />
         {Boolean(forwardIcon) && <ForwardIcon>{forwardIcon}</ForwardIcon>}
+        {Boolean(tapIcon) && (
+          <TouchableWithoutFeedback onPress={onTapIcon}>
+            <IconContainer>{tapIcon}</IconContainer>
+          </TouchableWithoutFeedback>
+        )}
       </View>
-      {Boolean(iconSrc) && (
-        <TouchableWithoutFeedback onPress={onTapIcon}>
-          <Icon source={iconSrc} />
-        </TouchableWithoutFeedback>
-      )}
 
       {touched && Boolean(error) && <FormError>{error}</FormError>}
     </Container>
@@ -59,7 +64,7 @@ TextInput.propTypes = {
   autoCapitalize: PropTypes.string,
   error: PropTypes.string,
   forwardIcon: PropTypes.node,
-  iconSrc: PropTypes.number, //image imports resolve as reference numbers
+  tapIcon: PropTypes.node,
   keyboardType: PropTypes.string,
   label: PropTypes.string,
   multiline: PropTypes.bool,

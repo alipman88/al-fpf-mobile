@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { TextInput } from '@components/TextInput'
 
+import { Icon } from './styledComponents'
+
 import passwordEyeActive from '@assets/images/createAccount/password-eyes/fpf-password-eye.png'
 import passwordEyeInactive from '@assets/images/createAccount/password-eyes/fpf-password-eye-inactive.png'
 
@@ -26,8 +28,12 @@ export class PasswordInput extends React.Component {
         error={error}
         value={value}
         touched={touched}
-        iconSrc={
-          this.state.showPassword ? passwordEyeInactive : passwordEyeActive
+        tapIcon={
+          <Icon
+            source={
+              this.state.showPassword ? passwordEyeInactive : passwordEyeActive
+            }
+          />
         }
         secureTextEntry={!this.state.showPassword}
         onTapIcon={() => this.toggleShowPassword()}

@@ -3,96 +3,17 @@ import { shallow } from 'enzyme'
 import { Formik } from 'formik'
 
 import { Search } from '../Search'
-import {
-  ResultCounts,
-  PostCategory,
-  PostContainer,
-  PostDate
-} from '../styledComponents'
 
 describe('Search', () => {
   const defaultProps = {
+    addSearchToHistory: jest.fn(),
     categories: [],
     search: jest.fn()
   }
 
   afterEach(() => {
+    defaultProps.addSearchToHistory.mockReset()
     defaultProps.search.mockReset()
-  })
-
-  test('no search results, no ResultCounts', () => {
-    const wrapper = shallow(<Search {...defaultProps} />)
-    expect(wrapper.find(ResultCounts).length).toEqual(0)
-    expect(wrapper.find(PostContainer).length).toEqual(0)
-  })
-
-  test('search results render content on screen', () => {
-    const wrapper = shallow(<Search {...defaultProps} />)
-
-    wrapper.setState({
-      searchResults: [
-        {
-          id: 1,
-          title: 'abc',
-          user_first_name: 'john',
-          user_last_name: 'smith',
-          user_email: 'test@example.com',
-          user_profile_name: 'profile name',
-          event: {},
-          categories: ['Lost and found']
-        }
-      ],
-      total: 1,
-      page: 1,
-      pages: 1,
-      pageItemCount: 25
-    })
-
-    const resultCounts = wrapper.find(ResultCounts)
-    expect(resultCounts.length).toEqual(1)
-    expect(resultCounts.text()).toEqual(
-      'Displaying postings 1 - 1 of 1 in total'
-    )
-    expect(wrapper.find(PostCategory).length).toEqual(1)
-    expect(wrapper.find(PostDate).length).toEqual(0)
-  })
-
-  test('renders post date', () => {
-    const wrapper = shallow(<Search {...defaultProps} />)
-
-    wrapper.setState({
-      searchResults: [
-        {
-          id: 1,
-          title: 'abc',
-          user_first_name: 'john',
-          user_last_name: 'smith',
-          user_email: 'test@example.com',
-          user_profile_name: 'profile name',
-          event: {
-            start_date: new Date()
-          },
-          categories: ['Lost and found']
-        }
-      ],
-      total: 1,
-      page: 1,
-      pages: 1,
-      pageItemCount: 25
-    })
-
-    expect(wrapper.find(PostDate).length).toEqual(1)
-  })
-
-  test('no results, but search was performed, shows no posts msg', () => {
-    const wrapper = shallow(<Search {...defaultProps} />)
-
-    wrapper.setState({
-      searchResults: [],
-      searched: true
-    })
-
-    expect(wrapper.find(ResultCounts).text()).toEqual('No posts found')
   })
 
   describe('onSubmit', () => {
@@ -103,11 +24,11 @@ describe('Search', () => {
       await wrapper
         .find(Formik)
         .props()
-        .onSubmit({ forums: [] }, { setSubmitting })
+        .onSubmit({ forums: [], keyword: 'test' }, { setSubmitting })
 
       expect(defaultProps.search).toHaveBeenCalledWith(
-        { forums: [], page: 1, count: 25 },
-        setSubmitting,
+        { forums: [], page: 1, count: 25, keyword: 'test' },
+        expect.any(Function),
         expect.any(Function)
       )
 
@@ -127,7 +48,13 @@ describe('Search', () => {
         results: [post]
       })
 
+      expect(defaultProps.addSearchToHistory).toHaveBeenCalledWith('test')
+      expect(setSubmitting).toHaveBeenCalledTimes(2)
+      expect(setSubmitting).toHaveBeenCalledWith(true)
+      expect(setSubmitting).toHaveBeenCalledWith(false)
+
       expect(wrapper.state()).toEqual({
+        loading: false,
         searched: true,
         searchResults: [post],
         total: 5,

@@ -15,13 +15,9 @@ export const Input = styled.TextInput`
   color: #000;
 `
 
-export const Icon = styled.Image`
-  height: 25;
-  width: 40;
+export const IconContainer = styled.View`
   position: absolute;
-  resize-mode: contain;
   right: 10;
-  top: 25;
 `
 
 export const ForwardIcon = styled.View`
