@@ -29,7 +29,6 @@ export class App extends React.Component {
       setDrawerOpenState: this.setDrawerOpenState
     }
   }
-
   componentDidMount() {
     Linking.addEventListener('url', this.handleOpenURL)
   }
@@ -42,6 +41,12 @@ export class App extends React.Component {
     const { route, params } = parseDeepLink(event.url)
     navigationService.navigate(route, params)
   }
+  // componentDidMount() {
+  //   Linking.getInitialURL().then(url => {
+  //     if (url) {
+  //     }
+  //   })
+  // }
 
   render() {
     return (
