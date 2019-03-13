@@ -1,6 +1,6 @@
 import React from 'react'
 import SideMenu from 'react-native-side-menu'
-import { Linking } from 'react-native'
+import { Linking, Platform } from 'react-native'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 
@@ -29,6 +29,7 @@ export class App extends React.Component {
       setDrawerOpenState: this.setDrawerOpenState
     }
   }
+
   componentDidMount() {
     Linking.addEventListener('url', this.handleOpenURL)
   }
@@ -39,14 +40,8 @@ export class App extends React.Component {
 
   handleOpenURL = event => {
     const { route, params } = parseDeepLink(event.url)
-    navigationService.navigate(route, params)
+    navigationService.navigate(route, params);
   }
-  // componentDidMount() {
-  //   Linking.getInitialURL().then(url => {
-  //     if (url) {
-  //     }
-  //   })
-  // }
 
   render() {
     return (
