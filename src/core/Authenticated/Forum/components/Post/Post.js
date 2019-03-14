@@ -44,7 +44,7 @@ export class Post extends React.Component {
           <Header>{title}</Header>
           <Name>{`${firstName} ${lastName}`}</Name>
           <Text>{userDetails}</Text>
-          <ContentText ellipsizeMode='tail' numberOfLines={15}>
+          <ContentText>
             {truncateText(content, postTruncateLength, !this.state.showMore)}
           </ContentText>
 
