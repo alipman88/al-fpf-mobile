@@ -1,6 +1,6 @@
 import React from 'react'
 import SideMenu from 'react-native-side-menu'
-import { Linking, Platform } from 'react-native'
+import { Linking } from 'react-native'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 
@@ -40,7 +40,7 @@ export class App extends React.Component {
 
   handleOpenURL = event => {
     const { route, params } = parseDeepLink(event.url)
-    navigationService.navigate(route, params);
+    navigationService.navigate(route, params)
   }
 
   render() {
