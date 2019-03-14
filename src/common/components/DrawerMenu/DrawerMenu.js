@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { ScrollView, TouchableOpacity } from 'react-native'
+import navigationService from '@common/utils/navigationService'
 
 import { DrawerContext } from '@app/context'
 import {
@@ -36,13 +37,13 @@ export const DrawerMenu = ({
                           if (profile.area_ids.indexOf(area.id) !== -1) {
                             return profile
                           }
-                          return false
                         })
 
                         setCurrentProfileId(profile.id)
                       }
                       setCurrentAreaId(area.id)
                       setDrawerOpenState(false)
+                      navigationService.navigate('Forum')
                     }}
                   >
                     <ForumText active={area.id === currentAreaId}>
