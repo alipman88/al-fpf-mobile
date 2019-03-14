@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
 import flatten from 'lodash/flatten'
+import uniq from 'lodash/uniq'
 
 import Spinner from 'react-native-loading-spinner-overlay'
 
@@ -198,9 +199,11 @@ export class ComposeFields extends React.Component {
               }}
             >
               Allow people in neighboring FPFs (
-              {flatten(filteredAreas.map(area => area.neighbor_areas))
-                .map(area => area.name)
-                .join(', ')}
+              {uniq(
+                flatten(filteredAreas.map(area => area.neighbor_areas)).map(
+                  area => area.name
+                )
+              ).join(', ')}
               ) to see this posting
             </Checkbox>
           )}
