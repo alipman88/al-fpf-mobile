@@ -116,6 +116,7 @@ export class ComposeFields extends React.Component {
               <Multiselect
                 error={errors.forums}
                 fieldName='Forums'
+                label='Forums'
                 items={filteredAreas.map(area => ({
                   id: area.id,
                   name: area.name
