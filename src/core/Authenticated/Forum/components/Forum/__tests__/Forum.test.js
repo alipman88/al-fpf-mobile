@@ -62,7 +62,7 @@ describe('Forum', () => {
         }
       ]
     },
-    neighboringAreas: [],
+    neighboringAreas: {},
     ads: {
       12: [
         {
@@ -236,6 +236,30 @@ describe('Forum', () => {
       })
 
       expect(defaultProps.setCurrentIssueId).toHaveBeenCalledWith(1000)
+    })
+
+    test("if nav param issue  is same as current issue, don't update currentIssueId", () => {
+      const wrapper = shallow(<Forum {...defaultProps} currentIssueId={1000} />)
+      wrapper.setProps({
+        navigation: {
+          ...defaultProps.navigation,
+          getParam: jest.fn(() => 30),
+          areaId: '30',
+          issueId: '2121'
+        }
+      })
+
+      wrapper.setProps({
+        navigation: {
+          ...defaultProps.navigation,
+          getParam: jest.fn(() => 2121),
+          areaId: '30',
+          issueId: '2121'
+        },
+        issues: [{ id: 1000, number: 2121 }]
+      })
+
+      expect(defaultProps.setCurrentIssueId).not.toHaveBeenCalled()
     })
   })
 })

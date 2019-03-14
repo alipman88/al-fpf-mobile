@@ -46,8 +46,10 @@ export class Forum extends React.Component {
       )
 
       if (!!issueNum && issues.length) {
-        const current = issues.find(i => i.num === issueNum)
-        if (current) this.props.setCurrentIssueId(current.id)
+        const current = issues.find(i => i.number === issueNum)
+        if (current && current.id !== this.props.currentIssueId) {
+          this.props.setCurrentIssueId(current.id)
+        }
       }
       // if this list of issues doesnt have the current id, set a new one
       if (
