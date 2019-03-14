@@ -21,6 +21,7 @@ describe('Forum', () => {
     getIssues: jest.fn(),
     getPosts: jest.fn(),
     setCurrentIssueId: jest.fn(),
+    setCurrentAreaId: jest.fn(),
     posts: {
       12: [
         {
@@ -61,6 +62,7 @@ describe('Forum', () => {
         }
       ]
     },
+    neighboringAreas: {},
     ads: {
       12: [
         {
@@ -82,6 +84,7 @@ describe('Forum', () => {
     defaultProps.getIssues.mockReset()
     defaultProps.getPosts.mockReset()
     defaultProps.setCurrentIssueId.mockReset()
+    defaultProps.setCurrentAreaId.mockReset()
   })
 
   test('calls setupForumData on mount', () => {
@@ -195,6 +198,68 @@ describe('Forum', () => {
       const wrapper = shallow(<Forum {...defaultProps} />)
       wrapper.setProps({ currentIssueId: 45 })
       expect(defaultProps.getPosts).toHaveBeenCalledWith(45)
+    })
+
+    test('if there is an area id in navigation params, set currentArea', () => {
+      const wrapper = shallow(<Forum {...defaultProps} />)
+      wrapper.setProps({
+        navigation: {
+          ...defaultProps.navigation,
+          getParam: jest.fn(() => 30),
+          areaId: '30',
+          issueId: '2121'
+        }
+      })
+
+      expect(defaultProps.setCurrentAreaId).toHaveBeenCalledWith(30)
+    })
+
+    test('if there is an issue num in navigation params, find issue and set ID', () => {
+      const wrapper = shallow(<Forum {...defaultProps} />)
+      wrapper.setProps({
+        navigation: {
+          ...defaultProps.navigation,
+          getParam: jest.fn(() => 30),
+          areaId: '30',
+          issueId: '2121'
+        }
+      })
+
+      wrapper.setProps({
+        navigation: {
+          ...defaultProps.navigation,
+          getParam: jest.fn(() => 2121),
+          areaId: '30',
+          issueId: '2121'
+        },
+        issues: [{ id: 1000, number: 2121 }]
+      })
+
+      expect(defaultProps.setCurrentIssueId).toHaveBeenCalledWith(1000)
+    })
+
+    test("if nav param issue  is same as current issue, don't update currentIssueId", () => {
+      const wrapper = shallow(<Forum {...defaultProps} currentIssueId={1000} />)
+      wrapper.setProps({
+        navigation: {
+          ...defaultProps.navigation,
+          getParam: jest.fn(() => 30),
+          areaId: '30',
+          issueId: '2121'
+        }
+      })
+
+      wrapper.setProps({
+        navigation: {
+          ...defaultProps.navigation,
+          getParam: jest.fn(() => 2121),
+          areaId: '30',
+          issueId: '2121'
+        },
+        issues: [{ id: 1000, number: 2121 }]
+      })
+
+      expect(defaultProps.setCurrentIssueId).not.toHaveBeenCalled()
     })
   })
 })
