@@ -39,6 +39,16 @@ export class Forum extends React.Component {
     const { issues } = this.props
 
     if (prevProps.issues !== issues) {
+      //if we got here from a deeplink, find issue and set current ID
+      const issueNum = parseInt(
+        this.props.navigation.getParam('issueNum', 0),
+        10
+      )
+
+      if (!!issueNum && issues.length) {
+        const current = issues.find(i => i.num === issueNum)
+        if (current) this.props.setCurrentIssueId(current.id)
+      }
       // if this list of issues doesnt have the current id, set a new one
       if (
         issues.length > 0 &&
