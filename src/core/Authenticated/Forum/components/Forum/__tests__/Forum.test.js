@@ -10,7 +10,8 @@ describe('Forum', () => {
   const defaultProps = {
     setupForumData: jest.fn(),
     navigation: {
-      setParams: jest.fn()
+      setParams: jest.fn(),
+      getParam: jest.fn()
     },
     setAccessToken: jest.fn(),
     currentIssueId: 12,

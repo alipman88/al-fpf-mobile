@@ -1,5 +1,6 @@
 import React from 'react'
 import SideMenu from 'react-native-side-menu'
+import { Linking } from 'react-native'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 
@@ -9,6 +10,8 @@ import { DrawerMenu } from '@components/DrawerMenu'
 import { SwitchNavigatorContainer } from '@core/switchNavigator'
 import { AppError } from '@components/AppError'
 import { getDimensions, isTabletWidth } from '@common/utils/size'
+import { parseDeepLink } from '@common/utils/parseDeepLink'
+import navigationService from '@common/utils/navigationService'
 
 export class App extends React.Component {
   constructor(props) {
@@ -25,6 +28,19 @@ export class App extends React.Component {
       open: false,
       setDrawerOpenState: this.setDrawerOpenState
     }
+  }
+
+  componentDidMount() {
+    Linking.addEventListener('url', this.handleOpenURL)
+  }
+
+  componentWillUnmount() {
+    Linking.removeEventListener('url', this.handleOpenURL)
+  }
+
+  handleOpenURL = event => {
+    const { route, params } = parseDeepLink(event.url)
+    navigationService.navigate(route, params)
   }
 
   render() {
@@ -44,7 +60,11 @@ export class App extends React.Component {
                 }
                 bounceBackOnOverdraw={false}
               >
-                <SwitchNavigatorContainer />
+                <SwitchNavigatorContainer
+                  ref={navigatorRef => {
+                    navigationService.setTopLevelNavigator(navigatorRef)
+                  }}
+                />
               </SideMenu>
             </DrawerContext.Provider>
             <AppError />

@@ -24,7 +24,7 @@ export class Forum extends React.Component {
     this.setTitleFromArea()
   }
 
-  componentDidUpdate(prevProps) {
+  fetchIssues(prevProps) {
     if (
       this.props.currentAreaId !== 0 &&
       (prevProps.areas !== this.props.areas ||
@@ -33,7 +33,9 @@ export class Forum extends React.Component {
       this.setTitleFromArea()
       this.props.getIssues(this.props.currentAreaId)
     }
+  }
 
+  fetchPosts(prevProps) {
     const { issues } = this.props
 
     if (prevProps.issues !== issues) {
@@ -49,6 +51,19 @@ export class Forum extends React.Component {
     if (prevProps.currentIssueId !== this.props.currentIssueId) {
       this.props.getPosts(this.props.currentIssueId)
     }
+  }
+
+  checkNavParams() {
+    const areaId = parseInt(this.props.navigation.getParam('areaId', 0), 10)
+    if (!!areaId && areaId !== this.props.currentAreaId) {
+      this.props.setCurrentAreaId(areaId)
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    this.checkNavParams()
+    this.fetchIssues(prevProps)
+    this.fetchPosts(prevProps)
   }
 
   setTitleFromArea() {
@@ -134,6 +149,7 @@ Forum.propTypes = {
   issues: PropTypes.array.isRequired,
   navigation: PropTypes.object.isRequired,
   neighboringAreas: PropTypes.object.isRequired,
+  setCurrentAreaId: PropTypes.func.isRequired,
   setCurrentIssueId: PropTypes.func.isRequired,
   setupForumData: PropTypes.func.isRequired,
   posts: PropTypes.object.isRequired

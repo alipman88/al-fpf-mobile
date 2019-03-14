@@ -36,6 +36,7 @@ export const DrawerMenu = ({
                           if (profile.area_ids.indexOf(area.id) !== -1) {
                             return profile
                           }
+                          return false
                         })
 
                         setCurrentProfileId(profile.id)

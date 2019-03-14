@@ -8,12 +8,7 @@ import subYears from 'date-fns/sub_years'
 import { SearchResults } from '../SearchResults'
 import { SearchHistory } from '../../SearchHistory'
 import { Post } from '../Post'
-import {
-  ResultCounts,
-  PostCategory,
-  PostContainer,
-  PostDate
-} from '../styledComponents'
+import { ResultCounts, PostContainer } from '../styledComponents'
 
 describe('SearchResults', () => {
   const defaultProps = {

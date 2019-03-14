@@ -28,7 +28,8 @@ export const Forum = createStackNavForTab({
       getPosts,
       setAccessToken: currentUser.actions.setAccessToken,
       setupForumData,
-      setCurrentIssueId: issues.actions.setCurrentIssueId
+      setCurrentIssueId: issues.actions.setCurrentIssueId,
+      setCurrentAreaId: areas.actions.setCurrentAreaId
     }
   )(ForumComponent)
 })
