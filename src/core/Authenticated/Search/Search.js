@@ -29,41 +29,43 @@ export class Search extends React.Component {
     pageItemCount: 25
   }
 
+  nextPage = values => {
+    this.setState(
+      state => ({ ...state, page: state.page + 1 }),
+      () => {
+        this.search(values)
+      }
+    )
+  }
+
   search = (values, cb = noop) => {
     this.props.search(
       {
         ...values,
         page: this.state.page,
-        count: this.state.pageItemCount
+        count: 25
       },
       loading => this.setState({ loading }),
       ({ pagination, results }) => {
         this.props.addSearchToHistory(values.keyword)
-        this.setState({
+        this.setState(state => ({
           searched: true,
-          searchResults: results,
+          // add the results from the query if they are from next page
+          searchResults:
+            state.page === 1 ? results : state.searchResults.concat(results),
           total: pagination.total,
           page: pagination.page,
           pages: pagination.pages,
           pageItemCount: pagination.page_item_count
-        })
+        }))
         cb()
       }
     )
   }
 
   render() {
-    const {
-      loading,
-      searched,
-      searchResults,
-      total,
-      page,
-      pageItemCount
-    } = this.state
+    const { loading, searched, searchResults, total } = this.state
     const { areas, categories } = this.props
-
-    const minResultRange = (page - 1) * pageItemCount + 1
 
     return (
       <ScreenContainer grey withPadding={false}>
@@ -78,7 +80,9 @@ export class Search extends React.Component {
           }}
           onSubmit={(values, actions) => {
             actions.setSubmitting(true)
-            this.search(values, () => actions.setSubmitting(false))
+            this.setState({ page: 1 }, () => {
+              this.search(values, () => actions.setSubmitting(false))
+            })
           }}
           validationSchema={validations}
           render={({
@@ -107,14 +111,14 @@ export class Search extends React.Component {
                 values={values}
               />
               <SearchResults
-                minResultRange={minResultRange}
-                pageItemCount={pageItemCount}
+                nextPage={this.nextPage}
                 total={total}
                 search={this.search}
                 searched={searched}
                 searchResults={searchResults}
                 setFieldTouched={setFieldTouched}
                 setFieldValue={setFieldValue}
+                values={values}
               />
             </ScrollView>
           )}

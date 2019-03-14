@@ -5,6 +5,7 @@ import startOfDay from 'date-fns/start_of_day'
 import endOfDay from 'date-fns/end_of_day'
 import subYears from 'date-fns/sub_years'
 
+import { Button } from '@components/Button'
 import { Post } from '../Post'
 import { SearchResults } from '../SearchResults'
 import { SearchHistory } from '../../SearchHistory'
@@ -13,9 +14,8 @@ import { ResultCounts, PostContainer } from '../styledComponents'
 describe('SearchResults', () => {
   const defaultProps = {
     categories: [],
-    minResultRange: 1,
-    pageItemCount: 25,
-    total: 25,
+    nextPage: jest.fn(),
+    total: 1,
     search: jest.fn(),
     searched: false,
     searchResults: [],
@@ -24,6 +24,7 @@ describe('SearchResults', () => {
   }
 
   afterEach(() => {
+    defaultProps.nextPage.mockReset()
     defaultProps.setFieldTouched.mockReset()
     defaultProps.setFieldValue.mockReset()
     defaultProps.search.mockReset()
@@ -57,7 +58,7 @@ describe('SearchResults', () => {
     const resultCounts = wrapper.find(ResultCounts)
     expect(resultCounts.length).toEqual(1)
     expect(resultCounts.text()).toEqual(
-      'Displaying postings 1 - 25 of 25 in total'
+      'Displaying postings 1 - 1 of 1 in total'
     )
     expect(wrapper.find(Post).length).toEqual(1)
   })
@@ -92,5 +93,52 @@ describe('SearchResults', () => {
     const wrapper = shallow(<SearchResults {...defaultProps} searched />)
 
     expect(wrapper.find(ResultCounts).text()).toEqual('No posts found')
+  })
+
+  test('load more button visible when there are more results', () => {
+    const wrapper = shallow(
+      <SearchResults
+        {...defaultProps}
+        total={10}
+        searchResults={[
+          {
+            id: 1,
+            title: 'abc',
+            user_first_name: 'john',
+            user_last_name: 'smith',
+            user_email: 'test@example.com',
+            user_profile_name: 'profile name',
+            event: {},
+            categories: ['Lost and found']
+          }
+        ]}
+      />
+    )
+
+    expect(wrapper.find(Button).length).toEqual(1)
+  })
+
+  test('load more button calls nextPage prop', () => {
+    const wrapper = shallow(
+      <SearchResults
+        {...defaultProps}
+        total={10}
+        searchResults={[
+          {
+            id: 1,
+            title: 'abc',
+            user_first_name: 'john',
+            user_last_name: 'smith',
+            user_email: 'test@example.com',
+            user_profile_name: 'profile name',
+            event: {},
+            categories: ['Lost and found']
+          }
+        ]}
+      />
+    )
+
+    wrapper.find(Button).simulate('press')
+    expect(defaultProps.nextPage).toHaveBeenCalled()
   })
 })

@@ -5,27 +5,31 @@ import startOfDay from 'date-fns/start_of_day'
 import endOfDay from 'date-fns/end_of_day'
 import subYears from 'date-fns/sub_years'
 
+import { Button } from '@components/Button'
 import { Post } from './Post'
 import { SearchHistory } from '../SearchHistory'
 import { PaddingContainer } from '../styledComponents'
 
 import {
+  LoadMoreContainer,
   ResultsContainer,
   ResultCounts,
   ResultsDivider
 } from './styledComponents'
 
 export const SearchResults = ({
-  minResultRange,
-  pageItemCount,
+  nextPage,
   postTruncateLength,
   total,
   search,
   searched,
   searchResults,
   setFieldTouched,
-  setFieldValue
+  setFieldValue,
+  values
 }) => {
+  const numberOfVisiblePosts = Math.min(searchResults.length, total)
+
   return (
     <ResultsContainer>
       <PaddingContainer>
@@ -52,9 +56,7 @@ export const SearchResults = ({
         {searchResults.length > 0 ? (
           <React.Fragment>
             <ResultCounts>
-              Displaying postings {minResultRange} -{' '}
-              {Math.min(minResultRange + pageItemCount - 1, total)} of {total}{' '}
-              in total
+              Displaying postings 1 - {numberOfVisiblePosts} of {total} in total
             </ResultCounts>
             <ResultsDivider />
           </React.Fragment>
@@ -66,19 +68,32 @@ export const SearchResults = ({
             postTruncateLength={postTruncateLength}
           />
         ))}
+        {searchResults.length < total ? (
+          <LoadMoreContainer>
+            <Button
+              bgColor='#ebecf1'
+              color='#999cad'
+              onPress={() => {
+                nextPage(values)
+              }}
+            >
+              Load more posts
+            </Button>
+          </LoadMoreContainer>
+        ) : null}
       </PaddingContainer>
     </ResultsContainer>
   )
 }
 
 SearchResults.propTypes = {
-  minResultRange: PropTypes.number.isRequired,
-  pageItemCount: PropTypes.number.isRequired,
+  nextPage: PropTypes.func.isRequired,
   postTruncateLength: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
   search: PropTypes.func.isRequired,
   searched: PropTypes.bool.isRequired,
   searchResults: PropTypes.array.isRequired,
   setFieldTouched: PropTypes.func.isRequired,
-  setFieldValue: PropTypes.func.isRequired
+  setFieldValue: PropTypes.func.isRequired,
+  values: PropTypes.object.isRequired
 }

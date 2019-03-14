@@ -4,7 +4,6 @@ import { Text } from '@components/Text'
 export const WrapperStyles = `
   padding-horizontal: 10;
   padding-vertical: 10;
-  background-color: #f29426;
   border-radius: 8;
 `
 

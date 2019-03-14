@@ -58,3 +58,7 @@ export const ShowMoreButton = styled(TextSemibold)`
   text-decoration-color: #d77400;
   margin-top: 10;
 `
+
+export const LoadMoreContainer = styled.View`
+  padding-bottom: 10;
+`
