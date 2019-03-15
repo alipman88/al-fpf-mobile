@@ -6,6 +6,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 import { DrawerContext } from './context'
 import { store, persistor } from '@common/store'
+import { currentUser } from '@common/currentUser'
 import { DrawerMenu } from '@components/DrawerMenu'
 import { SwitchNavigatorContainer } from '@core/switchNavigator'
 import { AppError } from '@components/AppError'
@@ -39,8 +40,10 @@ export class App extends React.Component {
   }
 
   handleOpenURL = event => {
-    const { route, params } = parseDeepLink(event.url)
-    navigationService.navigate(route, params)
+    if (currentUser.selectors.getAccessToken(store.getState())) {
+      const { route, params } = parseDeepLink(event.url)
+      navigationService.navigate(route, params)
+    }
   }
 
   render() {
