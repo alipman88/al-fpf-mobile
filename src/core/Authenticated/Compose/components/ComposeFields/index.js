@@ -163,6 +163,7 @@ export class ComposeFields extends React.Component {
               onBlur={() => setFieldTouched('subject')}
               touched={touched.subject}
               value={values.subject}
+              placeholder='Type the subject of your posting here'
               label='Subject'
             />
           </FieldWrapper>
@@ -185,6 +186,7 @@ export class ComposeFields extends React.Component {
                 touched={touched.message}
                 value={values.message}
                 label='Message'
+                placeholder='Type the body of your posting here'
                 multiline
               />
             </FieldWrapper>
