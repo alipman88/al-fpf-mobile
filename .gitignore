@@ -60,3 +60,5 @@ buck-out/
 
 # IDEs
 .vscode
+
+ios/Pods
