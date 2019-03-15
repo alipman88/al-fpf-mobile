@@ -1,5 +1,4 @@
 import * as yup from 'yup'
-import startOfDay from 'date-fns/start_of_day'
 import isAfter from 'date-fns/is_after'
 import isDate from 'date-fns/is_date'
 
@@ -15,7 +14,6 @@ export const validations = yup.object().shape({
   fromDate: yup
     .date()
     .nullable()
-    .min(startOfDay(new Date()), 'From field must be at today or later')
     .test('fromDate', 'From field must be specified for events', function(
       fromDate
     ) {
@@ -28,7 +26,6 @@ export const validations = yup.object().shape({
   toDate: yup
     .date()
     .nullable()
-    .min(new Date(), 'To field must be after current date & time')
     .test('toDate', 'To field must be after From field', function(endDate) {
       return (
         !this.parent.category ||
