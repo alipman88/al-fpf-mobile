@@ -70,7 +70,7 @@ export class Event extends React.Component {
       this.setState({ loading: true })
       const response = await api.postAuthorized(
         '/events',
-        { query: subject, area_ids: forums, event_start_date: fromDate },
+        { query: subject, area_ids: forums, start_date: fromDate },
         store.getState()
       )
       const { results } = response.data

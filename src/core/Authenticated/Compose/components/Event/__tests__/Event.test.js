@@ -155,7 +155,7 @@ describe('Event', () => {
         {
           query: 'AB',
           area_ids: [1],
-          event_start_date: fromDate
+          start_date: fromDate
         },
         expect.any(Object)
       )
