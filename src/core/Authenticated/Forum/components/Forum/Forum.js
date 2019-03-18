@@ -5,7 +5,7 @@ import get from 'lodash/get'
 
 import { ScreenContainer } from '@components/ScreenContainer'
 import { ForumContainer } from './styledComponents'
-import { Post } from '../Post'
+import { ForumPost } from '../ForumPost'
 import { Advertisement } from '../Advertisement'
 import { InThisIssue } from '../InThisIssue'
 import { OtherIssues } from '../OtherIssues'
@@ -125,7 +125,7 @@ export class Forum extends React.Component {
       } else if (posts[index - adOffset]) {
         const post = posts[index - adOffset]
         postRender.push(
-          <Post
+          <ForumPost
             post={post}
             onReplyPress={this.handleReplyPress}
             key={post.id}

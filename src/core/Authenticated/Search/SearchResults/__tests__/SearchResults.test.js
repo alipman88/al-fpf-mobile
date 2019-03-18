@@ -6,13 +6,14 @@ import endOfDay from 'date-fns/end_of_day'
 import subYears from 'date-fns/sub_years'
 
 import { Button } from '@components/Button'
-import { Post } from '../Post'
+import { Post } from '@components/Post'
 import { SearchResults } from '../SearchResults'
 import { SearchHistory } from '../../SearchHistory'
-import { ResultCounts, PostContainer } from '../styledComponents'
+import { ResultCounts } from '../styledComponents'
 
 describe('SearchResults', () => {
   const defaultProps = {
+    postTruncateLength: 10,
     categories: [],
     nextPage: jest.fn(),
     total: 1,
@@ -33,7 +34,7 @@ describe('SearchResults', () => {
   test('no search results, no ResultCounts', () => {
     const wrapper = shallow(<SearchResults {...defaultProps} />)
     expect(wrapper.find(ResultCounts).length).toEqual(0)
-    expect(wrapper.find(PostContainer).length).toEqual(0)
+    expect(wrapper.find(Post).length).toEqual(0)
   })
 
   test('search results render content on screen', () => {

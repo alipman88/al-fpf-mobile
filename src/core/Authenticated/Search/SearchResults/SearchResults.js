@@ -6,7 +6,7 @@ import endOfDay from 'date-fns/end_of_day'
 import subYears from 'date-fns/sub_years'
 
 import { Button } from '@components/Button'
-import { Post } from './Post'
+import { Post } from '@components/Post'
 import { SearchHistory } from '../SearchHistory'
 import { PaddingContainer } from '../styledComponents'
 
@@ -66,6 +66,8 @@ export const SearchResults = ({
             post={post}
             key={post.id}
             postTruncateLength={postTruncateLength}
+            moreText={'Read'}
+            showIssueData
           />
         ))}
         {searchResults.length < total ? (

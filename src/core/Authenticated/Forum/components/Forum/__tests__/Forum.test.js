@@ -2,7 +2,7 @@ import React from 'react'
 import { ForumContainer } from '../styledComponents'
 import { shallow } from 'enzyme'
 import { Forum } from '../Forum'
-import { Post } from '../../Post'
+import { ForumPost } from '../../ForumPost'
 import { Advertisement } from '../../Advertisement'
 import { NeighboringContent } from '../../NeighboringContent'
 
@@ -96,7 +96,7 @@ describe('Forum', () => {
   test('it renders some posts', () => {
     const wrapper = shallow(<Forum {...defaultProps} />)
 
-    expect(wrapper.find(Post).length).toEqual(4)
+    expect(wrapper.find(ForumPost).length).toEqual(4)
   })
 
   test('it renders neighboring content', () => {
@@ -130,7 +130,7 @@ describe('Forum', () => {
       if (i === 4 || i === 6 || i === 8) {
         expect(component.is(Advertisement))
       } else {
-        expect(component.is(Post))
+        expect(component.is(ForumPost))
       }
     }
 
@@ -145,7 +145,7 @@ describe('Forum', () => {
     for (let i = 1; i < children.length; i++) {
       const component = children.at(i)
       if (i === 2) {
-        expect(component.is(Post))
+        expect(component.is(ForumPost))
       } else {
         expect(component.is(Advertisement))
       }

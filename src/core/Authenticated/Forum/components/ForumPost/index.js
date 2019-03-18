@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
 import { appSettings } from '@common/appSettings'
-import { Post as PostComponent } from './Post'
+import { ForumPost as ForumPostComponent } from './ForumPost'
 
 const mapStateToProps = state => ({
   postTruncateLength: appSettings.selectors.getPostTruncateLength(state)
 })
 
-export const Post = connect(mapStateToProps)(PostComponent)
+export const ForumPost = connect(mapStateToProps)(ForumPostComponent)

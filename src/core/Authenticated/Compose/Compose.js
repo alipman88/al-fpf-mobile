@@ -78,8 +78,6 @@ export class Compose extends React.Component {
       profile => profile.id === currentProfileId
     )
 
-    const isReply = !!navigation.getParam('parentPostId')
-    const subject = isReply ? `RE: ${navigation.getParam('subject')}` : ''
     return (
       <ScreenContainer grey withPadding={false}>
         <Formik
@@ -87,7 +85,7 @@ export class Compose extends React.Component {
             forums: profile && profile.area_ids ? [profile.area_ids[0]] : [],
             profile,
             category: undefined,
-            subject: subject,
+            subject: '',
             message: '',
             isShared: false,
             fromDate: null,
