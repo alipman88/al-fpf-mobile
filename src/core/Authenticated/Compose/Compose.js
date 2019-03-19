@@ -74,16 +74,17 @@ export class Compose extends React.Component {
       profiles
     } = this.props
 
-    const profile = profiles.findIndex(
+    const profileIndex = profiles.findIndex(
       profile => profile.id === currentProfileId
     )
 
+    const profile = profiles[profileIndex]
     return (
       <ScreenContainer grey withPadding={false}>
         <Formik
           initialValues={{
             forums: profile && profile.area_ids ? [profile.area_ids[0]] : [],
-            profile,
+            profile: profileIndex,
             category: undefined,
             subject: '',
             message: '',

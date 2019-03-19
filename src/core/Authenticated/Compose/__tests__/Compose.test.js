@@ -1,6 +1,7 @@
 import React from 'react'
 import { Compose } from '../Compose'
 import { shallow } from 'enzyme'
+import { Formik } from 'formik'
 
 describe('Compose', () => {
   const defaultProps = {
@@ -52,6 +53,20 @@ describe('Compose', () => {
 
   afterEach(() => {
     defaultProps.submitPost.mockReset()
+  })
+
+  test('Formik has correct initialValues', () => {
+    const wrapper = shallow(<Compose {...defaultProps} />)
+    expect(wrapper.find(Formik).props().initialValues).toEqual({
+      forums: [1],
+      profile: 0,
+      category: undefined,
+      subject: '',
+      message: '',
+      isShared: false,
+      fromDate: null,
+      toDate: null
+    })
   })
 
   describe('onSubmit', () => {
