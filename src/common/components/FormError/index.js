@@ -1,8 +1,18 @@
-import styled from 'styled-components/native'
-import { Text } from '@components/Text'
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export const FormError = styled(Text)`
-  color: red;
-  font-size: 14;
-  margin-top: 4;
-`
+import capitalize from 'lodash/capitalize'
+
+import { FormErrorText } from './styledComponents'
+
+export const FormError = ({ children }) => (
+  <FormErrorText>{`${capitalize(children)}`}</FormErrorText>
+)
+
+FormError.propTypes = {
+  children: PropTypes.string
+}
+
+FormError.defaultProps = {
+  children: ''
+}

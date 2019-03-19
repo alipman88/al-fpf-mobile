@@ -19,6 +19,6 @@ describe('appError slice', () => {
         )
       }
     }
-    expect(appError.selectors.getError(state)).toEqual('boom')
+    expect(appError.selectors.getError(state)).toEqual('Boom')
   })
 })
