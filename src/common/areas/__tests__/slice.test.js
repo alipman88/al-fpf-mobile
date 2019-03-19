@@ -71,4 +71,21 @@ describe('areas - slice', () => {
       })
     ).toEqual(3)
   })
+
+  test('getFullAreasList', () => {
+    const state = areas.reducer(
+      undefined,
+      areas.actions.setAreas([
+        { id: 1, name: 'zzzz', neighbor_areas: [{ id: 2, name: 'neighbor' }] }
+      ])
+    )
+
+    const data = areas.selectors.getFullAreasList({
+      main: {
+        areas: state
+      }
+    })
+
+    expect(data).toEqual([{ id: 2, name: 'neighbor' }, { id: 1, name: 'zzzz' }])
+  })
 })

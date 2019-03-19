@@ -1,4 +1,5 @@
 import { createSelector, createSlice } from 'redux-starter-kit'
+import { resetAction } from '@common/resetAction'
 
 export const searchHistory = createSlice({
   name: 'searchHistory',
@@ -12,6 +13,11 @@ export const searchHistory = createSlice({
         // filter out previous entries of the same value
         state.history.filter(entry => entry !== payload).slice(0, 4)
       )
+    })
+  },
+  extraReducers: {
+    [resetAction]: () => ({
+      history: []
     })
   }
 })

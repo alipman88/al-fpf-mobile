@@ -9,7 +9,7 @@ import { search } from './actions'
 import { searchHistory } from './SearchHistory/slice'
 
 const mapStateToProps = state => ({
-  areas: areas.selectors.getAreas(state),
+  areas: areas.selectors.getFullAreasList(state),
   categories: appSettings.selectors.getCategories(state)
 })
 

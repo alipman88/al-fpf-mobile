@@ -1,4 +1,5 @@
 import React from 'react'
+import { Keyboard } from 'react-native'
 import { shallow } from 'enzyme'
 import { Formik } from 'formik'
 
@@ -67,6 +68,7 @@ describe('Search', () => {
   describe('onSubmit', () => {
     test('calls search', async () => {
       const wrapper = shallow(<Search {...defaultProps} />)
+      const dismissSpy = jest.spyOn(Keyboard, 'dismiss')
 
       const setSubmitting = jest.fn()
       await wrapper
@@ -100,6 +102,8 @@ describe('Search', () => {
       expect(setSubmitting).toHaveBeenCalledTimes(2)
       expect(setSubmitting).toHaveBeenCalledWith(true)
       expect(setSubmitting).toHaveBeenCalledWith(false)
+      expect(dismissSpy).toHaveBeenCalled()
+      dismissSpy.mockRestore()
 
       expect(wrapper.state()).toEqual({
         loading: false,

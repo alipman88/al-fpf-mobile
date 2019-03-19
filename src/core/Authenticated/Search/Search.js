@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView } from 'react-native'
+import { Keyboard, ScrollView } from 'react-native'
 import PropTypes from 'prop-types'
 import { Formik } from 'formik'
 
@@ -81,6 +81,7 @@ export class Search extends React.Component {
           onSubmit={(values, actions) => {
             actions.setSubmitting(true)
             this.setState({ page: 1 }, () => {
+              Keyboard.dismiss()
               this.search(values, () => actions.setSubmitting(false))
             })
           }}

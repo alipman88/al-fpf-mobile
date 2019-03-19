@@ -1,3 +1,4 @@
+import { resetAction } from '@common/resetAction'
 import { searchHistory } from '../slice'
 
 describe('searchHistory', () => {
@@ -38,6 +39,25 @@ describe('searchHistory', () => {
       expect(
         searchHistory.selectors.getHistory(wrapStateToMain(state))
       ).toEqual(['Term 3', 'Term 6', 'Term 5', 'Term 4', 'Term 2'])
+    })
+  })
+
+  describe('resetData', () => {
+    test('empties the history', () => {
+      let state = searchHistory.reducer(
+        undefined,
+        searchHistory.actions.addSearchToHistory('hi')
+      )
+
+      expect(state).toEqual({
+        history: ['hi']
+      })
+
+      state = searchHistory.reducer(state, resetAction())
+
+      expect(state).toEqual({
+        history: []
+      })
     })
   })
 })

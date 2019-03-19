@@ -69,5 +69,35 @@ areas.selectors = {
   getNeighboringAreas: createSelector(
     [path],
     areas => areas.neighboringAreas
+  ),
+  getFullAreasList: createSelector(
+    [path],
+    areas => {
+      const data = areas.areas
+        .map(area => ({
+          id: area.id,
+          name: area.name
+        }))
+        .concat(
+          Object.keys(areas.neighboringAreas).map(id => {
+            return {
+              id: parseInt(id, 10),
+              name: areas.neighboringAreas[id]
+            }
+          })
+        )
+
+      data.sort((a, b) => {
+        if (a.name === b.name) {
+          return 0
+        } else if (a.name < b.name) {
+          return -1
+        } else {
+          return 1
+        }
+      })
+
+      return data
+    }
   )
 }
