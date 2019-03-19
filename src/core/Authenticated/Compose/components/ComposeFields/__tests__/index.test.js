@@ -157,7 +157,12 @@ describe('Compose', () => {
   })
 
   test('Hide message & checkbox if theres a duplicate post', () => {
-    const wrapper = shallow(<ComposeFields {...defaultProps} />)
+    const wrapper = shallow(
+      <ComposeFields
+        {...defaultProps}
+        values={{ category: { is_event: true } }}
+      />
+    )
     wrapper.setState({ duplicatePost: true })
 
     expect(wrapper.find(Checkbox).length).toEqual(0)

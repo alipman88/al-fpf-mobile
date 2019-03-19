@@ -77,6 +77,9 @@ export class ComposeFields extends React.Component {
       values.profile
     )
 
+    const isDuplicateEvent =
+      duplicatePost && get(values, 'category.is_event', false)
+
     return (
       <KeyboardAwareScrollView
         enableOnAndroid
@@ -177,7 +180,7 @@ export class ComposeFields extends React.Component {
               values={values}
             />
           )}
-          {!duplicatePost && (
+          {!isDuplicateEvent && (
             <FieldWrapper>
               <TextInput
                 error={errors.message}
@@ -193,7 +196,7 @@ export class ComposeFields extends React.Component {
           )}
         </FormContainer>
         <ButtonContainer>
-          {!duplicatePost && (
+          {!isDuplicateEvent && (
             <Checkbox
               value={values.isShared}
               onPress={value => {
@@ -212,7 +215,7 @@ export class ComposeFields extends React.Component {
           )}
           <ButtonSpacer />
           <Button onPress={this.handleSubmit}>
-            {duplicatePost ? 'Cancel' : 'Submit posting'}
+            {isDuplicateEvent ? 'Done' : 'Submit posting'}
           </Button>
         </ButtonContainer>
       </KeyboardAwareScrollView>

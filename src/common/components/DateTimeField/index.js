@@ -23,7 +23,15 @@ export class DateTimeField extends React.Component {
     time: null
   }
 
+  componentDidMount() {
+    this.setDatesFromProps({})
+  }
+
   componentDidUpdate(prevProps) {
+    this.setDatesFromProps(prevProps)
+  }
+
+  setDatesFromProps(prevProps) {
     if (
       isDate(this.props.value) &&
       !isEqual(this.props.value, prevProps.value)

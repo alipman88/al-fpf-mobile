@@ -7,6 +7,7 @@ import { Search } from '../Search'
 describe('Search', () => {
   const defaultProps = {
     addSearchToHistory: jest.fn(),
+    areas: [],
     categories: [],
     search: jest.fn()
   }

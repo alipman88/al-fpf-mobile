@@ -25,6 +25,18 @@ describe('DateTimeField', () => {
     expect(wrapper.find(FormFieldLabel).length).toEqual(0)
   })
 
+  test('sets date & time state based on value prop', () => {
+    const wrapper = shallow(
+      <DateTimeField
+        {...defaultProps}
+        value={new Date(2019, 0, 10, 11, 5, 0)}
+      />
+    )
+    const state = wrapper.state()
+    expect(state.date).toEqual(new Date(2019, 0, 10))
+    expect(state.time).toEqual(new Date(2019, 0, 10, 11, 5, 0))
+  })
+
   test('updateFormDateValue combines date & time from state', () => {
     const wrapper = shallow(<DateTimeField {...defaultProps} />)
 
