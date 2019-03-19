@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-import { createStackNavForTab } from '../createStackNavForTab'
 import { Compose as ComposeScreen } from './Compose'
 import { areas } from '@common/areas'
 import { profile } from '@common/profile'
@@ -15,11 +14,9 @@ const mapStateToProps = state => ({
   categories: appSettings.selectors.getCategories(state)
 })
 
-export const Compose = createStackNavForTab({
-  Compose: connect(
-    mapStateToProps,
-    {
-      submitPost
-    }
-  )(ComposeScreen)
-})
+export const Compose = connect(
+  mapStateToProps,
+  {
+    submitPost
+  }
+)(ComposeScreen)

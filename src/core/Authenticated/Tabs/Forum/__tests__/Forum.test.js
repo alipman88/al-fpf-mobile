@@ -2,9 +2,9 @@ import React from 'react'
 import { ForumContainer } from '../styledComponents'
 import { shallow } from 'enzyme'
 import { Forum } from '../Forum'
-import { ForumPost } from '../../ForumPost'
-import { Advertisement } from '../../Advertisement'
-import { NeighboringContent } from '../../NeighboringContent'
+import { ForumPost } from '../components/ForumPost'
+import { Advertisement } from '../components/Advertisement'
+import { NeighboringContent } from '../components/NeighboringContent'
 
 describe('Forum', () => {
   const defaultProps = {

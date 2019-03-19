@@ -5,20 +5,13 @@ import get from 'lodash/get'
 
 import { ScreenContainer } from '@components/ScreenContainer'
 import { ForumContainer } from './styledComponents'
-import { ForumPost } from '../ForumPost'
-import { Advertisement } from '../Advertisement'
-import { InThisIssue } from '../InThisIssue'
-import { OtherIssues } from '../OtherIssues'
-import { NeighboringContent } from '../NeighboringContent'
+import { ForumPost } from './components/ForumPost'
+import { Advertisement } from './components/Advertisement'
+import { InThisIssue } from './components/InThisIssue'
+import { OtherIssues } from './components/OtherIssues'
+import { NeighboringContent } from './components/NeighboringContent'
 
 export class Forum extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const { params } = navigation.state
-    return {
-      title: params ? params.navTitle : 'Forum'
-    }
-  }
-
   componentDidMount() {
     this.props.setupForumData()
     this.setTitleFromArea()

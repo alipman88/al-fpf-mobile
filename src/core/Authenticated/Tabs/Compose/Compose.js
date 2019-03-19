@@ -11,10 +11,6 @@ import { validations } from './validations'
 import { ComposeFields } from './components/ComposeFields'
 
 export class Compose extends React.Component {
-  static navigationOptions = {
-    title: 'Compose'
-  }
-
   state = {
     modalVisible: false
   }

@@ -12,7 +12,7 @@ jest.mock('../posts', () => ({
 
 jest.mock('@common/profile', () => ({
   getProfiles: jest.fn().mockReturnValue('getProfiles'),
-  profile: require('../../../../common/profile/slice').profile
+  profile: require('../../../../../common/profile/slice').profile
 }))
 
 jest.mock('@common/appSettings', () => ({
@@ -21,7 +21,7 @@ jest.mock('@common/appSettings', () => ({
 
 jest.mock('@common/areas', () => ({
   getAreas: jest.fn().mockReturnValue('getAreas'),
-  areas: require('../../../../common/areas/slice').areas
+  areas: require('../../../../../common/areas/slice').areas
 }))
 
 describe('setupForumData', () => {

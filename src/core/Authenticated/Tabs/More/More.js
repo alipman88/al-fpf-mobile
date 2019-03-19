@@ -24,10 +24,6 @@ import speakerIcon from '@assets/images/more-section/speaker-icon.png'
 import linkIcon from '@assets/images/global-assets/external-link-icons/external-link-icon-blue.png'
 
 export class More extends React.Component {
-  static navigationOptions = {
-    title: 'More'
-  }
-
   render() {
     return (
       <ScreenContainer withPadding={false} grey>

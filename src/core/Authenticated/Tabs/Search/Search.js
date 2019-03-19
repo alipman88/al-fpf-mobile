@@ -15,10 +15,6 @@ import { SearchFields } from './SearchFields'
 import { SearchResults } from './SearchResults'
 
 export class Search extends React.Component {
-  static navigationOptions = {
-    title: 'Search Postings'
-  }
-
   state = {
     loading: false,
     searched: false,
