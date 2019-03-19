@@ -23,6 +23,7 @@ export const getPosts = issueId => async (dispatch, getState) => {
   }
 
   try {
+    dispatch(posts.actions.setLoading(true))
     const response = await getAuthorized(
       `/areas/${issue.area_id}/issues/${issue.number}/contents`,
       getState()

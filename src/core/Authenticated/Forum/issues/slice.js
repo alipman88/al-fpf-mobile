@@ -6,7 +6,8 @@ import { resetAction } from '@common/resetAction'
 const initialState = {
   issuesByAreaId: {},
   currentIssueId: 0,
-  firstLoadOfIssues: true
+  firstLoadOfIssues: true,
+  loading: false
 }
 
 export const issues = createSlice({
@@ -15,6 +16,10 @@ export const issues = createSlice({
     ...initialState
   },
   reducers: {
+    setLoading: (state, action) => ({
+      ...state,
+      loading: action.payload
+    }),
     setCurrentIssueId: (state, action) => {
       return {
         ...state,
@@ -59,7 +64,8 @@ export const issues = createSlice({
           ...state.issuesByAreaId,
           [areaId]: newIssues
         },
-        currentIssueId
+        currentIssueId,
+        loading: false
       }
     }
   },
@@ -94,5 +100,9 @@ issues.selectors = {
     issues => issues.currentIssueId
   ),
   getLatestIssues,
+  getLoading: createSelector(
+    [path],
+    issues => issues.loading
+  ),
   getIssuesForArea
 }

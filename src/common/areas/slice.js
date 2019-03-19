@@ -4,7 +4,8 @@ import { resetAction } from '@common/resetAction'
 const initialState = {
   areas: [],
   currentAreaId: 0,
-  neighboringAreas: {}
+  neighboringAreas: {},
+  loading: false
 }
 
 export const areas = createSlice({
@@ -13,6 +14,10 @@ export const areas = createSlice({
     ...initialState
   },
   reducers: {
+    setLoading: (state, action) => ({
+      ...state,
+      loading: action.payload
+    }),
     setAreas: (state, action) => {
       const neighboringAreas = {
         ...state.neighboringAreas
@@ -27,7 +32,8 @@ export const areas = createSlice({
       return {
         ...state,
         areas: action.payload,
-        neighboringAreas
+        neighboringAreas,
+        loading: false
       }
     },
     setCurrentAreaId: (state, action) => {
@@ -55,6 +61,10 @@ areas.selectors = {
   getCurrentAreaId: createSelector(
     [path],
     areas => areas.currentAreaId
+  ),
+  getLoading: createSelector(
+    [path],
+    areas => areas.loading
   ),
   getNeighboringAreas: createSelector(
     [path],

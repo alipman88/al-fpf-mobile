@@ -6,13 +6,28 @@ describe('areas - slice', () => {
     expect(data).toEqual({
       areas: [],
       currentAreaId: 0,
+      loading: false,
       neighboringAreas: {}
     })
   })
 
+  test('setLoading sets the loading state', () => {
+    let state = areas.reducer(undefined, areas.actions.setLoading(true))
+
+    const data = areas.selectors.getLoading({
+      main: {
+        areas: state
+      }
+    })
+
+    expect(data).toEqual(true)
+  })
+
   test('setAreas sets the array', () => {
-    const state = areas.reducer(
-      undefined,
+    let state = areas.reducer(undefined, areas.actions.setLoading(true))
+
+    state = areas.reducer(
+      state,
       areas.actions.setAreas([
         { id: 1, neighbor_areas: [{ id: 2, name: 'neighbor' }] }
       ])
@@ -36,6 +51,14 @@ describe('areas - slice', () => {
     expect(data).toEqual({
       2: 'neighbor'
     })
+
+    data = areas.selectors.getLoading({
+      main: {
+        areas: state
+      }
+    })
+
+    expect(data).toEqual(false)
   })
 
   test('setCurrentAreaId', () => {

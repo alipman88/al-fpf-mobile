@@ -7,14 +7,29 @@ describe('posts - slice', () => {
       headlinesByIssue: {},
       postsByIssue: {},
       adsByIssue: {},
+      loading: false,
       newsFromNeighboringNfsByIssue: {}
     })
   })
 
   describe('setPostsForIssue', () => {
+    test('setLoading sets loading state', () => {
+      const state = posts.reducer(undefined, posts.actions.setLoading(true))
+
+      expect(
+        posts.selectors.getLoading({
+          main: {
+            posts: state
+          }
+        })
+      ).toEqual(true)
+    })
+
     test('sets posts by issue number', () => {
-      const state = posts.reducer(
-        undefined,
+      let state = posts.reducer(undefined, posts.actions.setLoading(true))
+
+      state = posts.reducer(
+        state,
         posts.actions.setPostsForIssue({
           issueId: 1,
           posts: [
@@ -93,6 +108,14 @@ describe('posts - slice', () => {
           }
         ]
       })
+
+      expect(
+        posts.selectors.getLoading({
+          main: {
+            posts: state
+          }
+        })
+      ).toEqual(false)
     })
   })
 })

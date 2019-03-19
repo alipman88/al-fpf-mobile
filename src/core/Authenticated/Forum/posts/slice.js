@@ -5,7 +5,8 @@ const initialState = {
   postsByIssue: {},
   headlinesByIssue: {},
   adsByIssue: {},
-  newsFromNeighboringNfsByIssue: {}
+  newsFromNeighboringNfsByIssue: {},
+  loading: false
 }
 
 export const posts = createSlice({
@@ -14,6 +15,10 @@ export const posts = createSlice({
     ...initialState
   },
   reducers: {
+    setLoading: (state, action) => ({
+      ...state,
+      loading: action.payload
+    }),
     setPostsForIssue: (state, { payload }) => ({
       ...state,
       postsByIssue: {
@@ -31,7 +36,8 @@ export const posts = createSlice({
       newsFromNeighboringNfsByIssue: {
         ...state.newsFromNeighboringNfsByIssue,
         [payload.issueId]: payload.newsFromNeighboringNfs
-      }
+      },
+      loading: false
     })
   },
   extraReducers: {
@@ -56,6 +62,10 @@ posts.selectors = {
   getAdsByIssue: createSelector(
     [path],
     posts => posts.adsByIssue
+  ),
+  getLoading: createSelector(
+    [path],
+    posts => posts.loading
   ),
   getNewsFromNeighboringNfsByIssue: createSelector(
     [path],

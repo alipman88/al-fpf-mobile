@@ -34,6 +34,7 @@ describe('issues actions', () => {
       }
     })
 
+    expect(dispatch).toHaveBeenCalledWith(issues.actions.setLoading(true))
     expect(dispatch).toHaveBeenCalledWith(
       issues.actions.setIssues({ issues: [{ id: 1 }], areaId: 1 })
     )

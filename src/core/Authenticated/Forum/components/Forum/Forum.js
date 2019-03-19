@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { ScrollView } from 'react-native'
+import { RefreshControl, ScrollView } from 'react-native'
 import get from 'lodash/get'
 
 import { ScreenContainer } from '@components/ScreenContainer'
@@ -100,7 +100,7 @@ export class Forum extends React.Component {
   }
 
   render() {
-    const { currentIssueId, issues } = this.props
+    const { currentIssueId, issues, loading } = this.props
 
     const posts = this.props.posts[currentIssueId] || []
     const ads = this.props.ads[currentIssueId] || []
@@ -136,7 +136,14 @@ export class Forum extends React.Component {
 
     return (
       <ScreenContainer withPadding={false} grey>
-        <ScrollView>
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={loading}
+              onRefresh={() => this.props.getIssues(this.props.currentAreaId)}
+            />
+          }
+        >
           <OtherIssues />
           <ForumContainer>
             <InThisIssue />
@@ -159,6 +166,7 @@ Forum.propTypes = {
   getPosts: PropTypes.func.isRequired,
   getIssues: PropTypes.func.isRequired,
   issues: PropTypes.array.isRequired,
+  loading: PropTypes.bool,
   navigation: PropTypes.object.isRequired,
   neighboringAreas: PropTypes.object.isRequired,
   setCurrentAreaId: PropTypes.func.isRequired,

@@ -16,7 +16,11 @@ const mapStateToProps = state => {
     currentIssueId: issues.selectors.getCurrentIssueId(state),
     issues: issues.selectors.getLatestIssues(state, areaId),
     posts: posts.selectors.getPostsByIssue(state),
-    ads: posts.selectors.getAdsByIssue(state)
+    ads: posts.selectors.getAdsByIssue(state),
+    loading:
+      areas.selectors.getLoading(state) ||
+      issues.selectors.getLoading(state) ||
+      posts.selectors.getLoading(state)
   }
 }
 

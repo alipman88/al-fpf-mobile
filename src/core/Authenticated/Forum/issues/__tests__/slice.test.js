@@ -6,13 +6,28 @@ describe('issues - slice', () => {
     expect(data).toEqual({
       issuesByAreaId: {},
       currentIssueId: 0,
-      firstLoadOfIssues: true
+      firstLoadOfIssues: true,
+      loading: false
     })
   })
 
+  test('setLoading sets loading state', () => {
+    const state = issues.reducer(undefined, issues.actions.setLoading(true))
+
+    expect(
+      issues.selectors.getLoading({
+        main: {
+          issues: state
+        }
+      })
+    ).toEqual(true)
+  })
+
   test('setIssues sets the object', () => {
-    const state = issues.reducer(
-      undefined,
+    let state = issues.reducer(undefined, issues.actions.setLoading(true))
+
+    state = issues.reducer(
+      state,
       issues.actions.setIssues({
         issues: [{ id: 1, number: 32 }],
         areaId: 5
@@ -33,9 +48,17 @@ describe('issues - slice', () => {
         }
       })
     ).toEqual(1)
+
+    expect(
+      issues.selectors.getLoading({
+        main: {
+          issues: state
+        }
+      })
+    ).toEqual(false)
   })
 
-  test('setIssue sets new posts to not Unread on first load', () => {
+  test('setIssues sets new posts to not Unread on first load', () => {
     const state = issues.reducer(
       undefined,
       issues.actions.setIssues({

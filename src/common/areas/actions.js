@@ -10,6 +10,7 @@ export const getAreas = () => async (dispatch, getState) => {
     let pages = 0
     do {
       page++
+      dispatch(slice.actions.setLoading(true))
       const response = await getAuthorized(`/areas?page=${page}`, getState())
       pages = response.data.pagination.pages
       areas = areas.concat(response.data.areas)

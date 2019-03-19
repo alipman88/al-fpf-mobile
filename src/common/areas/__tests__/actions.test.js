@@ -31,6 +31,7 @@ describe('areas actions', () => {
       }
     })
 
+    expect(dispatch).toHaveBeenCalledWith(areas.actions.setLoading(true))
     expect(dispatch).toHaveBeenCalledWith(areas.actions.setAreas([{ id: 1 }]))
 
     getSpy.mockRestore()
