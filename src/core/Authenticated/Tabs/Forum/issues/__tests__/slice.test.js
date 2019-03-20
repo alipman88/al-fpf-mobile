@@ -1,3 +1,4 @@
+import { subDays, addDays, endOfToday } from 'date-fns'
 import { issues } from '../slice'
 
 describe('issues - slice', () => {
@@ -6,13 +7,16 @@ describe('issues - slice', () => {
     expect(data).toEqual({
       issuesByAreaId: {},
       currentIssueId: 0,
-      firstLoadOfIssues: true,
+      firstLoadOfIssues: null,
       loading: false
     })
   })
 
   test('setLoading sets loading state', () => {
-    const state = issues.reducer(undefined, issues.actions.setLoading(true))
+    const state = issues.reducer(
+      { firstLoadOfIssues: new Date() },
+      issues.actions.setLoading(true)
+    )
 
     expect(
       issues.selectors.getLoading({
@@ -24,22 +28,31 @@ describe('issues - slice', () => {
   })
 
   test('setIssues sets the object', () => {
-    let state = issues.reducer(undefined, issues.actions.setLoading(true))
+    const date = new Date()
+    const initialState = {
+      firstLoadOfIssues: date,
+      issuesByAreaId: {}
+    }
+
+    let state = issues.reducer(initialState, issues.actions.setLoading(true))
 
     state = issues.reducer(
       state,
       issues.actions.setIssues({
-        issues: [{ id: 1, number: 32 }],
+        issues: [{ id: 1, number: 32, sent_at: date }],
         areaId: 5
       })
     )
+
     const data = issues.selectors.getIssues({
       main: {
         issues: state
       }
     })
 
-    expect(data).toEqual({ 5: [{ id: 1, number: 32, isUnread: false }] })
+    expect(data).toEqual({
+      5: [{ id: 1, number: 32, isUnread: false, sent_at: date }]
+    })
 
     expect(
       issues.selectors.getCurrentIssueId({
@@ -63,9 +76,9 @@ describe('issues - slice', () => {
       undefined,
       issues.actions.setIssues({
         issues: [
-          { id: 1, number: 11 },
-          { id: 2, number: 22 },
-          { id: 3, number: 33 }
+          { id: 1, number: 11, sent_at: subDays(endOfToday(), 11) },
+          { id: 2, number: 22, sent_at: subDays(endOfToday(), 13) },
+          { id: 3, number: 33, sent_at: subDays(endOfToday(), 16) }
         ],
         areaId: 9
       })
@@ -94,14 +107,14 @@ describe('issues - slice', () => {
           { id: 1, number: 11, isUnread: false },
           { id: 2, number: 22, isUnread: false },
           { id: 3, number: 33, isUnread: true }
-        ],
-        firstLoadOfIssues: false
-      }
+        ]
+      },
+      firstLoadOfIssues: endOfToday()
     }
     const state = issues.reducer(
       initialState,
       issues.actions.setIssues({
-        issues: [{ id: 4, number: 44 }],
+        issues: [{ id: 4, number: 44, sent_at: addDays(endOfToday(), 1) }],
         areaId: 3
       })
     )
@@ -122,6 +135,7 @@ describe('issues - slice', () => {
 
     expect(newestIssue.isUnread).toBeTruthy()
     expect(previouslyUnread.isUnread).toBeTruthy()
+
     for (let issue in alreadyRead) {
       expect(issue.isUnread).toBeFalsy()
     }

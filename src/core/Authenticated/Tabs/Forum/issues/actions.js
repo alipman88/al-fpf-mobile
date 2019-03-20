@@ -8,11 +8,8 @@ export const getIssues = areaId => async (dispatch, getState) => {
     dispatch(issues.actions.setLoading(true))
     const response = await getAuthorized(`/areas/${areaId}/issues`, getState())
 
-    if (
-      issues.selectors.getFirstLoadIssues(getState()) &&
-      Object.keys(issues.selectors.getIssues(getState())).length
-    ) {
-      dispatch(issues.actions.setFirstLoadFalse())
+    if (!issues.selectors.getFirstLoadIssues(getState())) {
+      dispatch(issues.actions.setFirstLoadOfIssues())
     }
 
     dispatch(

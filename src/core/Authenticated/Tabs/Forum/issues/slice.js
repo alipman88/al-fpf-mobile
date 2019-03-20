@@ -1,4 +1,5 @@
 import { createSlice, createSelector } from 'redux-starter-kit'
+import { getTime } from 'date-fns'
 import keyBy from 'lodash/keyBy'
 
 import { resetAction } from '@common/resetAction'
@@ -6,7 +7,7 @@ import { resetAction } from '@common/resetAction'
 const initialState = {
   issuesByAreaId: {},
   currentIssueId: 0,
-  firstLoadOfIssues: true,
+  firstLoadOfIssues: null,
   loading: false
 }
 
@@ -39,10 +40,10 @@ export const issues = createSlice({
         }
       }
     },
-    setFirstLoadFalse: state => {
+    setFirstLoadOfIssues: state => {
       return {
         ...state,
-        firstLoadOfIssues: false
+        firstLoadOfIssues: new Date()
       }
     },
     setIssues: (state, { payload: { issues, areaId } }) => {
@@ -54,7 +55,9 @@ export const issues = createSlice({
         issues
           .filter(issue => !existingIssueIds[issue.id])
           .map(issue => {
-            issue.isUnread = !state.firstLoadOfIssues
+            issue.isUnread =
+              getTime(state.firstLoadOfIssues) <
+              getTime(new Date(issue.sent_at))
             return issue
           })
       )

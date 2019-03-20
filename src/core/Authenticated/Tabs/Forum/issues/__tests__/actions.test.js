@@ -12,7 +12,7 @@ describe('issues actions', () => {
     },
     main: {
       issues: {
-        firstLoadOfIssues: true,
+        firstLoadOfIssues: null,
         issuesByAreaId: {}
       }
     }
@@ -42,7 +42,7 @@ describe('issues actions', () => {
     getSpy.mockRestore()
   })
 
-  test('sets firstLoadOfIssues to false if issues already set', async () => {
+  test('sets firstLoadOfIssues if there were no issues', async () => {
     const getSpy = jest.spyOn(api, 'get').mockImplementation(() => ({
       data: {
         issues: [{ id: 1 }]
@@ -53,7 +53,6 @@ describe('issues actions', () => {
       ...getState(),
       main: {
         issues: {
-          firstLoadOfIssues: true,
           issuesByAreaId: {
             3: [{ id: 1 }]
           }
@@ -65,7 +64,10 @@ describe('issues actions', () => {
 
     await getIssues(1)(dispatch, state)
 
-    expect(dispatch).toHaveBeenCalledWith(issues.actions.setFirstLoadFalse())
+    expect(dispatch).toHaveBeenNthCalledWith(
+      2,
+      issues.actions.setFirstLoadOfIssues()
+    )
 
     getSpy.mockRestore()
   })
