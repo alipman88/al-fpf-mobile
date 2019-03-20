@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableOpacity } from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
 import PropTypes from 'prop-types'
 
 import format from 'date-fns/format'
@@ -34,13 +34,17 @@ export class Post extends React.Component {
       children,
       hasBorder,
       showIssueData,
-      moreText
+      moreText,
+      tappableCategory,
+      onTapCategory
     } = this.props
 
     const Container = hasBorder ? PostContainerBordered : PostContainer
     const postInfo = showIssueData
       ? `${post.area_name} - No. ${post.issue_number} -`
       : ''
+
+    const CategoryWrapper = tappableCategory ? TouchableOpacity : View
 
     return (
       <Container key={post.id}>
@@ -58,7 +62,12 @@ export class Post extends React.Component {
             </PostDate>
           )}
           {post.categories.map(category => (
-            <PostCategory key={category}>{category}</PostCategory>
+            <CategoryWrapper
+              key={category}
+              onPress={() => onTapCategory(category)}
+            >
+              <PostCategory>{category}</PostCategory>
+            </CategoryWrapper>
           ))}
           <PostBody>
             {truncateText(
@@ -87,5 +96,7 @@ Post.propTypes = {
   children: PropTypes.element,
   hasBorder: PropTypes.bool,
   showIssueData: PropTypes.bool,
-  moreText: PropTypes.string.isRequired
+  moreText: PropTypes.string.isRequired,
+  tappableCategory: PropTypes.bool,
+  onTapCategory: PropTypes.func
 }

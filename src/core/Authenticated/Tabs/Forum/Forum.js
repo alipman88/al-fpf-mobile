@@ -120,6 +120,7 @@ export class Forum extends React.Component {
         postRender.push(
           <ForumPost
             post={post}
+            navigation={this.props.navigation}
             onReplyPress={this.handleReplyPress}
             key={post.id}
           />

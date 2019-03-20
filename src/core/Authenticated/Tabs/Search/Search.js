@@ -22,7 +22,8 @@ export class Search extends React.Component {
     total: 0,
     page: 1,
     pages: 0,
-    pageItemCount: 25
+    pageItemCount: 25,
+    key: 1
   }
 
   nextPage = values => {
@@ -32,6 +33,18 @@ export class Search extends React.Component {
         this.search(values)
       }
     )
+  }
+
+  componentDidMount() {
+    const { navigation } = this.props
+
+    this.focusListener = navigation.addListener('willFocus', () => {
+      this.setState(() => ({ key: this.state.key + 1 })) //rerender Formik
+    })
+  }
+
+  componentWillUnmount() {
+    this.focusListener.remove()
   }
 
   search = (values, cb = noop) => {
@@ -61,17 +74,24 @@ export class Search extends React.Component {
 
   render() {
     const { loading, searched, searchResults, total } = this.state
-    const { areas, categories } = this.props
+    const { areas, categories, navigation } = this.props
+
+    const categoryFromLink = categories.find(
+      cat => cat.name === navigation.getParam('category')
+    )
+
+    const showFilters = !!categoryFromLink
 
     return (
       <ScreenContainer grey withPadding={false}>
         <Formik
+          key={this.state.key}
           ref={ref => (this.formikRef = ref)}
           initialValues={{
             fromDate: startOfDay(subYears(new Date(), 2)),
             toDate: endOfDay(new Date()),
             keyword: '',
-            category: null,
+            category: categoryFromLink,
             forums: []
           }}
           onSubmit={(values, actions) => {
@@ -106,6 +126,7 @@ export class Search extends React.Component {
                 isSubmitting={loading || isSubmitting}
                 touched={touched}
                 values={values}
+                showFilters={showFilters}
               />
               <SearchResults
                 nextPage={this.nextPage}
@@ -129,5 +150,6 @@ Search.propTypes = {
   addSearchToHistory: PropTypes.func.isRequired,
   areas: PropTypes.array.isRequired,
   categories: PropTypes.array.isRequired,
-  search: PropTypes.func.isRequired
+  search: PropTypes.func.isRequired,
+  navigation: PropTypes.object.isRequired
 }

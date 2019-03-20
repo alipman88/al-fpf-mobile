@@ -6,8 +6,17 @@ import { Linking } from 'react-native'
 import { PostButton } from './styledComponents'
 import { Bottom } from '../sharedStyles'
 
-export const ForumPost = ({ post, onReplyPress, postTruncateLength }) => {
+export const ForumPost = ({
+  post,
+  onReplyPress,
+  postTruncateLength,
+  navigation
+}) => {
   const { id, title, user_email: email } = post
+
+  const onTapCategory = category => {
+    navigation.navigate({ routeName: 'Search', params: { category } })
+  }
 
   const bottomButtons = (
     <Bottom>
@@ -38,7 +47,9 @@ export const ForumPost = ({ post, onReplyPress, postTruncateLength }) => {
       postTruncateLength={postTruncateLength}
       children={bottomButtons}
       moreText={'Show'}
+      onTapCategory={onTapCategory}
       hasBorder
+      tappableCategory
     />
   )
 }
@@ -46,5 +57,6 @@ export const ForumPost = ({ post, onReplyPress, postTruncateLength }) => {
 ForumPost.propTypes = {
   post: PropTypes.object.isRequired,
   onReplyPress: PropTypes.func.isRequired,
-  postTruncateLength: PropTypes.number.isRequired
+  postTruncateLength: PropTypes.number.isRequired,
+  navigation: PropTypes.object.isRequired
 }

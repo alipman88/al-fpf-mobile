@@ -33,6 +33,12 @@ export class SearchFields extends React.Component {
     showAdvanced: false
   }
 
+  componentDidMount() {
+    if (this.props.showFilters) {
+      this.setState(() => ({ showAdvanced: true }))
+    }
+  }
+
   render() {
     const {
       areas,
@@ -197,5 +203,6 @@ SearchFields.propTypes = {
   setFieldValue: PropTypes.func.isRequired,
   isSubmitting: PropTypes.bool,
   touched: PropTypes.object.isRequired,
-  values: PropTypes.object.isRequired
+  values: PropTypes.object.isRequired,
+  showFilters: PropTypes.bool
 }

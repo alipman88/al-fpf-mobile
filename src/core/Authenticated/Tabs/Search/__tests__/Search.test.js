@@ -10,12 +10,39 @@ describe('Search', () => {
     addSearchToHistory: jest.fn(),
     areas: [],
     categories: [],
-    search: jest.fn()
+    search: jest.fn(),
+    navigation: {
+      addListener: jest.fn()
+    }
   }
 
   afterEach(() => {
     defaultProps.addSearchToHistory.mockReset()
     defaultProps.search.mockReset()
+  })
+
+  test('it prepopulates cateogry when passed through navigation params', () => {
+    const categoryName = 'Lost and Found'
+    const navigation = {
+      addListener: jest.fn(),
+      getParam: jest.fn(() => categoryName),
+      state: { params: { category: categoryName } }
+    }
+    const categories = [
+      { id: 1, name: categoryName },
+      { id: 2, name: 'Another Category' }
+    ]
+    const wrapper = shallow(
+      <Search
+        {...defaultProps}
+        navigation={navigation}
+        categories={categories}
+      />
+    )
+    expect(wrapper.find(Formik).props().initialValues.category).toEqual({
+      id: 1,
+      name: categoryName
+    })
   })
 
   describe('nextPage', () => {
@@ -60,7 +87,8 @@ describe('Search', () => {
         total: 15,
         page: 2,
         pages: 3,
-        pageItemCount: 5
+        pageItemCount: 5,
+        key: 1
       })
     })
   })
@@ -112,7 +140,8 @@ describe('Search', () => {
         total: 5,
         page: 1,
         pages: 2,
-        pageItemCount: 3
+        pageItemCount: 3,
+        key: 1
       })
     })
   })

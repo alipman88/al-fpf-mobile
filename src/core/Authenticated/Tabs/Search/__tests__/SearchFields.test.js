@@ -28,13 +28,22 @@ describe('SearchFields', () => {
     setFieldValue: jest.fn(),
     isSubmitting: false,
     touched: {},
-    values: {}
+    values: {},
+    showFilters: false
   }
 
   afterEach(() => {
     defaultProps.setFieldTouched.mockReset()
     defaultProps.setFieldValue.mockReset()
     defaultProps.handleSubmit.mockReset()
+  })
+
+  test('showFilters shows filters on mount', () => {
+    const wrapper = shallow(<SearchFields {...defaultProps} showFilters />)
+
+    expect(wrapper.state().showAdvanced).toEqual(true)
+    expect(wrapper.find(Multiselect).length).toEqual(1)
+    expect(wrapper.find(FieldWrapper).length).toEqual(4)
   })
 
   test('FiltersToggle changes showAdvanced state', () => {
