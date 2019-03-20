@@ -4,15 +4,17 @@ import PropTypes from 'prop-types'
 import IconEvil from 'react-native-vector-icons/EvilIcons'
 import { Button } from '@components/Button'
 
-import { AdvertisementPill, Card } from './styledComponents'
+import { AdvertisementPill, Card, PillText } from './styledComponents'
 
 import { CardContent, ContentText, Header, Bottom } from '../sharedStyles'
 
 export const Advertisement = ({ ad }) => (
   <Card>
-    <AdvertisementPill>Advertisement</AdvertisementPill>
     <CardContent>
       <Header>{ad.headline}</Header>
+      <AdvertisementPill>
+        <PillText>Ad</PillText>
+      </AdvertisementPill>
       <ContentText>{ad.body}</ContentText>
     </CardContent>
     <Bottom>
