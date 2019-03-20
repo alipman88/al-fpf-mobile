@@ -13,6 +13,7 @@ export const Container = styled.View`
 export const Heading = styled(TextSemibold)`
   font-size: 20;
   margin-bottom: 14;
+  color: #000000;
 `
 
 export const ListItem = styled.View`
