@@ -10,7 +10,7 @@ export const ProfileTypeContainer = styled.View`
 `
 export const ProfileTypePill = styled(Pill)`
   background-color: #fff;
-  border-color: #869ba5;
+  border-color: ${({active}) => active ? '#f29426': '#869ba5' };
   borderWidth: 2;
   margin-bottom: 7;
   margin-top: 16;
