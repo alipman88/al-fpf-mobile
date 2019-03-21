@@ -5,6 +5,9 @@ export const WrapperStyles = `
   padding-horizontal: 10;
   padding-vertical: 10;
   border-radius: 8;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
 `
 
 export const ButtonText = styled(Text)`

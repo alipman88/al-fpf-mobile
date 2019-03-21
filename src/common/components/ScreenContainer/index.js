@@ -15,6 +15,9 @@ import grassImage from '@assets/images/fpf-grass.png'
 export const ScreenContainer = ({
   children,
   grassBackground,
+  grassHeight,
+  grassControls,
+  grassBgFixed,
   grey,
   withPadding
 }) => {
@@ -22,8 +25,9 @@ export const ScreenContainer = ({
     <ScreenWrapper grey={grey}>
       <StatusBar barStyle='dark-content' />
       {grassBackground && (
-        <GrassContainer>
-          <GrassBg />
+        <GrassContainer height={grassHeight}>
+          {grassControls}
+          <GrassBg height={grassHeight} fixed={grassBgFixed} />
           <Grass source={grassImage} />
         </GrassContainer>
       )}
@@ -37,6 +41,9 @@ export const ScreenContainer = ({
 ScreenContainer.propTypes = {
   children: PropTypes.node,
   grassBackground: PropTypes.bool,
+  grassHeight: PropTypes.number,
+  grassControls: PropTypes.node,
+  grassBgFixed: PropTypes.bool,
   grey: PropTypes.bool,
   withPadding: PropTypes.bool
 }

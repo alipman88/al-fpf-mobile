@@ -1,10 +1,12 @@
 import { createStackNavigator } from 'react-navigation'
 
 import { Login } from './Login'
+import { ProfileTypes } from './SignUp/ProfileTypes'
 
 export const UnauthenticatedStack = createStackNavigator(
   {
-    Login
+    Login,
+    ProfileTypes
   },
   {
     initialRouteName: 'Login',

@@ -18,7 +18,7 @@ export const ContentWrapper = styled.View`
 export const GrassContainer = styled.View`
   background-color: #fff;
   padding-top: 20;
-  height: 200;
+  height: ${({ height }) => height || '200'};
   position: absolute;
   bottom: 0;
   left: 0;
@@ -28,7 +28,8 @@ export const GrassContainer = styled.View`
 // Height of this is the height of this container subtract the container's top padding
 export const GrassBg = styled.View`
   background-color: #e3eddd;
-  height: 180;
+  position: ${({ fixed }) => (fixed ? 'absolute' : 'relative')};
+  height: ${({ height }) => height - 20 || 180};
   bottom: 0;
   left: 0;
   right: 0;
