@@ -31,14 +31,16 @@ export const ForumPost = ({
         </Button>
       </PostButton>
 
-      <PostButton>
-        <Button
-          color={'#fff'}
-          onPress={() => onReplyPress({ parentPostId: id })}
-        >
-          Reply to forum
-        </Button>
-      </PostButton>
+      {!post.is_shared_post && (
+        <PostButton>
+          <Button
+            color={'#fff'}
+            onPress={() => onReplyPress({ parentPostId: id })}
+          >
+            Reply to forum
+          </Button>
+        </PostButton>
+      )}
     </Bottom>
   )
   return (

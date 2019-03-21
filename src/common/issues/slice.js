@@ -70,6 +70,27 @@ export const issues = createSlice({
         currentIssueId,
         loading: false
       }
+    },
+    setIssue: (state, { payload: { issue, areaId } }) => {
+      const currentIssueId = state.currentIssueId || issue.id
+      let existingIssues = state.issuesByAreaId[areaId] || []
+      const existingIssueIds = keyBy(existingIssues, 'id')
+      if (!existingIssueIds[issue.id]) {
+        issue.isUnread = true
+        existingIssues = existingIssues.concat([issue]).sort((a, b) => {
+          return b.number - a.number
+        })
+      }
+
+      return {
+        ...state,
+        issuesByAreaId: {
+          ...state.issuesByAreaId,
+          [areaId]: existingIssues
+        },
+        currentIssueId,
+        loading: false
+      }
     }
   },
   extraReducers: {

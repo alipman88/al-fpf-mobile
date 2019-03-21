@@ -1,12 +1,12 @@
 import { setupForumData } from '../setupForumData'
 import { areas } from '@common/areas/slice'
 
-jest.mock('../issues', () => ({
+jest.mock('@common/issues', () => ({
   getIssues: jest.fn().mockReturnValue('getIssues'),
-  issues: require('../issues/slice').issues
+  issues: require('@common/issues/slice').issues
 }))
 
-jest.mock('../posts', () => ({
+jest.mock('@common/posts', () => ({
   getPosts: jest.fn().mockReturnValue('getPosts')
 }))
 

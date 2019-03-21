@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { areas } from '@common/areas'
-import { issues } from '../../issues'
-import { getPosts } from '../../posts'
+import { issues } from '@common/issues'
+import { getPosts } from '@common/posts'
 import { OtherIssues as OtherIssuesComponent } from './OtherIssues'
 
 const mapStateToProps = state => {

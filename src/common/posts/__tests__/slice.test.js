@@ -7,6 +7,7 @@ describe('posts - slice', () => {
       headlinesByIssue: {},
       postsByIssue: {},
       adsByIssue: {},
+      sharedPostsByIssue: {},
       loading: false,
       newsFromNeighboringNfsByIssue: {}
     })

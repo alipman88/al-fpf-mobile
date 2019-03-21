@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 
 import { NeighboringContent as NeighboringContentComponent } from './NeighboringContent'
-import { posts } from '../../posts'
-import { issues } from '../../issues'
+import { posts } from '@common/posts'
+import { issues } from '@common/issues'
 import { fetchNeighboringIssue } from './actions'
 
 const mapStateToProps = state => {

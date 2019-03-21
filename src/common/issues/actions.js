@@ -22,3 +22,29 @@ export const getIssues = areaId => async (dispatch, getState) => {
     dispatch(appError.actions.setAppError(responseError(e)))
   }
 }
+
+export const getIssue = (areaId, issueNumber) => async (dispatch, getState) => {
+  try {
+    dispatch(issues.actions.setLoading(true))
+    const response = await getAuthorized(
+      `/areas/${areaId}/issues/${issueNumber}`,
+      getState()
+    )
+
+    if (
+      issues.selectors.getFirstLoadIssues(getState()) &&
+      Object.keys(issues.selectors.getIssues(getState())).length
+    ) {
+      dispatch(issues.actions.setFirstLoadFalse())
+    }
+
+    dispatch(
+      issues.actions.setIssue({
+        issue: response.data.issue,
+        areaId
+      })
+    )
+  } catch (e) {
+    dispatch(appError.actions.setAppError(responseError(e)))
+  }
+}

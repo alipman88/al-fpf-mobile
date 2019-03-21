@@ -75,7 +75,8 @@ describe('Forum', () => {
           id: 3
         }
       ]
-    }
+    },
+    shared_posts: {}
   }
 
   afterEach(() => {

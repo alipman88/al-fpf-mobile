@@ -96,9 +96,11 @@ export class Forum extends React.Component {
     const { currentIssueId, issues, loading } = this.props
 
     const posts = this.props.posts[currentIssueId] || []
+    const shared_posts = this.props.shared_posts[currentIssueId] || []
     const ads = this.props.ads[currentIssueId] || []
 
-    const maxIndex = posts.length + Math.max(3, ads.length)
+    const maxIndex =
+      posts.length + shared_posts.length + Math.max(3, ads.length)
     const postRender = []
     let adOffset = 0
     for (let index = 0; index < maxIndex; index++) {
@@ -123,6 +125,15 @@ export class Forum extends React.Component {
             navigation={this.props.navigation}
             onReplyPress={this.handleReplyPress}
             key={post.id}
+          />
+        )
+      } else if (shared_posts[index - adOffset - posts.length]) {
+        const shared_post = shared_posts[index - adOffset - posts.length]
+        postRender.push(
+          <ForumPost
+            post={shared_post}
+            onReplyPress={this.handleReplyPress}
+            key={shared_post.id}
           />
         )
       }
@@ -166,5 +177,6 @@ Forum.propTypes = {
   setCurrentAreaId: PropTypes.func.isRequired,
   setCurrentIssueId: PropTypes.func.isRequired,
   setupForumData: PropTypes.func.isRequired,
-  posts: PropTypes.object.isRequired
+  posts: PropTypes.object.isRequired,
+  shared_posts: PropTypes.object.isRequired
 }

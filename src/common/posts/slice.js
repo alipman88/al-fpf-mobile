@@ -3,6 +3,7 @@ import { resetAction } from '@common/resetAction'
 
 const initialState = {
   postsByIssue: {},
+  sharedPostsByIssue: {},
   headlinesByIssue: {},
   adsByIssue: {},
   newsFromNeighboringNfsByIssue: {},
@@ -24,6 +25,10 @@ export const posts = createSlice({
       postsByIssue: {
         ...state.postsByIssue,
         [payload.issueId]: payload.posts
+      },
+      sharedPostsByIssue: {
+        ...state.sharedPostsByIssue,
+        [payload.issueId]: payload.sharedPosts
       },
       headlinesByIssue: {
         ...state.headlinesByIssue,
@@ -54,6 +59,10 @@ posts.selectors = {
   getPostsByIssue: createSelector(
     [path],
     posts => posts.postsByIssue
+  ),
+  getSharedPostsByIssue: createSelector(
+    [path],
+    posts => posts.sharedPostsByIssue
   ),
   getHeadlinesByIssue: createSelector(
     [path],

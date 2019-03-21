@@ -2,7 +2,7 @@ import React from 'react'
 import { TouchableOpacity } from 'react-native'
 import { shallow } from 'enzyme'
 
-import { Post } from '@components/Post'
+import { Post } from '@components/Post/Post'
 import {
   PostDate,
   PostBody,

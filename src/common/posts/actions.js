@@ -1,4 +1,4 @@
-import { issues } from '../issues/slice'
+import { issues } from '@common/issues'
 import { areas } from '@common/areas'
 import { posts } from './slice'
 import { getAuthorized } from '@common/api'
@@ -31,6 +31,7 @@ export const getPosts = issueId => async (dispatch, getState) => {
 
     const {
       posts: postsData,
+      shared_posts: sharedPosts,
       headlines,
       ads,
       news_from_neighboring_nfs
@@ -39,6 +40,7 @@ export const getPosts = issueId => async (dispatch, getState) => {
     dispatch(
       posts.actions.setPostsForIssue({
         posts: postsData,
+        sharedPosts,
         headlines,
         issueId: issue.id,
         ads,

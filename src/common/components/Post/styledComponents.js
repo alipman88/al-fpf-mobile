@@ -31,6 +31,12 @@ export const PostAuthor = styled(TextSemibold)`
   margin-bottom: 7;
 `
 
+export const PostShared = styled(TextSemibold)`
+  color: #4a4a4a;
+  font-size: 14;
+  margin-bottom: 7;
+`
+
 export const PostDate = styled(PostAuthor)``
 
 export const PostCategory = styled(Text)`
@@ -44,8 +50,11 @@ export const PostBody = styled(Text)`
   margin-vertical: 10;
 `
 
-export const ShowMoreButton = styled(TextSemibold)`
+export const PostLink = styled(TextSemibold)`
   color: #d77400;
   text-decoration-color: #d77400;
+`
+
+export const ShowMoreButton = styled(PostLink)`
   margin-top: 10;
 `
