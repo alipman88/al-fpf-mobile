@@ -13,7 +13,7 @@ export const UnauthenticatedStack = createStackNavigator(
     ProfileTypes
   },
   {
-    initialRouteName: 'Welcome',
+    initialRouteName: 'ProfileTypes',
     defaultNavigationOptions: {
       headerTransparent: true,
       headerStyle: {
