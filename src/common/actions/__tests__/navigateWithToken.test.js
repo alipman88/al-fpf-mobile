@@ -28,7 +28,7 @@ describe('navigateWithToken', () => {
     expect(getState).toHaveBeenCalled()
 
     expect(openUrlSpy).toHaveBeenCalledWith(
-      'https://frontporchforum.com/path?temporary_login_token=abc123&test=true'
+      'https://frontporchforum.com/path?test=true&temporary_login_token=abc123'
     )
     expect(setLoading).toHaveBeenCalledWith(false)
 

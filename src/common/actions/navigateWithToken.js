@@ -1,6 +1,6 @@
 import { Linking } from 'react-native'
 import Config from 'react-native-config'
-import queryString from 'query-string'
+import parse from 'url-parse'
 import * as api from '@common/api'
 
 import { appError } from '@components/AppError/slice'
@@ -12,16 +12,14 @@ export const navigateWithToken = (url, setLoading) => async (
 ) => {
   try {
     setLoading(true)
-    const urlObj = new URL(`${Config.WEBSITE_HOST}${url}`)
+    const urlObj = parse(`${Config.WEBSITE_HOST}${url}`, true)
     const response = await api.postAuthorized(
       '/get_login_token',
       {},
       getState()
     )
 
-    const search = queryString.parse(urlObj.search)
-    search.temporary_login_token = response.data.token
-    urlObj.search = queryString.stringify(search)
+    urlObj.query.temporary_login_token = response.data.token
     Linking.openURL(urlObj.toString())
   } catch (e) {
     dispatch(appError.actions.setAppError(responseError(e)))
