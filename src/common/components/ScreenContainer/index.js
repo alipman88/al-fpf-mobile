@@ -28,7 +28,7 @@ export const ScreenContainer = ({
         <GrassContainer height={grassHeight}>
           {grassControls}
           <GrassBg height={grassHeight} fixed={grassBgFixed} />
-          <Grass source={grassImage} />
+          <Grass source={grassImage} resizeMode='repeat' />
         </GrassContainer>
       )}
       <SafeAreaViewContainer>
