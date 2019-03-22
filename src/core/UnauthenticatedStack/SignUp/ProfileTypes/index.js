@@ -4,7 +4,7 @@ import { newUser } from '../newUser'
 
 const mapStateToProps = state => {
   return {
-    user: newUser.selectors.getNewUser(state),
+    user: newUser.selectors.getNewUser(state)
   }
 }
 

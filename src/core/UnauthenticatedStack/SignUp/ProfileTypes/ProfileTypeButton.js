@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { TouchableOpacity, View, Image } from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
 
 import checkBox from '@assets/images/global-assets/form-elements/checkbox-tick.png'
 import {
@@ -11,9 +11,7 @@ import {
 } from './styledComponents'
 
 export const ProfileTypeButton = ({
-  profileType,
   onTapHandler,
-  children,
   buttonText,
   label,
   type,

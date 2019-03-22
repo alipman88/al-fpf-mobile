@@ -11,10 +11,9 @@ export const newUser = createSlice({
   },
   reducers: {
     setNewUserByKey: (state, { payload }) => {
-      const { key, value } = payload
       return {
         ...state,
-        [key]: value
+        ...payload
       }
     }
   }

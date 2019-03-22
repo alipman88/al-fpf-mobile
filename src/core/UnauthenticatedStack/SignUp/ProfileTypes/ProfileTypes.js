@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 
 import { profileTypes } from '@common/types/profileTypes'
 import { FullScreenWizard } from '@components/FullScreenWizard'
-import { Text } from '@components/Text'
-
 import { ProfileTypeContainer, ProfileTypeText } from './styledComponents'
 import { ProfileTypeButton } from './ProfileTypeButton'
 
@@ -34,7 +32,7 @@ export class ProfileTypes extends React.Component {
   }
 
   onTapProfileButton = type => {
-    this.props.setNewUserByKey({ key: 'profileType', value: type })
+    this.props.setNewUserByKey({ profileType: type })
     this.setState({
       profileOptions: this.state.profileOptions.map(profile => {
         profile.active = profile.type === type
@@ -72,6 +70,7 @@ export class ProfileTypes extends React.Component {
 }
 
 ProfileTypes.propTypes = {
-  user: PropTypes.object,
-  setNewUserByKey: PropTypes.func.isRequired
+  setNewUserByKey: PropTypes.func.isRequired,
+  navigation: PropTypes.object.isRequired,
+  user: PropTypes.object
 }

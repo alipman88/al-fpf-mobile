@@ -10,8 +10,8 @@ export const ProfileTypeContainer = styled.View`
 `
 export const ProfileTypePill = styled(Pill)`
   background-color: #fff;
-  border-color: ${({active}) => active ? '#f29426': '#869ba5' };
-  borderWidth: 2;
+  border-color: ${({ active }) => (active ? '#f29426' : '#869ba5')};
+  borderwidth: 2;
   margin-bottom: 7;
   margin-top: 16;
   padding-vertical: 14;
@@ -24,15 +24,15 @@ export const ProfileTypePill = styled(Pill)`
 
 export const PillText = styled(TextSemibold)`
   font-size: 18;
-  color: ${({active}) => active ? '#000' : '#869ba5'};
+  color: ${({ active }) => (active ? '#000' : '#869ba5')};
 `
 
 export const ProfileTypeText = styled(Text)`
   max-width: 225;
   text-align: center;
-  font-size: ${({isHeader}) => isHeader ? 25 : 16};
-  margin-bottom: ${({extraMargin}) => extraMargin ? 25 : 0};
+  font-size: ${({ isHeader }) => (isHeader ? 25 : 16)};
+  margin-bottom: ${({ extraMargin }) => (extraMargin ? 25 : 0)};
 `
 export const CheckBox = styled.Image`
-  tintColor: #000;
+  tintcolor: #000;
 `
