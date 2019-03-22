@@ -1,8 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { TouchableOpacity, View } from 'react-native'
+import { TouchableOpacity, View, Image } from 'react-native'
 
-import { ProfileTypePill, PillText, ProfileTypeText } from './styledComponents'
+import checkBox from '@assets/images/global-assets/form-elements/checkbox-tick.png'
+import {
+  ProfileTypePill,
+  PillText,
+  ProfileTypeText,
+  CheckBox
+} from './styledComponents'
 
 export const ProfileTypeButton = ({
   profileType,
@@ -13,11 +19,16 @@ export const ProfileTypeButton = ({
   type,
   active
 }) => {
+  const check = active && (
+    <View style={{ paddingLeft: 15 }}>
+      <CheckBox source={checkBox} />
+    </View>
+  )
   return (
     <View>
       <TouchableOpacity onPress={() => onTapHandler(type)}>
-        <ProfileTypePill active={active}>
-          <PillText>{buttonText}</PillText>
+        <ProfileTypePill active={active} image={check}>
+          <PillText active={active}>{buttonText}</PillText>
         </ProfileTypePill>
       </TouchableOpacity>
       <ProfileTypeText>{label}</ProfileTypeText>

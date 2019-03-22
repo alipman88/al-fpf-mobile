@@ -19,11 +19,12 @@ export const ProfileTypePill = styled(Pill)`
   min-height: 45;
   justify-content: center;
   align-items: center;
+  flex-direction: row;
 `
 
 export const PillText = styled(TextSemibold)`
   font-size: 18;
-  color: #869ba5;
+  color: ${({active}) => active ? '#000' : '#869ba5'};
 `
 
 export const ProfileTypeText = styled(Text)`
@@ -31,4 +32,7 @@ export const ProfileTypeText = styled(Text)`
   text-align: center;
   font-size: ${({isHeader}) => isHeader ? 25 : 16};
   margin-bottom: ${({extraMargin}) => extraMargin ? 25 : 0};
+`
+export const CheckBox = styled.Image`
+  tintColor: #000;
 `
