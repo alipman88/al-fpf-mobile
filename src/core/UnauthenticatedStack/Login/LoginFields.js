@@ -17,7 +17,8 @@ import {
   FormContainer,
   Logo,
   LogoContainer,
-  ResetPassword
+  ResetPassword,
+  ErrorLink
 } from './styledComponents'
 
 export const LoginFields = ({
@@ -46,6 +47,11 @@ export const LoginFields = ({
             value={values.email}
             autoCapitalize='none'
           />
+          {errors.button && (
+            <ErrorLink onPress={() => Linking.openURL(errors.button.url)}>
+              {errors.button.text}
+            </ErrorLink>
+          )}
         </FieldContainer>
         <FieldContainer>
           <PasswordInput

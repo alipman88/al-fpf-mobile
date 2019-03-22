@@ -20,6 +20,10 @@ export const BottomContainer = styled.View`
   padding-bottom: 20;
 `
 
+export const ErrorLink = styled.Text`
+  color: #9b9b9b;
+`
+
 export const ResetPassword = styled.Text`
   color: #9b9b9b;
   text-align: center;
