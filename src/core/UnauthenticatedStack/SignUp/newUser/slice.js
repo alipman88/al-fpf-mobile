@@ -6,7 +6,9 @@ const initialState = {
 
 export const newUser = createSlice({
   slice: 'newUser',
-  initialState,
+  initialState: {
+    ...initialState
+  },
   reducers: {
     setNewUserByKey: (state, { payload }) => {
       const { key, value } = payload
