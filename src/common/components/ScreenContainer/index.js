@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import {
   ContentWrapper,
   Grass,
-  GrassBg,
   GrassContainer,
   SafeAreaViewContainer,
   ScreenWrapper
@@ -24,16 +23,15 @@ export const ScreenContainer = ({
   return (
     <ScreenWrapper grey={grey}>
       <StatusBar barStyle='dark-content' />
-      {grassBackground && (
-        <GrassContainer height={grassHeight}>
-          {grassControls}
-          <GrassBg height={grassHeight} fixed={grassBgFixed} />
-          <Grass source={grassImage} resizeMode='repeat' />
-        </GrassContainer>
-      )}
       <SafeAreaViewContainer>
         <ContentWrapper withPadding={withPadding}>{children}</ContentWrapper>
       </SafeAreaViewContainer>
+      {grassBackground && (
+        <GrassContainer height={grassHeight}>
+          {grassControls}
+          <Grass source={grassImage} resizeMode='repeat' />
+        </GrassContainer>
+      )}
     </ScreenWrapper>
   )
 }

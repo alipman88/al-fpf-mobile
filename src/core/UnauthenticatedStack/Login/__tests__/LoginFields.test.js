@@ -46,14 +46,4 @@ describe('LoginFields', () => {
 
     expect(defaultProps.handleSubmit).toHaveBeenCalled()
   })
-
-  test('Forgot password link opens a webpage', () => {
-    const wrapper = shallow(<LoginFields {...defaultProps} />)
-    jest.spyOn(Linking, 'openURL').mockImplementation(() => ({}))
-    wrapper.find(TouchableOpacity).simulate('press')
-    expect(Linking.openURL).toHaveBeenCalledWith(
-      'https://frontporchforum.com/passwords/new'
-    )
-    Linking.openURL.mockRestore()
-  })
 })

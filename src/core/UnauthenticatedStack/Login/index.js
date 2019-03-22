@@ -1,6 +1,8 @@
 import React from 'react'
+import { Linking, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import DeviceInfo from 'react-native-device-info'
 
 import { KeyboardAwareScrollView } from '@components/KeyboardAwareScrollView'
 import { api } from '@common/api'
@@ -11,9 +13,46 @@ import { validations } from './validations'
 import { ScreenContainer } from '@components/ScreenContainer'
 import { LoginFields } from './LoginFields'
 
+import {
+  BottomContainer,
+  BottomText,
+  LinksContainer,
+  ResetPasswordContainer,
+  TroubleLoggingInContainer,
+  Version
+} from './styledComponents'
+
 export const LoginComponent = ({ navigation, setAccessToken }) => {
+  const grassControls = (
+    <BottomContainer>
+      <LinksContainer>
+        <ResetPasswordContainer>
+          <TouchableOpacity
+            onPress={() =>
+              Linking.openURL('https://frontporchforum.com/passwords/new')
+            }
+          >
+            <BottomText>Forgot Password</BottomText>
+          </TouchableOpacity>
+        </ResetPasswordContainer>
+        <TroubleLoggingInContainer>
+          <TouchableOpacity
+            onPress={() =>
+              Linking.openURL('mailto:membersupport@frontporchforum.com')
+            }
+          >
+            <BottomText>Trouble logging in?</BottomText>
+          </TouchableOpacity>
+        </TroubleLoggingInContainer>
+      </LinksContainer>
+      <Version>
+        v{DeviceInfo.getVersion()} #{DeviceInfo.getBuildNumber()}
+      </Version>
+    </BottomContainer>
+  )
+
   return (
-    <ScreenContainer grassBackground>
+    <ScreenContainer grassBackground grassControls={grassControls}>
       <KeyboardAwareScrollView
         enableOnAndroid
         keyboardShouldPersistTaps='handled'
@@ -29,7 +68,6 @@ export const LoginComponent = ({ navigation, setAccessToken }) => {
               navigation.navigate('Authenticated')
             } catch (e) {
               actions.setFieldError('email', responseError(e))
-              actions.setFieldError('button', responseError(e, 'button'))
             }
 
             actions.setSubmitting(false)

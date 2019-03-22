@@ -2,12 +2,12 @@ import styled from 'styled-components/native'
 import { Text } from '@components/Text'
 
 export const Container = styled.View`
-  justify-content: space-between;
   flex: 1;
+  justify-content: flex-start;
 `
 
 export const FormContainer = styled.View`
-  flex: 2;
+  flex: 3;
 `
 
 export const FieldContainer = styled.View`
@@ -15,26 +15,33 @@ export const FieldContainer = styled.View`
 `
 
 export const BottomContainer = styled.View`
-  flex: 1;
-  justify-content: flex-end;
-  padding-bottom: 20;
+  padding-top: 40;
 `
 
-export const ErrorLink = styled.Text`
+export const BottomText = styled(Text)`
   color: #9b9b9b;
 `
 
-export const ResetPassword = styled.Text`
-  color: #9b9b9b;
-  text-align: center;
-  margin-top: 19;
+export const LinksContainer = styled.View`
+  flex-direction: row;
+  justify-content: center;
+`
+
+export const ResetPasswordContainer = styled.View`
+  padding-right: 8;
+  border-right-width: 1;
+  border-color: #9b9b9b;
+`
+
+export const TroubleLoggingInContainer = styled.View`
+  padding-left: 8;
 `
 
 export const LogoContainer = styled.View`
+  width: 170;
   flex: 1;
-  padding-horizontal: 50;
   padding-top: 10;
-  align-items: center;
+  align-self: center;
 `
 
 export const Logo = styled.Image`
@@ -42,7 +49,6 @@ export const Logo = styled.Image`
 `
 
 export const Version = styled(Text)`
-  position: absolute;
-  left: 0;
-  bottom: 0;
+  text-align: center;
+  margin-top: 10;
 `

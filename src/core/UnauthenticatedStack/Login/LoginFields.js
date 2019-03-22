@@ -1,24 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Linking, TouchableOpacity } from 'react-native'
-import DeviceInfo from 'react-native-device-info'
 import Spinner from 'react-native-loading-spinner-overlay'
 
 import { TextInput } from '@components/TextInput'
 import { PasswordInput } from '@components/PasswordInput'
 import { Button } from '@components/Button'
 import logoImage from '@assets/images/fpf-logo.png'
-import { Version } from './styledComponents'
 
 import {
-  BottomContainer,
   Container,
   FieldContainer,
   FormContainer,
   Logo,
-  LogoContainer,
-  ResetPassword,
-  ErrorLink
+  LogoContainer
 } from './styledComponents'
 
 export const LoginFields = ({
@@ -47,11 +41,6 @@ export const LoginFields = ({
             value={values.email}
             autoCapitalize='none'
           />
-          {errors.button && (
-            <ErrorLink onPress={() => Linking.openURL(errors.button.url)}>
-              {errors.button.text}
-            </ErrorLink>
-          )}
         </FieldContainer>
         <FieldContainer>
           <PasswordInput
@@ -62,22 +51,10 @@ export const LoginFields = ({
             setFieldTouched={setFieldTouched}
           />
         </FieldContainer>
-      </FormContainer>
-      <BottomContainer>
         <Button onPress={handleSubmit} disabled={isSubmitting}>
           Log in
         </Button>
-        <TouchableOpacity
-          onPress={() =>
-            Linking.openURL('https://frontporchforum.com/passwords/new')
-          }
-        >
-          <ResetPassword>Forgot Password</ResetPassword>
-        </TouchableOpacity>
-        <Version>
-          v{DeviceInfo.getVersion()} #{DeviceInfo.getBuildNumber()}
-        </Version>
-      </BottomContainer>
+      </FormContainer>
     </Container>
   )
 }

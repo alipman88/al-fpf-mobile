@@ -4,6 +4,7 @@ import { screenPadding } from '@common/styles/screenPadding'
 export const ScreenWrapper = styled.View`
   background-color: ${({ grey }) => (grey ? '#f2f2f2' : 'white')};
   flex: 1;
+  justify-content: space-between;
 `
 
 export const SafeAreaViewContainer = styled.SafeAreaView`
@@ -16,27 +17,14 @@ export const ContentWrapper = styled.View`
 `
 
 export const GrassContainer = styled.View`
-  background-color: #fff;
-  padding-top: 20;
-  height: ${({ height }) => height || '200'};
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-`
-
-// Height of this is the height of this container subtract the container's top padding
-export const GrassBg = styled.View`
   background-color: #e3eddd;
-  position: ${({ fixed }) => (fixed ? 'absolute' : 'relative')};
-  height: ${({ height }) => height - 20 || 180};
-  bottom: 0;
-  left: 0;
-  right: 0;
+  height: ${({ height }) => height || '140'};
+  width: 100%;
+  z-index: 100;
 `
 
 export const Grass = styled.Image`
-  top: 0;
+  top: -18;
   position: absolute;
   width: 100%;
 `
