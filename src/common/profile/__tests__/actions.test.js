@@ -1,17 +1,10 @@
-import { api } from '@common/api'
-import { getProfiles } from '../actions'
+import * as api from '@common/api'
+import { getProfiles, updateUser } from '../actions'
 import { profile } from '../slice'
 import { appError } from '@components/AppError/slice'
 
 describe('profile - actions', () => {
   const dispatch = jest.fn()
-  const getState = () => ({
-    secured: {
-      currentUser: {
-        accessToken: 'abc123'
-      }
-    }
-  })
 
   afterEach(() => {
     dispatch.mockReset()
@@ -19,25 +12,23 @@ describe('profile - actions', () => {
 
   describe('getProfiles', () => {
     test('fetches profile', async () => {
-      const getSpy = jest.spyOn(api, 'get').mockImplementation(() => ({
-        data: {
-          user: {
-            id: 1,
-            profiles: [
-              {
-                id: 33
-              }
-            ]
+      const getSpy = jest
+        .spyOn(api, 'getAuthorized')
+        .mockImplementation(() => ({
+          data: {
+            user: {
+              id: 1,
+              profiles: [
+                {
+                  id: 33
+                }
+              ]
+            }
           }
-        }
-      }))
-      await getProfiles()(dispatch, getState)
+        }))
+      await getProfiles()(dispatch, () => ({}))
 
-      expect(getSpy).toHaveBeenCalledWith('/users', {
-        headers: {
-          Authorization: 'Bearer abc123'
-        }
-      })
+      expect(getSpy).toHaveBeenCalledWith('/users', {})
       expect(dispatch).toHaveBeenCalledWith(profile.actions.setLoading(true))
       expect(dispatch).toHaveBeenCalledWith(profile.actions.setLoading(false))
       expect(dispatch).toHaveBeenCalledWith(
@@ -54,25 +45,89 @@ describe('profile - actions', () => {
     })
 
     test('an api error dispatches an error message', async () => {
-      const getSpy = jest.spyOn(api, 'get').mockImplementation(() => {
+      const getSpy = jest.spyOn(api, 'getAuthorized').mockImplementation(() => {
         throw new Error('boom')
       })
 
       const dispatch = jest.fn()
 
-      await getProfiles()(dispatch, getState)
+      await getProfiles()(dispatch, () => ({}))
 
-      expect(getSpy).toHaveBeenCalledWith('/users', {
-        headers: {
-          Authorization: 'Bearer abc123'
-        }
-      })
+      expect(getSpy).toHaveBeenCalledWith('/users', {})
 
       expect(dispatch).toHaveBeenCalledWith(
         appError.actions.setAppError('boom')
       )
 
       getSpy.mockRestore()
+    })
+  })
+
+  describe('updateUser', () => {
+    test('updates profile & sets new profile into storage', async () => {
+      const putSpy = jest
+        .spyOn(api, 'putAuthorized')
+        .mockImplementation(() => ({
+          data: {
+            user: {
+              id: 1,
+              profiles: [
+                {
+                  id: 33
+                }
+              ],
+              receive_push_notifications: true
+            }
+          }
+        }))
+
+      const values = {
+        receive_push_notifications: true
+      }
+      await updateUser(values)(dispatch, () => ({}))
+
+      expect(putSpy).toHaveBeenCalledWith('/users', { user: values }, {})
+      expect(dispatch).toHaveBeenCalledWith(profile.actions.setLoading(true))
+      expect(dispatch).toHaveBeenCalledWith(profile.actions.setLoading(false))
+      expect(dispatch).toHaveBeenCalledWith(
+        profile.actions.setValueInUserData({
+          key: 'receive_push_notifications',
+          value: true
+        })
+      )
+      expect(dispatch).toHaveBeenCalledWith(
+        profile.actions.setUserProfile({
+          id: 1,
+          profiles: [
+            {
+              id: 33
+            }
+          ],
+          receive_push_notifications: true
+        })
+      )
+      putSpy.mockRestore()
+    })
+
+    test('an api error dispatches an error message', async () => {
+      const putSpy = jest.spyOn(api, 'putAuthorized').mockImplementation(() => {
+        throw new Error('boom')
+      })
+
+      const dispatch = jest.fn()
+
+      const values = {
+        receive_push_notifications: true
+      }
+      await updateUser(values)(dispatch, () => ({}))
+
+      expect(putSpy).toHaveBeenCalledWith('/users', { user: values }, {})
+
+      expect(dispatch).toHaveBeenCalledWith(
+        appError.actions.setAppError('boom')
+      )
+
+      putSpy.mockRestore()
     })
   })
 })

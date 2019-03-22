@@ -1,4 +1,4 @@
-import { getProfiles } from './actions'
+import { getProfiles, updateUser } from './actions'
 import { profile } from './slice'
 
-export { profile, getProfiles }
+export { profile, getProfiles, updateUser }

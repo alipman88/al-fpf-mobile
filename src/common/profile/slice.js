@@ -31,6 +31,13 @@ export const profile = createSlice({
     setCurrentProfileId: (state, action) => ({
       ...state,
       currentProfileId: action.payload
+    }),
+    setValueInUserData: (state, { payload }) => ({
+      ...state,
+      user: {
+        ...state.user,
+        [payload.key]: payload.value
+      }
     })
   },
   extraReducers: {

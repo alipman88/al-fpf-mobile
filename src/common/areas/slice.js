@@ -70,6 +70,7 @@ areas.selectors = {
     [path],
     areas => areas.neighboringAreas
   ),
+  // returns home forums & neighboring forums
   getFullAreasList: createSelector(
     [path],
     areas => {
