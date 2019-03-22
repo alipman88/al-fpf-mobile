@@ -71,6 +71,5 @@ export class ProfileTypes extends React.Component {
 
 ProfileTypes.propTypes = {
   setNewUserByKey: PropTypes.func.isRequired,
-  navigation: PropTypes.object.isRequired,
-  user: PropTypes.object
+  navigation: PropTypes.object.isRequired
 }

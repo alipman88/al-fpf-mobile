@@ -11,7 +11,7 @@ export const ProfileTypeContainer = styled.View`
 export const ProfileTypePill = styled(Pill)`
   background-color: #fff;
   border-color: ${({ active }) => (active ? '#f29426' : '#869ba5')};
-  borderwidth: 2;
+  border-width: 2;
   margin-bottom: 7;
   margin-top: 16;
   padding-vertical: 14;
@@ -34,5 +34,5 @@ export const ProfileTypeText = styled(Text)`
   margin-bottom: ${({ extraMargin }) => (extraMargin ? 25 : 0)};
 `
 export const CheckBox = styled.Image`
-  tintcolor: #000;
+  tint-color: #000;
 `
