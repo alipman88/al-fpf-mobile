@@ -77,7 +77,13 @@ export const Tabs = createBottomTabNavigator(
     }
   },
   {
-    initialRouteName: 'Forum'
+    initialRouteName: 'Forum',
+    tabBarOptions: {
+      tabStyle: {
+        flexDirection: 'column',
+        justifyContent: 'space-around'
+      }
+    }
   }
 )
 
