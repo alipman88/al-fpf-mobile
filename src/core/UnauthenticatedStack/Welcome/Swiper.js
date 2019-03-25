@@ -33,7 +33,7 @@ export const SwiperComponent = ({ navigation, setShouldDisplay }) => {
       dot={<InactiveDot />}
       activeDot={<ActiveDot />}
       paginationStyle={{
-        bottom: 135
+        bottom: 40
       }}
     >
       <Slide>
@@ -58,7 +58,12 @@ export const SwiperComponent = ({ navigation, setShouldDisplay }) => {
         <Bird source={yellowBird} left />
       </Slide>
       <Slide>
-        <SlideButton onPress={handleLoginNavigation} width={250} tall>
+        <SlideButton
+          onPress={handleLoginNavigation}
+          width={250}
+          tall
+          borderColor='#f29426'
+        >
           I am already an FPF member
         </SlideButton>
         <ButtonSpacer />
@@ -66,6 +71,7 @@ export const SwiperComponent = ({ navigation, setShouldDisplay }) => {
           onPress={() => navigation.navigate('SignUp')}
           width={250}
           color='#f29426'
+          borderColor='#f29426'
           bgColor='#fff'
           tall
           border

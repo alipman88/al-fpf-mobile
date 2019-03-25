@@ -1,19 +1,19 @@
 import { createStackNavigator } from 'react-navigation'
 
 import { Login } from './Login'
+import { MapScreen } from './SignUp/MapScreen'
 import { Welcome } from './Welcome'
-import { Map } from './SignUp/Map'
 import { ProfileTypes } from './SignUp/ProfileTypes'
 
 export const UnauthenticatedStack = createStackNavigator(
   {
     Welcome,
     Login,
-    Map,
+    MapScreen,
     ProfileTypes
   },
   {
-    initialRouteName: 'ProfileTypes',
+    initialRouteName: 'Welcome',
     defaultNavigationOptions: {
       headerTransparent: true,
       headerStyle: {

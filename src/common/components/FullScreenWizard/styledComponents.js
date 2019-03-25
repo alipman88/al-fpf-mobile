@@ -25,7 +25,7 @@ export const Divider = styled.Image`
 
 export const TopContainer = styled.View`
   background-color: #fff;
-  padding-top: 25;
+  padding-top: 10;
   padding-bottom: 18;
   z-index: 100;
 `

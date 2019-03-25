@@ -50,6 +50,7 @@
 		9A9E0B9E224127CF00163B03 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9A9E0B71224127CE00163B03 /* GoogleService-Info.plist */; };
 		9AD2E5EB2204AE9B0065600F /* libRNSensitiveInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD2E5EA2204AE8E0065600F /* libRNSensitiveInfo.a */; };
 		A31A9C07AC8E48C5A15E034F /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 64016891F8CD42D88B3017AB /* libRNGestureHandler.a */; };
+		A7EF2A61905A4FBEA0DB8C3F /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EB6FC9BE9F4B7A9F4FAD9F /* libAirMaps.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		C4BEDA7503734CEEB59E5596 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = FA174A7985C3493EAEB93EEB /* ProximaNova-Regular.otf */; };
 		CB5648833EA2423591E20C92 /* libReactNativeConfig-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6CD66389FFD4D3E950D05ED /* libReactNativeConfig-tvOS.a */; };
@@ -297,6 +298,13 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		9A1681AF224431930036E2F1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BB78DA607C14431B9A1286CE /* AirMaps.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 11FA5C511C4A1296003AC2EE;
+			remoteInfo = AirMaps;
+		};
 		9A2CEBF02215D11C006483CF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9A2CEBEB2215D11C006483CF /* RNDeviceInfo.xcodeproj */;
@@ -410,6 +418,7 @@
 		2D02E47B1E0B4A5D006451C7 /* FrontPorchForum-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FrontPorchForum-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* FrontPorchForum-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FrontPorchForum-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		58EB6FC9BE9F4B7A9F4FAD9F /* libAirMaps.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAirMaps.a; sourceTree = "<group>"; };
 		3087E8742242B3E10045DF54 /* FrontPorchForum.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = FrontPorchForum.entitlements; path = FrontPorchForum/FrontPorchForum.entitlements; sourceTree = "<group>"; };
 		578940B65348189E4E3DB530 /* Pods-FrontPorchForumTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FrontPorchForumTests.debug.xcconfig"; path = "Target Support Files/Pods-FrontPorchForumTests/Pods-FrontPorchForumTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
@@ -427,6 +436,7 @@
 		9AD2E5E52204AE8E0065600F /* RNSensitiveInfo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSensitiveInfo.xcodeproj; path = "../node_modules/react-native-sensitive-info/ios/RNSensitiveInfo.xcodeproj"; sourceTree = "<group>"; };
 		9AEE2480223C1E3500753810 /* libFirebaseCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
+		BB78DA607C14431B9A1286CE /* AirMaps.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/lib/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
 		C6CD66389FFD4D3E950D05ED /* libReactNativeConfig-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libReactNativeConfig-tvOS.a"; sourceTree = "<group>"; };
 		C8554996E77A4AAC947ED9A1 /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
 		D5469A436D0FED1BA46BAC29 /* Pods-FrontPorchForum.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FrontPorchForum.release.xcconfig"; path = "Target Support Files/Pods-FrontPorchForum/Pods-FrontPorchForum.release.xcconfig"; sourceTree = "<group>"; };
@@ -470,6 +480,7 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				1C735EB7A9A44BE6A0F69240 /* libReactNativeConfig.a in Frameworks */,
 				A31A9C07AC8E48C5A15E034F /* libRNGestureHandler.a in Frameworks */,
+				A7EF2A61905A4FBEA0DB8C3F /* libAirMaps.a in Frameworks */,
 				879C9729AD464C38A4844398 /* libRNFirebase.a in Frameworks */,
 				F91104659A22928035DB0BAA /* libPods-FrontPorchForum.a in Frameworks */,
 			);
@@ -684,6 +695,7 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				8E64BD6A31F548FF8A269EBA /* ReactNativeConfig.xcodeproj */,
 				253516970FCB4906A990C2E4 /* RNGestureHandler.xcodeproj */,
+				BB78DA607C14431B9A1286CE /* AirMaps.xcodeproj */,
 				E3C8CA53D06D40E8B2D76E5A /* RNFirebase.xcodeproj */,
 			);
 			name = Libraries;
@@ -727,6 +739,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		9A1681AC224431920036E2F1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9A1681B0224431930036E2F1 /* libAirMaps.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		9A2CEBEC2215D11C006483CF /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -758,6 +778,7 @@
 				ECE79D427B77446784A20CD1 /* libReactNativeConfig.a */,
 				C6CD66389FFD4D3E950D05ED /* libReactNativeConfig-tvOS.a */,
 				64016891F8CD42D88B3017AB /* libRNGestureHandler.a */,
+				58EB6FC9BE9F4B7A9F4FAD9F /* libAirMaps.a */,
 				C8554996E77A4AAC947ED9A1 /* libRNFirebase.a */,
 			);
 			name = "Recovered References";
@@ -929,6 +950,10 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 9A1681AC224431920036E2F1 /* Products */;
+					ProjectRef = BB78DA607C14431B9A1286CE /* AirMaps.xcodeproj */;
+				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
@@ -1233,6 +1258,13 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		9A1681B0224431930036E2F1 /* libAirMaps.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAirMaps.a;
+			remoteRef = 9A1681AF224431930036E2F1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		9A2CEBF12215D11C006483CF /* libRNDeviceInfo.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1515,6 +1547,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = FrontPorchForumTests/Info.plist;
@@ -1551,6 +1584,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = FrontPorchForumTests/Info.plist;
@@ -1589,6 +1623,7 @@
 					"$(SRCROOT)/../../React/**",
 					"$(SRCROOT)/../react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = FrontPorchForum/Info.plist;
@@ -1623,6 +1658,7 @@
 					"$(SRCROOT)/../../React/**",
 					"$(SRCROOT)/../react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = FrontPorchForum/Info.plist;
@@ -1659,6 +1695,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = "FrontPorchForum-tvOS/Info.plist";
@@ -1698,6 +1735,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = "FrontPorchForum-tvOS/Info.plist";
@@ -1736,6 +1774,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = "FrontPorchForum-tvOSTests/Info.plist";
@@ -1774,6 +1813,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = "FrontPorchForum-tvOSTests/Info.plist";

@@ -5266,6 +5266,10 @@ react-native-loading-spinner-overlay@^1.0.1:
   dependencies:
     prop-types "^15.6.2"
 
+"react-native-maps@git+https://github.com/react-native-community/react-native-maps#v0.24-rc1":
+  version "0.23.0"
+  resolved "git+https://github.com/react-native-community/react-native-maps#6c225af612d4681a00d4849b60774d7c6426835e"
+
 react-native-modal-datetime-picker@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/react-native-modal-datetime-picker/-/react-native-modal-datetime-picker-6.0.0.tgz#8018994524122ad48fd6bc66f26f623c75a49fb3"

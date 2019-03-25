@@ -21,6 +21,7 @@ export const FullScreenWizard = ({
   children,
   onBackPress,
   onNextPress,
+  nextLabel,
   steps,
   currentStep,
   withPadding
@@ -28,7 +29,6 @@ export const FullScreenWizard = ({
   const navButtons = (
     <NavButtonWrapper>
       <Button
-        width={100}
         onPress={onBackPress}
         bgColor={'rgba(0,0,0,0)'}
         iconNameLeft='keyboard-arrow-left'
@@ -38,12 +38,11 @@ export const FullScreenWizard = ({
       </Button>
 
       <Button
-        width={150}
         onPress={onNextPress}
         iconNameRight='keyboard-arrow-right'
         iconRight
       >
-        Continue
+        {nextLabel}
       </Button>
     </NavButtonWrapper>
   )
@@ -64,7 +63,7 @@ export const FullScreenWizard = ({
   return (
     <ScreenContainer
       grassBackground
-      grassHeight={110}
+      grassHeight={80}
       grassControls={navButtons}
       grassBgFixed
       withPadding={withPadding}
@@ -78,8 +77,13 @@ export const FullScreenWizard = ({
 FullScreenWizard.propTypes = {
   children: PropTypes.node,
   currentStep: PropTypes.number,
+  nextLabel: PropTypes.string,
   onBackPress: PropTypes.func.isRequired,
   onNextPress: PropTypes.func.isRequired,
   steps: PropTypes.number,
   withPadding: PropTypes.bool
+}
+
+FullScreenWizard.propTypes = {
+  nextLabel: 'Continue'
 }
