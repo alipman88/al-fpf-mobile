@@ -6,6 +6,7 @@ import { posts } from '@common/posts/slice'
 import { profile } from '@common/profile/slice'
 import { appSettings } from '@common/appSettings'
 import { searchHistory } from '@core/Authenticated/Tabs/Search/SearchHistory/slice'
+import { welcome } from '@core/UnauthenticatedStack/Welcome/slice'
 
 export default combineReducers({
   appError: appError.reducer,
@@ -14,5 +15,6 @@ export default combineReducers({
   posts: posts.reducer,
   profile: profile.reducer,
   appSettings: appSettings.reducer,
-  searchHistory: searchHistory.reducer
+  searchHistory: searchHistory.reducer,
+  welcome: welcome.reducer
 })

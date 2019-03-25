@@ -90,6 +90,7 @@ export const LoginComponent = ({ navigation, setAccessToken }) => {
               setFieldValue={setFieldValue}
               handleSubmit={handleSubmit}
               isSubmitting={isSubmitting}
+              navigation={navigation}
             />
           )}
         />

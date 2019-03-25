@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { TouchableOpacity } from 'react-native'
 import Spinner from 'react-native-loading-spinner-overlay'
 
 import { TextInput } from '@components/TextInput'
@@ -12,7 +13,9 @@ import {
   FieldContainer,
   FormContainer,
   Logo,
-  LogoContainer
+  LogoContainer,
+  BottomText,
+  ButtonSpacer
 } from './styledComponents'
 
 export const LoginFields = ({
@@ -22,7 +25,8 @@ export const LoginFields = ({
   isSubmitting,
   setFieldTouched,
   touched,
-  values
+  values,
+  navigation
 }) => {
   return (
     <Container>
@@ -54,6 +58,10 @@ export const LoginFields = ({
         <Button onPress={handleSubmit} disabled={isSubmitting}>
           Log in
         </Button>
+        <ButtonSpacer />
+        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+          <BottomText>Don't have an account? SignUp</BottomText>
+        </TouchableOpacity>
       </FormContainer>
     </Container>
   )
@@ -66,5 +74,6 @@ LoginFields.propTypes = {
   setFieldTouched: PropTypes.func.isRequired,
   setFieldValue: PropTypes.func.isRequired,
   touched: PropTypes.object.isRequired,
-  values: PropTypes.object.isRequired
+  values: PropTypes.object.isRequired,
+  navigation: PropTypes.object.isRequired
 }

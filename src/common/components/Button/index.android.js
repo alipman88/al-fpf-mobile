@@ -7,9 +7,12 @@ import { ButtonText, WrapperStyles } from './styledComponents'
 
 const Wrapper = styled.View`
   ${WrapperStyles}
-  ${({ fullWidth }) => (fullWidth ? 'width: 100%;' : '')}
   background-color: ${({ bgColor }) => bgColor || '#f29426'};
-  ${({ width }) => width || 'inherit'};
+  border-width: 1;
+  border-color: #f29426;
+  width: ${({ width }) => width || 'auto'};
+  ${({ tall }) => tall && 'padding-vertical: 20;'}
+  ${({ fullWidth }) => fullWidth && 'width: 100%;'}
 `
 
 export const Button = ({
@@ -23,11 +26,17 @@ export const Button = ({
   iconRight,
   iconNameRight,
   iconLeft,
-  iconNameLeft
+  iconNameLeft,
+  tall
 }) => {
   return (
     <TouchableNativeFeedback disabled={disabled} onPress={onPress}>
-      <Wrapper bgColor={bgColor} fullWidth={fullWidth} width={width}>
+      <Wrapper
+        bgColor={bgColor}
+        fullWidth={fullWidth}
+        width={width}
+        tall={tall}
+      >
         {iconLeft && iconNameLeft && (
           <Icon name={iconNameLeft} color={color || '#502c02'} size={26} />
         )}
@@ -45,6 +54,7 @@ Button.propTypes = {
   children: PropTypes.node,
   disabled: PropTypes.bool,
   fullWidth: PropTypes.bool,
+  tall: PropTypes.bool,
   width: PropTypes.number,
   color: PropTypes.string,
   iconRight: PropTypes.bool,

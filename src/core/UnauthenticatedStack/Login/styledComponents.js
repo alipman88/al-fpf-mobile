@@ -52,3 +52,7 @@ export const Version = styled(Text)`
   text-align: center;
   margin-top: 10;
 `
+export const ButtonSpacer = styled.View`
+  height: 10;
+  width: 100%;
+`

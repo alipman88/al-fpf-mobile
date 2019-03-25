@@ -1,5 +1,4 @@
 import React from 'react'
-import { Linking, TouchableOpacity } from 'react-native'
 import { shallow } from 'enzyme'
 import { LoginFields } from '../LoginFields'
 import { TextInput } from '@components/TextInput'
