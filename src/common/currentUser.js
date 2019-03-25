@@ -4,17 +4,23 @@ import { resetAction } from '@common/resetAction'
 export const currentUser = createSlice({
   slice: 'currentUser',
   initialState: {
-    accessToken: ''
+    accessToken: '',
+    fcmToken: ''
   },
   reducers: {
     setAccessToken: (state, action) => ({
       ...state,
       accessToken: action.payload
+    }),
+    setFCMToken: (state, action) => ({
+      ...state,
+      fcmToken: action.payload
     })
   },
   extraReducers: {
     [resetAction]: state => ({
-      accessToken: ''
+      accessToken: '',
+      fcmToken: ''
     })
   }
 })
@@ -24,5 +30,9 @@ currentUser.selectors = {
   getAccessToken: createSelector(
     ['secured.currentUser'],
     currentUser => currentUser.accessToken
+  ),
+  getFCMToken: createSelector(
+    ['secured.currentUser'],
+    currentUser => currentUser.fcmToken
   )
 }

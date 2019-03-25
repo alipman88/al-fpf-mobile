@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { RefreshControl, ScrollView } from 'react-native'
 import get from 'lodash/get'
+import firebase from 'react-native-firebase'
 
 import { ScreenContainer } from '@components/ScreenContainer'
 import { ForumContainer } from './styledComponents'
@@ -11,10 +12,57 @@ import { InThisIssue } from './components/InThisIssue'
 import { OtherIssues } from './components/OtherIssues'
 import { NeighboringContent } from './components/NeighboringContent'
 
+import { createChannel, displayNotification } from '@common/notifications'
+
 export class Forum extends React.Component {
-  componentDidMount() {
+  async componentDidMount() {
     this.props.setupForumData()
     this.setTitleFromArea()
+
+    const fcmToken = await firebase.messaging().getToken()
+    if (this.props.fcmToken !== fcmToken) {
+      this.props.sendNewFCMToken(fcmToken)
+    }
+
+    this.onTokenRefreshListener = firebase
+      .messaging()
+      .onTokenRefresh(async fcmToken => {
+        this.props.sendNewFCMToken(fcmToken)
+      })
+
+    let enabled = await firebase.messaging().hasPermission()
+    if (!enabled) {
+      try {
+        await firebase.messaging().requestPermission()
+        enabled = true
+      } catch (error) {
+        // User has rejected permissions. We dont do anything, because that's fine
+      }
+    }
+
+    if (enabled) {
+      const channel = createChannel()
+
+      this.notificationListener = firebase
+        .notifications()
+        .onNotification(notification => {
+          console.log('onNotification', notification)
+          displayNotification(
+            channel,
+            notification._notificationId,
+            notification._title,
+            notification._body,
+            notification._data
+          )
+        })
+    }
+  }
+
+  componentWillUnmount() {
+    this.onTokenRefreshListener()
+    if (this.notificationListener) {
+      this.notificationListener()
+    }
   }
 
   fetchIssues(prevProps) {
@@ -164,16 +212,19 @@ export class Forum extends React.Component {
 }
 
 Forum.propTypes = {
+  accessToken: PropTypes.string.isRequired,
   ads: PropTypes.object.isRequired,
   areas: PropTypes.array.isRequired,
   currentAreaId: PropTypes.number.isRequired,
   currentIssueId: PropTypes.number.isRequired,
+  fcmToken: PropTypes.string,
   getPosts: PropTypes.func.isRequired,
   getIssues: PropTypes.func.isRequired,
   issues: PropTypes.array.isRequired,
   loading: PropTypes.bool,
   navigation: PropTypes.object.isRequired,
   neighboringAreas: PropTypes.object.isRequired,
+  sendNewFCMToken: PropTypes.func.isRequired,
   setCurrentAreaId: PropTypes.func.isRequired,
   setCurrentIssueId: PropTypes.func.isRequired,
   setupForumData: PropTypes.func.isRequired,

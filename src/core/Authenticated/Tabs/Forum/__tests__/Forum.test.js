@@ -1,4 +1,5 @@
 import React from 'react'
+import firebase from 'react-native-firebase'
 import { ForumContainer } from '../styledComponents'
 import { shallow } from 'enzyme'
 import { Forum } from '../Forum'
@@ -8,12 +9,14 @@ import { NeighboringContent } from '../components/NeighboringContent'
 
 describe('Forum', () => {
   const defaultProps = {
+    accessToken: 'abc',
     setupForumData: jest.fn(),
     navigation: {
       setParams: jest.fn(),
       getParam: jest.fn()
     },
-    setAccessToken: jest.fn(),
+    fcmToken: '',
+    sendNewFCMToken: jest.fn(),
     currentIssueId: 12,
     currentAreaId: 1,
     issues: [{ id: 12 }, { id: 13 }],
@@ -81,7 +84,7 @@ describe('Forum', () => {
 
   afterEach(() => {
     defaultProps.setupForumData.mockReset()
-    defaultProps.setAccessToken.mockReset()
+    defaultProps.sendNewFCMToken.mockReset()
     defaultProps.getIssues.mockReset()
     defaultProps.getPosts.mockReset()
     defaultProps.setCurrentIssueId.mockReset()
@@ -92,6 +95,31 @@ describe('Forum', () => {
     shallow(<Forum {...defaultProps} />)
 
     expect(defaultProps.setupForumData).toHaveBeenCalled()
+  })
+
+  test('calls sendNewFCMToken when firebase returns a different token', async () => {
+    const wrapper = shallow(<Forum {...defaultProps} />)
+    await wrapper.instance().componentDidMount()
+    expect(defaultProps.sendNewFCMToken).toHaveBeenCalledWith('fcmToken')
+  })
+
+  test('sets up notification listener', async () => {
+    const wrapper = shallow(<Forum {...defaultProps} />)
+    await wrapper.instance().componentDidMount()
+    expect(firebase.notifications().onNotification).toHaveBeenCalled()
+  })
+
+  test('user has not given messaging permission, should ask firebase for it', async () => {
+    const spy = jest
+      .spyOn(firebase.messaging(), 'hasPermission')
+      .mockReturnValue(false)
+
+    const wrapper = shallow(<Forum {...defaultProps} />)
+    await wrapper.instance().componentDidMount()
+    expect(firebase.messaging().requestPermission).toHaveBeenCalled()
+    expect(firebase.notifications().onNotification).toHaveBeenCalled()
+
+    spy.mockRestore()
   })
 
   test('it renders some posts', () => {

@@ -6,6 +6,8 @@ import { getIssues, issues } from '@common/issues'
 import { getPosts, posts } from '@common/posts'
 import { setupForumData } from './setupForumData.js'
 
+import { sendNewFCMToken } from './actions'
+
 const mapStateToProps = state => {
   const areaId = areas.selectors.getCurrentAreaId(state)
   return {
@@ -17,6 +19,8 @@ const mapStateToProps = state => {
     posts: posts.selectors.getPostsByIssue(state),
     shared_posts: posts.selectors.getSharedPostsByIssue(state),
     ads: posts.selectors.getAdsByIssue(state),
+    accessToken: currentUser.selectors.getAccessToken(state),
+    fcmToken: currentUser.selectors.getFCMToken(state),
     loading:
       areas.selectors.getLoading(state) ||
       issues.selectors.getLoading(state) ||
@@ -31,6 +35,7 @@ export const Forum = connect(
     getPosts,
     setAccessToken: currentUser.actions.setAccessToken,
     setupForumData,
+    sendNewFCMToken,
     setCurrentIssueId: issues.actions.setCurrentIssueId,
     setCurrentAreaId: areas.actions.setCurrentAreaId
   }

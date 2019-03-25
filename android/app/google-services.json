@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "98850320098",
+    "firebase_url": "https://fpf-mobile-staging.firebaseio.com",
+    "project_id": "fpf-mobile-staging",
+    "storage_bucket": "fpf-mobile-staging.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:98850320098:android:02332c66e1684f11",
+        "android_client_info": {
+          "package_name": "com.frontporchforum"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "98850320098-gbd2kcgfpe5h9l0anhpjijks9c3nistm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTfGCBxChX-RBjs_44Y05j71xOoVllhqk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
