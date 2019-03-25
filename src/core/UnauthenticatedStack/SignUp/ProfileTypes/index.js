@@ -1,16 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { FullScreenWizard } from '@components/FullScreenWizard'
-import { Text } from '@components/Text'
+import { connect } from 'react-redux'
+import { ProfileTypes as ProfileTypesComponent } from './ProfileTypes'
+import { newUser } from '../newUser'
 
-export class ProfileTypes extends React.Component {
-  render() {
-    return (
-      <FullScreenWizard>
-        <Text>Content here!</Text>
-      </FullScreenWizard>
-    )
+export const ProfileTypes = connect(
+  undefined,
+  {
+    setNewUserByKey: newUser.actions.setNewUserByKey
   }
-}
-
-ProfileTypes.PropTypes = {}
+)(ProfileTypesComponent)
