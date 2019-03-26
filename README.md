@@ -16,16 +16,6 @@ Add the `ANDROID_HOME` variable to your .bash_profile or .bashrc
 export ANDROID_HOME=$HOME/Library/Android/sdk
 ```
 
-**Install iOS dependenices**
-
-```
-sudo gem install cocoapods
-cd ios
-pod install
-```
-
-Installing the pods might take some time
-
 ### JS tools
 
 Install watchman so the node server that delivers our JS code can work.

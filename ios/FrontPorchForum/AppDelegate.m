@@ -9,7 +9,7 @@
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
-#import <Firebase.h>
+#import "Firebase.h"
 
 #import "RNFirebaseMessaging.h"
 #import "RNFirebaseNotifications.h"
