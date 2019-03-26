@@ -14,6 +14,7 @@ export const PostContainerBordered = styled.View`
   margin-bottom: 10;
   display: flex;
   justify-content: space-between;
+  elevation: 1;
 `
 export const PostBodyContainer = styled.View`
   padding-vertical: ${({ hasBorder }) => (hasBorder ? '16px' : '0')};

@@ -6,9 +6,10 @@ export const NavIcon = ({ source }) => (
   <Image
     source={source}
     style={{
-      width: 20,
+      width: 35,
       height: 20,
-      marginTop: 4
+      marginTop: 4,
+      resizeMode: 'contain'
     }}
   />
 )

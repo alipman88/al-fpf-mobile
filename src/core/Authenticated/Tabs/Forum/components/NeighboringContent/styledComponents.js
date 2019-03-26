@@ -8,6 +8,7 @@ export const Card = styled.View`
   background-color: #fff;
   padding-horizontal: 16;
   padding-vertical: 30;
+  margin-bottom: 10;
 `
 
 export const SectionHeader = styled(TextSemibold)`
@@ -25,6 +26,7 @@ export const Divider = styled.View`
 `
 
 export const NewsHeader = styled(TextSemibold)`
+  color: #000000;
   font-size: 16;
 `
 
