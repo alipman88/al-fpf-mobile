@@ -12,6 +12,7 @@
 		00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302C01ABCB91800DB3ED1 /* libRCTImage.a */; };
 		00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
+		0855C26C0364C7A597146C02 /* libPods-FrontPorchForum.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 88499D6E0FD7B1F7F9446F12 /* libPods-FrontPorchForum.a */; };
 		11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
@@ -53,7 +54,6 @@
 		CB5648833EA2423591E20C92 /* libReactNativeConfig-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6CD66389FFD4D3E950D05ED /* libReactNativeConfig-tvOS.a */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
-		F91104659A22928035DB0BAA /* libPods-FrontPorchForum.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 116E098D3B06FEDC03D0C199 /* libPods-FrontPorchForum.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -390,8 +390,6 @@
 		00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTVibration.xcodeproj; path = "../node_modules/react-native/Libraries/Vibration/RCTVibration.xcodeproj"; sourceTree = "<group>"; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* FrontPorchForumTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FrontPorchForumTests.m; sourceTree = "<group>"; };
-		06E0C92195D6BDCFE33F01CD /* Pods-FrontPorchForumTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FrontPorchForumTests.release.xcconfig"; path = "Target Support Files/Pods-FrontPorchForumTests/Pods-FrontPorchForumTests.release.xcconfig"; sourceTree = "<group>"; };
-		116E098D3B06FEDC03D0C199 /* libPods-FrontPorchForum.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FrontPorchForum.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* FrontPorchForum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FrontPorchForum.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -408,14 +406,15 @@
 		2D02E4901E0B4A5D006451C7 /* FrontPorchForum-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FrontPorchForum-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3087E8742242B3E10045DF54 /* FrontPorchForum.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = FrontPorchForum.entitlements; path = FrontPorchForum/FrontPorchForum.entitlements; sourceTree = "<group>"; };
-		578940B65348189E4E3DB530 /* Pods-FrontPorchForumTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FrontPorchForumTests.debug.xcconfig"; path = "Target Support Files/Pods-FrontPorchForumTests/Pods-FrontPorchForumTests.debug.xcconfig"; sourceTree = "<group>"; };
+		380AF23A0EF2C71D1BBDA8EC /* Pods-FrontPorchForum.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FrontPorchForum.release.xcconfig"; path = "Pods/Target Support Files/Pods-FrontPorchForum/Pods-FrontPorchForum.release.xcconfig"; sourceTree = "<group>"; };
+		494A3168B3FD3DA876371B9B /* Pods-FrontPorchForum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FrontPorchForum.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FrontPorchForum/Pods-FrontPorchForum.debug.xcconfig"; sourceTree = "<group>"; };
 		58EB6FC9BE9F4B7A9F4FAD9F /* libAirMaps.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAirMaps.a; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		64016891F8CD42D88B3017AB /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
 		6A77E211D5364283A316FC0E /* ProximaNova-Thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "ProximaNova-Thin.otf"; path = "../src/assets/fonts/ProximaNova-Thin.otf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
-		82EE2F738083D29B71AFDF24 /* Pods-FrontPorchForum.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FrontPorchForum.release.xcconfig"; path = "Pods/Target Support Files/Pods-FrontPorchForum/Pods-FrontPorchForum.release.xcconfig"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		88499D6E0FD7B1F7F9446F12 /* libPods-FrontPorchForum.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FrontPorchForum.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E64BD6A31F548FF8A269EBA /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
 		9A0F91E3221DFCDB009A6B45 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		9A15BB6B22259BAF002623F0 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
@@ -429,14 +428,10 @@
 		BB78DA607C14431B9A1286CE /* AirMaps.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/lib/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
 		C6CD66389FFD4D3E950D05ED /* libReactNativeConfig-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libReactNativeConfig-tvOS.a"; sourceTree = "<group>"; };
 		C8554996E77A4AAC947ED9A1 /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
-		D5469A436D0FED1BA46BAC29 /* Pods-FrontPorchForum.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FrontPorchForum.release.xcconfig"; path = "Target Support Files/Pods-FrontPorchForum/Pods-FrontPorchForum.release.xcconfig"; sourceTree = "<group>"; };
 		E3C8CA53D06D40E8B2D76E5A /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
-		EBAE71B9200A21E764A26753 /* libPods-FrontPorchForumTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FrontPorchForumTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECE79D427B77446784A20CD1 /* libReactNativeConfig.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeConfig.a; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		F615B933556A4F6093121706 /* Pods-FrontPorchForum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FrontPorchForum.debug.xcconfig"; path = "Target Support Files/Pods-FrontPorchForum/Pods-FrontPorchForum.debug.xcconfig"; sourceTree = "<group>"; };
-		F724D0C18C974620BBD1BC2B /* Pods-FrontPorchForum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FrontPorchForum.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FrontPorchForum/Pods-FrontPorchForum.debug.xcconfig"; sourceTree = "<group>"; };
 		FA174A7985C3493EAEB93EEB /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "ProximaNova-Regular.otf"; path = "../src/assets/fonts/ProximaNova-Regular.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -464,7 +459,7 @@
 				A31A9C07AC8E48C5A15E034F /* libRNGestureHandler.a in Frameworks */,
 				A7EF2A61905A4FBEA0DB8C3F /* libAirMaps.a in Frameworks */,
 				879C9729AD464C38A4844398 /* libRNFirebase.a in Frameworks */,
-				F91104659A22928035DB0BAA /* libPods-FrontPorchForum.a in Frameworks */,
+				0855C26C0364C7A597146C02 /* libPods-FrontPorchForum.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,8 +615,7 @@
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
-				116E098D3B06FEDC03D0C199 /* libPods-FrontPorchForum.a */,
-				EBAE71B9200A21E764A26753 /* libPods-FrontPorchForumTests.a */,
+				88499D6E0FD7B1F7F9446F12 /* libPods-FrontPorchForum.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -794,14 +788,10 @@
 		F38FF54E4231954941A3920F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F615B933556A4F6093121706 /* Pods-FrontPorchForum.debug.xcconfig */,
-				D5469A436D0FED1BA46BAC29 /* Pods-FrontPorchForum.release.xcconfig */,
-				578940B65348189E4E3DB530 /* Pods-FrontPorchForumTests.debug.xcconfig */,
-				06E0C92195D6BDCFE33F01CD /* Pods-FrontPorchForumTests.release.xcconfig */,
-				F724D0C18C974620BBD1BC2B /* Pods-FrontPorchForum.debug.xcconfig */,
-				82EE2F738083D29B71AFDF24 /* Pods-FrontPorchForum.release.xcconfig */,
+				494A3168B3FD3DA876371B9B /* Pods-FrontPorchForum.debug.xcconfig */,
+				380AF23A0EF2C71D1BBDA8EC /* Pods-FrontPorchForum.release.xcconfig */,
 			);
-			path = Pods;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -811,7 +801,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "FrontPorchForum" */;
 			buildPhases = (
-				858DAF4044637C17A55319ED /* [CP] Check Pods Manifest.lock */,
+				E8BFFB6E55A7D2D6840FA151 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
@@ -1372,7 +1362,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		858DAF4044637C17A55319ED /* [CP] Check Pods Manifest.lock */ = {
+		E8BFFB6E55A7D2D6840FA151 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1448,7 +1438,7 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F615B933556A4F6093121706 /* Pods-FrontPorchForum.debug.xcconfig */;
+			baseConfigurationReference = 494A3168B3FD3DA876371B9B /* Pods-FrontPorchForum.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FrontPorchForum/FrontPorchForum.entitlements;
@@ -1485,7 +1475,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D5469A436D0FED1BA46BAC29 /* Pods-FrontPorchForum.release.xcconfig */;
+			baseConfigurationReference = 380AF23A0EF2C71D1BBDA8EC /* Pods-FrontPorchForum.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FrontPorchForum/FrontPorchForum.entitlements;
