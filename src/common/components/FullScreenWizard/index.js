@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import logoImage from '@assets/images/fpf-logo.png'
+import { HeaderLogo } from '@components/HeaderLogo'
 import { Button } from '@components/Button'
 import { ScreenContainer } from '@components/ScreenContainer'
 import { FormSteps } from '@components/FormSteps'
@@ -10,8 +10,6 @@ import lineDivider from '@assets/images/createAccount/line-divider/accountsetup-
 
 import {
   Divider,
-  Logo,
-  LogoContainer,
   NavButtonWrapper,
   TopContainer,
   TopHeader
@@ -55,9 +53,7 @@ export const FullScreenWizard = ({
         <Divider source={lineDivider} resizeMode='repeat' />
       </TopContainer>
     ) : (
-      <LogoContainer>
-        <Logo source={logoImage} resizeMode='contain' />
-      </LogoContainer>
+      <HeaderLogo />
     )
 
   return (

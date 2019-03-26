@@ -4,13 +4,15 @@ import { Login } from './Login'
 import { MapScreen } from './SignUp/MapScreen'
 import { Welcome } from './Welcome'
 import { ProfileTypes } from './SignUp/ProfileTypes'
+import { EmailVerification } from './SignUp/EmailVerification'
 
 export const UnauthenticatedStack = createStackNavigator(
   {
     Welcome,
     Login,
     MapScreen,
-    ProfileTypes
+    ProfileTypes,
+    EmailVerification
   },
   {
     initialRouteName: 'Welcome',

@@ -2,19 +2,6 @@ import styled from 'styled-components/native'
 import { Text } from '@components/Text'
 import { Button } from '@components/Button'
 
-export const LogoContainer = styled.View`
-  position: absolute;
-  top: -10;
-  left: 0;
-  right: 0;
-  justify-content: center;
-  align-items: center;
-`
-
-export const Logo = styled.Image`
-  width: 150;
-`
-
 export const Image = styled.Image`
   ${({ width }) => width && `width: ${width};`}
   ${({ height }) => height && `height: ${height};`}

@@ -3,10 +3,8 @@ import PropTypes from 'prop-types'
 
 import { SwiperComponent } from './Swiper'
 import { ScreenContainer } from '@components/ScreenContainer'
-import { Logo, LogoContainer } from './styledComponents'
+import { HeaderLogo } from '@components/HeaderLogo'
 import { createResetStackTo } from '@common/utils/navigation'
-
-import logoImage from '@assets/images/fpf-logo.png'
 
 export class Welcome extends React.Component {
   constructor(props) {
@@ -22,9 +20,7 @@ export class Welcome extends React.Component {
     const { navigation, setShouldDisplay } = this.props
     return (
       <ScreenContainer grassBackground grassHeight={110} grassBgFixed>
-        <LogoContainer>
-          <Logo source={logoImage} resizeMode='contain' />
-        </LogoContainer>
+        <HeaderLogo />
         <SwiperComponent
           navigation={navigation}
           setShouldDisplay={setShouldDisplay}
