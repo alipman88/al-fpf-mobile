@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { ProfileTypes as ProfileTypesComponent } from './ProfileTypes'
+import { BasicInfo as BasicInfoComponent } from './BasicInfo'
 import { newUser } from '../newUser'
 
 const mapStateToProps = state => {
@@ -8,9 +8,9 @@ const mapStateToProps = state => {
   }
 }
 
-export const ProfileTypes = connect(
+export const BasicInfo = connect(
   mapStateToProps,
   {
     setNewUserByKey: newUser.actions.setNewUserByKey
   }
-)(ProfileTypesComponent)
+)(BasicInfoComponent)

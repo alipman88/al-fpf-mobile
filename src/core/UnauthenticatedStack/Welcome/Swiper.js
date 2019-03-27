@@ -68,7 +68,7 @@ export const SwiperComponent = ({ navigation, setShouldDisplay }) => {
         </SlideButton>
         <ButtonSpacer />
         <SlideButton
-          onPress={() => navigation.navigate('SignUp')}
+          onPress={() => navigation.navigate('ProfileTypes')}
           width={250}
           color='#f29426'
           borderColor='#f29426'

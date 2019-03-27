@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import { TextInput } from '@components/TextInput'
-
 import { Icon } from './styledComponents'
-
 import passwordEyeActive from '@assets/images/createAccount/password-eyes/active.png'
 import passwordEyeInactive from '@assets/images/createAccount/password-eyes/inActive.png'
 
@@ -20,14 +19,26 @@ export class PasswordInput extends React.Component {
     })
   }
   render() {
-    const { setFieldValue, setFieldTouched, error, value, touched } = this.props
+    const {
+      setFieldValue,
+      setFieldTouched,
+      error,
+      label,
+      value,
+      touched,
+      required,
+      fieldKey
+    } = this.props
+
+    const key = fieldKey || 'password'
 
     return (
       <TextInput
-        label='Password'
+        label={label || 'Password'}
         error={error}
         value={value}
         touched={touched}
+        required={required}
         tapIcon={
           <Icon
             source={
@@ -37,8 +48,8 @@ export class PasswordInput extends React.Component {
         }
         secureTextEntry={!this.state.showPassword}
         onTapIcon={() => this.toggleShowPassword()}
-        onChangeText={value => setFieldValue('password', value)}
-        onBlur={() => setFieldTouched('password')}
+        onChangeText={value => setFieldValue(key, value)}
+        onBlur={() => setFieldTouched(key)}
       />
     )
   }
@@ -47,7 +58,10 @@ export class PasswordInput extends React.Component {
 PasswordInput.propTypes = {
   error: PropTypes.string,
   value: PropTypes.string,
+  label: PropTypes.string,
   touched: PropTypes.bool,
+  required: PropTypes.bool,
+  fieldKey: PropTypes.string,
   setFieldValue: PropTypes.func,
   setFieldTouched: PropTypes.func
 }

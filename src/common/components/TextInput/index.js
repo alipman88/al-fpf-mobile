@@ -8,7 +8,11 @@ import {
   IconContainer,
   ForwardIcon
 } from './styledComponents'
-import { FormFieldLabel } from '@components/FormFieldLabel'
+import {
+  FormFieldLabel,
+  FormFieldLabelWrapper,
+  FormFieldRequired
+} from '@components/FormFieldLabel'
 
 export const TextInput = ({
   autoCapitalize,
@@ -26,11 +30,18 @@ export const TextInput = ({
   onTapIcon,
   tapIcon,
   touched,
+  required,
   error
 }) => {
+  const labelText = Boolean(label) && (
+    <FormFieldLabelWrapper>
+      <FormFieldLabel>{label}</FormFieldLabel>
+      {Boolean(required) && <FormFieldRequired>(Required)</FormFieldRequired>}
+    </FormFieldLabelWrapper>
+  )
   return (
     <Container>
-      {Boolean(label) && <FormFieldLabel>{label}</FormFieldLabel>}
+      {labelText}
       <View>
         <Input
           autoCapitalize={autoCapitalize}
@@ -76,6 +87,7 @@ TextInput.propTypes = {
   returnKeyType: PropTypes.string,
   secureTextEntry: PropTypes.bool,
   touched: PropTypes.bool,
+  required: PropTypes.bool,
   value: PropTypes.string
 }
 

@@ -1,14 +1,12 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { TouchableOpacity } from 'react-native'
-import { profileTypes } from '@common/types/profileTypes'
 import { ProfileTypes } from '../ProfileTypes'
 import { ProfileTypeButton } from '../ProfileTypeButton'
-import { ProfileTypeContainer } from '../styledComponents'
 
 describe('ProfileTypes', () => {
   const defaultProps = {
     setNewUserByKey: jest.fn(),
+    newUser: {},
     navigation: {}
   }
 

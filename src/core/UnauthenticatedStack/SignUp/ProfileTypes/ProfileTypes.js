@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { isEmpty } from 'lodash'
 
 import { profileTypes } from '@common/types/profileTypes'
 import { FullScreenWizard } from '@components/FullScreenWizard'
@@ -13,20 +14,20 @@ export class ProfileTypes extends React.Component {
         buttonText: 'Neighhbor',
         label: 'Personal account, just for me',
         type: profileTypes.NEIGHBOR,
-        active: false
+        active: this.props.newUser.profileType === profileTypes.NEIGHBOR
       },
       {
         buttonText: 'Business/Nonprofit',
         label: 'Business or nonprofit organization',
         type: profileTypes.BUSINESS,
-        active: false
+        active: this.props.newUser.profileType === profileTypes.BUSINESS
       },
       {
         buttonText: 'Government',
         label:
           'Public official, muncipal department, public school, town library, etc.',
         type: profileTypes.GOVERNMENT,
-        active: false
+        active: this.props.newUser.profileType === profileTypes.GOVERNMENT
       }
     ]
   }
@@ -42,7 +43,7 @@ export class ProfileTypes extends React.Component {
   }
 
   render() {
-    const { navigation } = this.props
+    const { navigation, newUser } = this.props
     const profileTypeButtons = this.state.profileOptions.map(profileType => {
       return (
         <ProfileTypeButton
@@ -53,10 +54,13 @@ export class ProfileTypes extends React.Component {
       )
     })
 
+    const nextButtonDisabled = isEmpty(newUser.profileType)
+
     return (
       <FullScreenWizard
         onBackPress={() => navigation.goBack()}
-        onNextPress={() => navigation.navigate('Login')}
+        onNextPress={() => navigation.navigate('BasicInfo')}
+        nextDisabled={nextButtonDisabled}
       >
         <ProfileTypeContainer>
           <ProfileTypeText isHeader>
@@ -71,5 +75,6 @@ export class ProfileTypes extends React.Component {
 
 ProfileTypes.propTypes = {
   setNewUserByKey: PropTypes.func.isRequired,
-  navigation: PropTypes.object.isRequired
+  navigation: PropTypes.object.isRequired,
+  newUser: PropTypes.object
 }

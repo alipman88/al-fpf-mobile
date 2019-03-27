@@ -28,6 +28,7 @@ export const Button = ({
   iconNameRight,
   iconLeft,
   iconNameLeft,
+  hasBorder,
   tall
 }) => {
   return (
@@ -62,6 +63,7 @@ Button.propTypes = {
   color: PropTypes.string,
   iconRight: PropTypes.bool,
   iconLeft: PropTypes.bool,
+  hasBorder: PropTypes.bool,
   iconNameRight: PropTypes.string,
   iconNameLeft: PropTypes.string,
   onPress: PropTypes.func.isRequired

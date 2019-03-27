@@ -22,14 +22,19 @@ export const FullScreenWizard = ({
   nextLabel,
   steps,
   currentStep,
-  withPadding
+  withPadding,
+  topPadding,
+  grey,
+  nextDisabled
 }) => {
   const navButtons = (
     <NavButtonWrapper>
       <Button
         onPress={onBackPress}
         bgColor={'rgba(0,0,0,0)'}
+        hasBorder={false}
         iconNameLeft='keyboard-arrow-left'
+        width={118}
         iconLeft
       >
         Back
@@ -38,19 +43,22 @@ export const FullScreenWizard = ({
       <Button
         onPress={onNextPress}
         iconNameRight='keyboard-arrow-right'
+        disabled={nextDisabled}
+        bgColor={nextDisabled ? 'rgba(242, 148, 38, 0.5)' : null}
+        width={118}
         iconRight
       >
-        {nextLabel}
+        {nextLabel || 'Continue'}
       </Button>
     </NavButtonWrapper>
   )
 
   const topSection =
     Boolean(currentStep) && Boolean(steps) ? (
-      <TopContainer>
+      <TopContainer topPadding={topPadding}>
         <TopHeader>Create Account</TopHeader>
         <FormSteps steps={steps} currentStep={currentStep} />
-        <Divider source={lineDivider} resizeMode='repeat' />
+        <Divider source={lineDivider} resizeMode='stretch' />
       </TopContainer>
     ) : (
       <HeaderLogo />
@@ -63,6 +71,7 @@ export const FullScreenWizard = ({
       grassControls={navButtons}
       grassBgFixed
       withPadding={withPadding}
+      grey={grey}
     >
       {topSection}
       {children}
@@ -77,9 +86,8 @@ FullScreenWizard.propTypes = {
   onBackPress: PropTypes.func.isRequired,
   onNextPress: PropTypes.func.isRequired,
   steps: PropTypes.number,
-  withPadding: PropTypes.bool
-}
-
-FullScreenWizard.propTypes = {
-  nextLabel: 'Continue'
+  withPadding: PropTypes.bool,
+  topPadding: PropTypes.number,
+  grey: PropTypes.bool,
+  nextDisabled: PropTypes.bool
 }

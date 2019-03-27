@@ -3,12 +3,7 @@ import { shallow } from 'enzyme'
 import { TouchableOpacity } from 'react-native'
 import { ProfileTypeButton } from '../ProfileTypeButton'
 
-import {
-  ProfileTypePill,
-  PillText,
-  ProfileTypeText,
-  CheckBox
-} from '../styledComponents'
+import { ProfileTypePill } from '../styledComponents'
 
 describe('ProfileTypeButton', () => {
   const defaultProps = {

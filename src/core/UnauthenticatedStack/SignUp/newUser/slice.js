@@ -1,7 +1,12 @@
 import { createSlice, createSelector } from 'redux-starter-kit'
 
 const initialState = {
-  profileType: 'neighbor'
+  profileType: null,
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  passwordConfirm: ''
 }
 
 export const newUser = createSlice({

@@ -59,7 +59,7 @@ export const LoginFields = ({
           Log in
         </Button>
         <ButtonSpacer />
-        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+        <TouchableOpacity onPress={() => navigation.navigate('ProfileTypes')}>
           <BottomText>Don't have an account? SignUp</BottomText>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('ProfileTypes')}>
