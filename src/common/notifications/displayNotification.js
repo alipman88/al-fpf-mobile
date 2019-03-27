@@ -6,6 +6,7 @@ export const displayNotification = (channel, id, title, body, data) => {
     .setTitle(title)
     .setBody(body)
     .setData(data)
+    .setSound('default')
 
   notification.android.setChannelId(channel._channelId)
 

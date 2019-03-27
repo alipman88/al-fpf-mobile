@@ -38,6 +38,9 @@ notifications.Notification = function() {
     },
     setData: function() {
       return this
+    },
+    setSound: function() {
+      return this
     }
   }
 }
