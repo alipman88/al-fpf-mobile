@@ -25,7 +25,7 @@ describe('KeyboardAwareScrollView', () => {
     const wrapper = shallow(<KeyboardAwareScrollView />)
     wrapper.instance().keyboardDidShow()
     expect(wrapper.state().keyboardOpen).toEqual(true)
-    expect(wrapper.find(Base).props().contentContainerStyle).toEqual(undefined)
+    expect(wrapper.find(Base).props().contentContainerStyle).toEqual({})
   })
 
   test('keyboardDidHide sets state to keyboardOpen: false', () => {

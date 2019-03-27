@@ -6,7 +6,13 @@ import { profileTypes } from '@common/types/profileTypes'
 import { TextInput } from '@components/TextInput'
 import { PasswordInput } from '@components/PasswordInput'
 import { FullScreenWizard } from '@components/FullScreenWizard'
-import { BasicInfoHeader, FormScrollView } from './styledComponents'
+import { BasicInfoHeader } from './styledComponents'
+import { KeyboardAwareScrollView } from '@components/KeyboardAwareScrollView'
+
+import {
+  paddingHorizontal,
+  paddingVertical
+} from '@common/styles/screenPadding'
 
 import {
   FieldWrapper,
@@ -26,7 +32,7 @@ export const BasicInfoFields = ({
 }) => {
   const onSubmit = values => {
     setNewUserByKey(values)
-    navigation.navigate('Login')
+    navigation.navigate('Address')
   }
 
   const stepCount = newUser.profileType === profileTypes.NEIGHBOR ? 4 : 5
@@ -40,9 +46,14 @@ export const BasicInfoFields = ({
       withPadding={false}
       topPadding={35}
       nextDisabled={!isEmpty(errors) || Object.values(values).includes('')}
-      grey
     >
-      <FormScrollView>
+      <KeyboardAwareScrollView
+        style={{
+          paddingHorizontal,
+          paddingVertical,
+          backgroundColor: '#f2f2f2'
+        }}
+      >
         <BasicInfoHeader>Hello neighbor! Let's get started.</BasicInfoHeader>
         <BasicInfoFieldsWrapper>
           <FieldWrapper>
@@ -112,7 +123,7 @@ export const BasicInfoFields = ({
             />
           </FieldWrapper>
         </BasicInfoFieldsWrapper>
-      </FormScrollView>
+      </KeyboardAwareScrollView>
     </FullScreenWizard>
   )
 }

@@ -16,7 +16,6 @@ export const ScreenContainer = ({
   grassBackground,
   grassHeight,
   grassControls,
-  grassBgFixed,
   grey,
   withPadding
 }) => {
@@ -41,7 +40,6 @@ ScreenContainer.propTypes = {
   grassBackground: PropTypes.bool,
   grassHeight: PropTypes.number,
   grassControls: PropTypes.node,
-  grassBgFixed: PropTypes.bool,
   grey: PropTypes.bool,
   withPadding: PropTypes.bool
 }

@@ -10,11 +10,11 @@ import { Container } from './styledComponents'
 export const Multiselect = ({
   error,
   label,
-  fieldName,
   items,
   onSelectedItemsChange,
   searchPlaceholderText,
   selectText,
+  single,
   touched,
   value
 }) => {
@@ -23,13 +23,7 @@ export const Multiselect = ({
     <Container>
       {Boolean(label) && <FormFieldLabel>{label}</FormFieldLabel>}
       <SectionedMultiSelect
-        items={[
-          {
-            name: fieldName,
-            id: 0,
-            children: items
-          }
-        ]}
+        items={items}
         uniqueKey='id'
         subKey='children'
         selectText={selectText}
@@ -49,6 +43,7 @@ export const Multiselect = ({
         }}
         showDropDown={false}
         expandDropDowns
+        single={single}
         colors={{ primary: '#f29426' }}
         styles={{
           selectToggle: {
@@ -71,7 +66,6 @@ export const Multiselect = ({
 
 Multiselect.propTypes = {
   error: PropTypes.string,
-  fieldName: PropTypes.string.isRequired,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -82,6 +76,7 @@ Multiselect.propTypes = {
   onSelectedItemsChange: PropTypes.func.isRequired,
   searchPlaceholderText: PropTypes.string,
   selectText: PropTypes.string,
+  single: PropTypes.bool,
   touched: PropTypes.bool,
   value: PropTypes.array
 }

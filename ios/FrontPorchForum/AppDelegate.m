@@ -13,6 +13,7 @@
 
 #import "RNFirebaseMessaging.h"
 #import "RNFirebaseNotifications.h"
+#import <React/RCTLinkingManager.h>
 
 @implementation AppDelegate
 
@@ -49,6 +50,12 @@
 
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
   [[RNFirebaseMessaging instance] didRegisterUserNotificationSettings:notificationSettings];
+}
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+  return [RCTLinkingManager application:application openURL:url options:options];
 }
 
 @end

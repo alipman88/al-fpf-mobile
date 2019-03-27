@@ -100,10 +100,16 @@ export class SearchFields extends React.Component {
                 <Multiselect
                   fieldName='Forums'
                   error={errors.forums}
-                  items={areas.map(area => ({
-                    id: area.id,
-                    name: area.name
-                  }))}
+                  items={[
+                    {
+                      name: 'Forums',
+                      id: 0,
+                      children: areas.map(area => ({
+                        id: area.id,
+                        name: area.name
+                      }))
+                    }
+                  ]}
                   onSelectedItemsChange={selectedItems => {
                     setFieldTouched('forums', true)
                     setFieldValue('forums', selectedItems)

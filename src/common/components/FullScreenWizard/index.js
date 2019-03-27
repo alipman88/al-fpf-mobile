@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Dimensions } from 'react-native'
 
 import { HeaderLogo } from '@components/HeaderLogo'
 import { Button } from '@components/Button'
@@ -17,6 +18,7 @@ import {
 
 export const FullScreenWizard = ({
   children,
+  grey,
   onBackPress,
   onNextPress,
   nextLabel,
@@ -24,7 +26,6 @@ export const FullScreenWizard = ({
   currentStep,
   withPadding,
   topPadding,
-  grey,
   nextDisabled
 }) => {
   const navButtons = (
@@ -48,7 +49,7 @@ export const FullScreenWizard = ({
         width={118}
         iconRight
       >
-        {nextLabel || 'Continue'}
+        {nextLabel}
       </Button>
     </NavButtonWrapper>
   )
@@ -67,7 +68,7 @@ export const FullScreenWizard = ({
   return (
     <ScreenContainer
       grassBackground
-      grassHeight={80}
+      grassHeight={Dimensions.get('screen').height < 700 ? 80 : 100}
       grassControls={navButtons}
       grassBgFixed
       withPadding={withPadding}
@@ -82,12 +83,16 @@ export const FullScreenWizard = ({
 FullScreenWizard.propTypes = {
   children: PropTypes.node,
   currentStep: PropTypes.number,
+  grey: PropTypes.bool,
   nextLabel: PropTypes.string,
   onBackPress: PropTypes.func.isRequired,
   onNextPress: PropTypes.func.isRequired,
   steps: PropTypes.number,
   withPadding: PropTypes.bool,
   topPadding: PropTypes.number,
-  grey: PropTypes.bool,
   nextDisabled: PropTypes.bool
+}
+
+FullScreenWizard.defaultProps = {
+  nextLabel: 'Continue'
 }

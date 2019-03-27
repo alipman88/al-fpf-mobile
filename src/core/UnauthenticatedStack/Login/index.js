@@ -53,11 +53,7 @@ export const LoginComponent = ({ navigation, setAccessToken }) => {
 
   return (
     <ScreenContainer grassBackground grassControls={grassControls}>
-      <KeyboardAwareScrollView
-        enableOnAndroid
-        keyboardShouldPersistTaps='handled'
-        stretchToHeightOfScreen
-      >
+      <KeyboardAwareScrollView stretchToHeightOfScreen>
         <Formik
           initialValues={{ email: '', password: '' }}
           onSubmit={async (values, actions) => {

@@ -81,10 +81,7 @@ export class ComposeFields extends React.Component {
       duplicatePost && get(values, 'category.is_event', false)
 
     return (
-      <KeyboardAwareScrollView
-        enableOnAndroid
-        keyboardShouldPersistTaps='handle'
-      >
+      <KeyboardAwareScrollView>
         <Spinner visible={loading || isSubmitting} />
         <FormContainer>
           {profiles.length > 1 && (
@@ -118,12 +115,17 @@ export class ComposeFields extends React.Component {
             <FieldWrapper>
               <Multiselect
                 error={errors.forums}
-                fieldName='Forums'
                 label='Forums'
-                items={filteredAreas.map(area => ({
-                  id: area.id,
-                  name: area.name
-                }))}
+                items={[
+                  {
+                    name: 'Forums',
+                    id: 0,
+                    children: filteredAreas.map(area => ({
+                      id: area.id,
+                      name: area.name
+                    }))
+                  }
+                ]}
                 selectText='Select Forums'
                 searchPlaceholderText='Search Forums'
                 onSelectedItemsChange={selectedItems => {

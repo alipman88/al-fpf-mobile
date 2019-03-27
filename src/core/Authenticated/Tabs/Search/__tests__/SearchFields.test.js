@@ -65,7 +65,7 @@ describe('SearchFields', () => {
     const wrapper = shallow(<SearchFields {...defaultProps} />)
     wrapper.setState({ showAdvanced: true })
     expect(wrapper.find(Multiselect).props().items).toEqual([
-      { id: 1, name: 'Area one' }
+      { name: 'Forums', id: 0, children: [{ id: 1, name: 'Area one' }] }
     ])
   })
 

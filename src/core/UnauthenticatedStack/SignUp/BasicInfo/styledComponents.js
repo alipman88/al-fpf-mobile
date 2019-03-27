@@ -1,5 +1,4 @@
 import styled from 'styled-components/native'
-import { screenPadding } from '@common/styles/screenPadding'
 import { Text } from '@components/Text'
 
 export const BasicInfoHeader = styled(Text)`
@@ -18,7 +17,4 @@ export const FieldWrapper = styled.View`
 `
 export const BasicInfoFieldsWrapper = styled.View`
   padding-bottom: 100;
-`
-export const FormScrollView = styled.ScrollView`
-  ${screenPadding};
 `
