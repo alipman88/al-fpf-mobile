@@ -180,6 +180,7 @@ export class Forum extends React.Component {
         postRender.push(
           <ForumPost
             post={shared_post}
+            navigation={this.props.navigation}
             onReplyPress={this.handleReplyPress}
             key={shared_post.id}
           />

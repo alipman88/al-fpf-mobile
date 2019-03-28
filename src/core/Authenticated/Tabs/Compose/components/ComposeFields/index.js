@@ -41,6 +41,24 @@ export class ComposeFields extends React.Component {
     return areas.filter(area => profileAreaIds[area.id])
   }
 
+  getNeighborNames(areas) {
+    const selectedAreas = this.props.values.forums
+      ? this.props.values.forums
+      : []
+    const neighborNames = uniq(
+      flatten(
+        areas
+          .filter(area => selectedAreas.includes(area.id))
+          .map(area => area.neighbor_areas)
+      ).map(area => area.name)
+    ).join(', ')
+    if (neighborNames.length > 0) {
+      return neighborNames
+    } else {
+      return 'No available areas for sharing'
+    }
+  }
+
   handleSubmit = () => {
     if (this.state.duplicatePost) {
       this.props.resetForm()
@@ -207,12 +225,7 @@ export class ComposeFields extends React.Component {
               }}
             >
               Allow people in neighboring FPFs (
-              {uniq(
-                flatten(filteredAreas.map(area => area.neighbor_areas)).map(
-                  area => area.name
-                )
-              ).join(', ')}
-              ) to see this posting
+              {this.getNeighborNames(filteredAreas)}) to see this posting
             </Checkbox>
           )}
           <ButtonSpacer />
