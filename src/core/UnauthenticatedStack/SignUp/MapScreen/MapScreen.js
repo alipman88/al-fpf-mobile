@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import MapView, { Marker, Polygon } from 'react-native-maps'
 
 import { FullScreenWizard } from '@components/FullScreenWizard'
+import { SimpleModal } from '@components/SimpleModal'
 import { ForumDetails } from './ForumDetails'
 
 import { ForumScrollView } from './styledComponents'
@@ -16,6 +17,7 @@ export class MapScreen extends React.Component {
     areas: [],
     address: {},
     checkedAreas: {},
+    modalOpen: false,
     region: {
       latitude: 0,
       longitude: 0,
@@ -25,8 +27,8 @@ export class MapScreen extends React.Component {
   }
 
   componentDidMount() {
-    const areas = this.props.navigation.getParam('areas')
-    const address = this.props.navigation.getParam('address')
+    const areas = this.props.navigation.getParam('areas', [])
+    const address = this.props.navigation.getParam('address', {})
 
     let minLat = Number.MAX_SAFE_INTEGER
     let minLong = Number.MAX_SAFE_INTEGER
@@ -48,6 +50,8 @@ export class MapScreen extends React.Component {
 
     if (areas.length === 1) {
       this.setState({ checkedAreas: { [areas[0].id]: true } })
+    } else {
+      this.setState({ modalOpen: true })
     }
 
     const latitudeDelta = maxLat - minLat
@@ -75,8 +79,8 @@ export class MapScreen extends React.Component {
   }
 
   render() {
-    const { navigation } = this.props
-    const { areas, address, region } = this.state
+    const { navigation, setNewUserByKey } = this.props
+    const { areas, address, region, checkedAreas } = this.state
 
     return (
       <FullScreenWizard
@@ -85,6 +89,13 @@ export class MapScreen extends React.Component {
         currentStep={3}
         nextLabel={areas.length > 1 ? 'Confirm your forum' : 'Continue'}
         withPadding={false}
+        onNextPress={() => {
+          setNewUserByKey({ areas: Object.keys(checkedAreas) })
+          // TODO: navigate somewhere
+        }}
+        nextDisabled={
+          areas.length > 1 && Object.keys(checkedAreas).length === 0
+        }
       >
         {region.latitudeDelta > 0 && region.longitudeDelta > 0 && (
           <MapView
@@ -135,11 +146,20 @@ export class MapScreen extends React.Component {
             />
           ))}
         </ForumScrollView>
+        <SimpleModal
+          dark
+          open={this.state.modalOpen}
+          onClose={() => this.setState({ modalOpen: false })}
+        >
+          Your address falls near a boundary between two or more local forums.
+          Please select which forum(s) you would like to join.
+        </SimpleModal>
       </FullScreenWizard>
     )
   }
 }
 
 MapScreen.propTypes = {
-  navigation: PropTypes.object.isRequired
+  navigation: PropTypes.object.isRequired,
+  setNewUserByKey: PropTypes.func.isRequired
 }

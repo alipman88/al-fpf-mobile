@@ -11,7 +11,7 @@ export class ProfileTypes extends React.Component {
   state = {
     profileOptions: [
       {
-        buttonText: 'Neighhbor',
+        buttonText: 'Neighbor',
         label: 'Personal account, just for me',
         type: profileTypes.NEIGHBOR,
         active: this.props.newUser.profileType === profileTypes.NEIGHBOR

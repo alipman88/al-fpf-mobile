@@ -62,8 +62,8 @@ export const LoginFields = ({
         <TouchableOpacity onPress={() => navigation.navigate('ProfileTypes')}>
           <BottomText>Don't have an account? SignUp</BottomText>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('ProfileTypes')}>
-          <BottomText>Profile type flow</BottomText>
+        <TouchableOpacity onPress={() => navigation.navigate('MapScreen')}>
+          <BottomText>Map Screen</BottomText>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.navigate('EmailVerification')}

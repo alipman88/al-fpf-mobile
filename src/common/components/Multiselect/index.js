@@ -3,7 +3,11 @@ import PropTypes from 'prop-types'
 import SectionedMultiSelect from 'react-native-sectioned-multi-select'
 
 import { FormError } from '@components/FormError'
-import { FormFieldLabel } from '@components/FormFieldLabel'
+import {
+  FormFieldLabel,
+  FormFieldLabelWrapper,
+  FormFieldRequired
+} from '@components/FormFieldLabel'
 
 import { Container } from './styledComponents'
 
@@ -12,6 +16,7 @@ export const Multiselect = ({
   label,
   items,
   onSelectedItemsChange,
+  required,
   searchPlaceholderText,
   selectText,
   single,
@@ -19,9 +24,15 @@ export const Multiselect = ({
   value
 }) => {
   const hasError = Boolean(error) && touched
+  const labelText = Boolean(label) && (
+    <FormFieldLabelWrapper>
+      <FormFieldLabel>{label}</FormFieldLabel>
+      {Boolean(required) && <FormFieldRequired>(Required)</FormFieldRequired>}
+    </FormFieldLabelWrapper>
+  )
   return (
     <Container>
-      {Boolean(label) && <FormFieldLabel>{label}</FormFieldLabel>}
+      {labelText}
       <SectionedMultiSelect
         items={items}
         uniqueKey='id'
@@ -74,6 +85,7 @@ Multiselect.propTypes = {
   ).isRequired,
   label: PropTypes.string,
   onSelectedItemsChange: PropTypes.func.isRequired,
+  required: PropTypes.bool,
   searchPlaceholderText: PropTypes.string,
   selectText: PropTypes.string,
   single: PropTypes.bool,

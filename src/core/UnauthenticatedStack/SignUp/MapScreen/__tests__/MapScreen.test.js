@@ -4,6 +4,7 @@ import MapView, { Polygon, Marker } from 'react-native-maps'
 
 import { MapScreen } from '../MapScreen'
 import { ForumDetails } from '../ForumDetails'
+import { FullScreenWizard } from '@components/FullScreenWizard'
 
 describe('MapScreen', () => {
   const defaultProps = {
@@ -29,8 +30,13 @@ describe('MapScreen', () => {
         }
         return data[key]
       }
-    }
+    },
+    setNewUserByKey: jest.fn()
   }
+
+  afterEach(() => {
+    defaultProps.setNewUserByKey.mockReset()
+  })
 
   test('sets region based on min & max values, as well as data from params', () => {
     const wrapper = shallow(<MapScreen {...defaultProps} />)
@@ -55,6 +61,7 @@ describe('MapScreen', () => {
         lat: '21.32',
         lng: '-24.3'
       },
+      modalOpen: false,
       region: {
         latitude: 20.266666666666666,
         longitude: -24.5,
@@ -68,6 +75,16 @@ describe('MapScreen', () => {
     const wrapper = shallow(<MapScreen {...defaultProps} />)
 
     expect(wrapper.find(MapView).length).toEqual(1)
+  })
+
+  test('submit button sets the checkedAreas', () => {
+    const wrapper = shallow(<MapScreen {...defaultProps} />)
+    wrapper.setState({ checkedAreas: [1, 2] })
+    wrapper
+      .find(FullScreenWizard)
+      .props()
+      .onNextPress()
+    expect(defaultProps.setNewUserByKey).toHaveBeenCalled()
   })
 
   test('map has polygons & details for each area', () => {
@@ -108,6 +125,8 @@ describe('MapScreen', () => {
         }}
       />
     )
+
+    expect(wrapper.state().modalOpen).toEqual(true)
 
     expect(wrapper.find(Polygon).length).toEqual(2)
     expect(wrapper.find(ForumDetails).length).toEqual(2)

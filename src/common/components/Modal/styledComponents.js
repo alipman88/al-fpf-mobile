@@ -7,12 +7,13 @@ export const Container = styled.View`
   top: 0;
   bottom: 0;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: ${({ dark }) =>
+    dark ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)'};
+  justify-content: center;
 `
 
 export const ContentWrapper = styled.View`
-  margin-top: 40;
-  border-radius: 15;
+  border-radius: 6;
   background-color: white;
   width: 90%;
   overflow: hidden;

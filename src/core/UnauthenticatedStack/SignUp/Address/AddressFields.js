@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Spinner from 'react-native-loading-spinner-overlay'
+import isEmpty from 'lodash/isEmpty'
 
 import { profileTypes } from '@common/types/profileTypes'
 import { FullScreenWizard } from '@components/FullScreenWizard'
@@ -80,6 +81,7 @@ export class AddressFields extends React.Component {
                 placeholder='154'
                 touched={touched.streetNumber}
                 value={values.streetNumber}
+                required
               />
             </FieldWrapper>
 
@@ -94,6 +96,7 @@ export class AddressFields extends React.Component {
                 placeholder='Maple St'
                 touched={touched.streetName}
                 value={values.streetName}
+                required
               />
             </FieldWrapper>
             <FieldWrapper>
@@ -120,6 +123,7 @@ export class AddressFields extends React.Component {
                 placeholder='Bristol'
                 touched={touched.city}
                 value={values.city}
+                required
               />
             </FieldWrapper>
             <FieldWrapper>
@@ -147,6 +151,7 @@ export class AddressFields extends React.Component {
                 searchPlaceholderText='Search'
                 touched={touched.state}
                 value={values.state}
+                required
               />
             </FieldWrapper>
           </Container>
