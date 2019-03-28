@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Formik } from 'formik'
-
 import { AddressFields } from './AddressFields'
 import { validations } from './validations'
 
@@ -15,8 +14,8 @@ export class Address extends React.Component {
 
     actions.setSubmitting(true)
     await searchAddress(values, (areas, address) => {
+      setNewUserByKey(values)
       if (areas.length > 0) {
-        setNewUserByKey(values)
         navigation.navigate('MapScreen', { areas, address })
       } else if (this.state.submitted) {
         navigation.navigate('Waitlist')
@@ -33,13 +32,7 @@ export class Address extends React.Component {
     return (
       <Formik
         onSubmit={this.onSubmit}
-        initialValues={{
-          streetNumber: null,
-          streetName: '',
-          secondaryAddress: '',
-          city: '',
-          state: ['VT']
-        }}
+        initialValues={newUser}
         render={props => (
           <AddressFields
             {...props}

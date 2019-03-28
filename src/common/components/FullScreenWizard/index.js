@@ -22,11 +22,13 @@ export const FullScreenWizard = ({
   onBackPress,
   onNextPress,
   nextLabel,
+  nextWidth,
   steps,
   currentStep,
   withPadding,
   topPadding,
-  nextDisabled
+  nextDisabled,
+  customHeader
 }) => {
   const navButtons = (
     <NavButtonWrapper>
@@ -46,7 +48,7 @@ export const FullScreenWizard = ({
         iconNameRight='keyboard-arrow-right'
         disabled={nextDisabled}
         bgColor={nextDisabled ? 'rgba(242, 148, 38, 0.5)' : null}
-        width={118}
+        width={nextWidth || 118}
         iconRight
       >
         {nextLabel}
@@ -61,6 +63,8 @@ export const FullScreenWizard = ({
         <FormSteps steps={steps} currentStep={currentStep} />
         <Divider source={lineDivider} resizeMode='stretch' />
       </TopContainer>
+    ) : Boolean(customHeader) ? (
+      customHeader
     ) : (
       <HeaderLogo />
     )
@@ -82,9 +86,11 @@ export const FullScreenWizard = ({
 
 FullScreenWizard.propTypes = {
   children: PropTypes.node,
+  customHeader: PropTypes.node,
   currentStep: PropTypes.number,
   grey: PropTypes.bool,
   nextLabel: PropTypes.string,
+  nextWidth: PropTypes.number,
   onBackPress: PropTypes.func.isRequired,
   onNextPress: PropTypes.func.isRequired,
   steps: PropTypes.number,
@@ -94,5 +100,5 @@ FullScreenWizard.propTypes = {
 }
 
 FullScreenWizard.defaultProps = {
-  nextLabel: 'Continue'
+  nextLabel: '    Continue'
 }

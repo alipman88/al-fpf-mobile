@@ -43,6 +43,7 @@ export class AddressFields extends React.Component {
         currentStep={2}
         onNextPress={handleSubmit}
         withPadding={false}
+        nextDisabled={!isEmpty(errors) || isEmpty(touched)}
       >
         <Spinner visible={isSubmitting} />
         <KeyboardAwareScrollView

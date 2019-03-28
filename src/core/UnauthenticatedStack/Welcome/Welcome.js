@@ -11,7 +11,6 @@ export class Welcome extends React.Component {
     super(props)
     const { shouldDisplay, navigation } = props
     if (!shouldDisplay) {
-      navigation.navigate('Login')
       navigation.dispatch(createResetStackTo('Login'))
     }
   }

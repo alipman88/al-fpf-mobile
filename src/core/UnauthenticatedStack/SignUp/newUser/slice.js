@@ -6,7 +6,14 @@ const initialState = {
   lastName: '',
   email: '',
   password: '',
-  passwordConfirm: ''
+  passwordConfirm: '',
+  streetNumber: null,
+  streetName: '',
+  secondaryAddress: '',
+  city: '',
+  state: ['VT'],
+  comment: '',
+  reference: ''
 }
 
 export const newUser = createSlice({

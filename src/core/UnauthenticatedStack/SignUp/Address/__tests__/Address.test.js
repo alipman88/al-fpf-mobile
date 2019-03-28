@@ -72,7 +72,7 @@ describe('Address', () => {
         submitted: true
       })
 
-      expect(defaultProps.setNewUserByKey).not.toHaveBeenCalled()
+      expect(defaultProps.setNewUserByKey).toHaveBeenCalled()
       expect(defaultProps.navigation.navigate).toHaveBeenCalledWith('Waitlist')
 
       expect(setSubmitting).toHaveBeenCalledWith(false)
@@ -97,7 +97,7 @@ describe('Address', () => {
         submitted: true
       })
 
-      expect(defaultProps.setNewUserByKey).not.toHaveBeenCalled()
+      expect(defaultProps.setNewUserByKey).toHaveBeenCalled()
       expect(defaultProps.navigation.navigate).not.toHaveBeenCalled()
 
       expect(setSubmitting).toHaveBeenCalledWith(false)

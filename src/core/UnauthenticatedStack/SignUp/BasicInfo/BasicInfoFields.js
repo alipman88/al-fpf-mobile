@@ -36,7 +36,6 @@ export const BasicInfoFields = ({
   }
 
   const stepCount = newUser.profileType === profileTypes.NEIGHBOR ? 4 : 5
-
   return (
     <FullScreenWizard
       onBackPress={() => navigation.goBack()}
@@ -45,7 +44,7 @@ export const BasicInfoFields = ({
       steps={stepCount}
       withPadding={false}
       topPadding={35}
-      nextDisabled={!isEmpty(errors) || Object.values(values).includes('')}
+      nextDisabled={!isEmpty(errors) || isEmpty(touched)}
     >
       <KeyboardAwareScrollView
         style={{

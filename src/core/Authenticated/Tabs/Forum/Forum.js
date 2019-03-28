@@ -46,7 +46,6 @@ export class Forum extends React.Component {
       this.notificationListener = firebase
         .notifications()
         .onNotification(notification => {
-          console.log('onNotification', notification)
           displayNotification(
             channel,
             notification._notificationId,

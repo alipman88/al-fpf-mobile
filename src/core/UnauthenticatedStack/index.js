@@ -7,6 +7,8 @@ import { ProfileTypes } from './SignUp/ProfileTypes'
 import { Address } from './SignUp/Address'
 import { EmailVerification } from './SignUp/EmailVerification'
 import { BasicInfo } from './SignUp/BasicInfo'
+import { Waitlist } from './SignUp/Waitlist'
+import { WaitlistSuccess } from './SignUp/WaitlistSuccess'
 
 export const UnauthenticatedStack = createStackNavigator(
   {
@@ -16,7 +18,9 @@ export const UnauthenticatedStack = createStackNavigator(
     ProfileTypes,
     Address,
     EmailVerification,
-    BasicInfo
+    BasicInfo,
+    Waitlist,
+    WaitlistSuccess
   },
   {
     initialRouteName: 'Welcome',
