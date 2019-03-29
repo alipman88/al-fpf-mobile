@@ -41,17 +41,6 @@ export class Profile extends React.Component {
           {capitalize(profile.profile_plan.plan_type)}
         </ExternalLink>
 
-        <FieldLabel bottomMargin={0}>Plan tier</FieldLabel>
-        <ExternalLink
-          hasBorder
-          hasLabel
-          onPress={() =>
-            navigateWithToken('/user', loading => this.setState({ loading }))
-          }
-        >
-          Edit account details
-        </ExternalLink>
-
         <FieldLabel>Address</FieldLabel>
         <Field>
           <FieldText>

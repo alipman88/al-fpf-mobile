@@ -65,15 +65,6 @@ describe('Profile', () => {
       expect.any(Function)
     )
     expect(defaultProps.navigateWithToken).toHaveBeenCalledWith(
-      '/user',
-      expect.any(Function)
-    )
-    expect(defaultProps.navigateWithToken).toHaveBeenNthCalledWith(
-      3,
-      '/user/profiles/4/edit',
-      expect.any(Function)
-    )
-    expect(defaultProps.navigateWithToken).toHaveBeenCalledWith(
       '/user/profiles/new?disable_plan_type_change=true&profile%5Bprofile_plan_id%5D=3',
       expect.any(Function)
     )
