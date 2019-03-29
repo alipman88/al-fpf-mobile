@@ -57,7 +57,7 @@ export class SettingsIndex extends React.Component {
               }
             >
               <ViewPostingsContainer>
-                <ViewPostings>View Postings</ViewPostings>
+                <ViewPostings>View my postings</ViewPostings>
                 <Image source={linkIcon} />
               </ViewPostingsContainer>
             </TouchableOpacity>
