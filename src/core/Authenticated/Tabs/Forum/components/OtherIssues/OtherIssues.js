@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { View } from 'react-native'
+
 import { IssueTab } from './IssueTab'
 import { IssueScrollView } from './styledComponents'
 
@@ -50,7 +51,10 @@ export class OtherIssues extends React.Component {
               focused={focused}
               isUnread={!!i.isUnread}
               currentAreaId={currentAreaId}
-              toggleIssueUnread={this.props.toggleIssueUnread}
+              toggleIssueUnread={id => {
+                this.props.toggleIssueUnread(id)
+                this.props.toast.show('Issue marked as unread')
+              }}
               onTapIssue={this.onTapIssue}
             />
           </View>
@@ -79,5 +83,8 @@ OtherIssues.propTypes = {
   currentAreaId: PropTypes.number.isRequired,
   getPosts: PropTypes.func.isRequired,
   setCurrentIssueId: PropTypes.func.isRequired,
+  toast: PropTypes.shape({
+    show: PropTypes.func
+  }).isRequired,
   toggleIssueUnread: PropTypes.func.isRequired
 }

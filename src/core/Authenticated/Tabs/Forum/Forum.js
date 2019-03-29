@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { RefreshControl, ScrollView } from 'react-native'
 import get from 'lodash/get'
 import firebase from 'react-native-firebase'
+import Toast from 'react-native-easy-toast'
 
 import { ScreenContainer } from '@components/ScreenContainer'
 import { ForumContainer } from './styledComponents'
@@ -197,7 +198,7 @@ export class Forum extends React.Component {
             />
           }
         >
-          <OtherIssues />
+          <OtherIssues toast={this.toastRef} />
           <ForumContainer>
             <InThisIssue />
             {postRender}
@@ -206,6 +207,11 @@ export class Forum extends React.Component {
             ) : null}
           </ForumContainer>
         </ScrollView>
+        <Toast
+          ref={toast => (this.toastRef = toast)}
+          position='top'
+          style={{ zIndex: 1000 }}
+        />
       </ScreenContainer>
     )
   }
