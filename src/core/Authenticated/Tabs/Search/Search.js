@@ -56,7 +56,9 @@ export class Search extends React.Component {
       },
       loading => this.setState({ loading }),
       ({ pagination, results }) => {
-        this.props.addSearchToHistory(values.keyword)
+        if (values.keyword.trim().length > 0) {
+          this.props.addSearchToHistory(values.keyword)
+        }
         this.setState(state => ({
           searched: true,
           // add the results from the query if they are from next page
