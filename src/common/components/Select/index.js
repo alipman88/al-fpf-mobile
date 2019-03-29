@@ -3,8 +3,12 @@ import PropTypes from 'prop-types'
 import ReactNativePickerModule from 'react-native-picker-module'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
-import { FormFieldLabel } from '@components/FormFieldLabel'
 import { FormError } from '@components/FormError'
+import {
+  FormFieldLabel,
+  FormFieldLabelWrapper,
+  FormFieldRequired
+} from '@components/FormFieldLabel'
 
 import {
   Container,
@@ -23,14 +27,22 @@ export class Select extends React.Component {
       items,
       onValueChange,
       touched,
-      error
+      error,
+      required
     } = this.props
 
     const hasError = touched && Boolean(error)
 
+    const labelText = Boolean(label) && (
+      <FormFieldLabelWrapper>
+        <FormFieldLabel>{label}</FormFieldLabel>
+        {Boolean(required) && <FormFieldRequired>(Required)</FormFieldRequired>}
+      </FormFieldLabelWrapper>
+    )
+
     return (
       <Container>
-        {Boolean(label) && <FormFieldLabel>{label}</FormFieldLabel>}
+        {labelText}
         <SelectButton
           onPress={() => this.selectModuleRef.show()}
           hasError={hasError}
@@ -63,5 +75,6 @@ Select.propTypes = {
   placeholder: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   touched: PropTypes.bool,
-  value: PropTypes.number
+  value: PropTypes.number,
+  required: PropTypes.bool
 }

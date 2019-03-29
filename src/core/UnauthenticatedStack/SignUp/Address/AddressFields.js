@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Spinner from 'react-native-loading-spinner-overlay'
-import isEmpty from 'lodash/isEmpty'
+import { isEmpty } from 'lodash'
 
 import { profileTypes } from '@common/types/profileTypes'
 import { FullScreenWizard } from '@components/FullScreenWizard'
@@ -44,7 +44,6 @@ export class AddressFields extends React.Component {
         onNextPress={handleSubmit}
         nextDisabled={!isEmpty(errors) || isEmpty(touched)}
         withPadding={false}
-        nextDisabled={!isEmpty(errors) || isEmpty(touched)}
       >
         <Spinner visible={isSubmitting} />
         <KeyboardAwareScrollView

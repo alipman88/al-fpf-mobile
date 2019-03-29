@@ -10,6 +10,7 @@ import { BasicInfo } from './SignUp/BasicInfo'
 import { GovernmentInfo } from './SignUp/GovernmentInfo'
 import { Waitlist } from './SignUp/Waitlist'
 import { WaitlistSuccess } from './SignUp/WaitlistSuccess'
+import { BusinessInfo } from './SignUp/BusinessInfo'
 
 export const UnauthenticatedStack = createStackNavigator(
   {
@@ -22,7 +23,8 @@ export const UnauthenticatedStack = createStackNavigator(
     BasicInfo,
     GovernmentInfo,
     Waitlist,
-    WaitlistSuccess
+    WaitlistSuccess,
+    BusinessInfo
   },
   {
     initialRouteName: 'Welcome',

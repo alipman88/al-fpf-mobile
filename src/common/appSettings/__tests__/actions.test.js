@@ -27,11 +27,7 @@ describe('appSettings - actions', () => {
       }))
       await getAppSettings()(dispatch, getState)
 
-      expect(getSpy).toHaveBeenCalledWith('/settings', {
-        headers: {
-          Authorization: 'Bearer abc123'
-        }
-      })
+      expect(getSpy).toHaveBeenCalledWith('/settings')
       expect(dispatch).toHaveBeenCalledWith(
         appSettings.actions.setLoading(true)
       )
@@ -56,11 +52,7 @@ describe('appSettings - actions', () => {
 
       await getAppSettings()(dispatch, getState)
 
-      expect(getSpy).toHaveBeenCalledWith('/settings', {
-        headers: {
-          Authorization: 'Bearer abc123'
-        }
-      })
+      expect(getSpy).toHaveBeenCalledWith('/settings')
 
       expect(dispatch).toHaveBeenCalledWith(
         appError.actions.setAppError('boom')

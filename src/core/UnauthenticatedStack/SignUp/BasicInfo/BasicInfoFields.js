@@ -6,7 +6,6 @@ import { profileTypes } from '@common/types/profileTypes'
 import { TextInput } from '@components/TextInput'
 import { PasswordInput } from '@components/PasswordInput'
 import { FullScreenWizard } from '@components/FullScreenWizard'
-import { BasicInfoHeader } from './styledComponents'
 import { KeyboardAwareScrollView } from '@components/KeyboardAwareScrollView'
 
 import {
@@ -16,9 +15,10 @@ import {
 
 import {
   FieldWrapper,
-  BasicInfoHelper,
-  BasicInfoFieldsWrapper
-} from './styledComponents'
+  FormHelper,
+  FormFieldsWrapper,
+  FormHeader
+} from '../styledComponents'
 
 export const BasicInfoFields = ({
   errors,
@@ -53,8 +53,8 @@ export const BasicInfoFields = ({
           backgroundColor: '#f2f2f2'
         }}
       >
-        <BasicInfoHeader>Hello neighbor! Let's get started.</BasicInfoHeader>
-        <BasicInfoFieldsWrapper>
+        <FormFieldsWrapper>
+          <FormHeader>Hello neighbor! Let's get started.</FormHeader>
           <FieldWrapper>
             <TextInput
               error={errors.firstName}
@@ -66,10 +66,10 @@ export const BasicInfoFields = ({
               required
             />
           </FieldWrapper>
-          <BasicInfoHelper>
+          <FormHelper>
             Please be neighborly! FPF requires your first and last name (even if
             you're a business)
-          </BasicInfoHelper>
+          </FormHelper>
 
           <FieldWrapper>
             <TextInput
@@ -90,6 +90,7 @@ export const BasicInfoFields = ({
               onBlur={() => setFieldTouched('email')}
               onChangeText={value => setFieldValue('email', value)}
               value={values.email}
+              keyboardType='email-address'
               required
             />
           </FieldWrapper>
@@ -105,9 +106,9 @@ export const BasicInfoFields = ({
               required
             />
           </FieldWrapper>
-          <BasicInfoHelper>
+          <FormHelper>
             Must be at least 8 characters long, including a number and a symbol.
-          </BasicInfoHelper>
+          </FormHelper>
 
           <FieldWrapper>
             <PasswordInput
@@ -121,7 +122,7 @@ export const BasicInfoFields = ({
               required
             />
           </FieldWrapper>
-        </BasicInfoFieldsWrapper>
+        </FormFieldsWrapper>
       </KeyboardAwareScrollView>
     </FullScreenWizard>
   )

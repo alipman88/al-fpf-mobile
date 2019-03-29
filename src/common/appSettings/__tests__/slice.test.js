@@ -6,6 +6,7 @@ describe('appSettings - slice', () => {
     expect(state).toEqual({
       postTruncateLength: 1000,
       categories: [],
+      businessCategories: {},
       loading: false
     })
   })
@@ -22,7 +23,10 @@ describe('appSettings - slice', () => {
               name: 'Lost and found',
               faq: 'Seeking lost items'
             }
-          ]
+          ],
+          business_categories: {
+            Animals: [['Pet Shop', 1], ['Animal rescue', 2]]
+          }
         })
       )
 
@@ -40,7 +44,11 @@ describe('appSettings - slice', () => {
             name: 'Lost and found',
             faq: 'Seeking lost items'
           }
-        ]
+        ],
+        businessCategories: {
+          Animals: [['Pet Shop', 1], ['Animal rescue', 2]]
+        },
+        loading: false
       })
 
       data = appSettings.selectors.getCategories({

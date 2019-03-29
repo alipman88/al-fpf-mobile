@@ -1,11 +1,11 @@
 import { appSettings } from './slice'
-import { getAuthorized } from '@common/api'
+import { api } from '@common/api'
 import { appError } from '@components/AppError/slice'
 import { responseError } from '@common/utils/responseError'
 
 export const getAppSettings = () => async (dispatch, getState) => {
   try {
-    const response = await getAuthorized('/settings', getState())
+    const response = await api.get('/settings')
     dispatch(appSettings.actions.setLoading(true))
     dispatch(appSettings.actions.setAppSettings(response.data))
   } catch (e) {
