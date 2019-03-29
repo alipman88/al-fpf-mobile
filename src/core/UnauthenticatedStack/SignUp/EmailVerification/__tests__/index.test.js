@@ -4,6 +4,7 @@ import { TouchableOpacity } from 'react-native'
 
 import { api } from '@common/api'
 import { EmailVerification } from '../EmailVerification'
+import { HelpMessage } from '../styledComponents'
 
 describe('EmailVerification', () => {
   const defaultProps = {
@@ -11,11 +12,21 @@ describe('EmailVerification', () => {
     resendEmail: jest.fn(),
     navigation: {
       navigate: jest.fn()
+    },
+    newUser: {
+      profileType: 'business'
     }
   }
 
   afterEach(() => {
     defaultProps.navigation.navigate.mockReset()
+  })
+
+  test('renders different content for different profile types', () => {
+    const wrapper = shallow(<EmailVerification {...defaultProps} />)
+    expect(wrapper.find(HelpMessage).length).toEqual(3)
+    wrapper.setProps({ newUser: { profileType: 'government' } })
+    expect(wrapper.find(HelpMessage).length).toEqual(1)
   })
 
   describe('resendEmail', () => {

@@ -42,6 +42,7 @@ export class AddressFields extends React.Component {
         steps={newUser.profileType === profileTypes.NEIGHBOR ? 4 : 5}
         currentStep={2}
         onNextPress={handleSubmit}
+        nextDisabled={!isEmpty(errors) || isEmpty(touched)}
         withPadding={false}
         nextDisabled={!isEmpty(errors) || isEmpty(touched)}
       >

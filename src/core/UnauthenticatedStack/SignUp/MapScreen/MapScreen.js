@@ -5,6 +5,7 @@ import MapView, { Marker, Polygon } from 'react-native-maps'
 import { FullScreenWizard } from '@components/FullScreenWizard'
 import { SimpleModal } from '@components/SimpleModal'
 import { ForumDetails } from './ForumDetails'
+import { profileTypes } from '@common/types/profileTypes'
 
 import { ForumScrollView } from './styledComponents'
 
@@ -79,7 +80,7 @@ export class MapScreen extends React.Component {
   }
 
   render() {
-    const { navigation, setNewUserByKey } = this.props
+    const { navigation, newUser, setNewUserByKey } = this.props
     const { areas, address, region, checkedAreas } = this.state
 
     return (
@@ -91,7 +92,10 @@ export class MapScreen extends React.Component {
         withPadding={false}
         onNextPress={() => {
           setNewUserByKey({ areas: Object.keys(checkedAreas) })
-          // TODO: navigate somewhere
+          if (newUser.profileType === profileTypes.GOVERNMENT) {
+            navigation.navigate('GovernmentInfo')
+          }
+          // TODO navigate for Business & neighbor
         }}
         nextDisabled={
           areas.length > 1 && Object.keys(checkedAreas).length === 0
@@ -161,5 +165,6 @@ export class MapScreen extends React.Component {
 
 MapScreen.propTypes = {
   navigation: PropTypes.object.isRequired,
+  newUser: PropTypes.object.isRequired,
   setNewUserByKey: PropTypes.func.isRequired
 }

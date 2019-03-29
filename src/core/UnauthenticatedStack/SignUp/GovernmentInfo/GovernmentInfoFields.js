@@ -1,0 +1,92 @@
+import React from 'react'
+import PropTypes from 'prop-types'
+import isEmpty from 'lodash/isEmpty'
+
+import { FullScreenWizard } from '@components/FullScreenWizard'
+import { KeyboardAwareScrollView } from '@components/KeyboardAwareScrollView'
+import { TextInput } from '@components/TextInput'
+
+import { Container, Description, FieldWrapper } from './styledComponents'
+
+export const GovernmentInfoFields = ({
+  errors,
+  handleSubmit,
+  navigation,
+  setFieldTouched,
+  setFieldValue,
+  touched,
+  values
+}) => (
+  <FullScreenWizard
+    onBackPress={() => navigation.goBack()}
+    steps={4}
+    currentStep={4}
+    onNextPress={handleSubmit}
+    nextDisabled={!isEmpty(errors) || isEmpty(touched)}
+    withPadding={false}
+  >
+    <KeyboardAwareScrollView
+      contentContainerStyle={{
+        paddingBottom: 20
+      }}
+      style={{ backgroundColor: '#f2f2f2' }}
+    >
+      <Container>
+        <Description>
+          Please tell us a little about yourself and your government role.
+        </Description>
+        <FieldWrapper>
+          <TextInput
+            error={errors.title}
+            label='Title'
+            onChangeText={value => {
+              setFieldTouched('title')
+              setFieldValue('title', value)
+            }}
+            required
+            touched={touched.title}
+            value={values.title}
+            placeholder='School Board Member'
+          />
+        </FieldWrapper>
+        <FieldWrapper>
+          <TextInput
+            error={errors.jurisdiction}
+            label='Jurisdiction'
+            onChangeText={value => {
+              setFieldTouched('jurisdiction')
+              setFieldValue('jurisdiction', value)
+            }}
+            required
+            touched={touched.jurisdiction}
+            value={values.jurisdiction}
+            placeholder='Winooski School District'
+          />
+        </FieldWrapper>
+        <FieldWrapper>
+          <TextInput
+            error={errors.tellUsMore}
+            label='Tell us more'
+            onChangeText={value => {
+              setFieldTouched('tellUsMore')
+              setFieldValue('tellUsMore', value)
+            }}
+            multiline
+            touched={touched.tellUsMore}
+            value={values.tellUsMore}
+          />
+        </FieldWrapper>
+      </Container>
+    </KeyboardAwareScrollView>
+  </FullScreenWizard>
+)
+
+GovernmentInfoFields.propTypes = {
+  errors: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  navigation: PropTypes.object.isRequired,
+  setFieldTouched: PropTypes.func.isRequired,
+  setFieldValue: PropTypes.func.isRequired,
+  touched: PropTypes.object.isRequired,
+  values: PropTypes.object.isRequired
+}

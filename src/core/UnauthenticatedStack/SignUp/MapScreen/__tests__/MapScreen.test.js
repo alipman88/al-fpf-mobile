@@ -29,13 +29,18 @@ describe('MapScreen', () => {
           }
         }
         return data[key]
-      }
+      },
+      navigate: jest.fn()
+    },
+    newUser: {
+      profileType: 'neighbor'
     },
     setNewUserByKey: jest.fn()
   }
 
   afterEach(() => {
     defaultProps.setNewUserByKey.mockReset()
+    defaultProps.navigation.navigate.mockReset()
   })
 
   test('sets region based on min & max values, as well as data from params', () => {
@@ -84,6 +89,21 @@ describe('MapScreen', () => {
       .find(FullScreenWizard)
       .props()
       .onNextPress()
+    expect(defaultProps.setNewUserByKey).toHaveBeenCalled()
+  })
+
+  test('submit navigates to GovernmentInfo for government profile', () => {
+    const wrapper = shallow(
+      <MapScreen {...defaultProps} newUser={{ profileType: 'government' }} />
+    )
+    wrapper.setState({ checkedAreas: [1, 2] })
+    wrapper
+      .find(FullScreenWizard)
+      .props()
+      .onNextPress()
+    expect(defaultProps.navigation.navigate).toHaveBeenCalledWith(
+      'GovernmentInfo'
+    )
     expect(defaultProps.setNewUserByKey).toHaveBeenCalled()
   })
 

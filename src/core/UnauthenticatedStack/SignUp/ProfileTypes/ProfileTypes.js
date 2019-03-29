@@ -59,7 +59,9 @@ export class ProfileTypes extends React.Component {
     return (
       <FullScreenWizard
         onBackPress={() => navigation.goBack()}
-        onNextPress={() => navigation.navigate('BasicInfo')}
+        onNextPress={() => {
+          navigation.navigate('BasicInfo')
+        }}
         nextDisabled={nextButtonDisabled}
       >
         <ProfileTypeContainer>

@@ -2,13 +2,21 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { ProfileTypes } from '../ProfileTypes'
 import { ProfileTypeButton } from '../ProfileTypeButton'
+import { profileTypes } from '@common/types/profileTypes'
+import { FullScreenWizard } from '@components/FullScreenWizard'
 
 describe('ProfileTypes', () => {
   const defaultProps = {
     setNewUserByKey: jest.fn(),
     newUser: {},
-    navigation: {}
+    navigation: {
+      navigate: jest.fn()
+    }
   }
+
+  afterEach(() => {
+    defaultProps.navigation.navigate.mockReset()
+  })
 
   test('it creates three profile options from which to choose', () => {
     const wrapper = shallow(<ProfileTypes {...defaultProps} />)
@@ -34,5 +42,47 @@ describe('ProfileTypes', () => {
     expect(wrapper.state().profileOptions[0].active).toBe(true)
     expect(wrapper.state().profileOptions[1].active).toBe(false)
     expect(wrapper.state().profileOptions[2].active).toBe(false)
+  })
+
+  test('selecing neighbor navigates the user to the BasicInfo screen', () => {
+    const wrapper = shallow(
+      <ProfileTypes
+        {...defaultProps}
+        newUser={{ profileType: profileTypes.NEIGHBOR }}
+      />
+    )
+    wrapper
+      .find(FullScreenWizard)
+      .props()
+      .onNextPress()
+    expect(defaultProps.navigation.navigate).toHaveBeenCalledWith('BasicInfo')
+  })
+
+  test('selecing business navigates the user to the BasicInfo screen', () => {
+    const wrapper = shallow(
+      <ProfileTypes
+        {...defaultProps}
+        newUser={{ profileType: profileTypes.BUSINESS }}
+      />
+    )
+    wrapper
+      .find(FullScreenWizard)
+      .props()
+      .onNextPress()
+    expect(defaultProps.navigation.navigate).toHaveBeenCalledWith('BasicInfo')
+  })
+
+  test('selecing government navigates the user to the BasicInfo screen', () => {
+    const wrapper = shallow(
+      <ProfileTypes
+        {...defaultProps}
+        newUser={{ profileType: profileTypes.GOVERNMENT }}
+      />
+    )
+    wrapper
+      .find(FullScreenWizard)
+      .props()
+      .onNextPress()
+    expect(defaultProps.navigation.navigate).toHaveBeenCalledWith('BasicInfo')
   })
 })
