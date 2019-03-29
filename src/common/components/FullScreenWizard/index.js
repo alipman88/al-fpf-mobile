@@ -73,7 +73,7 @@ export const FullScreenWizard = ({
     <ScreenContainer
       grassBackground
       grassHeight={Dimensions.get('screen').height < 700 ? 80 : 100}
-      grassControls={navButtons}
+      grassContent={navButtons}
       grassBgFixed
       withPadding={withPadding}
       grey={grey}

@@ -1,7 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { ScrollView, TouchableOpacity } from 'react-native'
+import { ScrollView, TouchableOpacity, Image } from 'react-native'
 import navigationService from '@common/utils/navigationService'
+
+import bird1 from '@assets/images/onboarding/yellow-bird.png'
+import bird2 from '@assets/images/onboarding/grey-bird.png'
+import bird3 from '@assets/images/bird-eating-birdseed/bird-eating-birdseed.png'
+
+import { Grass } from '@components/Grass'
 
 import { DrawerContext } from '@app/context'
 import {
@@ -9,7 +15,8 @@ import {
   Header,
   ForumText,
   SafeAreaView,
-  View
+  View,
+  Birds
 } from './styledComponents'
 
 export const DrawerMenu = ({
@@ -20,6 +27,14 @@ export const DrawerMenu = ({
   setCurrentAreaId,
   setCurrentProfileId
 }) => {
+  const birdies = (
+    <Birds>
+      {[bird1, bird2, bird3].map((bird, index) => (
+        <Image source={bird} key={index} />
+      ))}
+    </Birds>
+  )
+
   return (
     <DrawerContext.Consumer>
       {({ setDrawerOpenState }) => (
@@ -53,6 +68,7 @@ export const DrawerMenu = ({
                 ))}
               </ScrollView>
             </Container>
+            <Grass height={90} content={birdies} />
           </SafeAreaView>
         </View>
       )}

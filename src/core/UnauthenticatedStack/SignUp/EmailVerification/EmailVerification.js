@@ -32,7 +32,7 @@ export const EmailVerification = ({
     navigation.navigate('Login')
   }
 
-  const grassControls = (
+  const grassContent = (
     <BottomContainer>
       <BirdContainer>
         <Bird source={greyBird} />
@@ -43,7 +43,7 @@ export const EmailVerification = ({
   )
 
   return (
-    <ScreenContainer grassBackground grassControls={grassControls}>
+    <ScreenContainer grassBackground grassContent={grassContent}>
       <Spinner visible={false} />
       <HeaderLogo />
       <MessageContainer>

@@ -23,7 +23,7 @@ import {
 } from './styledComponents'
 
 export const LoginComponent = ({ navigation, setAccessToken }) => {
-  const grassControls = (
+  const grassContent = (
     <BottomContainer>
       <LinksContainer>
         <ResetPasswordContainer>
@@ -52,7 +52,7 @@ export const LoginComponent = ({ navigation, setAccessToken }) => {
   )
 
   return (
-    <ScreenContainer grassBackground grassControls={grassControls}>
+    <ScreenContainer grassBackground grassContent={grassContent}>
       <KeyboardAwareScrollView stretchToHeightOfScreen>
         <Formik
           initialValues={{ email: '', password: '' }}

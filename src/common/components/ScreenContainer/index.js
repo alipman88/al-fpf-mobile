@@ -1,21 +1,18 @@
 import React from 'react'
 import { StatusBar } from 'react-native'
 import PropTypes from 'prop-types'
+import { Grass } from '@components/Grass'
 import {
   ContentWrapper,
-  Grass,
-  GrassContainer,
   SafeAreaViewContainer,
   ScreenWrapper
 } from './styledComponents'
-
-import grassImage from '@assets/images/fpf-grass.png'
 
 export const ScreenContainer = ({
   children,
   grassBackground,
   grassHeight,
-  grassControls,
+  grassContent,
   grey,
   withPadding
 }) => {
@@ -26,10 +23,11 @@ export const ScreenContainer = ({
         <ContentWrapper withPadding={withPadding}>{children}</ContentWrapper>
       </SafeAreaViewContainer>
       {grassBackground && (
-        <GrassContainer height={grassHeight}>
-          {grassControls}
-          <Grass source={grassImage} resizeMode='repeat' />
-        </GrassContainer>
+        <Grass
+          height={grassHeight}
+          content={grassContent}
+          resizeMode='repeat'
+        />
       )}
     </ScreenWrapper>
   )
@@ -39,7 +37,7 @@ ScreenContainer.propTypes = {
   children: PropTypes.node,
   grassBackground: PropTypes.bool,
   grassHeight: PropTypes.number,
-  grassControls: PropTypes.node,
+  grassContent: PropTypes.node,
   grey: PropTypes.bool,
   withPadding: PropTypes.bool
 }

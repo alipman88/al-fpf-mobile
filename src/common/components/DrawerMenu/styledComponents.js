@@ -29,3 +29,11 @@ export const ForumText = styled(Text)`
   padding: 7px;
   background-color: ${({ active }) => (active ? '#fff4e7' : '#fff')};
 `
+
+export const Birds = styled.View`
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  padding-horizontal: 5;
+`
