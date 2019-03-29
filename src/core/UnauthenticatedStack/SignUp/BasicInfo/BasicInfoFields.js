@@ -92,6 +92,7 @@ export const BasicInfoFields = ({
               value={values.email}
               keyboardType='email-address'
               required
+              autoCapitalize={false}
             />
           </FieldWrapper>
           <FieldWrapper>

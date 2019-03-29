@@ -38,6 +38,35 @@ describe('MapScreen', () => {
     setNewUserByKey: jest.fn()
   }
 
+  const twoAreas = {
+    areas: [
+      {
+        id: 1,
+        name: 'test',
+        coordinates: [
+          ['20.5', '-23.3'],
+          ['20.56', '-23.0'],
+          ['21.2', '-26.0'],
+          ['20.5', '-23.3']
+        ]
+      },
+      {
+        id: 2,
+        name: 'test two',
+        coordinates: [
+          ['22.5', '-25.3'],
+          ['22.56', '-25.0'],
+          ['23.2', '-28.0'],
+          ['22.5', '-25.3']
+        ]
+      }
+    ],
+    address: {
+      lat: '21.32',
+      lng: '-24.3'
+    }
+  }
+
   afterEach(() => {
     defaultProps.setNewUserByKey.mockReset()
     defaultProps.navigation.navigate.mockReset()
@@ -112,35 +141,7 @@ describe('MapScreen', () => {
       <MapScreen
         navigation={{
           getParam: key => {
-            const data = {
-              areas: [
-                {
-                  id: 1,
-                  name: 'test',
-                  coordinates: [
-                    ['20.5', '-23.3'],
-                    ['20.56', '-23.0'],
-                    ['21.2', '-26.0'],
-                    ['20.5', '-23.3']
-                  ]
-                },
-                {
-                  id: 2,
-                  name: 'test two',
-                  coordinates: [
-                    ['22.5', '-25.3'],
-                    ['22.56', '-25.0'],
-                    ['23.2', '-28.0'],
-                    ['22.5', '-25.3']
-                  ]
-                }
-              ],
-              address: {
-                lat: '21.32',
-                lng: '-24.3'
-              }
-            }
-            return data[key]
+            return twoAreas[key]
           }
         }}
       />
@@ -151,5 +152,46 @@ describe('MapScreen', () => {
     expect(wrapper.find(Polygon).length).toEqual(2)
     expect(wrapper.find(ForumDetails).length).toEqual(2)
     expect(wrapper.find(Marker).length).toEqual(1)
+  })
+
+  test('toggling forum details & map checks the area', () => {
+    const wrapper = shallow(
+      <MapScreen
+        navigation={{
+          getParam: key => {
+            return twoAreas[key]
+          }
+        }}
+      />
+    )
+
+    wrapper
+      .find(ForumDetails)
+      .first()
+      .props()
+      .onPress(true)
+    expect(wrapper.state().checkedAreas).toEqual({
+      1: true
+    })
+
+    wrapper
+      .find(ForumDetails)
+      .at(1)
+      .props()
+      .onPress(true)
+    expect(wrapper.state().checkedAreas).toEqual({
+      1: true,
+      2: true
+    })
+
+    wrapper
+      .find(Polygon)
+      .first()
+      .props()
+      .onPress()
+    expect(wrapper.state().checkedAreas).toEqual({
+      1: false,
+      2: true
+    })
   })
 })

@@ -19,7 +19,7 @@ export const SimpleModal = ({ children, dark, onClose, open }) => {
       <ModalContent>
         <ModalText>{children}</ModalText>
         <TouchableOpacity onPress={onClose}>
-          <ModalContinue>Contiue</ModalContinue>
+          <ModalContinue>Continue</ModalContinue>
         </TouchableOpacity>
       </ModalContent>
     </Modal>

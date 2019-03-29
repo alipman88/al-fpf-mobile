@@ -120,7 +120,15 @@ export class MapScreen extends React.Component {
                   longitude: parseFloat(coordinate[1])
                 }))}
                 strokeColor='#ff0000'
-                fillColor='rgba(234, 98, 98, 0.5)'
+                fillColor={
+                  this.state.checkedAreas[area.id]
+                    ? 'rgba(234, 98, 98, 0.8)'
+                    : 'rgba(234, 98, 98, 0.5)'
+                }
+                onPress={() =>
+                  this.toggleArea(!this.state.checkedAreas[area.id], area.id)
+                }
+                tappable={areas.length > 1}
               />
             ))}
             {Boolean(address.lat) && Boolean(address.lng) && (
