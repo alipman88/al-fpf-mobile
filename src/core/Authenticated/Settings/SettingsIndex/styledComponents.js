@@ -14,6 +14,7 @@ export const LogoutText = styled(Text)`
   font-size: 16;
   text-decoration: underline;
   text-align: center;
+  padding-bottom: 26;
 `
 
 export const ViewPostingsContainer = styled.View`
