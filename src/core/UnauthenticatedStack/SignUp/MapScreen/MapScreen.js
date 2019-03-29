@@ -97,6 +97,7 @@ export class MapScreen extends React.Component {
           }
           // TODO navigate for Business & neighbor
         }}
+        nextWidth='auto'
         nextDisabled={
           areas.length > 1 && Object.keys(checkedAreas).length === 0
         }

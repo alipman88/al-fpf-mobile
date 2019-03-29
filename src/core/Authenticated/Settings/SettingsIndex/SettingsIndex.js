@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import DeviceInfo from 'react-native-device-info'
+import firebase from 'react-native-firebase'
 import { Image, TouchableOpacity } from 'react-native'
 import Spinner from 'react-native-loading-spinner-overlay'
 
@@ -65,7 +66,8 @@ export class SettingsIndex extends React.Component {
             </Version>
           </Navigation>
           <TouchableOpacity
-            onPress={() => {
+            onPress={async () => {
+              await firebase.iid().delete()
               resetAction()
               navigation.navigate('SplashScreen')
               navigation.dispatch(createResetStackTo('Login'))

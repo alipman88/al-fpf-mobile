@@ -1,4 +1,5 @@
 import React from 'react'
+import firebase from 'react-native-firebase'
 import { shallow } from 'enzyme'
 import { TouchableOpacity } from 'react-native'
 
@@ -64,9 +65,9 @@ describe('SettingsIndex', () => {
     )
   })
 
-  test('can logout', () => {
+  test('can logout', async () => {
     const wrapper = shallow(<SettingsIndex {...defaultProps} />)
-    wrapper
+    await wrapper
       .find(TouchableOpacity)
       .at(1)
       .simulate('press')
@@ -75,8 +76,10 @@ describe('SettingsIndex', () => {
     expect(defaultProps.navigation.navigate).toHaveBeenCalledWith(
       'SplashScreen'
     )
+    expect(firebase.iid().delete).toHaveBeenCalled()
     expect(defaultProps.navigation.dispatch).toHaveBeenCalledWith(
       createResetStackTo('Login')
     )
+    firebase.iid().delete.mockReset()
   })
 })

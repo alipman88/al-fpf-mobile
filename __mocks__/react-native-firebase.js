@@ -45,7 +45,12 @@ notifications.Notification = function() {
   }
 }
 
+const iid = {
+  delete: jest.fn()
+}
+
 module.exports = {
   messaging: () => messaging,
+  iid: () => iid,
   notifications
 }
