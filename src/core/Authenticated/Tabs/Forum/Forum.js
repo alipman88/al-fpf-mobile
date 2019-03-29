@@ -188,6 +188,8 @@ export class Forum extends React.Component {
       }
     }
 
+    const currentIssue = issues.find(issue => issue.id === currentIssueId)
+
     return (
       <ScreenContainer withPadding={false} grey>
         <ScrollView
@@ -200,7 +202,9 @@ export class Forum extends React.Component {
         >
           <OtherIssues toast={this.toastRef} />
           <ForumContainer>
-            <InThisIssue />
+            {Boolean(currentIssue) && (
+              <InThisIssue number={currentIssue.number} />
+            )}
             {postRender}
             {get(issues, '[0].id', 0) === currentIssueId ? (
               <NeighboringContent />

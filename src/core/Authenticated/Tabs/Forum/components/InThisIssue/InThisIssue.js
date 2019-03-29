@@ -9,9 +9,9 @@ import {
   ListItemText
 } from './styledComponents'
 
-export const InThisIssue = ({ headlines, posts }) => (
+export const InThisIssue = ({ headlines, number, posts }) => (
   <Container>
-    <Heading>In this issue</Heading>
+    <Heading>In this issue #{number}</Heading>
     {headlines.map((headline, i) => (
       <ListItem key={`headline_${i}`}>
         <ListItemBullet>{'\u2022'}</ListItemBullet>
@@ -28,6 +28,7 @@ export const InThisIssue = ({ headlines, posts }) => (
 
 InThisIssue.propTypes = {
   headlines: PropTypes.array,
+  number: PropTypes.number,
   posts: PropTypes.array
 }
 

@@ -51,16 +51,14 @@ export const issues = createSlice({
       const existingIssues = state.issuesByAreaId[areaId] || []
       const existingIssueIds = keyBy(existingIssues, 'id')
 
-      const newIssues = existingIssues.concat(
-        issues
-          .filter(issue => !existingIssueIds[issue.id])
-          .map(issue => {
-            issue.isUnread =
-              getTime(state.firstLoadOfIssues) <
-              getTime(new Date(issue.sent_at))
-            return issue
-          })
-      )
+      const newIssues = issues
+        .filter(issue => !existingIssueIds[issue.id])
+        .map(issue => {
+          issue.isUnread =
+            getTime(state.firstLoadOfIssues) < getTime(new Date(issue.sent_at))
+          return issue
+        })
+        .concat(existingIssues)
       return {
         ...state,
         issuesByAreaId: {
@@ -106,7 +104,7 @@ const getIssuesForArea = (state, areaId) => {
 }
 
 const getLatestIssues = (state, areaId) => {
-  return getIssuesForArea(state, areaId).slice(0, 5)
+  return getIssuesForArea(state, areaId).slice(0, 10)
 }
 
 issues.selectors = {

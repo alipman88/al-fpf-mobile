@@ -139,9 +139,13 @@ describe('issues - slice', () => {
     for (let issue in alreadyRead) {
       expect(issue.isUnread).toBeFalsy()
     }
+
+    expect(data.length).toEqual(4)
+    // newest issue is first
+    expect(data.map(post => post.id)).toEqual([4, 1, 2, 3])
   })
 
-  test('it selects the latest 5 issues', () => {
+  test('it selects the latest 10 issues', () => {
     const state = issues.reducer(
       undefined,
       issues.actions.setIssues({
@@ -151,14 +155,19 @@ describe('issues - slice', () => {
           { id: 3, number: 34 },
           { id: 4, number: 35 },
           { id: 5, number: 36 },
-          { id: 6, number: 37 }
+          { id: 6, number: 37 },
+          { id: 7, number: 38 },
+          { id: 8, number: 39 },
+          { id: 9, number: 40 },
+          { id: 10, number: 41 },
+          { id: 11, number: 42 },
+          { id: 12, number: 343 }
         ],
         areaId: 5
       })
     )
 
-    const oldestIssue =
-      state.issuesByAreaId[5][state.issuesByAreaId[5].length - 1]
+    const issue11 = state.issuesByAreaId[5][10]
 
     const data = issues.selectors.getLatestIssues(
       {
@@ -169,7 +178,8 @@ describe('issues - slice', () => {
       5
     )
 
-    expect(oldestIssue.id).toEqual(6)
-    expect(data).toEqual(expect.not.arrayContaining([oldestIssue]))
+    expect(issue11.id).toEqual(11)
+    expect(data).toEqual(expect.not.arrayContaining([issue11]))
+    expect(data.length).toEqual(10)
   })
 })
