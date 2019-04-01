@@ -6,6 +6,11 @@ import { appError } from '@components/AppError/slice'
 import { responseError } from '@common/utils/responseError'
 
 export const getPosts = issueId => async (dispatch, getState) => {
+  // short circuit if in default state with no issue
+  if (issueId === 0) {
+    return
+  }
+
   const currentAreaId = areas.selectors.getCurrentAreaId(getState())
   const issue = issues.selectors
     .getIssuesForArea(getState(), currentAreaId)

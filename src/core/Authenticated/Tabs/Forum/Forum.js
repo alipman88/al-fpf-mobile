@@ -59,7 +59,9 @@ export class Forum extends React.Component {
   }
 
   componentWillUnmount() {
-    this.onTokenRefreshListener()
+    if (this.onTokenRefreshListener) {
+      this.onTokenRefreshListener()
+    }
     if (this.notificationListener) {
       this.notificationListener()
     }

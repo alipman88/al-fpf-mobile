@@ -6,7 +6,6 @@ import { Image, TouchableOpacity } from 'react-native'
 import Spinner from 'react-native-loading-spinner-overlay'
 
 import { ScreenContainer } from '@components/ScreenContainer'
-import { createResetStackTo } from '@common/utils/navigation'
 import { getProfileDisplayName } from '@common/utils/getProfileDisplayName'
 import { NavLink } from './components/NavLink'
 import { FieldLabel } from '../components/FieldLabel'
@@ -27,8 +26,21 @@ export class SettingsIndex extends React.Component {
     loading: false
   }
 
+  async logoutUser() {
+    await firebase.iid().delete()
+    this.props.logoutUser(
+      this.props.navigation,
+      { device_token: this.props.fcmToken },
+      this.setLoading
+    )
+  }
+
+  setLoading = loadingVal => {
+    this.setState({ loading: loadingVal })
+  }
+
   render() {
-    const { navigateWithToken, navigation, resetAction, user } = this.props
+    const { navigateWithToken, navigation, user } = this.props
     return (
       <ScreenContainer grey withPadding={false}>
         <Spinner visible={this.state.loading} />
@@ -65,14 +77,7 @@ export class SettingsIndex extends React.Component {
               Version: v{DeviceInfo.getVersion()} #{DeviceInfo.getBuildNumber()}
             </Version>
           </Navigation>
-          <TouchableOpacity
-            onPress={async () => {
-              await firebase.iid().delete()
-              resetAction()
-              navigation.navigate('SplashScreen')
-              navigation.dispatch(createResetStackTo('Login'))
-            }}
-          >
+          <TouchableOpacity onPress={() => this.logoutUser()}>
             <LogoutText>Logout</LogoutText>
           </TouchableOpacity>
         </Container>
@@ -88,6 +93,7 @@ SettingsIndex.navigationOptions = {
 SettingsIndex.propTypes = {
   navigation: PropTypes.object.isRequired,
   navigateWithToken: PropTypes.func.isRequired,
-  resetAction: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
+  logoutUser: PropTypes.func.isRequired,
+  fcmToken: PropTypes.string
 }

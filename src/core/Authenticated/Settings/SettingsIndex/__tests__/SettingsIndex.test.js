@@ -5,7 +5,6 @@ import { TouchableOpacity } from 'react-native'
 
 import { SettingsIndex } from '../SettingsIndex'
 import { NavLink } from '../components/NavLink'
-import { createResetStackTo } from '@common/utils/navigation'
 
 describe('SettingsIndex', () => {
   const defaultProps = {
@@ -15,6 +14,7 @@ describe('SettingsIndex', () => {
     },
     navigateWithToken: jest.fn(),
     resetAction: jest.fn(),
+    logoutUser: jest.fn(),
     user: {
       first_name: 'John',
       last_name: 'Smith',
@@ -72,14 +72,8 @@ describe('SettingsIndex', () => {
       .at(1)
       .simulate('press')
 
-    expect(defaultProps.resetAction).toHaveBeenCalled()
-    expect(defaultProps.navigation.navigate).toHaveBeenCalledWith(
-      'SplashScreen'
-    )
+    expect(defaultProps.logoutUser).toHaveBeenCalled()
     expect(firebase.iid().delete).toHaveBeenCalled()
-    expect(defaultProps.navigation.dispatch).toHaveBeenCalledWith(
-      createResetStackTo('Login')
-    )
     firebase.iid().delete.mockReset()
   })
 })
