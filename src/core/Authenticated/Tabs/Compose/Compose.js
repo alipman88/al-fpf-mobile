@@ -70,11 +70,15 @@ export class Compose extends React.Component {
       profiles
     } = this.props
 
-    const profileIndex = profiles.findIndex(
+    let profileIndex = profiles.findIndex(
       profile => profile.id === currentProfileId
     )
 
-    const profile = profiles[profileIndex]
+    if (profileIndex === -1) {
+      profileIndex = 0
+    }
+
+    const profile = profiles[profileIndex] || profiles[0]
     return (
       <ScreenContainer grey withPadding={false}>
         <Formik

@@ -20,12 +20,17 @@ export const profile = createSlice({
       ...state,
       loading: action.payload
     }),
-    setUserProfile: (state, action) => {
+    setUserProfile: (state, { payload }) => {
+      const profiles = (payload.profiles || []).filter(
+        profile => profile.approved
+      )
       return {
         ...state,
-        user: action.payload,
-        currentProfileId:
-          state.currentProfileId || get(action, 'payload.profiles[0].id', 0)
+        user: {
+          ...payload,
+          profiles
+        },
+        currentProfileId: state.currentProfileId || get(profiles, '[0].id', 0)
       }
     },
     setCurrentProfileId: (state, action) => ({

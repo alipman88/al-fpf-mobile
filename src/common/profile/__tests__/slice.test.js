@@ -34,7 +34,12 @@ describe('profile - slice', () => {
           profiles: [
             {
               id: 3,
-              business_category_id: 100
+              business_category_id: 100,
+              approved: true
+            },
+            {
+              id: 4,
+              approved: false
             }
           ]
         })
@@ -51,7 +56,8 @@ describe('profile - slice', () => {
         profiles: [
           {
             id: 3,
-            business_category_id: 100
+            business_category_id: 100,
+            approved: true
           }
         ]
       })
@@ -65,7 +71,8 @@ describe('profile - slice', () => {
       expect(data).toEqual([
         {
           id: 3,
-          business_category_id: 100
+          business_category_id: 100,
+          approved: true
         }
       ])
     })
@@ -129,8 +136,10 @@ describe('profile - slice', () => {
         profile.actions.setUserProfile({
           id: 1,
           profiles: [
+            { id: 5 },
             {
-              id: 3
+              id: 3,
+              approved: true
             }
           ]
         })
@@ -150,7 +159,7 @@ describe('profile - slice', () => {
             profile: state
           }
         })
-      ).toEqual({ id: 3 })
+      ).toEqual({ id: 3, approved: true })
     })
   })
 

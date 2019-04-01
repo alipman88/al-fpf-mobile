@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 import { ScrollView, TouchableOpacity, Image } from 'react-native'
 import navigationService from '@common/utils/navigationService'
 
+import flatten from 'lodash/flatten'
+import keyBy from 'lodash/keyBy'
+
 import bird1 from '@assets/images/onboarding/yellow-bird.png'
 import bird2 from '@assets/images/onboarding/grey-bird.png'
 import bird3 from '@assets/images/bird-eating-birdseed/bird-eating-birdseed.png'
@@ -35,6 +38,12 @@ export const DrawerMenu = ({
     </Birds>
   )
 
+  // getting all area ids the user has in profiles as a key value pair
+  const areaIds = keyBy(flatten(profiles.map(profile => profile.area_ids)))
+
+  const areasToRender = areas.filter(area => areaIds[area.id])
+  areasToRender.sort((a, b) => a.name - b.name)
+
   return (
     <DrawerContext.Consumer>
       {({ setDrawerOpenState }) => (
@@ -43,7 +52,7 @@ export const DrawerMenu = ({
             <Container>
               <ScrollView>
                 <Header>Forums</Header>
-                {areas.map(area => (
+                {areasToRender.map(area => (
                   <TouchableOpacity
                     key={area.name}
                     onPress={() => {
@@ -54,7 +63,9 @@ export const DrawerMenu = ({
                           }
                         })
 
-                        setCurrentProfileId(profile.id)
+                        if (profile) {
+                          setCurrentProfileId(profile.id)
+                        }
                       }
                       setCurrentAreaId(area.id)
                       setDrawerOpenState(false)
