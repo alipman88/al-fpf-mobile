@@ -58,7 +58,7 @@ export class AddressFields extends React.Component {
                 <NoAreasHeader>Oops!</NoAreasHeader>
                 <NoAreasText>
                   We can't find that address in our coverage area. Please review
-                  and edit what you entered, or just click continue again.
+                  and edit what you entered, or just click "Continue" again.
                   Thanks!
                 </NoAreasText>
               </NoAreasContainer>
