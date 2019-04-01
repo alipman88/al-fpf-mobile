@@ -6,6 +6,7 @@ import com.facebook.react.ReactApplication;
 import com.airbnb.android.react.maps.MapsPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
+import io.invertase.firebase.instanceid.RNFirebaseInstanceIdPackage;
 import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 import br.com.classapp.RNSensitiveInfo.RNSensitiveInfoPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -37,6 +38,7 @@ public class MainApplication extends Application implements ReactApplication {
           new RNFirebasePackage(),
           new RNFirebaseMessagingPackage(),
           new RNFirebaseNotificationsPackage(),
+          new RNFirebaseInstanceIdPackage(),
           new RNSensitiveInfoPackage(),
           new RNGestureHandlerPackage(),
           new ReactNativeConfigPackage(),
