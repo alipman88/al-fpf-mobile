@@ -135,6 +135,16 @@ export class More extends React.Component {
                 </FooterText>
                 <RightIcon source={linkIcon} />
               </FooterLink>
+              <FooterLink>
+                <FooterText
+                  onPress={() =>
+                    Linking.openURL('mailto:membersupport@frontporchforum.com')
+                  }
+                >
+                  Member Support
+                </FooterText>
+                <RightIcon source={linkIcon} />
+              </FooterLink>
             </FooterLinkWrapper>
           </PageWrapper>
         </ScrollView>
