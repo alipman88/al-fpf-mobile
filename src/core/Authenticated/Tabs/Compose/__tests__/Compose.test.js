@@ -63,7 +63,7 @@ describe('Compose', () => {
       category: undefined,
       subject: '',
       message: '',
-      isShared: false,
+      isShared: true,
       fromDate: null,
       toDate: null
     })

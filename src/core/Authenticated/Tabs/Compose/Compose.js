@@ -88,7 +88,7 @@ export class Compose extends React.Component {
             category: undefined,
             subject: '',
             message: '',
-            isShared: false,
+            isShared: true,
             fromDate: null,
             toDate: null
           }}
