@@ -5,12 +5,12 @@ import PropTypes from 'prop-types'
 import format from 'date-fns/format'
 
 import { truncateText } from '@common/utils/truncateText'
+import { PostCategory } from '@components/PostCategory'
 
 import {
   PostAuthor,
   PostShared,
   PostBody,
-  PostCategory,
   PostContainer,
   PostContainerBordered,
   PostBodyContainer,
@@ -37,6 +37,7 @@ export class Post extends React.Component {
       children,
       hasBorder,
       showIssueData,
+      onTapCategory,
       moreText
     } = this.props
 
@@ -71,7 +72,12 @@ export class Post extends React.Component {
             </PostDate>
           )}
           {post.categories.map(category => (
-            <PostCategory key={category}>{category}</PostCategory>
+            <TouchableOpacity
+              key={category}
+              onPress={() => onTapCategory(category)}
+            >
+              <PostCategory>{category}</PostCategory>
+            </TouchableOpacity>
           ))}
           <PostBody>
             {truncateText(
@@ -99,7 +105,12 @@ Post.propTypes = {
   postTruncateLength: PropTypes.number.isRequired,
   children: PropTypes.element,
   hasBorder: PropTypes.bool,
+  onTapCategory: PropTypes.func,
   showIssueData: PropTypes.bool,
   fetchNeighboringIssue: PropTypes.func,
   moreText: PropTypes.string.isRequired
+}
+
+Post.defaultProps = {
+  onTapCategory: () => {}
 }

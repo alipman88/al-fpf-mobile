@@ -3,15 +3,15 @@ import { TouchableOpacity } from 'react-native'
 import { shallow } from 'enzyme'
 
 import { Post } from '@components/Post/Post'
+import { PostCategory } from '@components/PostCategory'
 import {
   PostDate,
   PostBody,
   PostContainerBordered,
-  ShowMoreButton,
-  PostCategory
+  ShowMoreButton
 } from '../styledComponents'
 
-describe('SearchResults - Post', () => {
+describe('Post', () => {
   const defaultProps = {
     post: {
       id: 1,
@@ -28,8 +28,13 @@ describe('SearchResults - Post', () => {
     },
     hasBorder: false,
     moreText: 'Read',
-    postTruncateLength: 200
+    postTruncateLength: 200,
+    onTapCategory: jest.fn()
   }
+
+  afterEach(() => {
+    defaultProps.onTapCategory.mockReset()
+  })
 
   test('renders post date', () => {
     const wrapper = shallow(<Post {...defaultProps} />)
@@ -47,6 +52,12 @@ describe('SearchResults - Post', () => {
     }
     const wrapper = shallow(<Post {...props} />)
     expect(wrapper.find(PostCategory).length).toEqual(2)
+  })
+
+  test('can navigate to category search', () => {
+    const wrapper = shallow(<Post {...defaultProps} />)
+    wrapper.find(TouchableOpacity).simulate('press')
+    expect(defaultProps.onTapCategory).toHaveBeenCalledWith('Lost and found')
   })
 
   test('show more button displays on long posts and works', () => {

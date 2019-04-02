@@ -40,11 +40,6 @@ export const PostShared = styled(TextSemibold)`
 
 export const PostDate = styled(PostAuthor)``
 
-export const PostCategory = styled(Text)`
-  color: #999cad;
-  font-size: 16;
-`
-
 export const PostBody = styled(Text)`
   color: #4a4a4a;
   font-size: 16;
