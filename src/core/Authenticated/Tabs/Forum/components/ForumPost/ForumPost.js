@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { Button } from '@components/Button'
 import { Post } from '@components/Post'
 import { Linking } from 'react-native'
-import { PostButton } from './styledComponents'
 import { Bottom } from '../sharedStyles'
 
 export const ForumPost = ({
@@ -20,26 +19,22 @@ export const ForumPost = ({
 
   const bottomButtons = (
     <Bottom>
-      <PostButton>
-        <Button
-          color={'#fff'}
-          onPress={() =>
-            Linking.openURL(`mailto:${email}?subject=RE: ${title}`)
-          }
-        >
-          Email author
-        </Button>
-      </PostButton>
+      <Button
+        color={'#fff'}
+        onPress={() => Linking.openURL(`mailto:${email}?subject=RE: ${title}`)}
+        width={124}
+      >
+        Email author
+      </Button>
 
       {!post.is_shared_post && (
-        <PostButton>
-          <Button
-            color={'#fff'}
-            onPress={() => onReplyPress({ parentPostId: id })}
-          >
-            Reply to forum
-          </Button>
-        </PostButton>
+        <Button
+          color={'#fff'}
+          onPress={() => onReplyPress({ parentPostId: id })}
+          width={124}
+        >
+          Reply to forum
+        </Button>
       )}
     </Bottom>
   )

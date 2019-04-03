@@ -23,4 +23,5 @@ export const Bottom = styled.View`
   justify-content: space-around;
   align-items: center;
   padding: 18px 10px 13px 10px;
+  align-items: stretch;
 `
