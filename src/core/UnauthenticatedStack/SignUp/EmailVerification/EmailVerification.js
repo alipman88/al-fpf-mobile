@@ -91,6 +91,10 @@ export const EmailVerification = ({
         <TouchableOpacity onPress={() => handleOnPress()}>
           <BoldTextLink>Resend Email Verification</BoldTextLink>
         </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+          <BoldTextLink>Log in</BoldTextLink>
+        </TouchableOpacity>
       </MessageContainer>
     </ScreenContainer>
   )

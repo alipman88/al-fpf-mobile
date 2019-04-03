@@ -232,12 +232,12 @@ export class WaitlistFields extends React.Component {
             </FieldWrapper>
             <FieldWrapper>
               <TextInput
-                error={errors.referemce}
+                error={errors.reference}
                 label='How did you learn about Front Porch Forum?'
-                touched={touched.referemce}
-                onBlur={() => setFieldTouched('referemce')}
-                onChangeText={value => setFieldValue('referemce', value)}
-                value={values.referemce}
+                touched={touched.reference}
+                onBlur={() => setFieldTouched('reference')}
+                onChangeText={value => setFieldValue('reference', value)}
+                value={values.reference}
                 multiline={true}
                 numberOfLines={4}
               />

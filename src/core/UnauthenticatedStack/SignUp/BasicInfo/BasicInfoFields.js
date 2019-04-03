@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import isEmpty from 'lodash/isEmpty'
 
-import { profileTypes } from '@common/types/profileTypes'
 import { TextInput } from '@components/TextInput'
 import { PasswordInput } from '@components/PasswordInput'
 import { FullScreenWizard } from '@components/FullScreenWizard'
@@ -12,6 +11,8 @@ import {
   paddingHorizontal,
   paddingVertical
 } from '@common/styles/screenPadding'
+
+import { getStepCount } from '../getStepCount'
 
 import {
   FieldWrapper,
@@ -28,20 +29,20 @@ export const BasicInfoFields = ({
   values,
   newUser,
   navigation,
-  setNewUserByKey
+  setNewUserByKey,
+  profileType
 }) => {
   const onSubmit = values => {
     setNewUserByKey(values)
     navigation.navigate('Address')
   }
 
-  const stepCount = newUser.profileType === profileTypes.NEIGHBOR ? 4 : 5
   return (
     <FullScreenWizard
       onBackPress={() => navigation.goBack()}
       onNextPress={() => onSubmit(values)}
       currentStep={1}
-      steps={stepCount}
+      steps={getStepCount(profileType)}
       withPadding={false}
       topPadding={35}
       nextDisabled={!isEmpty(errors) || isEmpty(touched)}
@@ -113,13 +114,13 @@ export const BasicInfoFields = ({
 
           <FieldWrapper>
             <PasswordInput
-              error={errors.passwordConfirm}
+              error={errors.passwordConfirmation}
               label='Confirm password'
-              touched={touched.passwordConfirm}
+              touched={touched.passwordConfirmation}
               setFieldValue={setFieldValue}
               setFieldTouched={setFieldTouched}
-              fieldKey='passwordConfirm'
-              value={values.passwordConfirm}
+              fieldKey='passwordConfirmation'
+              value={values.passwordConfirmation}
               required
             />
           </FieldWrapper>
@@ -137,5 +138,6 @@ BasicInfoFields.propTypes = {
   navigation: PropTypes.object.isRequired,
   touched: PropTypes.object.isRequired,
   values: PropTypes.object.isRequired,
-  newUser: PropTypes.object.isRequired
+  newUser: PropTypes.object.isRequired,
+  profileType: PropTypes.string.isRequired
 }

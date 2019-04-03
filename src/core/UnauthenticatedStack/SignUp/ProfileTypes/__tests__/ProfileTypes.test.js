@@ -11,7 +11,13 @@ describe('ProfileTypes', () => {
     newUser: {},
     navigation: {
       navigate: jest.fn()
-    }
+    },
+    getAppSettings: jest.fn(),
+    profilePlans: [
+      { id: 1, plan_type: 'neighbor' },
+      { id: 2, plan_type: 'business' },
+      { id: 3, plan_type: 'government' }
+    ]
   }
 
   afterEach(() => {
@@ -36,7 +42,10 @@ describe('ProfileTypes', () => {
 
     wrapper.instance().onTapProfileButton('neighbor')
     expect(defaultProps.setNewUserByKey).toHaveBeenCalledWith({
-      profileType: 'neighbor'
+      profilePlan: {
+        id: 1,
+        plan_type: 'neighbor'
+      }
     })
 
     expect(wrapper.state().profileOptions[0].active).toBe(true)

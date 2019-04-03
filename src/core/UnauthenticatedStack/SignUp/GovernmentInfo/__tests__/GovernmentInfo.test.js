@@ -6,8 +6,18 @@ import { GovernmentInfo } from '../GovernmentInfo'
 
 describe('GovernmentInfo', () => {
   const defaultProps = {
-    navigation: {},
-    setNewUserByKey: jest.fn()
+    navigation: {
+      navigate: jest.fn()
+    },
+    setNewUserByKey: jest.fn(),
+    newUser: {
+      government: {
+        title: '',
+        jurisdiction: '',
+        tellUsMore: ''
+      }
+    },
+    profileType: 'government'
   }
 
   afterEach(() => {
@@ -21,7 +31,7 @@ describe('GovernmentInfo', () => {
       .props()
       .onSubmit({ title: 'Councillor' })
     expect(defaultProps.setNewUserByKey).toHaveBeenCalledWith({
-      title: 'Councillor'
+      government: { title: 'Councillor' }
     })
   })
 })

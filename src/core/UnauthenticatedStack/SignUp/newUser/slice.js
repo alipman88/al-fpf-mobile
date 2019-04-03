@@ -1,19 +1,52 @@
 import { createSlice, createSelector } from 'redux-starter-kit'
 
 const initialState = {
-  profileType: null,
-  firstName: '',
-  lastName: '',
-  email: '',
-  password: '',
-  passwordConfirm: '',
-  streetNumber: null,
-  streetName: '',
-  secondaryAddress: '',
-  city: '',
-  state: ['VT'],
-  comment: '',
-  reference: ''
+  user: {
+    // ProfileType
+    profilePlan: {},
+    // BasicInfo
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    passwordConfirmation: '',
+    // CreateAccount
+    termsOfUse: false,
+    postIntro: true,
+    isNfBooster: false,
+    // CreateAccount: business edition
+    includeInDirectory: true,
+    showAddress: true,
+    // Waitlist
+    comment: '',
+    reference: '',
+    // Address
+    address: {
+      streetNumber: null,
+      streetName: '',
+      secondaryAddress: '',
+      city: '',
+      state: 'VT',
+      lat: 0,
+      lng: 0,
+      area_ids: []
+    },
+    // GovernmentInfo
+    government: {
+      title: '',
+      jurisdiction: '',
+      tellUsMore: ''
+    },
+    // BusinessInfo
+    business: {
+      name: '',
+      businessCategoryId: 0,
+      url: '',
+      phone: '',
+      description: ''
+    }
+  },
+  loading: false
 }
 
 export const newUser = createSlice({
@@ -23,9 +56,13 @@ export const newUser = createSlice({
   },
   reducers: {
     setNewUserByKey: (state, { payload }) => {
+      const user = { ...state.user, ...payload }
+      return { ...state, user }
+    },
+    setLoading: (state, { payload }) => {
       return {
         ...state,
-        ...payload
+        loading: payload
       }
     }
   }
@@ -37,6 +74,16 @@ newUser.selectors = {
   ...newUser.selectors,
   getNewUser: createSelector(
     [path],
-    newUser => newUser
+    newUser => newUser.user
+  ),
+
+  getProfileType: createSelector(
+    [path],
+    newUser => newUser.user.profilePlan.plan_type
+  ),
+
+  getLoading: createSelector(
+    [path],
+    newUser => newUser.loading
   )
 }

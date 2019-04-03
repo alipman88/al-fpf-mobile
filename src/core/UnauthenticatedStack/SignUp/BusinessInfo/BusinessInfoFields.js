@@ -31,14 +31,14 @@ export const BusinessInfoFields = ({
   loading
 }) => {
   const onSubmit = values => {
-    setNewUserByKey({
-      business: values
-    })
-    navigation.navigate('Login')
+    setNewUserByKey({ business: values })
+    navigation.navigate('CreateAccount')
   }
 
   const nextDisabled =
-    !isEmpty(errors) || !values.name.length || values.categories === null
+    !isEmpty(errors) ||
+    !values.name.length ||
+    values.businessCategoryId === null
 
   return (
     <FullScreenWizard
@@ -77,16 +77,17 @@ export const BusinessInfoFields = ({
           </FieldWrapper>
           <FieldWrapper>
             <Multiselect
-              error={errors.categories}
+              error={errors.businessCategoryId}
               label='Category'
-              selectText={'Select the categories that is the best match'}
+              selectText={'Select the category that is the best match'}
               items={categories}
               onSelectedItemsChange={selectedItems => {
-                setFieldTouched('categories', true)
-                setFieldValue('categories', selectedItems)
+                setFieldTouched('businessCategoryId', true)
+                setFieldValue('businessCategoryId', selectedItems[0])
               }}
-              touched={touched.categories}
-              value={values.categories}
+              touched={touched.businessCategoryId}
+              value={[values.businessCategoryId]}
+              single
               required
             />
           </FieldWrapper>

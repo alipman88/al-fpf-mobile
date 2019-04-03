@@ -1,2 +1,3 @@
 import { newUser } from './slice'
-export { newUser }
+import { postSignUp } from './actions'
+export { newUser, postSignUp }

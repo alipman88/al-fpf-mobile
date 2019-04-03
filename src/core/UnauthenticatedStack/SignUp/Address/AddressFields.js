@@ -12,6 +12,7 @@ import { TextInput } from '@components/TextInput'
 import { provinces } from '@common/types/provinces'
 import { states } from '@common/types/states'
 
+import { getStepCount } from '../getStepCount'
 import {
   Container,
   Description,
@@ -33,13 +34,14 @@ export class AddressFields extends React.Component {
       setFieldTouched,
       setFieldValue,
       touched,
-      values
+      values,
+      profileType
     } = this.props
 
     return (
       <FullScreenWizard
         onBackPress={() => navigation.goBack()}
-        steps={newUser.profileType === profileTypes.NEIGHBOR ? 4 : 5}
+        steps={getStepCount(profileType)}
         currentStep={2}
         onNextPress={handleSubmit}
         nextDisabled={!isEmpty(errors) || isEmpty(touched)}
@@ -146,12 +148,12 @@ export class AddressFields extends React.Component {
                 ]}
                 onSelectedItemsChange={state => {
                   setFieldTouched('state')
-                  setFieldValue('state', state)
+                  setFieldValue('state', state[0])
                 }}
-                single
                 searchPlaceholderText='Search'
                 touched={touched.state}
-                value={values.state}
+                value={[values.state]}
+                single
                 required
               />
             </FieldWrapper>
@@ -172,5 +174,6 @@ AddressFields.propTypes = {
   setFieldTouched: PropTypes.func.isRequired,
   setFieldValue: PropTypes.func.isRequired,
   touched: PropTypes.object.isRequired,
-  values: PropTypes.object.isRequired
+  values: PropTypes.object.isRequired,
+  profileType: PropTypes.string.isRequired
 }

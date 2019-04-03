@@ -14,7 +14,7 @@ export class Address extends React.Component {
 
     actions.setSubmitting(true)
     await searchAddress(values, (areas, address) => {
-      setNewUserByKey(values)
+      setNewUserByKey({ address: values })
       if (areas.length > 0) {
         navigation.navigate('MapScreen', { areas, address })
       } else if (this.state.submitted) {
@@ -27,18 +27,19 @@ export class Address extends React.Component {
   }
 
   render() {
-    const { navigation, newUser } = this.props
+    const { navigation, newUser, profileType } = this.props
 
     return (
       <Formik
         onSubmit={this.onSubmit}
-        initialValues={newUser}
+        initialValues={newUser.address}
         render={props => (
           <AddressFields
             {...props}
             navigation={navigation}
             newUser={newUser}
             noAreasFound={this.state.submitted}
+            profileType={profileType}
           />
         )}
         validationSchema={validations}
@@ -51,5 +52,6 @@ Address.propTypes = {
   navigation: PropTypes.object.isRequired,
   newUser: PropTypes.object.isRequired,
   searchAddress: PropTypes.func.isRequired,
-  setNewUserByKey: PropTypes.func.isRequired
+  setNewUserByKey: PropTypes.func.isRequired,
+  profileType: PropTypes.string.isRequired
 }

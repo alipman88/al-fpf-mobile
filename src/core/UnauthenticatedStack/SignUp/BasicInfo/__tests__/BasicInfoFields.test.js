@@ -10,12 +10,13 @@ describe('BasicInfoFields', () => {
     setFieldTouched: jest.fn(),
     setFieldValue: jest.fn(),
     touched: {},
+    profileType: 'neighbor',
     values: {
       firstName: '',
       lastName: '',
       email: '',
       password: '',
-      passwordConfirm: ''
+      passwordConfirmation: ''
     },
     newUser: {},
     stepCount: 4,
@@ -54,7 +55,7 @@ describe('BasicInfoFields', () => {
       lastName: 'Ross',
       email: 'happy@little.tree',
       password: ' TreesCoverUpAMultitudeOfSins.',
-      passwordConfirm: ' TreesCoverUpAMultitudeOfSins.'
+      passwordConfirmation: ' TreesCoverUpAMultitudeOfSins.'
     }
 
     const wrapper = shallow(
@@ -99,9 +100,7 @@ describe('BasicInfoFields', () => {
 
   test('it sets 4 or 5 steps depending on the profile', () => {
     const wrapper = type => {
-      return shallow(
-        <BasicInfoFields {...defaultProps} newUser={{ profileType: type }} />
-      )
+      return shallow(<BasicInfoFields {...defaultProps} profileType={type} />)
         .find(FullScreenWizard)
         .first()
         .props().steps

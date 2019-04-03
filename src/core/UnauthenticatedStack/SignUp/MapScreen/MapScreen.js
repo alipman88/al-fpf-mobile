@@ -6,7 +6,7 @@ import { FullScreenWizard } from '@components/FullScreenWizard'
 import { SimpleModal } from '@components/SimpleModal'
 import { ForumDetails } from './ForumDetails'
 import { profileTypes } from '@common/types/profileTypes'
-
+import { getStepCount } from '../getStepCount'
 import { ForumScrollView } from './styledComponents'
 
 export class MapScreen extends React.Component {
@@ -79,24 +79,41 @@ export class MapScreen extends React.Component {
     })
   }
 
+  onNextPress = () => {
+    const { setNewUserByKey, newUser, navigation, profileType } = this.props
+    const { checkedAreas, region } = this.state
+    setNewUserByKey({
+      address: {
+        ...newUser.address,
+        lat: region.latitude,
+        lng: region.longitude,
+        area_ids: Object.keys(checkedAreas)
+      }
+    })
+
+    let route
+    if (profileType === profileTypes.GOVERNMENT) {
+      route = 'GovernmentInfo'
+    } else if (profileType === profileTypes.BUSINESS) {
+      route = 'BusinessInfo'
+    } else if (profileType === profileTypes.NEIGHBOR) {
+      route = 'CreateAccount'
+    }
+    navigation.navigate(route)
+  }
+
   render() {
-    const { navigation, newUser, setNewUserByKey } = this.props
+    const { navigation, profileType } = this.props
     const { areas, address, region, checkedAreas } = this.state
 
     return (
       <FullScreenWizard
         onBackPress={() => navigation.goBack()}
-        steps={4}
+        steps={getStepCount(profileType)}
         currentStep={3}
         nextLabel={areas.length > 1 ? 'Confirm your forum' : 'Continue'}
         withPadding={false}
-        onNextPress={() => {
-          setNewUserByKey({ areas: Object.keys(checkedAreas) })
-          if (newUser.profileType === profileTypes.GOVERNMENT) {
-            navigation.navigate('GovernmentInfo')
-          }
-          // TODO navigate for Business & neighbor
-        }}
+        onNextPress={this.onNextPress}
         nextWidth='auto'
         nextDisabled={
           areas.length > 1 && Object.keys(checkedAreas).length === 0
@@ -175,5 +192,6 @@ export class MapScreen extends React.Component {
 MapScreen.propTypes = {
   navigation: PropTypes.object.isRequired,
   newUser: PropTypes.object.isRequired,
+  profileType: PropTypes.string.isRequired,
   setNewUserByKey: PropTypes.func.isRequired
 }

@@ -12,7 +12,7 @@ describe('BusinessInfoFields', () => {
     touched: {},
     values: {
       name: '',
-      categories: [],
+      businessCategoryId: [1],
       url: '',
       phone: '',
       description: ''
@@ -62,7 +62,7 @@ describe('BusinessInfoFields', () => {
   test('clicking Continue sets form data in store', () => {
     const inputValues = {
       name: 'Something LTD.io',
-      categories: [],
+      businessCategoryId: [1],
       url: 'http://made-it-up.work',
       phone: '',
       description: ''
@@ -79,9 +79,7 @@ describe('BusinessInfoFields', () => {
       .onNextPress()
 
     expect(defaultProps.setNewUserByKey).toHaveBeenCalledWith({
-      business: {
-        ...inputValues
-      }
+      business: inputValues
     })
     expect(defaultProps.navigation.navigate).toHaveBeenCalled()
   })
@@ -99,7 +97,7 @@ describe('BusinessInfoFields', () => {
   test('Continue button is enabled if required fields are filled', () => {
     const values = {
       name: 'Something LTD.io',
-      categories: [9],
+      businessCategoryId: [9],
       url: '',
       phone: '',
       description: ''

@@ -7,6 +7,7 @@ describe('appSettings - slice', () => {
       postTruncateLength: 1000,
       categories: [],
       businessCategories: {},
+      onboardingProfilePlans: [],
       loading: false
     })
   })

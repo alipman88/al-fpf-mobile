@@ -10,7 +10,8 @@ describe('Address', () => {
     },
     newUser: {},
     searchAddress: jest.fn(),
-    setNewUserByKey: jest.fn()
+    setNewUserByKey: jest.fn(),
+    profileType: 'neighbor'
   }
 
   afterEach(() => {
@@ -41,7 +42,7 @@ describe('Address', () => {
       })
 
       expect(defaultProps.setNewUserByKey).toHaveBeenCalledWith({
-        streetName: 'Main'
+        address: { streetName: 'Main' }
       })
 
       expect(defaultProps.navigation.navigate).toHaveBeenCalledWith(

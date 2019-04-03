@@ -60,18 +60,7 @@ export const LoginFields = ({
         </Button>
         <ButtonSpacer />
         <TouchableOpacity onPress={() => navigation.navigate('ProfileTypes')}>
-          <BottomText>Don't have an account? SignUp</BottomText>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('BusinessInfo')}>
-          <BottomText>Business info screen</BottomText>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('MapScreen')}>
-          <BottomText>Map Screen</BottomText>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('EmailVerification')}
-        >
-          <BottomText>Email verification</BottomText>
+          <BottomText>Don't have an account? Sign Up</BottomText>
         </TouchableOpacity>
       </FormContainer>
     </Container>

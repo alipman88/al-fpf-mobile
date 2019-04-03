@@ -4,7 +4,12 @@ import { Formik } from 'formik'
 import { BasicInfoFields } from './BasicInfoFields'
 import { validations } from './validations'
 
-export const BasicInfo = ({ navigation, setNewUserByKey, newUser }) => {
+export const BasicInfo = ({
+  navigation,
+  setNewUserByKey,
+  newUser,
+  profileType
+}) => {
   return (
     <Formik
       initialValues={newUser}
@@ -19,6 +24,7 @@ export const BasicInfo = ({ navigation, setNewUserByKey, newUser }) => {
           values={values}
           newUser={newUser}
           navigation={navigation}
+          profileType={profileType}
         />
       )}
     />
@@ -28,5 +34,6 @@ export const BasicInfo = ({ navigation, setNewUserByKey, newUser }) => {
 BasicInfo.propTypes = {
   setNewUserByKey: PropTypes.func.isRequired,
   navigation: PropTypes.object.isRequired,
-  newUser: PropTypes.object
+  newUser: PropTypes.object.isRequired,
+  profileType: PropTypes.string.isRequired
 }

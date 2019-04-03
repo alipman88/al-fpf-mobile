@@ -19,7 +19,7 @@ export const GovernmentInfoFields = ({
 }) => (
   <FullScreenWizard
     onBackPress={() => navigation.goBack()}
-    steps={4}
+    steps={5}
     currentStep={4}
     onNextPress={handleSubmit}
     nextDisabled={!isEmpty(errors) || isEmpty(touched)}

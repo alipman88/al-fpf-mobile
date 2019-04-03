@@ -35,6 +35,7 @@ describe('EmailVerification', () => {
       jest.spyOn(api, 'post').mockImplementation(() => ({}))
       await wrapper
         .find(TouchableOpacity)
+        .first()
         .props()
         .onPress()
 

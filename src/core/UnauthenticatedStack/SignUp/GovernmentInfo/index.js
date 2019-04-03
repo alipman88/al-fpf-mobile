@@ -1,9 +1,14 @@
 import { connect } from 'react-redux'
-
-import { GovernmentInfo as GovernmentInfoComponent } from './GovernmentInfo'
 import { newUser } from '../newUser'
+import { GovernmentInfo as GovernmentInfoComponent } from './GovernmentInfo'
+
+const mapStateToProps = state => {
+  return {
+    newUser: newUser.selectors.getNewUser(state)
+  }
+}
 
 export const GovernmentInfo = connect(
-  null,
+  mapStateToProps,
   { setNewUserByKey: newUser.actions.setNewUserByKey }
 )(GovernmentInfoComponent)

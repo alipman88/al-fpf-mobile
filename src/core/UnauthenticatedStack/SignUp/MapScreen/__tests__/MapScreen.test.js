@@ -32,9 +32,8 @@ describe('MapScreen', () => {
       },
       navigate: jest.fn()
     },
-    newUser: {
-      profileType: 'neighbor'
-    },
+    newUser: {},
+    profileType: 'neighbor',
     setNewUserByKey: jest.fn()
   }
 
@@ -123,7 +122,7 @@ describe('MapScreen', () => {
 
   test('submit navigates to GovernmentInfo for government profile', () => {
     const wrapper = shallow(
-      <MapScreen {...defaultProps} newUser={{ profileType: 'government' }} />
+      <MapScreen {...defaultProps} profileType='government' />
     )
     wrapper.setState({ checkedAreas: [1, 2] })
     wrapper
@@ -139,6 +138,7 @@ describe('MapScreen', () => {
   test('map has polygons & details for each area', () => {
     const wrapper = shallow(
       <MapScreen
+        profileType='neighbor'
         navigation={{
           getParam: key => {
             return twoAreas[key]

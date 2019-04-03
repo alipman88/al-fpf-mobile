@@ -6,6 +6,7 @@ export const appSettings = createSlice({
     postTruncateLength: 1000,
     categories: [],
     businessCategories: {},
+    onboardingProfilePlans: [],
     loading: false
   },
 
@@ -14,7 +15,8 @@ export const appSettings = createSlice({
       ...state,
       postTruncateLength: payload.posting_truncate_length,
       categories: payload.categories,
-      businessCategories: payload.business_categories
+      businessCategories: payload.business_categories,
+      onboardingProfilePlans: payload.onboarding_profile_plans
     }),
     setLoading: (state, { payload }) => ({
       ...state,
@@ -48,6 +50,11 @@ appSettings.selectors = {
           })
         }
       })
+  ),
+
+  getProfilePlans: createSelector(
+    [path],
+    appSettings => appSettings.onboardingProfilePlans
   ),
 
   getPostTruncateLength: createSelector(

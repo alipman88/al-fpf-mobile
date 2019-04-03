@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { BusinessInfo as BusinessInfoComponent } from './BusinessInfo'
 import { newUser } from '../newUser'
-import { appSettings, getAppSettings } from '@common/appSettings'
+import { appSettings } from '@common/appSettings'
 
 const mapStateToProps = state => {
   return {
@@ -14,7 +14,6 @@ const mapStateToProps = state => {
 export const BusinessInfo = connect(
   mapStateToProps,
   {
-    setNewUserByKey: newUser.actions.setNewUserByKey,
-    getAppSettings
+    setNewUserByKey: newUser.actions.setNewUserByKey
   }
 )(BusinessInfoComponent)

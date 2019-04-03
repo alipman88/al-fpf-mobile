@@ -5,7 +5,8 @@ import { newUser } from '../newUser'
 import { searchAddress } from './actions'
 
 const mapStateToProps = state => ({
-  newUser: newUser.selectors.getNewUser(state)
+  newUser: newUser.selectors.getNewUser(state),
+  profileType: newUser.selectors.getProfileType(state)
 })
 
 export const Address = connect(
