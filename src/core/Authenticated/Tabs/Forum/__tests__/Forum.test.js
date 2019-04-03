@@ -89,6 +89,8 @@ describe('Forum', () => {
     defaultProps.getPosts.mockReset()
     defaultProps.setCurrentIssueId.mockReset()
     defaultProps.setCurrentAreaId.mockReset()
+    defaultProps.navigation.setParams.mockReset()
+    defaultProps.navigation.getParam.mockReset()
   })
 
   test('calls setupForumData on mount', () => {
@@ -241,6 +243,12 @@ describe('Forum', () => {
       })
 
       expect(defaultProps.setCurrentAreaId).toHaveBeenCalledWith(30)
+      expect(defaultProps.navigation.setParams).toHaveBeenCalledWith({
+        areaId: undefined
+      })
+      expect(defaultProps.navigation.setParams).toHaveBeenCalledWith({
+        issueNum: undefined
+      })
     })
 
     test('if there is an issue num in navigation params, find issue and set ID', () => {
@@ -249,6 +257,7 @@ describe('Forum', () => {
         navigation: {
           ...defaultProps.navigation,
           getParam: jest.fn(() => 30),
+          setParams: jest.fn(),
           areaId: '30',
           issueId: '2121'
         }
@@ -258,6 +267,7 @@ describe('Forum', () => {
         navigation: {
           ...defaultProps.navigation,
           getParam: jest.fn(() => 2121),
+          setParams: jest.fn(),
           areaId: '30',
           issueId: '2121'
         },
@@ -282,6 +292,7 @@ describe('Forum', () => {
         navigation: {
           ...defaultProps.navigation,
           getParam: jest.fn(() => 2121),
+          setParams: jest.fn(),
           areaId: '30',
           issueId: '2121'
         },

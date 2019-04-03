@@ -68,10 +68,11 @@ export class Forum extends React.Component {
   }
 
   fetchIssues(prevProps) {
+    const { currentAreaId, areas } = this.props
+
     if (
-      this.props.currentAreaId !== 0 &&
-      (prevProps.areas !== this.props.areas ||
-        prevProps.currentAreaId !== this.props.currentAreaId)
+      currentAreaId !== 0 &&
+      (prevProps.areas !== areas || prevProps.currentAreaId !== currentAreaId)
     ) {
       this.setTitleFromArea()
       this.props.getIssues(this.props.currentAreaId)
@@ -79,19 +80,21 @@ export class Forum extends React.Component {
   }
 
   fetchPosts(prevProps) {
-    const { issues } = this.props
+    const { issues, navigation, setAppError } = this.props
 
     if (prevProps.issues !== issues) {
       //if we got here from a deeplink, find issue and set current ID
-      const issueNum = parseInt(
-        this.props.navigation.getParam('issueNum', 0),
-        10
-      )
+      const issueNum = parseInt(navigation.getParam('issueNum', 0), 10)
 
       if (!!issueNum && issues.length) {
+        navigation.setParams({ issueNum: undefined })
         const current = issues.find(i => i.number === issueNum)
         if (current && current.id !== this.props.currentIssueId) {
           this.props.setCurrentIssueId(current.id)
+        } else if (!current) {
+          setAppError(
+            `Cannot load issue #${issueNum}, viewing latest for Forum`
+          )
         }
       }
       // if this list of issues doesnt have the current id, set a new one
@@ -109,9 +112,13 @@ export class Forum extends React.Component {
   }
 
   checkNavParams() {
-    const areaId = parseInt(this.props.navigation.getParam('areaId', 0), 10)
-    if (!!areaId && areaId !== this.props.currentAreaId) {
-      this.props.setCurrentAreaId(areaId)
+    const { currentAreaId, navigation, setCurrentAreaId } = this.props
+
+    const areaId = parseInt(navigation.getParam('areaId', 0), 10)
+    if (!!areaId && areaId !== currentAreaId) {
+      setCurrentAreaId(areaId)
+      // if theres no issue number, clear the area ID
+      navigation.setParams({ areaId: undefined })
     }
   }
 
@@ -237,6 +244,7 @@ Forum.propTypes = {
   navigation: PropTypes.object.isRequired,
   neighboringAreas: PropTypes.object.isRequired,
   sendNewFCMToken: PropTypes.func.isRequired,
+  setAppError: PropTypes.func.isRequired,
   setCurrentAreaId: PropTypes.func.isRequired,
   setCurrentIssueId: PropTypes.func.isRequired,
   setupForumData: PropTypes.func.isRequired,
