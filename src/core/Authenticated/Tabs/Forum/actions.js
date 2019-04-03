@@ -7,7 +7,7 @@ export const sendNewFCMToken = fcmToken => async (dispatch, getState) => {
   await api.postAuthorized(
     '/devices',
     {
-      device_id: fcmToken,
+      fcm_token: fcmToken,
       device_type: Platform.OS
     },
     getState()
