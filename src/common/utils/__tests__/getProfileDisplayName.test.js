@@ -44,4 +44,19 @@ describe('getProfileDisplayName', () => {
       })
     ).toEqual('Front Porch Forum')
   })
+
+  test('government with no prefix returns name + jurisdiction', () => {
+    expect(
+      getProfileDisplayName(
+        {
+          profile_plan: {
+            plan_type: 'government'
+          },
+          name: 'City Hall',
+          jurisdiction: 'Newport'
+        },
+        false
+      )
+    ).toEqual('City Hall Newport')
+  })
 })

@@ -106,11 +106,13 @@ export class ComposeFields extends React.Component {
             <FieldWrapper>
               <Select
                 placeholder={
-                  getProfileDisplayName(profiles[values.profile]) ||
+                  getProfileDisplayName(profiles[values.profile], false) ||
                   'Select Profile'
                 }
                 label='Profile'
-                items={profiles.map(profile => getProfileDisplayName(profile))}
+                items={profiles.map(profile =>
+                  getProfileDisplayName(profile, false)
+                )}
                 onValueChange={index => {
                   setFieldTouched('profile', true)
                   setFieldValue('profile', index)
