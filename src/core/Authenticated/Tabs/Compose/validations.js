@@ -12,7 +12,7 @@ export const validations = yup.object().shape({
     .number()
     .required()
     .min(
-      1,
+      0,
       'Ensure that you are logged into an account with at least one approved profile'
     ),
   subject: yup.string().required(),
@@ -37,6 +37,15 @@ export const validations = yup.object().shape({
         !this.parent.category ||
         !this.parent.category.is_event ||
         isAfter(endDate, this.parent.fromDate)
+      )
+    })
+    .test('toDate', 'To field must be after current date & time', function(
+      endDate
+    ) {
+      return (
+        !this.parent.category ||
+        !this.parent.category.is_event ||
+        isAfter(endDate, new Date())
       )
     })
 })

@@ -74,10 +74,6 @@ export class Compose extends React.Component {
       profile => profile.id === currentProfileId
     )
 
-    if (profileIndex === -1) {
-      profileIndex = 0
-    }
-
     const profile = profiles[profileIndex] || profiles[0]
     return (
       <ScreenContainer grey withPadding={false}>

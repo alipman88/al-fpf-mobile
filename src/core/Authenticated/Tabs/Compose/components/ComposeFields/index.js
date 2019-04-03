@@ -6,6 +6,7 @@ import uniq from 'lodash/uniq'
 
 import Spinner from 'react-native-loading-spinner-overlay'
 
+import { FormError } from '@components/FormError'
 import { Button } from '@components/Button'
 import { Checkbox } from '@components/Checkbox'
 import { TextInput } from '@components/TextInput'
@@ -102,6 +103,13 @@ export class ComposeFields extends React.Component {
       <KeyboardAwareScrollView>
         <Spinner visible={loading || isSubmitting} />
         <FormContainer>
+          {profiles.length === 0 && (
+            <FieldWrapper>
+              <FormError>
+                You will not be able to submit without any active profiles.
+              </FormError>
+            </FieldWrapper>
+          )}
           {profiles.length > 1 && (
             <FieldWrapper>
               <Select
