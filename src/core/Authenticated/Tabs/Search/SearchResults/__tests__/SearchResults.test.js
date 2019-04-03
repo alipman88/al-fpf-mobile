@@ -9,7 +9,7 @@ import { Button } from '@components/Button'
 import { Post } from '@components/Post'
 import { SearchResults } from '../SearchResults'
 import { SearchHistory } from '../../SearchHistory'
-import { ResultCounts } from '../styledComponents'
+import { ResultCounts, ResultsDivider } from '../styledComponents'
 
 describe('SearchResults', () => {
   const defaultProps = {
@@ -63,6 +63,40 @@ describe('SearchResults', () => {
       'Displaying postings 1 - 1 of 1 in total'
     )
     expect(wrapper.find(Post).length).toEqual(1)
+    // just one separating result count & results
+    expect(wrapper.find(ResultsDivider).length).toEqual(1)
+  })
+
+  test('two results, separated by divider', () => {
+    const wrapper = shallow(
+      <SearchResults
+        {...defaultProps}
+        searchResults={[
+          {
+            id: 1,
+            title: 'abc',
+            user_first_name: 'john',
+            user_last_name: 'smith',
+            user_email: 'test@example.com',
+            user_profile_name: 'profile name',
+            event: {},
+            categories: ['Lost and found']
+          },
+          {
+            id: 2,
+            title: 'other post',
+            user_first_name: 'jane',
+            user_last_name: 'smith',
+            user_email: 'test@example.com',
+            user_profile_name: 'profile name',
+            event: {},
+            categories: ['Announcement']
+          }
+        ]}
+      />
+    )
+
+    expect(wrapper.find(ResultsDivider).length).toEqual(2)
   })
 
   test('renders search history', () => {

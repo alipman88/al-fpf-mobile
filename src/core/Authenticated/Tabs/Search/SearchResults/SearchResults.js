@@ -63,21 +63,24 @@ export const SearchResults = ({
             <ResultsDivider />
           </React.Fragment>
         ) : null}
-        {searchResults.map(post => (
-          <Post
-            post={post}
-            key={post.id}
-            postTruncateLength={postTruncateLength}
-            moreText={'Read'}
-            showIssueData
-            onTapCategory={categoryName => {
-              const category = categories.find(c => c.name === categoryName)
-              setFieldTouched('category', true)
-              setFieldValue('category', category)
-              search({ ...values, category })
-            }}
-            navigation={navigation}
-          />
+        {searchResults.map((post, i) => (
+          <React.Fragment>
+            <Post
+              post={post}
+              key={post.id}
+              postTruncateLength={postTruncateLength}
+              moreText={'Read'}
+              showIssueData
+              onTapCategory={categoryName => {
+                const category = categories.find(c => c.name === categoryName)
+                setFieldTouched('category', true)
+                setFieldValue('category', category)
+                search({ ...values, category })
+              }}
+              navigation={navigation}
+            />
+            {i < searchResults.length - 1 ? <ResultsDivider /> : null}
+          </React.Fragment>
         ))}
         {searchResults.length < total ? (
           <LoadMoreContainer>
