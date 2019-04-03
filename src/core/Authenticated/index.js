@@ -27,8 +27,8 @@ export const Authenticated = createStackNavigator(
       headerRight: (
         <TopNavIcon
           source={profileIcon}
-          width={16}
-          height={17}
+          width={26}
+          height={22}
           onPress={() => {
             navigation.navigate('Settings')
           }}
