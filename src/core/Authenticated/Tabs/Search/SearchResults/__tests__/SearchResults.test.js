@@ -15,6 +15,7 @@ describe('SearchResults', () => {
   const defaultProps = {
     postTruncateLength: 10,
     categories: [],
+    navigation: {},
     nextPage: jest.fn(),
     total: 1,
     search: jest.fn(),

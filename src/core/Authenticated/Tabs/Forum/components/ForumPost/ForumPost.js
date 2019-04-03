@@ -52,6 +52,7 @@ export const ForumPost = ({
       onTapCategory={onTapCategory}
       hasBorder
       tappableCategory
+      navigation={navigation}
     />
   )
 }

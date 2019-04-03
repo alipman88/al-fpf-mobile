@@ -131,6 +131,8 @@ export class Search extends React.Component {
                 showFilters={showFilters}
               />
               <SearchResults
+                categories={categories}
+                navigation={navigation}
                 nextPage={this.nextPage}
                 total={total}
                 search={this.search}

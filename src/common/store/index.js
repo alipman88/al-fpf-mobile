@@ -19,7 +19,7 @@ const sensitiveStorage = createSensitiveStorage({
 const mainPersistConfig = {
   key: 'main',
   storage: AsyncStorage,
-  blacklist: ['appError', 'newUser']
+  blacklist: ['appError', 'newUser', 'spinner']
 }
 
 const securedPersistConfig = {

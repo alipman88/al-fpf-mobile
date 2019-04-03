@@ -29,7 +29,8 @@ describe('Post', () => {
     hasBorder: false,
     moreText: 'Read',
     postTruncateLength: 200,
-    onTapCategory: jest.fn()
+    onTapCategory: jest.fn(),
+    navigation: {}
   }
 
   afterEach(() => {

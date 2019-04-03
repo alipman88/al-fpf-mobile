@@ -12,6 +12,7 @@ import { SwitchNavigatorContainer } from '@core/switchNavigator'
 import { AppError } from '@components/AppError'
 import { getDimensions, isTabletWidth } from '@common/utils/size'
 import { parseDeepLink } from '@common/utils/parseDeepLink'
+import { Spinner } from './Spinner'
 import navigationService from '@common/utils/navigationService'
 
 export class App extends React.Component {
@@ -63,6 +64,7 @@ export class App extends React.Component {
                 }
                 bounceBackOnOverdraw={false}
               >
+                <Spinner />
                 <SwitchNavigatorContainer
                   ref={navigatorRef => {
                     navigationService.setTopLevelNavigator(navigatorRef)

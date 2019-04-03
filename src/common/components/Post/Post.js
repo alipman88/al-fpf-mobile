@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableOpacity } from 'react-native'
+import { Linking, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
 
 import format from 'date-fns/format'
@@ -8,6 +8,7 @@ import { truncateText } from '@common/utils/truncateText'
 import { PostCategory } from '@components/PostCategory'
 
 import {
+  LinkText,
   PostAuthor,
   PostShared,
   PostBody,
@@ -38,13 +39,18 @@ export class Post extends React.Component {
       hasBorder,
       showIssueData,
       onTapCategory,
-      moreText
+      moreText,
+      navigation
     } = this.props
 
     const Container = hasBorder ? PostContainerBordered : PostContainer
-    const postInfo = showIssueData
-      ? `${post.area_name} - No. ${post.issue_number} - `
-      : ''
+    const postInfo = showIssueData ? (
+      <LinkText onPress={() => fetchNeighboringIssue(post, navigation)}>
+        {post.area_name} - No. ${post.issue_number} -{' '}
+      </LinkText>
+    ) : (
+      ''
+    )
 
     return (
       <Container key={post.id}>
@@ -52,13 +58,16 @@ export class Post extends React.Component {
           <PostHeader>{post.title}</PostHeader>
           <PostAuthor>
             {postInfo}
-            {post.user_first_name} {post.user_last_name} - {post.user_email} -{' '}
-            {post.user_profile_name}
+            {post.user_first_name} {post.user_last_name} -{' '}
+            <LinkText onPress={() => Linking.openURL(post.user_email)}>
+              {post.user_email}
+            </LinkText>{' '}
+            - {post.user_profile_name}
           </PostAuthor>
           {post.is_shared_post && (
             <PostShared>
               Shared from a neighboring FPF (
-              <PostLink onPress={() => fetchNeighboringIssue(post)}>
+              <PostLink onPress={() => fetchNeighboringIssue(post, navigation)}>
                 See more postings
               </PostLink>
               )
@@ -108,7 +117,8 @@ Post.propTypes = {
   onTapCategory: PropTypes.func,
   showIssueData: PropTypes.bool,
   fetchNeighboringIssue: PropTypes.func,
-  moreText: PropTypes.string.isRequired
+  moreText: PropTypes.string.isRequired,
+  navigation: PropTypes.object.isRequired
 }
 
 Post.defaultProps = {

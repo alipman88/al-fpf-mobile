@@ -18,6 +18,8 @@ import {
 } from './styledComponents'
 
 export const SearchResults = ({
+  categories,
+  navigation,
   nextPage,
   postTruncateLength,
   total,
@@ -68,6 +70,13 @@ export const SearchResults = ({
             postTruncateLength={postTruncateLength}
             moreText={'Read'}
             showIssueData
+            onTapCategory={categoryName => {
+              const category = categories.find(c => c.name === categoryName)
+              setFieldTouched('category', true)
+              setFieldValue('category', category)
+              search({ ...values, category })
+            }}
+            navigation={navigation}
           />
         ))}
         {searchResults.length < total ? (
@@ -89,6 +98,8 @@ export const SearchResults = ({
 }
 
 SearchResults.propTypes = {
+  categories: PropTypes.array.isRequired,
+  navigation: PropTypes.object.isRequired,
   nextPage: PropTypes.func.isRequired,
   postTruncateLength: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,

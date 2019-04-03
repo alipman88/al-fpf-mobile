@@ -54,3 +54,6 @@ export const PostLink = styled(TextSemibold)`
 export const ShowMoreButton = styled(PostLink)`
   margin-top: 10;
 `
+export const LinkText = styled(PostAuthor)`
+  text-decoration: underline;
+`
