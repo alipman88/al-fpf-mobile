@@ -146,7 +146,10 @@ export class Forum extends React.Component {
   }
 
   handleReplyPress = ({ parentPostId, subject }) => {
-    this.props.navigation.push('Compose', { parentPostId, subject })
+    this.props.navigation.navigate({
+      routeName: 'Compose',
+      params: { parentPostId, subject }
+    })
   }
 
   render() {
