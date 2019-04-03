@@ -24,7 +24,6 @@ import greenBird from '@assets/images/bird-eating-birdseed/bird-eating-birdseed.
 
 export const SwiperComponent = ({ navigation, setShouldDisplay }) => {
   const handleLoginNavigation = () => {
-    setShouldDisplay(false)
     navigation.navigate('Login')
     navigation.dispatch(createResetStackTo('Login'))
   }
