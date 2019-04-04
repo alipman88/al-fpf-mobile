@@ -18,7 +18,11 @@ export const Settings = createStackNavigator(
     initialRouteName: 'SettingsIndex',
     defaultNavigationOptions: ({ navigation }) => ({
       headerRight: (
-        <TouchableOpacity onPress={() => navigation.pop()}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.dismiss()
+          }}
+        >
           <CloseText>Close</CloseText>
         </TouchableOpacity>
       ),
