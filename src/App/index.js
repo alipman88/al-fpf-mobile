@@ -2,6 +2,7 @@ import React from 'react'
 import { Linking } from 'react-native'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
+import SplashScreen from 'react-native-splash-screen'
 
 import { store, persistor } from '@common/store'
 import { currentUser } from '@common/currentUser'
@@ -13,6 +14,7 @@ import { Container } from './Container'
 export class App extends React.Component {
   componentDidMount() {
     Linking.addEventListener('url', this.handleOpenURL)
+    SplashScreen.hide()
   }
 
   componentWillUnmount() {

@@ -3,6 +3,7 @@ package com.frontporchforum;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
@@ -17,6 +18,7 @@ import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.taluttasgiran.pickermodule.ReactNativePickerModulePackage;
+
 
 import java.util.Arrays;
 import java.util.List;
@@ -34,6 +36,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new RNDeviceInfo(),
           new MainReactPackage(),
+          new SplashScreenReactPackage(),
           new MapsPackage(),
           new RNFirebasePackage(),
           new RNFirebaseMessagingPackage(),
