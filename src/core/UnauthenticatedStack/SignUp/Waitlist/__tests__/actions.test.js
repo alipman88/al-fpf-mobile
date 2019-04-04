@@ -5,7 +5,7 @@ import { joinWaitlist } from '../actions'
 describe('Address - actions', () => {
   describe('joinWaitlist', () => {
     const values = {
-      streetNumber: 32,
+      streetNumber: '32',
       secondaryAddress: '200',
       streetName: 'Yonge St',
       city: 'Toronto',
@@ -22,12 +22,12 @@ describe('Address - actions', () => {
 
       expect(post).toHaveBeenCalledWith('/waitlist_users', {
         user: {
-          streetNumber: 32,
+          streetNumber: '32',
           secondaryAddress: '200',
           streetName: 'Yonge St',
           firstName: 'foo',
           lastName: 'bar',
-          street_number: 32,
+          street_number: '32',
           street_name: 'Yonge St',
           city: 'Toronto',
           state: 'ON',
@@ -48,12 +48,12 @@ describe('Address - actions', () => {
 
       expect(post).toHaveBeenCalledWith('/waitlist_users', {
         user: {
-          streetNumber: 32,
+          streetNumber: '32',
           secondaryAddress: '200',
           streetName: 'Yonge St',
           firstName: 'foo',
           lastName: 'bar',
-          street_number: 32,
+          street_number: '32',
           street_name: 'Yonge St',
           city: 'Toronto',
           state: 'ON',

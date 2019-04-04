@@ -87,5 +87,5 @@ ProfileTypes.propTypes = {
   getAppSettings: PropTypes.func.isRequired,
   navigation: PropTypes.object.isRequired,
   profilePlans: PropTypes.array.isRequired,
-  profileType: PropTypes.string.isRequired
+  profileType: PropTypes.string
 }

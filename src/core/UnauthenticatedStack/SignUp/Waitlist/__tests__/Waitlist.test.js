@@ -9,7 +9,9 @@ describe('Waitlist', () => {
     navigation: {
       dispatch: jest.fn()
     },
-    newUser: {},
+    newUser: {
+      user: { profilePlan: { id: 1, plan_type: 'neighbor' } }
+    },
     setNewUserByKey: jest.fn(),
     joinWaitlist: jest.fn()
   }
@@ -23,9 +25,7 @@ describe('Waitlist', () => {
     test('send data and updates state', async () => {
       const wrapper = shallow(<Waitlist {...defaultProps} />)
       const setSubmitting = jest.fn()
-      await wrapper
-        .instance()
-        .onSubmit({ streetName: 'Main' }, { setSubmitting })
+      await wrapper.instance().onSubmit({ bar: 'foo' }, { setSubmitting })
 
       expect(setSubmitting).toHaveBeenCalledWith(true)
 
@@ -35,9 +35,7 @@ describe('Waitlist', () => {
 
       expect(defaultProps.joinWaitlist).toHaveBeenCalled()
 
-      expect(defaultProps.setNewUserByKey).toHaveBeenCalledWith({
-        streetName: 'Main'
-      })
+      expect(defaultProps.setNewUserByKey).toHaveBeenCalledWith({ bar: 'foo' })
 
       expect(defaultProps.navigation.dispatch).toHaveBeenCalledWith(
         createResetStackTo('WaitlistSuccess')

@@ -69,8 +69,10 @@ export const BusinessInfoFields = ({
               label='Name of business or nonprofit'
               placeholder='Your Business Name'
               touched={touched.name}
-              onBlur={() => setFieldTouched('name')}
-              onChangeText={value => setFieldValue('name', value)}
+              onChangeText={value => {
+                setFieldValue('name', value)
+                setFieldTouched('name')
+              }}
               value={values.name}
               required
             />
@@ -97,8 +99,10 @@ export const BusinessInfoFields = ({
               label='Website'
               placeholder='example.com'
               touched={touched.website}
-              onBlur={() => setFieldTouched('website')}
-              onChangeText={value => setFieldValue('website', value)}
+              onChangeText={value => {
+                setFieldValue('website', value)
+                setFieldTouched('website')
+              }}
               value={values.website}
               keyboardType='url'
             />
@@ -110,8 +114,10 @@ export const BusinessInfoFields = ({
               label='Phone'
               placeholder='802-123-4567'
               touched={touched.phone}
-              onBlur={() => setFieldTouched('phone')}
-              onChangeText={value => setFieldValue('phone', value)}
+              onChangeText={value => {
+                setFieldValue('phone', value)
+                setFieldTouched('phone')
+              }}
               value={values.phone}
               keyboardType='phone-pad'
             />
@@ -122,8 +128,10 @@ export const BusinessInfoFields = ({
               error={errors.description}
               label='Business/nonprofit description'
               touched={touched.description}
-              onBlur={() => setFieldTouched('description')}
-              onChangeText={value => setFieldValue('description', value)}
+              onChangeText={value => {
+                setFieldValue('description', value)
+                setFieldTouched('description')
+              }}
               value={values.description}
               numberOfLines={10}
               multiline

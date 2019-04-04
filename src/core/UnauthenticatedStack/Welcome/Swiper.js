@@ -85,5 +85,5 @@ export const SwiperComponent = ({ navigation, setShouldDisplay }) => {
 
 SwiperComponent.propTypes = {
   navigation: PropTypes.object.isRequired,
-  setShouldDisplay: PropTypes.func.isRequired
+  setShouldDisplay: PropTypes.func
 }

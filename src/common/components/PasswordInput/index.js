@@ -48,8 +48,10 @@ export class PasswordInput extends React.Component {
         }
         secureTextEntry={!this.state.showPassword}
         onTapIcon={() => this.toggleShowPassword()}
-        onChangeText={value => setFieldValue(key, value)}
-        onBlur={() => setFieldTouched(key)}
+        onChangeText={value => {
+          setFieldValue(key, value)
+          setFieldTouched(key)
+        }}
       />
     )
   }

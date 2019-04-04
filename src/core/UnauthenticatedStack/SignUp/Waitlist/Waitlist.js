@@ -27,7 +27,8 @@ export class Waitlist extends React.Component {
       <Formik
         onSubmit={this.onSubmit}
         initialValues={{
-          ...newUser
+          ...newUser,
+          ...newUser.address
         }}
         render={props => (
           <WaitlistFields

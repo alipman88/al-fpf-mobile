@@ -61,8 +61,10 @@ export const BasicInfoFields = ({
               error={errors.firstName}
               label='First name'
               touched={touched.firstName}
-              onBlur={() => setFieldTouched('firstName')}
-              onChangeText={value => setFieldValue('firstName', value)}
+              onChangeText={value => {
+                setFieldTouched('firstName')
+                setFieldValue('firstName', value)
+              }}
               value={values.firstName}
               required
             />
@@ -77,8 +79,10 @@ export const BasicInfoFields = ({
               error={errors.lastName}
               label='Last name'
               touched={touched.lastName}
-              onBlur={() => setFieldTouched('lastName')}
-              onChangeText={value => setFieldValue('lastName', value)}
+              onChangeText={value => {
+                setFieldTouched('lastName')
+                setFieldValue('lastName', value)
+              }}
               value={values.lastName}
               required
             />
@@ -89,7 +93,9 @@ export const BasicInfoFields = ({
               label='Email'
               touched={touched.email}
               onBlur={() => setFieldTouched('email')}
-              onChangeText={value => setFieldValue('email', value)}
+              onChangeText={value => {
+                setFieldValue('email', value)
+              }}
               value={values.email}
               keyboardType='email-address'
               required

@@ -142,12 +142,12 @@ export class WaitlistFields extends React.Component {
                 ]}
                 onSelectedItemsChange={state => {
                   setFieldTouched('state')
-                  setFieldValue('state', state)
+                  setFieldValue('state', state[0])
                 }}
-                single
                 searchPlaceholderText='Search'
                 touched={touched.state}
-                value={values.state}
+                value={[values.state]}
+                single
                 required
               />
             </FieldWrapper>
@@ -160,8 +160,10 @@ export class WaitlistFields extends React.Component {
                 error={errors.firstName}
                 label='First name'
                 touched={touched.firstName}
-                onBlur={() => setFieldTouched('firstName')}
-                onChangeText={value => setFieldValue('firstName', value)}
+                onChangeText={value => {
+                  setFieldValue('firstName', value)
+                  setFieldTouched('firstName')
+                }}
                 value={values.firstName}
                 required
               />
@@ -171,8 +173,10 @@ export class WaitlistFields extends React.Component {
                 error={errors.lastName}
                 label='Last name'
                 touched={touched.lastName}
-                onBlur={() => setFieldTouched('lastName')}
-                onChangeText={value => setFieldValue('lastName', value)}
+                onChangeText={value => {
+                  setFieldValue('lastName', value)
+                  setFieldTouched('lastName')
+                }}
                 value={values.lastName}
                 required
               />
@@ -182,8 +186,10 @@ export class WaitlistFields extends React.Component {
                 error={errors.email}
                 label='Email'
                 touched={touched.email}
-                onBlur={() => setFieldTouched('email')}
-                onChangeText={value => setFieldValue('email', value)}
+                onChangeText={value => {
+                  setFieldValue('email', value)
+                  setFieldTouched('email')
+                }}
                 value={values.email}
                 required
               />
@@ -195,10 +201,10 @@ export class WaitlistFields extends React.Component {
                     error={errors.organizationName}
                     label='Organization name'
                     touched={touched.organizationName}
-                    onBlur={() => setFieldTouched('organizationName')}
-                    onChangeText={value =>
+                    onChangeText={value => {
                       setFieldValue('organizationName', value)
-                    }
+                      setFieldTouched('organizationName')
+                    }}
                     value={values.organizationName}
                   />
                 </FieldWrapper>
@@ -207,8 +213,10 @@ export class WaitlistFields extends React.Component {
                     error={errors.webAddress}
                     label='Web address'
                     touched={touched.webAddress}
-                    onBlur={() => setFieldTouched('webAddress')}
-                    onChangeText={value => setFieldValue('webAddress', value)}
+                    onChangeText={value => {
+                      setFieldValue('webAddress', value)
+                      setFieldTouched('webAddress')
+                    }}
                     value={values.webAddress}
                   />
                 </FieldWrapper>
@@ -223,8 +231,10 @@ export class WaitlistFields extends React.Component {
                 error={errors.comment}
                 label='If you want to help bring Front Porch Forum to your town, please tell us how you propose to pitch in (plus any other comments you would like to share):'
                 touched={touched.comment}
-                onBlur={() => setFieldTouched('comment')}
-                onChangeText={value => setFieldValue('comment', value)}
+                onChangeText={value => {
+                  setFieldValue('comment', value)
+                  setFieldTouched('comment')
+                }}
                 value={values.comment}
                 multiline={true}
                 numberOfLines={4}
@@ -235,8 +245,10 @@ export class WaitlistFields extends React.Component {
                 error={errors.reference}
                 label='How did you learn about Front Porch Forum?'
                 touched={touched.reference}
-                onBlur={() => setFieldTouched('reference')}
-                onChangeText={value => setFieldValue('reference', value)}
+                onChangeText={value => {
+                  setFieldValue('reference', value)
+                  setFieldTouched('reference')
+                }}
                 value={values.reference}
                 multiline={true}
                 numberOfLines={4}
