@@ -29,7 +29,7 @@ export const UnauthenticatedStack = createStackNavigator(
     CreateAccount
   },
   {
-    initialRouteName: 'Welcome',
+    initialRouteName: 'EmailVerification',
     defaultNavigationOptions: {
       headerTransparent: true,
       header: null,
