@@ -52,12 +52,23 @@ export class Profile extends React.Component {
             <FieldText>{profile.city}</FieldText>
             <FieldText>{profile.state}</FieldText>
           </Field>
-          <FieldLabel>Forum(s)</FieldLabel>
+          <FieldLabel>Home Forum</FieldLabel>
           <Field>
-            {profile.area_ids.map(areaId => (
-              <FieldText key={areaId}>{areas[areaId].name}</FieldText>
-            ))}
+            <FieldText>{areas[profile.home_nf].name}</FieldText>
           </Field>
+          {profile.area_ids.length > 1 && (
+            <React.Fragment>
+              <FieldLabel>Additional Forums</FieldLabel>
+              <Field>
+                {profile.area_ids
+                  .filter(id => id !== profile.home_nf)
+                  .map(areaId => (
+                    <FieldText key={areaId}>{areas[areaId].name}</FieldText>
+                  ))}
+              </Field>
+            </React.Fragment>
+          )}
+
           <ExternalLink
             hasBorder
             onPress={() =>
