@@ -25,7 +25,8 @@ export const EmailVerification = ({
   email,
   navigation,
   newUser,
-  resendEmail
+  resendEmail,
+  profileType
 }) => {
   const handleOnPress = async () => {
     await resendEmail(email)
@@ -47,7 +48,7 @@ export const EmailVerification = ({
       <Spinner visible={false} />
       <HeaderLogo />
       <MessageContainer>
-        {newUser.profileType === profileTypes.GOVERNMENT ? (
+        {profileType === profileTypes.GOVERNMENT ? (
           <HelpMessage>
             Your government profile will be reviewed within 48hrs. Once
             approved, you will have access to your FPF(s). Please{' '}
@@ -104,5 +105,6 @@ EmailVerification.propTypes = {
   navigation: PropTypes.object.isRequired,
   newUser: PropTypes.object.isRequired,
   email: PropTypes.object.isRequired,
-  resendEmail: PropTypes.func.isRequired
+  resendEmail: PropTypes.func.isRequired,
+  profileType: PropTypes.string.isRequired
 }

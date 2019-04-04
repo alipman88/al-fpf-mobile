@@ -7,7 +7,8 @@ import { newUser } from '../newUser'
 
 const mapStateToProps = state => ({
   email: registrationEmail.selectors.getRegistrationEmail(state),
-  newUser: newUser.selectors.getNewUser(state)
+  newUser: newUser.selectors.getNewUser(state),
+  profileType: newUser.selectors.getProfileType(state)
 })
 
 export const EmailVerification = connect(

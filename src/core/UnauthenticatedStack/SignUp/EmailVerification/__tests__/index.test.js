@@ -25,7 +25,8 @@ describe('EmailVerification', () => {
   test('renders different content for different profile types', () => {
     const wrapper = shallow(<EmailVerification {...defaultProps} />)
     expect(wrapper.find(HelpMessage).length).toEqual(3)
-    wrapper.setProps({ newUser: { profileType: 'government' } })
+
+    wrapper.setProps({ profileType: 'government' })
     expect(wrapper.find(HelpMessage).length).toEqual(1)
   })
 
