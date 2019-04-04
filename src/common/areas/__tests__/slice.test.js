@@ -76,7 +76,8 @@ describe('areas - slice', () => {
     const state = areas.reducer(
       undefined,
       areas.actions.setAreas([
-        { id: 1, name: 'zzzz', neighbor_areas: [{ id: 2, name: 'neighbor' }] }
+        { id: 1, name: 'zzzz', neighbor_areas: [{ id: 3, name: 'neighbor' }] },
+        { id: 2, name: 'aaaa', neighbor_areas: [{ id: 3, name: 'neighbor' }] }
       ])
     )
 
@@ -86,6 +87,10 @@ describe('areas - slice', () => {
       }
     })
 
-    expect(data).toEqual([{ id: 2, name: 'neighbor' }, { id: 1, name: 'zzzz' }])
+    expect(data).toEqual([
+      { id: 2, name: 'aaaa' },
+      { id: 3, name: 'neighbor' },
+      { id: 1, name: 'zzzz' }
+    ])
   })
 })

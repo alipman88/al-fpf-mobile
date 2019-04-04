@@ -74,6 +74,7 @@ areas.selectors = {
   getFullAreasList: createSelector(
     [path],
     areas => {
+      const uniqueAreaNames = new Set()
       const data = areas.areas
         .map(area => ({
           id: area.id,
@@ -87,6 +88,14 @@ areas.selectors = {
             }
           })
         )
+        .filter(area => {
+          // remove duplicates such as neighbor areas that the member also has primary access to
+          const newArea = !uniqueAreaNames.has(area.name)
+          if (newArea) {
+            uniqueAreaNames.add(area.name)
+          }
+          return newArea
+        })
 
       data.sort((a, b) => {
         if (a.name === b.name) {
