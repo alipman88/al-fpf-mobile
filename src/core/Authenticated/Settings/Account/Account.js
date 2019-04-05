@@ -19,7 +19,8 @@ import {
   SettingsDescription,
   SettingsDescriptionBold,
   SettingsLabel,
-  SettingsPair
+  SettingsPair,
+  LinkContainer
 } from './styledComponents'
 
 export class Account extends React.Component {
@@ -85,13 +86,17 @@ export class Account extends React.Component {
           >
             Manage my email subscriptions
           </ExternalLink>
-          <TouchableOpacity
-            onPress={() =>
-              navigateWithToken('/user', loading => this.setState({ loading }))
-            }
-          >
-            <CloseAccountText>Close my account</CloseAccountText>
-          </TouchableOpacity>
+          <LinkContainer>
+            <TouchableOpacity
+              onPress={() =>
+                navigateWithToken('/user', loading =>
+                  this.setState({ loading })
+                )
+              }
+            >
+              <CloseAccountText>Close my account</CloseAccountText>
+            </TouchableOpacity>
+          </LinkContainer>
         </KeyboardAwareScrollView>
       </ScreenContainer>
     )

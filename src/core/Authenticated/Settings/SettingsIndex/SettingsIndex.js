@@ -50,15 +50,17 @@ export class SettingsIndex extends React.Component {
             <NavLink
               linkText={`${user.first_name} ${user.last_name}`}
               onPress={() => navigation.navigate('Account')}
+              hasBorder={true}
             />
             <FieldLabel>My profile(s)</FieldLabel>
-            {user.profiles.map(profile => (
+            {user.profiles.map((profile, i, arr) => (
               <NavLink
                 linkText={getProfileDisplayName(profile)}
                 key={profile.id}
                 onPress={() =>
                   navigation.navigate('Profile', { profileId: profile.id })
                 }
+                hasBorder={arr.length === i + 1}
               />
             ))}
             <TouchableOpacity

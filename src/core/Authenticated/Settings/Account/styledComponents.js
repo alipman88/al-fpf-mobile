@@ -38,3 +38,7 @@ export const CloseAccountText = styled(Text)`
   text-decoration: underline;
   text-align: center;
 `
+
+export const LinkContainer = styled.View`
+  margin-top: 60;
+`

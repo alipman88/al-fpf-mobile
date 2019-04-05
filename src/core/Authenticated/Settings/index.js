@@ -28,7 +28,7 @@ export const Settings = createStackNavigator(
       ),
       headerTitleStyle: {
         fontFamily: 'ProximaNova-SemiBold',
-        fontSize: 14,
+        fontSize: 18,
         color: '#355768',
         textAlign: 'center',
         flex: 1
