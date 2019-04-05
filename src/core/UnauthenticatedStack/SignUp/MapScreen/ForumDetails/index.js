@@ -26,7 +26,7 @@ export const ForumDetails = ({
       <Header>{area.name}</Header>
       <Row>
         <Label>Launched</Label>
-        <Value>{format(new Date(area.created_at), 'MM dd, YYYY')}</Value>
+        <Value>{format(new Date(area.created_at), 'MMM DD, YYYY')}</Value>
       </Row>
       <Row>
         <Label>Members</Label>
