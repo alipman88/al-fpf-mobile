@@ -81,7 +81,7 @@ export const BusinessInfoFields = ({
             <Multiselect
               error={errors.businessCategoryId}
               label='Category'
-              selectText={'Select the category that is the best match'}
+              selectText={'Select category'}
               items={categories}
               onSelectedItemsChange={selectedItems => {
                 setFieldTouched('businessCategoryId', true)
