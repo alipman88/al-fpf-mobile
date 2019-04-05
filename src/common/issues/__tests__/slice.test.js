@@ -114,7 +114,7 @@ describe('issues - slice', () => {
     const state = issues.reducer(
       initialState,
       issues.actions.setIssues({
-        issues: [{ id: 4, number: 44, sent_at: addDays(endOfToday(), 1) }],
+        issues: [{ id: 4, number: 9, sent_at: addDays(endOfToday(), 1) }],
         areaId: 3
       })
     )
@@ -141,8 +141,8 @@ describe('issues - slice', () => {
     }
 
     expect(data.length).toEqual(4)
-    // newest issue is first
-    expect(data.map(post => post.id)).toEqual([4, 1, 2, 3])
+    // newest issue by number is first
+    expect(data.map(post => post.id)).toEqual([3, 2, 1, 4])
   })
 
   test('it selects the latest 10 issues', () => {
@@ -167,7 +167,7 @@ describe('issues - slice', () => {
       })
     )
 
-    const issue11 = state.issuesByAreaId[5][10]
+    const issue2 = state.issuesByAreaId[5][10]
 
     const data = issues.selectors.getLatestIssues(
       {
@@ -178,8 +178,8 @@ describe('issues - slice', () => {
       5
     )
 
-    expect(issue11.id).toEqual(11)
-    expect(data).toEqual(expect.not.arrayContaining([issue11]))
+    expect(issue2.id).toEqual(2)
+    expect(data).toEqual(expect.not.arrayContaining([issue2]))
     expect(data.length).toEqual(10)
   })
 })

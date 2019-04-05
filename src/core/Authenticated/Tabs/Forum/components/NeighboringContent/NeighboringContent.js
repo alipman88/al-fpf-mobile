@@ -14,7 +14,7 @@ import {
 } from './styledComponents'
 
 export const NeighboringContent = ({
-  fetchNeighboringIssue,
+  setCurrentAreaId,
   newsFromNeighboringNfs
 }) => {
   if (newsFromNeighboringNfs.length === 0) {
@@ -30,7 +30,7 @@ export const NeighboringContent = ({
             <NewsBody>
               {news.first_post_title} - {news.first_post_user_full_name} -
             </NewsBody>
-            <TouchableOpacity onPress={() => fetchNeighboringIssue(news)}>
+            <TouchableOpacity onPress={() => setCurrentAreaId(news.area_id)}>
               <Link>
                 Read posting{' '}
                 {news.additional_posts_count > 0
@@ -47,7 +47,7 @@ export const NeighboringContent = ({
 }
 
 NeighboringContent.propTypes = {
-  fetchNeighboringIssue: PropTypes.func.isRequired,
+  setCurrentAreaId: PropTypes.func.isRequired,
   newsFromNeighboringNfs: PropTypes.array
 }
 

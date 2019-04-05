@@ -1,7 +1,8 @@
 import { api } from '@common/api'
-import { getIssues } from '../actions'
+import { getIssues, fetchSpecificIssue } from '../actions'
 import { issues } from '../slice'
 import { appError } from '@components/AppError/slice'
+import { areas } from '@common/areas'
 
 describe('issues actions', () => {
   const getState = () => ({
@@ -90,5 +91,33 @@ describe('issues actions', () => {
     expect(dispatch).toHaveBeenCalledWith(appError.actions.setAppError('boom'))
 
     getSpy.mockRestore()
+  })
+
+  describe('fetchSpecificIssue', () => {
+    test('dispatches to fetch areas, issues, and posts', async () => {
+      const dispatch = jest.fn()
+      const getState = () => ({
+        main: {
+          issues: {
+            issuesByAreaId: {
+              50: [
+                {
+                  number: 26,
+                  id: 4
+                },
+                {
+                  number: 10,
+                  id: 2
+                }
+              ]
+            }
+          }
+        }
+      })
+
+      await fetchSpecificIssue(50, 26, 500)(dispatch, getState)
+
+      expect(dispatch).toHaveBeenCalledWith(areas.actions.setCurrentAreaId(50))
+    })
   })
 })

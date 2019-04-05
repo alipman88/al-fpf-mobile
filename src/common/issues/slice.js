@@ -59,6 +59,9 @@ export const issues = createSlice({
           return issue
         })
         .concat(existingIssues)
+        .sort((a, b) => {
+          return b.number - a.number
+        })
       return {
         ...state,
         issuesByAreaId: {

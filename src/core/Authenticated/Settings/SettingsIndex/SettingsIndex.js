@@ -27,7 +27,6 @@ export class SettingsIndex extends React.Component {
   }
 
   async logoutUser() {
-    await firebase.iid().delete()
     this.props.logoutUser(
       this.props.navigation,
       { device_token: this.props.fcmToken },

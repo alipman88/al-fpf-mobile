@@ -22,7 +22,7 @@ import yellowBird from '@assets/images/onboarding/yellow-bird.png'
 import greyBird from '@assets/images/onboarding/grey-bird.png'
 import greenBird from '@assets/images/bird-eating-birdseed/bird-eating-birdseed.png'
 
-export const SwiperComponent = ({ navigation, setShouldDisplay }) => {
+export const SwiperComponent = ({ navigation }) => {
   const handleLoginNavigation = () => {
     navigation.navigate('Login')
     navigation.dispatch(createResetStackTo('Login'))
@@ -84,6 +84,5 @@ export const SwiperComponent = ({ navigation, setShouldDisplay }) => {
 }
 
 SwiperComponent.propTypes = {
-  navigation: PropTypes.object.isRequired,
-  setShouldDisplay: PropTypes.func
+  navigation: PropTypes.object.isRequired
 }

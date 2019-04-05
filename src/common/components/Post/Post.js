@@ -34,7 +34,7 @@ export class Post extends React.Component {
     const {
       post,
       postTruncateLength,
-      fetchNeighboringIssue,
+      fetchSpecificIssue,
       children,
       hasBorder,
       showIssueData,
@@ -45,7 +45,16 @@ export class Post extends React.Component {
 
     const Container = hasBorder ? PostContainerBordered : PostContainer
     const postInfo = showIssueData ? (
-      <LinkText onPress={() => fetchNeighboringIssue(post, navigation)}>
+      <LinkText
+        onPress={() =>
+          fetchSpecificIssue(
+            post.area_id,
+            post.issue_id,
+            post.issue_number,
+            navigation
+          )
+        }
+      >
         {post.area_name} - No. ${post.issue_number} -{' '}
       </LinkText>
     ) : (
@@ -67,7 +76,16 @@ export class Post extends React.Component {
           {post.is_shared_post && (
             <PostShared>
               Shared from a neighboring FPF (
-              <PostLink onPress={() => fetchNeighboringIssue(post, navigation)}>
+              <PostLink
+                onPress={() =>
+                  fetchSpecificIssue(
+                    post.area_id,
+                    post.issue_id,
+                    post.issue_number,
+                    navigation
+                  )
+                }
+              >
                 See more postings
               </PostLink>
               )
@@ -117,7 +135,7 @@ Post.propTypes = {
   hasBorder: PropTypes.bool,
   onTapCategory: PropTypes.func,
   showIssueData: PropTypes.bool,
-  fetchNeighboringIssue: PropTypes.func,
+  fetchSpecificIssue: PropTypes.func,
   moreText: PropTypes.string.isRequired,
   navigation: PropTypes.object.isRequired
 }

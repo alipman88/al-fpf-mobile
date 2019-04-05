@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { Forum as ForumComponent } from './Forum'
 import { currentUser } from '@common/currentUser'
 import { areas } from '@common/areas'
-import { getIssues, issues } from '@common/issues'
+import { getIssues, issues, fetchSpecificIssue } from '@common/issues'
 import { getPosts, posts } from '@common/posts'
 import { setupForumData } from './setupForumData.js'
 import { appError } from '@components/AppError/slice'
@@ -32,6 +32,7 @@ const mapStateToProps = state => {
 export const Forum = connect(
   mapStateToProps,
   {
+    fetchSpecificIssue,
     getIssues,
     getPosts,
     setAccessToken: currentUser.actions.setAccessToken,

@@ -44,6 +44,17 @@ export class Forum extends React.Component {
     if (enabled) {
       const channel = createChannel()
 
+      const notificationOpen = await firebase
+        .notifications()
+        .getInitialNotification()
+      if (notificationOpen) {
+        this.handleNotificationOpen(notificationOpen)
+      }
+
+      this.messageListener = firebase
+        .messaging()
+        .onMessage(message => console.log('on message', message))
+
       this.notificationListener = firebase
         .notifications()
         .onNotification(notification => {
@@ -55,6 +66,12 @@ export class Forum extends React.Component {
             notification._data
           )
         })
+
+      this.notificationOpenedListener = firebase
+        .notifications()
+        .onNotificationOpened(notificationOpen => {
+          this.handleNotificationOpen(notificationOpen)
+        })
     }
   }
 
@@ -64,6 +81,9 @@ export class Forum extends React.Component {
     }
     if (this.notificationListener) {
       this.notificationListener()
+    }
+    if (this.notificationOpenedListener) {
+      this.notificationOpenedListener()
     }
   }
 
@@ -126,6 +146,17 @@ export class Forum extends React.Component {
     this.checkNavParams()
     this.fetchIssues(prevProps)
     this.fetchPosts(prevProps)
+  }
+
+  handleNotificationOpen(notificationOpen) {
+    const notification = notificationOpen.notification
+    const { area_id, issue_id, issue_number } = notification._data
+    this.props.fetchSpecificIssue(
+      parseInt(area_id, 10),
+      parseInt(issue_id, 10),
+      parseInt(issue_number, 10),
+      this.props.navigation
+    )
   }
 
   setTitleFromArea() {
@@ -240,6 +271,7 @@ Forum.propTypes = {
   currentAreaId: PropTypes.number.isRequired,
   currentIssueId: PropTypes.number.isRequired,
   fcmToken: PropTypes.string,
+  fetchSpecificIssue: PropTypes.func.isRequired,
   getPosts: PropTypes.func.isRequired,
   getIssues: PropTypes.func.isRequired,
   issues: PropTypes.array.isRequired,

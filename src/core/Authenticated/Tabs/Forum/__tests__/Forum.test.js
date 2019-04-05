@@ -25,6 +25,7 @@ describe('Forum', () => {
     getPosts: jest.fn(),
     setCurrentIssueId: jest.fn(),
     setCurrentAreaId: jest.fn(),
+    fetchSpecificIssue: jest.fn(),
     posts: {
       12: [
         {
@@ -300,6 +301,28 @@ describe('Forum', () => {
       })
 
       expect(defaultProps.setCurrentIssueId).not.toHaveBeenCalled()
+    })
+  })
+
+  describe('handleNotificationOpen', () => {
+    test('calls to fetch for the issue from the notificationOpen event', () => {
+      const wrapper = shallow(<Forum {...defaultProps} />)
+      wrapper.instance().handleNotificationOpen({
+        notification: {
+          _data: {
+            area_id: '5',
+            issue_id: '6',
+            issue_number: '340'
+          }
+        }
+      })
+
+      expect(defaultProps.fetchSpecificIssue).toHaveBeenCalledWith(
+        5,
+        6,
+        340,
+        defaultProps.navigation
+      )
     })
   })
 })

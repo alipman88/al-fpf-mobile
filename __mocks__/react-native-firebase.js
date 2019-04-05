@@ -1,5 +1,6 @@
 const messaging = {
   getToken: jest.fn().mockReturnValue('fcmToken'),
+  deleteToken: jest.fn(),
   hasPermission: jest.fn().mockReturnValue(true),
   onMessage: jest.fn(),
   onTokenRefresh: jest.fn(),
@@ -11,7 +12,9 @@ const notificationsFactory = {
   android: {
     createChannel: jest.fn()
   },
-  onNotification: jest.fn()
+  onNotification: jest.fn(),
+  getInitialNotification: jest.fn(),
+  onNotificationOpened: jest.fn()
 }
 
 const notifications = () => notificationsFactory

@@ -73,7 +73,5 @@ describe('SettingsIndex', () => {
       .simulate('press')
 
     expect(defaultProps.logoutUser).toHaveBeenCalled()
-    expect(firebase.iid().delete).toHaveBeenCalled()
-    firebase.iid().delete.mockReset()
   })
 })
