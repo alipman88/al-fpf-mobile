@@ -5,11 +5,6 @@ import { Switch, TouchableOpacity } from 'react-native'
 import { Account } from '../Account'
 import { ExternalLink } from '../../components/ExternalLink'
 
-jest.mock('uuid/v4', () => ({
-  __esModule: true,
-  default: () => 'abcdefgh123'
-}))
-
 describe('Account', () => {
   const defaultProps = {
     loading: false,
@@ -41,7 +36,7 @@ describe('Account', () => {
       expect.any(Function)
     )
     expect(defaultProps.navigateWithToken).toHaveBeenCalledWith(
-      '/user/abcdefgh123/subscriptions',
+      '/user/subscriptions',
       expect.any(Function)
     )
   })

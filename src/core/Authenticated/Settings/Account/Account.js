@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Platform, Switch, TouchableOpacity } from 'react-native'
 import Spinner from 'react-native-loading-spinner-overlay'
-import uuid from 'uuid/v4'
 
 import { ScreenContainer } from '@components/ScreenContainer'
 import { KeyboardAwareScrollView } from '@components/KeyboardAwareScrollView'
@@ -79,9 +78,7 @@ export class Account extends React.Component {
           </ExternalLink>
           <ExternalLink
             onPress={() =>
-              // URL on site uses a generated hash, but ideally it should just be /user/subscriptions
-              // so this UUID is temporary work around
-              navigateWithToken(`/user/${uuid()}/subscriptions`, loading =>
+              navigateWithToken(`/user/subscriptions`, loading =>
                 this.setState({ loading })
               )
             }
