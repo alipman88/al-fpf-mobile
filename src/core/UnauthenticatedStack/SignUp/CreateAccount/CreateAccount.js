@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { ScrollView } from 'react-native'
 import Spinner from 'react-native-loading-spinner-overlay'
 
 import { profileTypes } from '@common/types/profileTypes'
@@ -112,10 +111,8 @@ export class CreateAccount extends React.Component {
       >
         <Spinner visible={loading} />
 
-        <ScrollView>
-          <FormHeader>Last step...</FormHeader>
-          <CreateAccountWrapper>{toggles}</CreateAccountWrapper>
-        </ScrollView>
+        <FormHeader>Last step...</FormHeader>
+        <CreateAccountWrapper>{toggles}</CreateAccountWrapper>
       </FullScreenWizard>
     )
   }

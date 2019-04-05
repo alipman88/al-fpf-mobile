@@ -6,13 +6,9 @@ import Spinner from 'react-native-loading-spinner-overlay'
 import { TextInput } from '@components/TextInput'
 import { Multiselect } from '@components/Multiselect'
 import { FullScreenWizard } from '@components/FullScreenWizard'
-import { KeyboardAwareScrollView } from '@components/KeyboardAwareScrollView'
-import {
-  paddingHorizontal,
-  paddingVertical
-} from '@common/styles/screenPadding'
 
 import {
+  Container,
   FieldWrapper,
   FormFieldsWrapper,
   FormHeader
@@ -49,15 +45,12 @@ export const BusinessInfoFields = ({
       withPadding={false}
       topPadding={35}
       nextDisabled={nextDisabled}
+      contentContainerStyle={{
+        backgroundColor: '#f2f2f2'
+      }}
     >
-      <Spinner visible={loading} />
-      <KeyboardAwareScrollView
-        style={{
-          paddingHorizontal,
-          paddingVertical,
-          backgroundColor: '#f2f2f2'
-        }}
-      >
+      <Container>
+        <Spinner visible={loading} />
         <FormHeader>
           To help people learn more about your business through your listing in
           FPF's Business Directory, please complete the following fields:
@@ -138,7 +131,7 @@ export const BusinessInfoFields = ({
             />
           </FieldWrapper>
         </FormFieldsWrapper>
-      </KeyboardAwareScrollView>
+      </Container>
     </FullScreenWizard>
   )
 }

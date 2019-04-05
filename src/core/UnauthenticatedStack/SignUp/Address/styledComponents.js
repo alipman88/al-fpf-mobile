@@ -1,11 +1,6 @@
 import styled from 'styled-components/native'
 
-import { paddingHorizontal } from '@common/styles/screenPadding'
 import { Text, TextSemibold } from '@components/Text'
-
-export const Container = styled.View`
-  padding-horizontal: ${paddingHorizontal};
-`
 
 export const Description = styled(Text)`
   font-size: 14;

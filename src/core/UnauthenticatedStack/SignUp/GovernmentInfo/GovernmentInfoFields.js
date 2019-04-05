@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import isEmpty from 'lodash/isEmpty'
 
 import { FullScreenWizard } from '@components/FullScreenWizard'
-import { KeyboardAwareScrollView } from '@components/KeyboardAwareScrollView'
 import { TextInput } from '@components/TextInput'
 
 import { Container, Description, FieldWrapper } from './styledComponents'
@@ -24,60 +23,57 @@ export const GovernmentInfoFields = ({
     onNextPress={handleSubmit}
     nextDisabled={!isEmpty(errors) || isEmpty(touched)}
     withPadding={false}
+    contentContainerStyle={{
+      paddingBottom: 20,
+      backgroundColor: '#f2f2f2'
+    }}
   >
-    <KeyboardAwareScrollView
-      contentContainerStyle={{
-        paddingBottom: 20
-      }}
-      style={{ backgroundColor: '#f2f2f2' }}
-    >
-      <Container>
-        <Description>
-          Please tell us a little about yourself and your government role.
-        </Description>
-        <FieldWrapper>
-          <TextInput
-            error={errors.title}
-            label='Title'
-            onChangeText={value => {
-              setFieldTouched('title')
-              setFieldValue('title', value)
-            }}
-            required
-            touched={touched.title}
-            value={values.title}
-            placeholder='School Board Member'
-          />
-        </FieldWrapper>
-        <FieldWrapper>
-          <TextInput
-            error={errors.jurisdiction}
-            label='Jurisdiction'
-            onChangeText={value => {
-              setFieldTouched('jurisdiction')
-              setFieldValue('jurisdiction', value)
-            }}
-            required
-            touched={touched.jurisdiction}
-            value={values.jurisdiction}
-            placeholder='Winooski School District'
-          />
-        </FieldWrapper>
-        <FieldWrapper>
-          <TextInput
-            error={errors.tellUsMore}
-            label='Tell us more'
-            onChangeText={value => {
-              setFieldTouched('tellUsMore')
-              setFieldValue('tellUsMore', value)
-            }}
-            multiline
-            touched={touched.tellUsMore}
-            value={values.tellUsMore}
-          />
-        </FieldWrapper>
-      </Container>
-    </KeyboardAwareScrollView>
+    <Container>
+      <Description>
+        Please tell us a little about yourself and your government role.
+      </Description>
+      <FieldWrapper>
+        <TextInput
+          error={errors.title}
+          label='Title'
+          onChangeText={value => {
+            setFieldTouched('title')
+            setFieldValue('title', value)
+          }}
+          required
+          touched={touched.title}
+          value={values.title}
+          placeholder='School Board Member'
+        />
+      </FieldWrapper>
+      <FieldWrapper>
+        <TextInput
+          error={errors.jurisdiction}
+          label='Jurisdiction'
+          onChangeText={value => {
+            setFieldTouched('jurisdiction')
+            setFieldValue('jurisdiction', value)
+          }}
+          required
+          touched={touched.jurisdiction}
+          value={values.jurisdiction}
+          placeholder='Winooski School District'
+        />
+      </FieldWrapper>
+      <FieldWrapper>
+        <TextInput
+          error={errors.tellUsMore}
+          label='Tell us more'
+          onChangeText={value => {
+            setFieldTouched('tellUsMore')
+            setFieldValue('tellUsMore', value)
+          }}
+          multiline
+          touched={touched.tellUsMore}
+          value={values.tellUsMore}
+        />
+      </FieldWrapper>
+    </Container>
   </FullScreenWizard>
 )
 

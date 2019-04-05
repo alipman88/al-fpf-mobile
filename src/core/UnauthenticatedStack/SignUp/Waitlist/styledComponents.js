@@ -5,6 +5,7 @@ import { Text, TextSemibold } from '@components/Text'
 
 export const Container = styled.View`
   padding-horizontal: ${paddingHorizontal};
+  padding-bottom: 20;
 `
 
 export const SubTitle = styled(Text)`

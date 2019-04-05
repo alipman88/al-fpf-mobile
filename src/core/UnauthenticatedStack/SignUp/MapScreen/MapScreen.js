@@ -117,6 +117,9 @@ export class MapScreen extends React.Component {
         nextDisabled={
           areas.length > 1 && Object.keys(checkedAreas).length === 0
         }
+        contentContainerStyle={{
+          flex: 1
+        }}
       >
         {region.latitudeDelta > 0 && region.longitudeDelta > 0 && (
           <MapView

@@ -2,6 +2,19 @@ import styled from 'styled-components/native'
 
 import { TextSemibold } from '@components/Text'
 
+export const ScreenWrapper = styled.View`
+  flex: 1;
+  justify-content: space-between;
+`
+
+export const SafeAreaViewContainer = styled.SafeAreaView`
+  flex: 1;
+`
+
+export const KeyboardAvoidingView = styled.KeyboardAvoidingView`
+  flex: 1;
+`
+
 export const NavButtonWrapper = styled.View`
   flex-direction: row;
   justify-content: space-between;

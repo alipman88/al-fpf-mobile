@@ -5,16 +5,11 @@ import isEmpty from 'lodash/isEmpty'
 import { TextInput } from '@components/TextInput'
 import { PasswordInput } from '@components/PasswordInput'
 import { FullScreenWizard } from '@components/FullScreenWizard'
-import { KeyboardAwareScrollView } from '@components/KeyboardAwareScrollView'
-
-import {
-  paddingHorizontal,
-  paddingVertical
-} from '@common/styles/screenPadding'
 
 import { getStepCount } from '../getStepCount'
 
 import {
+  Container,
   FieldWrapper,
   FormHelper,
   FormFieldsWrapper,
@@ -43,17 +38,12 @@ export const BasicInfoFields = ({
       onNextPress={() => onSubmit(values)}
       currentStep={1}
       steps={getStepCount(profileType)}
-      withPadding={false}
-      topPadding={35}
       nextDisabled={!isEmpty(errors) || isEmpty(touched)}
+      contentContainerStyle={{
+        backgroundColor: '#f2f2f2'
+      }}
     >
-      <KeyboardAwareScrollView
-        style={{
-          paddingHorizontal,
-          paddingVertical,
-          backgroundColor: '#f2f2f2'
-        }}
-      >
+      <Container>
         <FormFieldsWrapper>
           <FormHeader>Hello neighbor! Let's get started.</FormHeader>
           <FieldWrapper>
@@ -99,7 +89,7 @@ export const BasicInfoFields = ({
               value={values.email}
               keyboardType='email-address'
               required
-              autoCapitalize={false}
+              autoCapitalize='none'
             />
           </FieldWrapper>
           <FieldWrapper>
@@ -135,7 +125,7 @@ export const BasicInfoFields = ({
             be grounds for account deactivation.
           </FormHelper>
         </FormFieldsWrapper>
-      </KeyboardAwareScrollView>
+      </Container>
     </FullScreenWizard>
   )
 }

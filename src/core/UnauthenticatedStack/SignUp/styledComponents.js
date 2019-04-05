@@ -1,6 +1,8 @@
 import styled from 'styled-components/native'
 import { Text } from '@components/Text'
 
+import { screenPadding } from '@common/styles/screenPadding'
+
 export const FormHeader = styled(Text)`
   font-size: 16;
   text-align: center;
@@ -17,4 +19,8 @@ export const FieldWrapper = styled.View`
 `
 export const FormFieldsWrapper = styled.View`
   padding-bottom: 100;
+`
+
+export const Container = styled.View`
+  ${screenPadding}
 `
