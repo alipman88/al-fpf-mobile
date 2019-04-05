@@ -38,7 +38,9 @@ export const LoginComponent = ({ navigation, setAccessToken }) => {
         <TroubleLoggingInContainer>
           <TouchableOpacity
             onPress={() =>
-              Linking.openURL('mailto:membersupport@frontporchforum.com')
+              Linking.openURL(
+                'https://frontporchforum.com/isfpfforme/member-faq'
+              )
             }
           >
             <BottomText>Trouble logging in?</BottomText>
