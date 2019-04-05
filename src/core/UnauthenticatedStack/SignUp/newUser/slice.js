@@ -64,6 +64,9 @@ export const newUser = createSlice({
         ...state,
         loading: payload
       }
+    },
+    clearData: () => {
+      return { ...initialState }
     }
   }
 })

@@ -6,7 +6,7 @@ describe('registrationEmail - slice', () => {
       email: ''
     }
 
-    const payload = { email: 'bar@foo.com' }
+    const payload = 'bar@foo.com'
     const state = registrationEmail.reducer(
       initialState,
       registrationEmail.actions.setRegistrationEmail(payload)
@@ -15,6 +15,6 @@ describe('registrationEmail - slice', () => {
     const data = registrationEmail.selectors.getRegistrationEmail({
       main: { registrationEmail: state }
     })
-    expect(data.email).toEqual('bar@foo.com')
+    expect(data).toEqual('bar@foo.com')
   })
 })

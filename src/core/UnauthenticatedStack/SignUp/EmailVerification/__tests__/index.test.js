@@ -14,8 +14,11 @@ describe('EmailVerification', () => {
       navigate: jest.fn()
     },
     newUser: {
-      profileType: 'business'
-    }
+      profileType: 'business',
+      email: 'bob@ross.com'
+    },
+    clearUserData: jest.fn(),
+    setRegistrationEmail: jest.fn()
   }
 
   afterEach(() => {
@@ -30,8 +33,25 @@ describe('EmailVerification', () => {
     expect(wrapper.find(HelpMessage).length).toEqual(1)
   })
 
+  test('it sets registration email on mount', () => {
+    shallow(<EmailVerification {...defaultProps} />)
+    expect(defaultProps.setRegistrationEmail).toHaveBeenCalledWith(
+      'bob@ross.com'
+    )
+  })
+
+  test('it clears data and navigates on Login link tap', () => {
+    const wrapper = shallow(<EmailVerification {...defaultProps} />)
+    wrapper
+      .find(TouchableOpacity)
+      .last()
+      .simulate('press')
+    expect(defaultProps.clearUserData).toHaveBeenCalled()
+    expect(defaultProps.navigation.navigate).toHaveBeenCalledWith('Login')
+  })
+
   describe('resendEmail', () => {
-    test('hits the api', async () => {
+    test('hits the api, clears data', async () => {
       const wrapper = shallow(<EmailVerification {...defaultProps} />)
       jest.spyOn(api, 'post').mockImplementation(() => ({}))
       await wrapper
@@ -41,8 +61,8 @@ describe('EmailVerification', () => {
         .onPress()
 
       expect(defaultProps.resendEmail).toHaveBeenCalled()
+      expect(defaultProps.clearUserData).toHaveBeenCalled()
       expect(defaultProps.navigation.navigate).toHaveBeenCalledWith('Login')
-
       api.post.mockRestore()
     })
   })

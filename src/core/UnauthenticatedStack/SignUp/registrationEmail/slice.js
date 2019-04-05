@@ -14,7 +14,7 @@ export const registrationEmail = createSlice({
   reducers: {
     setRegistrationEmail: (state, { payload }) => {
       return {
-        email: payload.email
+        email: payload
       }
     }
   }
@@ -26,6 +26,6 @@ registrationEmail.selectors = {
   ...registrationEmail.selectors,
   getRegistrationEmail: createSelector(
     [path],
-    registrationEmail => registrationEmail
+    registrationEmail => registrationEmail.email
   )
 }

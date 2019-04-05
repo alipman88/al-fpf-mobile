@@ -14,6 +14,8 @@ const mapStateToProps = state => ({
 export const EmailVerification = connect(
   mapStateToProps,
   {
-    resendEmail
+    resendEmail,
+    setRegistrationEmail: registrationEmail.actions.setRegistrationEmail,
+    clearUserData: newUser.actions.clearData
   }
 )(EmailVerificationComponent)
