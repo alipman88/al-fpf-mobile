@@ -60,6 +60,12 @@ export class Compose extends React.Component {
     })
   }
 
+  onModalClose = resetFormMethod => {
+    this.setState({ modalVisible: false })
+    resetFormMethod()
+    this.props.navigation.navigate('Forum')
+  }
+
   render() {
     const {
       categories,
@@ -117,12 +123,7 @@ export class Compose extends React.Component {
                 values={values}
               />
               {this.state.modalVisible && (
-                <Success
-                  onClose={() => {
-                    this.setState({ modalVisible: false })
-                    resetForm()
-                  }}
-                />
+                <Success onClose={() => this.onModalClose(resetForm)} />
               )}
             </React.Fragment>
           )}

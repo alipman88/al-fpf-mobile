@@ -35,7 +35,8 @@ describe('Compose', () => {
     currentAreaId: 1,
     loading: false,
     navigation: {
-      getParam: jest.fn()
+      getParam: jest.fn(),
+      navigate: jest.fn()
     },
     profiles: [
       {
@@ -196,6 +197,14 @@ describe('Compose', () => {
         },
         setSubmitting
       )
+    })
+
+    test('it sets state and navigates back to Forum', () => {
+      const wrapper = shallow(<Compose {...defaultProps} />)
+      wrapper.setState({ modalVisible: true })
+      wrapper.instance().onModalClose(jest.fn())
+      expect(wrapper.state().modalVisible).toEqual(false)
+      expect(defaultProps.navigation.navigate).toHaveBeenCalledWith('Forum')
     })
   })
 })
