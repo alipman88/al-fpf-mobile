@@ -7,4 +7,5 @@ export const Icon = styled.Image`
 
 export const IconContainer = styled.TouchableOpacity`
   padding-horizontal: 20;
+  padding-vertical: 10;
 `
