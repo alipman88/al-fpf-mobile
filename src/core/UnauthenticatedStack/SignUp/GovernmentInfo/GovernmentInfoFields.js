@@ -4,6 +4,7 @@ import isEmpty from 'lodash/isEmpty'
 
 import { FullScreenWizard } from '@components/FullScreenWizard'
 import { TextInput } from '@components/TextInput'
+import { Select } from '@components/Select'
 
 import { Container, Description, FieldWrapper } from './styledComponents'
 
@@ -14,7 +15,8 @@ export const GovernmentInfoFields = ({
   setFieldTouched,
   setFieldValue,
   touched,
-  values
+  values,
+  governmentTitles
 }) => (
   <FullScreenWizard
     onBackPress={() => navigation.goBack()}
@@ -33,17 +35,21 @@ export const GovernmentInfoFields = ({
         Please tell us a little about yourself and your government role.
       </Description>
       <FieldWrapper>
-        <TextInput
+        <Select
           error={errors.title}
           label='Title'
-          onChangeText={value => {
+          title='Title'
+          items={governmentTitles}
+          onValueChange={value => {
             setFieldTouched('title')
-            setFieldValue('title', value)
+            setFieldValue('title', governmentTitles[value])
           }}
-          required
           touched={touched.title}
-          value={values.title}
-          placeholder='School Board Member'
+          value={governmentTitles.indexOf(values.title) || 0}
+          placeholder={
+            values.title.length ? values.title : 'School Board Member'
+          }
+          required
         />
       </FieldWrapper>
       <FieldWrapper>
@@ -84,5 +90,6 @@ GovernmentInfoFields.propTypes = {
   setFieldTouched: PropTypes.func.isRequired,
   setFieldValue: PropTypes.func.isRequired,
   touched: PropTypes.object.isRequired,
-  values: PropTypes.object.isRequired
+  values: PropTypes.object.isRequired,
+  governmentTitles: PropTypes.array.isRequired
 }

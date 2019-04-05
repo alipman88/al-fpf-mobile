@@ -17,7 +17,8 @@ describe('GovernmentInfo', () => {
         tellUsMore: ''
       }
     },
-    profileType: 'government'
+    profileType: 'government',
+    governmentTitles: ['Mayor', 'Feudal Lord', 'Feudal Lady', 'Mr. Rogers']
   }
 
   afterEach(() => {

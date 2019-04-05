@@ -13,13 +13,19 @@ export class GovernmentInfo extends React.Component {
       navigation.navigate('CreateAccount')
     }
 
+    const { newUser, navigation, governmentTitles } = this.props
+
     return (
       <Formik
-        initialValues={this.props.newUser.government}
+        initialValues={newUser.government}
         onSubmit={values => handleSubmit(values)}
         validationSchema={validations}
         render={props => (
-          <GovernmentInfoFields {...props} navigation={this.props.navigation} />
+          <GovernmentInfoFields
+            {...props}
+            navigation={navigation}
+            governmentTitles={governmentTitles}
+          />
         )}
       />
     )
@@ -29,5 +35,6 @@ export class GovernmentInfo extends React.Component {
 GovernmentInfo.propTypes = {
   navigation: PropTypes.object.isRequired,
   setNewUserByKey: PropTypes.func.isRequired,
-  newUser: PropTypes.object.isRequired
+  newUser: PropTypes.object.isRequired,
+  governmentTitles: PropTypes.array.isRequired
 }
