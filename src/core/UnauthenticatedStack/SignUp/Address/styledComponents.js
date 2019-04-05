@@ -30,6 +30,8 @@ export const NoAreasContainer = styled.View`
 export const NoAreasHeader = styled(TextSemibold)`
   font-size: 21;
   color: #4b4b4b;
+  margin-bottom: 10;
+  text-align: center;
 `
 
 export const NoAreasText = styled(Text)`
