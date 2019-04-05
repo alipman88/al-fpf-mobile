@@ -130,6 +130,10 @@ export const BasicInfoFields = ({
               required
             />
           </FieldWrapper>
+          <FormHelper>
+            False or incomplete information violates FPF's Terms of Use and will
+            be grounds for account deactivation.
+          </FormHelper>
         </FormFieldsWrapper>
       </KeyboardAwareScrollView>
     </FullScreenWizard>
