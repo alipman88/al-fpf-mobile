@@ -49,11 +49,10 @@ export class MapScreen extends React.Component {
       }
     }
 
-    if (areas.length === 1) {
-      this.setState({ checkedAreas: { [areas[0].id]: true } })
-    } else {
+    if (areas.length !== 1) {
       this.setState({ modalOpen: true })
     }
+    this.setState({ checkedAreas: { [areas[0].id]: true } })
 
     const latitudeDelta = maxLat - minLat
     const longitudeDelta = maxLong - minLong
