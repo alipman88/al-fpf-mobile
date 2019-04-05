@@ -65,7 +65,7 @@ export const EmailVerification = ({
           <>
             <SuccessMessage>
               Success! Check your email. We've sent a confirmation email message
-              to rooney@gmail.com.
+              to {newUser.email}
             </SuccessMessage>
             <HelpMessage>
               To complete your registration, please click on the link in that
