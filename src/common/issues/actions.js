@@ -8,7 +8,10 @@ import { spinner } from '@app/Spinner/slice'
 export const getIssues = areaId => async (dispatch, getState) => {
   try {
     dispatch(issues.actions.setLoading(true))
-    const response = await getAuthorized(`/areas/${areaId}/issues`, getState())
+    const response = await getAuthorized(
+      `/areas/${areaId}/issues?page=1&count=10`,
+      getState()
+    )
 
     if (!issues.selectors.getFirstLoadIssues(getState())) {
       dispatch(issues.actions.setFirstLoadOfIssues())

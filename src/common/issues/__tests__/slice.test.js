@@ -71,6 +71,185 @@ describe('issues - slice', () => {
     ).toEqual(false)
   })
 
+  test('setIssues merges the data properly', () => {
+    let state = issues.reducer(
+      undefined,
+      issues.actions.setIssues({
+        areaId: 1,
+        issues: [
+          { id: 1, number: 4 },
+          { id: 2, number: 5 },
+          { id: 3, number: 6 }
+        ]
+      })
+    )
+
+    state = issues.reducer(
+      state,
+      issues.actions.setIssues({
+        areaId: 1,
+        issues: [{ id: 1, number: 4 }, { id: 4, number: 7 }]
+      })
+    )
+
+    expect(state.issuesByAreaId[1].length).toEqual(4)
+    expect(state.issuesByAreaId[1].map(issue => issue.id)).toEqual([4, 3, 2, 1])
+  })
+
+  test('setIssues log contents', () => {
+    const state = issues.reducer(
+      {
+        firstLoadOfIssues: new Date(),
+        issuesByAreaId: {
+          '462': [
+            {
+              id: 349373,
+              area_id: 462,
+              number: 335,
+              sent_at: '2019-04-04T00:10:12-04:00',
+              isUnread: false
+            },
+            {
+              id: 349327,
+              area_id: 462,
+              number: 334,
+              sent_at: '2019-04-01T18:12:01-04:00',
+              isUnread: false
+            },
+            {
+              id: 349211,
+              area_id: 462,
+              number: 333,
+              sent_at: '2019-03-31T17:04:48-04:00',
+              isUnread: false
+            },
+            {
+              id: 349065,
+              area_id: 462,
+              number: 332,
+              sent_at: '2019-03-30T16:41:59-04:00',
+              isUnread: false
+            },
+            {
+              id: 348460,
+              area_id: 462,
+              number: 331,
+              sent_at: '2019-03-29T17:22:36-04:00',
+              isUnread: false
+            },
+            {
+              id: 347946,
+              area_id: 462,
+              number: 330,
+              sent_at: '2019-03-25T17:02:11-04:00',
+              isUnread: false
+            },
+            {
+              id: 347837,
+              area_id: 462,
+              number: 329,
+              sent_at: '2019-03-21T16:44:54-04:00',
+              isUnread: false
+            },
+            {
+              id: 347710,
+              area_id: 462,
+              number: 328,
+              sent_at: '2019-03-20T17:02:26-04:00',
+              isUnread: false
+            },
+            {
+              id: 347603,
+              area_id: 462,
+              number: 327,
+              sent_at: '2019-03-19T17:16:26-04:00',
+              isUnread: false
+            },
+            {
+              id: 347323,
+              area_id: 462,
+              number: 326,
+              sent_at: '2019-03-18T17:45:21-04:00',
+              isUnread: false
+            }
+          ]
+        },
+        currentIssueId: 349373,
+        loading: true
+      },
+      {
+        type: 'issues/setIssues',
+        payload: {
+          issues: [
+            {
+              id: 349373,
+              area_id: 462,
+              number: 335,
+              sent_at: '2019-04-04T00:10:12-04:00'
+            },
+            {
+              id: 349327,
+              area_id: 462,
+              number: 334,
+              sent_at: '2019-04-01T18:12:01-04:00'
+            },
+            {
+              id: 349211,
+              area_id: 462,
+              number: 333,
+              sent_at: '2019-03-31T17:04:48-04:00'
+            },
+            {
+              id: 349065,
+              area_id: 462,
+              number: 332,
+              sent_at: '2019-03-30T16:41:59-04:00'
+            },
+            {
+              id: 348460,
+              area_id: 462,
+              number: 331,
+              sent_at: '2019-03-29T17:22:36-04:00'
+            },
+            {
+              id: 347946,
+              area_id: 462,
+              number: 330,
+              sent_at: '2019-03-25T17:02:11-04:00'
+            },
+            {
+              id: 347837,
+              area_id: 462,
+              number: 329,
+              sent_at: '2019-03-21T16:44:54-04:00'
+            },
+            {
+              id: 347710,
+              area_id: 462,
+              number: 328,
+              sent_at: '2019-03-20T17:02:26-04:00'
+            },
+            {
+              id: 347603,
+              area_id: 462,
+              number: 327,
+              sent_at: '2019-03-19T17:16:26-04:00'
+            },
+            {
+              id: 347323,
+              area_id: 462,
+              number: 326,
+              sent_at: '2019-03-18T17:45:21-04:00'
+            }
+          ],
+          areaId: 462
+        }
+      }
+    )
+
+    expect(state.issuesByAreaId[462].length).toEqual(10)
+  })
+
   test('setIssues sets new posts to not Unread on first load', () => {
     const state = issues.reducer(
       undefined,
@@ -142,7 +321,7 @@ describe('issues - slice', () => {
 
     expect(data.length).toEqual(4)
     // newest issue by number is first
-    expect(data.map(post => post.id)).toEqual([3, 2, 1, 4])
+    expect(data.map(issue => issue.id)).toEqual([3, 2, 1, 4])
   })
 
   test('it selects the latest 10 issues', () => {

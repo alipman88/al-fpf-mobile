@@ -29,7 +29,7 @@ describe('issues actions', () => {
 
     await getIssues(1)(dispatch, getState)
 
-    expect(getSpy).toHaveBeenCalledWith('/areas/1/issues', {
+    expect(getSpy).toHaveBeenCalledWith('/areas/1/issues?page=1&count=10', {
       headers: {
         Authorization: 'Bearer abc123'
       }
@@ -82,7 +82,7 @@ describe('issues actions', () => {
 
     await getIssues(2)(dispatch, getState)
 
-    expect(getSpy).toHaveBeenCalledWith('/areas/2/issues', {
+    expect(getSpy).toHaveBeenCalledWith('/areas/2/issues?page=1&count=10', {
       headers: {
         Authorization: 'Bearer abc123'
       }

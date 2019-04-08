@@ -5,7 +5,6 @@ import keyBy from 'lodash/keyBy'
 import { resetAction } from '@common/resetAction'
 
 const initialState = {
-  issuesByAreaId: {},
   currentIssueId: 0,
   firstLoadOfIssues: null,
   loading: false
@@ -14,7 +13,8 @@ const initialState = {
 export const issues = createSlice({
   slice: 'issues',
   initialState: {
-    ...initialState
+    ...initialState,
+    issuesByAreaId: {}
   },
   reducers: {
     setLoading: (state, action) => ({
@@ -51,17 +51,19 @@ export const issues = createSlice({
       const existingIssues = state.issuesByAreaId[areaId] || []
       const existingIssueIds = keyBy(existingIssues, 'id')
 
-      const newIssues = issues
+      let newIssues = issues
         .filter(issue => !existingIssueIds[issue.id])
         .map(issue => {
           issue.isUnread =
             getTime(state.firstLoadOfIssues) < getTime(new Date(issue.sent_at))
           return issue
         })
-        .concat(existingIssues)
-        .sort((a, b) => {
-          return b.number - a.number
-        })
+
+      newIssues = [...newIssues, ...existingIssues]
+      newIssues = newIssues.sort((a, b) => {
+        return b.number - a.number
+      })
+
       return {
         ...state,
         issuesByAreaId: {
@@ -95,7 +97,7 @@ export const issues = createSlice({
     }
   },
   extraReducers: {
-    [resetAction]: () => ({ ...initialState })
+    [resetAction]: () => ({ ...initialState, issuesByAreaId: {} })
   }
 })
 
