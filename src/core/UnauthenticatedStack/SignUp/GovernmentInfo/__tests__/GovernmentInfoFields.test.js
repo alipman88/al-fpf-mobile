@@ -3,6 +3,7 @@ import { shallow } from 'enzyme'
 import { GovernmentInfoFields } from '../GovernmentInfoFields'
 
 import { TextInput } from '@components/TextInput'
+import { Select } from '@components/Select'
 
 describe('GovernmentInfoFields', () => {
   const defaultProps = {
@@ -12,7 +13,12 @@ describe('GovernmentInfoFields', () => {
     setFieldTouched: jest.fn(),
     setFieldValue: jest.fn(),
     touched: {},
-    values: {}
+    values: {
+      title: '',
+      jurisdiction: '',
+      tellUsMore: ''
+    },
+    governmentTitles: ['Mayor', 'Feudal Lord', 'Feudal Lady', 'Mr. Rogers']
   }
 
   afterEach(() => {
@@ -24,12 +30,10 @@ describe('GovernmentInfoFields', () => {
   test('changing title calls handlers', () => {
     const wrapper = shallow(<GovernmentInfoFields {...defaultProps} />)
 
-    wrapper
-      .find(TextInput)
-      .first()
-      .simulate('changeText', 'hi')
+    const select = wrapper.find(Select).first()
+    select.props().onValueChange(() => 3)
+
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('title')
-    expect(defaultProps.setFieldValue).toHaveBeenCalledWith('title', 'hi')
   })
 
   test('changing jurisdiction calls handlers', () => {
@@ -37,13 +41,9 @@ describe('GovernmentInfoFields', () => {
 
     wrapper
       .find(TextInput)
-      .at(1)
+      .first()
       .simulate('changeText', 'hi')
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('jurisdiction')
-    expect(defaultProps.setFieldValue).toHaveBeenCalledWith(
-      'jurisdiction',
-      'hi'
-    )
   })
 
   test('changing tell us more calls handlers', () => {
@@ -51,7 +51,7 @@ describe('GovernmentInfoFields', () => {
 
     wrapper
       .find(TextInput)
-      .at(2)
+      .at(1)
       .simulate('changeText', 'hi')
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('tellUsMore')
     expect(defaultProps.setFieldValue).toHaveBeenCalledWith('tellUsMore', 'hi')

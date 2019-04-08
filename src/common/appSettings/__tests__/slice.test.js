@@ -8,6 +8,7 @@ describe('appSettings - slice', () => {
       categories: [],
       businessCategories: {},
       onboardingProfilePlans: [],
+      governmentTitles: [],
       loading: false
     })
   })
