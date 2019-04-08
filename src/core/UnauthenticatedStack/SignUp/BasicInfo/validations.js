@@ -11,6 +11,11 @@ export const validations = yup.object().shape({
     .string()
     .min(8, 'Password should be at least 8 characters long')
     .max(40, 'Password cannot be longer than 40 characters')
+    .test('password', 'Password must contain a number and a symbol', function(
+      password
+    ) {
+      return /(?=.*[a-zA-Z].*\d.*[!#$%&? "])/.test(password)
+    })
     .required(),
   passwordConfirmation: yup
     .string()
