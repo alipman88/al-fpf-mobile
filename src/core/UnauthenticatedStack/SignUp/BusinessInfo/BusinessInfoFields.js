@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { isEmpty } from 'lodash'
 import Spinner from 'react-native-loading-spinner-overlay'
 
+import { formatPhoneNumber } from '@common/utils/formatPhoneNumber'
+
 import { TextInput } from '@components/TextInput'
 import { Multiselect } from '@components/Multiselect'
 import { FullScreenWizard } from '@components/FullScreenWizard'
@@ -111,7 +113,7 @@ export const BusinessInfoFields = ({
                 setFieldValue('phone', value)
                 setFieldTouched('phone')
               }}
-              value={values.phone}
+              value={formatPhoneNumber(values.phone)}
               keyboardType='phone-pad'
             />
           </FieldWrapper>
