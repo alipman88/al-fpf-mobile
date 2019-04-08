@@ -3,9 +3,7 @@ import PropTypes from 'prop-types'
 import { ScrollView, TouchableOpacity, Image } from 'react-native'
 import navigationService from '@common/utils/navigationService'
 
-import flatten from 'lodash/flatten'
-import keyBy from 'lodash/keyBy'
-import uniqWith from 'lodash/uniqWith'
+import { flatten, keyBy, uniqWith, sortBy } from 'lodash'
 
 import bird1 from '@assets/images/onboarding/yellow-bird.png'
 import bird2 from '@assets/images/onboarding/grey-bird.png'
@@ -42,11 +40,13 @@ export const DrawerMenu = ({
   // getting all area ids the user has in profiles as a key value pair
   const areaIds = keyBy(flatten(profiles.map(profile => profile.area_ids)))
 
-  const areasToRender = uniqWith(
-    areas.filter(area => areaIds[area.id]),
-    (a, b) => a.name === b.name
+  const areasToRender = sortBy(
+    uniqWith(
+      areas.filter(area => areaIds[area.id]),
+      (a, b) => a.name === b.name
+    ),
+    ['name']
   )
-  areasToRender.sort((a, b) => a.name - b.name)
 
   return (
     <DrawerContext.Consumer>
