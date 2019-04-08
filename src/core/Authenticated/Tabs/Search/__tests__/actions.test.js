@@ -19,7 +19,7 @@ describe('Search - actions', () => {
       const cb = jest.fn()
       const dispatch = jest.fn()
 
-      const date = new Date()
+      const date = new Date(2019, 3, 8)
 
       await search(
         {
@@ -40,8 +40,8 @@ describe('Search - actions', () => {
         {
           area_ids: [1],
           category_ids: [2],
-          from: date,
-          to: date,
+          from: '2019-04-08',
+          to: '2019-04-08',
           query: 'cats'
         },
         {}
@@ -69,7 +69,7 @@ describe('Search - actions', () => {
       const cb = jest.fn()
       const dispatch = jest.fn()
 
-      const date = new Date()
+      const date = new Date(2019, 3, 8)
 
       await search(
         {
@@ -89,8 +89,8 @@ describe('Search - actions', () => {
         {
           area_ids: undefined,
           category_ids: undefined,
-          from: date,
-          to: date,
+          from: '2019-04-08',
+          to: '2019-04-08',
           query: 'cats'
         },
         {}
@@ -115,7 +115,7 @@ describe('Search - actions', () => {
       const cb = jest.fn()
       const dispatch = jest.fn()
 
-      const date = new Date()
+      const date = new Date(2019, 3, 8)
 
       await search(
         {
@@ -134,8 +134,8 @@ describe('Search - actions', () => {
         {
           area_ids: undefined,
           category_ids: undefined,
-          from: date,
-          to: date
+          from: '2019-04-08',
+          to: '2019-04-08'
         },
         {}
       )

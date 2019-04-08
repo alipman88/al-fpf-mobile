@@ -1,3 +1,4 @@
+import format from 'date-fns/format'
 import { appError } from '@components/AppError/slice'
 import * as api from '@common/api'
 import { responseError } from '@common/utils/responseError'
@@ -17,8 +18,8 @@ export const search = (values, setSubmitting, callback) => async (
       {
         area_ids: values.forums.length > 0 ? values.forums : undefined,
         category_ids: values.category ? [values.category.id] : undefined,
-        from: values.fromDate,
-        to: values.toDate,
+        from: format(values.fromDate, 'YYYY-MM-DD'),
+        to: format(values.toDate, 'YYYY-MM-DD'),
         query: values.keyword
       },
       getState()
