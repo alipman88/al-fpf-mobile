@@ -1,16 +1,22 @@
+import get from 'lodash/get'
+
 import { newUser } from './slice'
 import { api } from '@common/api'
-import { appError } from '@components/AppError/slice'
-import { responseError } from '@common/utils/responseError'
+import { appMessage } from '@components/AppMessage/slice'
 import { prepareValues } from './prepareValues'
 
-export const postSignUp = () => (dispatch, getState) => {
+export const postSignUp = navigation => async (dispatch, getState) => {
   try {
     dispatch(newUser.actions.setLoading(true))
     const toSave = prepareValues(newUser.selectors.getNewUser(getState()))
-    api.post('/users', toSave)
+    await api.post('/users', toSave)
+    navigation.navigate('EmailVerification')
   } catch (e) {
-    dispatch(appError.actions.setAppError(responseError(e)))
+    dispatch(
+      appMessage.actions.setAppError(
+        get(e, 'response.data.errors.email[0]', e.message)
+      )
+    )
   } finally {
     dispatch(newUser.actions.setLoading(false))
   }

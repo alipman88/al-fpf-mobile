@@ -2,7 +2,7 @@ import { issues } from '@common/issues'
 import { areas } from '@common/areas'
 import { posts } from './slice'
 import { getAuthorized } from '@common/api'
-import { appError } from '@components/AppError/slice'
+import { appMessage } from '@components/AppMessage/slice'
 import { responseError } from '@common/utils/responseError'
 
 export const getPosts = issueId => async (dispatch, getState) => {
@@ -53,6 +53,6 @@ export const getPosts = issueId => async (dispatch, getState) => {
       })
     )
   } catch (e) {
-    dispatch(appError.actions.setAppError(responseError(e)))
+    dispatch(appMessage.actions.setAppError(responseError(e)))
   }
 }

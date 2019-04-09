@@ -1,6 +1,6 @@
 import * as api from '@common/api'
 
-import { appError } from '@components/AppError/slice'
+import { appMessage } from '@components/AppMessage/slice'
 import { search } from '../actions'
 
 describe('Search - actions', () => {
@@ -144,7 +144,7 @@ describe('Search - actions', () => {
       expect(setSubmitting).toHaveBeenCalledWith(true)
       expect(cb).not.toHaveBeenCalled()
       expect(dispatch).toHaveBeenCalledWith(
-        appError.actions.setAppError('boom')
+        appMessage.actions.setAppError('boom')
       )
 
       postSpy.mockRestore()

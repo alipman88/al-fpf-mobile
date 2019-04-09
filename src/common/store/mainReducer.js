@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { appError } from '@components/AppError/slice'
+import { appMessage } from '@components/AppMessage/slice'
 import { areas } from '@common/areas/slice'
 import { issues } from '@common/issues/slice'
 import { posts } from '@common/posts/slice'
@@ -11,7 +11,7 @@ import { newUser } from '@core/UnauthenticatedStack/SignUp/newUser/slice'
 import { spinner } from '@app/Spinner/slice'
 
 export default combineReducers({
-  appError: appError.reducer,
+  appMessage: appMessage.reducer,
   areas: areas.reducer,
   issues: issues.reducer,
   posts: posts.reducer,

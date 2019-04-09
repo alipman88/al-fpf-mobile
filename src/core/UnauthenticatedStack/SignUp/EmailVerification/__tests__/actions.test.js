@@ -1,6 +1,6 @@
 import { api } from '@common/api'
 
-import { appError } from '@components/AppError/slice'
+import { appMessage } from '@components/AppMessage/slice'
 import { resendEmail } from '../actions'
 
 describe('EmailVerification - actions', () => {
@@ -9,14 +9,17 @@ describe('EmailVerification - actions', () => {
       const post = jest.spyOn(api, 'post').mockImplementation(() => {})
       const dispatch = jest.fn()
 
-      await resendEmail({
-        email: 'foo@bar.com'
-      })(dispatch, () => ({}))
+      await resendEmail('foo@bar.com')(dispatch, () => ({}))
 
       expect(post).toHaveBeenCalledWith('/resend_email_verification', {
         email: 'foo@bar.com'
       })
-      expect(dispatch).not.toHaveBeenCalled()
+      expect(dispatch).toHaveBeenCalledWith(
+        appMessage.actions.setAppMessage({
+          type: 'success',
+          message: 'Verification resent'
+        })
+      )
 
       post.mockRestore()
     })
@@ -27,14 +30,14 @@ describe('EmailVerification - actions', () => {
       })
       const dispatch = jest.fn()
 
-      await resendEmail({ email: 'foo@bar.com' })(dispatch, () => ({}))
+      await resendEmail('foo@bar.com')(dispatch, () => ({}))
 
       expect(post).toHaveBeenCalledWith('/resend_email_verification', {
         email: 'foo@bar.com'
       })
 
       expect(dispatch).toHaveBeenCalledWith(
-        appError.actions.setAppError('boom')
+        appMessage.actions.setAppError('boom')
       )
 
       post.mockRestore()

@@ -3,7 +3,7 @@ import Config from 'react-native-config'
 import parse from 'url-parse'
 import * as api from '@common/api'
 
-import { appError } from '@components/AppError/slice'
+import { appMessage } from '@components/AppMessage/slice'
 import { responseError } from '@common/utils/responseError'
 
 export const navigateWithToken = (url, setLoading) => async (
@@ -22,7 +22,7 @@ export const navigateWithToken = (url, setLoading) => async (
     urlObj.query.temporary_login_token = response.data.token
     Linking.openURL(urlObj.toString())
   } catch (e) {
-    dispatch(appError.actions.setAppError(responseError(e)))
+    dispatch(appMessage.actions.setAppError(responseError(e)))
   } finally {
     setLoading(false)
   }

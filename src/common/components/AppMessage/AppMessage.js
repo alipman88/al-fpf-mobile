@@ -2,15 +2,15 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import FlashMessage, { FlashMessageManager } from 'react-native-flash-message'
 
-export class AppError extends React.Component {
+export class AppMessage extends React.Component {
   componentDidUpdate(prevProps) {
-    if (!prevProps.error && this.props.error) {
+    if (!prevProps.message && this.props.message) {
       const ref = FlashMessageManager.getDefault()
       ref.showMessage({
-        message: this.props.error,
-        type: 'danger'
+        message: this.props.message,
+        type: this.props.type
       })
-    } else if (prevProps.error && !this.props.error) {
+    } else if (prevProps.message && !this.props.message) {
       const ref = FlashMessageManager.getDefault()
       ref.hideMessage()
     }
@@ -28,7 +28,8 @@ export class AppError extends React.Component {
   }
 }
 
-AppError.propTypes = {
-  error: PropTypes.string.isRequired,
+AppMessage.propTypes = {
+  message: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   setAppError: PropTypes.func.isRequired
 }

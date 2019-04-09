@@ -1,7 +1,7 @@
 import { api } from '@common/api'
 import { getIssues, fetchSpecificIssue } from '../actions'
 import { issues } from '../slice'
-import { appError } from '@components/AppError/slice'
+import { appMessage } from '@components/AppMessage/slice'
 import { areas } from '@common/areas'
 
 describe('issues actions', () => {
@@ -88,7 +88,9 @@ describe('issues actions', () => {
       }
     })
 
-    expect(dispatch).toHaveBeenCalledWith(appError.actions.setAppError('boom'))
+    expect(dispatch).toHaveBeenCalledWith(
+      appMessage.actions.setAppError('boom')
+    )
 
     getSpy.mockRestore()
   })

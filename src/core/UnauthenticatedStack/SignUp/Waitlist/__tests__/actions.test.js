@@ -1,5 +1,5 @@
 import { api } from '@common/api'
-import { appError } from '@components/AppError/slice'
+import { appMessage } from '@components/AppMessage/slice'
 import { joinWaitlist } from '../actions'
 
 describe('Address - actions', () => {
@@ -67,7 +67,7 @@ describe('Address - actions', () => {
       })
 
       expect(dispatch).toHaveBeenCalledWith(
-        appError.actions.setAppError('boom')
+        appMessage.actions.setAppError('boom')
       )
 
       post.mockRestore()

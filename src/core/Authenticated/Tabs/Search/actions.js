@@ -1,5 +1,6 @@
 import format from 'date-fns/format'
-import { appError } from '@components/AppError/slice'
+
+import { appMessage } from '@components/AppMessage/slice'
 import * as api from '@common/api'
 import { responseError } from '@common/utils/responseError'
 import queryString from 'query-string'
@@ -28,7 +29,7 @@ export const search = (values, setSubmitting, callback) => async (
     setSubmitting(false)
     callback(response.data)
   } catch (e) {
-    dispatch(appError.actions.setAppError(responseError(e)))
+    dispatch(appMessage.actions.setAppError(responseError(e)))
   }
 
   setSubmitting(false)

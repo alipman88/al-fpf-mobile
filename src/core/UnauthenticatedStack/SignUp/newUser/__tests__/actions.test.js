@@ -1,7 +1,7 @@
 import { api } from '@common/api'
 import { postSignUp } from '../actions'
 import { newUser } from '../slice'
-import { appError } from '@components/AppError/slice'
+import { appMessage } from '@components/AppMessage/slice'
 
 describe('newUser actions', () => {
   const getState = jest.fn(() => ({
@@ -38,13 +38,21 @@ describe('newUser actions', () => {
       profilePlan: { id: 1, plan_type: 'neighbor' }
     }
 
+    const navigation = {
+      navigate: jest.fn()
+    }
+
+    afterEach(() => {
+      navigation.navigate.mockReset()
+    })
+
     test('posts user data', async () => {
       const postSpy = jest.spyOn(api, 'post').mockImplementation(() => ({
         data: {
           user: values
         }
       }))
-      await postSignUp()(dispatch, getState)
+      await postSignUp(navigation)(dispatch, getState)
       expect(postSpy).toHaveBeenCalledWith('/users', {
         user: {
           email: 'test@testing.org',
@@ -55,10 +63,12 @@ describe('newUser actions', () => {
           profile: { profile_plan: { id: 1, plan_type: 'neighbor' } }
         }
       })
+
+      expect(navigation.navigate).toHaveBeenCalledWith('EmailVerification')
     })
 
     test('it sets loading', async () => {
-      postSignUp()(dispatch, getState)
+      postSignUp(navigation)(dispatch, getState)
       expect(dispatch).toHaveBeenCalledWith(newUser.actions.setLoading(true))
     })
 
@@ -67,7 +77,7 @@ describe('newUser actions', () => {
         throw new Error('boom')
       })
 
-      await postSignUp()(dispatch, getState)
+      await postSignUp(navigation)(dispatch, getState)
 
       expect(errorPostSpy).toHaveBeenCalledWith('/users', {
         user: {
@@ -80,7 +90,7 @@ describe('newUser actions', () => {
         }
       })
       expect(dispatch).toHaveBeenCalledWith(
-        appError.actions.setAppError('boom')
+        appMessage.actions.setAppError('boom')
       )
       errorPostSpy.mockRestore()
     })

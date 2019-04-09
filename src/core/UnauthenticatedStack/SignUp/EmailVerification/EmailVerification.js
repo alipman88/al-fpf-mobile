@@ -34,10 +34,8 @@ export class EmailVerification extends React.Component {
   }
 
   handleResend = async () => {
-    const { resendEmail, email, clearUserData, navigation } = this.props
+    const { resendEmail, email } = this.props
     await resendEmail(email)
-    clearUserData()
-    navigation.navigate('Login')
   }
 
   render() {
@@ -117,7 +115,7 @@ export class EmailVerification extends React.Component {
 EmailVerification.propTypes = {
   navigation: PropTypes.object.isRequired,
   newUser: PropTypes.object.isRequired,
-  email: PropTypes.object.isRequired,
+  email: PropTypes.string.isRequired,
   resendEmail: PropTypes.func.isRequired,
   setRegistrationEmail: PropTypes.func.isRequired,
   clearUserData: PropTypes.func.isRequired,

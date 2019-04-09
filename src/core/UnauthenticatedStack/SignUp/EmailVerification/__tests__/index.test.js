@@ -8,7 +8,7 @@ import { HelpMessage } from '../styledComponents'
 
 describe('EmailVerification', () => {
   const defaultProps = {
-    email: { email: 'foo@bar.com' },
+    email: 'foo@bar.com',
     resendEmail: jest.fn(),
     navigation: {
       navigate: jest.fn()
@@ -60,9 +60,7 @@ describe('EmailVerification', () => {
         .props()
         .onPress()
 
-      expect(defaultProps.resendEmail).toHaveBeenCalled()
-      expect(defaultProps.clearUserData).toHaveBeenCalled()
-      expect(defaultProps.navigation.navigate).toHaveBeenCalledWith('Login')
+      expect(defaultProps.resendEmail).toHaveBeenCalledWith(defaultProps.email)
       api.post.mockRestore()
     })
   })

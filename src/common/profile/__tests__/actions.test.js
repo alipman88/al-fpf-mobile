@@ -1,7 +1,7 @@
 import * as api from '@common/api'
 import { getProfiles, updateUser } from '../actions'
 import { profile } from '../slice'
-import { appError } from '@components/AppError/slice'
+import { appMessage } from '@components/AppMessage/slice'
 
 describe('profile - actions', () => {
   const dispatch = jest.fn()
@@ -56,7 +56,7 @@ describe('profile - actions', () => {
       expect(getSpy).toHaveBeenCalledWith('/users', {})
 
       expect(dispatch).toHaveBeenCalledWith(
-        appError.actions.setAppError('boom')
+        appMessage.actions.setAppError('boom')
       )
 
       getSpy.mockRestore()
@@ -124,7 +124,7 @@ describe('profile - actions', () => {
       expect(putSpy).toHaveBeenCalledWith('/users', { user: values }, {})
 
       expect(dispatch).toHaveBeenCalledWith(
-        appError.actions.setAppError('boom')
+        appMessage.actions.setAppError('boom')
       )
 
       putSpy.mockRestore()

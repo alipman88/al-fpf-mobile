@@ -1,7 +1,7 @@
 import * as api from '@common/api'
 import { responseError } from '@common/utils/responseError'
 
-import { appError } from '@components/AppError/slice'
+import { appMessage } from '@components/AppMessage/slice'
 
 export const searchAddress = (values, onSuccess) => async (
   dispatch,
@@ -23,6 +23,6 @@ export const searchAddress = (values, onSuccess) => async (
     )
     onSuccess(response.data.areas, response.data.address)
   } catch (e) {
-    dispatch(appError.actions.setAppError(responseError(e)))
+    dispatch(appMessage.actions.setAppError(responseError(e)))
   }
 }

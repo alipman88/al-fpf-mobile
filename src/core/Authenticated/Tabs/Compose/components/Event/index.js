@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
 
-import { appError } from '@components/AppError/slice'
+import { appMessage } from '@components/AppMessage/slice'
 import { Event as EventComponent } from './Event'
 
 export const Event = connect(
   null,
-  { setAppError: appError.actions.setAppError }
+  { setAppError: appMessage.actions.setAppError }
 )(EventComponent)

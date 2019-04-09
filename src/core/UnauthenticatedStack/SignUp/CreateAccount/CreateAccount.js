@@ -50,8 +50,7 @@ export class CreateAccount extends React.Component {
     })
 
     setNewUserByKey(values)
-    await postSignUp()
-    navigation.navigate('EmailVerification')
+    await postSignUp(navigation)
   }
 
   componentDidMount() {

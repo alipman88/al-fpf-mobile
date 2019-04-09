@@ -5,7 +5,7 @@ import { areas } from '@common/areas'
 import { getIssues, issues, fetchSpecificIssue } from '@common/issues'
 import { getPosts, posts } from '@common/posts'
 import { setupForumData } from './setupForumData.js'
-import { appError } from '@components/AppError/slice'
+import { appMessage } from '@components/AppMessage/slice'
 
 import { sendNewFCMToken } from './actions'
 
@@ -36,7 +36,7 @@ export const Forum = connect(
     getIssues,
     getPosts,
     setAccessToken: currentUser.actions.setAccessToken,
-    setAppError: appError.actions.setAppError,
+    setAppError: appMessage.actions.setAppError,
     setupForumData,
     sendNewFCMToken,
     setCurrentIssueId: issues.actions.setCurrentIssueId,

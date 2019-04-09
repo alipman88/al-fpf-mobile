@@ -1,6 +1,6 @@
 import { profile } from './slice'
 import * as api from '@common/api'
-import { appError } from '@components/AppError/slice'
+import { appMessage } from '@components/AppMessage/slice'
 import { responseError } from '@common/utils/responseError'
 
 export const getProfiles = () => async (dispatch, getState) => {
@@ -9,7 +9,7 @@ export const getProfiles = () => async (dispatch, getState) => {
     dispatch(profile.actions.setLoading(true))
     dispatch(profile.actions.setUserProfile(response.data.user))
   } catch (e) {
-    dispatch(appError.actions.setAppError(responseError(e)))
+    dispatch(appMessage.actions.setAppError(responseError(e)))
   } finally {
     dispatch(profile.actions.setLoading(false))
   }
@@ -29,7 +29,7 @@ export const updateUser = values => async (dispatch, getState) => {
     dispatch(profile.actions.setLoading(true))
     dispatch(profile.actions.setUserProfile(response.data.user))
   } catch (e) {
-    dispatch(appError.actions.setAppError(responseError(e)))
+    dispatch(appMessage.actions.setAppError(responseError(e)))
   } finally {
     dispatch(profile.actions.setLoading(false))
   }

@@ -1,7 +1,7 @@
 import { api } from '@common/api'
 import { getAppSettings } from '../actions'
 import { appSettings } from '../slice'
-import { appError } from '@components/AppError/slice'
+import { appMessage } from '@components/AppMessage/slice'
 
 describe('appSettings - actions', () => {
   const dispatch = jest.fn()
@@ -55,7 +55,7 @@ describe('appSettings - actions', () => {
       expect(getSpy).toHaveBeenCalledWith('/settings')
 
       expect(dispatch).toHaveBeenCalledWith(
-        appError.actions.setAppError('boom')
+        appMessage.actions.setAppError('boom')
       )
 
       getSpy.mockRestore()

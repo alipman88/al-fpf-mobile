@@ -1,6 +1,6 @@
 import { issues } from './slice'
 import { getAuthorized } from '@common/api'
-import { appError } from '@components/AppError/slice'
+import { appMessage } from '@components/AppMessage/slice'
 import { responseError } from '@common/utils/responseError'
 import { areas } from '@common/areas'
 import { spinner } from '@app/Spinner/slice'
@@ -24,7 +24,7 @@ export const getIssues = areaId => async (dispatch, getState) => {
       })
     )
   } catch (e) {
-    dispatch(appError.actions.setAppError(responseError(e)))
+    dispatch(appMessage.actions.setAppError(responseError(e)))
   }
 }
 
@@ -64,7 +64,7 @@ export const fetchSpecificIssue = (
     dispatch(issues.actions.setCurrentIssueId(issueId))
     navigation.navigate('Forum')
   } catch (e) {
-    dispatch(appError.actions.setAppError(responseError(e)))
+    dispatch(appMessage.actions.setAppError(responseError(e)))
   } finally {
     dispatch(spinner.actions.setVisibility(false))
   }

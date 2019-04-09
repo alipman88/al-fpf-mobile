@@ -2,23 +2,23 @@ import React from 'react'
 import { FlashMessageManager } from 'react-native-flash-message'
 import { shallow } from 'enzyme'
 
-import { AppError } from '../AppError'
+import { AppMessage } from '../AppMessage'
 
-describe('AppError', () => {
+describe('AppMessage', () => {
   it('calls appropriate handlers error change', () => {
     const fake = {
       showMessage: jest.fn(),
       hideMessage: jest.fn()
     }
     jest.spyOn(FlashMessageManager, 'getDefault').mockImplementation(() => fake)
-    const wrapper = shallow(<AppError setAppError={jest.fn()} error='' />)
-    wrapper.setProps({ error: 'Doh!' })
+    const wrapper = shallow(<AppMessage setAppError={jest.fn()} message='' />)
+    wrapper.setProps({ message: 'Doh!', type: 'danger' })
     expect(fake.showMessage).toHaveBeenCalledWith({
       message: 'Doh!',
       type: 'danger'
     })
 
-    wrapper.setProps({ error: '' })
+    wrapper.setProps({ message: '' })
     expect(fake.hideMessage).toHaveBeenCalled()
   })
 })

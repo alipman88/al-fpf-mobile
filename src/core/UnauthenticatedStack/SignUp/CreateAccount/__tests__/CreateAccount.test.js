@@ -73,6 +73,5 @@ describe('CreateAccount', () => {
       isNfBooster: false
     })
     await expect(defaultProps.postSignUp).toHaveBeenCalled()
-    expect(defaultProps.navigation.navigate).toHaveBeenCalled()
   })
 })

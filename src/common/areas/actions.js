@@ -1,6 +1,6 @@
 import { areas as slice } from './slice'
 import { getAuthorized } from '@common/api'
-import { appError } from '@components/AppError/slice'
+import { appMessage } from '@components/AppMessage/slice'
 import { responseError } from '@common/utils/responseError'
 
 export const getAreas = () => async (dispatch, getState) => {
@@ -17,6 +17,6 @@ export const getAreas = () => async (dispatch, getState) => {
     } while (page < pages)
     dispatch(slice.actions.setAreas(areas))
   } catch (e) {
-    dispatch(appError.actions.setAppError(responseError(e)))
+    dispatch(appMessage.actions.setAppError(responseError(e)))
   }
 }

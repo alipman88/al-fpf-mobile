@@ -1,6 +1,6 @@
 import * as api from '@common/api'
 import { responseError } from '@common/utils/responseError'
-import { appError } from '@components/AppError/slice'
+import { appMessage } from '@components/AppMessage/slice'
 import { searchAddress } from '../actions'
 
 describe('Address - actions', () => {
@@ -73,7 +73,7 @@ describe('Address - actions', () => {
       )
 
       expect(dispatch).toHaveBeenCalledWith(
-        appError.actions.setAppError(responseError(new Error('boom')))
+        appMessage.actions.setAppError(responseError(new Error('boom')))
       )
 
       expect(onSuccess).not.toHaveBeenCalled()

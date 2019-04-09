@@ -3,7 +3,7 @@ import { api } from '@common/api'
 import { snakeCaseData } from '@common/utils/snakeCaseData'
 import { responseError } from '@common/utils/responseError'
 
-import { appError } from '@components/AppError/slice'
+import { appMessage } from '@components/AppMessage/slice'
 
 export const joinWaitlist = values => async dispatch => {
   try {
@@ -29,6 +29,6 @@ export const joinWaitlist = values => async dispatch => {
       }
     })
   } catch (e) {
-    dispatch(appError.actions.setAppError(responseError(e)))
+    dispatch(appMessage.actions.setAppError(responseError(e)))
   }
 }

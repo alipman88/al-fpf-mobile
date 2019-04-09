@@ -1,7 +1,7 @@
 import { api } from '@common/api'
 import { getAreas } from '../actions'
 import { areas } from '../slice'
-import { appError } from '@components/AppError/slice'
+import { appMessage } from '@components/AppMessage/slice'
 
 describe('areas actions', () => {
   const getState = () => ({
@@ -94,7 +94,9 @@ describe('areas actions', () => {
       }
     })
 
-    expect(dispatch).toHaveBeenCalledWith(appError.actions.setAppError('boom'))
+    expect(dispatch).toHaveBeenCalledWith(
+      appMessage.actions.setAppError('boom')
+    )
 
     getSpy.mockRestore()
   })

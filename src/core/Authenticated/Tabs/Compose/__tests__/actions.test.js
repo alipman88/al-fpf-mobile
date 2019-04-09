@@ -1,6 +1,6 @@
 import { submitPost } from '../actions'
 import { api } from '@common/api'
-import { appError } from '@components/AppError/slice'
+import { appMessage } from '@components/AppMessage/slice'
 
 describe('Compose - actions', () => {
   const dispatch = jest.fn()
@@ -69,7 +69,7 @@ describe('Compose - actions', () => {
         }
       )
       expect(dispatch).toHaveBeenCalledWith(
-        appError.actions.setAppError('error')
+        appMessage.actions.setAppError('error')
       )
       expect(setSubmitting).toHaveBeenCalledWith(false)
 

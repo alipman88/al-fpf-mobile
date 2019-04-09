@@ -6,7 +6,7 @@ import SplashScreen from 'react-native-splash-screen'
 
 import { store, persistor } from '@common/store'
 import { currentUser } from '@common/currentUser'
-import { AppError } from '@components/AppError'
+import { AppMessage } from '@components/AppMessage'
 import { parseDeepLink } from '@common/utils/parseDeepLink'
 import navigationService from '@common/utils/navigationService'
 import { Container } from './Container'
@@ -34,7 +34,7 @@ export class App extends React.Component {
         <PersistGate loading={null} persistor={persistor}>
           <React.Fragment>
             <Container />
-            <AppError />
+            <AppMessage />
           </React.Fragment>
         </PersistGate>
       </Provider>

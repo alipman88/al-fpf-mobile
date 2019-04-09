@@ -1,7 +1,7 @@
 import * as api from '@common/api'
 import { Linking } from 'react-native'
 import { navigateWithToken } from '../navigateWithToken'
-import { appError } from '@components/AppError/slice'
+import { appMessage } from '@components/AppMessage/slice'
 
 describe('navigateWithToken', () => {
   test('gets the token, and directs the user', async () => {
@@ -53,7 +53,9 @@ describe('navigateWithToken', () => {
     expect(apiSpy).toHaveBeenCalledWith('/get_login_token', {}, {})
     expect(setLoading).toHaveBeenCalledWith(false)
 
-    expect(dispatch).toHaveBeenCalledWith(appError.actions.setAppError('boom'))
+    expect(dispatch).toHaveBeenCalledWith(
+      appMessage.actions.setAppError('boom')
+    )
 
     apiSpy.mockRestore()
   })
