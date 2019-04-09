@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Formik } from 'formik'
 import { BusinessInfoFields } from './BusinessInfoFields'
+import { validations } from './validations'
 
 export const BusinessInfo = ({
   navigation,
@@ -13,6 +14,7 @@ export const BusinessInfo = ({
   return (
     <Formik
       initialValues={newUser.business}
+      validationSchema={validations}
       render={({ errors, setFieldValue, setFieldTouched, touched, values }) => (
         <BusinessInfoFields
           errors={errors}

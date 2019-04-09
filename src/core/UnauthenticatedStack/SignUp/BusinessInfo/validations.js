@@ -5,7 +5,7 @@ export const validations = yup.object().shape({
   businessCategoryId: yup.number().required(),
   url: yup.string(),
   phone: yup
-    .min(10)
-    .max(25)
     .string()
+    .min(10)
+    .max(20)
 })

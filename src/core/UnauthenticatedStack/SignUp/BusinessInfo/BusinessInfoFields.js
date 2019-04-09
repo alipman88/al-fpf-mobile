@@ -90,13 +90,13 @@ export const BusinessInfoFields = ({
           </FieldWrapper>
           <FieldWrapper>
             <TextInput
-              error={errors.website}
+              error={errors.url}
               label='Website'
               placeholder='example.com'
-              touched={touched.website}
+              touched={touched.url}
               onChangeText={value => {
-                setFieldValue('website', value)
-                setFieldTouched('website')
+                setFieldValue('url', value)
+                setFieldTouched('url')
               }}
               value={values.website}
               keyboardType='url'
