@@ -72,7 +72,7 @@ export class More extends React.Component {
               </CenterImgContainer>
               <CardTitle>Donate</CardTitle>
               <CardContent>
-                Your contribution will help us maintina, improve and grow our
+                Your contribution will help us maintain, improve and grow our
                 community-building service.
               </CardContent>
               <ExternalLink
