@@ -28,7 +28,7 @@ export class SettingsIndex extends React.Component {
   async logoutUser() {
     this.props.logoutUser(
       this.props.navigation,
-      { device_token: this.props.fcmToken },
+      { fcm_token: this.props.fcmToken },
       this.setLoading
     )
   }
