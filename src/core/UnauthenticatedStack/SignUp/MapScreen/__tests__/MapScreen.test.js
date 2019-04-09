@@ -110,7 +110,7 @@ describe('MapScreen', () => {
     expect(wrapper.find(MapView).length).toEqual(1)
   })
 
-  test('submit button sets the checkedAreas', () => {
+  test('submit button sets the checkedAreas in the reducer', () => {
     const wrapper = shallow(<MapScreen {...defaultProps} />)
     wrapper.setState({ checkedAreas: [1, 2] })
     wrapper
@@ -133,6 +133,22 @@ describe('MapScreen', () => {
       'GovernmentInfo'
     )
     expect(defaultProps.setNewUserByKey).toHaveBeenCalled()
+  })
+
+  test('no checked areas, nextButton should be disabled', () => {
+    const wrapper = shallow(
+      <MapScreen
+        profileType='neighbor'
+        navigation={{
+          getParam: key => {
+            return twoAreas[key]
+          }
+        }}
+      />
+    )
+
+    wrapper.setState({ checkedAreas: { 1: false, 2: false } })
+    expect(wrapper.find(FullScreenWizard).props().nextDisabled).toEqual(true)
   })
 
   test('map has polygons & details for each area', () => {

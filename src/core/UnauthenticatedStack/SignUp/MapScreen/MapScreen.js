@@ -105,6 +105,8 @@ export class MapScreen extends React.Component {
     const { navigation, profileType } = this.props
     const { areas, address, region, checkedAreas } = this.state
 
+    const checkedAreaKeys = Object.keys(checkedAreas)
+
     return (
       <FullScreenWizard
         onBackPress={() => navigation.goBack()}
@@ -115,7 +117,12 @@ export class MapScreen extends React.Component {
         onNextPress={this.onNextPress}
         nextWidth='auto'
         nextDisabled={
-          areas.length > 1 && Object.keys(checkedAreas).length === 0
+          areas.length === 0 ||
+          !checkedAreaKeys.reduce(
+            (atleastOneChecked, areaChecked) =>
+              atleastOneChecked || checkedAreas[areaChecked],
+            false
+          )
         }
         contentContainerStyle={{
           flex: 1
