@@ -1,5 +1,6 @@
 import { createSlice, createSelector } from 'redux-starter-kit'
 import { resetAction } from '@common/resetAction'
+import sortBy from 'lodash/sortBy'
 
 const initialState = {
   areas: [],
@@ -31,7 +32,7 @@ export const areas = createSlice({
 
       return {
         ...state,
-        areas: action.payload,
+        areas: sortBy(action.payload, ['name']),
         neighboringAreas,
         loading: false
       }
