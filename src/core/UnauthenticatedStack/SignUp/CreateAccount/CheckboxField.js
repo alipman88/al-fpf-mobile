@@ -1,8 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { TouchableOpacity, Linking } from 'react-native'
 import { Text } from '@components/Text'
 import { Checkbox } from '@components/Checkbox'
-import { CheckboxWrapper } from './styledComponents'
+import {
+  CheckboxWrapper,
+  LinkWrapper,
+  LinkText,
+  RequiredText
+} from './styledComponents'
 
 export const CheckboxField = ({
   type,
@@ -17,6 +23,18 @@ export const CheckboxField = ({
       <Checkbox onPress={value => onToggle(type, value)} value={truthiness}>
         <Text>{text}</Text>
       </Checkbox>
+      {type === 'termsOfUse' && (
+        <LinkWrapper>
+          <TouchableOpacity
+            onPress={() =>
+              Linking.openURL('https://frontporchforum.com/terms-of-use')
+            }
+          >
+            <LinkText>Terms of Use</LinkText>
+          </TouchableOpacity>
+          <RequiredText>(Required)</RequiredText>
+        </LinkWrapper>
+      )}
     </CheckboxWrapper>
   )
 }

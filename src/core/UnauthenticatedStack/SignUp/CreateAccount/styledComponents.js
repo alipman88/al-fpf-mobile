@@ -1,4 +1,5 @@
 import styled from 'styled-components/native'
+import { Text } from '@components/Text'
 
 export const CheckboxWrapper = styled.View`
   min-height: 80;
@@ -20,7 +21,7 @@ export const CheckboxWrapper = styled.View`
       borderTopLeftRadius: 10;
     `
       : ''}
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 `
 export const CreateAccountWrapper = styled.View`
@@ -29,4 +30,17 @@ export const CreateAccountWrapper = styled.View`
   border-color: #d5dde1;
   border-radius: 10;
   align-self: center;
+`
+export const LinkWrapper = styled.View`
+  justify-content: flex-start
+  align-items: flex-start
+  width: 80%;
+`
+
+export const LinkText = styled(Text)`
+  color: #f29426;
+  font-weight: bold;
+`
+export const RequiredText = styled(Text)`
+  color: #86a0ad;
 `
