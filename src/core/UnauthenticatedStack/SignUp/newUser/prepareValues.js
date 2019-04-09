@@ -1,13 +1,6 @@
-import { snakeCase, omit } from 'lodash'
+import { omit } from 'lodash'
+import { snakeCaseData } from '@common/utils/snakeCaseData'
 import { profileTypes } from '@common/types/profileTypes'
-
-const snakeCaseData = data => {
-  let newObj = {}
-  Object.entries(data).forEach(([key, value]) => {
-    newObj = { ...newObj, [snakeCase(key)]: value }
-  })
-  return newObj
-}
 
 export const prepareValues = values => {
   let newValues = values

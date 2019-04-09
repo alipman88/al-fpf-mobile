@@ -9,9 +9,13 @@ describe('Address - actions', () => {
       secondaryAddress: '200',
       streetName: 'Yonge St',
       city: 'Toronto',
-      state: ['ON'],
+      state: 'ON',
       firstName: 'foo',
-      lastName: 'bar'
+      lastName: 'bar',
+      webAddress: 'web.addr',
+      organizationName: 'org name',
+      comment: 'comment',
+      reference: 'reference'
     }
 
     test('it hits teh api with waitlist info', async () => {
@@ -22,17 +26,17 @@ describe('Address - actions', () => {
 
       expect(post).toHaveBeenCalledWith('/waitlist_users', {
         user: {
-          streetNumber: '32',
-          secondaryAddress: '200',
-          streetName: 'Yonge St',
-          firstName: 'foo',
-          lastName: 'bar',
+          secondary_address: '200',
           street_number: '32',
           street_name: 'Yonge St',
           city: 'Toronto',
           state: 'ON',
           first_name: 'foo',
-          last_name: 'bar'
+          last_name: 'bar',
+          web_address: 'web.addr',
+          organization_name: 'org name',
+          comment: 'comment',
+          reference: 'reference'
         }
       })
       post.mockRestore()
@@ -48,17 +52,17 @@ describe('Address - actions', () => {
 
       expect(post).toHaveBeenCalledWith('/waitlist_users', {
         user: {
-          streetNumber: '32',
-          secondaryAddress: '200',
-          streetName: 'Yonge St',
-          firstName: 'foo',
-          lastName: 'bar',
+          secondary_address: '200',
           street_number: '32',
           street_name: 'Yonge St',
           city: 'Toronto',
           state: 'ON',
           first_name: 'foo',
-          last_name: 'bar'
+          last_name: 'bar',
+          web_address: 'web.addr',
+          organization_name: 'org name',
+          comment: 'comment',
+          reference: 'reference'
         }
       })
 

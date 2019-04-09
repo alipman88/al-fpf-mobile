@@ -1,5 +1,4 @@
 import React from 'react'
-import firebase from 'react-native-firebase'
 import { shallow } from 'enzyme'
 import { TouchableOpacity } from 'react-native'
 
