@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { TouchableOpacity } from 'react-native'
 
-import { WaitlistSuccess } from '../index'
+import { WaitlistSuccess } from '../WaitlistSuccess'
 import { Close } from '../styledComponents'
 import { createResetStackTo } from '@common/utils/navigation'
 
@@ -10,7 +10,8 @@ describe('WaitlistSuccess', () => {
   const defaultProps = {
     navigation: {
       dispatch: jest.fn()
-    }
+    },
+    clearUserData: jest.fn()
   }
 
   afterEach(() => {
@@ -31,5 +32,11 @@ describe('WaitlistSuccess', () => {
     expect(defaultProps.navigation.dispatch).toHaveBeenCalledWith(
       createResetStackTo('Login')
     )
+  })
+
+  test('pressing link button clearsUserData', () => {
+    const wrapper = shallow(<WaitlistSuccess {...defaultProps} />)
+    wrapper.find(TouchableOpacity).simulate('press')
+    expect(defaultProps.clearUserData).toHaveBeenCalled()
   })
 })
