@@ -28,3 +28,5 @@ export const Advertisement = ({ ad }) => (
 Advertisement.propTypes = {
   ad: PropTypes.object.isRequired
 }
+
+Advertisement.displayName = 'Advertisement'

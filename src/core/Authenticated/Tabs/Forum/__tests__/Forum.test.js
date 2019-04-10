@@ -4,7 +4,6 @@ import { ForumContainer } from '../styledComponents'
 import { shallow } from 'enzyme'
 import { Forum } from '../Forum'
 import { ForumPost } from '../components/ForumPost'
-import { Advertisement } from '../components/Advertisement'
 import { NeighboringContent } from '../components/NeighboringContent'
 
 describe('Forum', () => {
@@ -80,7 +79,9 @@ describe('Forum', () => {
         }
       ]
     },
-    shared_posts: {}
+    sharedPosts: {
+      12: []
+    }
   }
 
   afterEach(() => {
@@ -157,33 +158,57 @@ describe('Forum', () => {
     const wrapper = shallow(<Forum {...defaultProps} />)
     const children = wrapper.find(ForumContainer).children()
     // start index at 1, skip the first component
-    for (let i = 1; i < children.length; i++) {
+    // skip the last one, due to being neighboring content
+    for (let i = 1; i < children.length - 1; i++) {
       const component = children.at(i)
-      if (i === 4 || i === 6 || i === 8) {
-        expect(component.is(Advertisement))
+      if (i === 3 || i === 5 || i === 7) {
+        expect(component.name()).toEqual('Advertisement')
       } else {
-        expect(component.is(ForumPost))
+        expect(component.name()).toEqual('Connect(ForumPost)')
       }
     }
 
     expect(children.length).toEqual(9)
   })
 
-  test('one post, 3 ads, renders 1 & 1', () => {
+  test('one post, 3 ads, renders 1 followed by 3 ads', () => {
     const posts = { 12: defaultProps.posts[12].slice(0, 1) }
     const wrapper = shallow(<Forum {...defaultProps} posts={posts} />)
     const children = wrapper.find(ForumContainer).children()
 
-    for (let i = 1; i < children.length; i++) {
-      const component = children.at(i)
-      if (i === 2) {
-        expect(component.is(ForumPost))
-      } else {
-        expect(component.is(Advertisement))
-      }
+    expect(children.at(1).name()).toEqual('Connect(ForumPost)')
+    expect(children.at(2).name()).toEqual('Advertisement')
+    expect(children.at(3).name()).toEqual('Advertisement')
+    expect(children.at(4).name()).toEqual('Advertisement')
+
+    expect(children.length).toEqual(6)
+  })
+
+  test('shared posts integrate with the regular posts & ads', () => {
+    const posts = { 12: defaultProps.posts[12].slice(0, 1) }
+    const sharedPosts = {
+      12: defaultProps.posts[12]
+        .slice(1, 3)
+        .map(post => ({ ...post, is_shared_post: true }))
     }
 
-    expect(children.length).toEqual(4)
+    const wrapper = shallow(
+      <Forum {...defaultProps} posts={posts} sharedPosts={sharedPosts} />
+    )
+
+    const children = wrapper.find(ForumContainer).children()
+
+    expect(children.at(1).name()).toEqual('Connect(ForumPost)')
+    expect(children.at(2).name()).toEqual('Connect(ForumPost)')
+    expect(children.at(3).name()).toEqual('Advertisement')
+    expect(children.at(4).name()).toEqual('Connect(ForumPost)')
+    expect(children.at(5).name()).toEqual('Advertisement')
+    expect(children.at(6).name()).toEqual('Advertisement')
+
+    expect(children.at(2).props().post.is_shared_post).toEqual(true)
+    expect(children.at(4).props().post.is_shared_post).toEqual(true)
+
+    expect(children.length).toEqual(8)
   })
 
   describe('componentDidUpdate', () => {

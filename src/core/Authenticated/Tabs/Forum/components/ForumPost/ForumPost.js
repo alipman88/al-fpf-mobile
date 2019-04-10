@@ -58,3 +58,5 @@ ForumPost.propTypes = {
   postTruncateLength: PropTypes.number.isRequired,
   navigation: PropTypes.object.isRequired
 }
+
+ForumPost.displayName = 'ForumPost'

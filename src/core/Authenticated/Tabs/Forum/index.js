@@ -18,7 +18,7 @@ const mapStateToProps = state => {
     currentIssueId: issues.selectors.getCurrentIssueId(state),
     issues: issues.selectors.getLatestIssues(state, areaId),
     posts: posts.selectors.getPostsByIssue(state),
-    shared_posts: posts.selectors.getSharedPostsByIssue(state),
+    sharedPosts: posts.selectors.getSharedPostsByIssue(state),
     ads: posts.selectors.getAdsByIssue(state),
     accessToken: currentUser.selectors.getAccessToken(state),
     fcmToken: currentUser.selectors.getFCMToken(state),

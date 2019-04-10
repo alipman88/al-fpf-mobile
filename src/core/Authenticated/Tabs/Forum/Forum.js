@@ -186,24 +186,23 @@ export class Forum extends React.Component {
   render() {
     const { currentIssueId, issues, loading } = this.props
 
-    const posts = this.props.posts[currentIssueId] || []
-    const shared_posts = this.props.shared_posts[currentIssueId] || []
+    const posts = (this.props.posts[currentIssueId] || []).concat(
+      this.props.sharedPosts[currentIssueId] || []
+    )
     const ads = this.props.ads[currentIssueId] || []
 
-    const maxIndex =
-      posts.length + shared_posts.length + Math.max(3, ads.length)
+    const maxIndex = posts.length + Math.min(3, ads.length)
     const postRender = []
     let adOffset = 0
-    for (let index = 0; index < maxIndex; index++) {
-      // out of posts, no ads rendered yet
-      if (index - adOffset >= posts.length && adOffset === 0 && ads[0]) {
-        const ad = ads[adOffset]
-        // add one ad, then exit
-        postRender.push(<Advertisement ad={ad} key={ad.id} />)
-        break
-      }
 
-      if (ads[adOffset] && (index === 2 || index === 4 || index === 6)) {
+    for (let index = 0; index < maxIndex; index++) {
+      // if we rendered all posts, render remaining ads
+      if (index - adOffset >= posts.length) {
+        const ad = ads[adOffset]
+        postRender.push(<Advertisement ad={ad} key={ad.id} />)
+        adOffset++
+        // were in the middle of posts, and were on an even count
+      } else if (ads[adOffset] && (index === 2 || index === 4 || index === 6)) {
         const ad = ads[adOffset]
         adOffset++
 
@@ -216,16 +215,6 @@ export class Forum extends React.Component {
             navigation={this.props.navigation}
             onReplyPress={this.handleReplyPress}
             key={post.id}
-          />
-        )
-      } else if (shared_posts[index - adOffset - posts.length]) {
-        const shared_post = shared_posts[index - adOffset - posts.length]
-        postRender.push(
-          <ForumPost
-            post={shared_post}
-            navigation={this.props.navigation}
-            onReplyPress={this.handleReplyPress}
-            key={shared_post.id}
           />
         )
       }
@@ -284,5 +273,5 @@ Forum.propTypes = {
   setCurrentIssueId: PropTypes.func.isRequired,
   setupForumData: PropTypes.func.isRequired,
   posts: PropTypes.object.isRequired,
-  shared_posts: PropTypes.object.isRequired
+  sharedPosts: PropTypes.object.isRequired
 }
