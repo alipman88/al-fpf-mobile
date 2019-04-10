@@ -55,7 +55,7 @@ export class Post extends React.Component {
           )
         }
       >
-        {post.area_name} - No. ${post.issue_number} -{' '}
+        {post.area_name} - No. {post.issue_number}
       </LinkText>
     ) : (
       ''
@@ -67,11 +67,9 @@ export class Post extends React.Component {
           <PostHeader>{post.title}</PostHeader>
           <PostAuthor>
             {postInfo}
+            {showIssueData ? ' - ' : ''}
             {post.user_first_name} {post.user_last_name} -{' '}
-            <LinkText onPress={() => Linking.openURL(post.user_email)}>
-              {post.user_email}
-            </LinkText>{' '}
-            - {post.user_profile_name}
+            {post.user_profile_name}
           </PostAuthor>
           {post.is_shared_post && (
             <PostShared>
