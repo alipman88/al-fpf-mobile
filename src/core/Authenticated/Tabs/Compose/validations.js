@@ -1,6 +1,7 @@
 import * as yup from 'yup'
 import isAfter from 'date-fns/is_after'
 import isDate from 'date-fns/is_date'
+import differenceInDays from 'date-fns/difference_in_days'
 
 export const validations = yup.object().shape({
   forums: yup
@@ -46,6 +47,15 @@ export const validations = yup.object().shape({
         !this.parent.category ||
         !this.parent.category.is_event ||
         isAfter(endDate, new Date())
+      )
+    })
+    .test('toDate', 'To & from dates can only be up to a week apart', function(
+      endDate
+    ) {
+      return (
+        !this.parent.category ||
+        !this.parent.category.is_event ||
+        differenceInDays(endDate, this.parent.fromDate) <= 7
       )
     })
 })
