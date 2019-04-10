@@ -11,7 +11,7 @@ export const ForumPost = ({
   postTruncateLength,
   navigation
 }) => {
-  const { id, title, user_email: email } = post
+  const { id, title, user_email: email, area_id: areaId } = post
 
   const onTapCategory = category => {
     navigation.navigate({ routeName: 'Search', params: { category } })
@@ -30,7 +30,7 @@ export const ForumPost = ({
       {!post.is_shared_post && (
         <Button
           color={'#fff'}
-          onPress={() => onReplyPress({ parentPostId: id })}
+          onPress={() => onReplyPress({ parentPostId: id, areaId })}
           width={124}
         >
           Reply to forum

@@ -81,11 +81,23 @@ export class Compose extends React.Component {
     )
 
     const profile = profiles[profileIndex] || profiles[0]
+
+    const setForums = () => {
+      const areaFromParams = navigation.getParam('areaId') || false
+      if (areaFromParams) {
+        return [areaFromParams]
+      } else if (profile && profile.area_ids) {
+        return [profile.area_ids[0]]
+      } else {
+        return []
+      }
+    }
+
     return (
       <ScreenContainer grey withPadding={false}>
         <Formik
           initialValues={{
-            forums: profile && profile.area_ids ? [profile.area_ids[0]] : [],
+            forums: setForums(),
             profile: profileIndex,
             category: undefined,
             subject: '',
@@ -96,6 +108,7 @@ export class Compose extends React.Component {
           }}
           validationSchema={validations}
           onSubmit={this.onSubmit}
+          key={setForums()[0]}
           render={({
             errors,
             handleSubmit,
