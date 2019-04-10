@@ -10,7 +10,7 @@ import { registrationEmail } from '@core/UnauthenticatedStack/SignUp/registratio
 import { newUser } from '@core/UnauthenticatedStack/SignUp/newUser/slice'
 import { spinner } from '@app/Spinner/slice'
 
-export default combineReducers({
+export const mainReducer = combineReducers({
   appMessage: appMessage.reducer,
   areas: areas.reducer,
   issues: issues.reducer,

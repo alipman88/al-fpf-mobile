@@ -3,6 +3,7 @@ import { Linking } from 'react-native'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import SplashScreen from 'react-native-splash-screen'
+import NetInfo from '@react-native-community/netinfo'
 
 import { store, persistor } from '@common/store'
 import { currentUser } from '@common/currentUser'
@@ -10,11 +11,23 @@ import { AppMessage } from '@components/AppMessage'
 import { parseDeepLink } from '@common/utils/parseDeepLink'
 import navigationService from '@common/utils/navigationService'
 import { Container } from './Container'
+import { Offline } from './Offline'
 
 export class App extends React.Component {
+  state = {
+    connected: true
+  }
+
   componentDidMount() {
     Linking.addEventListener('url', this.handleOpenURL)
     SplashScreen.hide()
+    NetInfo.addEventListener('connectionChange', connectionInfo => {
+      this.setConnectedStatus(connectionInfo.type, connectionInfo.effectiveType)
+    })
+
+    NetInfo.getConnectionInfo().then(connectionInfo => {
+      this.setConnectedStatus(connectionInfo.type, connectionInfo.effectiveType)
+    })
   }
 
   componentWillUnmount() {
@@ -28,12 +41,22 @@ export class App extends React.Component {
     }
   }
 
+  setConnectedStatus(type, effectiveType) {
+    const connectionWeak =
+      type === 'none' ||
+      type === 'unknown' ||
+      (type !== 'wifi' && effectiveType === '2g')
+
+    this.setState({ connected: !connectionWeak })
+  }
+
   render() {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <React.Fragment>
             <Container />
+            {!this.state.connected && <Offline />}
             <AppMessage />
           </React.Fragment>
         </PersistGate>

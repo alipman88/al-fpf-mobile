@@ -3,6 +3,7 @@ package com.frontporchforum;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.netinfo.NetInfoPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import io.invertase.firebase.RNFirebasePackage;
@@ -36,6 +37,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new RNDeviceInfo(),
           new MainReactPackage(),
+            new NetInfoPackage(),
           new SplashScreenReactPackage(),
           new MapsPackage(),
           new RNFirebasePackage(),

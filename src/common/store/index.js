@@ -4,8 +4,8 @@ import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk'
 import { persistStore, persistReducer } from 'redux-persist'
 import createSensitiveStorage from 'redux-persist-sensitive-storage'
-import mainReducer from './mainReducer'
-import securedReducer from './securedReducer'
+import { mainReducer } from './mainReducer'
+import { securedReducer } from './securedReducer'
 
 const loggerMiddleware = createLogger({
   predicate: () => window.__DEV__ && !window.__TEST__
