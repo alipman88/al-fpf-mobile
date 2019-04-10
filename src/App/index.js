@@ -1,5 +1,6 @@
 import React from 'react'
-import { Linking } from 'react-native'
+import firebase from 'react-native-firebase'
+import { AppState, Linking } from 'react-native'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import SplashScreen from 'react-native-splash-screen'
@@ -15,11 +16,13 @@ import { Offline } from './Offline'
 
 export class App extends React.Component {
   state = {
+    appState: AppState.currentState,
     connected: true
   }
 
   componentDidMount() {
     Linking.addEventListener('url', this.handleOpenURL)
+    AppState.addEventListener('change', this.handleAppStateChange)
     SplashScreen.hide()
     NetInfo.addEventListener('connectionChange', connectionInfo => {
       this.setConnectedStatus(connectionInfo.type, connectionInfo.effectiveType)
@@ -32,6 +35,18 @@ export class App extends React.Component {
 
   componentWillUnmount() {
     Linking.removeEventListener('url', this.handleOpenURL)
+    AppState.removeEventListener('change', this.handleAppStateChange)
+  }
+
+  handleAppStateChange = async nextAppState => {
+    if (
+      this.state.appState.match(/inactive|background/) &&
+      nextAppState === 'active'
+    ) {
+      await firebase.notifications().setBadge(0)
+    }
+
+    this.setState({ appState: nextAppState })
   }
 
   handleOpenURL = event => {

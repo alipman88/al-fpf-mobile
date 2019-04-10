@@ -14,14 +14,20 @@ const middlewares = compose(applyMiddleware(thunk))
 
 const store = createStore(reducer, undefined, middlewares)
 
-export const connect = (
-  mapStateToProps,
-  mapDispatch
-) => ReactComponent => () => {
+export const connect = (mapStateToProps, mapDispatch) => ReactComponent => {
   mapStateToProps = mapStateToProps || noop
-  return (
-    <ReactComponent {...mapStateToProps(store.getState())} {...mapDispatch} />
-  )
+  const NewComponent = () => {
+    return (
+      <ReactComponent {...mapStateToProps(store.getState())} {...mapDispatch} />
+    )
+  }
+
+  const wrappedComponentName =
+    ReactComponent.displayName || ReactComponent.name || 'Component'
+
+  NewComponent.displayName = `Connect(${wrappedComponentName})`
+
+  return NewComponent
 }
 
 export const Provider = ({ children }) => children
