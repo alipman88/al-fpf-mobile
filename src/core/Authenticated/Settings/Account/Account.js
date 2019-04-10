@@ -56,8 +56,6 @@ export class Account extends React.Component {
                   updateUser({ receive_push_notifications: value })
                 }
                 value={user.receive_push_notifications}
-                trackColor={{ true: '#355768' }}
-                thumbColor={Platform.select({ android: '#355768' })}
               />
             </SettingsPair>
             <SettingsDescription>

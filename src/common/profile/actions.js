@@ -17,6 +17,7 @@ export const getProfiles = () => async (dispatch, getState) => {
 
 export const updateUser = values => async (dispatch, getState) => {
   try {
+    dispatch(profile.actions.setLoading(true))
     for (let key of Object.keys(values)) {
       dispatch(profile.actions.setValueInUserData({ key, value: values[key] }))
     }
@@ -26,7 +27,6 @@ export const updateUser = values => async (dispatch, getState) => {
       { user: values },
       getState()
     )
-    dispatch(profile.actions.setLoading(true))
     dispatch(profile.actions.setUserProfile(response.data.user))
   } catch (e) {
     dispatch(appMessage.actions.setAppError(responseError(e)))
