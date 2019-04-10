@@ -33,10 +33,7 @@ export const BusinessInfoFields = ({
     navigation.navigate('CreateAccount')
   }
 
-  const nextDisabled =
-    !isEmpty(errors) ||
-    !values.name.length ||
-    values.businessCategoryId === null
+  const nextDisabled = !isEmpty(errors) || isEmpty(touched)
 
   return (
     <FullScreenWizard
