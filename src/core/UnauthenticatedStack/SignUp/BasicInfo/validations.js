@@ -14,14 +14,14 @@ export const validations = yup.object().shape({
     .test('password', 'Password must contain a number and a symbol', function(
       password
     ) {
-      return /(?=.*[a-zA-Z].*\d.*[!#$%&? "])/.test(password)
+      return /(?=.*[a-zA-Z].*)(?=.*\d.*)(?=.*[!#$%&?@"].*)/.test(password)
     })
     .required(),
   passwordConfirmation: yup
     .string()
     .test(
       'passwordConfirmation',
-      'Password and password confirmation must match',
+      'Password and confirm password must match',
       function(passConfirm) {
         return this.parent.password === passConfirm
       }
