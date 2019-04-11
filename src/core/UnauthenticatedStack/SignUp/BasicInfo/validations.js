@@ -1,5 +1,9 @@
 import * as yup from 'yup'
 
+export const passwordValidation = password => {
+  return /(?=.*[a-zA-Z].*)(?=.*\d.*)(?=.*[!#$%&?@"].*)/.test(password)
+}
+
 export const validations = yup.object().shape({
   firstName: yup.string().required('First name is a required field'),
   lastName: yup.string().required('Last name is a required field'),
@@ -14,7 +18,7 @@ export const validations = yup.object().shape({
     .test('password', 'Password must contain a number and a symbol', function(
       password
     ) {
-      return /(?=.*[a-zA-Z].*)(?=.*\d.*)(?=.*[!#$%&?@"].*)/.test(password)
+      passwordValidation(password)
     })
     .required(),
   passwordConfirmation: yup
