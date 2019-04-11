@@ -15,7 +15,7 @@ export const prepareValues = values => {
   newValues.profile = {
     ...newValues.profile,
     ...snakeCaseData(values.address),
-    profile_plan: newValues.profilePlan
+    profile_plan_id: newValues.profilePlan.id
   }
 
   // remove temp fields

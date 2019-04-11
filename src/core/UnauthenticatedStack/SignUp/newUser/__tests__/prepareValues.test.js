@@ -3,7 +3,7 @@ import { prepareValues } from '../prepareValues'
 describe('prepareValues', () => {
   test('it restructures data depending on profile type', () => {
     const values = planType => ({
-      profilePlan: { plan_type: planType },
+      profilePlan: { id: 4, plan_type: planType },
       business: {
         businessCategoryId: 3
       },
@@ -22,7 +22,7 @@ describe('prepareValues', () => {
     expect(prepareValues(neighbor)).toEqual({
       user: {
         profile: {
-          profile_plan: { plan_type: 'neighbor' },
+          profile_plan_id: 4,
           street_name: 'Test St'
         }
       }
@@ -31,7 +31,7 @@ describe('prepareValues', () => {
     expect(prepareValues(business)).toEqual({
       user: {
         profile: {
-          profile_plan: { plan_type: 'business' },
+          profile_plan_id: 4,
           business_category_id: 3,
           street_name: 'Test St'
         }
@@ -41,7 +41,7 @@ describe('prepareValues', () => {
     expect(prepareValues(government)).toEqual({
       user: {
         profile: {
-          profile_plan: { plan_type: 'government' },
+          profile_plan_id: 4,
           tell_us_more: 'some text',
           street_name: 'Test St'
         }

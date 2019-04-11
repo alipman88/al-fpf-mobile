@@ -60,7 +60,7 @@ describe('newUser actions', () => {
           last_name: 'Testerson',
           password: 'testtest1',
           password_confirmation: 'testtest1',
-          profile: { profile_plan: { id: 1, plan_type: 'neighbor' } }
+          profile: { profile_plan_id: 1 }
         }
       })
 
@@ -86,7 +86,7 @@ describe('newUser actions', () => {
           last_name: 'Testerson',
           password: 'testtest1',
           password_confirmation: 'testtest1',
-          profile: { profile_plan: { id: 1, plan_type: 'neighbor' } }
+          profile: { profile_plan_id: 1 }
         }
       })
       expect(dispatch).toHaveBeenCalledWith(
