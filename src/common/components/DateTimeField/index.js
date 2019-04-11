@@ -46,7 +46,8 @@ export class DateTimeField extends React.Component {
           date.getDate(),
           date.getHours(),
           date.getMinutes(),
-          date.getSeconds()
+          0,
+          0
         )
       })
     }
@@ -101,7 +102,8 @@ export class DateTimeField extends React.Component {
     combinedDate.setDate(date.getDate())
     combinedDate.setHours(time.getHours())
     combinedDate.setMinutes(time.getMinutes())
-    combinedDate.setSeconds(time.getSeconds())
+    combinedDate.setSeconds(0)
+    combinedDate.setMilliseconds(0)
 
     this.props.onChangeValue(combinedDate)
   }
