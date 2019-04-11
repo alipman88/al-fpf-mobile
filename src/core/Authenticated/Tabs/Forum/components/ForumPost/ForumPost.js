@@ -2,13 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Post } from '@components/Post'
 
-export const ForumPost = ({
-  post,
-  onReplyPress,
-  postTruncateLength,
-  navigation
-}) => {
+export const ForumPost = ({ post, postTruncateLength, navigation }) => {
   const onTapCategory = category => {
+    navigation.setParams({ category })
     navigation.navigate({ routeName: 'Search', params: { category } })
   }
 
@@ -28,7 +24,6 @@ export const ForumPost = ({
 
 ForumPost.propTypes = {
   post: PropTypes.object.isRequired,
-  onReplyPress: PropTypes.func.isRequired,
   postTruncateLength: PropTypes.number.isRequired,
   navigation: PropTypes.object.isRequired
 }

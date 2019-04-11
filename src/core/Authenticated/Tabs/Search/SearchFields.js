@@ -39,6 +39,17 @@ export class SearchFields extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.categoryFromLink &&
+      this.props.categoryFromLink !== prevProps.categoryFromLink
+    ) {
+      this.props.setFieldValue('category', this.props.categoryFromLink)
+      this.props.setFieldTouched('category')
+      this.setState({ showAdvanced: true })
+    }
+  }
+
   render() {
     const {
       areas,
@@ -202,6 +213,7 @@ export class SearchFields extends React.Component {
 SearchFields.propTypes = {
   areas: PropTypes.array.isRequired,
   categories: PropTypes.array.isRequired,
+  categoryFromLink: PropTypes.object,
   errors: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   onClearSearch: PropTypes.func.isRequired,

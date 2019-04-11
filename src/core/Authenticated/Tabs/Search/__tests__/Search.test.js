@@ -12,7 +12,7 @@ describe('Search', () => {
     categories: [],
     search: jest.fn(),
     navigation: {
-      addListener: jest.fn()
+      getParam: jest.fn()
     }
   }
 
@@ -24,9 +24,7 @@ describe('Search', () => {
   test('it prepopulates cateogry when passed through navigation params', () => {
     const categoryName = 'Lost and Found'
     const navigation = {
-      addListener: jest.fn(),
-      getParam: jest.fn(() => categoryName),
-      state: { params: { category: categoryName } }
+      getParam: jest.fn(() => categoryName)
     }
     const categories = [
       { id: 1, name: categoryName },
@@ -39,9 +37,21 @@ describe('Search', () => {
         categories={categories}
       />
     )
-    expect(wrapper.find(Formik).props().initialValues.category).toEqual({
+    wrapper.instance().componentDidMount()
+    expect(wrapper.state().categoryFromLink).toEqual({
       id: 1,
       name: categoryName
+    })
+
+    wrapper.setProps({
+      navigation: {
+        getParam: jest.fn(() => 'Another Category')
+      }
+    })
+
+    expect(wrapper.state().categoryFromLink).toEqual({
+      id: 2,
+      name: 'Another Category'
     })
   })
 
@@ -81,14 +91,14 @@ describe('Search', () => {
       })
 
       expect(wrapper.state()).toEqual({
+        categoryFromLink: undefined,
         loading: false,
         searched: true,
         searchResults: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }],
         total: 15,
         page: 2,
         pages: 3,
-        pageItemCount: 5,
-        key: 1
+        pageItemCount: 5
       })
     })
   })
@@ -134,14 +144,14 @@ describe('Search', () => {
       dismissSpy.mockRestore()
 
       expect(wrapper.state()).toEqual({
+        categoryFromLink: undefined,
         loading: false,
         searched: true,
         searchResults: [post],
         total: 5,
         page: 1,
         pages: 2,
-        pageItemCount: 3,
-        key: 1
+        pageItemCount: 3
       })
     })
   })

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { Formik } from 'formik'
 
 import noop from 'lodash/noop'
+import get from 'lodash/get'
 
 import subYears from 'date-fns/sub_years'
 import startOfDay from 'date-fns/start_of_day'
@@ -16,14 +17,14 @@ import { SearchResults } from './SearchResults'
 
 export class Search extends React.Component {
   state = {
+    categoryFromLink: null,
     loading: false,
     searched: false,
     searchResults: [],
     total: 0,
     page: 1,
     pages: 0,
-    pageItemCount: 25,
-    key: 1
+    pageItemCount: 25
   }
 
   nextPage = values => {
@@ -38,13 +39,28 @@ export class Search extends React.Component {
   componentDidMount() {
     const { navigation } = this.props
 
-    this.focusListener = navigation.addListener('willFocus', () => {
-      this.setState(() => ({ key: this.state.key + 1 })) //rerender Formik
-    })
+    this.setCategoryFromLink(navigation.getParam('category'))
+  }
+
+  componentDidUpdate() {
+    const categoryParam = this.props.navigation.getParam('category')
+    const categoryNameFromState = get(this.state.categoryFromLink, 'name')
+    if (categoryParam !== categoryNameFromState) {
+      this.setCategoryFromLink(categoryParam)
+    }
   }
 
   componentWillUnmount() {
     this.focusListener.remove()
+  }
+
+  setCategoryFromLink(categoryName) {
+    const { categories } = this.props
+    const categoryFromLink = categories.find(cat => cat.name === categoryName)
+
+    this.setState({
+      categoryFromLink
+    })
   }
 
   search = (values, cb = noop) => {
@@ -75,14 +91,14 @@ export class Search extends React.Component {
   }
 
   render() {
-    const { loading, searched, searchResults, total } = this.state
+    const {
+      categoryFromLink,
+      loading,
+      searched,
+      searchResults,
+      total
+    } = this.state
     const { areas, categories, navigation } = this.props
-
-    const categoryFromLink = categories.find(
-      cat => cat.name === navigation.getParam('category')
-    )
-
-    const showFilters = !!categoryFromLink
 
     return (
       <ScreenContainer grey withPadding={false}>
@@ -93,7 +109,7 @@ export class Search extends React.Component {
             fromDate: startOfDay(subYears(new Date(), 2)),
             toDate: endOfDay(new Date()),
             keyword: '',
-            category: categoryFromLink,
+            category: null,
             forums: []
           }}
           onSubmit={(values, actions) => {
@@ -128,7 +144,7 @@ export class Search extends React.Component {
                 isSubmitting={loading || isSubmitting}
                 touched={touched}
                 values={values}
-                showFilters={showFilters}
+                categoryFromLink={categoryFromLink}
               />
               <SearchResults
                 categories={categories}
