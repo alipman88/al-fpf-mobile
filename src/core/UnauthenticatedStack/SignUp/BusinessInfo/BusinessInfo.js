@@ -10,28 +10,26 @@ export const BusinessInfo = ({
   newUser,
   categories,
   loading
-}) => {
-  return (
-    <Formik
-      initialValues={newUser.business}
-      validationSchema={validations}
-      render={({ errors, setFieldValue, setFieldTouched, touched, values }) => (
-        <BusinessInfoFields
-          errors={errors}
-          setFieldValue={setFieldValue}
-          setFieldTouched={setFieldTouched}
-          setNewUserByKey={setNewUserByKey}
-          touched={touched}
-          values={values}
-          newUser={newUser}
-          navigation={navigation}
-          categories={categories}
-          loading={loading}
-        />
-      )}
-    />
-  )
-}
+}) => (
+  <Formik
+    initialValues={newUser.business}
+    validationSchema={validations}
+    render={({ errors, setFieldValue, setFieldTouched, touched, values }) => (
+      <BusinessInfoFields
+        errors={errors}
+        setFieldValue={setFieldValue}
+        setFieldTouched={setFieldTouched}
+        setNewUserByKey={setNewUserByKey}
+        touched={touched}
+        values={values}
+        newUser={newUser}
+        navigation={navigation}
+        categories={categories}
+        loading={loading}
+      />
+    )}
+  />
+)
 
 BusinessInfo.propTypes = {
   setNewUserByKey: PropTypes.func.isRequired,

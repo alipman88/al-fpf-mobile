@@ -12,7 +12,7 @@ describe('BusinessInfoFields', () => {
     touched: {},
     values: {
       name: '',
-      businessCategoryId: [1],
+      businessCategoryId: 1,
       url: '',
       phone: '',
       description: ''
@@ -62,7 +62,7 @@ describe('BusinessInfoFields', () => {
   test('clicking Continue sets form data in store', () => {
     const inputValues = {
       name: 'Something LTD.io',
-      businessCategoryId: [1],
+      businessCategoryId: 1,
       url: 'http://made-it-up.work',
       phone: '',
       description: ''
@@ -94,17 +94,14 @@ describe('BusinessInfoFields', () => {
     ).toEqual(true)
   })
 
-  test('Continue button is enabled if required fields are filled', () => {
-    const values = {
-      name: 'Something LTD.io',
-      businessCategoryId: [9],
-      url: '',
-      phone: '',
-      description: ''
+  test('Continue button is enabled if there are no errors and fields have been touched', () => {
+    const touched = {
+      name: true,
+      businessCategoryId: true
     }
 
     const wrapper = shallow(
-      <BusinessInfoFields {...defaultProps} values={values} />
+      <BusinessInfoFields {...defaultProps} touched={touched} />
     )
     expect(
       wrapper
