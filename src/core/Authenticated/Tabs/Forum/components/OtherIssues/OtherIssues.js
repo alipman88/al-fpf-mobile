@@ -1,11 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { View } from 'react-native'
+import { Dimensions, View, findNodeHandle } from 'react-native'
 
 import { IssueTab } from './IssueTab'
 import { IssueScrollView } from './styledComponents'
 
 export class OtherIssues extends React.Component {
+  state = {
+    x: 0,
+    scrollWidth: Number.MAX_VALUE
+  }
+
   onTapIssue = id => {
     this.props.setCurrentIssueId(id)
     this.props.getPosts(id)
@@ -18,14 +23,26 @@ export class OtherIssues extends React.Component {
     }
   }
 
-  scrollFocusedIssue = () => {
-    if (this.focusedIssue) {
-      this.focusedIssue.measure((x, y, width, height, pageX, pageY) => {
-        this.scrollViewRef.scrollTo({ x: pageX, animated: true })
-      })
-    } else {
-      this.scrollViewRef.scrollToEnd({ animated: true })
-    }
+  scrollFocusedIssue = ev => {
+    requestAnimationFrame(() => {
+      if (this.focusedIssue) {
+        this.focusedIssue.measureLayout(
+          findNodeHandle(this.scrollViewRef),
+          x => {
+            this.scrollViewRef.scrollTo({
+              x: Math.min(this.state.scrollWidth, x),
+              animated: true
+            })
+          }
+        )
+      } else {
+        this.scrollViewRef.scrollToEnd({ animated: true })
+      }
+    })
+  }
+
+  sizeChange = width => {
+    this.setState({ scrollWidth: width - Dimensions.get('screen').width })
   }
 
   render() {
@@ -35,7 +52,6 @@ export class OtherIssues extends React.Component {
         const focused = currentIssueId === i.id
         return (
           <View
-            onLayout={this.scrollFocusedIssue}
             key={i.id}
             ref={
               focused
@@ -44,6 +60,7 @@ export class OtherIssues extends React.Component {
                   }
                 : undefined
             }
+            onLayout={focused ? this.scrollFocusedIssue : undefined}
           >
             <IssueTab
               issue={i}
@@ -66,7 +83,7 @@ export class OtherIssues extends React.Component {
       <IssueScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        onContentSizeChange={this.scrollFocusedIssue}
+        onContentSizeChange={this.sizeChange}
         ref={ref => {
           this.scrollViewRef = ref
         }}

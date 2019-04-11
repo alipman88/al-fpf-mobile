@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Platform, Switch, TouchableOpacity } from 'react-native'
+import { Switch, TouchableOpacity } from 'react-native'
 import Spinner from 'react-native-loading-spinner-overlay'
 
 import { ScreenContainer } from '@components/ScreenContainer'
