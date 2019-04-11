@@ -1,12 +1,30 @@
 import * as yup from 'yup'
+import startCase from 'lodash/startCase'
+
+export const validateName = string => {
+  return /^[a-zA-Z]+$/.test(string)
+}
 
 export const passwordValidation = password => {
   return /(?=.*[a-zA-Z].*)(?=.*\d.*)(?=.*[!#$%&?@"].*)/.test(password)
 }
 
 export const validations = yup.object().shape({
-  firstName: yup.string().required('First name is a required field'),
-  lastName: yup.string().required('Last name is a required field'),
+  firstName: yup
+    .string()
+    .test('firstName', 'First name can only contain letters', function(
+      firstName
+    ) {
+      return validateName(firstName)
+    })
+    .required('First name is a required field'),
+  lastName: yup
+    .string()
+    .min(2, 'Last name must be at least 2 characters long')
+    .test('lastName', 'Last name can only contain letters', function(lastName) {
+      return validateName(lastName)
+    })
+    .required('Last name is a required field'),
   email: yup
     .string()
     .required()
