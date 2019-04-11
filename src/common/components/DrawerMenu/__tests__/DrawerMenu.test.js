@@ -40,11 +40,11 @@ describe('DrawerMenu', () => {
     setCurrentProfileId: jest.fn()
   }
 
-  test('renders areas that are part of the profiles', () => {
+  test('renders areas', () => {
     const outer = shallow(<DrawerMenu {...defaultProps} />)
     const Children = outer.prop('children')
     const wrapper = shallow(<Children />)
 
-    expect(wrapper.find(ForumText).length).toEqual(2)
+    expect(wrapper.find(ForumText).length).toEqual(3)
   })
 })
