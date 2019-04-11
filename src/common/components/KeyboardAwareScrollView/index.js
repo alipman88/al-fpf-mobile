@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Platform } from 'react-native'
 import { KeyboardAwareScrollView as Base } from 'react-native-keyboard-aware-scroll-view'
 
 import { KeyboardOpen } from '@components/KeyboardOpen'
@@ -18,10 +17,7 @@ export const KeyboardAwareScrollView = ({
         return (
           <Base
             enableOnAndroid
-            keyboardShouldPersistTaps={Platform.select({
-              android: 'handle',
-              ios: undefined
-            })}
+            keyboardShouldPersistTaps='handled'
             contentContainerStyle={{
               ...style,
               ...contentContainerStyle

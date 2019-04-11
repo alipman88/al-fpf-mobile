@@ -5,7 +5,6 @@ import { paddingTop, paddingHorizontal } from '@common/styles/screenPadding'
 
 export const FormContainer = styled.View`
   padding-top: ${paddingTop};
-  flex: 1;
 `
 
 export const InputDetails = styled(Text)`
@@ -16,7 +15,6 @@ export const InputDetails = styled(Text)`
 
 export const FieldWrapper = styled.View`
   margin-bottom: 10;
-  flex: 1;
   padding-horizontal: ${paddingHorizontal};
 `
 
