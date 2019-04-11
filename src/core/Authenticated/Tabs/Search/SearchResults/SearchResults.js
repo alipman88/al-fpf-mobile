@@ -79,6 +79,7 @@ export const SearchResults = ({
                 search({ ...values, category })
               }}
               navigation={navigation}
+              showDatePublished
             />
             {i < searchResults.length - 1 ? <ResultsDivider /> : null}
           </React.Fragment>

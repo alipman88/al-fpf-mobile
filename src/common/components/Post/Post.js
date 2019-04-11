@@ -54,7 +54,8 @@ export class Post extends React.Component {
       showIssueData,
       onTapCategory,
       moreText,
-      navigation
+      navigation,
+      showDatePublished
     } = this.props
 
     const Container = hasBorder ? PostContainerBordered : PostContainer
@@ -147,10 +148,14 @@ export class Post extends React.Component {
           )}
           {Boolean(post.event.start_date) && (
             <PostDate>
-              {format(new Date(post.event.start_date), 'MMM DD, YYYY') + ' '}
-              {format(new Date(post.event.start_date), 'h:mm A')}
+              {format(new Date(post.event.start_date), 'MMM DD, YYYY h:mm A')}
               {Boolean(post.event.end_date) &&
                 ` - ${format(new Date(post.event.end_date), 'h:mm A')}`}
+            </PostDate>
+          )}
+          {showDatePublished && Boolean(post.date_published) && (
+            <PostDate>
+              Published: {format(new Date(post.date_published), 'MMM DD, YYYY')}
             </PostDate>
           )}
           {post.categories.map(category => (
@@ -194,7 +199,8 @@ Post.propTypes = {
   showIssueData: PropTypes.bool,
   fetchSpecificIssue: PropTypes.func,
   moreText: PropTypes.string.isRequired,
-  navigation: PropTypes.object.isRequired
+  navigation: PropTypes.object.isRequired,
+  showDatePublished: PropTypes.bool
 }
 
 Post.defaultProps = {
