@@ -26,8 +26,8 @@ export class Profile extends React.Component {
           <Spinner visible={this.state.loading} />
           <Description>
             Currently in app edits to your account information can’t be made
-            here, here, you’ll be taken to the FPF website to make these any
-            changes clicking the blue external links below.
+            here, you’ll be taken to the FPF website to make these any changes
+            clicking the blue external links below.
           </Description>
 
           <FieldLabel bottomMargin={0}>Profile type</FieldLabel>
