@@ -1,9 +1,10 @@
 import React from 'react'
-import { TouchableOpacity } from 'react-native'
+import { Linking, TouchableOpacity } from 'react-native'
 import { shallow } from 'enzyme'
 
 import { Post } from '@components/Post/Post'
 import { PostCategory } from '@components/PostCategory'
+import { Button } from '@components/Button'
 import {
   PostDate,
   PostBody,
@@ -23,6 +24,7 @@ describe('Post', () => {
       event: {
         start_date: new Date()
       },
+      area_id: 2,
       categories: ['Lost and found'],
       content: 'This is a longer test that we should render'
     },
@@ -30,7 +32,15 @@ describe('Post', () => {
     moreText: 'Read',
     postTruncateLength: 200,
     onTapCategory: jest.fn(),
-    navigation: {}
+    includeBottomButtons: true,
+    navigation: {
+      navigate: jest.fn()
+    },
+    areasIdMap: {
+      2: {
+        id: 2
+      }
+    }
   }
 
   afterEach(() => {
@@ -114,5 +124,33 @@ describe('Post', () => {
     const wrapper = shallow(<Post {...defaultProps} hasBorder />)
 
     expect(wrapper.find(PostContainerBordered).length).toBeTruthy()
+  })
+
+  test('reply button press', () => {
+    const wrapper = shallow(<Post {...defaultProps} />)
+    wrapper
+      .find(Button)
+      .last()
+      .simulate('press')
+    expect(defaultProps.navigation.navigate).toHaveBeenCalledWith({
+      routeName: 'Compose',
+      params: {
+        parentPostId: defaultProps.post.id,
+        areaId: defaultProps.post.area_id
+      }
+    })
+  })
+
+  test('email button press', () => {
+    const wrapper = shallow(<Post {...defaultProps} />)
+    wrapper
+      .find(Button)
+      .first()
+      .simulate('press')
+    expect(Linking.openURL).toHaveBeenCalledWith(
+      `mailto:${defaultProps.post.user_email}?subject=RE: ${
+        defaultProps.post.title
+      }`
+    )
   })
 })

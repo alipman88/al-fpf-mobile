@@ -3,7 +3,7 @@ import styled from 'styled-components/native'
 import { Text, TextSemibold } from '@components/Text'
 
 export const PostContainer = styled.View`
-  margin-bottom: 33;
+  margin-bottom: 10;
 `
 
 export const PostContainerBordered = styled.View`
@@ -56,4 +56,30 @@ export const ShowMoreButton = styled(PostLink)`
 `
 export const LinkText = styled(PostAuthor)`
   text-decoration: underline;
+`
+
+export const BottomBordered = styled.View`
+  border-top-width: 1;
+  border-top-color: #ebecf1;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 10px 13px 10px
+  align-items: stretch;
+`
+
+export const Bottom = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0px 10px 0px
+  align-items: stretch;
+`
+
+export const ButtonWrapper = styled.View`
+  flex: 4;
+`
+
+export const ButtonSpacer = styled.View`
+  flex: 1;
 `

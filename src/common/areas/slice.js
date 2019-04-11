@@ -1,6 +1,7 @@
 import { createSlice, createSelector } from 'redux-starter-kit'
 import { resetAction } from '@common/resetAction'
 import sortBy from 'lodash/sortBy'
+import keyBy from 'lodash/keyBy'
 
 const initialState = {
   areas: [],
@@ -53,11 +54,17 @@ export const areas = createSlice({
 
 const path = 'main.areas'
 
+const getAreas = createSelector(
+  [path],
+  areas => areas.areas
+)
+
 areas.selectors = {
   ...areas.selectors,
-  getAreas: createSelector(
-    [path],
-    areas => areas.areas
+  getAreas,
+  getAreasIdMap: createSelector(
+    [getAreas],
+    areas => keyBy(areas, 'id')
   ),
   getCurrentAreaId: createSelector(
     [path],

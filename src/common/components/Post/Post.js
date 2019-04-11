@@ -6,6 +6,7 @@ import format from 'date-fns/format'
 
 import { truncateText } from '@common/utils/truncateText'
 import { PostCategory } from '@components/PostCategory'
+import { Button } from '@components/Button'
 
 import {
   LinkText,
@@ -18,7 +19,11 @@ import {
   PostDate,
   PostHeader,
   PostLink,
-  ShowMoreButton
+  ShowMoreButton,
+  Bottom,
+  BottomBordered,
+  ButtonWrapper,
+  ButtonSpacer
 } from './styledComponents'
 
 export class Post extends React.Component {
@@ -30,13 +35,22 @@ export class Post extends React.Component {
     this.setState(state => ({ showMore: !state.showMore }))
   }
 
+  handleReplyPress = ({ parentPostId, areaId }) => {
+    this.props.navigation.navigate({
+      routeName: 'Compose',
+      params: { parentPostId, areaId }
+    })
+  }
+
   render() {
     const {
       post,
+      areasIdMap,
       postTruncateLength,
       fetchSpecificIssue,
       children,
       hasBorder,
+      includeBottomButtons,
       showIssueData,
       onTapCategory,
       moreText,
@@ -44,6 +58,7 @@ export class Post extends React.Component {
     } = this.props
 
     const Container = hasBorder ? PostContainerBordered : PostContainer
+    const BottomContainer = hasBorder ? BottomBordered : Bottom
     const postInfo = showIssueData ? (
       <LinkText
         onPress={() =>
@@ -60,6 +75,47 @@ export class Post extends React.Component {
     ) : (
       ''
     )
+
+    const getBottomButtons = post => {
+      const includeReplyButton =
+        !post.is_shared_post && areasIdMap[post.area_id]
+      return (
+        <BottomContainer>
+          <ButtonWrapper>
+            <Button
+              color={'#fff'}
+              onPress={() =>
+                Linking.openURL(
+                  `mailto:${post.user_email}?subject=RE: ${post.title}`
+                )
+              }
+              fullWidth
+            >
+              Email author
+            </Button>
+          </ButtonWrapper>
+
+          {includeReplyButton && (
+            <React.Fragment>
+              <ButtonSpacer />
+              <ButtonWrapper>
+                <Button
+                  color={'#fff'}
+                  onPress={() =>
+                    this.handleReplyPress({
+                      parentPostId: post.id,
+                      areaId: post.area_id
+                    })
+                  }
+                >
+                  Reply to forum
+                </Button>
+              </ButtonWrapper>
+            </React.Fragment>
+          )}
+        </BottomContainer>
+      )
+    }
 
     return (
       <Container key={post.id}>
@@ -121,6 +177,7 @@ export class Post extends React.Component {
           )}
         </PostBodyContainer>
         {children}
+        {includeBottomButtons && getBottomButtons(post)}
       </Container>
     )
   }
@@ -128,8 +185,10 @@ export class Post extends React.Component {
 
 Post.propTypes = {
   post: PropTypes.object.isRequired,
+  areasIdMap: PropTypes.object,
   postTruncateLength: PropTypes.number.isRequired,
   children: PropTypes.element,
+  includeBottomButtons: PropTypes.bool,
   hasBorder: PropTypes.bool,
   onTapCategory: PropTypes.func,
   showIssueData: PropTypes.bool,

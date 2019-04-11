@@ -176,13 +176,6 @@ export class Forum extends React.Component {
     })
   }
 
-  handleReplyPress = ({ parentPostId, areaId }) => {
-    this.props.navigation.navigate({
-      routeName: 'Compose',
-      params: { parentPostId, areaId }
-    })
-  }
-
   render() {
     const { currentIssueId, issues, loading } = this.props
 
@@ -213,7 +206,6 @@ export class Forum extends React.Component {
           <ForumPost
             post={post}
             navigation={this.props.navigation}
-            onReplyPress={this.handleReplyPress}
             key={post.id}
           />
         )

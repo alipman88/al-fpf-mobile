@@ -64,11 +64,12 @@ export const SearchResults = ({
           </React.Fragment>
         ) : null}
         {searchResults.map((post, i) => (
-          <React.Fragment>
+          <React.Fragment key={i}>
             <Post
               post={post}
               key={post.id}
               postTruncateLength={postTruncateLength}
+              includeBottomButtons
               moreText={'Read'}
               showIssueData
               onTapCategory={categoryName => {
