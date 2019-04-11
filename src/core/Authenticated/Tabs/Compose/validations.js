@@ -19,8 +19,14 @@ export const validations = yup.object().shape({
       0,
       'Ensure that you are logged into an account with at least one approved profile'
     ),
-  subject: yup.string().required(),
-  message: yup.string().required(),
+  subject: yup
+    .string()
+    .trim()
+    .required(),
+  message: yup
+    .string()
+    .trim()
+    .required(),
   fromDate: yup
     .date()
     .nullable()

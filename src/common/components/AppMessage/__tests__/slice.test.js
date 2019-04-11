@@ -24,6 +24,24 @@ describe('appMessage slice', () => {
     expect(appMessage.selectors.getMessageType(state)).toEqual('danger')
   })
 
+  test('it creates a human readable error out of objects', () => {
+    const state = {
+      main: {
+        appMessage: appMessage.reducer(
+          undefined,
+          appMessage.actions.setAppError({
+            title: 'needs a title',
+            content: 'needs content'
+          })
+        )
+      }
+    }
+    expect(appMessage.selectors.getMessage(state)).toEqual(
+      'Needs a title, needs content'
+    )
+    expect(appMessage.selectors.getMessageType(state)).toEqual('danger')
+  })
+
   test('message & type get set for setAppMessage', () => {
     const state = {
       main: {

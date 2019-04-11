@@ -7,10 +7,16 @@ export const appMessage = createSlice({
     type: ''
   },
   reducers: {
-    setAppError: (_, { payload }) => ({
-      message: capitalize(payload),
-      type: 'danger'
-    }),
+    setAppError: (_, { payload }) => {
+      const message =
+        typeof payload === 'string'
+          ? payload
+          : Object.values(payload).join(', ')
+      return {
+        message: capitalize(message),
+        type: 'danger'
+      }
+    },
     setAppMessage: (_, { payload }) => ({
       message: capitalize(payload.message),
       type: payload.type
