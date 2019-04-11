@@ -36,7 +36,7 @@ export const validations = yup.object().shape({
     .test('password', 'Password must contain a number and a symbol', function(
       password
     ) {
-      passwordValidation(password)
+      return passwordValidation(password)
     })
     .required(),
   passwordConfirmation: yup
