@@ -99,7 +99,7 @@ export class Compose extends React.Component {
           initialValues={{
             forums: setForums(),
             profile: profileIndex,
-            category: undefined,
+            category: null,
             subject: '',
             message: '',
             isShared: true,

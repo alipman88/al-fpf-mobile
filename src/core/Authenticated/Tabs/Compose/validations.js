@@ -8,7 +8,10 @@ export const validations = yup.object().shape({
     .array()
     .required()
     .min(1),
-  category: yup.object().required(),
+  category: yup
+    .object()
+    .nullable()
+    .required(),
   profile: yup
     .number()
     .required()

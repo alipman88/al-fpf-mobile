@@ -61,7 +61,7 @@ describe('Compose', () => {
     expect(wrapper.find(Formik).props().initialValues).toEqual({
       forums: [1],
       profile: 0,
-      category: undefined,
+      category: null,
       subject: '',
       message: '',
       isShared: true,

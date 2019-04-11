@@ -99,6 +99,14 @@ export class ComposeFields extends React.Component {
     const isDuplicateEvent =
       duplicatePost && get(values, 'category.is_event', false)
 
+    let categoryValue = categories.findIndex(
+      category => category.id === get(values, 'category.id')
+    )
+
+    if (categoryValue === -1) {
+      categoryValue = null
+    }
+
     return (
       <KeyboardAwareScrollView>
         <Spinner visible={loading || isSubmitting} />
@@ -179,9 +187,7 @@ export class ComposeFields extends React.Component {
                 setFieldValue('category', categories[index])
               }}
               title='Select Category'
-              value={categories.findIndex(
-                category => category.id === get(values, 'category.id')
-              )}
+              value={categoryValue}
               error={errors.category}
               touched={touched.category}
             />
