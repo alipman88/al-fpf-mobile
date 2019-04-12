@@ -46,9 +46,13 @@ export const GovernmentInfoFields = ({
             setFieldValue('title', governmentTitles[value])
           }}
           touched={touched.title}
-          value={governmentTitles.indexOf(values.title) || 0}
+          value={
+            Boolean(values.title)
+              ? governmentTitles.indexOf(values.title)
+              : null
+          }
           placeholder={
-            values.title.length ? values.title : 'School Board Member'
+            Boolean(values.title) ? values.title : 'School Board Member'
           }
           required
         />

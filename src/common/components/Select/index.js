@@ -40,6 +40,7 @@ export class Select extends React.Component {
       </FormFieldLabelWrapper>
     )
 
+    const placeholderColor = Boolean(value) || value === 0 ? '#000' : '#c5c5c5'
     return (
       <Container>
         {labelText}
@@ -47,7 +48,9 @@ export class Select extends React.Component {
           onPress={() => this.selectModuleRef.show()}
           hasError={hasError}
         >
-          <SelectPlaceholder>{placeholder}</SelectPlaceholder>
+          <SelectPlaceholder color={placeholderColor}>
+            {placeholder}
+          </SelectPlaceholder>
           <DownArrowWrapper>
             <Icon size={24} name='keyboard-arrow-down' />
           </DownArrowWrapper>
