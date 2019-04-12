@@ -63,6 +63,14 @@ export class SearchFields extends React.Component {
       values
     } = this.props
 
+    let categoryValue = categories.findIndex(
+      category => category.id === get(values, 'category.id')
+    )
+
+    if (categoryValue === -1) {
+      categoryValue = null
+    }
+
     return (
       <SearchFormContainer>
         <Spinner visible={isSubmitting} />
@@ -140,9 +148,7 @@ export class SearchFields extends React.Component {
                     setFieldValue('category', categories[index])
                   }}
                   title='Select Category'
-                  value={categories.findIndex(
-                    category => category.id === get(values, 'category.id')
-                  )}
+                  value={categoryValue}
                   error={errors.category}
                   touched={touched.category}
                 />
