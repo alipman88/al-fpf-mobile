@@ -8,6 +8,10 @@ const messaging = {
   subscribeToTopic: jest.fn()
 }
 
+const analytics = {
+  logEvent: jest.fn()
+}
+
 const notificationsFactory = {
   android: {
     createChannel: jest.fn()
@@ -54,6 +58,7 @@ const iid = {
 
 module.exports = {
   messaging: () => messaging,
+  analytics: () => analytics,
   iid: () => iid,
   notifications
 }
