@@ -31,13 +31,9 @@ describe('Account', () => {
     const nodes = wrapper.find(ExternalLink)
     nodes.forEach(node => node.simulate('press'))
 
+    expect(defaultProps.navigateWithToken).toHaveBeenCalledWith('/user')
     expect(defaultProps.navigateWithToken).toHaveBeenCalledWith(
-      '/user',
-      expect.any(Function)
-    )
-    expect(defaultProps.navigateWithToken).toHaveBeenCalledWith(
-      '/user/subscriptions',
-      expect.any(Function)
+      '/user/subscriptions'
     )
   })
 
@@ -45,9 +41,6 @@ describe('Account', () => {
     const wrapper = shallow(<Account {...defaultProps} />)
     wrapper.find(TouchableOpacity).simulate('press')
 
-    expect(defaultProps.navigateWithToken).toHaveBeenCalledWith(
-      '/user',
-      expect.any(Function)
-    )
+    expect(defaultProps.navigateWithToken).toHaveBeenCalledWith('/user')
   })
 })

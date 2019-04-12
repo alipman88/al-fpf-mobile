@@ -2,6 +2,7 @@ import * as api from '@common/api'
 import { Linking } from 'react-native'
 import { navigateWithToken } from '../navigateWithToken'
 import { appMessage } from '@components/AppMessage/slice'
+import { spinner } from '@app/Spinner/slice'
 
 describe('navigateWithToken', () => {
   test('gets the token, and directs the user', async () => {
@@ -17,20 +18,18 @@ describe('navigateWithToken', () => {
 
     const dispatch = jest.fn()
     const getState = jest.fn().mockReturnValue({})
-    const setLoading = jest.fn()
 
-    await navigateWithToken('/path?test=true', setLoading)(dispatch, getState)
+    await navigateWithToken('/path?test=true')(dispatch, getState)
 
-    expect(dispatch).not.toHaveBeenCalled()
+    expect(dispatch).toHaveBeenCalledWith(spinner.actions.setVisibility(true))
 
-    expect(setLoading).toHaveBeenCalledWith(true)
     expect(apiSpy).toHaveBeenCalledWith('/get_login_token', {}, {})
     expect(getState).toHaveBeenCalled()
 
     expect(openUrlSpy).toHaveBeenCalledWith(
       'https://frontporchforum.com/path?test=true&temporary_login_token=abc123'
     )
-    expect(setLoading).toHaveBeenCalledWith(false)
+    expect(dispatch).toHaveBeenCalledWith(spinner.actions.setVisibility(false))
 
     apiSpy.mockRestore()
     openUrlSpy.mockRestore()
@@ -43,15 +42,14 @@ describe('navigateWithToken', () => {
 
     const dispatch = jest.fn()
     const getState = jest.fn().mockReturnValue({})
-    const setLoading = jest.fn()
-    await navigateWithToken('https://something.com?test=true', setLoading)(
+    await navigateWithToken('https://something.com?test=true')(
       dispatch,
       getState
     )
 
-    expect(setLoading).toHaveBeenCalledWith(true)
+    expect(dispatch).toHaveBeenCalledWith(spinner.actions.setVisibility(true))
     expect(apiSpy).toHaveBeenCalledWith('/get_login_token', {}, {})
-    expect(setLoading).toHaveBeenCalledWith(false)
+    expect(dispatch).toHaveBeenCalledWith(spinner.actions.setVisibility(false))
 
     expect(dispatch).toHaveBeenCalledWith(
       appMessage.actions.setAppError('boom')

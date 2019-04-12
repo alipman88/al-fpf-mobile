@@ -3,6 +3,8 @@ import { getIssues, fetchSpecificIssue } from '../actions'
 import { issues } from '../slice'
 import { appMessage } from '@components/AppMessage/slice'
 import { areas } from '@common/areas'
+import { spinner } from '@app/Spinner/slice'
+import * as commonActions from '@common/actions/navigateWithToken'
 
 describe('issues actions', () => {
   const getState = () => ({
@@ -96,30 +98,88 @@ describe('issues actions', () => {
   })
 
   describe('fetchSpecificIssue', () => {
-    test('dispatches to fetch areas, issues, and posts', async () => {
+    test('dispatches go to a specific issue', async () => {
       const dispatch = jest.fn()
+      const issuesArray = [{ id: 26, number: 500 }, { id: 27, number: 501 }]
       const getState = () => ({
         main: {
           issues: {
             issuesByAreaId: {
-              50: [
-                {
-                  number: 26,
-                  id: 4
-                },
-                {
-                  number: 10,
-                  id: 2
-                }
-              ]
+              50: issuesArray
             }
+          },
+          areas: {
+            currentAreaId: 35
           }
         }
       })
 
-      await fetchSpecificIssue(50, 26, 500)(dispatch, getState)
+      const getSpy = jest.spyOn(api, 'get').mockImplementation(() => ({
+        data: {
+          issuesArray
+        }
+      }))
 
+      const navigate = jest.fn()
+      await fetchSpecificIssue(50, 26, 500, { navigate })(dispatch, getState)
+
+      expect(dispatch).toHaveBeenCalledWith(spinner.actions.setVisibility(true))
       expect(dispatch).toHaveBeenCalledWith(areas.actions.setCurrentAreaId(50))
+      expect(dispatch).toHaveBeenCalledWith(
+        issues.actions.setCurrentIssueId(26)
+      )
+      expect(navigate).toHaveBeenCalledWith('Forum')
+      expect(dispatch).toHaveBeenCalledWith(
+        spinner.actions.setVisibility(false)
+      )
+
+      getSpy.mockRestore()
+    })
+
+    test('issue is not in current list, goes to web instead', async () => {
+      const dispatch = jest.fn()
+      const issuesArray = [{ id: 26, number: 500 }, { id: 27, number: 501 }]
+      const getState = () => ({
+        main: {
+          issues: {
+            issuesByAreaId: {
+              50: issuesArray
+            }
+          },
+          areas: {
+            currentAreaId: 35
+          }
+        }
+      })
+
+      const getSpy = jest.spyOn(api, 'get').mockImplementation(() => ({
+        data: {
+          issuesArray
+        }
+      }))
+
+      const navigateWithTokenSpy = jest.spyOn(
+        commonActions,
+        'navigateWithToken'
+      )
+
+      const navigate = jest.fn()
+      await fetchSpecificIssue(50, 28, 502, { navigate })(dispatch, getState)
+
+      expect(dispatch).toHaveBeenCalledWith(spinner.actions.setVisibility(true))
+      expect(dispatch).toHaveBeenCalledWith(areas.actions.setCurrentAreaId(50))
+      expect(navigateWithTokenSpy).toHaveBeenCalledWith('/areas/50/issues/502')
+      expect(dispatch).toHaveBeenCalledWith(areas.actions.setCurrentAreaId(35))
+      expect(dispatch).not.toHaveBeenCalledWith(
+        issues.actions.setCurrentIssueId(26)
+      )
+      expect(navigate).not.toHaveBeenCalledWith('Forum')
+      expect(dispatch).toHaveBeenCalledWith(
+        spinner.actions.setVisibility(false)
+      )
+
+      getSpy.mockRestore()
+      navigateWithTokenSpy.mockRestore()
     })
   })
 })

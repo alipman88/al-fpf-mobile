@@ -4,14 +4,12 @@ import parse from 'url-parse'
 import * as api from '@common/api'
 
 import { appMessage } from '@components/AppMessage/slice'
+import { spinner } from '@app/Spinner/slice'
 import { responseError } from '@common/utils/responseError'
 
-export const navigateWithToken = (url, setLoading) => async (
-  dispatch,
-  getState
-) => {
+export const navigateWithToken = url => async (dispatch, getState) => {
   try {
-    setLoading(true)
+    dispatch(spinner.actions.setVisibility(true))
     const urlObj = parse(`${Config.WEBSITE_HOST}${url}`, true)
     const response = await api.postAuthorized(
       '/get_login_token',
@@ -24,6 +22,6 @@ export const navigateWithToken = (url, setLoading) => async (
   } catch (e) {
     dispatch(appMessage.actions.setAppError(responseError(e)))
   } finally {
-    setLoading(false)
+    dispatch(spinner.actions.setVisibility(false))
   }
 }

@@ -24,16 +24,12 @@ import {
 } from './styledComponents'
 
 export class Account extends React.Component {
-  state = {
-    loading: false
-  }
-
   render() {
     const { loading, navigateWithToken, user, updateUser } = this.props
     return (
       <ScreenContainer withPadding={false} grey>
         <KeyboardAwareScrollView>
-          <Spinner visible={loading || this.state.loading} />
+          <Spinner visible={loading} />
           <Description>
             Currently in app edits to your account information can't be made in
             the app. To edit your account, click on the desired link below, and
@@ -69,31 +65,16 @@ export class Account extends React.Component {
             </SettingsDescription>
           </Notifications>
 
-          <ExternalLink
-            hasBorder
-            onPress={() =>
-              navigateWithToken('/user', loading => this.setState({ loading }))
-            }
-          >
+          <ExternalLink hasBorder onPress={() => navigateWithToken('/user')}>
             Edit account details
           </ExternalLink>
           <ExternalLink
-            onPress={() =>
-              navigateWithToken(`/user/subscriptions`, loading =>
-                this.setState({ loading })
-              )
-            }
+            onPress={() => navigateWithToken('/user/subscriptions')}
           >
             Manage my email subscriptions
           </ExternalLink>
           <LinkContainer>
-            <TouchableOpacity
-              onPress={() =>
-                navigateWithToken('/user', loading =>
-                  this.setState({ loading })
-                )
-              }
-            >
+            <TouchableOpacity onPress={() => navigateWithToken('/user')}>
               <CloseAccountText>Close my account</CloseAccountText>
             </TouchableOpacity>
           </LinkContainer>
