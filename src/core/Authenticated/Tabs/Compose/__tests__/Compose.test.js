@@ -70,19 +70,6 @@ describe('Compose', () => {
     })
   })
 
-  test('it sets the correct default Forum from navigation', () => {
-    const navigation = {
-      getParam: jest.fn(() => {
-        return 3
-      }),
-      navigate: jest.fn()
-    }
-    const wrapper = shallow(
-      <Compose {...defaultProps} navigation={navigation} />
-    )
-    expect(wrapper.find(Formik).props().initialValues.forums).toEqual([3])
-  })
-
   describe('onSubmit', () => {
     test('submits data to action', () => {
       const setSubmitting = jest.fn()

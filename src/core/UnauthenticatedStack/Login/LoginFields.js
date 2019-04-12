@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { TouchableOpacity } from 'react-native'
+import { Linking, TouchableOpacity } from 'react-native'
 import Spinner from 'react-native-loading-spinner-overlay'
 
 import { TextInput } from '@components/TextInput'
@@ -45,6 +45,11 @@ export const LoginFields = ({
             value={values.email}
             autoCapitalize='none'
           />
+          {errors.button && (
+            <BottomText onPress={() => Linking.openURL(errors.button.url)}>
+              {errors.button.text}
+            </BottomText>
+          )}
         </FieldContainer>
         <FieldContainer>
           <PasswordInput

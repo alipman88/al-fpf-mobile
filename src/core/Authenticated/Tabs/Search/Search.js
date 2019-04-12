@@ -50,10 +50,6 @@ export class Search extends React.Component {
     }
   }
 
-  componentWillUnmount() {
-    this.focusListener.remove()
-  }
-
   setCategoryFromLink(categoryName) {
     const { categories } = this.props
     const categoryFromLink = categories.find(cat => cat.name === categoryName)
@@ -98,7 +94,7 @@ export class Search extends React.Component {
       searchResults,
       total
     } = this.state
-    const { areas, categories, navigation } = this.props
+    const { areas, categories, currentAreaId, navigation } = this.props
 
     return (
       <ScreenContainer grey withPadding={false}>
@@ -136,6 +132,7 @@ export class Search extends React.Component {
               <SearchFields
                 areas={areas}
                 categories={categories}
+                currentAreaId={currentAreaId}
                 errors={errors}
                 handleSubmit={handleSubmit}
                 onClearSearch={() => this.setState({ searched: false })}
@@ -170,6 +167,7 @@ Search.propTypes = {
   addSearchToHistory: PropTypes.func.isRequired,
   areas: PropTypes.array.isRequired,
   categories: PropTypes.array.isRequired,
+  currentAreaId: PropTypes.number.isRequired,
   search: PropTypes.func.isRequired,
   navigation: PropTypes.object.isRequired
 }

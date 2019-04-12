@@ -66,6 +66,7 @@ export const LoginComponent = ({ navigation, setAccessToken }) => {
               navigation.navigate('Authenticated')
             } catch (e) {
               actions.setFieldError('email', responseError(e))
+              actions.setFieldError('button', responseError(e, 'button'))
             }
 
             actions.setSubmitting(false)

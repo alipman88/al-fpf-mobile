@@ -14,6 +14,7 @@
 #import "RNFirebaseMessaging.h"
 #import "RNFirebaseNotifications.h"
 #import <React/RCTLinkingManager.h>
+#import "RNSplashScreen.h"
 
 @implementation AppDelegate
 
@@ -24,20 +25,18 @@
   NSURL *jsCodeLocation;
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
-  UIView *backgroundView = [[[NSBundle mainBundle] loadNibNamed:@"LaunchScreen" owner:self options:nil] firstObject];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"FrontPorchForum"
                                                initialProperties:nil
                                                    launchOptions:launchOptions];
-  rootView.backgroundColor = [UIColor clearColor];
+  rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
-  rootViewController.view = backgroundView;
+  rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-  [backgroundView addSubview:rootView];
-  rootView.frame = backgroundView.frame;
+  [RNSplashScreen show];
   return YES;
 }
 

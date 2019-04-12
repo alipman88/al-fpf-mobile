@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Dimensions, ScrollView, StatusBar } from 'react-native'
+import { Dimensions, Keyboard, ScrollView, StatusBar } from 'react-native'
 
 import { HeaderLogo } from '@components/HeaderLogo'
 import { Button } from '@components/Button'
@@ -40,7 +40,10 @@ export class FullScreenWizard extends React.Component {
     const navButtons = (
       <NavButtonWrapper>
         <Button
-          onPress={onBackPress}
+          onPress={() => {
+            Keyboard.dismiss()
+            onBackPress()
+          }}
           bgColor={'rgba(0,0,0,0)'}
           hasBorder={false}
           iconNameLeft='keyboard-arrow-left'
@@ -51,7 +54,10 @@ export class FullScreenWizard extends React.Component {
         </Button>
 
         <Button
-          onPress={onNextPress}
+          onPress={() => {
+            Keyboard.dismiss()
+            onNextPress()
+          }}
           iconNameRight='keyboard-arrow-right'
           disabled={nextDisabled}
           bgColor={nextDisabled ? 'rgba(242, 148, 38, 0.5)' : null}
