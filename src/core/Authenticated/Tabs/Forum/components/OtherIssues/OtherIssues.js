@@ -11,6 +11,12 @@ export class OtherIssues extends React.Component {
     scrollWidth: Number.MAX_VALUE
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.currentIssueId !== this.props.currentIssueId) {
+      this.scrollToFocusedIssue()
+    }
+  }
+
   onTapIssue = id => {
     this.props.setCurrentIssueId(id)
     this.props.getPosts(id)
@@ -23,18 +29,19 @@ export class OtherIssues extends React.Component {
     }
   }
 
+  scrollToFocusedIssue() {
+    this.focusedIssue.measureLayout(findNodeHandle(this.scrollViewRef), x => {
+      this.scrollViewRef.scrollTo({
+        x: Math.min(this.state.scrollWidth, x),
+        animated: true
+      })
+    })
+  }
+
   scrollFocusedIssue = ev => {
     requestAnimationFrame(() => {
       if (this.focusedIssue) {
-        this.focusedIssue.measureLayout(
-          findNodeHandle(this.scrollViewRef),
-          x => {
-            this.scrollViewRef.scrollTo({
-              x: Math.min(this.state.scrollWidth, x),
-              animated: true
-            })
-          }
-        )
+        this.scrollToFocusedIssue()
       } else {
         this.scrollViewRef.scrollToEnd({ animated: true })
       }
