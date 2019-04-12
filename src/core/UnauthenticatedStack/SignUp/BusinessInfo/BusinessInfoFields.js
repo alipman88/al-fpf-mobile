@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { isEmpty } from 'lodash'
+
 import Spinner from 'react-native-loading-spinner-overlay'
 
 import { formatPhoneNumber } from '@common/utils/formatPhoneNumber'
@@ -33,7 +34,8 @@ export const BusinessInfoFields = ({
     navigation.navigate('CreateAccount')
   }
 
-  const nextDisabled = !isEmpty(errors) || isEmpty(touched)
+  const nextDisabled =
+    !isEmpty(errors) || isEmpty(touched) || !Boolean(values.businessCategoryId)
 
   return (
     <FullScreenWizard

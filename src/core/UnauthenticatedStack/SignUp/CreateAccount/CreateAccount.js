@@ -10,7 +10,7 @@ import { FullScreenWizard } from '@components/FullScreenWizard'
 import { CheckboxField } from './CheckboxField'
 
 import { CreateAccountWrapper } from './styledComponents'
-import { FormHeader } from '../styledComponents'
+import { FormHeader, BottomPadding } from '../styledComponents'
 
 export class CreateAccount extends React.Component {
   state = {
@@ -23,7 +23,7 @@ export class CreateAccount extends React.Component {
       {
         type: 'postIntro',
         value: true,
-        text: 'Introduce me to the the members of my neighborhood forum'
+        text: 'Introduce me to the members of my neighborhood forum'
       },
       {
         type: 'isNfBooster',
@@ -112,6 +112,7 @@ export class CreateAccount extends React.Component {
 
         <FormHeader>Last step...</FormHeader>
         <CreateAccountWrapper>{toggles}</CreateAccountWrapper>
+        <BottomPadding />
       </FullScreenWizard>
     )
   }

@@ -24,3 +24,6 @@ export const FormFieldsWrapper = styled.View`
 export const Container = styled.ScrollView`
   ${screenPadding}
 `
+export const BottomPadding = styled.View`
+  height: 80;
+`
