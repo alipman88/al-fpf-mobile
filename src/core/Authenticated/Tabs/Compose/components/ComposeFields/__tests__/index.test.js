@@ -63,7 +63,8 @@ describe('Compose', () => {
     handleSubmit: jest.fn(),
     loading: false,
     navigation: {
-      navigate: jest.fn()
+      navigate: jest.fn(),
+      setParams: jest.fn()
     },
     profiles: [
       {
@@ -154,6 +155,14 @@ describe('Compose', () => {
     )
 
     expect(wrapper.find(Multiselect).length).toEqual(1)
+  })
+
+  test('it sets the correct default Forum from navigation', () => {
+    const areaFromLink = 3
+
+    const wrapper = shallow(<ComposeFields {...defaultProps} />)
+    wrapper.setProps({ areaFromLink })
+    expect(defaultProps.setFieldValue).toHaveBeenCalledWith('forums', [3])
   })
 
   test('Hide message & checkbox if theres a duplicate post', () => {

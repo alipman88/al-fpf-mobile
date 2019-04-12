@@ -1,5 +1,4 @@
 import * as yup from 'yup'
-import startCase from 'lodash/startCase'
 
 export const validateName = string => {
   return /^[a-zA-Z]+$/.test(string)
