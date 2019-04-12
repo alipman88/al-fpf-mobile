@@ -1,4 +1,5 @@
 import { subDays, addDays, endOfToday } from 'date-fns'
+import range from 'lodash/range'
 import { issues } from '../slice'
 
 describe('issues - slice', () => {
@@ -324,31 +325,16 @@ describe('issues - slice', () => {
     expect(data.map(issue => issue.id)).toEqual([3, 2, 1, 4])
   })
 
-  test('it selects the latest 10 issues', () => {
+  test('it keeps the latest 30 issues', () => {
     const state = issues.reducer(
       undefined,
       issues.actions.setIssues({
-        issues: [
-          { id: 1, number: 32 },
-          { id: 2, number: 33 },
-          { id: 3, number: 34 },
-          { id: 4, number: 35 },
-          { id: 5, number: 36 },
-          { id: 6, number: 37 },
-          { id: 7, number: 38 },
-          { id: 8, number: 39 },
-          { id: 9, number: 40 },
-          { id: 10, number: 41 },
-          { id: 11, number: 42 },
-          { id: 12, number: 343 }
-        ],
+        issues: range(1, 31).map(id => ({ id, number: id + 32 })),
         areaId: 5
       })
     )
 
-    const issue2 = state.issuesByAreaId[5][10]
-
-    const data = issues.selectors.getLatestIssues(
+    const data = issues.selectors.getIssuesForArea(
       {
         main: {
           issues: state
@@ -357,8 +343,8 @@ describe('issues - slice', () => {
       5
     )
 
-    expect(issue2.id).toEqual(2)
-    expect(data).toEqual(expect.not.arrayContaining([issue2]))
-    expect(data.length).toEqual(10)
+    // cant find the 31st issue
+    expect(data.find(issue => issue.id === 31)).toEqual(undefined)
+    expect(data.length).toEqual(30)
   })
 })

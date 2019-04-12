@@ -63,6 +63,7 @@ export const issues = createSlice({
       newIssues = newIssues.sort((a, b) => {
         return b.number - a.number
       })
+      newIssues = newIssues.slice(0, 30)
 
       return {
         ...state,
@@ -108,10 +109,6 @@ const getIssuesForArea = (state, areaId) => {
   return issuesByAreaId[areaId] || []
 }
 
-const getLatestIssues = (state, areaId) => {
-  return getIssuesForArea(state, areaId).slice(0, 10)
-}
-
 issues.selectors = {
   ...issues.selectors,
   getFirstLoadIssues: createSelector(
@@ -126,7 +123,6 @@ issues.selectors = {
     [path],
     issues => issues.currentIssueId
   ),
-  getLatestIssues,
   getLoading: createSelector(
     [path],
     issues => issues.loading
