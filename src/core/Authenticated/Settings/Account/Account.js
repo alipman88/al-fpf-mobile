@@ -35,7 +35,9 @@ export class Account extends React.Component {
         <KeyboardAwareScrollView>
           <Spinner visible={loading || this.state.loading} />
           <Description>
-            To edit your account, click links below to go to our website.
+            Currently in app edits to your account information can't be made in
+            the app. To edit your account, click on the desired link below, and
+            it will open the FPF website in your browser.
           </Description>
           <FieldLabel>Name</FieldLabel>
           <Field>
