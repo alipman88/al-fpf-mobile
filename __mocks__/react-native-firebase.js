@@ -20,9 +20,12 @@ const notificationsFactory = {
 const notifications = () => notificationsFactory
 
 notifications.Android = {
-  Channel: () => ({
-    setDescription: jest.fn()
-  }),
+  Channel: () => {
+    const channel = {}
+    channel.setDescription = jest.fn(() => channel)
+    channel.setShowBadge = jest.fn(() => channel)
+    return channel
+  },
   Importance: {
     Max: 1
   }
