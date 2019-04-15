@@ -56,6 +56,29 @@ export class App extends React.Component {
     }
   }
 
+  getActiveRouteName = (navigationState) => {
+    if (!navigationState) {
+      return null;
+    }
+    const route = navigationState.routes[navigationState.index];
+    // dive into nested navigators
+    if (route.routes) {
+      return this.getActiveRouteName(route);
+    }
+    return route.routeName;
+  }
+
+  handleNavigationChange = (prevState, currentState, action) => {
+    const currentScreen = this.getActiveRouteName(currentState);
+    const prevScreen = this.getActiveRouteName(prevState);
+
+    if (prevScreen !== currentScreen) {
+      // trigger setting screen name for analytics based on react navigation
+      console.log(currentScreen)
+      firebase.analytics().setCurrentScreen(currentScreen)
+    }
+  }
+
   setConnectedStatus(type, effectiveType) {
     const connectionWeak =
       type === 'none' ||
@@ -70,7 +93,7 @@ export class App extends React.Component {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <React.Fragment>
-            <Container />
+            <Container handleNavigationChange={this.handleNavigationChange} />
             {!this.state.connected && <Offline />}
             <AppMessage />
           </React.Fragment>
