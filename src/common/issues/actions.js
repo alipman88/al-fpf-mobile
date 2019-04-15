@@ -4,12 +4,13 @@ import { appMessage } from '@components/AppMessage/slice'
 import { responseError } from '@common/utils/responseError'
 import { areas } from '@common/areas'
 import { spinner } from '@app/Spinner/slice'
+import * as commonActions from '@common/actions/navigateWithToken'
 
 export const getIssues = areaId => async (dispatch, getState) => {
   try {
     dispatch(issues.actions.setLoading(true))
     const response = await getAuthorized(
-      `/areas/${areaId}/issues?page=1&count=10`,
+      `/areas/${areaId}/issues?page=1&count=30`,
       getState()
     )
 
@@ -59,10 +60,25 @@ export const fetchSpecificIssue = (
 ) => async (dispatch, getState) => {
   try {
     dispatch(spinner.actions.setVisibility(true))
+    const previousAreaId = areas.selectors.getCurrentAreaId(getState())
+    // set current and fetch issues for that area
     dispatch(areas.actions.setCurrentAreaId(areaId))
-    await getIssue(areaId, issueNumber)(dispatch, getState)
-    dispatch(issues.actions.setCurrentIssueId(issueId))
-    navigation.navigate('Forum')
+    await dispatch(getIssues(areaId))
+
+    // if the desired issue is not in the latest 30 for that forum
+    const issuesForArea = issues.selectors.getIssuesForArea(getState(), areaId)
+    if (!issuesForArea.find(issue => issue.id === issueId)) {
+      await dispatch(
+        commonActions.navigateWithToken(
+          `/areas/${areaId}/issues/${issueNumber}`
+        )
+      )
+      // go back to previous forum
+      dispatch(areas.actions.setCurrentAreaId(previousAreaId))
+    } else {
+      dispatch(issues.actions.setCurrentIssueId(issueId))
+      navigation.navigate('Forum')
+    }
   } catch (e) {
     dispatch(appMessage.actions.setAppError(responseError(e)))
   } finally {

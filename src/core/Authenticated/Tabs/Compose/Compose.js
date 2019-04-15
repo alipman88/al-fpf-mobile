@@ -82,22 +82,13 @@ export class Compose extends React.Component {
 
     const profile = profiles[profileIndex] || profiles[0]
 
-    const setForums = () => {
-      const areaFromParams = navigation.getParam('areaId') || false
-      if (areaFromParams) {
-        return [areaFromParams]
-      } else if (profile && profile.area_ids) {
-        return [profile.area_ids[0]]
-      } else {
-        return []
-      }
-    }
+    const areaFromLink = navigation.getParam('areaId') || null
 
     return (
       <ScreenContainer grey withPadding={false}>
         <Formik
           initialValues={{
-            forums: setForums(),
+            forums: profile && profile.area_ids ? [profile.area_ids[0]] : [],
             profile: profileIndex,
             category: null,
             subject: '',
@@ -108,7 +99,6 @@ export class Compose extends React.Component {
           }}
           validationSchema={validations}
           onSubmit={this.onSubmit}
-          key={setForums()[0]}
           render={({
             errors,
             handleSubmit,
@@ -134,6 +124,7 @@ export class Compose extends React.Component {
                 setFieldTouched={setFieldTouched}
                 touched={touched}
                 values={values}
+                areaFromLink={areaFromLink}
               />
               {this.state.modalVisible && (
                 <Success onClose={() => this.onModalClose(resetForm)} />

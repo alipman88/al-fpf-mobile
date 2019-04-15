@@ -100,7 +100,7 @@ export class Forum extends React.Component {
   }
 
   fetchPosts(prevProps) {
-    const { issues, navigation, setAppError } = this.props
+    const { currentAreaId, issues, navigation, navigateWithToken } = this.props
 
     if (prevProps.issues !== issues) {
       //if we got here from a deeplink, find issue and set current ID
@@ -112,9 +112,7 @@ export class Forum extends React.Component {
         if (current && current.id !== this.props.currentIssueId) {
           this.props.setCurrentIssueId(current.id)
         } else if (!current) {
-          setAppError(
-            `Cannot load issue #${issueNum}, viewing latest for Forum`
-          )
+          navigateWithToken(`/areas/${currentAreaId}/issues/${issueNum}`)
         }
       }
       // if this list of issues doesnt have the current id, set a new one
@@ -258,9 +256,9 @@ Forum.propTypes = {
   issues: PropTypes.array.isRequired,
   loading: PropTypes.bool,
   navigation: PropTypes.object.isRequired,
+  navigateWithToken: PropTypes.func.isRequired,
   neighboringAreas: PropTypes.object.isRequired,
   sendNewFCMToken: PropTypes.func.isRequired,
-  setAppError: PropTypes.func.isRequired,
   setCurrentAreaId: PropTypes.func.isRequired,
   setCurrentIssueId: PropTypes.func.isRequired,
   setupForumData: PropTypes.func.isRequired,

@@ -7,7 +7,7 @@ import { OtherIssues as OtherIssuesComponent } from './OtherIssues'
 const mapStateToProps = state => {
   const areaId = areas.selectors.getCurrentAreaId(state)
   return {
-    issues: issues.selectors.getLatestIssues(state, areaId),
+    issues: issues.selectors.getIssuesForArea(state, areaId),
     currentIssueId: issues.selectors.getCurrentIssueId(state),
     currentAreaId: areas.selectors.getCurrentAreaId(state)
   }

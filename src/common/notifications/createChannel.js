@@ -5,7 +5,9 @@ export const createChannel = (id = 'test-channel', name = 'Test Channel') => {
     id,
     name,
     firebase.notifications.Android.Importance.Max
-  ).setDescription('My apps test channel')
+  )
+    .setDescription('Front Porch Forum')
+    .setShowBadge(true)
 
   // Create the channel
   firebase.notifications().android.createChannel(channel)

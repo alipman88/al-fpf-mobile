@@ -160,6 +160,7 @@ export class Post extends React.Component {
           )}
           {Boolean(post.event.start_date) && (
             <PostDate>
+              Event:{' '}
               {format(new Date(post.event.start_date), 'MMM DD, YYYY h:mm A')}
               {Boolean(post.event.end_date) &&
                 ` - ${format(new Date(post.event.end_date), 'h:mm A')}`}
@@ -167,7 +168,7 @@ export class Post extends React.Component {
           )}
           {showDatePublished && Boolean(post.date_published) && (
             <PostDate>
-              Published: {format(new Date(post.date_published), 'MMM DD, YYYY')}
+              {format(new Date(post.date_published), 'MMM DD, YYYY')}
             </PostDate>
           )}
           {post.categories.map(category => (

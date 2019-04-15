@@ -44,10 +44,29 @@ export class SearchFields extends React.Component {
       this.props.categoryFromLink &&
       this.props.categoryFromLink !== prevProps.categoryFromLink
     ) {
-      this.props.setFieldValue('category', this.props.categoryFromLink)
+      this.resetForm()
+      this.props.setFieldValue('category', this.props.categoryFromLink, false)
       this.props.setFieldTouched('category')
+      this.props.setFieldValue('forums', [this.props.currentAreaId])
       this.setState({ showAdvanced: true })
+      // this is a hack
+      // formik settings values seems to be async, and validations dont pass due to having `isCanceled: true`
+      // The 3rd param in setFieldValue should tell it not to validate, but something is still
+      // causing the isCanceled: true to be there
+      setTimeout(() => this.props.handleSubmit())
     }
+  }
+
+  resetForm() {
+    const { setFieldTouched, setFieldValue } = this.props
+    setFieldValue('forums', [])
+    setFieldValue('fromDate', startOfDay(subYears(new Date(), 2)))
+    setFieldValue('toDate', endOfDay(new Date()))
+    setFieldValue('category', null)
+    setFieldTouched('forums', false)
+    setFieldTouched('fromDate', false)
+    setFieldTouched('toDate', false)
+    setFieldTouched('category', false)
   }
 
   render() {
@@ -62,6 +81,14 @@ export class SearchFields extends React.Component {
       touched,
       values
     } = this.props
+
+    let categoryValue = categories.findIndex(
+      category => category.id === get(values, 'category.id')
+    )
+
+    if (categoryValue === -1) {
+      categoryValue = null
+    }
 
     return (
       <SearchFormContainer>
@@ -140,9 +167,7 @@ export class SearchFields extends React.Component {
                     setFieldValue('category', categories[index])
                   }}
                   title='Select Category'
-                  value={categories.findIndex(
-                    category => category.id === get(values, 'category.id')
-                  )}
+                  value={categoryValue}
                   error={errors.category}
                   touched={touched.category}
                 />
@@ -185,17 +210,7 @@ export class SearchFields extends React.Component {
               <FieldWrapper>
                 <TouchableOpacity
                   onPress={() => {
-                    setFieldValue('forums', [])
-                    setFieldValue(
-                      'fromDate',
-                      startOfDay(subYears(new Date(), 2))
-                    )
-                    setFieldValue('toDate', endOfDay(new Date()))
-                    setFieldValue('category', null)
-                    setFieldTouched('forums', false)
-                    setFieldTouched('fromDate', false)
-                    setFieldTouched('toDate', false)
-                    setFieldTouched('category', false)
+                    this.resetForm()
                   }}
                 >
                   <ClearFilters>Clear Filters</ClearFilters>
@@ -214,6 +229,7 @@ SearchFields.propTypes = {
   areas: PropTypes.array.isRequired,
   categories: PropTypes.array.isRequired,
   categoryFromLink: PropTypes.object,
+  currentAreaId: PropTypes.number.isRequired,
   errors: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   onClearSearch: PropTypes.func.isRequired,

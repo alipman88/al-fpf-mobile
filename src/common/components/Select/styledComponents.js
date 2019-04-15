@@ -16,7 +16,7 @@ export const SelectButton = styled.TouchableOpacity`
 
 export const SelectPlaceholder = styled(Text)`
   font-size: 15;
-  color: #000;
+  color: ${({ color }) => color};
 `
 
 export const DownArrowWrapper = styled.View`

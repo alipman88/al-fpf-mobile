@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Spinner from 'react-native-loading-spinner-overlay'
 import capitalize from 'lodash/capitalize'
 
 import { KeyboardAwareScrollView } from '@components/KeyboardAwareScrollView'
@@ -14,20 +13,15 @@ import { FieldText } from '../components/FieldText'
 import { ExternalLink } from '../components/ExternalLink'
 
 export class Profile extends React.Component {
-  state = {
-    loading: false
-  }
-
   render() {
     const { areas, navigateWithToken, profile } = this.props
     return (
       <ScreenContainer withPadding={false} grey>
         <KeyboardAwareScrollView>
-          <Spinner visible={this.state.loading} />
           <Description>
-            Currently in app edits to your account information can’t be made
-            here, you’ll be taken to the FPF website to make these any changes
-            clicking the blue external links below.
+            Currently in app edits to your account information can't be made in
+            the app. To edit your profile, click on the desired link below, and
+            it will open the FPF website in your browser.
           </Description>
 
           <FieldLabel bottomMargin={0}>Profile type</FieldLabel>
@@ -35,9 +29,7 @@ export class Profile extends React.Component {
             hasBorder
             hasLabel
             onPress={() =>
-              navigateWithToken(`/user/profiles/${profile.id}/edit`, loading =>
-                this.setState({ loading })
-              )
+              navigateWithToken(`/user/profiles/${profile.id}/edit`)
             }
           >
             {capitalize(profile.profile_plan.plan_type)}
@@ -72,9 +64,7 @@ export class Profile extends React.Component {
           <ExternalLink
             hasBorder
             onPress={() =>
-              navigateWithToken(`/user/profiles/${profile.id}/edit`, loading =>
-                this.setState({ loading })
-              )
+              navigateWithToken(`/user/profiles/${profile.id}/edit`)
             }
           >
             Change your address
@@ -83,8 +73,7 @@ export class Profile extends React.Component {
             hasBorder
             onPress={() =>
               navigateWithToken(
-                '/user/profiles/new?disable_plan_type_change=true&profile%5Bprofile_plan_id%5D=3',
-                loading => this.setState({ loading })
+                '/user/profiles/new?disable_plan_type_change=true&profile%5Bprofile_plan_id%5D=3'
               )
             }
           >
@@ -93,8 +82,7 @@ export class Profile extends React.Component {
           <ExternalLink
             onPress={() =>
               navigateWithToken(
-                '/user/profiles/new?profile%5Bprofile_plan_id%5D=4',
-                loading => this.setState({ loading })
+                '/user/profiles/new?profile%5Bprofile_plan_id%5D=4'
               )
             }
           >

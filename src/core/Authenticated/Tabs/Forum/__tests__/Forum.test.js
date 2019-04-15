@@ -245,12 +245,6 @@ describe('Forum', () => {
       expect(defaultProps.setCurrentIssueId).not.toHaveBeenCalled()
     })
 
-    test('if issues change, and id is not in list, set current issue to first one', () => {
-      const wrapper = shallow(<Forum {...defaultProps} />)
-      wrapper.setProps({ issues: [{ id: 15 }, { id: 14 }] })
-      expect(defaultProps.setCurrentIssueId).toHaveBeenCalledWith(15)
-    })
-
     test('if currentIssueId changes, get posts', () => {
       const wrapper = shallow(<Forum {...defaultProps} />)
       wrapper.setProps({ currentIssueId: 45 })

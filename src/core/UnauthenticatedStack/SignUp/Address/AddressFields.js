@@ -12,7 +12,7 @@ import { provinces } from '@common/types/provinces'
 import { states } from '@common/types/states'
 
 import { getStepCount } from '../getStepCount'
-import { Container } from '../styledComponents'
+import { Container, BottomPadding } from '../styledComponents'
 import {
   Description,
   FieldWrapper,
@@ -28,7 +28,6 @@ export class AddressFields extends React.Component {
       handleSubmit,
       isSubmitting,
       navigation,
-      newUser,
       noAreasFound,
       setFieldTouched,
       setFieldValue,
@@ -63,10 +62,8 @@ export class AddressFields extends React.Component {
           )}
           <Description>
             Please enter your
-            {newUser.profileType === profileTypes.NEIGHBOR
-              ? ''
-              : ' business'}{' '}
-            street address so we can find your neighborhood forum.
+            {profileType === profileTypes.NEIGHBOR ? '' : ' business'} street
+            address so we can find your neighborhood forum.
           </Description>
           <FieldWrapper>
             <TextInput
@@ -153,6 +150,7 @@ export class AddressFields extends React.Component {
               required
             />
           </FieldWrapper>
+          <BottomPadding />
         </Container>
       </FullScreenWizard>
     )
@@ -164,7 +162,6 @@ AddressFields.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
   navigation: PropTypes.object.isRequired,
-  newUser: PropTypes.object.isRequired,
   noAreasFound: PropTypes.bool.isRequired,
   setFieldTouched: PropTypes.func.isRequired,
   setFieldValue: PropTypes.func.isRequired,

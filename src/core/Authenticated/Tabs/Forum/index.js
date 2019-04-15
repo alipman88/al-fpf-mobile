@@ -5,7 +5,7 @@ import { areas } from '@common/areas'
 import { getIssues, issues, fetchSpecificIssue } from '@common/issues'
 import { getPosts, posts } from '@common/posts'
 import { setupForumData } from './setupForumData.js'
-import { appMessage } from '@components/AppMessage/slice'
+import { navigateWithToken } from '@common/actions/navigateWithToken'
 
 import { sendNewFCMToken } from './actions'
 
@@ -16,7 +16,7 @@ const mapStateToProps = state => {
     neighboringAreas: areas.selectors.getNeighboringAreas(state),
     currentAreaId: areas.selectors.getCurrentAreaId(state),
     currentIssueId: issues.selectors.getCurrentIssueId(state),
-    issues: issues.selectors.getLatestIssues(state, areaId),
+    issues: issues.selectors.getIssuesForArea(state, areaId),
     posts: posts.selectors.getPostsByIssue(state),
     sharedPosts: posts.selectors.getSharedPostsByIssue(state),
     ads: posts.selectors.getAdsByIssue(state),
@@ -36,10 +36,10 @@ export const Forum = connect(
     getIssues,
     getPosts,
     setAccessToken: currentUser.actions.setAccessToken,
-    setAppError: appMessage.actions.setAppError,
     setupForumData,
     sendNewFCMToken,
     setCurrentIssueId: issues.actions.setCurrentIssueId,
-    setCurrentAreaId: areas.actions.setCurrentAreaId
+    setCurrentAreaId: areas.actions.setCurrentAreaId,
+    navigateWithToken
   }
 )(ForumComponent)

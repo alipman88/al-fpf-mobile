@@ -62,16 +62,13 @@ describe('Profile', () => {
 
     expect(defaultProps.navigateWithToken).toHaveBeenNthCalledWith(
       1,
-      '/user/profiles/4/edit',
-      expect.any(Function)
+      '/user/profiles/4/edit'
     )
     expect(defaultProps.navigateWithToken).toHaveBeenCalledWith(
-      '/user/profiles/new?disable_plan_type_change=true&profile%5Bprofile_plan_id%5D=3',
-      expect.any(Function)
+      '/user/profiles/new?disable_plan_type_change=true&profile%5Bprofile_plan_id%5D=3'
     )
     expect(defaultProps.navigateWithToken).toHaveBeenCalledWith(
-      '/user/profiles/new?profile%5Bprofile_plan_id%5D=4',
-      expect.any(Function)
+      '/user/profiles/new?profile%5Bprofile_plan_id%5D=4'
     )
   })
 })

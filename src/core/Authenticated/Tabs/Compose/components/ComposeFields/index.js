@@ -74,6 +74,16 @@ export class ComposeFields extends React.Component {
     this.setState({ duplicatePost })
   }
 
+  componentDidUpdate(prevProps) {
+    const { areaFromLink, navigation } = this.props
+
+    if (areaFromLink && areaFromLink !== prevProps.areaFromLink) {
+      this.props.setFieldValue('forums', [areaFromLink])
+      this.props.setFieldTouched('forums')
+      navigation.setParams({ areaId: null })
+    }
+  }
+
   render() {
     const {
       areas,
@@ -267,5 +277,6 @@ ComposeFields.propTypes = {
   setFieldTouched: PropTypes.func.isRequired,
   setFieldValue: PropTypes.func.isRequired,
   touched: PropTypes.object.isRequired,
-  values: PropTypes.object.isRequired
+  values: PropTypes.object.isRequired,
+  areaFromLink: PropTypes.number.isRequired
 }
