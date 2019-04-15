@@ -56,21 +56,21 @@ export class App extends React.Component {
     }
   }
 
-  getActiveRouteName = (navigationState) => {
+  getActiveRouteName = navigationState => {
     if (!navigationState) {
-      return null;
+      return null
     }
-    const route = navigationState.routes[navigationState.index];
+    const route = navigationState.routes[navigationState.index]
     // dive into nested navigators
     if (route.routes) {
-      return this.getActiveRouteName(route);
+      return this.getActiveRouteName(route)
     }
-    return route.routeName;
+    return route.routeName
   }
 
   handleNavigationChange = (prevState, currentState, action) => {
-    const currentScreen = this.getActiveRouteName(currentState);
-    const prevScreen = this.getActiveRouteName(prevState);
+    const currentScreen = this.getActiveRouteName(currentState)
+    const prevScreen = this.getActiveRouteName(prevState)
 
     if (prevScreen !== currentScreen) {
       // trigger setting screen name for analytics based on react navigation

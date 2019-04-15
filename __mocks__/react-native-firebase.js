@@ -9,7 +9,9 @@ const messaging = {
 }
 
 const analytics = {
-  logEvent: jest.fn()
+  logEvent: jest.fn(),
+  setAnalyticsCollectionEnabled: jest.fn(),
+  setCurrentScreen: jest.fn()
 }
 
 const notificationsFactory = {
