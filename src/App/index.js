@@ -74,7 +74,6 @@ export class App extends React.Component {
 
     if (prevScreen !== currentScreen) {
       // trigger setting screen name for analytics based on react navigation
-      console.log(currentScreen)
       firebase.analytics().setCurrentScreen(currentScreen)
     }
   }
