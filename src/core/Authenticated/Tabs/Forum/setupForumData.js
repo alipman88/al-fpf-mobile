@@ -2,10 +2,10 @@ import { getAreas, areas } from '@common/areas'
 import { getProfiles, profile } from '@common/profile'
 import { getAppSettings } from '@common/appSettings'
 
-export const setupForumData = () => async (dispatch, getState) => {
+export const setupForumData = navigation => async (dispatch, getState) => {
   await dispatch(getProfiles())
   await dispatch(getAppSettings())
-  await dispatch(getAreas())
+  await dispatch(getAreas(navigation))
 
   let currentAreaId = areas.selectors.getCurrentAreaId(getState())
   // default state, none set

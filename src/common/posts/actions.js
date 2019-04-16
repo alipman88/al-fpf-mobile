@@ -3,9 +3,11 @@ import { areas } from '@common/areas'
 import { posts } from './slice'
 import { getAuthorized } from '@common/api'
 import { appMessage } from '@components/AppMessage/slice'
+import { resetAction } from '@common/resetAction'
+import { createResetStackTo } from '@common/utils/navigation'
 import { responseError } from '@common/utils/responseError'
 
-export const getPosts = issueId => async (dispatch, getState) => {
+export const getPosts = (issueId, navigation) => async (dispatch, getState) => {
   // short circuit if in default state with no issue
   if (issueId === 0) {
     return
@@ -54,5 +56,10 @@ export const getPosts = issueId => async (dispatch, getState) => {
     )
   } catch (e) {
     dispatch(appMessage.actions.setAppError(responseError(e)))
+    if (e.response.status === 401) {
+      dispatch(resetAction())
+      navigation.navigate('SplashScreen')
+      navigation.dispatch(createResetStackTo('Login'))
+    }
   }
 }
