@@ -17,7 +17,7 @@ import { createChannel, displayNotification } from '@common/notifications'
 
 export class Forum extends React.Component {
   async componentDidMount() {
-    this.props.setupForumData()
+    this.props.setupForumData(this.props.navigation)
     this.setTitleFromArea()
 
     const fcmToken = await firebase.messaging().getToken()
@@ -95,7 +95,7 @@ export class Forum extends React.Component {
       (prevProps.areas !== areas || prevProps.currentAreaId !== currentAreaId)
     ) {
       this.setTitleFromArea()
-      this.props.getIssues(this.props.currentAreaId)
+      this.props.getIssues(this.props.currentAreaId, this.props.navigation)
     }
   }
 
@@ -125,7 +125,7 @@ export class Forum extends React.Component {
     }
 
     if (prevProps.currentIssueId !== this.props.currentIssueId) {
-      this.props.getPosts(this.props.currentIssueId)
+      this.props.getPosts(this.props.currentIssueId, this.props.navigation)
     }
   }
 
@@ -225,7 +225,10 @@ export class Forum extends React.Component {
           <OtherIssues toast={this.toastRef} />
           <ForumContainer>
             {Boolean(currentIssue) && (
-              <InThisIssue number={currentIssue.number} />
+              <InThisIssue
+                number={currentIssue.number}
+                navigation={this.props.navigation}
+              />
             )}
             {postRender}
             {get(issues, '[0].id', 0) === currentIssueId ? (

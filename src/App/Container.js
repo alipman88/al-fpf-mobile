@@ -29,7 +29,7 @@ class ContainerComponent extends React.Component {
   }
 
   render() {
-    const { accessToken } = this.props
+    const { accessToken, handleNavigationChange } = this.props
     return (
       <DrawerContext.Provider value={this.state}>
         <SideMenu
@@ -46,6 +46,7 @@ class ContainerComponent extends React.Component {
         >
           <Spinner />
           <SwitchNavigatorContainer
+            onNavigationStateChange={handleNavigationChange}
             ref={navigatorRef => {
               navigationService.setTopLevelNavigator(navigatorRef)
             }}
@@ -57,7 +58,8 @@ class ContainerComponent extends React.Component {
 }
 
 ContainerComponent.propTypes = {
-  accessToken: PropTypes.string
+  accessToken: PropTypes.string,
+  handleNavigationChange: PropTypes.func
 }
 
 const mapStateToProps = state => ({

@@ -16,7 +16,11 @@ describe('OtherIssues selector', () => {
     currentAreaId: 1,
     getPosts: jest.fn(),
     setCurrentIssueId: jest.fn(),
-    toggleIssueUnread: jest.fn()
+    toggleIssueUnread: jest.fn(),
+    navigation: {
+      navigate: jest.fn(),
+      dispatch: jest.fn()
+    }
   }
 
   test('it creates 5 tabs to choose from', () => {
@@ -35,6 +39,9 @@ describe('OtherIssues selector', () => {
       .onTapIssue(4)
 
     expect(defaultProps.setCurrentIssueId).toHaveBeenCalledWith(4)
-    expect(defaultProps.getPosts).toHaveBeenCalledWith(4)
+    expect(defaultProps.getPosts).toHaveBeenCalledWith(
+      4,
+      defaultProps.navigation
+    )
   })
 })

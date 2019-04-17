@@ -51,7 +51,12 @@ export class Compose extends React.Component {
       category_ids: [category.id],
       event
     }
-    this.props.submitPost(this.onSuccess, postBody, actions.setSubmitting)
+    this.props.submitPost(
+      this.onSuccess,
+      postBody,
+      actions.setSubmitting,
+      navigation
+    )
   }
 
   onSuccess = () => {

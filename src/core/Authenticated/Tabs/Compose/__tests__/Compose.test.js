@@ -102,7 +102,8 @@ describe('Compose', () => {
           category_ids: [3],
           event: {}
         },
-        setSubmitting
+        setSubmitting,
+        defaultProps.navigation
       )
     })
 
@@ -147,7 +148,8 @@ describe('Compose', () => {
             title: 'Hello'
           }
         },
-        setSubmitting
+        setSubmitting,
+        defaultProps.navigation
       )
     })
 
@@ -195,7 +197,8 @@ describe('Compose', () => {
           category_ids: [3],
           event: {}
         },
-        setSubmitting
+        setSubmitting,
+        props.navigation
       )
     })
 

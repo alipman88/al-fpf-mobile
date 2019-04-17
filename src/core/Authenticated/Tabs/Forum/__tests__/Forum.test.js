@@ -14,6 +14,7 @@ describe('Forum', () => {
       setParams: jest.fn(),
       getParam: jest.fn()
     },
+    navigationWithToken: jest.fn(),
     fcmToken: '',
     sendNewFCMToken: jest.fn(),
     currentIssueId: 12,
@@ -223,14 +224,18 @@ describe('Forum', () => {
       })
 
       expect(defaultProps.getIssues).toHaveBeenCalledWith(
-        defaultProps.currentAreaId
+        defaultProps.currentAreaId,
+        defaultProps.navigation
       )
     })
 
     test('changing area id pulls issues for that area', () => {
       const wrapper = shallow(<Forum {...defaultProps} />)
       wrapper.setProps({ currentAreaId: 2 })
-      expect(defaultProps.getIssues).toHaveBeenCalledWith(2)
+      expect(defaultProps.getIssues).toHaveBeenCalledWith(
+        2,
+        defaultProps.navigation
+      )
     })
 
     test('if issues change, but no length, do not set new currentIssueId', () => {
@@ -248,7 +253,10 @@ describe('Forum', () => {
     test('if currentIssueId changes, get posts', () => {
       const wrapper = shallow(<Forum {...defaultProps} />)
       wrapper.setProps({ currentIssueId: 45 })
-      expect(defaultProps.getPosts).toHaveBeenCalledWith(45)
+      expect(defaultProps.getPosts).toHaveBeenCalledWith(
+        45,
+        defaultProps.navigation
+      )
     })
 
     test('if there is an area id in navigation params, set currentArea', () => {

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Linking, TouchableOpacity } from 'react-native'
+import firebase from 'react-native-firebase'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import DeviceInfo from 'react-native-device-info'
@@ -63,6 +64,7 @@ export const LoginComponent = ({ navigation, setAccessToken }) => {
             try {
               const response = await api.post('/login', values)
               setAccessToken(response.data.access_token)
+              firebase.analytics().setAnalyticsCollectionEnabled(true)
               navigation.navigate('Authenticated')
             } catch (e) {
               actions.setFieldError('email', responseError(e))
