@@ -1,6 +1,7 @@
 import { getAreas, areas } from '@common/areas'
 import { getProfiles, profile } from '@common/profile'
 import { getAppSettings } from '@common/appSettings'
+import { appMessage } from '@components/AppMessage/slice'
 
 export const setupForumData = navigation => async (dispatch, getState) => {
   await dispatch(getProfiles())
@@ -18,6 +19,14 @@ export const setupForumData = navigation => async (dispatch, getState) => {
       // set the current area id to the first one in the profile
       dispatch(areas.actions.setCurrentAreaId(firstArea.id))
       currentAreaId = firstArea.id
+    } else if (Object.keys(currentProfile).length === 0) {
+      dispatch(
+        appMessage.actions.setAppMessage({
+          message:
+            'Your government profile will be reviewed within 48 hours. Once approved, you will have access to your FPF(s). Please contact us as needed.',
+          type: 'warning'
+        })
+      )
     }
   }
 }
