@@ -8,7 +8,12 @@ export const displayNotification = (channel, id, title, body, data) => {
     .setData(data)
     .setSound('default')
 
-  notification.android.setChannelId(channel._channelId)
+  // disable eslint so we can put .android.method on the same line. Linted format is less readable here
+  /* eslint-disable */
+  notification
+  .android.setChannelId(channel._channelId)
+  .android.setSmallIcon('ic_stat_ic_notification')
+  /* eslint-enable */
 
   firebase.notifications().displayNotification(notification)
 }
