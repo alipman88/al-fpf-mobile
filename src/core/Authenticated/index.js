@@ -1,11 +1,18 @@
 import React from 'react'
 import { createStackNavigator } from 'react-navigation'
+import Config from 'react-native-config'
 
 import profileIcon from '@assets/images/global-assets/top-nav-elements/profile-icon.png'
 import { DrawerNavIcon } from './DrawerNavIcon'
 import { TopNavIcon } from './TopNavIcon'
 import { Settings } from './Settings'
 import { Tabs } from './Tabs'
+
+let headerBackgroundForEnv = ['development', 'staging'].includes(
+  Config.ENVIRONMENT
+)
+  ? '#ffff00'
+  : ''
 
 export const Authenticated = createStackNavigator(
   {
@@ -38,6 +45,7 @@ export const Authenticated = createStackNavigator(
         fontFamily: 'ProximaNova-SemiBold',
         fontSize: 14,
         color: '#355768',
+        backgroundColor: headerBackgroundForEnv,
         textAlign: 'center',
         flex: 1
       }

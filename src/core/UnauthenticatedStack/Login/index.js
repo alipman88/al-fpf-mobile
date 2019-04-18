@@ -1,5 +1,6 @@
 import React from 'react'
 import { Linking, TouchableOpacity } from 'react-native'
+import Config from 'react-native-config'
 import firebase from 'react-native-firebase'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -48,9 +49,12 @@ export const LoginComponent = ({ navigation, setAccessToken }) => {
           </TouchableOpacity>
         </TroubleLoggingInContainer>
       </LinksContainer>
-      <Version>
-        v{DeviceInfo.getVersion()} #{DeviceInfo.getBuildNumber()}
-      </Version>
+      {['development', 'staging'].includes(Config.ENVIRONMENT) && (
+        <Version>
+          v{DeviceInfo.getVersion()} #{DeviceInfo.getBuildNumber()} :{' '}
+          {Config.ENVIRONMENT}
+        </Version>
+      )}
     </BottomContainer>
   )
 

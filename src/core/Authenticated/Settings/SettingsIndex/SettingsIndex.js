@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import DeviceInfo from 'react-native-device-info'
 import { Image, TouchableOpacity } from 'react-native'
 import Spinner from 'react-native-loading-spinner-overlay'
+import Config from 'react-native-config'
 
 import { ScreenContainer } from '@components/ScreenContainer'
 import { getProfileDisplayName } from '@common/utils/getProfileDisplayName'
@@ -19,6 +20,10 @@ import {
 } from './styledComponents'
 
 import linkIcon from '@assets/images/global-assets/external-link-icons/external-link-icon-blue.png'
+
+let envDisplay = ['development', 'staging'].includes(Config.ENVIRONMENT)
+  ? ` : ${Config.ENVIRONMENT}`
+  : ''
 
 export class SettingsIndex extends React.Component {
   state = {
@@ -74,7 +79,8 @@ export class SettingsIndex extends React.Component {
               </ViewPostingsContainer>
             </TouchableOpacity>
             <Version>
-              Version: v{DeviceInfo.getVersion()} #{DeviceInfo.getBuildNumber()}
+              v{DeviceInfo.getVersion()} #{DeviceInfo.getBuildNumber()}
+              {envDisplay}
             </Version>
           </Navigation>
           <TouchableOpacity onPress={() => this.logoutUser()}>
