@@ -49,7 +49,7 @@ export class SettingsIndex extends React.Component {
         <Spinner visible={this.state.loading} />
         <Container>
           <Navigation>
-            <FieldLabel>My account(s)</FieldLabel>
+            <FieldLabel>My account</FieldLabel>
             <NavLink
               linkText={`${user.first_name} ${user.last_name}`}
               onPress={() => navigation.navigate('Account')}
@@ -84,7 +84,7 @@ export class SettingsIndex extends React.Component {
             </Version>
           </Navigation>
           <TouchableOpacity onPress={() => this.logoutUser()}>
-            <LogoutText>Logout</LogoutText>
+            <LogoutText>Log out</LogoutText>
           </TouchableOpacity>
         </Container>
       </ScreenContainer>
