@@ -26,6 +26,7 @@ describe('Forum', () => {
     setCurrentIssueId: jest.fn(),
     setCurrentAreaId: jest.fn(),
     fetchSpecificIssue: jest.fn(),
+    toggleIssueUnread: jest.fn(),
     posts: {
       12: [
         {

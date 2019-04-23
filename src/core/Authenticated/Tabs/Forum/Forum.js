@@ -111,6 +111,11 @@ export class Forum extends React.Component {
         const current = issues.find(i => i.number === issueNum)
         if (current && current.id !== this.props.currentIssueId) {
           this.props.setCurrentIssueId(current.id)
+          this.props.toggleIssueUnread({
+            id: current.id,
+            isUnread: false,
+            areaId: currentAreaId
+          })
         } else if (!current) {
           navigateWithToken(`/areas/${currentAreaId}/issues/${issueNum}`)
         }
@@ -121,11 +126,21 @@ export class Forum extends React.Component {
         !issues.find(issue => issue.id === this.props.currentIssueId)
       ) {
         this.props.setCurrentIssueId(this.props.issues[0].id)
+        this.props.toggleIssueUnread({
+          id: this.props.issues[0].id,
+          isUnread: false,
+          areaId: currentAreaId
+        })
       }
     }
 
     if (prevProps.currentIssueId !== this.props.currentIssueId) {
       this.props.getPosts(this.props.currentIssueId, this.props.navigation)
+      this.props.toggleIssueUnread({
+        id: this.props.currentIssueId,
+        isUnread: false,
+        areaId: currentAreaId
+      })
     }
   }
 
@@ -261,10 +276,11 @@ Forum.propTypes = {
   navigation: PropTypes.object.isRequired,
   navigateWithToken: PropTypes.func.isRequired,
   neighboringAreas: PropTypes.object.isRequired,
+  posts: PropTypes.object.isRequired,
   sendNewFCMToken: PropTypes.func.isRequired,
   setCurrentAreaId: PropTypes.func.isRequired,
   setCurrentIssueId: PropTypes.func.isRequired,
   setupForumData: PropTypes.func.isRequired,
-  posts: PropTypes.object.isRequired,
-  sharedPosts: PropTypes.object.isRequired
+  sharedPosts: PropTypes.object.isRequired,
+  toggleIssueUnread: PropTypes.func.isRequired
 }
