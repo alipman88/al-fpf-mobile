@@ -53,6 +53,11 @@ export class Account extends React.Component {
                 onValueChange={value =>
                   updateUser({ receive_push_notifications: value })
                 }
+                trackColor={{
+                  false: 'red',
+                  true: 'green'
+                }}
+                ios_backgroundColor='red'
                 value={user.receive_push_notifications}
               />
             </SettingsPair>
