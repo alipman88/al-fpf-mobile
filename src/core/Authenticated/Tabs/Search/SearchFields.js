@@ -218,7 +218,14 @@ export class SearchFields extends React.Component {
               </FieldWrapper>
             </Filters>
           )}
-          <Button onPress={() => handleSubmit()}>Search</Button>
+          <Button
+            onPress={() => {
+              this.setState(state => ({ showAdvanced: false }))
+              handleSubmit()
+            }}
+          >
+            Search
+          </Button>
         </PaddingContainer>
       </SearchFormContainer>
     )

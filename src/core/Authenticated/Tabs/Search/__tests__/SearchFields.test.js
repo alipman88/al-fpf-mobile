@@ -6,6 +6,7 @@ import startOfDay from 'date-fns/start_of_day'
 import endOfDay from 'date-fns/end_of_day'
 import subYears from 'date-fns/sub_years'
 
+import { Button } from '@components/Button'
 import { DateTimeField } from '@components/DateTimeField'
 import { TextInput } from '@components/TextInput'
 import { SearchFields } from '../SearchFields'
@@ -58,6 +59,18 @@ describe('SearchFields', () => {
     expect(wrapper.find(FieldWrapper).length).toEqual(4)
 
     wrapper.find(FiltersToggle).simulate('press')
+    expect(wrapper.state().showAdvanced).toEqual(false)
+  })
+
+  test('Submit hides showAdvanced state', () => {
+    const wrapper = shallow(<SearchFields {...defaultProps} />)
+
+    expect(wrapper.find(Multiselect).length).toEqual(0)
+    expect(wrapper.find(FieldWrapper).length).toEqual(0)
+
+    wrapper.setState({ showAdvanced: true })
+
+    wrapper.find(Button).simulate('press')
     expect(wrapper.state().showAdvanced).toEqual(false)
   })
 
