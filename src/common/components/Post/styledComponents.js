@@ -51,20 +51,17 @@ export const PostLink = styled(TextSemibold)`
   text-decoration-color: #d77400;
 `
 
-export const ShowMoreButton = styled(PostLink)`
-  margin-top: 10;
-`
+export const ShowMoreButton = styled(PostLink)``
+
 export const LinkText = styled(PostAuthor)`
   text-decoration: underline;
 `
 
 export const BottomBordered = styled.View`
-  border-top-width: 1;
-  border-top-color: #ebecf1;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 10px 13px 10px
+  padding: 0px 10px 10px 10px
   align-items: stretch;
 `
 
