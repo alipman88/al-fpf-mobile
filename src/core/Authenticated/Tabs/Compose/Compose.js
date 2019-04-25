@@ -31,6 +31,7 @@ export class Compose extends React.Component {
   onSubmit = (values, actions) => {
     const { profiles, navigation } = this.props
     const { category } = values
+    const categoryId = category.id > 0 ? category.id : ''
     const parentId = navigation.getParam('parentPostId') || null
     const event = category.is_event
       ? {
@@ -48,7 +49,7 @@ export class Compose extends React.Component {
       content: values.message,
       is_shared: values.isShared,
       area_ids: values.forums,
-      category_ids: [category.id],
+      category_ids: [categoryId],
       event
     }
     this.props.submitPost(
