@@ -101,12 +101,24 @@ describe('SearchFields', () => {
     wrapper
       .find(Select)
       .props()
-      .onValueChange(2)
+      .onValueChange(3)
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('category', true)
     expect(defaultProps.setFieldValue).toHaveBeenCalledWith('category', {
       id: 3,
       name: 'cat'
     })
+  })
+
+  test('changing select unsets category on select all', () => {
+    const wrapper = shallow(<SearchFields {...defaultProps} />)
+    wrapper.setState({ showAdvanced: true })
+
+    wrapper
+      .find(Select)
+      .props()
+      .onValueChange(0)
+    expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('category', true)
+    expect(defaultProps.setFieldValue).toHaveBeenCalledWith('category', null)
   })
 
   test('changing DateTimeField calls the prop callbacks', () => {

@@ -82,7 +82,14 @@ export class SearchFields extends React.Component {
       values
     } = this.props
 
-    let categoryValue = categories.findIndex(
+    // Add 'All Categories' category unique to post submission
+    const searchCategories = categories.slice()
+    searchCategories.unshift({
+      name: 'All categories',
+      id: -1
+    })
+
+    let categoryValue = searchCategories.findIndex(
       category => category.id === get(values, 'category.id')
     )
 
@@ -161,10 +168,15 @@ export class SearchFields extends React.Component {
               <FieldWrapper>
                 <Select
                   placeholder={get(values.category, 'name', 'All categories')}
-                  items={categories.map(category => category.name)}
+                  items={searchCategories.map(category => category.name)}
                   onValueChange={index => {
                     setFieldTouched('category', true)
-                    setFieldValue('category', categories[index])
+                    const selectedCategory =
+                      searchCategories[index] &&
+                      searchCategories[index].id === -1
+                        ? null
+                        : searchCategories[index]
+                    setFieldValue('category', selectedCategory)
                   }}
                   title='Select Category'
                   value={categoryValue}
