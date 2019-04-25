@@ -134,7 +134,10 @@ export class Forum extends React.Component {
       }
     }
 
-    if (prevProps.currentIssueId !== this.props.currentIssueId) {
+    if (
+      prevProps.currentIssueId !== this.props.currentIssueId &&
+      this.props.currentIssueId !== 0
+    ) {
       this.props.getPosts(this.props.currentIssueId, this.props.navigation)
       this.props.toggleIssueUnread({
         id: this.props.currentIssueId,
