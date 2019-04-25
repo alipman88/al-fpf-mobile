@@ -57,6 +57,21 @@ export const GovernmentInfoFields = ({
           required
         />
       </FieldWrapper>
+      {values.title === 'Other' && (
+        <FieldWrapper>
+          <TextInput
+            error={errors.name}
+            label='If other, please specify'
+            onChangeText={value => {
+              setFieldTouched('name')
+              setFieldValue('name', value)
+            }}
+            required
+            touched={touched.name}
+            value={values.name}
+          />
+        </FieldWrapper>
+      )}
       <FieldWrapper>
         <TextInput
           error={errors.jurisdiction}
