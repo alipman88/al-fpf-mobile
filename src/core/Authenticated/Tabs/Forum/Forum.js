@@ -129,6 +129,7 @@ export class Forum extends React.Component {
         issues.length > 0 &&
         !issues.find(issue => issue.id === this.props.currentIssueId)
       ) {
+        this.refs.forumViewRef.scrollTo({ y: 0 })
         this.props.setCurrentIssueId(this.props.issues[0].id)
         this.props.toggleIssueUnread({
           id: this.props.issues[0].id,
@@ -237,6 +238,7 @@ export class Forum extends React.Component {
     return (
       <ScreenContainer withPadding={false} grey>
         <ScrollView
+          ref='forumViewRef'
           refreshControl={
             <RefreshControl
               refreshing={loading}

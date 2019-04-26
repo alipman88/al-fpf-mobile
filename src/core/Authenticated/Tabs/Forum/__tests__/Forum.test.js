@@ -282,6 +282,12 @@ describe('Forum', () => {
 
     test('if there is an issue num in navigation params, find issue and set ID', () => {
       const wrapper = shallow(<Forum {...defaultProps} />)
+      const scrollTo = jest.fn()
+      wrapper.instance().refs = {
+        forumViewRef: {
+          scrollTo: scrollTo
+        }
+      }
       wrapper.setProps({
         navigation: {
           ...defaultProps.navigation,
@@ -304,6 +310,7 @@ describe('Forum', () => {
       })
 
       expect(defaultProps.setCurrentIssueId).toHaveBeenCalledWith(1000)
+      expect(scrollTo).toHaveBeenCalledWith({ y: 0 })
     })
 
     test("if nav param issue  is same as current issue, don't update currentIssueId", () => {
