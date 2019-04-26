@@ -35,6 +35,10 @@ export class Forum extends React.Component {
     if (!enabled) {
       try {
         await firebase.messaging().requestPermission()
+
+        // Some iOS devices need to explicitly register. See https://github.com/invertase/react-native-firebase/pull/1626 and https://rnfirebase.io/docs/v5.x.x/messaging/reference/IOSMessaging
+        await firebase.messaging().registerForRemoteNotifications()
+
         enabled = true
       } catch (error) {
         // User has rejected permissions. We dont do anything, because that's fine
