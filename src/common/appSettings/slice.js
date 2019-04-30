@@ -3,7 +3,8 @@ import { uniqueId } from 'lodash'
 
 export const appSettings = createSlice({
   initialState: {
-    postTruncateLength: 1000,
+    forumPostTruncateLength: 1000,
+    searchPostTruncateLength: 1000,
     categories: [],
     businessCategories: {},
     onboardingProfilePlans: [],
@@ -14,7 +15,8 @@ export const appSettings = createSlice({
   reducers: {
     setAppSettings: (state, { payload }) => ({
       ...state,
-      postTruncateLength: payload.posting_truncate_length,
+      forumPostTruncateLength: payload.forum_posting_truncate_length,
+      searchPostTruncateLength: payload.search_posting_truncate_length,
       categories: payload.categories,
       businessCategories: payload.business_categories,
       onboardingProfilePlans: payload.onboarding_profile_plans,
@@ -64,9 +66,14 @@ appSettings.selectors = {
     appSettings => appSettings.onboardingProfilePlans
   ),
 
-  getPostTruncateLength: createSelector(
+  getForumPostTruncateLength: createSelector(
     [path],
-    appSettings => appSettings.postTruncateLength
+    appSettings => appSettings.forumPostTruncateLength
+  ),
+
+  getSearchPostTruncateLength: createSelector(
+    [path],
+    appSettings => appSettings.searchPostTruncateLength
   ),
 
   getLoading: createSelector(
