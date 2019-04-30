@@ -160,7 +160,7 @@ export class ComposeFields extends React.Component {
                 title='Select Profile'
                 value={values.profile}
                 error={errors.profile}
-                touched={touched.profile}
+                touched={touched.profile !== undefined}
               />
             </FieldWrapper>
           )}
