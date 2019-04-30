@@ -129,8 +129,8 @@ export class Event extends React.Component {
                 defaultTimeForDate={startOfDay}
                 timeLabel='Start Time'
                 onChangeValue={date => {
-                  setFieldTouched('fromDate')
                   setFieldValue('fromDate', date)
+                  setFieldTouched('fromDate')
                 }}
                 error={errors.fromDate}
                 touched={touched.fromDate}
@@ -144,8 +144,8 @@ export class Event extends React.Component {
                 defaultTimeForDate={endOfDay}
                 timeLabel='End Time'
                 onChangeValue={date => {
-                  setFieldTouched('toDate')
                   setFieldValue('toDate', date)
+                  setFieldTouched('toDate')
                 }}
                 error={errors.toDate}
                 touched={touched.toDate}
