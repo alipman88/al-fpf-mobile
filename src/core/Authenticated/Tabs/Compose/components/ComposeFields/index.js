@@ -285,5 +285,5 @@ ComposeFields.propTypes = {
   setFieldValue: PropTypes.func.isRequired,
   touched: PropTypes.object.isRequired,
   values: PropTypes.object.isRequired,
-  areaFromLink: PropTypes.number.isRequired
+  areaFromLink: PropTypes.number
 }
