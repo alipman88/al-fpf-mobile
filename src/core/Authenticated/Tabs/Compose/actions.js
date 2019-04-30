@@ -1,3 +1,4 @@
+import { Keyboard } from 'react-native'
 import get from 'lodash/get'
 
 import { appMessage } from '@components/AppMessage/slice'
@@ -34,5 +35,6 @@ export const submitPost = (
     }
   } finally {
     setSubmitting(false)
+    Keyboard.dismiss()
   }
 }
