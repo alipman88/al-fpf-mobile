@@ -1,4 +1,5 @@
 import * as yup from 'yup'
+import { api } from '@common/api'
 
 export const validateName = string => {
   return /^[a-zA-Z]+$/.test(string)
@@ -6,6 +7,17 @@ export const validateName = string => {
 
 export const passwordValidation = password => {
   return /(?=.*[a-zA-Z].*)(?=.*\d.*)(?=.*[!#$%&?@"].*)/.test(password)
+}
+
+export const validateEmail = email => {
+  if (email) {
+    return api
+      .get('/check_user_email_availability', { params: { email: email } })
+      .then(resp => {
+        return resp.data.available === true
+      })
+  }
+  return false
 }
 
 export const validations = yup.object().shape({
@@ -27,7 +39,8 @@ export const validations = yup.object().shape({
   email: yup
     .string()
     .required()
-    .email(),
+    .email()
+    .test('email', 'email is already in use', validateEmail),
   password: yup
     .string()
     .min(8, 'Password should be at least 8 characters long')

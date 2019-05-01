@@ -51,8 +51,8 @@ export const BasicInfoFields = ({
               error={errors.firstName}
               label='First name'
               touched={touched.firstName}
+              onBlur={() => setFieldTouched('firstName')}
               onChangeText={value => {
-                setFieldTouched('firstName')
                 setFieldValue('firstName', value)
               }}
               value={values.firstName}
@@ -69,8 +69,8 @@ export const BasicInfoFields = ({
               error={errors.lastName}
               label='Last name'
               touched={touched.lastName}
+              onBlur={() => setFieldTouched('lastName')}
               onChangeText={value => {
-                setFieldTouched('lastName')
                 setFieldValue('lastName', value)
               }}
               value={values.lastName}
