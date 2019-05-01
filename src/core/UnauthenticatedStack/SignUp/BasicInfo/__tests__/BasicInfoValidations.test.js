@@ -1,4 +1,8 @@
-import { passwordValidation, validateName } from '../validations'
+import {
+  passwordValidation,
+  validateFirstName,
+  validateLastName
+} from '../validations'
 
 describe('BasicInfo validations', () => {
   test('it validates password to include letters, numbers and symbols', () => {
@@ -13,9 +17,94 @@ describe('BasicInfo validations', () => {
     expect(passwordValidation('!!@@##$$')).toEqual(false)
   })
 
-  test('it only allows letters in first and last name', () => {
-    expect(validateName('Timmy')).toEqual(true)
-    expect(validateName('Timmy123')).toEqual(false)
-    expect(validateName('Timmy!$%')).toEqual(false)
+  test('it allows correct edge cases in first name', () => {
+    expect(validateFirstName('Timmy')).toEqual(true)
+    expect(validateFirstName('Timmy123')).toEqual(false)
+    expect(validateFirstName('Timmy!$%')).toEqual(false)
+
+    expect(validateFirstName('A')).toEqual(true)
+    expect(validateFirstName('jean-claude')).toEqual(true)
+    expect(validateFirstName("O'malley")).toEqual(true)
+    expect(validateFirstName("'malley")).toEqual(true)
+    expect(validateFirstName(' A ')).toEqual(true)
+    expect(validateFirstName(' A and andrew')).toEqual(true)
+    expect(validateFirstName('.')).toEqual(false)
+
+    const validChars = ['.', "'", '-', ',', '(', ')', '"', '/', '&', 'é', 'ö']
+    validChars.forEach(char => {
+      expect(validateFirstName(`a${char}`)).toEqual(true)
+    })
+
+    const invalidChars = [
+      '~',
+      '!',
+      '@',
+      '#',
+      '$',
+      '%',
+      '^',
+      '*',
+      '_',
+      '+',
+      '?',
+      '=',
+      '{',
+      '}',
+      '[',
+      ']',
+      ':',
+      ';',
+      '<',
+      '>',
+      '|'
+    ]
+    invalidChars.forEach(char => {
+      expect(validateFirstName(`a${char}`)).toEqual(false)
+    })
+  })
+
+  test('it allows correct edge cases in last name', () => {
+    expect(validateLastName('Timmy')).toEqual(true)
+    expect(validateLastName('Timmy123')).toEqual(false)
+    expect(validateLastName('Timmy!$%')).toEqual(false)
+
+    expect(validateLastName('bc')).toEqual(true)
+    expect(validateLastName('van-damme, jr.')).toEqual(true)
+    expect(validateLastName("O'malley")).toEqual(true)
+    expect(validateLastName("'malley")).toEqual(true)
+    expect(validateLastName(' Bc ')).toEqual(true)
+    expect(validateLastName('b.')).toEqual(false)
+
+    const validChars = ['.', "'", '-', ',', '(', ')', '"', '/', '&', 'é', 'ö']
+    validChars.forEach(char => {
+      expect(validateLastName(`bc${char}`)).toEqual(true)
+    })
+
+    const invalidChars = [
+      '~',
+      '!',
+      '@',
+      '#',
+      '$',
+      '%',
+      '^',
+      '*',
+      '_',
+      '+',
+      '?',
+      '=',
+      '{',
+      '}',
+      '[',
+      ']',
+      ':',
+      ';',
+      '<',
+      '>',
+      '|'
+    ]
+    invalidChars.forEach(char => {
+      expect(validateLastName(`bc${char}`)).toEqual(false)
+    })
   })
 })

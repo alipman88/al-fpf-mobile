@@ -1,8 +1,16 @@
 import * as yup from 'yup'
 import { api } from '@common/api'
 
-export const validateName = string => {
-  return /^[a-zA-Z]+$/.test(string)
+export const validateFirstName = string => {
+  return /^(?=.*[a-zA-Z\u00C0-\u017F])[a-zA-Z\u00C0-\u017F.'"\-,/ ()&]*$/.test(
+    string
+  )
+}
+
+export const validateLastName = string => {
+  return /^(?=.*[a-zA-Z\u00C0-\u017F]{2})[a-zA-Z\u00C0-\u017F.'"\-,/ ()&]*$/.test(
+    string
+  )
 }
 
 export const passwordValidation = password => {
@@ -23,18 +31,12 @@ export const validateEmail = email => {
 export const validations = yup.object().shape({
   firstName: yup
     .string()
-    .test('firstName', 'First name can only contain letters', function(
-      firstName
-    ) {
-      return validateName(firstName)
-    })
+    .test('firstName', 'First name can only contain letters', validateFirstName)
     .required('First name is a required field'),
   lastName: yup
     .string()
     .min(2, 'Last name must be at least 2 characters long')
-    .test('lastName', 'Last name can only contain letters', function(lastName) {
-      return validateName(lastName)
-    })
+    .test('lastName', 'Last name can only contain letters', validateLastName)
     .required('Last name is a required field'),
   email: yup
     .string()
@@ -45,11 +47,11 @@ export const validations = yup.object().shape({
     .string()
     .min(8, 'Password should be at least 8 characters long')
     .max(40, 'Password cannot be longer than 40 characters')
-    .test('password', 'Password must contain a number and a symbol', function(
-      password
-    ) {
-      return passwordValidation(password)
-    })
+    .test(
+      'password',
+      'Password must contain a number and a symbol',
+      passwordValidation
+    )
     .required(),
   passwordConfirmation: yup
     .string()
