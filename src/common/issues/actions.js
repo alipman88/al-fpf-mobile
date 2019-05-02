@@ -33,6 +33,8 @@ export const getIssues = (areaId, navigation) => async (dispatch, getState) => {
       navigation.navigate('SplashScreen')
       navigation.dispatch(createResetStackTo('Login'))
     }
+  } finally {
+    dispatch(issues.actions.setLoading(false))
   }
 }
 
