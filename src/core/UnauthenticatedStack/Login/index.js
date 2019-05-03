@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import DeviceInfo from 'react-native-device-info'
 
+import { resendEmail } from '../actions'
 import { KeyboardAwareScrollView } from '@components/KeyboardAwareScrollView'
 import { api } from '@common/api'
 import { currentUser } from '@common/currentUser'
@@ -24,7 +25,7 @@ import {
   Version
 } from './styledComponents'
 
-export const LoginComponent = ({ navigation, setAccessToken }) => {
+export const LoginComponent = ({ navigation, setAccessToken, resendEmail }) => {
   const grassContent = (
     <BottomContainer>
       <LinksContainer>
@@ -94,6 +95,7 @@ export const LoginComponent = ({ navigation, setAccessToken }) => {
               setFieldTouched={setFieldTouched}
               setFieldValue={setFieldValue}
               handleSubmit={handleSubmit}
+              resendEmail={resendEmail}
               isSubmitting={isSubmitting}
               navigation={navigation}
             />
@@ -106,12 +108,14 @@ export const LoginComponent = ({ navigation, setAccessToken }) => {
 
 LoginComponent.propTypes = {
   navigation: PropTypes.object.isRequired,
-  setAccessToken: PropTypes.func.isRequired
+  setAccessToken: PropTypes.func.isRequired,
+  resendEmail: PropTypes.func.isRequired
 }
 
 export const Login = connect(
   null,
   {
-    setAccessToken: currentUser.actions.setAccessToken
+    setAccessToken: currentUser.actions.setAccessToken,
+    resendEmail: resendEmail
   }
 )(LoginComponent)
