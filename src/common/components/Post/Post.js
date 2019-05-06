@@ -167,9 +167,7 @@ export class Post extends React.Component {
             </PostDate>
           )}
           {showDatePublished && Boolean(post.date_published) && (
-            <PostDate>
-              {format(new Date(post.date_published), 'MMM DD, YYYY')}
-            </PostDate>
+            <PostDate>{format(post.date_published, 'MMM DD, YYYY')}</PostDate>
           )}
           {post.categories.map(category => (
             <TouchableOpacity
