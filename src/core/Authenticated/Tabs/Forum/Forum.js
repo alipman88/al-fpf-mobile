@@ -17,6 +17,10 @@ import { createChannel, displayNotification } from '@common/notifications'
 
 export class Forum extends React.Component {
   async componentDidMount() {
+    // reset issue/area id to 0 so we fetch the default on fresh launch (notification handler is after this)
+    this.props.setCurrentIssueId(0)
+    this.props.setCurrentAreaId(0)
+
     this.props.setupForumData(this.props.navigation)
     this.setTitleFromArea()
 
