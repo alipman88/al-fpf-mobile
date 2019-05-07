@@ -25,6 +25,7 @@
     "query-string": "^6.4.0",
     "react": "16.6.3",
     "react-native": "0.58.3",
+    "react-native-autolink": "^1.8.0",
     "react-native-config": "^0.11.7",
     "react-native-device-info": "^0.26.3",
     "react-native-easy-toast": "^1.2.0",
@@ -81,7 +82,7 @@
       "./jest.setup.js"
     ],
     "transformIgnorePatterns": [
-      "node_modules/(?!(jest-)?react-native|react-navigation|@react-native-community)"
+      "node_modules/(?!(jest-)?react-native|react-navigation|@react-native-community|react-native-autolink|autolinker)"
     ]
   }
 }
