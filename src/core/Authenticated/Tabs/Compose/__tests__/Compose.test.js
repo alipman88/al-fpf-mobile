@@ -202,6 +202,54 @@ describe('Compose', () => {
       )
     })
 
+    test('it submits can submit with no category', () => {
+      const props = {
+        ...defaultProps,
+        navigation: {
+          getParam: jest.fn(param => (param === 'subject' ? 'Test' : 200)),
+          state: {
+            params: {
+              subject: 'Test',
+              parentPostId: 200
+            }
+          }
+        }
+      }
+
+      const setSubmitting = jest.fn()
+      const wrapper = shallow(<Compose {...props} />)
+      wrapper.instance().onSubmit(
+        {
+          profile: 1,
+          parentPostId: 1,
+          subject: `RE: Test`,
+          message: 'Message Body',
+          isShared: true,
+          forums: [1, 2, 3],
+          category: {
+            id: -1,
+            name: 'None Apply'
+          }
+        },
+        { setSubmitting }
+      )
+      expect(props.submitPost).toHaveBeenCalledWith(
+        expect.any(Function),
+        {
+          profile_id: 2,
+          parent_post_id: 200,
+          title: 'RE: Test',
+          content: 'Message Body',
+          is_shared: true,
+          area_ids: [1, 2, 3],
+          category_ids: [''],
+          event: {}
+        },
+        setSubmitting,
+        props.navigation
+      )
+    })
+
     test('it sets state and navigates back to Forum', () => {
       const wrapper = shallow(<Compose {...defaultProps} />)
       wrapper.setState({ modalVisible: true })

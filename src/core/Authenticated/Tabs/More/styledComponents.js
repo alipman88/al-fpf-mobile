@@ -70,13 +70,16 @@ export const FooterLink = styled.View`
   padding-vertical: 15;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 `
 
 export const FooterText = styled(Text)`
   font-size: 18;
+  width: 100%;
 `
 
 export const RightIcon = styled.Image`
   height: 18;
   width: 18;
+  margin-left: -18;
 `

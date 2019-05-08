@@ -17,6 +17,10 @@ import { createChannel, displayNotification } from '@common/notifications'
 
 export class Forum extends React.Component {
   async componentDidMount() {
+    // reset issue/area id to 0 so we fetch the default on fresh launch (notification handler is after this)
+    this.props.setCurrentIssueId(0)
+    this.props.setCurrentAreaId(0)
+
     this.props.setupForumData(this.props.navigation)
     this.setTitleFromArea()
 
@@ -35,6 +39,10 @@ export class Forum extends React.Component {
     if (!enabled) {
       try {
         await firebase.messaging().requestPermission()
+
+        // Some iOS devices need to explicitly register. See https://github.com/invertase/react-native-firebase/pull/1626 and https://rnfirebase.io/docs/v5.x.x/messaging/reference/IOSMessaging
+        await firebase.messaging().registerForRemoteNotifications()
+
         enabled = true
       } catch (error) {
         // User has rejected permissions. We dont do anything, because that's fine
@@ -125,6 +133,7 @@ export class Forum extends React.Component {
         issues.length > 0 &&
         !issues.find(issue => issue.id === this.props.currentIssueId)
       ) {
+        this.refs.forumViewRef.scrollTo({ y: 0 })
         this.props.setCurrentIssueId(this.props.issues[0].id)
         this.props.toggleIssueUnread({
           id: this.props.issues[0].id,
@@ -134,7 +143,10 @@ export class Forum extends React.Component {
       }
     }
 
-    if (prevProps.currentIssueId !== this.props.currentIssueId) {
+    if (
+      prevProps.currentIssueId !== this.props.currentIssueId &&
+      this.props.currentIssueId !== 0
+    ) {
       this.props.getPosts(this.props.currentIssueId, this.props.navigation)
       this.props.toggleIssueUnread({
         id: this.props.currentIssueId,
@@ -230,6 +242,7 @@ export class Forum extends React.Component {
     return (
       <ScreenContainer withPadding={false} grey>
         <ScrollView
+          ref='forumViewRef'
           refreshControl={
             <RefreshControl
               refreshing={loading}

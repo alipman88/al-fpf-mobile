@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 
 import { EmailVerification as EmailVerificationComponent } from './EmailVerification'
 import { registrationEmail } from '../registrationEmail'
-import { resendEmail } from './actions'
+import { resendEmail } from '../../actions'
 import { newUser } from '../newUser'
 
 const mapStateToProps = state => ({

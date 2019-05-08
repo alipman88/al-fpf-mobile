@@ -241,14 +241,26 @@ describe('Forum', () => {
 
     test('if issues change, but no length, do not set new currentIssueId', () => {
       const wrapper = shallow(<Forum {...defaultProps} />)
+
+      // This is called on mount. Assert that it was called on mount (once) as expected for baseline to compare later
+      expect(defaultProps.setCurrentIssueId).toHaveBeenCalledTimes(1)
+
       wrapper.setProps({ issues: [] })
-      expect(defaultProps.setCurrentIssueId).not.toHaveBeenCalled()
+
+      // This is called on mount. Assert that it was only called on mount (once)
+      expect(defaultProps.setCurrentIssueId).toHaveBeenCalledTimes(1)
     })
 
     test('if issues change, and id is in list, dont change', () => {
       const wrapper = shallow(<Forum {...defaultProps} />)
+
+      // This is called on mount. Assert that it was called on mount (once) as expected for baseline to compare later
+      expect(defaultProps.setCurrentIssueId).toHaveBeenCalledTimes(1)
+
       wrapper.setProps({ issues: [{ id: 12 }] })
-      expect(defaultProps.setCurrentIssueId).not.toHaveBeenCalled()
+
+      // This is called on mount. Assert that it was only called on mount (once)
+      expect(defaultProps.setCurrentIssueId).toHaveBeenCalledTimes(1)
     })
 
     test('if currentIssueId changes, get posts', () => {
@@ -282,6 +294,12 @@ describe('Forum', () => {
 
     test('if there is an issue num in navigation params, find issue and set ID', () => {
       const wrapper = shallow(<Forum {...defaultProps} />)
+      const scrollTo = jest.fn()
+      wrapper.instance().refs = {
+        forumViewRef: {
+          scrollTo: scrollTo
+        }
+      }
       wrapper.setProps({
         navigation: {
           ...defaultProps.navigation,
@@ -304,10 +322,15 @@ describe('Forum', () => {
       })
 
       expect(defaultProps.setCurrentIssueId).toHaveBeenCalledWith(1000)
+      expect(scrollTo).toHaveBeenCalledWith({ y: 0 })
     })
 
     test("if nav param issue  is same as current issue, don't update currentIssueId", () => {
       const wrapper = shallow(<Forum {...defaultProps} currentIssueId={1000} />)
+
+      // This is called on mount. Assert that it was called on mount (once) as expected for baseline to compare later
+      expect(defaultProps.setCurrentIssueId).toHaveBeenCalledTimes(1)
+
       wrapper.setProps({
         navigation: {
           ...defaultProps.navigation,
@@ -328,7 +351,8 @@ describe('Forum', () => {
         issues: [{ id: 1000, number: 2121 }]
       })
 
-      expect(defaultProps.setCurrentIssueId).not.toHaveBeenCalled()
+      // This is called on mount. Assert that it was only called on mount (once)
+      expect(defaultProps.setCurrentIssueId).toHaveBeenCalledTimes(1)
     })
   })
 

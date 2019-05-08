@@ -12,6 +12,7 @@ import {
   PostContainerBordered,
   ShowMoreButton
 } from '../styledComponents'
+import Autolink from 'react-native-autolink'
 
 describe('Post', () => {
   const defaultProps = {
@@ -91,7 +92,7 @@ describe('Post', () => {
         postTruncateLength={6}
       />
     )
-    expect(wrapper.find(PostBody).text()).toEqual('Lorem ...')
+    expect(wrapper.find(Autolink).props().text).toEqual('Lorem ...')
 
     const getButton = wrapper => {
       return wrapper.find(TouchableOpacity).last()
@@ -106,12 +107,7 @@ describe('Post', () => {
 
     getButton(wrapper).simulate('press')
 
-    expect(
-      wrapper
-        .find(PostBody)
-        .last()
-        .text()
-    ).toEqual(post.content)
+    expect(wrapper.find(Autolink).props().text).toEqual(post.content)
 
     expect(
       getButton(wrapper)

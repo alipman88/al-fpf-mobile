@@ -9,6 +9,7 @@ describe('LoginFields', () => {
   const defaultProps = {
     errors: {},
     handleSubmit: jest.fn(),
+    resendEmail: jest.fn(),
     isSubmitting: false,
     setFieldTouched: jest.fn(),
     setFieldValue: jest.fn(),
@@ -17,6 +18,7 @@ describe('LoginFields', () => {
   }
 
   afterEach(() => {
+    defaultProps.resendEmail.mockReset()
     defaultProps.handleSubmit.mockReset()
     defaultProps.setFieldTouched.mockReset()
     defaultProps.setFieldValue.mockReset()
@@ -65,5 +67,31 @@ describe('LoginFields', () => {
 
     expect(defaultProps.handleSubmit).toHaveBeenCalled()
     expect(wrapperWithError.find(BottomText).length).toEqual(2) // 2 with error
+  })
+
+  test('shows error button with action', () => {
+    const wrapper = shallow(<LoginFields {...defaultProps} />)
+    wrapper.find(Button).simulate('press')
+
+    expect(defaultProps.handleSubmit).toHaveBeenCalled()
+    expect(wrapper.find(BottomText).length).toEqual(1) // only 1 without error
+
+    const error = {
+      text: 'something went wrong',
+      button: { text: 'fix it', action: 'resend_email' }
+    }
+    const wrapperWithError = shallow(
+      <LoginFields {...defaultProps} errors={error} />
+    )
+    wrapperWithError.find(Button).simulate('press')
+
+    expect(defaultProps.handleSubmit).toHaveBeenCalled()
+    expect(wrapperWithError.find(BottomText).length).toEqual(2) // 2 with error
+
+    wrapperWithError
+      .find(BottomText)
+      .at(0)
+      .simulate('press')
+    expect(defaultProps.resendEmail).toHaveBeenCalled()
   })
 })

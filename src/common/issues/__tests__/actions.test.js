@@ -100,6 +100,8 @@ describe('issues actions', () => {
     expect(dispatch).toHaveBeenCalledWith(
       appMessage.actions.setAppError('boom')
     )
+    expect(dispatch).toHaveBeenCalledWith(issues.actions.setLoading(false))
+
     expect(navigation.navigate).toHaveBeenCalledWith('SplashScreen')
     expect(navigation.dispatch).toHaveBeenCalledTimes(1)
 

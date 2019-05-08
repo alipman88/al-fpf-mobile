@@ -1,5 +1,6 @@
 import React from 'react'
-import { Linking, TouchableOpacity } from 'react-native'
+import { Linking, TouchableOpacity, StyleSheet } from 'react-native'
+import Autolink from 'react-native-autolink'
 import firebase from 'react-native-firebase'
 import PropTypes from 'prop-types'
 
@@ -26,6 +27,12 @@ import {
   ButtonWrapper,
   ButtonSpacer
 } from './styledComponents'
+
+const AutoPostLinkStyle = StyleSheet.create({
+  link: {
+    color: '#d77400'
+  }
+})
 
 export class Post extends React.Component {
   state = {
@@ -167,9 +174,7 @@ export class Post extends React.Component {
             </PostDate>
           )}
           {showDatePublished && Boolean(post.date_published) && (
-            <PostDate>
-              {format(new Date(post.date_published), 'MMM DD, YYYY')}
-            </PostDate>
+            <PostDate>{format(post.date_published, 'MMM DD, YYYY')}</PostDate>
           )}
           {post.categories.map(category => (
             <TouchableOpacity
@@ -180,11 +185,14 @@ export class Post extends React.Component {
             </TouchableOpacity>
           ))}
           <PostBody>
-            {truncateText(
-              post.content,
-              postTruncateLength,
-              !this.state.showMore
-            )}
+            <Autolink
+              text={truncateText(
+                post.content,
+                postTruncateLength,
+                !this.state.showMore
+              )}
+              linkStyle={AutoPostLinkStyle.link}
+            />
           </PostBody>
           {post.content.length > postTruncateLength && (
             <TouchableOpacity onPress={() => this.toggleShowMore()}>
