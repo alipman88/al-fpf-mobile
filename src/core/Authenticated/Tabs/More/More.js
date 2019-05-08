@@ -37,7 +37,7 @@ export class More extends React.Component {
               <CenterImgContainer>
                 <CardIcon source={businessDirectoryIcon} />
               </CenterImgContainer>
-              <CardTitle>Business directory</CardTitle>
+              <CardTitle>Business Directory</CardTitle>
               <CardContent>
                 Search 10,000 local businesses and nonprofits that participate
                 on Front Porch Forum.
@@ -121,7 +121,7 @@ export class More extends React.Component {
                     )
                   }
                 >
-                  Privacy policy
+                  Privacy Policy
                 </FooterText>
                 <RightIcon source={linkIcon} />
               </FooterLink>
@@ -131,7 +131,7 @@ export class More extends React.Component {
                     Linking.openURL('https://frontporchforum.com/terms-of-use')
                   }
                 >
-                  Terms of use
+                  Terms of Use
                 </FooterText>
                 <RightIcon source={linkIcon} />
               </FooterLink>
