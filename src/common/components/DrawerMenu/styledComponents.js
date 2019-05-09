@@ -28,6 +28,7 @@ export const ForumText = styled(Text)`
   font-size: 16;
   padding: 7px;
   background-color: ${({ active }) => (active ? '#fff4e7' : '#fff')};
+  font-weight: ${({ access }) => (access === 'primary' ? 'bold' : 'normal')};
 `
 
 export const Birds = styled.View`

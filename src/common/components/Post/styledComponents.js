@@ -21,7 +21,8 @@ export const PostBodyContainer = styled.View`
   padding-horizontal: ${({ hasBorder }) => (hasBorder ? '10px' : '0')};
 `
 export const PostHeader = styled(TextSemibold)`
-  font-size: 20;
+  font-size: 22;
+  font-weight: bold;
   color: #355768;
   margin-bottom: 10;
 `

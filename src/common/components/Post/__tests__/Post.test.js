@@ -8,7 +8,6 @@ import { PostCategory } from '@components/PostCategory'
 import { Button } from '@components/Button'
 import {
   PostDate,
-  PostBody,
   PostContainerBordered,
   ShowMoreButton
 } from '../styledComponents'

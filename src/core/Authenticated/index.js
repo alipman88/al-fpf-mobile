@@ -43,7 +43,7 @@ export const Authenticated = createStackNavigator(
       ),
       headerTitleStyle: {
         fontFamily: 'ProximaNova-SemiBold',
-        fontSize: 14,
+        fontSize: 16,
         color: '#355768',
         backgroundColor: headerBackgroundForEnv,
         textAlign: 'center',
