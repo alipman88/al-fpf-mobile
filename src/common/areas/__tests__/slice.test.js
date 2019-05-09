@@ -77,7 +77,11 @@ describe('areas - slice', () => {
       undefined,
       areas.actions.setAreas([
         { id: 1, name: 'zzzz', neighbor_areas: [{ id: 3, name: 'neighbor' }] },
-        { id: 2, name: 'aaaa', neighbor_areas: [{ id: 3, name: 'neighbor' }] }
+        {
+          id: 2,
+          name: 'aaaa',
+          neighbor_areas: [{ id: 3, name: 'neighbor' }, { id: 1, name: 'zzzz' }]
+        }
       ])
     )
 
@@ -88,9 +92,9 @@ describe('areas - slice', () => {
     })
 
     expect(data).toEqual([
-      { id: 2, name: 'aaaa' },
-      { id: 3, name: 'neighbor' },
-      { id: 1, name: 'zzzz' }
+      { id: 2, name: 'aaaa', access: 'primary' },
+      { id: 3, name: 'neighbor', access: 'neighbor' },
+      { id: 1, name: 'zzzz', access: 'primary' }
     ])
   })
 })

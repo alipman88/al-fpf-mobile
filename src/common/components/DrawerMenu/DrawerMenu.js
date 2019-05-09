@@ -63,7 +63,10 @@ export const DrawerMenu = ({
                       navigationService.navigate('Forum')
                     }}
                   >
-                    <ForumText active={area.id === currentAreaId}>
+                    <ForumText
+                      active={area.id === currentAreaId}
+                      access={area.access}
+                    >
                       {area.name}
                     </ForumText>
                   </TouchableOpacity>

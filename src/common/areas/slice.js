@@ -86,13 +86,15 @@ areas.selectors = {
       const data = areas.areas
         .map(area => ({
           id: area.id,
-          name: area.name
+          name: area.name,
+          access: 'primary'
         }))
         .concat(
           Object.keys(areas.neighboringAreas).map(id => {
             return {
               id: parseInt(id, 10),
-              name: areas.neighboringAreas[id]
+              name: areas.neighboringAreas[id],
+              access: 'neighbor'
             }
           })
         )
