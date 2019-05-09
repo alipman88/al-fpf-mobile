@@ -6,6 +6,7 @@ export const Header = styled(Text)`
   font-size: 22;
   font-weight: bold;
   color: #355768;
+  margin-bottom: 10;
 `
 export const CardContent = styled.View`
   padding: 16px;
