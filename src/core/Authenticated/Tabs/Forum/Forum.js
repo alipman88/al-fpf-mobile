@@ -12,6 +12,7 @@ import { Advertisement } from './components/Advertisement'
 import { InThisIssue } from './components/InThisIssue'
 import { OtherIssues } from './components/OtherIssues'
 import { NeighboringContent } from './components/NeighboringContent'
+import { OcmMessage } from './components/OcmMessage'
 
 import { createChannel, displayNotification } from '@common/notifications'
 
@@ -263,6 +264,7 @@ export class Forum extends React.Component {
               <NeighboringContent />
             ) : null}
           </ForumContainer>
+          <OcmMessage />
         </ScrollView>
         <Toast
           ref={toast => (this.toastRef = toast)}

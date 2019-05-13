@@ -41,7 +41,8 @@ export const getPosts = (issueId, navigation) => async (dispatch, getState) => {
       shared_posts: sharedPosts,
       headlines,
       ads,
-      news_from_neighboring_nfs
+      news_from_neighboring_nfs,
+      ocm_message
     } = response.data
 
     dispatch(
@@ -51,7 +52,8 @@ export const getPosts = (issueId, navigation) => async (dispatch, getState) => {
         headlines,
         issueId: issue.id,
         ads,
-        newsFromNeighboringNfs: news_from_neighboring_nfs
+        newsFromNeighboringNfs: news_from_neighboring_nfs,
+        ocmMessage: ocm_message
       })
     )
   } catch (e) {

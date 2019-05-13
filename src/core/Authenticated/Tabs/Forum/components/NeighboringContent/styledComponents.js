@@ -15,7 +15,8 @@ export const SectionHeader = styled(TextSemibold)`
   color: #355768;
   font-size: 18;
   text-align: center;
-  margin-vertical: 30;
+  margin-top: 15;
+  margin-bottom: 30;
 `
 
 export const Divider = styled.View`

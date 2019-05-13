@@ -9,7 +9,8 @@ describe('posts - slice', () => {
       adsByIssue: {},
       sharedPostsByIssue: {},
       loading: false,
-      newsFromNeighboringNfsByIssue: {}
+      newsFromNeighboringNfsByIssue: {},
+      ocmMessageByIssue: {}
     })
   })
 
