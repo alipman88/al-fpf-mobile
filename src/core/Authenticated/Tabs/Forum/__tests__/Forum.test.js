@@ -1,4 +1,5 @@
 import React from 'react'
+import { AppState, PushNotificationIOS } from 'react-native'
 import firebase from 'react-native-firebase'
 import { ForumContainer } from '../styledComponents'
 import { shallow } from 'enzyme'
@@ -126,6 +127,52 @@ describe('Forum', () => {
     expect(firebase.notifications().onNotification).toHaveBeenCalled()
 
     spy.mockRestore()
+  })
+
+  test('it sets up app state event listener', () => {
+    const spy = jest.spyOn(AppState, 'addEventListener')
+    const wrapper = shallow(<Forum {...defaultProps} />)
+
+    expect(AppState.addEventListener).toHaveBeenCalledWith(
+      'change',
+      wrapper.instance().handleAppStateChange
+    )
+    spy.mockRestore()
+  })
+
+  test('it resets area and issue', () => {
+    const wrapper = shallow(<Forum {...defaultProps} />)
+
+    wrapper.instance().resetIssueAndArea()
+    expect(defaultProps.setCurrentAreaId).toHaveBeenCalledWith(0)
+    expect(defaultProps.setCurrentIssueId).toHaveBeenCalledWith(0)
+  })
+
+  describe('handleAppStateChange', () => {
+    test('it resets area and issue on unknown state', () => {
+      const wrapper = shallow(<Forum {...defaultProps} />)
+      const spy = jest.spyOn(wrapper.instance(), 'resetIssueAndArea')
+
+      wrapper.instance().handleAppStateChange('unknown')
+      expect(wrapper.instance().resetIssueAndArea).toHaveBeenCalled()
+
+      spy.mockRestore()
+    })
+
+    test('it sends member to default NF if app badge icon present', () => {
+      const wrapper = shallow(<Forum {...defaultProps} />)
+      const spy = jest.spyOn(
+        PushNotificationIOS,
+        'getApplicationIconBadgeNumber'
+      )
+
+      wrapper.instance().handleAppStateChange('active')
+      expect(
+        PushNotificationIOS.getApplicationIconBadgeNumber
+      ).toHaveBeenCalled()
+
+      spy.mockRestore()
+    })
   })
 
   test('it renders some posts', () => {

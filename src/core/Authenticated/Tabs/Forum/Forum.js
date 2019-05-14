@@ -1,6 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { RefreshControl, ScrollView } from 'react-native'
+import {
+  AppState,
+  PushNotificationIOS,
+  RefreshControl,
+  ScrollView
+} from 'react-native'
 import get from 'lodash/get'
 import firebase from 'react-native-firebase'
 import Toast from 'react-native-easy-toast'
@@ -19,8 +24,9 @@ import { createChannel, displayNotification } from '@common/notifications'
 export class Forum extends React.Component {
   async componentDidMount() {
     // reset issue/area id to 0 so we fetch the default on fresh launch (notification handler is after this)
-    this.props.setCurrentIssueId(0)
-    this.props.setCurrentAreaId(0)
+    this.resetIssueAndArea()
+
+    AppState.addEventListener('change', this.handleAppStateChange)
 
     this.props.setupForumData(this.props.navigation)
     this.setTitleFromArea()
@@ -93,6 +99,24 @@ export class Forum extends React.Component {
     }
     if (this.notificationOpenedListener) {
       this.notificationOpenedListener()
+    }
+  }
+
+  resetIssueAndArea() {
+    this.props.setCurrentIssueId(0)
+    this.props.setCurrentAreaId(0)
+  }
+
+  handleAppStateChange(state) {
+    if (state === 'unknown') {
+      this.resetIssueAndArea()
+    } else if (state === 'active') {
+      PushNotificationIOS.getApplicationIconBadgeNumber(badgeNumber => {
+        if (badgeNumber >= 1) {
+          this.resetIssueAndArea()
+          this.props.setupForumData()
+        }
+      })
     }
   }
 
