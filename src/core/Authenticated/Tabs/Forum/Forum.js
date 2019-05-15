@@ -107,10 +107,12 @@ export class Forum extends React.Component {
     this.props.setCurrentAreaId(0)
   }
 
-  handleAppStateChange(state) {
+  handleAppStateChange = state => {
     if (state === 'unknown') {
+      // reset issue/area id to 0 so we fetch the default on fresh launch (notification handler is after this)
       this.resetIssueAndArea()
     } else if (state === 'active') {
+      // reset issue/area id to 0 so we fetch the default if badge icon is present
       PushNotificationIOS.getApplicationIconBadgeNumber(badgeNumber => {
         if (badgeNumber >= 1) {
           this.resetIssueAndArea()
