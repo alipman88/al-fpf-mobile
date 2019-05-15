@@ -1,5 +1,5 @@
 import React from 'react'
-import { Linking, TouchableOpacity, StyleSheet } from 'react-native'
+import { Linking, TouchableOpacity } from 'react-native'
 import Autolink from 'react-native-autolink'
 import firebase from 'react-native-firebase'
 import PropTypes from 'prop-types'
@@ -25,14 +25,9 @@ import {
   Bottom,
   BottomBordered,
   ButtonWrapper,
-  ButtonSpacer
+  ButtonSpacer,
+  AutoPostLinkStyle
 } from './styledComponents'
-
-const AutoPostLinkStyle = StyleSheet.create({
-  link: {
-    color: '#d77400'
-  }
-})
 
 export class Post extends React.Component {
   state = {

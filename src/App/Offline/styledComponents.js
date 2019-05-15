@@ -27,6 +27,7 @@ export const Body = styled(Text)`
   font-size: 16;
   text-align: center;
   margin-horizontal: 40;
+  margin-bottom: 20;
 `
 
 export const Image = styled.Image``

@@ -7,6 +7,7 @@ const initialState = {
   headlinesByIssue: {},
   adsByIssue: {},
   newsFromNeighboringNfsByIssue: {},
+  ocmMessageByIssue: {},
   loading: false
 }
 
@@ -41,6 +42,10 @@ export const posts = createSlice({
       newsFromNeighboringNfsByIssue: {
         ...state.newsFromNeighboringNfsByIssue,
         [payload.issueId]: payload.newsFromNeighboringNfs
+      },
+      ocmMessageByIssue: {
+        ...state.ocmMessageByIssue,
+        [payload.issueId]: payload.ocmMessage
       },
       loading: false
     })
@@ -79,5 +84,9 @@ posts.selectors = {
   getNewsFromNeighboringNfsByIssue: createSelector(
     [path],
     posts => posts.newsFromNeighboringNfsByIssue || {}
+  ),
+  getOcmMessageByIssue: createSelector(
+    [path],
+    posts => posts.ocmMessageByIssue || {}
   )
 }
