@@ -1,4 +1,5 @@
 import React from 'react'
+import { AppState, PushNotificationIOS } from 'react-native'
 import firebase from 'react-native-firebase'
 import { ForumContainer } from '../styledComponents'
 import { shallow } from 'enzyme'
@@ -14,6 +15,7 @@ describe('Forum', () => {
       setParams: jest.fn(),
       getParam: jest.fn()
     },
+    navigationWithToken: jest.fn(),
     fcmToken: '',
     sendNewFCMToken: jest.fn(),
     currentIssueId: 12,
@@ -25,6 +27,7 @@ describe('Forum', () => {
     setCurrentIssueId: jest.fn(),
     setCurrentAreaId: jest.fn(),
     fetchSpecificIssue: jest.fn(),
+    toggleIssueUnread: jest.fn(),
     posts: {
       12: [
         {
@@ -126,6 +129,52 @@ describe('Forum', () => {
     spy.mockRestore()
   })
 
+  test('it sets up app state event listener', () => {
+    const spy = jest.spyOn(AppState, 'addEventListener')
+    const wrapper = shallow(<Forum {...defaultProps} />)
+
+    expect(AppState.addEventListener).toHaveBeenCalledWith(
+      'change',
+      wrapper.instance().handleAppStateChange
+    )
+    spy.mockRestore()
+  })
+
+  test('it resets area and issue', () => {
+    const wrapper = shallow(<Forum {...defaultProps} />)
+
+    wrapper.instance().resetIssueAndArea()
+    expect(defaultProps.setCurrentAreaId).toHaveBeenCalledWith(0)
+    expect(defaultProps.setCurrentIssueId).toHaveBeenCalledWith(0)
+  })
+
+  describe('handleAppStateChange', () => {
+    test('it resets area and issue on unknown state', () => {
+      const wrapper = shallow(<Forum {...defaultProps} />)
+      const spy = jest.spyOn(wrapper.instance(), 'resetIssueAndArea')
+
+      wrapper.instance().handleAppStateChange('unknown')
+      expect(wrapper.instance().resetIssueAndArea).toHaveBeenCalled()
+
+      spy.mockRestore()
+    })
+
+    test('it sends member to default NF if app badge icon present', () => {
+      const wrapper = shallow(<Forum {...defaultProps} />)
+      const spy = jest.spyOn(
+        PushNotificationIOS,
+        'getApplicationIconBadgeNumber'
+      )
+
+      wrapper.instance().handleAppStateChange('active')
+      expect(
+        PushNotificationIOS.getApplicationIconBadgeNumber
+      ).toHaveBeenCalled()
+
+      spy.mockRestore()
+    })
+  })
+
   test('it renders some posts', () => {
     const wrapper = shallow(<Forum {...defaultProps} />)
 
@@ -223,32 +272,51 @@ describe('Forum', () => {
       })
 
       expect(defaultProps.getIssues).toHaveBeenCalledWith(
-        defaultProps.currentAreaId
+        defaultProps.currentAreaId,
+        defaultProps.navigation
       )
     })
 
     test('changing area id pulls issues for that area', () => {
       const wrapper = shallow(<Forum {...defaultProps} />)
       wrapper.setProps({ currentAreaId: 2 })
-      expect(defaultProps.getIssues).toHaveBeenCalledWith(2)
+      expect(defaultProps.getIssues).toHaveBeenCalledWith(
+        2,
+        defaultProps.navigation
+      )
     })
 
     test('if issues change, but no length, do not set new currentIssueId', () => {
       const wrapper = shallow(<Forum {...defaultProps} />)
+
+      // This is called on mount. Assert that it was called on mount (once) as expected for baseline to compare later
+      expect(defaultProps.setCurrentIssueId).toHaveBeenCalledTimes(1)
+
       wrapper.setProps({ issues: [] })
-      expect(defaultProps.setCurrentIssueId).not.toHaveBeenCalled()
+
+      // This is called on mount. Assert that it was only called on mount (once)
+      expect(defaultProps.setCurrentIssueId).toHaveBeenCalledTimes(1)
     })
 
     test('if issues change, and id is in list, dont change', () => {
       const wrapper = shallow(<Forum {...defaultProps} />)
+
+      // This is called on mount. Assert that it was called on mount (once) as expected for baseline to compare later
+      expect(defaultProps.setCurrentIssueId).toHaveBeenCalledTimes(1)
+
       wrapper.setProps({ issues: [{ id: 12 }] })
-      expect(defaultProps.setCurrentIssueId).not.toHaveBeenCalled()
+
+      // This is called on mount. Assert that it was only called on mount (once)
+      expect(defaultProps.setCurrentIssueId).toHaveBeenCalledTimes(1)
     })
 
     test('if currentIssueId changes, get posts', () => {
       const wrapper = shallow(<Forum {...defaultProps} />)
       wrapper.setProps({ currentIssueId: 45 })
-      expect(defaultProps.getPosts).toHaveBeenCalledWith(45)
+      expect(defaultProps.getPosts).toHaveBeenCalledWith(
+        45,
+        defaultProps.navigation
+      )
     })
 
     test('if there is an area id in navigation params, set currentArea', () => {
@@ -273,6 +341,12 @@ describe('Forum', () => {
 
     test('if there is an issue num in navigation params, find issue and set ID', () => {
       const wrapper = shallow(<Forum {...defaultProps} />)
+      const scrollTo = jest.fn()
+      wrapper.instance().refs = {
+        forumViewRef: {
+          scrollTo: scrollTo
+        }
+      }
       wrapper.setProps({
         navigation: {
           ...defaultProps.navigation,
@@ -295,10 +369,15 @@ describe('Forum', () => {
       })
 
       expect(defaultProps.setCurrentIssueId).toHaveBeenCalledWith(1000)
+      expect(scrollTo).toHaveBeenCalledWith({ y: 0 })
     })
 
     test("if nav param issue  is same as current issue, don't update currentIssueId", () => {
       const wrapper = shallow(<Forum {...defaultProps} currentIssueId={1000} />)
+
+      // This is called on mount. Assert that it was called on mount (once) as expected for baseline to compare later
+      expect(defaultProps.setCurrentIssueId).toHaveBeenCalledTimes(1)
+
       wrapper.setProps({
         navigation: {
           ...defaultProps.navigation,
@@ -319,7 +398,8 @@ describe('Forum', () => {
         issues: [{ id: 1000, number: 2121 }]
       })
 
-      expect(defaultProps.setCurrentIssueId).not.toHaveBeenCalled()
+      // This is called on mount. Assert that it was only called on mount (once)
+      expect(defaultProps.setCurrentIssueId).toHaveBeenCalledTimes(1)
     })
   })
 

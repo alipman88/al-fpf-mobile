@@ -1,9 +1,19 @@
 import * as yup from 'yup'
 
+export const validateBusinessName = name => {
+  return /\w[^.]/.test(name)
+}
+
 export const validations = yup.object().shape({
   name: yup
     .string()
     .trim()
+    .min(2)
+    .test(
+      'name',
+      'Name must contain at least two characters',
+      validateBusinessName
+    )
     .required('Name of business is a required field'),
   businessCategoryId: yup.number().required(),
   url: yup.string(),

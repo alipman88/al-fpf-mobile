@@ -1,6 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { RefreshControl, ScrollView } from 'react-native'
+import {
+  AppState,
+  PushNotificationIOS,
+  RefreshControl,
+  ScrollView
+} from 'react-native'
 import get from 'lodash/get'
 import firebase from 'react-native-firebase'
 import Toast from 'react-native-easy-toast'
@@ -12,12 +17,18 @@ import { Advertisement } from './components/Advertisement'
 import { InThisIssue } from './components/InThisIssue'
 import { OtherIssues } from './components/OtherIssues'
 import { NeighboringContent } from './components/NeighboringContent'
+import { OcmMessage } from './components/OcmMessage'
 
 import { createChannel, displayNotification } from '@common/notifications'
 
 export class Forum extends React.Component {
   async componentDidMount() {
-    this.props.setupForumData()
+    // reset issue/area id to 0 so we fetch the default on fresh launch (notification handler is after this)
+    this.resetIssueAndArea()
+
+    AppState.addEventListener('change', this.handleAppStateChange)
+
+    this.props.setupForumData(this.props.navigation)
     this.setTitleFromArea()
 
     const fcmToken = await firebase.messaging().getToken()
@@ -35,6 +46,10 @@ export class Forum extends React.Component {
     if (!enabled) {
       try {
         await firebase.messaging().requestPermission()
+
+        // Some iOS devices need to explicitly register. See https://github.com/invertase/react-native-firebase/pull/1626 and https://rnfirebase.io/docs/v5.x.x/messaging/reference/IOSMessaging
+        await firebase.messaging().registerForRemoteNotifications()
+
         enabled = true
       } catch (error) {
         // User has rejected permissions. We dont do anything, because that's fine
@@ -87,6 +102,26 @@ export class Forum extends React.Component {
     }
   }
 
+  resetIssueAndArea() {
+    this.props.setCurrentIssueId(0)
+    this.props.setCurrentAreaId(0)
+  }
+
+  handleAppStateChange = state => {
+    if (state === 'unknown') {
+      // reset issue/area id to 0 so we fetch the default on fresh launch (notification handler is after this)
+      this.resetIssueAndArea()
+    } else if (state === 'active') {
+      // reset issue/area id to 0 so we fetch the default if badge icon is present
+      PushNotificationIOS.getApplicationIconBadgeNumber(badgeNumber => {
+        if (badgeNumber >= 1) {
+          this.resetIssueAndArea()
+          this.props.setupForumData()
+        }
+      })
+    }
+  }
+
   fetchIssues(prevProps) {
     const { currentAreaId, areas } = this.props
 
@@ -95,7 +130,7 @@ export class Forum extends React.Component {
       (prevProps.areas !== areas || prevProps.currentAreaId !== currentAreaId)
     ) {
       this.setTitleFromArea()
-      this.props.getIssues(this.props.currentAreaId)
+      this.props.getIssues(this.props.currentAreaId, this.props.navigation)
     }
   }
 
@@ -111,6 +146,11 @@ export class Forum extends React.Component {
         const current = issues.find(i => i.number === issueNum)
         if (current && current.id !== this.props.currentIssueId) {
           this.props.setCurrentIssueId(current.id)
+          this.props.toggleIssueUnread({
+            id: current.id,
+            isUnread: false,
+            areaId: currentAreaId
+          })
         } else if (!current) {
           navigateWithToken(`/areas/${currentAreaId}/issues/${issueNum}`)
         }
@@ -120,12 +160,30 @@ export class Forum extends React.Component {
         issues.length > 0 &&
         !issues.find(issue => issue.id === this.props.currentIssueId)
       ) {
+        this.refs.forumViewRef.scrollTo({ y: 0 })
         this.props.setCurrentIssueId(this.props.issues[0].id)
+        this.props.toggleIssueUnread({
+          id: this.props.issues[0].id,
+          isUnread: false,
+          areaId: currentAreaId
+        })
       }
     }
 
-    if (prevProps.currentIssueId !== this.props.currentIssueId) {
-      this.props.getPosts(this.props.currentIssueId)
+    if (
+      prevProps.currentIssueId !== this.props.currentIssueId &&
+      this.props.currentIssueId !== 0
+    ) {
+      // scroll to top any time we're rendering a different issue
+      if (this.refs.forumViewRef) {
+        this.refs.forumViewRef.scrollTo({ y: 0 })
+      }
+      this.props.getPosts(this.props.currentIssueId, this.props.navigation)
+      this.props.toggleIssueUnread({
+        id: this.props.currentIssueId,
+        isUnread: false,
+        areaId: currentAreaId
+      })
     }
   }
 
@@ -215,6 +273,7 @@ export class Forum extends React.Component {
     return (
       <ScreenContainer withPadding={false} grey>
         <ScrollView
+          ref='forumViewRef'
           refreshControl={
             <RefreshControl
               refreshing={loading}
@@ -225,13 +284,17 @@ export class Forum extends React.Component {
           <OtherIssues toast={this.toastRef} />
           <ForumContainer>
             {Boolean(currentIssue) && (
-              <InThisIssue number={currentIssue.number} />
+              <InThisIssue
+                number={currentIssue.number}
+                navigation={this.props.navigation}
+              />
             )}
             {postRender}
             {get(issues, '[0].id', 0) === currentIssueId ? (
               <NeighboringContent />
             ) : null}
           </ForumContainer>
+          <OcmMessage />
         </ScrollView>
         <Toast
           ref={toast => (this.toastRef = toast)}
@@ -258,10 +321,11 @@ Forum.propTypes = {
   navigation: PropTypes.object.isRequired,
   navigateWithToken: PropTypes.func.isRequired,
   neighboringAreas: PropTypes.object.isRequired,
+  posts: PropTypes.object.isRequired,
   sendNewFCMToken: PropTypes.func.isRequired,
   setCurrentAreaId: PropTypes.func.isRequired,
   setCurrentIssueId: PropTypes.func.isRequired,
   setupForumData: PropTypes.func.isRequired,
-  posts: PropTypes.object.isRequired,
-  sharedPosts: PropTypes.object.isRequired
+  sharedPosts: PropTypes.object.isRequired,
+  toggleIssueUnread: PropTypes.func.isRequired
 }

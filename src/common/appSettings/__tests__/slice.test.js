@@ -4,7 +4,8 @@ describe('appSettings - slice', () => {
   test('initialState', () => {
     const state = appSettings.reducer(undefined, {})
     expect(state).toEqual({
-      postTruncateLength: 1000,
+      forumPostTruncateLength: 1000,
+      searchPostTruncateLength: 1000,
       categories: [],
       businessCategories: {},
       onboardingProfilePlans: [],
@@ -18,7 +19,8 @@ describe('appSettings - slice', () => {
       const state = appSettings.reducer(
         undefined,
         appSettings.actions.setAppSettings({
-          posting_truncate_length: 450,
+          forum_posting_truncate_length: 450,
+          search_posting_truncate_length: 550,
           categories: [
             {
               id: 1,
@@ -39,7 +41,8 @@ describe('appSettings - slice', () => {
       })
 
       expect(data).toEqual({
-        postTruncateLength: 450,
+        forumPostTruncateLength: 450,
+        searchPostTruncateLength: 550,
         categories: [
           {
             id: 1,

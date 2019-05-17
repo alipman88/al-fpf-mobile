@@ -35,6 +35,7 @@
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* FrontPorchForumTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* FrontPorchForumTests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
+		3024235E228A059400D6D951 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30242338228A04DE00D6D951 /* libRCTPushNotification.a */; };
 		49A869758CA447DBA2A929DC /* ProximaNova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 20728C53B8F34FB1BF296047 /* ProximaNova-Semibold.otf */; };
 		5BA57F8643964EAAB2DF9FDC /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 422AA25362334CDFAAC95FAA /* libSplashScreen.a */; };
 		68EF0E77951040D090A81A73 /* libRNCNetInfo-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A79C63293FC4A6B89F70DC6 /* libRNCNetInfo-tvOS.a */; };
@@ -199,6 +200,20 @@
 			proxyType = 2;
 			remoteGlobalIDString = 3D383D621EBD27B9005632C8;
 			remoteInfo = "double-conversion-tvOS";
+		};
+		30242337228A04DE00D6D951 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 30242325228A04DE00D6D951 /* RCTPushNotification.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTPushNotification;
+		};
+		30242339228A04DE00D6D951 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 30242325228A04DE00D6D951 /* RCTPushNotification.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D05745F1DE6004600184BB4;
+			remoteInfo = "RCTPushNotification-tvOS";
 		};
 		3DAD3E831DF850E9000B6D8A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -431,7 +446,7 @@
 		0A79C63293FC4A6B89F70DC6 /* libRNCNetInfo-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNCNetInfo-tvOS.a"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* FrontPorchForum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FrontPorchForum.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* Front Porch Forum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Front Porch Forum.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = FrontPorchForum/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = FrontPorchForum/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -444,6 +459,7 @@
 		2D02E47B1E0B4A5D006451C7 /* FrontPorchForum-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FrontPorchForum-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* FrontPorchForum-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FrontPorchForum-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		30242325228A04DE00D6D951 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		422AA25362334CDFAAC95FAA /* libSplashScreen.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSplashScreen.a; sourceTree = "<group>"; };
 		4C9CC268633343DEBAE440EF /* RNCNetInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNCNetInfo.xcodeproj; path = "../node_modules/@react-native-community/netinfo/ios/RNCNetInfo.xcodeproj"; sourceTree = "<group>"; };
 		58EB6FC9BE9F4B7A9F4FAD9F /* libAirMaps.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAirMaps.a; sourceTree = "<group>"; };
@@ -497,6 +513,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3024235E228A059400D6D951 /* libRCTPushNotification.a in Frameworks */,
 				9A598EE1224A8C42008F56DF /* FirebaseMessaging.framework in Frameworks */,
 				9A598EDF224A8C36008F56DF /* FirebaseInAppMessaging.framework in Frameworks */,
 				9A598EE0224A8C36008F56DF /* FirebaseInAppMessagingDisplay.framework in Frameworks */,
@@ -710,6 +727,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		30242326228A04DE00D6D951 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				30242338228A04DE00D6D951 /* libRCTPushNotification.a */,
+				3024233A228A04DE00D6D951 /* libRCTPushNotification-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		5B1FF356EC48437AA3A68C38 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -745,6 +771,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				30242325228A04DE00D6D951 /* RCTPushNotification.xcodeproj */,
 				9A2CEBEB2215D11C006483CF /* RNDeviceInfo.xcodeproj */,
 				9AD2E5E52204AE8E0065600F /* RNSensitiveInfo.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
@@ -798,7 +825,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* FrontPorchForum.app */,
+				13B07F961A680F5B00A75B9A /* Front Porch Forum.app */,
 				2D02E47B1E0B4A5D006451C7 /* FrontPorchForum-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* FrontPorchForum-tvOSTests.xctest */,
 			);
@@ -914,7 +941,7 @@
 			);
 			name = FrontPorchForum;
 			productName = "Hello World";
-			productReference = 13B07F961A680F5B00A75B9A /* FrontPorchForum.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* Front Porch Forum.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2D02E47A1E0B4A5D006451C7 /* FrontPorchForum-tvOS */ = {
@@ -1030,6 +1057,10 @@
 				{
 					ProductGroup = 00C302D41ABCB9D200DB3ED1 /* Products */;
 					ProjectRef = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
+				},
+				{
+					ProductGroup = 30242326228A04DE00D6D951 /* Products */;
+					ProjectRef = 30242325228A04DE00D6D951 /* RCTPushNotification.xcodeproj */;
 				},
 				{
 					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
@@ -1207,6 +1238,20 @@
 			fileType = archive.ar;
 			path = "libdouble-conversion.a";
 			remoteRef = 2DF0FFE82056DD460020B375 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		30242338228A04DE00D6D951 /* libRCTPushNotification.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTPushNotification.a;
+			remoteRef = 30242337228A04DE00D6D951 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3024233A228A04DE00D6D951 /* libRCTPushNotification-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRCTPushNotification-tvOS.a";
+			remoteRef = 30242339228A04DE00D6D951 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		3DAD3E841DF850E9000B6D8A /* libRCTImage-tvOS.a */ = {
@@ -1589,7 +1634,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.FrontPorchForum.FrontPorchForum;
-				PRODUCT_NAME = FrontPorchForum;
+				PRODUCT_NAME = "Front Porch Forum";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 arm64e armv7 armv7s";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1641,7 +1686,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.FrontPorchForum.FrontPorchForum;
-				PRODUCT_NAME = FrontPorchForum;
+				PRODUCT_NAME = "Front Porch Forum";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};

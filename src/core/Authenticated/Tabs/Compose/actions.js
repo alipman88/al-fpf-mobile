@@ -1,13 +1,18 @@
+import { Keyboard } from 'react-native'
 import get from 'lodash/get'
 
 import { appMessage } from '@components/AppMessage/slice'
 import { postAuthorized } from '@common/api'
+import { resetAction } from '@common/resetAction'
+import { createResetStackTo } from '@common/utils/navigation'
 import { responseError } from '@common/utils/responseError'
 
-export const submitPost = (onSuccess, values, setSubmitting) => async (
-  dispatch,
-  getState
-) => {
+export const submitPost = (
+  onSuccess,
+  values,
+  setSubmitting,
+  navigation
+) => async (dispatch, getState) => {
   setSubmitting(true)
   try {
     await postAuthorized('/users/posts', values, getState())
@@ -23,7 +28,13 @@ export const submitPost = (onSuccess, values, setSubmitting) => async (
         )
       )
     )
+    if (e.response.status === 401) {
+      dispatch(resetAction())
+      navigation.navigate('SplashScreen')
+      navigation.dispatch(createResetStackTo('Login'))
+    }
   } finally {
     setSubmitting(false)
+    Keyboard.dismiss()
   }
 }

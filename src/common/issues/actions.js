@@ -1,12 +1,14 @@
 import { issues } from './slice'
 import { getAuthorized } from '@common/api'
 import { appMessage } from '@components/AppMessage/slice'
+import { resetAction } from '@common/resetAction'
+import { createResetStackTo } from '@common/utils/navigation'
 import { responseError } from '@common/utils/responseError'
 import { areas } from '@common/areas'
 import { spinner } from '@app/Spinner/slice'
 import * as commonActions from '@common/actions/navigateWithToken'
 
-export const getIssues = areaId => async (dispatch, getState) => {
+export const getIssues = (areaId, navigation) => async (dispatch, getState) => {
   try {
     dispatch(issues.actions.setLoading(true))
     const response = await getAuthorized(
@@ -26,6 +28,13 @@ export const getIssues = areaId => async (dispatch, getState) => {
     )
   } catch (e) {
     dispatch(appMessage.actions.setAppError(responseError(e)))
+    if (e.response.status === 401) {
+      dispatch(resetAction())
+      navigation.navigate('SplashScreen')
+      navigation.dispatch(createResetStackTo('Login'))
+    }
+  } finally {
+    dispatch(issues.actions.setLoading(false))
   }
 }
 
@@ -63,7 +72,7 @@ export const fetchSpecificIssue = (
     const previousAreaId = areas.selectors.getCurrentAreaId(getState())
     // set current and fetch issues for that area
     dispatch(areas.actions.setCurrentAreaId(areaId))
-    await dispatch(getIssues(areaId))
+    await dispatch(getIssues(areaId, navigation))
 
     // if the desired issue is not in the latest 30 for that forum
     const issuesForArea = issues.selectors.getIssuesForArea(getState(), areaId)
@@ -81,6 +90,11 @@ export const fetchSpecificIssue = (
     }
   } catch (e) {
     dispatch(appMessage.actions.setAppError(responseError(e)))
+    if (e.response.status === 401) {
+      dispatch(resetAction())
+      navigation.navigate('SplashScreen')
+      navigation.dispatch(createResetStackTo('Login'))
+    }
   } finally {
     dispatch(spinner.actions.setVisibility(false))
   }

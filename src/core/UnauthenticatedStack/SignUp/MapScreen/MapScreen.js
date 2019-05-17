@@ -118,6 +118,7 @@ export class MapScreen extends React.Component {
         nextWidth='auto'
         nextDisabled={
           areas.length === 0 ||
+          this.state.modalOpen ||
           !checkedAreaKeys.reduce(
             (atleastOneChecked, areaChecked) =>
               atleastOneChecked || checkedAreas[areaChecked],

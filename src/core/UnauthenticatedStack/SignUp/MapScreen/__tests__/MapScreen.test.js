@@ -151,6 +151,14 @@ describe('MapScreen', () => {
     expect(wrapper.find(FullScreenWizard).props().nextDisabled).toEqual(true)
   })
 
+  test('modal open, nextButton should be disabled', () => {
+    const wrapper = shallow(<MapScreen {...defaultProps} />)
+
+    expect(wrapper.find(FullScreenWizard).props().nextDisabled).toEqual(false)
+    wrapper.setState({ modalOpen: true })
+    expect(wrapper.find(FullScreenWizard).props().nextDisabled).toEqual(true)
+  })
+
   test('map has polygons & details for each area', () => {
     const wrapper = shallow(
       <MapScreen

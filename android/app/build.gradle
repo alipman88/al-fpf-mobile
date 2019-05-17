@@ -111,6 +111,16 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    if (project.hasProperty('FPF_RELEASE_STORE_FILE')) {
+        signingConfigs {
+            release {
+                storeFile file(FPF_RELEASE_STORE_FILE)
+                storePassword FPF_RELEASE_STORE_PASSWORD
+                keyAlias FPF_RELEASE_KEY_ALIAS
+                keyPassword FPF_RELEASE_KEY_PASSWORD
+            }
+        }
+    }
     splits {
         abi {
             reset()
@@ -123,6 +133,9 @@ android {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            if (project.hasProperty('FPF_RELEASE_STORE_FILE')) {
+                signingConfig signingConfigs.release
+            }
         }
     }
     // applicationVariants are e.g. debug, release
@@ -153,7 +166,7 @@ dependencies {
     implementation project(':react-native-sensitive-info')
     implementation project(':react-native-gesture-handler')
     implementation project(':react-native-config')
-    compile project(':react-native-sensitive-info')
+    implementation project(':react-native-sensitive-info')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.facebook.react:react-native:+"  // From node_modules
@@ -161,7 +174,7 @@ dependencies {
     implementation project(':react-native-picker-module')
 
     implementation "com.google.android.gms:play-services-base:16.0.1"
-    implementation "com.google.firebase:firebase-core:16.0.6"
+    implementation "com.google.firebase:firebase-core:16.0.8"
     implementation "com.google.firebase:firebase-messaging:17.3.4"
     implementation 'me.leolin:ShortcutBadger:1.1.21@aar'
 }

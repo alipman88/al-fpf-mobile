@@ -1,9 +1,12 @@
 import React from 'react'
 import { Linking, TouchableOpacity } from 'react-native'
+import Config from 'react-native-config'
+import firebase from 'react-native-firebase'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import DeviceInfo from 'react-native-device-info'
 
+import { resendEmail } from '../actions'
 import { KeyboardAwareScrollView } from '@components/KeyboardAwareScrollView'
 import { api } from '@common/api'
 import { currentUser } from '@common/currentUser'
@@ -22,7 +25,7 @@ import {
   Version
 } from './styledComponents'
 
-export const LoginComponent = ({ navigation, setAccessToken }) => {
+export const LoginComponent = ({ navigation, setAccessToken, resendEmail }) => {
   const grassContent = (
     <BottomContainer>
       <LinksContainer>
@@ -47,9 +50,12 @@ export const LoginComponent = ({ navigation, setAccessToken }) => {
           </TouchableOpacity>
         </TroubleLoggingInContainer>
       </LinksContainer>
-      <Version>
-        v{DeviceInfo.getVersion()} #{DeviceInfo.getBuildNumber()}
-      </Version>
+      {['development', 'staging'].includes(Config.ENVIRONMENT) && (
+        <Version>
+          v{DeviceInfo.getVersion()} #{DeviceInfo.getBuildNumber()} :{' '}
+          {Config.ENVIRONMENT}
+        </Version>
+      )}
     </BottomContainer>
   )
 
@@ -63,6 +69,7 @@ export const LoginComponent = ({ navigation, setAccessToken }) => {
             try {
               const response = await api.post('/login', values)
               setAccessToken(response.data.access_token)
+              firebase.analytics().setAnalyticsCollectionEnabled(true)
               navigation.navigate('Authenticated')
             } catch (e) {
               actions.setFieldError('email', responseError(e))
@@ -88,6 +95,7 @@ export const LoginComponent = ({ navigation, setAccessToken }) => {
               setFieldTouched={setFieldTouched}
               setFieldValue={setFieldValue}
               handleSubmit={handleSubmit}
+              resendEmail={resendEmail}
               isSubmitting={isSubmitting}
               navigation={navigation}
             />
@@ -100,12 +108,14 @@ export const LoginComponent = ({ navigation, setAccessToken }) => {
 
 LoginComponent.propTypes = {
   navigation: PropTypes.object.isRequired,
-  setAccessToken: PropTypes.func.isRequired
+  setAccessToken: PropTypes.func.isRequired,
+  resendEmail: PropTypes.func.isRequired
 }
 
 export const Login = connect(
   null,
   {
-    setAccessToken: currentUser.actions.setAccessToken
+    setAccessToken: currentUser.actions.setAccessToken,
+    resendEmail: resendEmail
   }
 )(LoginComponent)

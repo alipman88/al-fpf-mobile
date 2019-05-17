@@ -15,7 +15,6 @@ import { CreateAccount } from './SignUp/CreateAccount'
 
 export const UnauthenticatedStack = createStackNavigator(
   {
-    Welcome,
     Login,
     MapScreen,
     ProfileTypes,
@@ -26,7 +25,13 @@ export const UnauthenticatedStack = createStackNavigator(
     Waitlist,
     WaitlistSuccess,
     BusinessInfo,
-    CreateAccount
+    CreateAccount,
+    Welcome: {
+      screen: Welcome,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    }
   },
   {
     initialRouteName: 'Welcome',

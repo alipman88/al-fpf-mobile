@@ -4,8 +4,8 @@ import { Text } from '@components/Text'
 export const LinkText = styled(Text)`
   color: blue;
   text-align: center;
-  padding-vertical: 10;
-  padding-right; 5;
+  margin-vertical: 10;
+  margin-right; 5;
   font-size: 18;
 `
 

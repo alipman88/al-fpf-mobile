@@ -18,7 +18,13 @@ describe('GovernmentInfoFields', () => {
       jurisdiction: '',
       tellUsMore: ''
     },
-    governmentTitles: ['Mayor', 'Feudal Lord', 'Feudal Lady', 'Mr. Rogers']
+    governmentTitles: [
+      'Mayor',
+      'Feudal Lord',
+      'Feudal Lady',
+      'Mr. Rogers',
+      'Other'
+    ]
   }
 
   afterEach(() => {
@@ -34,6 +40,16 @@ describe('GovernmentInfoFields', () => {
     select.props().onValueChange(() => 3)
 
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('title')
+  })
+
+  test('changing title to Other displays text input', () => {
+    const wrapper = shallow(<GovernmentInfoFields {...defaultProps} />)
+    expect(wrapper.find(TextInput).length).toEqual(2)
+
+    const wrapperOther = shallow(
+      <GovernmentInfoFields {...defaultProps} values={{ title: 'Other' }} />
+    )
+    expect(wrapperOther.find(TextInput).length).toEqual(3)
   })
 
   test('changing jurisdiction calls handlers', () => {

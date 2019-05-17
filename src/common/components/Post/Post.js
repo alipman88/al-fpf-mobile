@@ -1,5 +1,7 @@
 import React from 'react'
 import { Linking, TouchableOpacity } from 'react-native'
+import Autolink from 'react-native-autolink'
+import firebase from 'react-native-firebase'
 import PropTypes from 'prop-types'
 
 import format from 'date-fns/format'
@@ -23,7 +25,8 @@ import {
   Bottom,
   BottomBordered,
   ButtonWrapper,
-  ButtonSpacer
+  ButtonSpacer,
+  AutoPostLinkStyle
 } from './styledComponents'
 
 export class Post extends React.Component {
@@ -80,16 +83,24 @@ export class Post extends React.Component {
     const getBottomButtons = post => {
       const includeReplyButton =
         !post.is_shared_post && areasIdMap[post.area_id]
+      const postAnalyticsData = {
+        area_id: post.area_id,
+        post_id: post.id,
+        issue_id: post.issue_id
+      }
       return (
         <BottomContainer>
           <ButtonWrapper>
             <Button
               color={'#fff'}
-              onPress={() =>
+              onPress={() => {
+                firebase
+                  .analytics()
+                  .logEvent('press_email_author', postAnalyticsData)
                 Linking.openURL(
                   `mailto:${post.user_email}?subject=RE: ${post.title}`
                 )
-              }
+              }}
               fullWidth
             >
               Email author
@@ -102,12 +113,15 @@ export class Post extends React.Component {
               <ButtonWrapper>
                 <Button
                   color={'#fff'}
-                  onPress={() =>
+                  onPress={() => {
+                    firebase
+                      .analytics()
+                      .logEvent('press_reply_to_forum', postAnalyticsData)
                     this.handleReplyPress({
                       parentPostId: post.id,
                       areaId: post.area_id
                     })
-                  }
+                  }}
                 >
                   Reply to forum
                 </Button>
@@ -155,9 +169,7 @@ export class Post extends React.Component {
             </PostDate>
           )}
           {showDatePublished && Boolean(post.date_published) && (
-            <PostDate>
-              {format(new Date(post.date_published), 'MMM DD, YYYY')}
-            </PostDate>
+            <PostDate>{format(post.date_published, 'MMM DD, YYYY')}</PostDate>
           )}
           {post.categories.map(category => (
             <TouchableOpacity
@@ -168,11 +180,14 @@ export class Post extends React.Component {
             </TouchableOpacity>
           ))}
           <PostBody>
-            {truncateText(
-              post.content,
-              postTruncateLength,
-              !this.state.showMore
-            )}
+            <Autolink
+              text={truncateText(
+                post.content,
+                postTruncateLength,
+                !this.state.showMore
+              )}
+              linkStyle={AutoPostLinkStyle.link}
+            />
           </PostBody>
           {post.content.length > postTruncateLength && (
             <TouchableOpacity onPress={() => this.toggleShowMore()}>

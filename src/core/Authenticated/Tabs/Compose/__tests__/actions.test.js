@@ -12,20 +12,23 @@ describe('Compose - actions', () => {
     }
   })
   const setSubmitting = jest.fn()
+  const onSuccess = jest.fn()
   const navigation = {
-    navigate: jest.fn()
+    navigate: jest.fn(),
+    dispatch: jest.fn()
   }
 
   afterEach(() => {
     dispatch.mockReset()
     setSubmitting.mockReset()
     navigation.navigate.mockReset()
+    navigation.dispatch.mockReset()
+    onSuccess.mockReset()
   })
 
   describe('submitPost', () => {
     test('calls api.post', async () => {
       const spy = jest.spyOn(api, 'post').mockImplementation(() => ({}))
-      const onSuccess = jest.fn()
 
       await submitPost(onSuccess, { subject: 'Subject' }, setSubmitting)(
         dispatch,
@@ -49,16 +52,21 @@ describe('Compose - actions', () => {
     })
 
     test('dispatches app error', async () => {
+      const error = new Error('error')
+      error.response = { status: 401 }
       const spy = jest.spyOn(api, 'post').mockImplementation(() => {
-        throw new Error('error')
+        throw error
       })
 
-      await submitPost(navigation, { subject: 'Subject' }, setSubmitting)(
-        dispatch,
-        getState
-      )
+      await submitPost(
+        onSuccess,
+        { subject: 'Subject' },
+        setSubmitting,
+        navigation
+      )(dispatch, getState)
 
       expect(setSubmitting).toHaveBeenCalledWith(true)
+      expect(onSuccess).toHaveBeenCalledTimes(0)
       expect(spy).toHaveBeenCalledWith(
         '/users/posts',
         { subject: 'Subject' },
@@ -71,6 +79,10 @@ describe('Compose - actions', () => {
       expect(dispatch).toHaveBeenCalledWith(
         appMessage.actions.setAppError('error')
       )
+
+      expect(navigation.navigate).toHaveBeenCalledWith('SplashScreen')
+      expect(navigation.dispatch).toHaveBeenCalledTimes(1)
+
       expect(setSubmitting).toHaveBeenCalledWith(false)
 
       spy.mockRestore()

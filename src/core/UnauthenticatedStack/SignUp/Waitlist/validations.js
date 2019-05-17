@@ -3,7 +3,8 @@ import * as yup from 'yup'
 export const validations = yup.object().shape({
   streetNumber: yup
     .string()
-    .matches(/^[0-9]*$/, 'Please enter a valid House/building number'),
+    .matches(/^[0-9]*$/, 'Please enter a valid House/building number')
+    .required(),
   streetName: yup.string().required(),
   apt: yup.string(),
   city: yup.string().required(),

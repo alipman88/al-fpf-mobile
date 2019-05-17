@@ -11,9 +11,15 @@ export class OtherIssues extends React.Component {
     scrollWidth: Number.MAX_VALUE
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.currentIssueId !== this.props.currentIssueId) {
+      this.scrollToFocusedIssue()
+    }
+  }
+
   onTapIssue = id => {
     this.props.setCurrentIssueId(id)
-    this.props.getPosts(id)
+    this.props.getPosts(id, this.props.navigation)
     if (this.props.issues.find(issue => issue.id === id).isUnread) {
       this.props.toggleIssueUnread({
         id: id,
@@ -23,21 +29,22 @@ export class OtherIssues extends React.Component {
     }
   }
 
+  scrollToFocusedIssue() {
+    if (this.focusedIssue) {
+      this.focusedIssue.measureLayout(findNodeHandle(this.scrollViewRef), x => {
+        this.scrollViewRef.scrollTo({
+          x: Math.min(this.state.scrollWidth, x),
+          animated: true
+        })
+      })
+    } else if (this.scrollViewRef) {
+      this.scrollViewRef.scrollToEnd({ animated: true })
+    }
+  }
+
   scrollFocusedIssue = ev => {
     requestAnimationFrame(() => {
-      if (this.focusedIssue) {
-        this.focusedIssue.measureLayout(
-          findNodeHandle(this.scrollViewRef),
-          x => {
-            this.scrollViewRef.scrollTo({
-              x: Math.min(this.state.scrollWidth, x),
-              animated: true
-            })
-          }
-        )
-      } else {
-        this.scrollViewRef.scrollToEnd({ animated: true })
-      }
+      this.scrollToFocusedIssue()
     })
   }
 
@@ -103,5 +110,6 @@ OtherIssues.propTypes = {
   toast: PropTypes.shape({
     show: PropTypes.func
   }).isRequired,
-  toggleIssueUnread: PropTypes.func.isRequired
+  toggleIssueUnread: PropTypes.func.isRequired,
+  navigation: PropTypes.object.isRequired
 }

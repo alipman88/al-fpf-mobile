@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import SplashScreen from 'react-native-splash-screen'
 import NetInfo from '@react-native-community/netinfo'
+import Toast from 'react-native-easy-toast'
 
 import { store, persistor } from '@common/store'
 import { currentUser } from '@common/currentUser'
@@ -28,14 +29,23 @@ export class App extends React.Component {
       this.setConnectedStatus(connectionInfo.type, connectionInfo.effectiveType)
     })
 
-    NetInfo.getConnectionInfo().then(connectionInfo => {
-      this.setConnectedStatus(connectionInfo.type, connectionInfo.effectiveType)
-    })
+    this.updateConnectionStatus()
   }
 
   componentWillUnmount() {
     Linking.removeEventListener('url', this.handleOpenURL)
     AppState.removeEventListener('change', this.handleAppStateChange)
+  }
+
+  updateConnectionStatus = () => {
+    const startConnectionState = this.state.connected
+    NetInfo.getConnectionInfo().then(connectionInfo => {
+      this.setConnectedStatus(connectionInfo.type, connectionInfo.effectiveType)
+
+      if (!startConnectionState && !this.state.connected) {
+        this.toastRef.show('No cell or wifi signal')
+      }
+    })
   }
 
   handleAppStateChange = async nextAppState => {
@@ -56,6 +66,28 @@ export class App extends React.Component {
     }
   }
 
+  getActiveRouteName = navigationState => {
+    if (!navigationState) {
+      return null
+    }
+    const route = navigationState.routes[navigationState.index]
+    // dive into nested navigators
+    if (route.routes) {
+      return this.getActiveRouteName(route)
+    }
+    return route.routeName
+  }
+
+  handleNavigationChange = (prevState, currentState, action) => {
+    const currentScreen = this.getActiveRouteName(currentState)
+    const prevScreen = this.getActiveRouteName(prevState)
+
+    if (prevScreen !== currentScreen) {
+      // trigger setting screen name for analytics based on react navigation
+      firebase.analytics().setCurrentScreen(currentScreen)
+    }
+  }
+
   setConnectedStatus(type, effectiveType) {
     const connectionWeak =
       type === 'none' ||
@@ -70,9 +102,16 @@ export class App extends React.Component {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <React.Fragment>
-            <Container />
-            {!this.state.connected && <Offline />}
+            <Container handleNavigationChange={this.handleNavigationChange} />
+            {!this.state.connected && (
+              <Offline updateConnectionStatus={this.updateConnectionStatus} />
+            )}
             <AppMessage />
+            <Toast
+              ref={toast => (this.toastRef = toast)}
+              position='top'
+              style={{ zIndex: 1000 }}
+            />
           </React.Fragment>
         </PersistGate>
       </Provider>

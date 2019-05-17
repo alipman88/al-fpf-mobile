@@ -40,6 +40,7 @@ export const Forum = connect(
     sendNewFCMToken,
     setCurrentIssueId: issues.actions.setCurrentIssueId,
     setCurrentAreaId: areas.actions.setCurrentAreaId,
-    navigateWithToken
+    navigateWithToken,
+    toggleIssueUnread: issues.actions.toggleIssueUnread
   }
 )(ForumComponent)

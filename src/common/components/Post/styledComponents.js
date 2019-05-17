@@ -1,6 +1,7 @@
 import styled from 'styled-components/native'
 
 import { Text, TextSemibold } from '@components/Text'
+import { StyleSheet } from 'react-native'
 
 export const PostContainer = styled.View`
   margin-bottom: 10;
@@ -21,7 +22,8 @@ export const PostBodyContainer = styled.View`
   padding-horizontal: ${({ hasBorder }) => (hasBorder ? '10px' : '0')};
 `
 export const PostHeader = styled(TextSemibold)`
-  font-size: 20;
+  font-size: 22;
+  font-weight: bold;
   color: #355768;
   margin-bottom: 10;
 `
@@ -51,20 +53,17 @@ export const PostLink = styled(TextSemibold)`
   text-decoration-color: #d77400;
 `
 
-export const ShowMoreButton = styled(PostLink)`
-  margin-top: 10;
-`
+export const ShowMoreButton = styled(PostLink)``
+
 export const LinkText = styled(PostAuthor)`
   text-decoration: underline;
 `
 
 export const BottomBordered = styled.View`
-  border-top-width: 1;
-  border-top-color: #ebecf1;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 10px 13px 10px
+  padding: 0px 10px 10px 10px
   align-items: stretch;
 `
 
@@ -83,3 +82,9 @@ export const ButtonWrapper = styled.View`
 export const ButtonSpacer = styled.View`
   flex: 1;
 `
+
+export const AutoPostLinkStyle = StyleSheet.create({
+  link: {
+    color: '#d77400'
+  }
+})

@@ -109,7 +109,14 @@ export class ComposeFields extends React.Component {
     const isDuplicateEvent =
       duplicatePost && get(values, 'category.is_event', false)
 
-    let categoryValue = categories.findIndex(
+    // Add 'None Apply' category unique to post submission
+    const composeCategories = categories.slice()
+    composeCategories.push({
+      name: 'None Apply',
+      id: -1
+    })
+
+    let categoryValue = composeCategories.findIndex(
       category => category.id === get(values, 'category.id')
     )
 
@@ -153,7 +160,7 @@ export class ComposeFields extends React.Component {
                 title='Select Profile'
                 value={values.profile}
                 error={errors.profile}
-                touched={touched.profile}
+                touched={touched.profile !== undefined}
               />
             </FieldWrapper>
           )}
@@ -191,10 +198,10 @@ export class ComposeFields extends React.Component {
                 'Select category that best applies'
               )}
               label='Category'
-              items={categories.map(category => category.name)}
+              items={composeCategories.map(category => category.name)}
               onValueChange={index => {
                 setFieldTouched('category', true)
-                setFieldValue('category', categories[index])
+                setFieldValue('category', composeCategories[index])
               }}
               title='Select Category'
               value={categoryValue}
@@ -278,5 +285,5 @@ ComposeFields.propTypes = {
   setFieldValue: PropTypes.func.isRequired,
   touched: PropTypes.object.isRequired,
   values: PropTypes.object.isRequired,
-  areaFromLink: PropTypes.number.isRequired
+  areaFromLink: PropTypes.number
 }

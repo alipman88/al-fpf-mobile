@@ -11,6 +11,10 @@ describe('areas actions', () => {
       }
     }
   })
+  const navigation = {
+    navigate: jest.fn(),
+    dispatch: jest.fn()
+  }
 
   test('requests /areas with authorization header', async () => {
     const getSpy = jest.spyOn(api, 'get').mockImplementation(() => ({
@@ -80,13 +84,15 @@ describe('areas actions', () => {
   })
 
   test('an api error dispatches an error message', async () => {
+    const error = new Error('boom')
+    error.response = { status: 401 }
     const getSpy = jest.spyOn(api, 'get').mockImplementation(() => {
-      throw new Error('boom')
+      throw error
     })
 
     const dispatch = jest.fn()
 
-    await getAreas()(dispatch, getState)
+    await getAreas(navigation)(dispatch, getState)
 
     expect(getSpy).toHaveBeenCalledWith('/areas?page=1', {
       headers: {
@@ -97,6 +103,9 @@ describe('areas actions', () => {
     expect(dispatch).toHaveBeenCalledWith(
       appMessage.actions.setAppError('boom')
     )
+
+    expect(navigation.navigate).toHaveBeenCalledWith('SplashScreen')
+    expect(navigation.dispatch).toHaveBeenCalledTimes(1)
 
     getSpy.mockRestore()
   })
