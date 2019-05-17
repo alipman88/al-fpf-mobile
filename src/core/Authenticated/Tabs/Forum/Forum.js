@@ -294,7 +294,7 @@ export class Forum extends React.Component {
               <NeighboringContent />
             ) : null}
           </ForumContainer>
-          <OcmMessage />
+          {get(issues, '[0].id', 0) === currentIssueId ? <OcmMessage /> : null}
         </ScrollView>
         <Toast
           ref={toast => (this.toastRef = toast)}
