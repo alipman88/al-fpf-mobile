@@ -12,6 +12,11 @@ import {
   ShowMoreButton
 } from '../styledComponents'
 import Autolink from 'react-native-autolink'
+import { chooseMailApp } from '@common/utils/chooseMailApp'
+
+jest.mock('@common/utils/chooseMailApp', () => ({
+  chooseMailApp: jest.fn()
+}))
 
 describe('Post', () => {
   const defaultProps = {
@@ -159,10 +164,9 @@ describe('Post', () => {
         issue_id: defaultProps.post.issue_id
       }
     )
-    expect(Linking.openURL).toHaveBeenCalledWith(
-      `mailto:${defaultProps.post.user_email}?subject=RE: ${
-        defaultProps.post.title
-      }`
-    )
+    expect(chooseMailApp).toHaveBeenCalledWith({
+      subject: `RE: ${defaultProps.post.title}`,
+      toEmail: defaultProps.post.user_email
+    })
   })
 })

@@ -51,13 +51,11 @@ function getComposeUrl(app, subject, toEmail) {
  */
 export function isAppInstalled(app, subject, toEmail) {
   return new Promise(resolve => {
-    console.log(`checking app ${app}`)
     if (!(app in prefixes)) {
       return resolve(false)
     }
 
     const url = getComposeUrl(app, subject, toEmail)
-    console.log(`checking url`, url)
     Linking.canOpenURL(url)
       .then(isSupported => {
         resolve(isSupported)
