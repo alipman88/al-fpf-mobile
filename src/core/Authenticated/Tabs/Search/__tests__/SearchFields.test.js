@@ -154,16 +154,22 @@ describe('SearchFields', () => {
     wrapper.setState({ showAdvanced: true })
 
     wrapper.find(TouchableOpacity).simulate('press')
-    expect(defaultProps.setFieldValue).toHaveBeenCalledWith('forums', [])
+    expect(defaultProps.setFieldValue).toHaveBeenCalledWith('forums', [], true)
     expect(defaultProps.setFieldValue).toHaveBeenCalledWith(
       'fromDate',
-      startOfDay(subYears(new Date(), 2))
+      startOfDay(subYears(new Date(), 2)),
+      true
     )
     expect(defaultProps.setFieldValue).toHaveBeenCalledWith(
       'toDate',
-      endOfDay(new Date())
+      endOfDay(new Date()),
+      true
     )
-    expect(defaultProps.setFieldValue).toHaveBeenCalledWith('category', null)
+    expect(defaultProps.setFieldValue).toHaveBeenCalledWith(
+      'category',
+      null,
+      true
+    )
 
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('forums', false)
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('fromDate', false)

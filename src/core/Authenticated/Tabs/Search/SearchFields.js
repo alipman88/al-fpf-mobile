@@ -44,10 +44,11 @@ export class SearchFields extends React.Component {
       this.props.categoryFromLink &&
       this.props.categoryFromLink !== prevProps.categoryFromLink
     ) {
-      this.resetForm()
+      this.resetForm(false)
+      this.props.setFieldValue('keyword', '', false)
       this.props.setFieldValue('category', this.props.categoryFromLink, false)
       this.props.setFieldTouched('category')
-      this.props.setFieldValue('forums', [this.props.currentAreaId])
+      this.props.setFieldValue('forums', [this.props.currentAreaId], false)
       this.setState({ showAdvanced: true })
       // this is a hack
       // formik settings values seems to be async, and validations dont pass due to having `isCanceled: true`
@@ -57,12 +58,16 @@ export class SearchFields extends React.Component {
     }
   }
 
-  resetForm() {
+  resetForm(setFieldAsync = true) {
     const { setFieldTouched, setFieldValue } = this.props
-    setFieldValue('forums', [])
-    setFieldValue('fromDate', startOfDay(subYears(new Date(), 2)))
-    setFieldValue('toDate', endOfDay(new Date()))
-    setFieldValue('category', null)
+    setFieldValue('forums', [], setFieldAsync)
+    setFieldValue(
+      'fromDate',
+      startOfDay(subYears(new Date(), 2)),
+      setFieldAsync
+    )
+    setFieldValue('toDate', endOfDay(new Date()), setFieldAsync)
+    setFieldValue('category', null, setFieldAsync)
     setFieldTouched('forums', false)
     setFieldTouched('fromDate', false)
     setFieldTouched('toDate', false)
