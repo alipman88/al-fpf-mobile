@@ -101,6 +101,7 @@ export class Post extends React.Component {
 
                 if (Platform.OS === 'ios') {
                   chooseMailApp({
+                    title: 'Email author',
                     subject: `RE: ${post.title}`,
                     toEmail: post.user_email
                   })
