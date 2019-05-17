@@ -1,5 +1,5 @@
 import React from 'react'
-import { Linking, TouchableOpacity } from 'react-native'
+import { Linking, Platform, TouchableOpacity } from 'react-native'
 import Autolink from 'react-native-autolink'
 import firebase from 'react-native-firebase'
 import PropTypes from 'prop-types'
@@ -9,6 +9,7 @@ import format from 'date-fns/format'
 import { truncateText } from '@common/utils/truncateText'
 import { PostCategory } from '@components/PostCategory'
 import { Button } from '@components/Button'
+import { chooseMailApp } from '@common/utils/chooseMailApp'
 
 import {
   LinkText,
@@ -93,13 +94,21 @@ export class Post extends React.Component {
           <ButtonWrapper>
             <Button
               color={'#fff'}
-              onPress={() => {
+              onPress={async () => {
                 firebase
                   .analytics()
                   .logEvent('press_email_author', postAnalyticsData)
-                Linking.openURL(
-                  `mailto:${post.user_email}?subject=RE: ${post.title}`
-                )
+
+                if (Platform.OS === 'ios') {
+                  chooseMailApp({
+                    subject: `RE: ${post.title}`,
+                    toEmail: post.user_email
+                  })
+                } else {
+                  Linking.openURL(
+                    `mailto:${post.user_email}?subject=RE: ${post.title}`
+                  )
+                }
               }}
               fullWidth
             >
