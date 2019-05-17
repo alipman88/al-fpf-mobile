@@ -32,7 +32,6 @@ function getComposeUrl(app, subject, toEmail) {
     case 'gmail':
       return `${prefixes[app]}co?subject=${subject}&to=${toEmail}`
     case 'spark':
-      // readdle-spark://compose?subject=test&body=test2&recipient=test@test.com
       return `${prefixes[app]}compose?subject=${subject}&recipient=${toEmail}`
     case 'airmail':
       return `${prefixes[app]}compose?subject=${subject}&to=${toEmail}`
