@@ -1,11 +1,29 @@
 import * as yup from 'yup'
 
+export const validateGovernmentFieldPresence = name => {
+  return /\w[^.]/.test(name)
+}
+
 export const validations = yup.object().shape({
   title: yup.string().required(),
   name: yup.string().when('title', {
     is: 'Other',
-    then: yup.string().required('Please enter a title.')
+    then: yup
+      .string()
+      .test(
+        'name',
+        'Name must contain at least two characters',
+        validateGovernmentFieldPresence
+      )
+      .required('Please enter a title.')
   }),
-  jurisdiction: yup.string().required(),
+  jurisdiction: yup
+    .string()
+    .test(
+      'jurisdiction',
+      'Jurisdiction must contain at least two characters',
+      validateGovernmentFieldPresence
+    )
+    .required(),
   tellUsMore: yup.string()
 })
