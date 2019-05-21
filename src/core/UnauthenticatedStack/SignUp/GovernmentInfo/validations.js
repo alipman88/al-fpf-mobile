@@ -10,6 +10,7 @@ export const validations = yup.object().shape({
     is: 'Other',
     then: yup
       .string()
+      .trim()
       .test(
         'name',
         'Name must contain at least two characters',
@@ -19,6 +20,7 @@ export const validations = yup.object().shape({
   }),
   jurisdiction: yup
     .string()
+    .trim()
     .test(
       'jurisdiction',
       'Jurisdiction must contain at least two characters',

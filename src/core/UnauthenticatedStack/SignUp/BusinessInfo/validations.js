@@ -7,6 +7,7 @@ export const validateBusinessName = name => {
 export const validations = yup.object().shape({
   name: yup
     .string()
+    .trim()
     .min(2)
     .test(
       'name',
