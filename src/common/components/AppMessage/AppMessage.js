@@ -19,7 +19,7 @@ export class AppMessage extends React.Component {
   render() {
     return (
       <FlashMessage
-        autoHide={false}
+        autoHide={this.props.autoHide}
         icon='auto'
         position='top'
         onPress={() => this.props.setAppError('')}
@@ -31,5 +31,10 @@ export class AppMessage extends React.Component {
 AppMessage.propTypes = {
   message: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  autoHide: PropTypes.bool,
   setAppError: PropTypes.func.isRequired
+}
+
+AppMessage.defaultProps = {
+  autoHide: false
 }

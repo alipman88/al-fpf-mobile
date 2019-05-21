@@ -4,7 +4,8 @@ import { appMessage } from './slice'
 
 const mapStateToProps = state => ({
   message: appMessage.selectors.getMessage(state),
-  type: appMessage.selectors.getMessageType(state)
+  type: appMessage.selectors.getMessageType(state),
+  autoHide: appMessage.selectors.getAutoHide(state)
 })
 
 export const AppMessage = connect(

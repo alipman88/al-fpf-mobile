@@ -4,7 +4,8 @@ import capitalize from 'lodash/capitalize'
 export const appMessage = createSlice({
   initialState: {
     message: '',
-    type: ''
+    type: '',
+    autoHide: false
   },
   reducers: {
     setAppError: (_, { payload }) => {
@@ -17,10 +18,13 @@ export const appMessage = createSlice({
         type: 'danger'
       }
     },
-    setAppMessage: (_, { payload }) => ({
-      message: capitalize(payload.message),
-      type: payload.type
-    })
+    setAppMessage: (_, { payload }) => {
+      return {
+        message: capitalize(payload.message),
+        type: payload.type,
+        autoHide: payload.autoHide
+      }
+    }
   }
 })
 
@@ -32,5 +36,9 @@ appMessage.selectors = {
   getMessageType: createSelector(
     ['main.appMessage'],
     appMessage => appMessage.type
+  ),
+  getAutoHide: createSelector(
+    ['main.appMessage'],
+    appMessage => appMessage.autoHide
   )
 }
