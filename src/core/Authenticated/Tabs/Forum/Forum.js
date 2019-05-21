@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {
   AppState,
+  Platform,
   PushNotificationIOS,
   RefreshControl,
   ScrollView
@@ -112,13 +113,15 @@ export class Forum extends React.Component {
       // reset issue/area id to 0 so we fetch the default on fresh launch (notification handler is after this)
       this.resetIssueAndArea()
     } else if (state === 'active') {
-      // reset issue/area id to 0 so we fetch the default if badge icon is present
-      PushNotificationIOS.getApplicationIconBadgeNumber(badgeNumber => {
-        if (badgeNumber >= 1) {
-          this.resetIssueAndArea()
-          this.props.setupForumData()
-        }
-      })
+      if (Platform.OS === 'ios') {
+        // reset issue/area id to 0 so we fetch the default if badge icon is present
+        PushNotificationIOS.getApplicationIconBadgeNumber(badgeNumber => {
+          if (badgeNumber >= 1) {
+            this.resetIssueAndArea()
+            this.props.setupForumData()
+          }
+        })
+      }
     }
   }
 

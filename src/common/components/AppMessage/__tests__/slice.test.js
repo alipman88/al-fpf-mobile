@@ -9,6 +9,7 @@ describe('appMessage slice', () => {
     }
     expect(appMessage.selectors.getMessage(state)).toEqual('')
     expect(appMessage.selectors.getMessageType(state)).toEqual('')
+    expect(appMessage.selectors.getAutoHide(state)).toEqual(false)
   })
 
   test('message should be set when calling setAppError', () => {
@@ -22,6 +23,7 @@ describe('appMessage slice', () => {
     }
     expect(appMessage.selectors.getMessage(state)).toEqual('Boom')
     expect(appMessage.selectors.getMessageType(state)).toEqual('danger')
+    expect(appMessage.selectors.getAutoHide(state)).toEqual(undefined)
   })
 
   test('it creates a human readable error out of objects', () => {
@@ -40,16 +42,18 @@ describe('appMessage slice', () => {
       'Needs a title, needs content'
     )
     expect(appMessage.selectors.getMessageType(state)).toEqual('danger')
+    expect(appMessage.selectors.getAutoHide(state)).toEqual(undefined)
   })
 
-  test('message & type get set for setAppMessage', () => {
+  test('message, type, and autoHide get set for setAppMessage', () => {
     const state = {
       main: {
         appMessage: appMessage.reducer(
           undefined,
           appMessage.actions.setAppMessage({
             message: 'Done!',
-            type: 'success'
+            type: 'success',
+            autoHide: true
           })
         )
       }
@@ -57,5 +61,6 @@ describe('appMessage slice', () => {
 
     expect(appMessage.selectors.getMessage(state)).toEqual('Done!')
     expect(appMessage.selectors.getMessageType(state)).toEqual('success')
+    expect(appMessage.selectors.getAutoHide(state)).toEqual(true)
   })
 })
