@@ -1,5 +1,5 @@
 import React from 'react'
-import { Linking, TouchableOpacity } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import firebase from 'react-native-firebase'
 import { shallow } from 'enzyme'
 
@@ -37,6 +37,7 @@ describe('Post', () => {
     navigation: {
       navigate: jest.fn()
     },
+    chooseMailApp: jest.fn(),
     areasIdMap: {
       2: {
         id: 2
@@ -45,6 +46,7 @@ describe('Post', () => {
   }
 
   afterEach(() => {
+    defaultProps.chooseMailApp.mockReset()
     defaultProps.onTapCategory.mockReset()
   })
 
@@ -159,10 +161,10 @@ describe('Post', () => {
         issue_id: defaultProps.post.issue_id
       }
     )
-    expect(Linking.openURL).toHaveBeenCalledWith(
-      `mailto:${defaultProps.post.user_email}?subject=RE: ${
-        defaultProps.post.title
-      }`
-    )
+    expect(defaultProps.chooseMailApp).toHaveBeenCalledWith({
+      subject: `RE: ${defaultProps.post.title}`,
+      toEmail: defaultProps.post.user_email,
+      title: 'Email author'
+    })
   })
 })
