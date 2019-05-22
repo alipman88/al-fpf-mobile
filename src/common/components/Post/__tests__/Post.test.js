@@ -1,5 +1,5 @@
 import React from 'react'
-import { Linking, TouchableOpacity } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import firebase from 'react-native-firebase'
 import { shallow } from 'enzyme'
 
@@ -12,11 +12,6 @@ import {
   ShowMoreButton
 } from '../styledComponents'
 import Autolink from 'react-native-autolink'
-import { chooseMailApp } from '@common/utils/chooseMailApp'
-
-jest.mock('@common/utils/chooseMailApp', () => ({
-  chooseMailApp: jest.fn()
-}))
 
 describe('Post', () => {
   const defaultProps = {
@@ -42,6 +37,7 @@ describe('Post', () => {
     navigation: {
       navigate: jest.fn()
     },
+    chooseMailApp: jest.fn(),
     areasIdMap: {
       2: {
         id: 2
@@ -50,6 +46,7 @@ describe('Post', () => {
   }
 
   afterEach(() => {
+    defaultProps.chooseMailApp.mockReset()
     defaultProps.onTapCategory.mockReset()
   })
 
@@ -164,9 +161,10 @@ describe('Post', () => {
         issue_id: defaultProps.post.issue_id
       }
     )
-    expect(chooseMailApp).toHaveBeenCalledWith({
+    expect(defaultProps.chooseMailApp).toHaveBeenCalledWith({
       subject: `RE: ${defaultProps.post.title}`,
-      toEmail: defaultProps.post.user_email
+      toEmail: defaultProps.post.user_email,
+      title: 'Email author'
     })
   })
 })

@@ -9,7 +9,6 @@ import format from 'date-fns/format'
 import { truncateText } from '@common/utils/truncateText'
 import { PostCategory } from '@components/PostCategory'
 import { Button } from '@components/Button'
-import { chooseMailApp } from '@common/utils/chooseMailApp'
 
 import {
   LinkText,
@@ -50,6 +49,7 @@ export class Post extends React.Component {
     const {
       post,
       areasIdMap,
+      chooseMailApp,
       postTruncateLength,
       fetchSpecificIssue,
       children,
@@ -219,6 +219,7 @@ Post.propTypes = {
   areasIdMap: PropTypes.object,
   postTruncateLength: PropTypes.number.isRequired,
   children: PropTypes.element,
+  chooseMailApp: PropTypes.func.isRequired,
   includeBottomButtons: PropTypes.bool,
   hasBorder: PropTypes.bool,
   onTapCategory: PropTypes.func,
