@@ -8,7 +8,8 @@ export const resendEmail = email => async dispatch => {
     dispatch(
       appMessage.actions.setAppMessage({
         message: 'Verification resent',
-        type: 'success'
+        type: 'success',
+        autoHide: true
       })
     )
   } catch (e) {

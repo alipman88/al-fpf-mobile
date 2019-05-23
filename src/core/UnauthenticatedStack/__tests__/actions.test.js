@@ -17,7 +17,8 @@ describe('EmailVerification - actions', () => {
       expect(dispatch).toHaveBeenCalledWith(
         appMessage.actions.setAppMessage({
           type: 'success',
-          message: 'Verification resent'
+          message: 'Verification resent',
+          autoHide: true
         })
       )
 
