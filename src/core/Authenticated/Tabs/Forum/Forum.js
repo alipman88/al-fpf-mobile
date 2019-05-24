@@ -109,19 +109,15 @@ export class Forum extends React.Component {
   }
 
   handleAppStateChange = state => {
-    if (state === 'unknown') {
-      // reset issue/area id to 0 so we fetch the default on fresh launch (notification handler is after this)
-      this.resetIssueAndArea()
-    } else if (state === 'active') {
-      if (Platform.OS === 'ios') {
-        // reset issue/area id to 0 so we fetch the default if badge icon is present
-        PushNotificationIOS.getApplicationIconBadgeNumber(badgeNumber => {
-          if (badgeNumber >= 1) {
-            this.resetIssueAndArea()
-            this.props.setupForumData()
-          }
-        })
-      }
+    if (state === 'active' && Platform.OS === 'ios') {
+      // reset issue/area id to 0 so we fetch the default if badge icon is present
+      PushNotificationIOS.getApplicationIconBadgeNumber(badgeNumber => {
+        if (badgeNumber >= 1) {
+          this.resetIssueAndArea()
+          this.props.setupForumData()
+          PushNotificationIOS.setApplicationIconBadgeNumber(0)
+        }
+      })
     }
   }
 
