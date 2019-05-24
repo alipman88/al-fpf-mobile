@@ -32,16 +32,18 @@ export const validations = yup.object().shape({
   firstName: yup
     .string()
     .test('firstName', 'First name can only contain letters', validateFirstName)
-    .required('First name is a required field'),
+    .required('First name is a required field')
+    .trim(),
   lastName: yup
     .string()
     .min(2, 'Last name must be at least 2 characters long')
     .test('lastName', 'Last name can only contain letters', validateLastName)
-    .required('Last name is a required field'),
+    .required('Last name is a required field')
+    .trim(),
   email: yup
     .string()
     .required()
-    .email()
+    .trim()
     .test('email', 'email is already in use', validateEmail),
   password: yup
     .string()

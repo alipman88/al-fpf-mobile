@@ -1,5 +1,5 @@
 import React from 'react'
-import { Linking, TouchableOpacity } from 'react-native'
+import { Linking, Platform, TouchableOpacity } from 'react-native'
 import Autolink from 'react-native-autolink'
 import firebase from 'react-native-firebase'
 import PropTypes from 'prop-types'
@@ -49,6 +49,7 @@ export class Post extends React.Component {
     const {
       post,
       areasIdMap,
+      chooseMailApp,
       postTruncateLength,
       fetchSpecificIssue,
       children,
@@ -93,13 +94,22 @@ export class Post extends React.Component {
           <ButtonWrapper>
             <Button
               color={'#fff'}
-              onPress={() => {
+              onPress={async () => {
                 firebase
                   .analytics()
                   .logEvent('press_email_author', postAnalyticsData)
-                Linking.openURL(
-                  `mailto:${post.user_email}?subject=RE: ${post.title}`
-                )
+
+                if (Platform.OS === 'ios') {
+                  chooseMailApp({
+                    title: 'Email author',
+                    subject: `RE: ${post.title}`,
+                    toEmail: post.user_email
+                  })
+                } else {
+                  Linking.openURL(
+                    `mailto:${post.user_email}?subject=RE: ${post.title}`
+                  )
+                }
               }}
               fullWidth
             >
@@ -209,6 +219,7 @@ Post.propTypes = {
   areasIdMap: PropTypes.object,
   postTruncateLength: PropTypes.number.isRequired,
   children: PropTypes.element,
+  chooseMailApp: PropTypes.func.isRequired,
   includeBottomButtons: PropTypes.bool,
   hasBorder: PropTypes.bool,
   onTapCategory: PropTypes.func,

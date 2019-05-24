@@ -9,6 +9,7 @@ import { searchHistory } from '@core/Authenticated/Tabs/Search/SearchHistory/sli
 import { registrationEmail } from '@core/UnauthenticatedStack/SignUp/registrationEmail/slice'
 import { newUser } from '@core/UnauthenticatedStack/SignUp/newUser/slice'
 import { spinner } from '@app/Spinner/slice'
+import { mailApp } from '@common/mailApp'
 
 export const mainReducer = combineReducers({
   appMessage: appMessage.reducer,
@@ -20,5 +21,6 @@ export const mainReducer = combineReducers({
   searchHistory: searchHistory.reducer,
   registrationEmail: registrationEmail.reducer,
   newUser: newUser.reducer,
-  spinner: spinner.reducer
+  spinner: spinner.reducer,
+  mailApp: mailApp.reducer
 })
