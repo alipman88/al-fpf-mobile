@@ -14,7 +14,7 @@ export const Advertisement = ({ ad }) => (
   <Card>
     <CardContent>
       <Header>{ad.headline}</Header>
-      <PostCategory>Ad</PostCategory>
+      <PostCategory dark={true}>Ad</PostCategory>
       <ContentText>{ad.body}</ContentText>
     </CardContent>
     <Bottom>
