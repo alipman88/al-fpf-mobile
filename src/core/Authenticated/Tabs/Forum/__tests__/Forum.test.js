@@ -149,16 +149,6 @@ describe('Forum', () => {
   })
 
   describe('handleAppStateChange', () => {
-    test('it resets area and issue on unknown state', () => {
-      const wrapper = shallow(<Forum {...defaultProps} />)
-      const spy = jest.spyOn(wrapper.instance(), 'resetIssueAndArea')
-
-      wrapper.instance().handleAppStateChange('unknown')
-      expect(wrapper.instance().resetIssueAndArea).toHaveBeenCalled()
-
-      spy.mockRestore()
-    })
-
     test('it sends member to default NF if app badge icon present', () => {
       const wrapper = shallow(<Forum {...defaultProps} />)
       const spy = jest.spyOn(
