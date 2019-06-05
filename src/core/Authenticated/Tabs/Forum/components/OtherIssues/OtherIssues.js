@@ -30,21 +30,20 @@ export class OtherIssues extends React.Component {
   }
 
   scrollToFocusedIssue() {
-    if (this.focusedIssue) {
-      this.focusedIssue.measureLayout(findNodeHandle(this.scrollViewRef), x => {
-        this.scrollViewRef.scrollTo({
-          x: Math.min(this.state.scrollWidth, x),
-          animated: true
-        })
-      })
-    } else if (this.scrollViewRef) {
-      this.scrollViewRef.scrollToEnd({ animated: true })
-    }
-  }
-
-  scrollFocusedIssue = ev => {
-    requestAnimationFrame(() => {
-      this.scrollToFocusedIssue()
+    setTimeout(() => {
+      if (this.focusedIssueRef) {
+        this.focusedIssueRef.measureLayout(
+          findNodeHandle(this.scrollViewRef),
+          x => {
+            this.scrollViewRef.scrollTo({
+              x: Math.min(this.state.scrollWidth, x),
+              animated: true
+            })
+          }
+        )
+      } else if (this.scrollViewRef) {
+        this.scrollViewRef.scrollToEnd({ animated: true })
+      }
     })
   }
 
@@ -63,11 +62,11 @@ export class OtherIssues extends React.Component {
             ref={
               focused
                 ? ref => {
-                    this.focusedIssue = ref
+                    this.focusedIssueRef = ref
                   }
                 : undefined
             }
-            onLayout={focused ? this.scrollFocusedIssue : undefined}
+            onLayout={focused ? this.scrollToFocusedIssue : undefined}
           >
             <IssueTab
               issue={i}
