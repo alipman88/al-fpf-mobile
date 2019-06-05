@@ -5,7 +5,8 @@ import {
   Platform,
   PushNotificationIOS,
   RefreshControl,
-  ScrollView
+  ScrollView,
+  Alert
 } from 'react-native'
 import get from 'lodash/get'
 import firebase from 'react-native-firebase'
@@ -108,8 +109,12 @@ export class Forum extends React.Component {
     this.props.setCurrentAreaId(0)
   }
 
-  handleAppStateChange = state => {
-    if (state === 'active' && Platform.OS === 'ios') {
+  handleAppStateChange = async state => {
+    const notificationOpen = await firebase
+      .notifications()
+      .getInitialNotification()
+    // if we're opening via a notification, we can let that flow do its thing
+    if (!notificationOpen && state === 'active' && Platform.OS === 'ios') {
       // reset issue/area id to 0 so we fetch the default if badge icon is present
       PushNotificationIOS.getApplicationIconBadgeNumber(badgeNumber => {
         if (badgeNumber >= 1) {
@@ -160,9 +165,9 @@ export class Forum extends React.Component {
         !issues.find(issue => issue.id === this.props.currentIssueId)
       ) {
         this.refs.forumViewRef.scrollTo({ y: 0 })
-        this.props.setCurrentIssueId(this.props.issues[0].id)
+        this.props.setCurrentIssueId(issues[0].id)
         this.props.toggleIssueUnread({
-          id: this.props.issues[0].id,
+          id: issues[0].id,
           isUnread: false,
           areaId: currentAreaId
         })
