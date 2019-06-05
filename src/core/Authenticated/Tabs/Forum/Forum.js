@@ -223,6 +223,7 @@ export class Forum extends React.Component {
 
   scrollPostsToTop() {
     if (this.forumViewRef) {
+      // using set timeout to ensure the code doesn't run until rendering is finished
       setTimeout(() => this.forumViewRef.scrollTo({ y: 0, animated: false }))
     }
   }
