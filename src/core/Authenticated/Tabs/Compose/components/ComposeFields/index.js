@@ -1,4 +1,5 @@
 import React from 'react'
+import { Keyboard } from 'react-native'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
 import flatten from 'lodash/flatten'
@@ -27,6 +28,18 @@ import {
 export class ComposeFields extends React.Component {
   state = {
     duplicatePost: false
+  }
+
+  constructor(props) {
+    super(props)
+
+    this.subjectRef = React.createRef()
+    this.messageRef = React.createRef()
+  }
+
+  blurTextInputs = () => {
+    this.subjectRef.current.blur()
+    this.messageRef.current.blur()
   }
 
   getAreasForProfile(profiles, areas, profileIndex) {
@@ -138,6 +151,7 @@ export class ComposeFields extends React.Component {
           {profiles.length > 1 && (
             <FieldWrapper>
               <Select
+                onPress={this.blurTextInputs}
                 placeholder={
                   getProfileDisplayName(profiles[values.profile], false) ||
                   'Select Profile'
@@ -167,6 +181,11 @@ export class ComposeFields extends React.Component {
           {filteredAreas.length > 1 && (
             <FieldWrapper>
               <Multiselect
+                onToggle={opened => {
+                  if (opened) {
+                    this.blurTextInputs()
+                  }
+                }}
                 error={errors.forums}
                 label='Forums'
                 items={[
@@ -184,6 +203,7 @@ export class ComposeFields extends React.Component {
                 onSelectedItemsChange={selectedItems => {
                   setFieldTouched('forums', true)
                   setFieldValue('forums', selectedItems)
+                  this.blurTextInputs()
                 }}
                 touched={touched.forums}
                 value={values.forums}
@@ -192,6 +212,7 @@ export class ComposeFields extends React.Component {
           )}
           <FieldWrapper>
             <Select
+              onPress={this.blurTextInputs}
               placeholder={get(
                 values.category,
                 'name',
@@ -221,10 +242,12 @@ export class ComposeFields extends React.Component {
               value={values.subject}
               placeholder='Type the subject of your posting here'
               label='Subject'
+              inputRef={this.subjectRef}
             />
           </FieldWrapper>
           {get(values.category, 'is_event', false) && (
             <Event
+              blurTextInputs={this.blurTextInputs}
               errors={errors}
               setFieldTouched={setFieldTouched}
               setFieldValue={setFieldValue}
@@ -243,6 +266,7 @@ export class ComposeFields extends React.Component {
                 value={values.message}
                 label='Message'
                 placeholder='Type the body of your posting here'
+                inputRef={this.messageRef}
                 multiline
               />
             </FieldWrapper>

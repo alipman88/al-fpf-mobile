@@ -89,6 +89,7 @@ export class Event extends React.Component {
 
   render() {
     const {
+      blurTextInputs,
       errors,
       setFieldValue,
       setFieldTouched,
@@ -133,6 +134,7 @@ export class Event extends React.Component {
                   setFieldTouched('fromDate')
                 }}
                 error={errors.fromDate}
+                onPress={blurTextInputs}
                 touched={touched.fromDate}
                 value={values.fromDate}
               />
@@ -148,6 +150,7 @@ export class Event extends React.Component {
                   setFieldTouched('toDate')
                 }}
                 error={errors.toDate}
+                onPress={blurTextInputs}
                 touched={touched.toDate}
                 value={values.toDate}
               />
@@ -160,6 +163,7 @@ export class Event extends React.Component {
 }
 
 Event.propTypes = {
+  blurTextInputs: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
   setAppError: PropTypes.func.isRequired,
   setDuplicateState: PropTypes.func.isRequired,

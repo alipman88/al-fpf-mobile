@@ -16,6 +16,7 @@ export const Multiselect = ({
   label,
   items,
   onSelectedItemsChange,
+  onToggle,
   required,
   searchPlaceholderText,
   selectText,
@@ -42,6 +43,11 @@ export const Multiselect = ({
         searchPlaceholderText={searchPlaceholderText}
         onSelectedItemsChange={onSelectedItemsChange}
         selectedItems={value}
+        onToggleSelector={opened => {
+          if (onToggle) {
+            onToggle(opened)
+          }
+        }}
         searchTextFontFamily={{
           fontFamily: 'ProximaNova-Regular'
         }}
@@ -85,6 +91,7 @@ Multiselect.propTypes = {
   ).isRequired,
   label: PropTypes.string,
   onSelectedItemsChange: PropTypes.func.isRequired,
+  onToggle: PropTypes.func,
   required: PropTypes.bool,
   searchPlaceholderText: PropTypes.string,
   selectText: PropTypes.string,
