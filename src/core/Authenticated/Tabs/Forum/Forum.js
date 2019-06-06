@@ -24,6 +24,11 @@ import { OcmMessage } from './components/OcmMessage'
 import { createChannel, displayNotification } from '@common/notifications'
 
 export class Forum extends React.Component {
+  constructor(props) {
+    super(props)
+    this.forumViewRef = React.createRef()
+  }
+
   async componentDidMount() {
     // reset issue/area id to 0 so we fetch the default on fresh launch (notification handler is after this)
     this.resetIssueAndArea()
@@ -134,6 +139,10 @@ export class Forum extends React.Component {
       (prevProps.areas !== areas || prevProps.currentAreaId !== currentAreaId)
     ) {
       this.setTitleFromArea()
+      if (this.props.currentAreaId !== prevProps.currentAreaId) {
+        this.props.setCurrentIssueId(0)
+        this.scrollPostsToTop()
+      }
       this.props.getIssues(this.props.currentAreaId, this.props.navigation)
     }
   }
@@ -164,7 +173,7 @@ export class Forum extends React.Component {
         issues.length > 0 &&
         !issues.find(issue => issue.id === this.props.currentIssueId)
       ) {
-        this.refs.forumViewRef.scrollTo({ y: 0 })
+        this.scrollPostsToTop()
         this.props.setCurrentIssueId(issues[0].id)
         this.props.toggleIssueUnread({
           id: issues[0].id,
@@ -179,9 +188,7 @@ export class Forum extends React.Component {
       this.props.currentIssueId !== 0
     ) {
       // scroll to top any time we're rendering a different issue
-      if (this.refs.forumViewRef) {
-        this.refs.forumViewRef.scrollTo({ y: 0 })
-      }
+      this.scrollPostsToTop()
       this.props.getPosts(this.props.currentIssueId, this.props.navigation)
       this.props.toggleIssueUnread({
         id: this.props.currentIssueId,
@@ -217,6 +224,13 @@ export class Forum extends React.Component {
       parseInt(issue_number, 10),
       this.props.navigation
     )
+  }
+
+  scrollPostsToTop() {
+    if (this.forumViewRef) {
+      // using set timeout to ensure the code doesn't run until rendering is finished
+      setTimeout(() => this.forumViewRef.scrollTo({ y: 0, animated: false }))
+    }
   }
 
   setTitleFromArea() {
@@ -277,7 +291,9 @@ export class Forum extends React.Component {
     return (
       <ScreenContainer withPadding={false} grey>
         <ScrollView
-          ref='forumViewRef'
+          ref={ref => {
+            this.forumViewRef = ref
+          }}
           refreshControl={
             <RefreshControl
               refreshing={loading}
