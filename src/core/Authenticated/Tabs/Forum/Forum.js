@@ -31,7 +31,6 @@ export class Forum extends React.Component {
   async componentDidMount() {
     AppState.addEventListener('change', this.handleAppStateChange)
 
-    this.props.setupForumData(this.props.navigation)
     this.setTitleFromArea()
 
     const fcmToken = await firebase.messaging().getToken()
@@ -67,6 +66,8 @@ export class Forum extends React.Component {
         .getInitialNotification()
       if (notificationOpen) {
         this.handleNotificationOpen(notificationOpen)
+      } else {
+        this.props.setupForumData(this.props.navigation)
       }
 
       this.messageListener = firebase
@@ -90,6 +91,8 @@ export class Forum extends React.Component {
         .onNotificationOpened(notificationOpen => {
           this.handleNotificationOpen(notificationOpen)
         })
+    } else {
+      this.props.setupForumData(this.props.navigation)
     }
   }
 

@@ -98,8 +98,11 @@ describe('Forum', () => {
     defaultProps.navigation.getParam.mockReset()
   })
 
-  test('calls setupForumData on mount', () => {
-    shallow(<Forum {...defaultProps} />)
+  test('calls setupForumData on mount', async () => {
+    const wrapper = shallow(<Forum {...defaultProps} />)
+
+    // called manually due to async logic in the code
+    await wrapper.instance().componentDidMount()
 
     expect(defaultProps.setupForumData).toHaveBeenCalled()
   })
