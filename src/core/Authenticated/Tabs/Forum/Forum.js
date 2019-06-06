@@ -5,8 +5,7 @@ import {
   Platform,
   PushNotificationIOS,
   RefreshControl,
-  ScrollView,
-  Alert
+  ScrollView
 } from 'react-native'
 import get from 'lodash/get'
 import firebase from 'react-native-firebase'
