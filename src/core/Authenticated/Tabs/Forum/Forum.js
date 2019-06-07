@@ -29,12 +29,8 @@ export class Forum extends React.Component {
   }
 
   async componentDidMount() {
-    // reset issue/area id to 0 so we fetch the default on fresh launch (notification handler is after this)
-    this.resetIssueAndArea()
-
     AppState.addEventListener('change', this.handleAppStateChange)
 
-    this.props.setupForumData(this.props.navigation)
     this.setTitleFromArea()
 
     const fcmToken = await firebase.messaging().getToken()
@@ -70,6 +66,8 @@ export class Forum extends React.Component {
         .getInitialNotification()
       if (notificationOpen) {
         this.handleNotificationOpen(notificationOpen)
+      } else {
+        this.props.setupForumData(this.props.navigation)
       }
 
       this.messageListener = firebase
@@ -93,6 +91,8 @@ export class Forum extends React.Component {
         .onNotificationOpened(notificationOpen => {
           this.handleNotificationOpen(notificationOpen)
         })
+    } else {
+      this.props.setupForumData(this.props.navigation)
     }
   }
 
@@ -108,18 +108,16 @@ export class Forum extends React.Component {
     }
   }
 
-  resetIssueAndArea() {
-    this.props.setCurrentIssueId(0)
-    this.props.setCurrentAreaId(0)
-  }
-
-  handleAppStateChange = state => {
-    if (state === 'active' && Platform.OS === 'ios') {
+  handleAppStateChange = async state => {
+    const notificationOpen = await firebase
+      .notifications()
+      .getInitialNotification()
+    // if we're opening via a notification, we can let that flow do its thing
+    if (!notificationOpen && state === 'active' && Platform.OS === 'ios') {
       // reset issue/area id to 0 so we fetch the default if badge icon is present
       PushNotificationIOS.getApplicationIconBadgeNumber(badgeNumber => {
         if (badgeNumber >= 1) {
-          this.resetIssueAndArea()
-          this.props.setupForumData()
+          this.props.setupForumData(this.props.navigation)
           PushNotificationIOS.setApplicationIconBadgeNumber(0)
         }
       })
@@ -127,18 +125,18 @@ export class Forum extends React.Component {
   }
 
   fetchIssues(prevProps) {
-    const { currentAreaId, areas } = this.props
+    const { currentAreaId, areas, navigation } = this.props
 
     if (
       currentAreaId !== 0 &&
       (prevProps.areas !== areas || prevProps.currentAreaId !== currentAreaId)
     ) {
       this.setTitleFromArea()
-      if (this.props.currentAreaId !== prevProps.currentAreaId) {
+      if (currentAreaId !== prevProps.currentAreaId) {
         this.props.setCurrentIssueId(0)
         this.scrollPostsToTop()
       }
-      this.props.getIssues(this.props.currentAreaId, this.props.navigation)
+      this.props.getIssues(currentAreaId, navigation)
     }
   }
 
@@ -169,9 +167,9 @@ export class Forum extends React.Component {
         !issues.find(issue => issue.id === this.props.currentIssueId)
       ) {
         this.scrollPostsToTop()
-        this.props.setCurrentIssueId(this.props.issues[0].id)
+        this.props.setCurrentIssueId(issues[0].id)
         this.props.toggleIssueUnread({
-          id: this.props.issues[0].id,
+          id: issues[0].id,
           isUnread: false,
           areaId: currentAreaId
         })
@@ -246,7 +244,7 @@ export class Forum extends React.Component {
   }
 
   render() {
-    const { currentIssueId, issues, loading } = this.props
+    const { currentIssueId, issues, loading, navigation } = this.props
 
     const posts = (this.props.posts[currentIssueId] || []).concat(
       this.props.sharedPosts[currentIssueId] || []
@@ -296,12 +294,12 @@ export class Forum extends React.Component {
             />
           }
         >
-          <OtherIssues toast={this.toastRef} />
+          <OtherIssues navigation={navigation} toast={this.toastRef} />
           <ForumContainer>
             {Boolean(currentIssue) && (
               <InThisIssue
                 number={currentIssue.number}
-                navigation={this.props.navigation}
+                navigation={navigation}
               />
             )}
             {postRender}

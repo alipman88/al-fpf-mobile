@@ -54,6 +54,9 @@ export class DateTimeField extends React.Component {
   }
 
   showDatePicker = () => {
+    if (this.props.onPress) {
+      this.props.onPress()
+    }
     this.setState({ dateVisible: true })
   }
 
@@ -75,6 +78,9 @@ export class DateTimeField extends React.Component {
   }
 
   showTimePicker = () => {
+    if (this.props.onPress) {
+      this.props.onPress()
+    }
     this.setState({ timeVisible: true })
   }
 
@@ -178,6 +184,7 @@ DateTimeField.propTypes = {
   error: PropTypes.string,
   label: PropTypes.string,
   onChangeValue: PropTypes.func.isRequired,
+  onPress: PropTypes.func.isRequired,
   timeLabel: PropTypes.string,
   touched: PropTypes.bool,
   value: PropTypes.object

@@ -33,6 +33,11 @@ export class SearchFields extends React.Component {
     showAdvanced: false
   }
 
+  constructor(props) {
+    super(props)
+    this.keywordRef = React.createRef()
+  }
+
   componentDidMount() {
     if (this.props.showFilters) {
       this.setState(() => ({ showAdvanced: true }))
@@ -56,6 +61,10 @@ export class SearchFields extends React.Component {
       // causing the isCanceled: true to be there
       setTimeout(() => this.props.handleSubmit())
     }
+  }
+
+  blurTextInput = () => {
+    this.keywordRef.current.blur()
   }
 
   resetForm(setFieldAsync = true) {
@@ -110,6 +119,7 @@ export class SearchFields extends React.Component {
             error={errors.keyword}
             forwardIcon={<Icon color='#9b9b9b' name='search' size={18} />}
             placeholder='Type keyword here'
+            inputRef={this.keywordRef}
             onChangeText={value => {
               setFieldTouched('keyword', true)
               setFieldValue('keyword', value)
@@ -148,6 +158,11 @@ export class SearchFields extends React.Component {
             <Filters>
               <FieldWrapper>
                 <Multiselect
+                  onToggle={opened => {
+                    if (opened) {
+                      this.blurTextInput()
+                    }
+                  }}
                   fieldName='Forums'
                   error={errors.forums}
                   items={[
@@ -174,6 +189,7 @@ export class SearchFields extends React.Component {
                 <Select
                   placeholder={get(values.category, 'name', 'All categories')}
                   items={searchCategories.map(category => category.name)}
+                  onPress={this.blurTextInput}
                   onValueChange={index => {
                     setFieldTouched('category', true)
                     const selectedCategory =
@@ -203,6 +219,7 @@ export class SearchFields extends React.Component {
                         setFieldTouched('toDate')
                         setFieldValue('fromDate', date)
                       }}
+                      onPress={this.blurTextInput}
                       touched={touched.fromDate}
                       value={values.fromDate}
                     />
@@ -218,6 +235,7 @@ export class SearchFields extends React.Component {
                         setFieldTouched('toDate')
                         setFieldValue('toDate', date)
                       }}
+                      onPress={this.blurTextInput}
                       touched={touched.toDate}
                       value={values.toDate}
                     />

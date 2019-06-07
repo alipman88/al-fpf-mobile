@@ -20,6 +20,7 @@ import {
 export class Select extends React.Component {
   render() {
     const {
+      onPress,
       placeholder,
       value,
       label,
@@ -45,7 +46,12 @@ export class Select extends React.Component {
       <Container>
         {labelText}
         <SelectButton
-          onPress={() => this.selectModuleRef.show()}
+          onPress={() => {
+            if (onPress) {
+              onPress()
+            }
+            this.selectModuleRef.show()
+          }}
           hasError={hasError}
         >
           <SelectPlaceholder color={placeholderColor}>
@@ -74,6 +80,7 @@ Select.propTypes = {
   error: PropTypes.string,
   items: PropTypes.array.isRequired,
   label: PropTypes.string,
+  onPress: PropTypes.func,
   onValueChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
