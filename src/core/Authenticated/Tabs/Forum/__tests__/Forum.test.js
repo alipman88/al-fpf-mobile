@@ -98,8 +98,11 @@ describe('Forum', () => {
     defaultProps.navigation.getParam.mockReset()
   })
 
-  test('calls setupForumData on mount', () => {
-    shallow(<Forum {...defaultProps} />)
+  test('calls setupForumData on mount', async () => {
+    const wrapper = shallow(<Forum {...defaultProps} />)
+
+    // called manually due to async logic in the code
+    await wrapper.instance().componentDidMount()
 
     expect(defaultProps.setupForumData).toHaveBeenCalled()
   })
@@ -140,28 +143,84 @@ describe('Forum', () => {
     spy.mockRestore()
   })
 
-  test('it resets area and issue', () => {
-    const wrapper = shallow(<Forum {...defaultProps} />)
-
-    wrapper.instance().resetIssueAndArea()
-    expect(defaultProps.setCurrentAreaId).toHaveBeenCalledWith(0)
-    expect(defaultProps.setCurrentIssueId).toHaveBeenCalledWith(0)
-  })
-
   describe('handleAppStateChange', () => {
-    test('it sends member to default NF if app badge icon present', () => {
+    test('it sends member to default NF if app badge icon present', async () => {
+      const notificationSpy = jest
+        .spyOn(firebase.notifications(), 'getInitialNotification')
+        .mockReturnValue(Promise.resolve(null))
       const wrapper = shallow(<Forum {...defaultProps} />)
-      const spy = jest.spyOn(
+      const badgeSpy = jest.spyOn(
         PushNotificationIOS,
         'getApplicationIconBadgeNumber'
       )
 
-      wrapper.instance().handleAppStateChange('active')
+      const setBadgeSpy = jest.spyOn(
+        PushNotificationIOS,
+        'setApplicationIconBadgeNumber'
+      )
+
+      await wrapper.instance().handleAppStateChange('active')
       expect(
         PushNotificationIOS.getApplicationIconBadgeNumber
       ).toHaveBeenCalled()
 
-      spy.mockRestore()
+      const fn = badgeSpy.mock.calls[0][0]
+      fn(1)
+
+      expect(setBadgeSpy).toHaveBeenCalledWith(0)
+
+      badgeSpy.mockRestore()
+      notificationSpy.mockRestore()
+      setBadgeSpy.mockRestore()
+    })
+
+    test('it does not change state if theres no badge count', async () => {
+      const notificationSpy = jest
+        .spyOn(firebase.notifications(), 'getInitialNotification')
+        .mockReturnValue(Promise.resolve(null))
+      const wrapper = shallow(<Forum {...defaultProps} />)
+      const badgeSpy = jest.spyOn(
+        PushNotificationIOS,
+        'getApplicationIconBadgeNumber'
+      )
+
+      const setBadgeSpy = jest.spyOn(
+        PushNotificationIOS,
+        'setApplicationIconBadgeNumber'
+      )
+
+      await wrapper.instance().handleAppStateChange('active')
+      expect(
+        PushNotificationIOS.getApplicationIconBadgeNumber
+      ).toHaveBeenCalled()
+
+      const fn = badgeSpy.mock.calls[0][0]
+      fn(0)
+
+      expect(setBadgeSpy).not.toHaveBeenCalled()
+
+      badgeSpy.mockRestore()
+      notificationSpy.mockRestore()
+      setBadgeSpy.mockRestore()
+    })
+
+    test('doesnt check badge count if open via notification', async () => {
+      const notificationSpy = jest
+        .spyOn(firebase.notifications(), 'getInitialNotification')
+        .mockReturnValue(Promise.resolve({}))
+      const wrapper = shallow(<Forum {...defaultProps} />)
+      const badgeSpy = jest.spyOn(
+        PushNotificationIOS,
+        'getApplicationIconBadgeNumber'
+      )
+
+      await wrapper.instance().handleAppStateChange('active')
+      expect(
+        PushNotificationIOS.getApplicationIconBadgeNumber
+      ).not.toHaveBeenCalled()
+
+      badgeSpy.mockRestore()
+      notificationSpy.mockRestore()
     })
   })
 
@@ -279,25 +338,17 @@ describe('Forum', () => {
     test('if issues change, but no length, do not set new currentIssueId', () => {
       const wrapper = shallow(<Forum {...defaultProps} />)
 
-      // This is called on mount. Assert that it was called on mount (once) as expected for baseline to compare later
-      expect(defaultProps.setCurrentIssueId).toHaveBeenCalledTimes(1)
-
       wrapper.setProps({ issues: [] })
 
-      // This is called on mount. Assert that it was only called on mount (once)
-      expect(defaultProps.setCurrentIssueId).toHaveBeenCalledTimes(1)
+      expect(defaultProps.setCurrentIssueId).not.toHaveBeenCalled()
     })
 
     test('if issues change, and id is in list, dont change', () => {
       const wrapper = shallow(<Forum {...defaultProps} />)
 
-      // This is called on mount. Assert that it was called on mount (once) as expected for baseline to compare later
-      expect(defaultProps.setCurrentIssueId).toHaveBeenCalledTimes(1)
-
       wrapper.setProps({ issues: [{ id: 12 }] })
 
-      // This is called on mount. Assert that it was only called on mount (once)
-      expect(defaultProps.setCurrentIssueId).toHaveBeenCalledTimes(1)
+      expect(defaultProps.setCurrentIssueId).not.toHaveBeenCalled()
     })
 
     test('if currentIssueId changes, get posts', () => {
@@ -366,9 +417,6 @@ describe('Forum', () => {
     test("if nav param issue  is same as current issue, don't update currentIssueId", () => {
       const wrapper = shallow(<Forum {...defaultProps} currentIssueId={1000} />)
 
-      // This is called on mount. Assert that it was called on mount (once) as expected for baseline to compare later
-      expect(defaultProps.setCurrentIssueId).toHaveBeenCalledTimes(1)
-
       wrapper.setProps({
         navigation: {
           ...defaultProps.navigation,
@@ -390,7 +438,7 @@ describe('Forum', () => {
       })
 
       // This is called on mount. Assert that it was only called on mount (once)
-      expect(defaultProps.setCurrentIssueId).toHaveBeenCalledTimes(1)
+      expect(defaultProps.setCurrentIssueId).not.toHaveBeenCalled()
     })
   })
 

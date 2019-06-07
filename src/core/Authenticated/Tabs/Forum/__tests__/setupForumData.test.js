@@ -1,5 +1,6 @@
 import { setupForumData } from '../setupForumData'
 import { areas } from '@common/areas/slice'
+import { issues } from '@common/issues/slice'
 
 jest.mock('@common/issues', () => ({
   getIssues: jest.fn().mockReturnValue('getIssues'),
@@ -25,38 +26,6 @@ jest.mock('@common/areas', () => ({
 }))
 
 describe('setupForumData', () => {
-  test('loads profiles, settings, areas, issues, and posts', async () => {
-    const dispatch = jest.fn()
-    const getState = () => ({
-      main: {
-        areas: {
-          areas: [
-            {
-              id: 1
-            }
-          ],
-          currentAreaId: 1
-        },
-        issues: {
-          issues: [
-            {
-              id: 1,
-              number: 1
-            }
-          ],
-          currentIssueId: 1
-        }
-      }
-    })
-    await setupForumData()(dispatch, getState)
-
-    expect(dispatch).toHaveBeenCalledWith('getProfiles')
-    expect(dispatch).toHaveBeenCalledWith('getAppSettings')
-    expect(dispatch).toHaveBeenCalledWith('getAreas')
-
-    expect(dispatch).toHaveBeenCalledTimes(3)
-  })
-
   test('currentAreaId 0, code selects an area from the profile', async () => {
     const dispatch = jest.fn()
     const getState = () => ({
@@ -96,8 +65,12 @@ describe('setupForumData', () => {
     expect(dispatch).toHaveBeenCalledWith('getProfiles')
     expect(dispatch).toHaveBeenCalledWith('getAppSettings')
     expect(dispatch).toHaveBeenCalledWith('getAreas')
+    // called with zero to reset it first
+    expect(dispatch).toHaveBeenCalledWith(areas.actions.setCurrentAreaId(0))
     expect(dispatch).toHaveBeenCalledWith(areas.actions.setCurrentAreaId(2))
+    // reset the current issue
+    expect(dispatch).toHaveBeenCalledWith(issues.actions.setCurrentIssueId(0))
 
-    expect(dispatch).toHaveBeenCalledTimes(4)
+    expect(dispatch).toHaveBeenCalledTimes(6)
   })
 })
