@@ -17,7 +17,7 @@ import {
 
 import speechBubble from '@assets/images/onboarding/speech-bubble.png'
 import hand from '@assets/images/onboarding/hand.png'
-import lock from '@assets/images/onboarding/lock.png'
+import logIn from '@assets/images/onboarding/log-in.png'
 import yellowBird from '@assets/images/onboarding/yellow-bird.png'
 import greyBird from '@assets/images/onboarding/grey-bird.png'
 import greenBird from '@assets/images/bird-eating-birdseed/bird-eating-birdseed.png'
@@ -50,7 +50,7 @@ export const SwiperComponent = ({ navigation }) => {
         <Bird source={greenBird} left />
       </Slide>
       <Slide>
-        <Image width={75} height={100} source={lock} />
+        <Image width={220} height={153} source={logIn} />
         <SlideTitle>
           With FPF mobile, log in once and stay logged in!
         </SlideTitle>
