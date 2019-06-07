@@ -25,24 +25,23 @@ export class App extends React.Component {
     Linking.addEventListener('url', this.handleOpenURL)
     AppState.addEventListener('change', this.handleAppStateChange)
     SplashScreen.hide()
-    NetInfo.addEventListener('connectionChange', connectionInfo => {
-      this.setConnectedStatus(connectionInfo.type, connectionInfo.effectiveType)
-    })
+    NetInfo.addEventListener('connectionChange', this.setConnectedStatus)
 
     this.updateConnectionStatus()
   }
 
   componentWillUnmount() {
     Linking.removeEventListener('url', this.handleOpenURL)
-    AppState.removeEventListener('change', this.handleAppStateChange)
+    AppState.removeEventListener('connectionChange', this.handleAppStateChange)
+    NetInfo.removeEventListener('connectionChange', this.setConnectedStatus)
   }
 
   updateConnectionStatus = () => {
     const startConnectionState = this.state.connected
-    NetInfo.getConnectionInfo().then(connectionInfo => {
-      this.setConnectedStatus(connectionInfo.type, connectionInfo.effectiveType)
+    NetInfo.getConnectionInfo().then(async connectionInfo => {
+      const connected = await this.setConnectedStatus(connectionInfo)
 
-      if (!startConnectionState && !this.state.connected) {
+      if (!startConnectionState && !connected) {
         this.toastRef.show('No cell or wifi signal')
       }
     })
@@ -88,13 +87,23 @@ export class App extends React.Component {
     }
   }
 
-  setConnectedStatus(type, effectiveType) {
-    const connectionWeak =
+  setConnectedStatus = async ({ type, effectiveType }) => {
+    let connectionWeak =
       type === 'none' ||
       type === 'unknown' ||
       (type !== 'wifi' && effectiveType === '2g')
 
+    // some cases where both values are unknown, lets see if we can reach the server
+    if (connectionWeak && type === 'unknown' && effectiveType === 'unknown') {
+      try {
+        await fetch('https://frontporchforum.com/')
+        connectionWeak = false
+      } catch {} // we ignore the exception, because if the request failed, connectionWeak is already covering us
+    }
+
     this.setState({ connected: !connectionWeak })
+
+    return !connectionWeak
   }
 
   render() {
