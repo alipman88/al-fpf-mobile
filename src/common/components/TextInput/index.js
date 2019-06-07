@@ -19,6 +19,7 @@ export const TextInput = ({
   forwardIcon,
   keyboardType,
   onChangeText,
+  inputRef,
   label,
   multiline,
   placeholder,
@@ -52,6 +53,7 @@ export const TextInput = ({
           onChangeText={onChangeText}
           placeholder={placeholder}
           placeholderTextColor='#c5c5c5'
+          ref={inputRef}
           returnKeyType={returnKeyType}
           secureTextEntry={secureTextEntry}
           onBlur={onBlur}
@@ -75,6 +77,7 @@ TextInput.propTypes = {
   autoCapitalize: PropTypes.string,
   error: PropTypes.string,
   forwardIcon: PropTypes.node,
+  inputRef: PropTypes.object,
   tapIcon: PropTypes.node,
   keyboardType: PropTypes.string,
   label: PropTypes.string,
