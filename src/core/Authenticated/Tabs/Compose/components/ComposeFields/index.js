@@ -1,5 +1,4 @@
 import React from 'react'
-import { Keyboard } from 'react-native'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
 import flatten from 'lodash/flatten'

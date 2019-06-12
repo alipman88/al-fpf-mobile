@@ -1,5 +1,6 @@
 import React from 'react'
-import { Linking } from 'react-native'
+import { Linking, TouchableOpacity } from 'react-native'
+import Config from 'react-native-config'
 import PropTypes from 'prop-types'
 import IconEvil from 'react-native-vector-icons/EvilIcons'
 import { Button } from '@components/Button'
@@ -14,7 +15,15 @@ export const Advertisement = ({ ad }) => (
   <Card>
     <CardContent>
       <Header>{ad.headline}</Header>
-      <PostCategory dark={true}>Paid ad</PostCategory>
+      <TouchableOpacity
+        onPress={() =>
+          Linking.openURL(
+            `${Config.WEBSITE_HOST}/advertise-on-fpf/why-paid-ads`
+          )
+        }
+      >
+        <PostCategory dark={true}>Paid ad</PostCategory>
+      </TouchableOpacity>
       <ContentText>{ad.body}</ContentText>
     </CardContent>
     <Bottom>
