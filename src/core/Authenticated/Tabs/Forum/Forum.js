@@ -23,13 +23,14 @@ import { OcmMessage } from './components/OcmMessage'
 import { createChannel, displayNotification } from '@common/notifications'
 
 export class Forum extends React.Component {
-  async componentDidMount() {
-    // reset issue/area id to 0 so we fetch the default on fresh launch (notification handler is after this)
-    this.resetIssueAndArea()
+  constructor(props) {
+    super(props)
+    this.forumViewRef = React.createRef()
+  }
 
+  async componentDidMount() {
     AppState.addEventListener('change', this.handleAppStateChange)
 
-    this.props.setupForumData(this.props.navigation)
     this.setTitleFromArea()
 
     const fcmToken = await firebase.messaging().getToken()
@@ -65,6 +66,8 @@ export class Forum extends React.Component {
         .getInitialNotification()
       if (notificationOpen) {
         this.handleNotificationOpen(notificationOpen)
+      } else {
+        this.props.setupForumData(this.props.navigation)
       }
 
       this.messageListener = firebase
@@ -88,6 +91,8 @@ export class Forum extends React.Component {
         .onNotificationOpened(notificationOpen => {
           this.handleNotificationOpen(notificationOpen)
         })
+    } else {
+      this.props.setupForumData(this.props.navigation)
     }
   }
 
@@ -103,18 +108,16 @@ export class Forum extends React.Component {
     }
   }
 
-  resetIssueAndArea() {
-    this.props.setCurrentIssueId(0)
-    this.props.setCurrentAreaId(0)
-  }
-
-  handleAppStateChange = state => {
-    if (state === 'active' && Platform.OS === 'ios') {
+  handleAppStateChange = async state => {
+    const notificationOpen = await firebase
+      .notifications()
+      .getInitialNotification()
+    // if we're opening via a notification, we can let that flow do its thing
+    if (!notificationOpen && state === 'active' && Platform.OS === 'ios') {
       // reset issue/area id to 0 so we fetch the default if badge icon is present
       PushNotificationIOS.getApplicationIconBadgeNumber(badgeNumber => {
         if (badgeNumber >= 1) {
-          this.resetIssueAndArea()
-          this.props.setupForumData()
+          this.props.setupForumData(this.props.navigation)
           PushNotificationIOS.setApplicationIconBadgeNumber(0)
         }
       })
@@ -122,14 +125,18 @@ export class Forum extends React.Component {
   }
 
   fetchIssues(prevProps) {
-    const { currentAreaId, areas } = this.props
+    const { currentAreaId, areas, navigation } = this.props
 
     if (
       currentAreaId !== 0 &&
       (prevProps.areas !== areas || prevProps.currentAreaId !== currentAreaId)
     ) {
       this.setTitleFromArea()
-      this.props.getIssues(this.props.currentAreaId, this.props.navigation)
+      if (currentAreaId !== prevProps.currentAreaId) {
+        this.props.setCurrentIssueId(0)
+        this.scrollPostsToTop()
+      }
+      this.props.getIssues(currentAreaId, navigation)
     }
   }
 
@@ -159,10 +166,10 @@ export class Forum extends React.Component {
         issues.length > 0 &&
         !issues.find(issue => issue.id === this.props.currentIssueId)
       ) {
-        this.refs.forumViewRef.scrollTo({ y: 0 })
-        this.props.setCurrentIssueId(this.props.issues[0].id)
+        this.scrollPostsToTop()
+        this.props.setCurrentIssueId(issues[0].id)
         this.props.toggleIssueUnread({
-          id: this.props.issues[0].id,
+          id: issues[0].id,
           isUnread: false,
           areaId: currentAreaId
         })
@@ -174,9 +181,7 @@ export class Forum extends React.Component {
       this.props.currentIssueId !== 0
     ) {
       // scroll to top any time we're rendering a different issue
-      if (this.refs.forumViewRef) {
-        this.refs.forumViewRef.scrollTo({ y: 0 })
-      }
+      this.scrollPostsToTop()
       this.props.getPosts(this.props.currentIssueId, this.props.navigation)
       this.props.toggleIssueUnread({
         id: this.props.currentIssueId,
@@ -214,6 +219,13 @@ export class Forum extends React.Component {
     )
   }
 
+  scrollPostsToTop() {
+    if (this.forumViewRef) {
+      // using set timeout to ensure the code doesn't run until rendering is finished
+      setTimeout(() => this.forumViewRef.scrollTo({ y: 0, animated: false }))
+    }
+  }
+
   setTitleFromArea() {
     const currentArea = this.props.areas.find(
       a => a.id === this.props.currentAreaId
@@ -232,7 +244,7 @@ export class Forum extends React.Component {
   }
 
   render() {
-    const { currentIssueId, issues, loading } = this.props
+    const { currentIssueId, issues, loading, navigation } = this.props
 
     const posts = (this.props.posts[currentIssueId] || []).concat(
       this.props.sharedPosts[currentIssueId] || []
@@ -272,7 +284,9 @@ export class Forum extends React.Component {
     return (
       <ScreenContainer withPadding={false} grey>
         <ScrollView
-          ref='forumViewRef'
+          ref={ref => {
+            this.forumViewRef = ref
+          }}
           refreshControl={
             <RefreshControl
               refreshing={loading}
@@ -280,12 +294,12 @@ export class Forum extends React.Component {
             />
           }
         >
-          <OtherIssues toast={this.toastRef} />
+          <OtherIssues navigation={navigation} toast={this.toastRef} />
           <ForumContainer>
             {Boolean(currentIssue) && (
               <InThisIssue
                 number={currentIssue.number}
-                navigation={this.props.navigation}
+                navigation={navigation}
               />
             )}
             {postRender}

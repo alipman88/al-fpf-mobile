@@ -17,22 +17,42 @@ describe('App', () => {
   })
 
   describe('setConnectedStatus', () => {
-    test('sets connected state depending on variables', () => {
+    test('sets connected state depending on variables', async () => {
       const wrapper = shallow(<App />)
-      expect(wrapper.state().connected).toEqual(true)
 
-      wrapper.instance().setConnectedStatus('none', '4g')
-      expect(wrapper.state().connected).toEqual(false)
-      wrapper.instance().setConnectedStatus('unknown', '4g')
-      expect(wrapper.state().connected).toEqual(false)
+      let result = await wrapper
+        .instance()
+        .setConnectedStatus({ type: 'none', effectiveType: '4g' })
+      expect(result).toEqual(false)
 
-      wrapper.instance().setConnectedStatus('cellular', '2g')
-      expect(wrapper.state().connected).toEqual(false)
+      result = await wrapper
+        .instance()
+        .setConnectedStatus({ type: 'unknown', effectiveType: '4g' })
+      expect(result).toEqual(false)
 
-      wrapper.instance().setConnectedStatus('wifi', '2g')
-      expect(wrapper.state().connected).toEqual(true)
+      result = await wrapper
+        .instance()
+        .setConnectedStatus({ type: 'cellular', effectiveType: '2g' })
+      expect(result).toEqual(false)
 
-      wrapper.instance().setConnectedStatus('cellular', '4g')
+      result = await wrapper
+        .instance()
+        .setConnectedStatus({ type: 'wifi', effectiveType: '2g' })
+      expect(result).toEqual(true)
+
+      result = await wrapper
+        .instance()
+        .setConnectedStatus({ type: 'cellular', effectiveType: '4g' })
+      expect(result).toEqual(true)
+    })
+
+    test('when connection is unknown, it tries the backend server', async () => {
+      const wrapper = shallow(<App />)
+      global.fetch = jest.fn()
+
+      await wrapper
+        .instance()
+        .setConnectedStatus({ type: 'unknown', effectiveType: 'unknown' })
       expect(wrapper.state().connected).toEqual(true)
     })
   })
