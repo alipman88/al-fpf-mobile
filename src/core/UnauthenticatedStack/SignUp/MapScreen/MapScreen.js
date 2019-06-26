@@ -152,9 +152,11 @@ export class MapScreen extends React.Component {
                     ? 'rgba(234, 98, 98, 0.8)'
                     : 'rgba(234, 98, 98, 0.5)'
                 }
-                onPress={() =>
-                  this.toggleArea(!this.state.checkedAreas[area.id], area.id)
-                }
+                onPress={() => {
+                  if (areas.length > 1) {
+                    this.toggleArea(!this.state.checkedAreas[area.id], area.id)
+                  }
+                }}
                 tappable={areas.length > 1}
               />
             ))}
