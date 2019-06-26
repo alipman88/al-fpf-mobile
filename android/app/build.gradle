@@ -170,7 +170,14 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.facebook.react:react-native:+"  // From node_modules
-    implementation project(':react-native-device-info')
+    // react-native-device-info pulls in AndroidX (which replaces and is
+    // incompatible with Support).  Avoid this inclusion until we upgrade
+    // to AndroidX.
+    // https://github.com/facebook/react-native/issues/25293#issuecomment-503157853
+    // https://github.com/facebook/react-native/issues/23112
+    implementation(project(":react-native-device-info"),  {
+      exclude group: "com.google.android.gms"
+    })
     implementation project(':react-native-picker-module')
 
     implementation "com.google.android.gms:play-services-base:16.0.1"
