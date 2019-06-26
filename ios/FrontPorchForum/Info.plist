@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>5</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>message</string>
@@ -45,6 +45,10 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Your location is required to determine if you are in our service area.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Your location is required to determine if you are in our service area.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Feather.ttf</string>
