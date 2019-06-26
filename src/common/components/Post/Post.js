@@ -21,6 +21,7 @@ import {
   PostDate,
   PostHeader,
   PostLink,
+  CategoryPosts,
   ShowMoreButton,
   Bottom,
   BottomBordered,
@@ -181,14 +182,16 @@ export class Post extends React.Component {
           {showDatePublished && Boolean(post.date_published) && (
             <PostDate>{format(post.date_published, 'MMM DD, YYYY')}</PostDate>
           )}
-          {post.categories.map(category => (
-            <TouchableOpacity
-              key={category}
-              onPress={() => onTapCategory(category)}
-            >
-              <PostCategory>{category}</PostCategory>
-            </TouchableOpacity>
-          ))}
+          <CategoryPosts>
+            {post.categories.map(category => (
+              <TouchableOpacity
+                key={category}
+                onPress={() => onTapCategory(category)}
+              >
+                <PostCategory>{category}</PostCategory>
+              </TouchableOpacity>
+            ))}
+          </CategoryPosts>
           <PostBody>
             <Autolink
               text={truncateText(

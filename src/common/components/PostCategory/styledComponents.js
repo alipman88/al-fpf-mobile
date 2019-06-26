@@ -4,6 +4,7 @@ import { Text } from '@components/Text'
 export const Pill = styled.View`
   background-color: ${({ dark }) => (dark ? '#999cad' : '#ebecf1')};
   padding: 1px 10px 1px 10px;
+  margin: 0 2px 2px 0;
   border-radius: 5;
   border-color: #355768;
   align-self: flex-start;
