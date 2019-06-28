@@ -40,6 +40,13 @@ To run on iOS, simply use:
 yarn ios
 ```
 
+Or to select a different emulator than the default:
+
+```
+xcrun simctl list devices
+yarn ios --simulator="iPhone 5s"
+```
+
 To run on android, you need to start up an emulator first.
 
 Open android studio, and open the project for this app (this is just so you can access menus in android studio). Then look for the mobile phone icon near the top, AVD Manager. Use that to create an emulator. This may take some time to download images. Once the emulator is running you can run:
@@ -59,6 +66,12 @@ brew cask install react-native-debugger
 Then before running `yarn ios` or `yarn android`, start the node server yourself by running `yarn startdebug` then run the respected command to run on iOS or Android.
 
 When you open the developer menu in the app, and click to start debugging, the React Native Debugger app will launch.
+
+### Hot Reloading
+
+To enable hot reloading, press Cmd-D (for iOS) or Cmd-M (for Android) in the simulator to open the debug menu, then select "Enable Hot Reloading".
+
+https://facebook.github.io/react-native/docs/debugging
 
 ## Redux
 
