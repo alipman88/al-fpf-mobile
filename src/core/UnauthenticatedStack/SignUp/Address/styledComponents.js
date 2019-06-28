@@ -11,10 +11,6 @@ export const Description = styled(Text)`
   text-align: center;
 `
 
-export const FieldWrapper = styled.View`
-  margin-bottom: 4;
-`
-
 export const NoAreasContainer = styled.View`
   background-color: #e4f1d8;
   padding-horizontal: 30;

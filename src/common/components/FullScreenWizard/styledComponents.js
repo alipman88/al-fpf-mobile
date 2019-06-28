@@ -30,6 +30,8 @@ export const Divider = styled.Image`
 `
 
 export const TopContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
   background-color: #fff;
   padding-top: ${({ topPadding }) => topPadding || 10};
   padding-bottom: 18;

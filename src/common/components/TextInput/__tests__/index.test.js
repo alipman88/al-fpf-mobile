@@ -5,7 +5,7 @@ import { TouchableWithoutFeedback } from 'react-native'
 import { TextInput } from '../index'
 import { FormError } from '@components/FormError'
 import { FormFieldLabel } from '@components/FormFieldLabel'
-import { Input } from '../styledComponents'
+import { StyledTextInput } from '../styledComponents'
 
 const TestIcon = () => null
 
@@ -21,7 +21,7 @@ describe('TextInput', () => {
 
   test('input calls onChangeText', () => {
     const wrapper = shallow(<TextInput {...defaultProps} />)
-    wrapper.find(Input).simulate('changeText', 'hello!')
+    wrapper.find(StyledTextInput).simulate('changeText', 'hello!')
     expect(defaultProps.onChangeText).toHaveBeenCalledWith('hello!')
     expect(wrapper.find(FormFieldLabel).length).toEqual(1)
   })

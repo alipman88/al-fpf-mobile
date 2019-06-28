@@ -69,7 +69,11 @@ describe('BusinessInfoFields', () => {
     }
 
     const wrapper = shallow(
-      <BusinessInfoFields {...defaultProps} values={inputValues} />
+      <BusinessInfoFields
+        {...defaultProps}
+        values={inputValues}
+        touched={['name']}
+      />
     )
 
     wrapper

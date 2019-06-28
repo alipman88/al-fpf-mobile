@@ -2,7 +2,7 @@ import styled from 'styled-components/native'
 
 export const Container = styled.View``
 
-export const Input = styled.TextInput`
+export const StyledTextInput = styled.TextInput`
   border-radius: 5;
   border-width: 1;
   border-color: ${({ hasError }) => (hasError ? '#dc4558' : '#d5dde1')};
