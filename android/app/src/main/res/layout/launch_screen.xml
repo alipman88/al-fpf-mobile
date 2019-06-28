@@ -2,6 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splashscreen"
-    android:gravity="center">
+    android:background="#ffffff"
+    android:gravity="bottom">
+    <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:scaleType="fitEnd"
+      android:adjustViewBounds="true"
+      android:src="@drawable/splashscreen"
+      />
 </LinearLayout>
