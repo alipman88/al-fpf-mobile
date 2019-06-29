@@ -107,7 +107,9 @@ export class FullScreenWizard extends React.Component {
       <ScreenWrapper>
         <StatusBar barStyle='dark-content' />
         <KeyboardAvoidingView behavior='padding'>
-          <SafeAreaViewContainer>
+          {/* Use JS-only version of React Native's SafeAreaView so that Grass
+              can extend into iOS 12 footer space*/}
+          <SafeAreaViewContainer forceInset={{ bottom: 'never' }}>
             {topSection}
             <KeyboardOpen
               render={({ open }) => {

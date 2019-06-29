@@ -1,4 +1,5 @@
 import styled from 'styled-components/native'
+import SafeAreaView from 'react-native-safe-area-view'
 
 import { TextSemibold } from '@components/Text'
 
@@ -7,7 +8,7 @@ export const ScreenWrapper = styled.View`
   justify-content: space-between;
 `
 
-export const SafeAreaViewContainer = styled.SafeAreaView`
+export const SafeAreaViewContainer = styled(SafeAreaView)`
   flex: 1;
 `
 
