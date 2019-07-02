@@ -50,7 +50,7 @@ export const SwiperComponent = ({ navigation }) => {
         <Bird source={greenBird} left />
       </Slide>
       <Slide>
-        <Image width={220} height={153} source={logIn} />
+        <Image width={173} height={120} source={logIn} />
         <SlideTitle>
           With FPF mobile, log in once and stay logged in!
         </SlideTitle>

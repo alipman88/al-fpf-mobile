@@ -17,124 +17,149 @@ import {
   FormHeader
 } from '../styledComponents'
 
-export const BusinessInfoFields = ({
-  errors,
-  setFieldValue,
-  setFieldTouched,
-  touched,
-  values,
-  newUser,
-  navigation,
-  setNewUserByKey,
-  categories,
-  loading
-}) => {
-  const onSubmit = values => {
-    setNewUserByKey({ business: values })
-    navigation.navigate('CreateAccount')
+export class BusinessInfoFields extends React.Component {
+  constructor(props) {
+    super(props)
+    this.businessCategoryIdInput = React.createRef()
+    this.websiteInput = React.createRef()
+    this.phoneInput = React.createRef()
+    this.descriptionInput = React.createRef()
   }
 
-  const nextDisabled =
-    !isEmpty(errors) || isEmpty(touched) || !Boolean(values.businessCategoryId)
+  render() {
+    const {
+      errors,
+      setFieldValue,
+      setFieldTouched,
+      touched,
+      values,
+      navigation,
+      setNewUserByKey,
+      categories,
+      loading
+    } = this.props
 
-  return (
-    <FullScreenWizard
-      onBackPress={() => navigation.goBack()}
-      onNextPress={() => onSubmit(values)}
-      currentStep={4}
-      steps={5}
-      withPadding={false}
-      topPadding={35}
-      nextDisabled={nextDisabled}
-      contentContainerStyle={{
-        backgroundColor: '#f2f2f2'
-      }}
-    >
-      <Container>
-        <Spinner visible={loading} />
-        <FormHeader>
-          To help people learn more about your business through your listing in
-          FPF's Business Directory, please complete the following fields:
-        </FormHeader>
-        <FormFieldsWrapper>
-          <FieldWrapper>
-            <TextInput
-              error={errors.name}
-              label='Name of business or nonprofit'
-              placeholder='Your Business Name'
-              touched={touched.name}
-              onChangeText={value => {
-                setFieldValue('name', value)
-                setFieldTouched('name')
-              }}
-              value={values.name}
-              required
-            />
-          </FieldWrapper>
-          <FieldWrapper>
-            <Multiselect
-              error={errors.businessCategoryId}
-              label='Category'
-              selectText={'Select category'}
-              items={categories}
-              onSelectedItemsChange={selectedItems => {
-                setFieldTouched('businessCategoryId', true)
-                setFieldValue('businessCategoryId', selectedItems[0])
-              }}
-              touched={touched.businessCategoryId}
-              value={[values.businessCategoryId]}
-              single
-              required
-            />
-          </FieldWrapper>
-          <FieldWrapper>
-            <TextInput
-              error={errors.url}
-              label='Website'
-              placeholder='example.com'
-              touched={touched.url}
-              onChangeText={value => {
-                setFieldValue('url', value)
-                setFieldTouched('url')
-              }}
-              value={values.website}
-              keyboardType='url'
-            />
-          </FieldWrapper>
+    const nextDisabled =
+      !isEmpty(errors) ||
+      isEmpty(touched) ||
+      !Boolean(values.businessCategoryId)
 
-          <FieldWrapper>
-            <TextInput
-              error={errors.phone}
-              label='Phone'
-              placeholder='802-123-4567'
-              touched={touched.phone}
-              onChangeText={value => {
-                setFieldValue('phone', value)
-                setFieldTouched('phone')
-              }}
-              value={formatPhoneNumber(values.phone)}
-              keyboardType='phone-pad'
-            />
-          </FieldWrapper>
+    const onSubmit = values => {
+      if (!nextDisabled) {
+        setNewUserByKey({ business: values })
+        navigation.navigate('CreateAccount')
+      }
+    }
 
-          <FieldWrapper>
-            <TextInput
-              error={errors.description}
-              label='Business/nonprofit description'
-              touched={touched.description}
-              onChangeText={value => {
-                setFieldValue('description', value)
-                setFieldTouched('description')
-              }}
-              value={values.description}
-              numberOfLines={10}
-              multiline
-            />
-          </FieldWrapper>
-        </FormFieldsWrapper>
-      </Container>
-    </FullScreenWizard>
-  )
+    return (
+      <FullScreenWizard
+        onBackPress={() => navigation.goBack()}
+        onNextPress={() => onSubmit(values)}
+        currentStep={4}
+        steps={5}
+        withPadding={false}
+        topPadding={35}
+        nextDisabled={nextDisabled}
+        contentContainerStyle={{
+          backgroundColor: '#f2f2f2'
+        }}
+      >
+        <Container>
+          <Spinner visible={loading} />
+          <FormHeader>
+            To help people learn more about your business through your listing
+            in FPF's Business Directory, please complete the following fields:
+          </FormHeader>
+          <FormFieldsWrapper>
+            <FieldWrapper>
+              <TextInput
+                nextField={this.businessCategoryIdInput}
+                blurOnSubmit={true} // next element is not a text input
+                error={errors.name}
+                label='Name of business or nonprofit'
+                placeholder='Your Business Name'
+                touched={touched.name}
+                onChangeText={value => {
+                  setFieldValue('name', value)
+                  setFieldTouched('name')
+                }}
+                value={values.name}
+                required
+              />
+            </FieldWrapper>
+            <FieldWrapper>
+              <Multiselect
+                error={errors.businessCategoryId}
+                label='Category'
+                selectText={'Select category'}
+                items={categories}
+                onSelectedItemsChange={selectedItems => {
+                  setFieldTouched('businessCategoryId', true)
+                  setFieldValue('businessCategoryId', selectedItems[0])
+                }}
+                touched={touched.businessCategoryId}
+                value={[values.businessCategoryId]}
+                ref={this.businessCategoryIdInput}
+                single
+                required
+              />
+            </FieldWrapper>
+            <FieldWrapper>
+              <TextInput
+                nextField={this.phoneInput}
+                error={errors.url}
+                label='Website'
+                placeholder='example.com'
+                touched={touched.url}
+                onChangeText={value => {
+                  setFieldValue('url', value)
+                  setFieldTouched('url')
+                }}
+                value={values.website}
+                inputRef={this.websiteInput}
+                keyboardType='url'
+                autoCapitalize='none'
+                autoCorrect={false}
+              />
+            </FieldWrapper>
+
+            <FieldWrapper>
+              <TextInput
+                nextField={this.descriptionInput}
+                error={errors.phone}
+                label='Phone'
+                placeholder='802-123-4567'
+                touched={touched.phone}
+                onChangeText={value => {
+                  setFieldValue('phone', value)
+                  setFieldTouched('phone')
+                }}
+                value={formatPhoneNumber(values.phone)}
+                inputRef={this.phoneInput}
+                keyboardType='phone-pad'
+              />
+            </FieldWrapper>
+
+            <FieldWrapper>
+              <TextInput
+                error={errors.description}
+                label='Business/nonprofit description'
+                touched={touched.description}
+                onChangeText={value => {
+                  setFieldValue('description', value)
+                  setFieldTouched('description')
+                }}
+                value={values.description}
+                inputRef={this.descriptionInput}
+                numberOfLines={10}
+                multiline
+              />
+            </FieldWrapper>
+          </FormFieldsWrapper>
+        </Container>
+      </FullScreenWizard>
+    )
+  }
 }
 
 BusinessInfoFields.propTypes = {

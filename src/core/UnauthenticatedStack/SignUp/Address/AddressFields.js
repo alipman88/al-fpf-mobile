@@ -12,16 +12,23 @@ import { provinces } from '@common/types/provinces'
 import { states } from '@common/types/states'
 
 import { getStepCount } from '../getStepCount'
-import { Container, BottomPadding } from '../styledComponents'
+import { Container, FieldWrapper, FormFieldsWrapper } from '../styledComponents'
 import {
   Description,
-  FieldWrapper,
   NoAreasContainer,
   NoAreasHeader,
   NoAreasText
 } from './styledComponents'
 
 export class AddressFields extends React.Component {
+  constructor(props) {
+    super(props)
+    this.streetNameInput = React.createRef()
+    this.secondaryAddressInput = React.createRef()
+    this.cityInput = React.createRef()
+    this.stateInput = React.createRef()
+  }
+
   render() {
     const {
       errors,
@@ -36,121 +43,140 @@ export class AddressFields extends React.Component {
       profileType
     } = this.props
 
+    const nextDisabled = !isEmpty(errors) || isEmpty(touched)
+
+    const onSubmit = values => {
+      if (!nextDisabled) {
+        handleSubmit()
+      }
+    }
+
     return (
       <FullScreenWizard
         onBackPress={() => navigation.goBack()}
         steps={getStepCount(profileType)}
         currentStep={2}
-        onNextPress={handleSubmit}
-        nextDisabled={!isEmpty(errors) || isEmpty(touched)}
+        onNextPress={onSubmit}
+        nextDisabled={nextDisabled}
         contentContainerStyle={{
           backgroundColor: '#f2f2f2'
         }}
-        stretchToHeightOfScreen
       >
         <Container>
-          <Spinner visible={isSubmitting} />
-          {noAreasFound && (
-            <NoAreasContainer>
-              <NoAreasHeader>Oops!</NoAreasHeader>
-              <NoAreasText>
-                We can't find that address in our coverage area. Please review
-                and edit what you entered, or just click "Continue" again.
-                Thanks!
-              </NoAreasText>
-            </NoAreasContainer>
-          )}
-          <Description>
-            Please enter your
-            {profileType === profileTypes.NEIGHBOR ? '' : ' business'} street
-            address so we can find your neighborhood forum.
-          </Description>
-          <FieldWrapper>
-            <TextInput
-              error={errors.streetNumber}
-              keyboardType='number-pad'
-              label='House/building number'
-              onChangeText={text => {
-                setFieldTouched('streetNumber')
-                setFieldValue('streetNumber', text)
-              }}
-              placeholder='154'
-              touched={touched.streetNumber}
-              value={values.streetNumber}
-              required
-            />
-          </FieldWrapper>
+          <FormFieldsWrapper>
+            <Spinner visible={isSubmitting} />
+            {noAreasFound && (
+              <NoAreasContainer>
+                <NoAreasHeader>Oops!</NoAreasHeader>
+                <NoAreasText>
+                  We can't find that address in our coverage area. Please review
+                  and edit what you entered, or just click "Continue" again.
+                  Thanks!
+                </NoAreasText>
+              </NoAreasContainer>
+            )}
+            <Description>
+              Please enter your
+              {profileType === profileTypes.NEIGHBOR ? '' : ' business'} street
+              address so we can find your neighborhood forum.
+            </Description>
+            <FieldWrapper>
+              <TextInput
+                nextField={this.streetNameInput}
+                error={errors.streetNumber}
+                keyboardType='number-pad'
+                label='House/building number'
+                onChangeText={text => {
+                  setFieldTouched('streetNumber')
+                  setFieldValue('streetNumber', text)
+                }}
+                placeholder='154'
+                touched={touched.streetNumber}
+                value={values.streetNumber}
+                required
+              />
+            </FieldWrapper>
 
-          <FieldWrapper>
-            <TextInput
-              error={errors.streetName}
-              label='Street name (no house number)'
-              onChangeText={text => {
-                setFieldTouched('streetName')
-                setFieldValue('streetName', text)
-              }}
-              placeholder='Maple St'
-              touched={touched.streetName}
-              value={values.streetName}
-              required
-            />
-          </FieldWrapper>
-          <FieldWrapper>
-            <TextInput
-              error={errors.secondaryAddress}
-              label='Apt/suite (if applicable)'
-              onChangeText={text => {
-                setFieldTouched('secondaryAddress')
-                setFieldValue('secondaryAddress', text)
-              }}
-              placeholder='3R'
-              touched={touched.secondaryAddress}
-              value={values.secondaryAddress}
-            />
-          </FieldWrapper>
-          <FieldWrapper>
-            <TextInput
-              error={errors.city}
-              label='City'
-              onChangeText={text => {
-                setFieldTouched('city')
-                setFieldValue('city', text)
-              }}
-              placeholder='Bristol'
-              touched={touched.city}
-              value={values.city}
-              required
-            />
-          </FieldWrapper>
-          <FieldWrapper>
-            <Multiselect
-              error={errors.state}
-              label='State'
-              title='State'
-              items={[
-                {
-                  name: 'States',
-                  id: 0,
-                  children: states
-                },
-                {
-                  name: 'Provinces',
-                  id: 1,
-                  children: provinces
-                }
-              ]}
-              onSelectedItemsChange={state => {
-                setFieldTouched('state')
-                setFieldValue('state', state[0])
-              }}
-              searchPlaceholderText='Search'
-              touched={touched.state}
-              value={[values.state]}
-              single
-              required
-            />
-          </FieldWrapper>
-          <BottomPadding />
+            <FieldWrapper>
+              <TextInput
+                nextField={this.secondaryAddressInput}
+                inputRef={this.streetNameInput}
+                error={errors.streetName}
+                label='Street name (no house number)'
+                onChangeText={text => {
+                  setFieldTouched('streetName')
+                  setFieldValue('streetName', text)
+                }}
+                placeholder='Maple St'
+                touched={touched.streetName}
+                value={values.streetName}
+                required
+              />
+            </FieldWrapper>
+            <FieldWrapper>
+              <TextInput
+                nextField={this.cityInput}
+                inputRef={this.secondaryAddressInput}
+                error={errors.secondaryAddress}
+                label='Apt/suite (if applicable)'
+                onChangeText={text => {
+                  setFieldTouched('secondaryAddress')
+                  setFieldValue('secondaryAddress', text)
+                }}
+                placeholder='3R'
+                touched={touched.secondaryAddress}
+                value={values.secondaryAddress}
+              />
+            </FieldWrapper>
+            <FieldWrapper>
+              <TextInput
+                inputRef={this.cityInput}
+                error={errors.city}
+                label='City'
+                onChangeText={text => {
+                  setFieldTouched('city')
+                  setFieldValue('city', text)
+                }}
+                placeholder='Bristol'
+                touched={touched.city}
+                value={values.city}
+                nextField={this.stateInput}
+                blurOnSubmit={true} // next element is not a text input
+                required
+              />
+            </FieldWrapper>
+            <FieldWrapper>
+              <Multiselect
+                inputRef={this.stateInput}
+                error={errors.state}
+                label='State'
+                title='State'
+                items={[
+                  {
+                    name: 'States',
+                    id: 0,
+                    children: states
+                  },
+                  {
+                    name: 'Provinces',
+                    id: 1,
+                    children: provinces
+                  }
+                ]}
+                onSelectedItemsChange={state => {
+                  setFieldTouched('state')
+                  setFieldValue('state', state[0])
+                  onSubmit()
+                }}
+                onConfirm={onSubmit}
+                searchPlaceholderText='Search'
+                touched={touched.state}
+                value={[values.state]}
+                single
+                required
+              />
+            </FieldWrapper>
+          </FormFieldsWrapper>
         </Container>
       </FullScreenWizard>
     )

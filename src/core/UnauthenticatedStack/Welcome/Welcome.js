@@ -9,7 +9,7 @@ export class Welcome extends React.Component {
   render() {
     const { navigation } = this.props
     return (
-      <ScreenContainer grassBackground grassHeight={110} grassBgFixed>
+      <ScreenContainer grassBackground grassHeight={110}>
         <HeaderLogo />
         <SwiperComponent navigation={navigation} />
       </ScreenContainer>
