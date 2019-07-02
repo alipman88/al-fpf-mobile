@@ -2,6 +2,7 @@ import styled from 'styled-components/native'
 import { Text } from '@components/Text'
 
 import { screenPadding } from '@common/styles/screenPadding'
+import { screenSize } from '@common/styles/screenSizeHelper'
 
 export const FormHeader = styled(Text)`
   font-size: 16;
@@ -15,10 +16,9 @@ export const FormHelper = styled(Text)`
 `
 export const FieldWrapper = styled.View`
   margin-bottom: 11;
-  max-width: 380;
 `
 export const FormFieldsWrapper = styled.View`
-  padding-bottom: 100;
+  padding-bottom: ${screenSize({ xs: 10, sm: 15 }, 30)};
 `
 
 export const Container = styled.ScrollView`

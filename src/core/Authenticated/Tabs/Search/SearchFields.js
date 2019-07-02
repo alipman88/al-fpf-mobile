@@ -180,7 +180,11 @@ export class SearchFields extends React.Component {
                     setFieldValue('forums', selectedItems)
                   }}
                   searchPlaceholderText='Search Forums'
-                  selectText='All local forums'
+                  selectText={
+                    get(values, 'forums.length') > 0
+                      ? 'Selected local forums'
+                      : 'All local forums'
+                  }
                   touched={touched.forums}
                   value={values.forums}
                 />

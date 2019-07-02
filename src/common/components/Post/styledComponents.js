@@ -59,6 +59,12 @@ export const LinkText = styled(PostAuthor)`
   text-decoration: underline;
 `
 
+export const CategoryPosts = styled.View`
+  flex: 1;
+  flex-direction: row;
+  flex-wrap: wrap;
+`
+
 export const BottomBordered = styled.View`
   flex-direction: row;
   justify-content: space-between;

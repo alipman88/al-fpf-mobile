@@ -22,23 +22,17 @@ export class PasswordInput extends React.Component {
     const {
       setFieldValue,
       setFieldTouched,
-      error,
       label,
-      value,
-      touched,
-      required,
-      fieldKey
+      fieldKey,
+      ...other
     } = this.props
 
     const key = fieldKey || 'password'
 
     return (
       <TextInput
+        {...other}
         label={label || 'Password'}
-        error={error}
-        value={value}
-        touched={touched}
-        required={required}
         tapIcon={
           <Icon
             source={

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Linking, ScrollView } from 'react-native'
+import { Linking, Platform, ScrollView } from 'react-native'
 import { ExternalLink } from '@components/ExternalLink'
 import { ScreenContainer } from '@components/ScreenContainer'
 import {
@@ -66,20 +66,22 @@ export class More extends React.Component {
               />
             </Card>
 
-            <Card>
-              <CenterImgContainer>
-                <CardIcon source={donateIcon} />
-              </CenterImgContainer>
-              <CardTitle>Donate</CardTitle>
-              <CardContent>
-                Your contribution will help us maintain, improve and grow our
-                community-building service.
-              </CardContent>
-              <ExternalLink
-                content='Donate Now'
-                url='https://frontporchforum.com/supporting-members'
-              />
-            </Card>
+            {Platform.OS !== 'ios' && (
+              <Card>
+                <CenterImgContainer>
+                  <CardIcon source={donateIcon} />
+                </CenterImgContainer>
+                <CardTitle>Donate</CardTitle>
+                <CardContent>
+                  Your contribution will help us maintain, improve and grow our
+                  community-building service.
+                </CardContent>
+                <ExternalLink
+                  content='Donate Now'
+                  url='https://frontporchforum.com/supporting-members'
+                />
+              </Card>
+            )}
 
             <Card>
               <CenterImgContainer>

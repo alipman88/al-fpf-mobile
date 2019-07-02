@@ -1,12 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Dimensions, Keyboard, ScrollView, StatusBar } from 'react-native'
+import { Keyboard, ScrollView, StatusBar, View } from 'react-native'
 
 import { HeaderLogo } from '@components/HeaderLogo'
 import { Button } from '@components/Button'
 import { FormSteps } from '@components/FormSteps'
 import { Grass } from '@components/Grass'
+import { IconButton } from '@components/IconButton'
 import { KeyboardOpen } from '@components/KeyboardOpen'
+import { screenSize } from '@common/styles/screenSizeHelper'
 
 import lineDivider from '@assets/images/createAccount/line-divider/accountsetup-line-divider.png'
 
@@ -30,7 +32,6 @@ export class FullScreenWizard extends React.Component {
       nextLabel,
       nextWidth,
       steps,
-      stretchToHeightOfScreen,
       currentStep,
       topPadding,
       nextDisabled,
@@ -72,8 +73,28 @@ export class FullScreenWizard extends React.Component {
     const topSection =
       Boolean(currentStep) && Boolean(steps) ? (
         <TopContainer topPadding={topPadding}>
-          <TopHeader>Create Account</TopHeader>
-          <FormSteps steps={steps} currentStep={currentStep} />
+          <IconButton
+            onPress={() => {
+              Keyboard.dismiss()
+              onBackPress()
+            }}
+            iconName='keyboard-arrow-left'
+            width={40}
+          />
+          <View>
+            <TopHeader>Create Account</TopHeader>
+            <FormSteps steps={steps} currentStep={currentStep} />
+          </View>
+          <IconButton
+            onPress={() => {
+              Keyboard.dismiss()
+              onNextPress()
+            }}
+            iconName='keyboard-arrow-right'
+            disabled={nextDisabled}
+            color={nextDisabled ? 'rgba(80, 44, 2, 0.5)' : null}
+            width={40}
+          />
           <Divider source={lineDivider} resizeMode='stretch' />
         </TopContainer>
       ) : Boolean(customHeader) ? (
@@ -86,30 +107,35 @@ export class FullScreenWizard extends React.Component {
       <ScreenWrapper>
         <StatusBar barStyle='dark-content' />
         <KeyboardAvoidingView behavior='padding'>
-          <SafeAreaViewContainer>
+          {/* Use JS-only version of React Native's SafeAreaView so that Grass
+              can extend into iOS 12 footer space*/}
+          <SafeAreaViewContainer forceInset={{ bottom: 'never' }}>
             {topSection}
             <KeyboardOpen
               render={({ open }) => {
-                const style =
-                  stretchToHeightOfScreen && !open ? { flex: 1 } : undefined
                 return (
+                  // LATER: use KeyboardAwareScrollView here, but it's not working well:
+                  // - it's not actually scrolling inputs into view
+                  // - it's adding extra space below the bottom of the scroll content
                   <ScrollView
                     contentContainerStyle={{
-                      ...style,
+                      // https://medium.com/@peterpme/taming-react-natives-scrollview-with-flex-144e6ff76c08
+                      flexGrow: 1,
+                      justifyContent: 'space-between',
                       ...contentContainerStyle
                     }}
                   >
                     {children}
+                    <Grass
+                      height={screenSize({ sm: 80 }, 100)}
+                      content={navButtons}
+                      resizeMode='repeat'
+                    />
                   </ScrollView>
                 )
               }}
             />
           </SafeAreaViewContainer>
-          <Grass
-            height={Dimensions.get('screen').height < 700 ? 80 : 100}
-            content={navButtons}
-            resizeMode='repeat'
-          />
         </KeyboardAvoidingView>
       </ScreenWrapper>
     )
@@ -126,7 +152,6 @@ FullScreenWizard.propTypes = {
   onBackPress: PropTypes.func.isRequired,
   onNextPress: PropTypes.func.isRequired,
   steps: PropTypes.number,
-  stretchToHeightOfScreen: PropTypes.bool,
   topPadding: PropTypes.number,
   nextDisabled: PropTypes.bool
 }

@@ -29,7 +29,6 @@ export const GovernmentInfoFields = ({
       paddingBottom: 20,
       backgroundColor: '#f2f2f2'
     }}
-    stretchToHeightOfScreen
   >
     <Container>
       <Description>

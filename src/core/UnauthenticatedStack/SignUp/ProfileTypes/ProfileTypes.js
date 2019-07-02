@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import isEmpty from 'lodash/isEmpty'
-import { ScrollView } from 'react-native'
 import { profileTypes } from '@common/types/profileTypes'
 import { FullScreenWizard } from '@components/FullScreenWizard'
 import { ProfileTypeContainer, ProfileTypeText } from './styledComponents'
@@ -47,6 +46,8 @@ export class ProfileTypes extends React.Component {
         return profile
       })
     })
+
+    this.props.navigation.navigate('BasicInfo')
   }
 
   render() {
@@ -71,14 +72,12 @@ export class ProfileTypes extends React.Component {
         }}
         nextDisabled={nextButtonDisabled}
       >
-        <ScrollView>
-          <ProfileTypeContainer>
-            <ProfileTypeText isHeader>
-              How will you use this account?
-            </ProfileTypeText>
-            <ProfileTypeContainer>{profileTypeButtons}</ProfileTypeContainer>
-          </ProfileTypeContainer>
-        </ScrollView>
+        <ProfileTypeContainer>
+          <ProfileTypeText isHeader>
+            How will you use this account?
+          </ProfileTypeText>
+          <ProfileTypeContainer>{profileTypeButtons}</ProfileTypeContainer>
+        </ProfileTypeContainer>
       </FullScreenWizard>
     )
   }
