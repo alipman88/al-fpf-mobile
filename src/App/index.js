@@ -1,6 +1,7 @@
 import React from 'react'
 import firebase from 'react-native-firebase'
 import { AppState, Linking } from 'react-native'
+import Config from 'react-native-config'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import SplashScreen from 'react-native-splash-screen'
@@ -96,7 +97,7 @@ export class App extends React.Component {
     // some cases where both values are unknown, lets see if we can reach the server
     if (connectionWeak && type === 'unknown' && effectiveType === 'unknown') {
       try {
-        await fetch('https://frontporchforum.com/')
+        await fetch(`${Config.WEBSITE_HOST}/_health_check`)
         connectionWeak = false
       } catch {} // we ignore the exception, because if the request failed, connectionWeak is already covering us
     }
