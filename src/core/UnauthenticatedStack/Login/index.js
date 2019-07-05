@@ -32,7 +32,7 @@ export const LoginComponent = ({ navigation, setAccessToken, resendEmail }) => {
         <ResetPasswordContainer>
           <TouchableOpacity
             onPress={() =>
-              Linking.openURL('https://frontporchforum.com/passwords/new')
+              Linking.openURL(`${Config.WEBSITE_HOST}/passwords/new`)
             }
           >
             <BottomText>Forgot Password</BottomText>
@@ -41,9 +41,7 @@ export const LoginComponent = ({ navigation, setAccessToken, resendEmail }) => {
         <TroubleLoggingInContainer>
           <TouchableOpacity
             onPress={() =>
-              Linking.openURL(
-                'https://frontporchforum.com/isfpfforme/member-faq'
-              )
+              Linking.openURL(`${Config.WEBSITE_HOST}/isfpfforme/member-faq`)
             }
           >
             <BottomText>Trouble logging in?</BottomText>

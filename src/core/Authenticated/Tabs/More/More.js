@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Linking, Platform, ScrollView } from 'react-native'
+import Config from 'react-native-config'
 import { ExternalLink } from '@components/ExternalLink'
 import { ScreenContainer } from '@components/ScreenContainer'
 import {
@@ -45,7 +46,7 @@ export class More extends React.Component {
               <CenterImgContainer>
                 <ExternalLink
                   content='See business directory'
-                  url='https://frontporchforum.com/business_directories'
+                  url={`${Config.WEBSITE_HOST}/business_directories`}
                 />
               </CenterImgContainer>
             </Card>
@@ -60,7 +61,7 @@ export class More extends React.Component {
               </CardContent>
               <ExternalLink
                 content='Browse local events'
-                url={`https://frontporchforum.com/areas/${
+                url={`${Config.WEBSITE_HOST}/areas/${
                   this.props.currentAreaId
                 }/calendar`}
               />
@@ -78,7 +79,7 @@ export class More extends React.Component {
                 </CardContent>
                 <ExternalLink
                   content='Donate Now'
-                  url='https://frontporchforum.com/supporting-members'
+                  url={`${Config.WEBSITE_HOST}/supporting-members`}
                 />
               </Card>
             )}
@@ -110,7 +111,7 @@ export class More extends React.Component {
               </CardContent>
               <ExternalLink
                 content='Go to FrontPorchForum.com'
-                url='https://frontporchforum.com'
+                url={Config.WEBSITE_HOST}
               />
             </Card>
 
@@ -118,9 +119,7 @@ export class More extends React.Component {
               <FooterLink>
                 <FooterText
                   onPress={() =>
-                    Linking.openURL(
-                      'https://frontporchforum.com/privacy-policy'
-                    )
+                    Linking.openURL(`{Config.WEBSITE_HOST}/privacy-policy`)
                   }
                 >
                   Privacy Policy
@@ -130,7 +129,7 @@ export class More extends React.Component {
               <FooterLink>
                 <FooterText
                   onPress={() =>
-                    Linking.openURL('https://frontporchforum.com/terms-of-use')
+                    Linking.openURL(`${Config.WEBSITE_HOST}/terms-of-use`)
                   }
                 >
                   Terms of Use

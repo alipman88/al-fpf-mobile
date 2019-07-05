@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { TouchableOpacity, Linking } from 'react-native'
+import Config from 'react-native-config'
 import { Text } from '@components/Text'
 import { Checkbox } from '@components/Checkbox'
 import {
@@ -27,7 +28,7 @@ export const CheckboxField = ({
         <LinkWrapper>
           <TouchableOpacity
             onPress={() =>
-              Linking.openURL('https://frontporchforum.com/terms-of-use')
+              Linking.openURL(`${Config.WEBSITE_HOST}/terms-of-use`)
             }
           >
             <LinkText>Terms of Use</LinkText>

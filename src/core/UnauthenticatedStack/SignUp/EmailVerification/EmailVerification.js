@@ -1,5 +1,6 @@
 import React from 'react'
 import { TouchableOpacity, Linking, ScrollView } from 'react-native'
+import Config from 'react-native-config'
 import PropTypes from 'prop-types'
 
 import Spinner from 'react-native-loading-spinner-overlay'
@@ -62,7 +63,7 @@ export class EmailVerification extends React.Component {
                 approved, you will have access to your FPF(s). Please{' '}
                 <TextLink
                   onPress={() =>
-                    Linking.openURL('https://frontporchforum.com/contact')
+                    Linking.openURL(`${Config.WEBSITE_HOST}/contact`)
                   }
                 >
                   contact us
@@ -88,7 +89,7 @@ export class EmailVerification extends React.Component {
                   please{' '}
                   <TextLink
                     onPress={() =>
-                      Linking.openURL('https://frontporchforum.com/contact')
+                      Linking.openURL(`${Config.WEBSITE_HOST}/contact`)
                     }
                   >
                     contact us
