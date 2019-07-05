@@ -32,6 +32,10 @@ yarn install
 
 Copy `.env.example` as `.env` and populate it with values.
 
+Note that the Android emulator runs in its own network, which maps 10.0.2.2
+to the host.  So for Android testing, `API_HOST` should likely be
+http://10.0.2.2:3000/api/v1.
+
 ## Run
 
 To run on iOS, simply use:

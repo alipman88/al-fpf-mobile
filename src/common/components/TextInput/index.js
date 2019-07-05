@@ -4,9 +4,9 @@ import { TouchableWithoutFeedback, View } from 'react-native'
 import { FormError } from '@components/FormError'
 import {
   Container,
-  Input,
+  ForwardIcon,
   IconContainer,
-  ForwardIcon
+  StyledTextInput
 } from './styledComponents'
 import {
   FormFieldLabel,
@@ -14,87 +14,74 @@ import {
   FormFieldRequired
 } from '@components/FormFieldLabel'
 
-export const TextInput = ({
-  autoCapitalize,
-  forwardIcon,
-  keyboardType,
-  onChangeText,
-  inputRef,
-  label,
-  multiline,
-  placeholder,
-  value,
-  returnKeyType,
-  secureTextEntry,
-  onBlur,
-  onSubmitEditing,
-  onTapIcon,
-  tapIcon,
-  touched,
-  required,
-  error
-}) => {
-  const labelText = Boolean(label) && (
-    <FormFieldLabelWrapper>
-      <FormFieldLabel>{label}</FormFieldLabel>
-      {Boolean(required) && <FormFieldRequired>(Required)</FormFieldRequired>}
-    </FormFieldLabelWrapper>
-  )
-  return (
-    <Container>
-      {labelText}
-      <View>
-        <Input
-          autoCapitalize={autoCapitalize}
-          keyboardType={keyboardType}
-          hasError={touched && Boolean(error)}
-          hasForwardIcon={Boolean(forwardIcon)}
-          multiline={multiline}
-          onChangeText={onChangeText}
-          placeholder={placeholder}
-          placeholderTextColor='#c5c5c5'
-          ref={inputRef}
-          returnKeyType={returnKeyType}
-          secureTextEntry={secureTextEntry}
-          onBlur={onBlur}
-          onSubmitEditing={onSubmitEditing}
-          value={value}
-        />
-        {Boolean(forwardIcon) && <ForwardIcon>{forwardIcon}</ForwardIcon>}
-        {Boolean(tapIcon) && (
-          <TouchableWithoutFeedback onPress={onTapIcon}>
-            <IconContainer>{tapIcon}</IconContainer>
-          </TouchableWithoutFeedback>
-        )}
-      </View>
+export class TextInput extends React.Component {
+  render() {
+    const {
+      error,
+      forwardIcon,
+      inputRef,
+      label,
+      nextField,
+      onTapIcon,
+      required,
+      tapIcon,
+      touched,
+      ...other
+    } = this.props
 
-      {touched && Boolean(error) && <FormError>{error}</FormError>}
-    </Container>
-  )
+    const labelText = Boolean(label) && (
+      <FormFieldLabelWrapper>
+        <FormFieldLabel>{label}</FormFieldLabel>
+        {Boolean(required) && <FormFieldRequired>(Required)</FormFieldRequired>}
+      </FormFieldLabelWrapper>
+    )
+
+    return (
+      <Container>
+        {labelText}
+        <View>
+          <StyledTextInput
+            blurOnSubmit={nextField ? false : null}
+            returnKeyType={nextField ? 'next' : 'default'}
+            onSubmitEditing={() => {
+              if (nextField && nextField.current && nextField.current.focus) {
+                nextField.current.focus()
+              }
+            }}
+            {...other}
+            hasError={touched && Boolean(error)}
+            hasForwardIcon={Boolean(forwardIcon)}
+            placeholderTextColor='#c5c5c5'
+            ref={inputRef}
+          />
+          {Boolean(forwardIcon) && <ForwardIcon>{forwardIcon}</ForwardIcon>}
+          {Boolean(tapIcon) && (
+            <TouchableWithoutFeedback onPress={onTapIcon}>
+              <IconContainer>{tapIcon}</IconContainer>
+            </TouchableWithoutFeedback>
+          )}
+        </View>
+
+        {touched && Boolean(error) && <FormError>{error}</FormError>}
+      </Container>
+    )
+  }
 }
 
 TextInput.propTypes = {
-  autoCapitalize: PropTypes.string,
   error: PropTypes.string,
   forwardIcon: PropTypes.node,
   inputRef: PropTypes.object,
   tapIcon: PropTypes.node,
-  keyboardType: PropTypes.string,
   label: PropTypes.string,
-  multiline: PropTypes.bool,
-  onChangeText: PropTypes.func.isRequired,
-  onBlur: PropTypes.func,
-  onSubmitEditing: PropTypes.func,
+  nextField: PropTypes.object,
   onTapIcon: PropTypes.func,
-  placeholder: PropTypes.string,
-  returnKeyType: PropTypes.string,
-  secureTextEntry: PropTypes.bool,
   touched: PropTypes.bool,
-  required: PropTypes.bool,
-  value: PropTypes.string
+  required: PropTypes.bool
 }
 
 TextInput.defaultProps = {
   keyboardType: 'default',
+  nextField: null,
   secureTextEntry: false
 }

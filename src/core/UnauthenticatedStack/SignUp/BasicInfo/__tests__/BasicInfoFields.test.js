@@ -59,7 +59,11 @@ describe('BasicInfoFields', () => {
     }
 
     const wrapper = shallow(
-      <BasicInfoFields {...defaultProps} values={userValues} />
+      <BasicInfoFields
+        {...defaultProps}
+        values={userValues}
+        touched={['firstName']}
+      />
     )
     wrapper
       .find(FullScreenWizard)
