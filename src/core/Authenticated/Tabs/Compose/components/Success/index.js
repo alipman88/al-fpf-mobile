@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { TouchableOpacity, Linking } from 'react-native'
+import Config from 'react-native-config'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import IconEvil from 'react-native-vector-icons/EvilIcons'
 import { Modal } from '@components/Modal'
@@ -41,9 +42,7 @@ export const Success = ({ onClose }) => (
       </TextContainer>
       <TextContainer>
         <TouchableOpacity
-          onPress={() =>
-            Linking.openURL('https://frontporchforum.com/user/posts')
-          }
+          onPress={() => Linking.openURL(`${Config.WEBSITE_HOST}/user/posts`)}
         >
           <BodyText>
             To <BodySemibold>edit</BodySemibold> or{' '}
