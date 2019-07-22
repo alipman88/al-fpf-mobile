@@ -1,8 +1,9 @@
 import styled from 'styled-components/native'
+import { screenSize } from '@common/styles/screenSizeHelper'
 
 export const GrassContainer = styled.View`
   background-color: #e3eddd;
-  height: ${({ height }) => height || '140'};
+  height: ${({ height }) => height || screenSize({ sm: 90 }, 140)};
   width: 100%;
   z-index: 100;
 `
