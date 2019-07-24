@@ -60,7 +60,7 @@ export const LinkText = styled(PostAuthor)`
 `
 
 export const CategoryPosts = styled.View`
-  flex: 1;
+  flex: none;
   flex-direction: row;
   flex-wrap: wrap;
 `
