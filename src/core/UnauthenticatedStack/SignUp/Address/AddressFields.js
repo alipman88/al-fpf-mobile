@@ -8,6 +8,7 @@ import { FullScreenWizard } from '@components/FullScreenWizard'
 import { Multiselect } from '@components/Multiselect'
 import { TextInput } from '@components/TextInput'
 
+import { fpfStates } from '@common/types/fpf_states'
 import { provinces } from '@common/types/provinces'
 import { states } from '@common/types/states'
 
@@ -153,13 +154,18 @@ export class AddressFields extends React.Component {
                 title='State'
                 items={[
                   {
-                    name: 'States',
+                    name: 'Our Service Area',
                     id: 0,
+                    children: fpfStates
+                  },
+                  {
+                    name: 'States',
+                    id: 1,
                     children: states
                   },
                   {
                     name: 'Provinces',
-                    id: 1,
+                    id: 2,
                     children: provinces
                   }
                 ]}
