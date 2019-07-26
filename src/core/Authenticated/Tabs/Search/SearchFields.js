@@ -53,7 +53,6 @@ export class SearchFields extends React.Component {
       this.props.setFieldValue('keyword', '', false)
       this.props.setFieldValue('category', this.props.categoryFromLink, false)
       this.props.setFieldTouched('category')
-      this.props.setFieldValue('forums', [this.props.currentAreaId], false)
       this.setState({ showAdvanced: true })
       // this is a hack
       // formik settings values seems to be async, and validations dont pass due to having `isCanceled: true`
