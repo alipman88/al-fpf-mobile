@@ -1,4 +1,5 @@
 import styled from 'styled-components/native'
+import { screenSize } from '@common/styles/screenSizeHelper'
 import { Text, TextSemibold } from '@components/Text'
 
 export const Container = styled.View`
@@ -25,11 +26,11 @@ export const SuccessMessage = styled(TextSemibold)`
 
 export const HelpMessage = styled(Text)`
   font-size: 13;
-  margin-bottom: 20;
+  margin-bottom: ${screenSize({ sm: 15 }, 20)};
   color: #4a4a4a;
 `
 export const MessageContainer = styled.View`
-  margin-vertical: 40;
+  margin-vertical: ${screenSize({ sm: 20 }, 40)};
   padding-horizontal: 10;
   flex: 1;
   justify-content: flex-start;

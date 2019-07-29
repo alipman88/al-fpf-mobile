@@ -11,7 +11,6 @@ import {
 export const ScreenContainer = ({
   children,
   grassBackground,
-  grassHeight,
   grassContent,
   grey,
   withPadding
@@ -22,13 +21,7 @@ export const ScreenContainer = ({
       <SafeAreaViewContainer>
         <ContentWrapper withPadding={withPadding}>{children}</ContentWrapper>
       </SafeAreaViewContainer>
-      {grassBackground && (
-        <Grass
-          height={grassHeight}
-          content={grassContent}
-          resizeMode='repeat'
-        />
-      )}
+      {grassBackground && <Grass content={grassContent} resizeMode='repeat' />}
     </ScreenWrapper>
   )
 }
@@ -36,7 +29,6 @@ export const ScreenContainer = ({
 ScreenContainer.propTypes = {
   children: PropTypes.node,
   grassBackground: PropTypes.bool,
-  grassHeight: PropTypes.number,
   grassContent: PropTypes.node,
   grey: PropTypes.bool,
   withPadding: PropTypes.bool
