@@ -17,12 +17,27 @@ export const passwordValidation = password => {
   return /(?=.*[a-zA-Z].*)(?=.*\d.*)(?=.*[!#$%&?@"].*)/.test(password)
 }
 
-export const validateEmail = email => {
+/**
+ * Validate that the email address is available.
+ * Caches the result for the last email checked in the context object.
+ */
+export const validateEmail = function(email) {
   if (email) {
+    const context = this.options ? this.options.context : null
+
+    if (context && email === context.lastValidatedEmail) {
+      return context.lastValidatedEmailResult
+    }
+
     return api
       .get('/check_user_email_availability', { params: { email: email } })
       .then(resp => {
-        return resp.data.available === true
+        const available = resp.data.available === true
+        if (context) {
+          context.lastValidatedEmail = email
+          context.lastValidatedEmailResult = available
+        }
+        return available
       })
   }
   return false
