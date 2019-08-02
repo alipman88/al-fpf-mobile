@@ -31,6 +31,7 @@
     "react-native-easy-toast": "^1.2.0",
     "react-native-firebase": "^5.3.1",
     "react-native-flash-message": "^0.1.10",
+    "react-native-iap": "^3.3.7",
     "react-native-keyboard-aware-scroll-view": "^0.8.0",
     "react-native-loading-spinner-overlay": "^1.0.1",
     "react-native-maps": "git+https://github.com/react-native-community/react-native-maps#v0.24-rc1",
