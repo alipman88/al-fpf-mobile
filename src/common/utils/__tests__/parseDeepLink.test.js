@@ -16,11 +16,14 @@ describe('parseDeepLink', () => {
 
   describe('parseDeepLink', () => {
     test('it gets correct route name for a new post url', () => {
-      const url = baseURL + '/areas/1/posts/new'
+      const url = baseURL + '/areas/1/posts/new?post%5Bparent_post_id%5D=123'
       const result = parseDeepLink(url)
 
       expect(result.route).toEqual('Compose')
-      expect(result.params).toEqual({})
+      expect(result.params).toEqual({
+        shouldResetForm: true,
+        parentPostId: 123
+      })
     })
 
     test('it gets correct route name and params for an issue link', () => {

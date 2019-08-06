@@ -87,12 +87,11 @@ export class ComposeFields extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { areaFromLink, navigation } = this.props
+    const { resetForm, shouldResetForm, navigation } = this.props
 
-    if (areaFromLink && areaFromLink !== prevProps.areaFromLink) {
-      this.props.setFieldValue('forums', [areaFromLink])
-      this.props.setFieldTouched('forums')
-      navigation.setParams({ areaId: null })
+    if (shouldResetForm) {
+      resetForm()
+      navigation.setParams({ shouldResetForm: null })
     }
   }
 
@@ -306,7 +305,7 @@ ComposeFields.propTypes = {
   resetForm: PropTypes.func.isRequired,
   setFieldTouched: PropTypes.func.isRequired,
   setFieldValue: PropTypes.func.isRequired,
+  shouldResetForm: PropTypes.bool,
   touched: PropTypes.object.isRequired,
-  values: PropTypes.object.isRequired,
-  areaFromLink: PropTypes.number
+  values: PropTypes.object.isRequired
 }
