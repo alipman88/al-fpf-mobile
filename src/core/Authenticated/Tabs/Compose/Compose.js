@@ -15,19 +15,6 @@ export class Compose extends React.Component {
     modalVisible: false
   }
 
-  getAreasForProfile(profiles, areas, profileIndex) {
-    const profileAreaIds = get(
-      profiles,
-      `[${profileIndex}].area_ids`,
-      []
-    ).reduce((obj, id) => {
-      obj[id] = true
-      return obj
-    }, {})
-
-    return areas.filter(area => profileAreaIds[area.id])
-  }
-
   onSubmit = (values, actions) => {
     const { profiles, navigation } = this.props
     const { category } = values
@@ -87,17 +74,17 @@ export class Compose extends React.Component {
     )
 
     const profile = profiles[profileIndex] || profiles[0]
-
-    const areaFromLink = navigation.getParam('areaId') || null
+    const areaId =
+      navigation.getParam('areaId') || get(profile, 'area_ids[0]') || null
 
     return (
       <ScreenContainer grey withPadding={false}>
         <Formik
           initialValues={{
-            forums: profile && profile.area_ids ? [profile.area_ids[0]] : [],
+            forums: areaId ? [areaId] : [],
             profile: profileIndex,
             category: null,
-            subject: '',
+            subject: navigation.getParam('title') || '',
             message: '',
             isShared: true,
             fromDate: null,
@@ -130,7 +117,7 @@ export class Compose extends React.Component {
                 setFieldTouched={setFieldTouched}
                 touched={touched}
                 values={values}
-                areaFromLink={areaFromLink}
+                shouldResetForm={navigation.getParam('shouldResetForm')}
               />
               {this.state.modalVisible && (
                 <Success onClose={() => this.onModalClose(resetForm)} />

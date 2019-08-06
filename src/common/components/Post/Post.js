@@ -39,10 +39,21 @@ export class Post extends React.Component {
     this.setState(state => ({ showMore: !state.showMore }))
   }
 
-  handleReplyPress = ({ parentPostId, areaId }) => {
+  reTitle(title, prefix = 'Re:') {
+    return title.toLowerCase().startsWith(prefix.toLowerCase())
+      ? title
+      : `${prefix} ${title}`
+  }
+
+  handleReplyPress = post => {
     this.props.navigation.navigate({
       routeName: 'Compose',
-      params: { parentPostId, areaId }
+      params: {
+        shouldResetForm: true,
+        title: this.reTitle(post.title),
+        parentPostId: post.id,
+        areaId: post.area_id
+      }
     })
   }
 
@@ -100,15 +111,17 @@ export class Post extends React.Component {
                   .analytics()
                   .logEvent('press_email_author', postAnalyticsData)
 
+                const subject = this.reTitle(post.title)
+
                 if (Platform.OS === 'ios') {
                   chooseMailApp({
                     title: 'Email author',
-                    subject: `RE: ${post.title}`,
+                    subject: subject,
                     toEmail: post.user_email
                   })
                 } else {
                   Linking.openURL(
-                    `mailto:${post.user_email}?subject=RE: ${post.title}`
+                    `mailto:${post.user_email}?subject=${subject}`
                   )
                 }
               }}
@@ -128,10 +141,7 @@ export class Post extends React.Component {
                     firebase
                       .analytics()
                       .logEvent('press_reply_to_forum', postAnalyticsData)
-                    this.handleReplyPress({
-                      parentPostId: post.id,
-                      areaId: post.area_id
-                    })
+                    this.handleReplyPress(post)
                   }}
                 >
                   Reply to forum

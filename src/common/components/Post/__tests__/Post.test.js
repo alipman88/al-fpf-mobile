@@ -141,8 +141,10 @@ describe('Post', () => {
     expect(defaultProps.navigation.navigate).toHaveBeenCalledWith({
       routeName: 'Compose',
       params: {
+        shouldResetForm: true,
         parentPostId: defaultProps.post.id,
-        areaId: defaultProps.post.area_id
+        areaId: defaultProps.post.area_id,
+        title: `Re: ${defaultProps.post.title}`
       }
     })
   })
@@ -162,7 +164,7 @@ describe('Post', () => {
       }
     )
     expect(defaultProps.chooseMailApp).toHaveBeenCalledWith({
-      subject: `RE: ${defaultProps.post.title}`,
+      subject: `Re: ${defaultProps.post.title}`,
       toEmail: defaultProps.post.user_email,
       title: 'Email author'
     })

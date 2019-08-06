@@ -173,7 +173,7 @@ describe('Compose', () => {
         {
           profile: 1,
           parentPostId: 1,
-          subject: `RE: Test`,
+          subject: `Re: Test`,
           message: 'Message Body',
           isShared: true,
           forums: [1, 2, 3],
@@ -190,7 +190,7 @@ describe('Compose', () => {
         {
           profile_id: 2,
           parent_post_id: 200,
-          title: 'RE: Test',
+          title: 'Re: Test',
           content: 'Message Body',
           is_shared: true,
           area_ids: [1, 2, 3],
@@ -222,7 +222,7 @@ describe('Compose', () => {
         {
           profile: 1,
           parentPostId: 1,
-          subject: `RE: Test`,
+          subject: `Re: Test`,
           message: 'Message Body',
           isShared: true,
           forums: [1, 2, 3],
@@ -238,7 +238,7 @@ describe('Compose', () => {
         {
           profile_id: 2,
           parent_post_id: 200,
-          title: 'RE: Test',
+          title: 'Re: Test',
           content: 'Message Body',
           is_shared: true,
           area_ids: [1, 2, 3],

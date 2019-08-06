@@ -157,12 +157,10 @@ describe('Compose', () => {
     expect(wrapper.find(Multiselect).length).toEqual(1)
   })
 
-  test('it sets the correct default Forum from navigation', () => {
-    const areaFromLink = 3
-
+  test('it resets the form on navigation', () => {
     const wrapper = shallow(<ComposeFields {...defaultProps} />)
-    wrapper.setProps({ areaFromLink })
-    expect(defaultProps.setFieldValue).toHaveBeenCalledWith('forums', [3])
+    wrapper.setProps({ shouldResetForm: true })
+    expect(defaultProps.resetForm).toHaveBeenCalled()
   })
 
   test('Hide message & checkbox if theres a duplicate post', () => {
