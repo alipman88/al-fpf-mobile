@@ -51,6 +51,8 @@ export const DrawerMenu = ({
                         const profile = profiles.find(profile => {
                           if (profile.area_ids.indexOf(area.id) !== -1) {
                             return profile
+                          } else {
+                            return undefined
                           }
                         })
 

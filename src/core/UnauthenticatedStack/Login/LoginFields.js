@@ -51,6 +51,7 @@ export class LoginFields extends React.Component {
               onBlur={() => setFieldTouched('email')}
               touched={touched.email}
               value={values.email}
+              keyboardType='email-address'
               autoCapitalize='none'
             />
             {errors.button && errors.button.url && (

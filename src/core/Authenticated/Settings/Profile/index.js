@@ -10,7 +10,8 @@ const mapStateToProps = (state, props) => ({
   areas: keyBy(areas.selectors.getAreas(state), 'id'),
   profile: profile.selectors
     .getProfiles(state)
-    .find(profile => profile.id === props.navigation.getParam('profileId', 0))
+    .find(profile => profile.id === props.navigation.getParam('profileId', 0)),
+  ...profile.selectors.getSubscriptionStatus(state)
 })
 
 export const Profile = connect(

@@ -7,14 +7,18 @@ import { PersistGate } from 'redux-persist/integration/react'
 import SplashScreen from 'react-native-splash-screen'
 import NetInfo from '@react-native-community/netinfo'
 import Toast from 'react-native-easy-toast'
+import RNIap from 'react-native-iap'
 
 import { store, persistor } from '@common/store'
 import { currentUser } from '@common/currentUser'
 import { AppMessage } from '@components/AppMessage'
 import { parseDeepLink } from '@common/utils/parseDeepLink'
 import navigationService from '@common/utils/navigationService'
+import { getProducts } from '@common/products'
 import { Container } from './Container'
 import { Offline } from './Offline'
+import { purchaseUpdated, purchaseError } from '@common/purchases'
+import { subscriptionSkus } from '@common/types/subscriptionSkus'
 
 export class App extends React.Component {
   state = {
@@ -29,12 +33,29 @@ export class App extends React.Component {
     NetInfo.addEventListener('connectionChange', this.setConnectedStatus)
 
     this.updateConnectionStatus()
+
+    store.dispatch(getProducts(subscriptionSkus))
+    this.purchaseUpdatedListener = RNIap.purchaseUpdatedListener(purchase => {
+      store.dispatch(purchaseUpdated(purchase))
+    })
+    this.purchaseErrorListener = RNIap.purchaseErrorListener(error => {
+      store.dispatch(purchaseError(error))
+    })
   }
 
   componentWillUnmount() {
     Linking.removeEventListener('url', this.handleOpenURL)
     AppState.removeEventListener('connectionChange', this.handleAppStateChange)
     NetInfo.removeEventListener('connectionChange', this.setConnectedStatus)
+
+    if (this.purchaseUpdatedListener) {
+      this.purchaseUpdatedListener.remove()
+      this.purchaseUpdatedListener = null
+    }
+    if (this.purchaseErrorListener) {
+      this.purchaseErrorListener.remove()
+      this.purchaseErrorListener = null
+    }
   }
 
   updateConnectionStatus = () => {

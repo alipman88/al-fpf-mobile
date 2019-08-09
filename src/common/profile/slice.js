@@ -67,6 +67,25 @@ const getCurrentProfile = createSelector(
   (profiles, id) => profiles.find(profile => profile.id === id) || {}
 )
 
+/**
+ * Identifies whether profile / user has an active subscription.
+ */
+const getSubscriptionStatus = createSelector(
+  [getCurrentProfile, getProfiles],
+  (profile, profiles) => ({
+    hasSubscription: !!profile.active_subscription,
+    hasIAPSubscription: !!(
+      profile.active_subscription &&
+      profile.active_subscription.service === 'apple'
+    ),
+    userHasIAPSubscription: !!profiles.some(
+      profile =>
+        profile.active_subscription &&
+        profile.active_subscription.service === 'apple'
+    )
+  })
+)
+
 profile.selectors = {
   ...profile.selectors,
   getUser: createSelector(
@@ -79,5 +98,6 @@ profile.selectors = {
     profile => profile.loading
   ),
   getCurrentProfileId,
-  getCurrentProfile
+  getCurrentProfile,
+  getSubscriptionStatus
 }
