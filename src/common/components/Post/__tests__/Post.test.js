@@ -22,6 +22,7 @@ describe('Post', () => {
       user_last_name: 'smith',
       user_email: 'test@example.com',
       user_profile_name: 'profile name',
+      show_user_email: true,
       event: {
         start_date: new Date()
       },

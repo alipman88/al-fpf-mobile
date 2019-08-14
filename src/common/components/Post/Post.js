@@ -103,37 +103,39 @@ export class Post extends React.Component {
       }
       return (
         <BottomContainer>
-          <ButtonWrapper>
-            <Button
-              color={'#fff'}
-              onPress={async () => {
-                firebase
-                  .analytics()
-                  .logEvent('press_email_author', postAnalyticsData)
+          {post.show_user_email && (
+            <ButtonWrapper>
+              <Button
+                color={'#fff'}
+                onPress={async () => {
+                  firebase
+                    .analytics()
+                    .logEvent('press_email_author', postAnalyticsData)
 
-                const subject = this.reTitle(post.title)
+                  const subject = this.reTitle(post.title)
 
-                if (Platform.OS === 'ios') {
-                  chooseMailApp({
-                    title: 'Email author',
-                    subject: subject,
-                    toEmail: post.user_email
-                  })
-                } else {
-                  Linking.openURL(
-                    `mailto:${post.user_email}?subject=${subject}`
-                  )
-                }
-              }}
-              fullWidth
-            >
-              Email author
-            </Button>
-          </ButtonWrapper>
+                  if (Platform.OS === 'ios') {
+                    chooseMailApp({
+                      title: 'Email author',
+                      subject: subject,
+                      toEmail: post.user_email
+                    })
+                  } else {
+                    Linking.openURL(
+                      `mailto:${post.user_email}?subject=${subject}`
+                    )
+                  }
+                }}
+                fullWidth
+              >
+                Email author
+              </Button>
+            </ButtonWrapper>
+          )}
 
           {includeReplyButton && (
             <React.Fragment>
-              <ButtonSpacer />
+              {post.show_user_email && <ButtonSpacer />}
               <ButtonWrapper>
                 <Button
                   color={'#fff'}
