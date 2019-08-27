@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 import { TouchableOpacity } from 'react-native'
 
 import { SettingsIndex } from '../SettingsIndex'
-import { NavLink } from '../components/NavLink'
+import { NavLink } from '../../components/NavLink'
 
 describe('SettingsIndex', () => {
   const defaultProps = {

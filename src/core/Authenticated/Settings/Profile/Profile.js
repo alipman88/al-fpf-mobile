@@ -1,4 +1,5 @@
 import React from 'react'
+import { Linking, Platform } from 'react-native'
 import PropTypes from 'prop-types'
 import capitalize from 'lodash/capitalize'
 
@@ -11,10 +12,57 @@ import { Field } from '../components/Field'
 import { FieldLabel } from '../components/FieldLabel'
 import { FieldText } from '../components/FieldText'
 import { ExternalLink } from '../components/ExternalLink'
+import { NavLink } from '../components/NavLink'
 
 export class Profile extends React.Component {
   render() {
-    const { areas, navigateWithToken, profile } = this.props
+    const {
+      areas,
+      hasIAPSubscription,
+      hasSubscription,
+      navigateWithToken,
+      navigation,
+      profile,
+      userHasIAPSubscription
+    } = this.props
+
+    let subscriptionLink
+
+    // LATER: it would be helpful to also check whether the current Apple ID
+    // has a subscription.  If so, and user doesn't have one, then we could
+    // informatively prevent user from trying to purchase another subscription.
+    // Right now, that will just fail after the purchase attempt.
+
+    if (Platform.OS === 'ios') {
+      // If current profile has IAP subscription, link to native IAP management URL
+      if (hasIAPSubscription) {
+        subscriptionLink = (
+          <ExternalLink
+            onPress={() =>
+              Linking.openURL('https://apps.apple.com/account/subscriptions')
+            }
+            hasLabel
+            hasBorder={true}
+          >
+            Manage FPF Plan
+          </ExternalLink>
+        )
+      }
+      // If current profile does not have subscription and user does not have
+      // IAP subscription, show subscribe view
+      else if (!hasSubscription && !userHasIAPSubscription) {
+        subscriptionLink = (
+          <NavLink
+            linkText='Upgrade FPF Plan'
+            onPress={() =>
+              navigation.navigate('Subscription', { profileId: profile.id })
+            }
+            hasBorder={true}
+          />
+        )
+      }
+    }
+
     return (
       <ScreenContainer withPadding={false} grey>
         <KeyboardAwareScrollView>
@@ -26,7 +74,7 @@ export class Profile extends React.Component {
 
           <FieldLabel bottomMargin={0}>Profile type</FieldLabel>
           <ExternalLink
-            hasBorder
+            hasBorder={!subscriptionLink}
             hasLabel
             onPress={() =>
               navigateWithToken(`/user/profiles/${profile.id}/edit`)
@@ -34,6 +82,8 @@ export class Profile extends React.Component {
           >
             {capitalize(profile.profile_plan.plan_type)}
           </ExternalLink>
+
+          {subscriptionLink}
 
           <FieldLabel>Address</FieldLabel>
           <Field>
@@ -101,6 +151,10 @@ Profile.navigationOptions = ({ navigation }) => ({
 
 Profile.propTypes = {
   areas: PropTypes.object.isRequired,
+  hasIAPSubscription: PropTypes.bool,
+  hasSubscription: PropTypes.bool,
   navigateWithToken: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired
+  navigation: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
+  userHasIAPSubscription: PropTypes.bool
 }

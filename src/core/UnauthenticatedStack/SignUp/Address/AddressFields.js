@@ -8,7 +8,7 @@ import { FullScreenWizard } from '@components/FullScreenWizard'
 import { Multiselect } from '@components/Multiselect'
 import { TextInput } from '@components/TextInput'
 
-import { fpfStates } from '@common/types/fpf_states'
+import { fpfStates } from '@common/types/fpfStates'
 import { provinces } from '@common/types/provinces'
 import { states } from '@common/types/states'
 

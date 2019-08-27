@@ -7,7 +7,7 @@ import Config from 'react-native-config'
 
 import { ScreenContainer } from '@components/ScreenContainer'
 import { getProfileDisplayName } from '@common/utils/getProfileDisplayName'
-import { NavLink } from './components/NavLink'
+import { NavLink } from '../components/NavLink'
 import { FieldLabel } from '../components/FieldLabel'
 
 import {

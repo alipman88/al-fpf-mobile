@@ -1186,7 +1186,7 @@ chalk@^1.1.1:
     strip-ansi "^3.0.0"
     supports-color "^2.0.0"
 
-chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0, chalk@^2.4.2:
+chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0, chalk@^2.4.1, chalk@^2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424"
   dependencies:
@@ -1669,6 +1669,13 @@ domutils@^1.5.1:
   dependencies:
     dom-serializer "0"
     domelementtype "1"
+
+dooboolab-welcome@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/dooboolab-welcome/-/dooboolab-welcome-1.1.0.tgz#4a0aa9d2cbc4e2b1008bf7683bc056b41caa3d0d"
+  integrity sha512-K9TKEeefzDXZiUyLZG+bIr8cy9UoYIfFMseowp/o3czVl7TfkVm3gQpeB85w+TO8xeqzWHiIcEelZbBgt5WUwQ==
+  dependencies:
+    chalk "^2.4.1"
 
 ecc-jsbn@~0.1.1:
   version "0.1.2"
@@ -4853,6 +4860,13 @@ react-native-gesture-handler@~1.0.14:
     hoist-non-react-statics "^2.3.1"
     invariant "^2.2.2"
     prop-types "^15.5.10"
+
+react-native-iap@^3.3.7:
+  version "3.3.7"
+  resolved "https://registry.yarnpkg.com/react-native-iap/-/react-native-iap-3.3.7.tgz#a60fd9e7c4bf07f6226096f503d2658aa57cb302"
+  integrity sha512-wihFZExWesxEtW1+FpZlay2a0ctRgcLVpdyM88FX/FGCNPnu7lc28GdPrcp21Al/5CjY9bQGogMiZ6434noyCA==
+  dependencies:
+    dooboolab-welcome "^1.1.0"
 
 react-native-iphone-x-helper@^1.0.3:
   version "1.2.0"

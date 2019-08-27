@@ -5,6 +5,7 @@ import { createStackNavigator } from 'react-navigation'
 import { Account } from './Account'
 import { Profile } from './Profile'
 import { SettingsIndex } from './SettingsIndex'
+import { Subscription } from './Subscription'
 
 import { CloseText } from './styledComponents'
 
@@ -12,7 +13,8 @@ export const Settings = createStackNavigator(
   {
     Account,
     Profile,
-    SettingsIndex
+    SettingsIndex,
+    Subscription
   },
   {
     initialRouteName: 'SettingsIndex',
