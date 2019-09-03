@@ -137,7 +137,7 @@ describe('purchases - actions', () => {
       )
 
       // Should still be purchasing
-      expect(dispatch).not.toHaveBeenCalledWith(
+      expect(dispatch).toHaveBeenCalledWith(
         purchases.actions.setPurchasing(false)
       )
 

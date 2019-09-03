@@ -60,7 +60,6 @@ export const purchaseUpdated = purchase => async (dispatch, getState) => {
         profile.actions.setUserProfile({ profiles: [response.data.profile] })
       )
 
-      dispatch(slice.actions.setPurchasing(false))
       dispatch(
         appMessage.actions.setAppMessage({
           message: 'FPF plan upgrade successful!',
@@ -96,6 +95,8 @@ export const purchaseUpdated = purchase => async (dispatch, getState) => {
     }
 
     dispatch(appMessage.actions.setAppError(message))
+  } finally {
+    dispatch(slice.actions.setPurchasing(false))
   }
 }
 
