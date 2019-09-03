@@ -13,6 +13,7 @@ describe('SettingsIndex', () => {
     },
     navigateWithToken: jest.fn(),
     resetAction: jest.fn(),
+    getProfiles: jest.fn(),
     logoutUser: jest.fn(),
     user: {
       first_name: 'John',
@@ -38,7 +39,9 @@ describe('SettingsIndex', () => {
       .find(NavLink)
       .at(0)
       .simulate('press')
+
     expect(defaultProps.navigation.navigate).toHaveBeenCalledWith('Account')
+    expect(defaultProps.getProfiles).toHaveBeenCalled()
   })
 
   test('can click to view profile', () => {
