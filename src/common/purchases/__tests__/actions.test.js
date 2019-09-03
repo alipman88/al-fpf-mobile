@@ -136,8 +136,7 @@ describe('purchases - actions', () => {
         appMessage.actions.setAppError('boom')
       )
 
-      // Should still be purchasing
-      expect(dispatch).not.toHaveBeenCalledWith(
+      expect(dispatch).toHaveBeenCalledWith(
         purchases.actions.setPurchasing(false)
       )
 
