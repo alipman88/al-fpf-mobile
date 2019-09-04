@@ -30,6 +30,12 @@ export class SettingsIndex extends React.Component {
     loading: false
   }
 
+  constructor(props) {
+    super(props)
+
+    this.props.getProfiles()
+  }
+
   async logoutUser() {
     this.props.logoutUser(
       this.props.navigation,
@@ -100,6 +106,7 @@ SettingsIndex.propTypes = {
   navigation: PropTypes.object.isRequired,
   navigateWithToken: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
+  getProfiles: PropTypes.func.isRequired,
   logoutUser: PropTypes.func.isRequired,
   fcmToken: PropTypes.string
 }
