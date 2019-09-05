@@ -1,6 +1,6 @@
 import React from 'react'
 import firebase from 'react-native-firebase'
-import { AppState, Linking } from 'react-native'
+import { AppState, Linking, Platform } from 'react-native'
 import Config from 'react-native-config'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
@@ -34,13 +34,16 @@ export class App extends React.Component {
 
     this.updateConnectionStatus()
 
-    store.dispatch(getProducts(subscriptionSkus))
-    this.purchaseUpdatedListener = RNIap.purchaseUpdatedListener(purchase => {
-      store.dispatch(purchaseUpdated(purchase))
-    })
-    this.purchaseErrorListener = RNIap.purchaseErrorListener(error => {
-      store.dispatch(purchaseError(error))
-    })
+    // Remove this guard when adding support for Google Play [#168313664]
+    if (Platform.OS === 'ios') {
+      store.dispatch(getProducts(subscriptionSkus))
+      this.purchaseUpdatedListener = RNIap.purchaseUpdatedListener(purchase => {
+        store.dispatch(purchaseUpdated(purchase))
+      })
+      this.purchaseErrorListener = RNIap.purchaseErrorListener(error => {
+        store.dispatch(purchaseError(error))
+      })
+    }
   }
 
   componentWillUnmount() {

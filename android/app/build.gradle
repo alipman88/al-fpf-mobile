@@ -154,7 +154,8 @@ android {
 }
 
 dependencies {
-    implementation project(':react-native-iap')
+    // Re-enable this when we need IAP in Android (and #168304197 is fixed) [#168313664]
+    // implementation project(':react-native-iap')
     implementation project(':@react-native-community_netinfo')
     implementation project(':react-native-splash-screen')
     implementation(project(':react-native-maps')){

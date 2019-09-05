@@ -1,6 +1,7 @@
 rootProject.name = 'FrontPorchForum'
-include ':react-native-iap'
-project(':react-native-iap').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-iap/android')
+// Re-enable this when we need IAP in Android (and #168304197 is fixed) [#168313664]
+// include ':react-native-iap'
+// project(':react-native-iap').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-iap/android')
 include ':@react-native-community_netinfo'
 project(':@react-native-community_netinfo').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/netinfo/android')
 include ':react-native-splash-screen'
