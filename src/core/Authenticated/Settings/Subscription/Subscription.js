@@ -31,7 +31,7 @@ export class Subscription extends React.Component {
    * https://developer.apple.com/app-store/subscriptions/
    */
   subscriptionButton(product) {
-    // LATER: revisit this code for Google Play support
+    // LATER: revisit this code for Google Play support [#168313664]
     const interval = product.subscriptionPeriodUnitIOS
     const intervalHuman =
       interval[0].toUpperCase() + interval.substr(1).toLowerCase()

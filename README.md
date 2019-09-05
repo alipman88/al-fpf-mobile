@@ -55,6 +55,15 @@ To run on android, you need to start up an emulator first.
 
 Open android studio, and open the project for this app (this is just so you can access menus in android studio). Then look for the mobile phone icon near the top, AVD Manager. Use that to create an emulator. This may take some time to download images. Once the emulator is running you can run:
 
+Or run an emulator from the command line:
+
+```
+emulator -list-avds
+emulator @avd_name
+```
+
+Then:
+
 ```
 yarn android
 ```
