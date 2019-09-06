@@ -10,6 +10,8 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import "Firebase.h"
+#import <RollbarReactNative/RollbarReactNative.h>
+#import "ReactNativeConfig.h"
 
 #import "RNFirebaseMessaging.h"
 #import "RNFirebaseNotifications.h"
@@ -21,6 +23,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [RollbarReactNative initWithAccessToken:[ReactNativeConfig envFor:@"ROLLBAR_API_KEY"]];
   [FIRApp configure];
   [RNFirebaseNotifications configure];
   NSURL *jsCodeLocation;

@@ -6,6 +6,7 @@ import com.facebook.react.ReactApplication;
 // Re-enable this when we need IAP in Android (and #168304197 is fixed) [#168313664]
 // import com.dooboolab.RNIap.RNIapPackage;
 import com.reactnativecommunity.netinfo.NetInfoPackage;
+import com.rollbar.RollbarReactNative;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import io.invertase.firebase.RNFirebasePackage;
@@ -43,6 +44,7 @@ public class MainApplication extends Application implements ReactApplication {
           // Re-enable this when we need IAP in Android (and #168304197 is fixed) [#168313664]
           // new RNIapPackage(),
           new NetInfoPackage(),
+          RollbarReactNative.getPackage(),
           new SplashScreenReactPackage(),
           new MapsPackage(),
           new RNFirebasePackage(),
@@ -71,6 +73,7 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+    RollbarReactNative.init(this, BuildConfig.ROLLBAR_API_KEY, BuildConfig.ENVIRONMENT);
     SoLoader.init(this, /* native exopackage */ false);
   }
 }
