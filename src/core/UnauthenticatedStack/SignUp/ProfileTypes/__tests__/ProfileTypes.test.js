@@ -12,7 +12,7 @@ describe('ProfileTypes', () => {
     navigation: {
       navigate: jest.fn()
     },
-    getAppSettings: jest.fn(),
+    getAppSettings: jest.fn().mockResolvedValue(),
     profilePlans: [
       { id: 1, plan_type: 'neighbor' },
       { id: 2, plan_type: 'business' },

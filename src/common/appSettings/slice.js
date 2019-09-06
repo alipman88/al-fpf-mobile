@@ -9,7 +9,8 @@ export const appSettings = createSlice({
     businessCategories: {},
     onboardingProfilePlans: [],
     governmentTitles: [],
-    loading: false
+    loading: false,
+    loaded: false
   },
 
   reducers: {
@@ -20,11 +21,16 @@ export const appSettings = createSlice({
       categories: payload.categories,
       businessCategories: payload.business_categories,
       onboardingProfilePlans: payload.onboarding_profile_plans,
-      governmentTitles: payload.official_titles
+      governmentTitles: payload.official_titles,
+      loaded: true
     }),
     setLoading: (state, { payload }) => ({
       ...state,
       loading: payload
+    }),
+    setLoaded: (state, { payload }) => ({
+      ...state,
+      loaded: payload
     })
   }
 })
@@ -79,5 +85,10 @@ appSettings.selectors = {
   getLoading: createSelector(
     ['main.appSettings'],
     ({ loading }) => loading
+  ),
+
+  getLoaded: createSelector(
+    ['main.appSettings'],
+    ({ loaded }) => loaded
   )
 }

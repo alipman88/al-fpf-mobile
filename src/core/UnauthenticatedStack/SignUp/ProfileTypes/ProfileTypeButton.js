@@ -15,7 +15,8 @@ export const ProfileTypeButton = ({
   buttonText,
   label,
   type,
-  active
+  active,
+  disabled
 }) => {
   const check = active && (
     <View style={{ paddingLeft: 15 }}>
@@ -24,7 +25,7 @@ export const ProfileTypeButton = ({
   )
   return (
     <View>
-      <TouchableOpacity onPress={() => onTapHandler(type)}>
+      <TouchableOpacity onPress={() => onTapHandler(type)} disabled={disabled}>
         <ProfileTypePill active={active} image={check}>
           <PillText active={active}>{buttonText}</PillText>
         </ProfileTypePill>
@@ -39,5 +40,6 @@ ProfileTypeButton.propTypes = {
   buttonText: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  active: PropTypes.bool
+  active: PropTypes.bool,
+  disabled: PropTypes.bool
 }

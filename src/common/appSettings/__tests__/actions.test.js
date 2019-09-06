@@ -50,7 +50,7 @@ describe('appSettings - actions', () => {
 
       const dispatch = jest.fn()
 
-      await getAppSettings()(dispatch, getState)
+      await expect(getAppSettings()(dispatch, getState)).rejects.toThrow()
 
       expect(getSpy).toHaveBeenCalledWith('/settings')
 

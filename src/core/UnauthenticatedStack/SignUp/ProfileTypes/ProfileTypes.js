@@ -5,6 +5,7 @@ import { profileTypes } from '@common/types/profileTypes'
 import { FullScreenWizard } from '@components/FullScreenWizard'
 import { ProfileTypeContainer, ProfileTypeText } from './styledComponents'
 import { ProfileTypeButton } from './ProfileTypeButton'
+import { retry } from '@common/utils/retry'
 
 export class ProfileTypes extends React.Component {
   state = {
@@ -32,7 +33,13 @@ export class ProfileTypes extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getAppSettings()
+    this.getAppSettingsRetry = retry(this.props.getAppSettings)
+  }
+
+  componentWillUnmount() {
+    if (this.getAppSettingsRetry) {
+      this.getAppSettingsRetry.cancel()
+    }
   }
 
   onTapProfileButton = type => {
@@ -51,13 +58,14 @@ export class ProfileTypes extends React.Component {
   }
 
   render() {
-    const { navigation, profileType } = this.props
+    const { navigation, profileType, appSettingsLoaded } = this.props
     const profileTypeButtons = this.state.profileOptions.map(profileType => {
       return (
         <ProfileTypeButton
           {...profileType}
           key={profileType.type}
           onTapHandler={this.onTapProfileButton}
+          disabled={!appSettingsLoaded}
         />
       )
     })
@@ -88,5 +96,6 @@ ProfileTypes.propTypes = {
   getAppSettings: PropTypes.func.isRequired,
   navigation: PropTypes.object.isRequired,
   profilePlans: PropTypes.array.isRequired,
-  profileType: PropTypes.string
+  profileType: PropTypes.string,
+  appSettingsLoaded: PropTypes.bool.isRequired
 }

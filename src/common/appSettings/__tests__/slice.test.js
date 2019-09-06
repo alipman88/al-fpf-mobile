@@ -10,7 +10,8 @@ describe('appSettings - slice', () => {
       businessCategories: {},
       onboardingProfilePlans: [],
       governmentTitles: [],
-      loading: false
+      loading: false,
+      loaded: false
     })
   })
 
@@ -53,7 +54,8 @@ describe('appSettings - slice', () => {
         businessCategories: {
           Animals: [['Pet Shop', 1], ['Animal rescue', 2]]
         },
-        loading: false
+        loading: false,
+        loaded: true
       })
 
       data = appSettings.selectors.getCategories({
