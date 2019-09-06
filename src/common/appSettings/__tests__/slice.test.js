@@ -90,4 +90,21 @@ describe('appSettings - slice', () => {
       expect(loading).toEqual(true)
     })
   })
+
+  describe('setLoaded', () => {
+    test('sets loaded state', () => {
+      const state = appSettings.reducer(
+        undefined,
+        appSettings.actions.setLoaded(true)
+      )
+
+      const loaded = appSettings.selectors.getLoaded({
+        main: {
+          appSettings: state
+        }
+      })
+
+      expect(loaded).toEqual(true)
+    })
+  })
 })

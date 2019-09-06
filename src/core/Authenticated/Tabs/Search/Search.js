@@ -3,13 +3,13 @@ import { Keyboard, ScrollView } from 'react-native'
 import PropTypes from 'prop-types'
 import { Formik } from 'formik'
 
-import noop from 'lodash/noop'
 import get from 'lodash/get'
 
 import subYears from 'date-fns/sub_years'
 import startOfDay from 'date-fns/start_of_day'
 import endOfDay from 'date-fns/end_of_day'
 
+import { responseError } from '@common/utils/responseError'
 import { validations } from './validations'
 import { ScreenContainer } from '@components/ScreenContainer'
 import { SearchFields } from './SearchFields'
@@ -59,15 +59,16 @@ export class Search extends React.Component {
     })
   }
 
-  search = (values, cb = noop) => {
-    this.props.search(
-      {
+  search = values => {
+    this.setState({ loading: true })
+
+    return this.props
+      .search({
         ...values,
         page: this.state.page,
         count: 25
-      },
-      loading => this.setState({ loading }),
-      ({ pagination, results }) => {
+      })
+      .then(({ pagination, results }) => {
         if (values.keyword.trim().length > 0) {
           this.props.addSearchToHistory(values.keyword)
         }
@@ -81,9 +82,13 @@ export class Search extends React.Component {
           pages: pagination.pages,
           pageItemCount: pagination.page_item_count
         }))
-        cb()
-      }
-    )
+      })
+      .catch(e => {
+        this.props.setAppError(responseError(e))
+      })
+      .finally(() => {
+        this.setState({ loading: false })
+      })
   }
 
   render() {
@@ -112,7 +117,7 @@ export class Search extends React.Component {
             actions.setSubmitting(true)
             this.setState({ page: 1 }, () => {
               Keyboard.dismiss()
-              this.search(values, () => actions.setSubmitting(false))
+              this.search(values).finally(() => actions.setSubmitting(false))
             })
           }}
           validationSchema={validations}
@@ -169,5 +174,6 @@ Search.propTypes = {
   categories: PropTypes.array.isRequired,
   currentAreaId: PropTypes.number.isRequired,
   search: PropTypes.func.isRequired,
-  navigation: PropTypes.object.isRequired
+  navigation: PropTypes.object.isRequired,
+  setAppError: PropTypes.func.isRequired
 }
