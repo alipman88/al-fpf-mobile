@@ -48,7 +48,7 @@ Or to select a different emulator than the default:
 
 ```
 xcrun simctl list devices
-yarn ios --simulator="iPhone 5s"
+yarn ios --simulator="iPhone 5s (9.3)"
 ```
 
 To run on android, you need to start up an emulator first.
