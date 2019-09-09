@@ -1,5 +1,7 @@
 import get from 'lodash/get'
 import { createSlice, createSelector } from 'redux-starter-kit'
+
+import { rollbar } from '@common/utils/rollbar'
 import { resetAction } from '@common/resetAction'
 
 const initialState = {
@@ -21,9 +23,16 @@ export const profile = createSlice({
       loading: action.payload
     }),
     setUserProfile: (state, { payload }) => {
+      rollbar.setPerson(
+        '' + payload.id, // rollbar-react-native expects a string id
+        `${payload.first_name} ${payload.last_name}`,
+        payload.email
+      )
+
       const profiles = (payload.profiles || []).filter(
         profile => profile.approved
       )
+
       return {
         ...state,
         user: {
