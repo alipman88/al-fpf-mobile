@@ -14,7 +14,8 @@ describe('Search', () => {
     search: jest.fn(),
     navigation: {
       getParam: jest.fn()
-    }
+    },
+    setAppError: jest.fn()
   }
 
   afterEach(() => {
@@ -74,33 +75,32 @@ describe('Search', () => {
       const wrapper = shallow(<Search {...defaultProps} />)
       wrapper.setState({ page: 2, searchResults: [{ id: 1 }] })
 
-      wrapper.instance().search({ keyword: 'test' })
-
-      expect(defaultProps.search).toHaveBeenCalledWith(
-        {
-          keyword: 'test',
-          page: 2,
-          count: 25
-        },
-        expect.any(Function),
-        expect.any(Function)
-      )
-
-      defaultProps.search.mock.calls[0][2]({
+      defaultProps.search.mockResolvedValue({
         pagination: { total: 15, page: 2, pages: 3, page_item_count: 5 },
         results: [{ id: 2 }, { id: 3 }, { id: 4 }]
       })
 
-      expect(wrapper.state()).toEqual({
-        categoryFromLink: undefined,
-        loading: false,
-        searched: true,
-        searchResults: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }],
-        total: 15,
-        page: 2,
-        pages: 3,
-        pageItemCount: 5
-      })
+      return wrapper
+        .instance()
+        .search({ keyword: 'test' })
+        .then(() => {
+          expect(defaultProps.search).toHaveBeenCalledWith({
+            keyword: 'test',
+            page: 2,
+            count: 25
+          })
+
+          expect(wrapper.state()).toEqual({
+            categoryFromLink: undefined,
+            loading: false,
+            searched: true,
+            searchResults: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }],
+            total: 15,
+            page: 2,
+            pages: 3,
+            pageItemCount: 5
+          })
+        })
     })
   })
 
@@ -108,18 +108,6 @@ describe('Search', () => {
     test('calls search', async () => {
       const wrapper = shallow(<Search {...defaultProps} />)
       const dismissSpy = jest.spyOn(Keyboard, 'dismiss')
-
-      const setSubmitting = jest.fn()
-      await wrapper
-        .find(Formik)
-        .props()
-        .onSubmit({ forums: [], keyword: 'test' }, { setSubmitting })
-
-      expect(defaultProps.search).toHaveBeenCalledWith(
-        { forums: [], page: 1, count: 25, keyword: 'test' },
-        expect.any(Function),
-        expect.any(Function)
-      )
 
       const post = {
         id: 1,
@@ -132,9 +120,22 @@ describe('Search', () => {
         categories: ['Lost and found']
       }
 
-      defaultProps.search.mock.calls[0][2]({
+      defaultProps.search.mockResolvedValue({
         pagination: { total: 5, page: 1, pages: 2, page_item_count: 3 },
         results: [post]
+      })
+
+      const setSubmitting = jest.fn()
+      await wrapper
+        .find(Formik)
+        .props()
+        .onSubmit({ forums: [], keyword: 'test' }, { setSubmitting })
+
+      expect(defaultProps.search).toHaveBeenCalledWith({
+        forums: [],
+        page: 1,
+        count: 25,
+        keyword: 'test'
       })
 
       expect(defaultProps.addSearchToHistory).toHaveBeenCalledWith('test')

@@ -10,7 +10,8 @@ describe('appSettings - slice', () => {
       businessCategories: {},
       onboardingProfilePlans: [],
       governmentTitles: [],
-      loading: false
+      loading: false,
+      loaded: false
     })
   })
 
@@ -53,7 +54,8 @@ describe('appSettings - slice', () => {
         businessCategories: {
           Animals: [['Pet Shop', 1], ['Animal rescue', 2]]
         },
-        loading: false
+        loading: false,
+        loaded: true
       })
 
       data = appSettings.selectors.getCategories({
@@ -86,6 +88,23 @@ describe('appSettings - slice', () => {
       })
 
       expect(loading).toEqual(true)
+    })
+  })
+
+  describe('setLoaded', () => {
+    test('sets loaded state', () => {
+      const state = appSettings.reducer(
+        undefined,
+        appSettings.actions.setLoaded(true)
+      )
+
+      const loaded = appSettings.selectors.getLoaded({
+        main: {
+          appSettings: state
+        }
+      })
+
+      expect(loaded).toEqual(true)
     })
   })
 })

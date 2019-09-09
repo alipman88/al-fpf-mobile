@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 
+import { appMessage } from '@components/AppMessage/slice'
 import { areas } from '@common/areas'
 import { appSettings } from '@common/appSettings'
 import { Search as SearchScreen } from './Search'
@@ -15,5 +16,9 @@ const mapStateToProps = state => ({
 
 export const Search = connect(
   mapStateToProps,
-  { search, addSearchToHistory: searchHistory.actions.addSearchToHistory }
+  {
+    search,
+    addSearchToHistory: searchHistory.actions.addSearchToHistory,
+    setAppError: appMessage.actions.setAppError
+  }
 )(SearchScreen)

@@ -7,7 +7,8 @@ const mapStateToProps = state => {
   return {
     newUser: newUser.selectors.getNewUser(state),
     profileType: newUser.selectors.getProfileType(state),
-    profilePlans: appSettings.selectors.getProfilePlans(state)
+    profilePlans: appSettings.selectors.getProfilePlans(state),
+    appSettingsLoaded: appSettings.selectors.getLoaded(state)
   }
 }
 

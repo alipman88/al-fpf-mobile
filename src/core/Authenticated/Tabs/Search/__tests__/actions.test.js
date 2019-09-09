@@ -1,6 +1,5 @@
 import * as api from '@common/api'
 
-import { appMessage } from '@components/AppMessage/slice'
 import { search } from '../actions'
 
 describe('Search - actions', () => {
@@ -15,44 +14,36 @@ describe('Search - actions', () => {
           }
         }))
 
-      const setSubmitting = jest.fn()
-      const cb = jest.fn()
       const dispatch = jest.fn()
 
       const date = new Date(2019, 3, 8)
 
-      await search(
-        {
-          forums: [1],
-          category: { id: 2 },
-          fromDate: date,
-          toDate: date,
-          page: 1,
-          count: 10,
-          keyword: 'cats'
-        },
-        setSubmitting,
-        cb
-      )(dispatch, () => ({}))
+      return await search({
+        forums: [1],
+        category: { id: 2 },
+        fromDate: date,
+        toDate: date,
+        page: 1,
+        count: 10,
+        keyword: 'cats'
+      })(dispatch, () => ({})).then(data => {
+        expect(postSpy).toHaveBeenCalledWith(
+          '/posts?count=10&page=1',
+          {
+            area_ids: [1],
+            category_ids: [2],
+            from: '2019-04-08',
+            to: '2019-04-08',
+            query: 'cats'
+          },
+          {}
+        )
 
-      expect(postSpy).toHaveBeenCalledWith(
-        '/posts?count=10&page=1',
-        {
-          area_ids: [1],
-          category_ids: [2],
-          from: '2019-04-08',
-          to: '2019-04-08',
-          query: 'cats'
-        },
-        {}
-      )
+        expect(data).toEqual({ results: [], pagination: {} })
+        expect(dispatch).not.toHaveBeenCalled()
 
-      expect(setSubmitting).toHaveBeenCalledWith(false)
-      expect(setSubmitting).toHaveBeenCalledWith(true)
-      expect(cb).toHaveBeenCalledWith({ results: [], pagination: {} })
-      expect(dispatch).not.toHaveBeenCalled()
-
-      postSpy.mockRestore()
+        postSpy.mockRestore()
+      })
     })
 
     test('no selected forums or categories strips it from request', async () => {
@@ -65,89 +56,72 @@ describe('Search - actions', () => {
           }
         }))
 
-      const setSubmitting = jest.fn()
-      const cb = jest.fn()
       const dispatch = jest.fn()
 
       const date = new Date(2019, 3, 8)
 
-      await search(
-        {
-          forums: [],
-          fromDate: date,
-          toDate: date,
-          page: 1,
-          count: 10,
-          keyword: 'cats'
-        },
-        setSubmitting,
-        cb
-      )(dispatch, () => ({}))
+      return await search({
+        forums: [],
+        fromDate: date,
+        toDate: date,
+        page: 1,
+        count: 10,
+        keyword: 'cats'
+      })(dispatch, () => ({})).then(data => {
+        expect(postSpy).toHaveBeenCalledWith(
+          '/posts?count=10&page=1',
+          {
+            area_ids: undefined,
+            category_ids: undefined,
+            from: '2019-04-08',
+            to: '2019-04-08',
+            query: 'cats'
+          },
+          {}
+        )
 
-      expect(postSpy).toHaveBeenCalledWith(
-        '/posts?count=10&page=1',
-        {
-          area_ids: undefined,
-          category_ids: undefined,
-          from: '2019-04-08',
-          to: '2019-04-08',
-          query: 'cats'
-        },
-        {}
-      )
+        expect(data).toEqual({ results: [], pagination: {} })
+        expect(dispatch).not.toHaveBeenCalled()
 
-      expect(setSubmitting).toHaveBeenCalledWith(false)
-      expect(setSubmitting).toHaveBeenCalledWith(true)
-      expect(cb).toHaveBeenCalledWith({ results: [], pagination: {} })
-      expect(dispatch).not.toHaveBeenCalled()
-
-      postSpy.mockRestore()
+        postSpy.mockRestore()
+      })
     })
 
     test('API request failure dispatches error', async () => {
+      const error = new Error('boom')
+
       const postSpy = jest
         .spyOn(api, 'postAuthorized')
         .mockImplementation(() => {
-          throw new Error('boom')
+          throw error
         })
 
-      const setSubmitting = jest.fn()
-      const cb = jest.fn()
       const dispatch = jest.fn()
 
       const date = new Date(2019, 3, 8)
 
-      await search(
-        {
-          forums: [],
-          fromDate: date,
-          toDate: date,
-          page: 1,
-          count: 10
-        },
-        setSubmitting,
-        cb
-      )(dispatch, () => ({}))
+      return await search({
+        forums: [],
+        fromDate: date,
+        toDate: date,
+        page: 1,
+        count: 10
+      })(dispatch, () => ({})).catch(data => {
+        expect(postSpy).toHaveBeenCalledWith(
+          '/posts?count=10&page=1',
+          {
+            area_ids: undefined,
+            category_ids: undefined,
+            from: '2019-04-08',
+            to: '2019-04-08'
+          },
+          {}
+        )
 
-      expect(postSpy).toHaveBeenCalledWith(
-        '/posts?count=10&page=1',
-        {
-          area_ids: undefined,
-          category_ids: undefined,
-          from: '2019-04-08',
-          to: '2019-04-08'
-        },
-        {}
-      )
+        expect(data).toEqual(error)
 
-      expect(setSubmitting).toHaveBeenCalledWith(false)
-      expect(setSubmitting).toHaveBeenCalledWith(true)
-      expect(cb).not.toHaveBeenCalled()
-      expect(dispatch).toHaveBeenCalledWith(
-        appMessage.actions.setAppError('boom')
-      )
-
-      postSpy.mockRestore()
+        postSpy.mockRestore()
+      })
     })
   })
 })

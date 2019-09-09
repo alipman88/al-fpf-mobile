@@ -1,12 +1,14 @@
 import { createSlice, createSelector } from 'redux-starter-kit'
 import capitalize from 'lodash/capitalize'
 
+const initialState = {
+  message: '',
+  type: '',
+  autoHide: false
+}
+
 export const appMessage = createSlice({
-  initialState: {
-    message: '',
-    type: '',
-    autoHide: false
-  },
+  initialState: initialState,
   reducers: {
     setAppError: (_, { payload }) => {
       const message =
@@ -24,7 +26,9 @@ export const appMessage = createSlice({
         type: payload.type,
         autoHide: payload.autoHide
       }
-    }
+    },
+    hideNetworkError: state =>
+      state.message === 'Network error' ? initialState : state
   }
 })
 
