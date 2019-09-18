@@ -3,6 +3,7 @@ package com.frontporchforum;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.avishayil.rnrestart.ReactNativeRestartPackage;
 // Re-enable this when we need IAP in Android (and #168304197 is fixed) [#168313664]
 // import com.dooboolab.RNIap.RNIapPackage;
 import com.reactnativecommunity.netinfo.NetInfoPackage;
@@ -41,6 +42,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new RNDeviceInfo(),
           new MainReactPackage(),
+            new ReactNativeRestartPackage(),
           // Re-enable this when we need IAP in Android (and #168304197 is fixed) [#168313664]
           // new RNIapPackage(),
           new NetInfoPackage(),

@@ -74,6 +74,7 @@
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
 		41BDF1131AF2473095F8A8A7 /* libRollbarReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF04FEDFA5D54570B9D9844B /* libRollbarReactNative.a */; };
+		E0062C51E53A4AC1BDB3690B /* libRCTRestart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 894B66C6BE1A4C9C93186B84 /* libRCTRestart.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -527,6 +528,8 @@
 		FA174A7985C3493EAEB93EEB /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "ProximaNova-Regular.otf"; path = "../src/assets/fonts/ProximaNova-Regular.otf"; sourceTree = "<group>"; };
 		CAFC88A1DFB24F22B745C5B5 /* RollbarReactNative.xcodeproj */ = {isa = PBXFileReference; name = "RollbarReactNative.xcodeproj"; path = "../node_modules/rollbar-react-native/ios/RollbarReactNative.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		CF04FEDFA5D54570B9D9844B /* libRollbarReactNative.a */ = {isa = PBXFileReference; name = "libRollbarReactNative.a"; path = "libRollbarReactNative.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		5F4A6713FA0947B49FE745B0 /* RCTRestart.xcodeproj */ = {isa = PBXFileReference; name = "RCTRestart.xcodeproj"; path = "../node_modules/react-native-restart/ios/RCTRestart.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		894B66C6BE1A4C9C93186B84 /* libRCTRestart.a */ = {isa = PBXFileReference; name = "libRCTRestart.a"; path = "libRCTRestart.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -574,6 +577,7 @@
 				6ED28250D1564369A3B8B084 /* libRNCNetInfo.a in Frameworks */,
 				8B6C9F9AB7D14456B195904D /* libRNIap.a in Frameworks */,
 				41BDF1131AF2473095F8A8A7 /* libRollbarReactNative.a in Frameworks */,
+				E0062C51E53A4AC1BDB3690B /* libRCTRestart.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -828,6 +832,7 @@
 				4C9CC268633343DEBAE440EF /* RNCNetInfo.xcodeproj */,
 				5B0BA59E76C6472EBEF8BC3D /* RNIap.xcodeproj */,
 				CAFC88A1DFB24F22B745C5B5 /* RollbarReactNative.xcodeproj */,
+				5F4A6713FA0947B49FE745B0 /* RCTRestart.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1676,6 +1681,7 @@
 					"$(SRCROOT)/../node_modules/@react-native-community/netinfo/ios",
 					"$(SRCROOT)/../node_modules/react-native-iap/ios",
 					"$(SRCROOT)/../node_modules/rollbar-react-native/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-restart/ios/RCTRestart",
 				);
 				INFOPLIST_FILE = FrontPorchForum/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
@@ -1688,6 +1694,7 @@
 					"\"$(SRCROOT)/FrontPorchForum\"",
 					"\"$(SRCROOT)/FrontPorchForum\"",
 					"\"$(SRCROOT)/FrontPorchForum\"",
+					"\"$(SRCROOT)/Front Porch Forum\"",
 					"\"$(SRCROOT)/Front Porch Forum\"",
 					"\"$(SRCROOT)/Front Porch Forum\"",
 				);
@@ -1731,6 +1738,7 @@
 					"$(SRCROOT)/../node_modules/@react-native-community/netinfo/ios",
 					"$(SRCROOT)/../node_modules/react-native-iap/ios",
 					"$(SRCROOT)/../node_modules/rollbar-react-native/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-restart/ios/RCTRestart",
 				);
 				INFOPLIST_FILE = FrontPorchForum/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
@@ -1743,6 +1751,7 @@
 					"\"$(SRCROOT)/FrontPorchForum\"",
 					"\"$(SRCROOT)/FrontPorchForum\"",
 					"\"$(SRCROOT)/FrontPorchForum\"",
+					"\"$(SRCROOT)/Front Porch Forum\"",
 					"\"$(SRCROOT)/Front Porch Forum\"",
 					"\"$(SRCROOT)/Front Porch Forum\"",
 				);
@@ -1781,6 +1790,7 @@
 					"$(SRCROOT)/../node_modules/@react-native-community/netinfo/ios",
 					"$(SRCROOT)/../node_modules/react-native-iap/ios",
 					"$(SRCROOT)/../node_modules/rollbar-react-native/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-restart/ios/RCTRestart",
 				);
 				INFOPLIST_FILE = "FrontPorchForum-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1825,6 +1835,7 @@
 					"$(SRCROOT)/../node_modules/@react-native-community/netinfo/ios",
 					"$(SRCROOT)/../node_modules/react-native-iap/ios",
 					"$(SRCROOT)/../node_modules/rollbar-react-native/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-restart/ios/RCTRestart",
 				);
 				INFOPLIST_FILE = "FrontPorchForum-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1868,6 +1879,7 @@
 					"$(SRCROOT)/../node_modules/@react-native-community/netinfo/ios",
 					"$(SRCROOT)/../node_modules/react-native-iap/ios",
 					"$(SRCROOT)/../node_modules/rollbar-react-native/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-restart/ios/RCTRestart",
 				);
 				INFOPLIST_FILE = "FrontPorchForum-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1911,6 +1923,7 @@
 					"$(SRCROOT)/../node_modules/@react-native-community/netinfo/ios",
 					"$(SRCROOT)/../node_modules/react-native-iap/ios",
 					"$(SRCROOT)/../node_modules/rollbar-react-native/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-restart/ios/RCTRestart",
 				);
 				INFOPLIST_FILE = "FrontPorchForum-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

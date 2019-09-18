@@ -1,4 +1,6 @@
 rootProject.name = 'FrontPorchForum'
+include ':react-native-restart'
+project(':react-native-restart').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-restart/android')
 // Re-enable this when we need IAP in Android (and #168304197 is fixed) [#168313664]
 // include ':react-native-iap'
 // project(':react-native-iap').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-iap/android')

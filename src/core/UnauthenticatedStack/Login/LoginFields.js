@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Linking, TouchableOpacity, Text } from 'react-native'
 import Spinner from 'react-native-loading-spinner-overlay'
+import RNRestart from 'react-native-restart'
 
 import { Config, getSettingsGroup, setSettingsGroup } from '@common/config'
 import { TextInput } from '@components/TextInput'
@@ -21,10 +22,6 @@ import {
 } from './styledComponents'
 
 export class LoginFields extends React.Component {
-  state = {
-    settingsGroup: getSettingsGroup()
-  }
-
   handleResend = async email => {
     const { resendEmail } = this.props
     await resendEmail(email)
@@ -50,16 +47,15 @@ export class LoginFields extends React.Component {
         <FieldContainer>
           <Text style={{ marginTop: 20 }}>Connect to:</Text>
           <Select
-            placeholder={this.state.settingsGroup}
+            placeholder={getSettingsGroup()}
             items={groups}
             onValueChange={index => {
-              // TODO(NMH): tell the user to restart the app (and how to do so)
               const settingsGroup = groups[index]
-              this.setState({ settingsGroup })
               setSettingsGroup(settingsGroup)
+              RNRestart.Restart()
             }}
             title='Connect to'
-            value={groups.indexOf(this.state.settingsGroup)}
+            value={groups.indexOf(getSettingsGroup())}
           />
         </FieldContainer>
       )
