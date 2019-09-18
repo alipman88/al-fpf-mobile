@@ -1,7 +1,7 @@
 import React from 'react'
 import { createStackNavigator } from 'react-navigation'
-import Config from 'react-native-config'
 
+import { Config } from '@common/config'
 import profileIcon from '@assets/images/global-assets/top-nav-elements/profile-icon.png'
 import { DrawerNavIcon } from './DrawerNavIcon'
 import { TopNavIcon } from './TopNavIcon'

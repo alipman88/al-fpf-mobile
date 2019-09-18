@@ -1,11 +1,11 @@
 import React from 'react'
 import { Linking, TouchableOpacity } from 'react-native'
-import Config from 'react-native-config'
 import firebase from 'react-native-firebase'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import DeviceInfo from 'react-native-device-info'
 
+import { Config } from '@common/config'
 import { resendEmail } from '../actions'
 import { KeyboardAwareScrollView } from '@components/KeyboardAwareScrollView'
 import { api } from '@common/api'

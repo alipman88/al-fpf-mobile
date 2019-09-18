@@ -1,11 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Linking, TouchableOpacity } from 'react-native'
+import { Linking, TouchableOpacity, Text } from 'react-native'
 import Spinner from 'react-native-loading-spinner-overlay'
 
+import { Config, getSettingsGroup, setSettingsGroup } from '@common/config'
 import { TextInput } from '@components/TextInput'
 import { PasswordInput } from '@components/PasswordInput'
 import { Button } from '@components/Button'
+import { Select } from '@components/Select'
 import logoImage from '@assets/images/fpf-logo.png'
 
 import {
@@ -19,6 +21,10 @@ import {
 } from './styledComponents'
 
 export class LoginFields extends React.Component {
+  state = {
+    settingsGroup: getSettingsGroup()
+  }
+
   handleResend = async email => {
     const { resendEmail } = this.props
     await resendEmail(email)
@@ -35,6 +41,29 @@ export class LoginFields extends React.Component {
       values,
       navigation
     } = this.props
+
+    let settingsGroupField
+    if (Config.ORIGINAL_CONFIG.ENVIRONMENT !== 'production') {
+      const groups = ['production', 'staging', 'android_dev', 'ios_dev']
+
+      settingsGroupField = (
+        <FieldContainer>
+          <Text style={{ marginTop: 20 }}>Connect to:</Text>
+          <Select
+            placeholder={this.state.settingsGroup}
+            items={groups}
+            onValueChange={index => {
+              // TODO(NMH): tell the user to restart the app (and how to do so)
+              const settingsGroup = groups[index]
+              this.setState({ settingsGroup })
+              setSettingsGroup(settingsGroup)
+            }}
+            title='Connect to'
+            value={groups.indexOf(this.state.settingsGroup)}
+          />
+        </FieldContainer>
+      )
+    }
 
     return (
       <Container>
@@ -81,6 +110,7 @@ export class LoginFields extends React.Component {
           <TouchableOpacity onPress={() => navigation.navigate('ProfileTypes')}>
             <BottomText>Don't have an account? Sign Up</BottomText>
           </TouchableOpacity>
+          {settingsGroupField}
         </FormContainer>
       </Container>
     )

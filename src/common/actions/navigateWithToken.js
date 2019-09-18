@@ -1,8 +1,8 @@
 import { Linking } from 'react-native'
-import Config from 'react-native-config'
 import parse from 'url-parse'
 import * as api from '@common/api'
 
+import { Config } from '@common/config'
 import { appMessage } from '@components/AppMessage/slice'
 import { spinner } from '@app/Spinner/slice'
 import { responseError } from '@common/utils/responseError'

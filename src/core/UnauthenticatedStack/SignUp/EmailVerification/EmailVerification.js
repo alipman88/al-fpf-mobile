@@ -1,9 +1,9 @@
 import React from 'react'
 import { TouchableOpacity, Linking, ScrollView } from 'react-native'
-import Config from 'react-native-config'
 import PropTypes from 'prop-types'
-
 import Spinner from 'react-native-loading-spinner-overlay'
+
+import { Config } from '@common/config'
 import { ScreenContainer } from '@components/ScreenContainer'
 import { HeaderLogo } from '@components/HeaderLogo'
 import { profileTypes } from '@common/types/profileTypes'

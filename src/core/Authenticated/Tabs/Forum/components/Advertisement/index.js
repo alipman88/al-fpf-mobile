@@ -1,14 +1,12 @@
 import React from 'react'
 import { Linking, TouchableOpacity } from 'react-native'
-import Config from 'react-native-config'
 import PropTypes from 'prop-types'
 import IconEvil from 'react-native-vector-icons/EvilIcons'
+
+import { Config } from '@common/config'
 import { Button } from '@components/Button'
-
 import { PostCategory } from '@components/PostCategory'
-
 import { Card } from './styledComponents'
-
 import { CardContent, ContentText, Header, Bottom } from '../sharedStyles'
 
 export const Advertisement = ({ ad }) => (

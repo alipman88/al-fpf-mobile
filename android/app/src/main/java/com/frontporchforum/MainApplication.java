@@ -55,7 +55,8 @@ public class MainApplication extends Application implements ReactApplication {
           new RNSensitiveInfoPackage(),
           new RNGestureHandlerPackage(),
           new ReactNativeConfigPackage(),
-          new ReactNativePickerModulePackage()
+          new ReactNativePickerModulePackage(),
+          new RCTSettingsManagerPackage()
       );
     }
 
