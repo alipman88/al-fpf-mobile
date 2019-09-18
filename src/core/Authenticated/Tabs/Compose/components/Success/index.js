@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { TouchableOpacity, Linking } from 'react-native'
-import Config from 'react-native-config'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import IconEvil from 'react-native-vector-icons/EvilIcons'
-import { Modal } from '@components/Modal'
 
+import { Config } from '@common/config'
+import { Modal } from '@components/Modal'
 import grassImage from '@assets/images/fpf-grass.png'
 import greyBird from '@assets/images/global-assets/grey-bird/grey-bird.png'
 import birdLetterbox from '@assets/images/bird-letterbox/bird-letterbox.png'

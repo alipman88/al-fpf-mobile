@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Linking, Platform, ScrollView } from 'react-native'
-import Config from 'react-native-config'
+
+import { Config } from '@common/config'
 import { ExternalLink } from '@components/ExternalLink'
 import { ScreenContainer } from '@components/ScreenContainer'
 import {

@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { TouchableOpacity, Linking } from 'react-native'
-import Config from 'react-native-config'
+
+import { Config } from '@common/config'
 import { Text } from '@components/Text'
 import { Checkbox } from '@components/Checkbox'
 import {

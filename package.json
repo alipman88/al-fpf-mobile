@@ -38,6 +38,7 @@
     "react-native-maps": "git+https://github.com/react-native-community/react-native-maps#v0.24-rc1",
     "react-native-modal-datetime-picker": "^6.0.0",
     "react-native-picker-module": "^0.1.2",
+    "react-native-restart": "^0.0.13",
     "react-native-safe-area-view": "^0.14.5",
     "react-native-sectioned-multi-select": "^0.6.5",
     "react-native-sensitive-info": "^5.2.7",

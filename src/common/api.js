@@ -1,5 +1,6 @@
 import axios from 'axios'
-import Config from 'react-native-config'
+
+import { Config } from '@common/config'
 import { currentUser } from './currentUser'
 
 export const api = axios.create({

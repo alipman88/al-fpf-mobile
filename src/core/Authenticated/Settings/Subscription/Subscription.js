@@ -1,9 +1,9 @@
 import React from 'react'
-import Config from 'react-native-config'
 import { ScrollView } from 'react-native'
 import PropTypes from 'prop-types'
 import Spinner from 'react-native-loading-spinner-overlay'
 
+import { Config } from '@common/config'
 import { Button } from '@components/Button'
 import { ExternalLink } from '@components/ExternalLink'
 import { ScreenContainer } from '@components/ScreenContainer'

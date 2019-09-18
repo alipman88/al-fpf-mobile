@@ -1126,7 +1126,7 @@ buffer-from@>=1.1, buffer-from@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/buffer-from/-/buffer-from-1.1.1.tgz#32713bc028f75c02fdb710d7c7bcec1f2c6070ef"
 
-buffer@^4.9.1:
+buffer@^4.9.1, buffer@^5.0.7:
   version "4.9.1"
   resolved "https://registry.yarnpkg.com/buffer/-/buffer-4.9.1.tgz#6d1bb601b07a4efced97094132093027c95bc298"
   integrity sha1-bRu2AbB6TvztlwlBMgkwJ8lbwpg=
@@ -4983,6 +4983,11 @@ react-native-modal@^6.2.0:
 react-native-picker-module@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/react-native-picker-module/-/react-native-picker-module-0.1.2.tgz#24e7d7647cfda9b215d1b0013356f793a2c2e2a4"
+
+react-native-restart@^0.0.13:
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/react-native-restart/-/react-native-restart-0.0.13.tgz#88003fd6b1cce9de5bafa2570ba4ef8ff1ea2937"
+  integrity sha512-p4rBiTliPiJEejA0IhExHuM7Ge6TuLpUAm98TbtkmiISWDRK2a/DeZ4Wno7bawcMr1Yb6O5eeTHPO0rUltRD/A==
 
 react-native-safe-area-view@^0.12.0:
   version "0.12.0"

@@ -1,11 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Linking, TouchableOpacity } from 'react-native'
+import { Linking, TouchableOpacity, Text } from 'react-native'
 import Spinner from 'react-native-loading-spinner-overlay'
+import RNRestart from 'react-native-restart'
 
+import {
+  Config,
+  getSettingsGroup,
+  setSettingsGroup,
+  getSettingsGroups
+} from '@common/config'
 import { TextInput } from '@components/TextInput'
 import { PasswordInput } from '@components/PasswordInput'
 import { Button } from '@components/Button'
+import { Select } from '@components/Select'
 import logoImage from '@assets/images/fpf-logo.png'
 
 import {
@@ -35,6 +43,37 @@ export class LoginFields extends React.Component {
       values,
       navigation
     } = this.props
+
+    // For non-production builds, show a picker that allows choosing between
+    // the settings groups that have been defined for this build.
+    // When a different settings group is selected, restart the app.
+    let settingsGroupField
+    const settingsGroups = getSettingsGroups()
+    if (
+      settingsGroups.length > 1 &&
+      Config.ORIGINAL_CONFIG.ENVIRONMENT !== 'production'
+    ) {
+      const settingsGroupsLabels = settingsGroups.map(
+        key => key || Config.ORIGINAL_CONFIG.ENVIRONMENT
+      )
+
+      settingsGroupField = (
+        <FieldContainer>
+          <Text style={{ marginTop: 20 }}>Connect to:</Text>
+          <Select
+            placeholder={getSettingsGroup()}
+            items={settingsGroupsLabels}
+            onValueChange={index => {
+              const settingsGroup = settingsGroups[index]
+              setSettingsGroup(settingsGroup)
+              RNRestart.Restart()
+            }}
+            title='Connect to'
+            value={settingsGroups.indexOf(getSettingsGroup())}
+          />
+        </FieldContainer>
+      )
+    }
 
     return (
       <Container>
@@ -81,6 +120,7 @@ export class LoginFields extends React.Component {
           <TouchableOpacity onPress={() => navigation.navigate('ProfileTypes')}>
             <BottomText>Don't have an account? Sign Up</BottomText>
           </TouchableOpacity>
+          {settingsGroupField}
         </FormContainer>
       </Container>
     )
