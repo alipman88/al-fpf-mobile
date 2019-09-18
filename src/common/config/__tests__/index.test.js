@@ -1,4 +1,4 @@
-import { configForSettingsGroup } from '..'
+import { configForSettingsGroup, getSettingsGroups } from '..'
 
 describe('configForSettingsGroup', () => {
   test('removes settings group prefix from config keys', () => {
@@ -14,5 +14,11 @@ describe('configForSettingsGroup', () => {
       OTHER_KEY: 'other',
       ORIGINAL_CONFIG: config
     })
+  })
+})
+
+describe('getSettingsGroups', () => {
+  test('gets settings groups from config', () => {
+    expect(getSettingsGroups()).toEqual(['', 'test', 'development'])
   })
 })

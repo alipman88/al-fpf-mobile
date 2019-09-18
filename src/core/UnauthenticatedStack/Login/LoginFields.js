@@ -4,7 +4,12 @@ import { Linking, TouchableOpacity, Text } from 'react-native'
 import Spinner from 'react-native-loading-spinner-overlay'
 import RNRestart from 'react-native-restart'
 
-import { Config, getSettingsGroup, setSettingsGroup } from '@common/config'
+import {
+  Config,
+  getSettingsGroup,
+  setSettingsGroup,
+  getSettingsGroups
+} from '@common/config'
 import { TextInput } from '@components/TextInput'
 import { PasswordInput } from '@components/PasswordInput'
 import { Button } from '@components/Button'
@@ -39,23 +44,32 @@ export class LoginFields extends React.Component {
       navigation
     } = this.props
 
+    // For non-production builds, show a picker that allows choosing between
+    // the settings groups that have been defined for this build.
+    // When a different settings group is selected, restart the app.
     let settingsGroupField
-    if (Config.ORIGINAL_CONFIG.ENVIRONMENT !== 'production') {
-      const groups = ['production', 'staging', 'android_dev', 'ios_dev']
+    const settingsGroups = getSettingsGroups()
+    if (
+      settingsGroups.length > 1 &&
+      Config.ORIGINAL_CONFIG.ENVIRONMENT !== 'production'
+    ) {
+      const settingsGroupsLabels = settingsGroups.map(
+        key => key || Config.ORIGINAL_CONFIG.ENVIRONMENT
+      )
 
       settingsGroupField = (
         <FieldContainer>
           <Text style={{ marginTop: 20 }}>Connect to:</Text>
           <Select
             placeholder={getSettingsGroup()}
-            items={groups}
+            items={settingsGroupsLabels}
             onValueChange={index => {
-              const settingsGroup = groups[index]
+              const settingsGroup = settingsGroups[index]
               setSettingsGroup(settingsGroup)
               RNRestart.Restart()
             }}
             title='Connect to'
-            value={groups.indexOf(getSettingsGroup())}
+            value={settingsGroups.indexOf(getSettingsGroup())}
           />
         </FieldContainer>
       )

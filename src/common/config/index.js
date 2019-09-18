@@ -19,6 +19,25 @@ const setSettingsGroup = settingsGroup =>
   Settings.set({ [SETTINGS_GROUP_KEY]: settingsGroup })
 
 /**
+ * Gets a list of all the settings group names lower cased.
+ *
+ * Looks for config keys with names that match the pattern *API_HOST, and
+ * returns the unique prefixes with "_API_HOST" removed.  Note that this will
+ * include "" if there's a config key that's just a bare "API_HOST".
+ *
+ * @returns {array<string>}
+ */
+const getSettingsGroups = () => {
+  const suffix = 'API_HOST'
+
+  return chain(Object.keys(ReactNativeConfig))
+    .filter(key => key.endsWith(suffix))
+    .map(key => key.slice(0, -(suffix.length + 1)).toLowerCase())
+    .uniq()
+    .value()
+}
+
+/**
  * Returns an object with react-native-config constants, where keys with the
  * given settings group string as a prefix are included in the object with that
  * settings group prefix stripped.  The original config is included under the
@@ -52,4 +71,10 @@ const configForSettingsGroup = (config, settingsGroup) => {
  */
 const Config = configForSettingsGroup(ReactNativeConfig, getSettingsGroup())
 
-export { Config, getSettingsGroup, setSettingsGroup, configForSettingsGroup }
+export {
+  Config,
+  getSettingsGroup,
+  setSettingsGroup,
+  getSettingsGroups,
+  configForSettingsGroup
+}
