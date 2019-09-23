@@ -45,6 +45,26 @@ describe('appMessage slice', () => {
     expect(appMessage.selectors.getAutoHide(state)).toEqual(undefined)
   })
 
+  test('it handles unexpected message types', () => {
+    const messages = [null, undefined, jest.fn(), 123]
+
+    for (const message of messages) {
+      const state = {
+        main: {
+          appMessage: appMessage.reducer(
+            message,
+            appMessage.actions.setAppError(null)
+          )
+        }
+      }
+      expect(appMessage.selectors.getMessage(state)).toEqual(
+        'An error occurred'
+      )
+      expect(appMessage.selectors.getMessageType(state)).toEqual('danger')
+      expect(appMessage.selectors.getAutoHide(state)).toEqual(undefined)
+    }
+  })
+
   test('message, type, and autoHide get set for setAppMessage', () => {
     const state = {
       main: {

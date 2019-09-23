@@ -47,6 +47,26 @@ describe('purchases - actions', () => {
 
       rniapSpy.mockRestore()
     })
+
+    test('error without message dispatches an error message and resets purchasing', async () => {
+      const rniapSpy = jest
+        .spyOn(RNIap, 'requestSubscription')
+        .mockImplementation(() => {
+          throw new Error()
+        })
+
+      await requestSubscription('some-sku', 1)(dispatch, () => ({}))
+
+      expect(dispatch).toHaveBeenCalledWith(
+        appMessage.actions.setAppError('The purchase failed')
+      )
+
+      expect(dispatch).toHaveBeenCalledWith(
+        purchases.actions.setPurchasing(false)
+      )
+
+      rniapSpy.mockRestore()
+    })
   })
 
   describe('purchaseUpdated', () => {

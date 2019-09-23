@@ -12,9 +12,10 @@ export const appMessage = createSlice({
   reducers: {
     setAppError: (_, { payload }) => {
       const message =
-        typeof payload === 'string'
-          ? payload
-          : Object.values(payload).join(', ')
+        (typeof payload === 'string' && payload) ||
+        (payload && Object.values(payload).join(', ')) ||
+        'An error occurred'
+
       return {
         message: capitalize(message),
         type: 'danger'

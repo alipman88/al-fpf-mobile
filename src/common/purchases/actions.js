@@ -25,7 +25,9 @@ export const requestSubscription = (productId, profileId) => async (
     dispatch(slice.actions.setPurchasing({ profileId }))
     await RNIap.requestSubscription(productId)
   } catch (e) {
-    const message = 'string' === typeof e ? e : e.message
+    const message =
+      (typeof e === 'string' && e) || (e && e.message) || 'The purchase failed'
+
     dispatch(appMessage.actions.setAppError(message))
     dispatch(slice.actions.setPurchasing(false))
   }
