@@ -67,9 +67,8 @@ export class Profile extends React.Component {
       <ScreenContainer withPadding={false} grey>
         <KeyboardAwareScrollView>
           <Description>
-            Currently in app edits to your account information can't be made in
-            the app. To edit your profile, click on the desired link below, and
-            it will open the FPF website in your browser.
+            To edit your account, click on the link below to open the FPF
+            website in your browser.
           </Description>
 
           <FieldLabel bottomMargin={0}>Profile type</FieldLabel>
