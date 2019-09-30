@@ -120,7 +120,7 @@ export class More extends React.Component {
               <FooterLink>
                 <FooterText
                   onPress={() =>
-                    Linking.openURL(`{Config.WEBSITE_HOST}/privacy-policy`)
+                    Linking.openURL(`${Config.WEBSITE_HOST}/privacy-policy`)
                   }
                 >
                   Privacy Policy
