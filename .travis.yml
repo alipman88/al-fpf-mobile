@@ -4,6 +4,17 @@ node_js:
 cache:
   directories:
   - node_modules
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always
+  slack:
+    secure: gmu9wWSAk/pnXcz/JR5r/moOzgiSeS4t2NZB/+ko9P/KQx/MnNtMLzEJCaQC6X2dTpCP99wNmbvly25UT69yYXv8OIuJZ4VrfS5/rlW9av5g7Ox599Fcqeozk19iAS+BdmpiIr/ZoD5SZN2rXkGEK0x3eCyNVqer0LEVKzCITds=
+
 branches:
   only:
   - master
+  - staging
+  - /^staging-rc-/
+  - production
