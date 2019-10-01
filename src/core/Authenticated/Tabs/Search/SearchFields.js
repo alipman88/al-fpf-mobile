@@ -193,7 +193,7 @@ export class SearchFields extends React.Component {
                   placeholder={get(values.category, 'name', 'All categories')}
                   items={searchCategories.map(category => category.name)}
                   onPress={this.blurTextInput}
-                  onValueChange={index => {
+                  onValueChange={(value, index) => {
                     setFieldTouched('category', true)
                     const selectedCategory =
                       searchCategories[index] &&

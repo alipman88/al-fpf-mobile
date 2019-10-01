@@ -40,9 +40,9 @@ export const GovernmentInfoFields = ({
           label='Title'
           title='Title'
           items={governmentTitles}
-          onValueChange={value => {
+          onValueChange={(value, index) => {
             setFieldTouched('title')
-            setFieldValue('title', governmentTitles[value])
+            setFieldValue('title', governmentTitles[index])
           }}
           touched={touched.title}
           value={

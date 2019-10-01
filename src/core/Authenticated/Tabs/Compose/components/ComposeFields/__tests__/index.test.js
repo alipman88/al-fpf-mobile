@@ -114,7 +114,7 @@ describe('Compose', () => {
       wrapper.find(Select).forEach(component => {
         if (component.props().label === 'Profile') {
           componentCalled = true
-          component.props().onValueChange(1)
+          component.props().onValueChange('profile', 1)
         }
       })
 

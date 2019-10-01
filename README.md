@@ -2,9 +2,11 @@
 
 ## Setup
 
-### Native Tools Setup
+### Xcode and Android Studio
 
-First you'll need to setup iOS & Android dev tools. Install [XCode](https://itunes.apple.com/ca/app/xcode/id497799835?mt=12) and [Android Studio](https://developer.android.com/studio)
+First you'll need to setup iOS & Android dev tools. Install
+[XCode](https://itunes.apple.com/ca/app/xcode/id497799835?mt=12) and
+[Android Studio](https://developer.android.com/studio).
 
 Once XCode is installed, be sure to install xcode command line tools `xcode-select --install`.
 
@@ -16,19 +18,37 @@ Add the `ANDROID_HOME` variable to your .bash_profile or .bashrc
 export ANDROID_HOME=$HOME/Library/Android/sdk
 ```
 
-### JS tools
+### Tools
 
-Install watchman so the node server that delivers our JS code can work.
+Install homebrew if not already installed.
+
+Install the following tools:
 
 ```
+brew install yarn
+brew install node
 brew install watchman
+sudo gem install cocoapods
 ```
 
-Then install the node dependencies using yarn.
+If you have already installed Node on your system, make sure it is Node 8.3 or newer.
+
+Watchman is a tool by Facebook for watching changes in the filesystem. It is
+highly recommended you install it for better performance.
+
+Install npm packages:
 
 ```
 yarn install
 ```
+
+Install pods (which are specified in `ios/Podfile`):
+
+```
+cd ios ; pod install ; cd ..
+```
+
+### Environment config
 
 Copy `.env.example` as `.env` and populate it with values.
 
@@ -67,6 +87,12 @@ Then:
 ```
 yarn android
 ```
+
+## Xcode workspace
+
+To open the app in Xcode, only open the workspace file at `ios/FrontPorchForum.xcworkspace`,
+not the project file at `ios/FrontPorchForum.xcodeproj` (the latter won't correctly
+build the cocoapods Pods project).
 
 ## Debugging
 

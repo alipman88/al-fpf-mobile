@@ -1,9 +1,11 @@
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux'
-import { AsyncStorage } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk'
 import { persistStore, persistReducer } from 'redux-persist'
+// NOTE: this uses react-native-sensitive-info for the actual storage
 import createSensitiveStorage from 'redux-persist-sensitive-storage'
+
 import { mainReducer } from './mainReducer'
 import { securedReducer } from './securedReducer'
 

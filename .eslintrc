@@ -2,6 +2,7 @@
   "extends": ["prettier", "react-app"],
   "plugins": ["prettier"],
   "parser": "babel-eslint",
+  "root": true,
   "rules": {
     "prettier/prettier": "error",
     "react/prop-types": "error"

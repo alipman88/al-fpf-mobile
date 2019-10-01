@@ -1,72 +1,51 @@
 package com.frontporchforum;
 
 import android.app.Application;
-
+import android.content.Context;
+import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
-import com.avishayil.rnrestart.ReactNativeRestartPackage;
-// Re-enable this when we need IAP in Android (and #168304197 is fixed) [#168313664]
-// import com.dooboolab.RNIap.RNIapPackage;
-import com.reactnativecommunity.netinfo.NetInfoPackage;
 import com.rollbar.RollbarReactNative;
-import org.devio.rn.splashscreen.SplashScreenReactPackage;
-import com.airbnb.android.react.maps.MapsPackage;
-import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import io.invertase.firebase.instanceid.RNFirebaseInstanceIdPackage;
 import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
-import br.com.classapp.RNSensitiveInfo.RNSensitiveInfoPackage;
-import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
-import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.learnium.RNDeviceInfo.RNDeviceInfo;
-import com.taluttasgiran.pickermodule.ReactNativePickerModulePackage;
 
-
-import java.util.Arrays;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
 
-  private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
-    @Override
-    public boolean getUseDeveloperSupport() {
-      return BuildConfig.DEBUG;
-    }
+  private final ReactNativeHost mReactNativeHost =
+      new ReactNativeHost(this) {
+        @Override
+        public boolean getUseDeveloperSupport() {
+          return BuildConfig.DEBUG;
+        }
 
-    @Override
-    protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
-          new RNDeviceInfo(),
-          new MainReactPackage(),
-            new ReactNativeRestartPackage(),
-          // Re-enable this when we need IAP in Android (and #168304197 is fixed) [#168313664]
-          // new RNIapPackage(),
-          new NetInfoPackage(),
-          RollbarReactNative.getPackage(),
-          new SplashScreenReactPackage(),
-          new MapsPackage(),
-          new RNFirebasePackage(),
-          new RNFirebaseMessagingPackage(),
-          new RNFirebaseNotificationsPackage(),
-          new RNFirebaseInstanceIdPackage(),
-          new RNFirebaseAnalyticsPackage(),
-          new RNSensitiveInfoPackage(),
-          new RNGestureHandlerPackage(),
-          new ReactNativeConfigPackage(),
-          new ReactNativePickerModulePackage(),
-          new RCTSettingsManagerPackage()
-      );
-    }
+        @Override
+        protected List<ReactPackage> getPackages() {
+          @SuppressWarnings("UnnecessaryLocalVariable")
+          List<ReactPackage> packages = new PackageList(this).getPackages();
 
-    @Override
-    protected String getJSMainModuleName() {
-      return "index";
-    }
-  };
+          // Packages that cannot be autolinked yet can be added manually here
+          packages.add(new RNFirebaseMessagingPackage());
+          packages.add(new RNFirebaseNotificationsPackage());
+          packages.add(new RNFirebaseInstanceIdPackage());
+          packages.add(new RNFirebaseAnalyticsPackage());
+          packages.add(new RCTSettingsManagerPackage());
+
+          return packages;
+        }
+
+        @Override
+        protected String getJSMainModuleName() {
+          return "index";
+        }
+      };
 
   @Override
   public ReactNativeHost getReactNativeHost() {
@@ -78,5 +57,32 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     RollbarReactNative.init(this, BuildConfig.ROLLBAR_API_KEY, BuildConfig.ENVIRONMENT);
     SoLoader.init(this, /* native exopackage */ false);
+    initializeFlipper(this); // Remove this line if you don't want Flipper enabled
+  }
+
+  /**
+   * Loads Flipper in React Native templates.
+   *
+   * @param context
+   */
+  private static void initializeFlipper(Context context) {
+    if (BuildConfig.DEBUG) {
+      try {
+        /*
+         We use reflection here to pick up the class that initializes Flipper,
+        since Flipper library is not available in release mode
+        */
+        Class<?> aClass = Class.forName("com.facebook.flipper.ReactNativeFlipper");
+        aClass.getMethod("initializeFlipper", Context.class).invoke(null, context);
+      } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+      } catch (NoSuchMethodException e) {
+        e.printStackTrace();
+      } catch (IllegalAccessException e) {
+        e.printStackTrace();
+      } catch (InvocationTargetException e) {
+        e.printStackTrace();
+      }
+    }
   }
 }

@@ -101,7 +101,7 @@ describe('SearchFields', () => {
     wrapper
       .find(Select)
       .props()
-      .onValueChange(3)
+      .onValueChange('cat', 3)
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('category', true)
     expect(defaultProps.setFieldValue).toHaveBeenCalledWith('category', {
       id: 3,
@@ -116,7 +116,7 @@ describe('SearchFields', () => {
     wrapper
       .find(Select)
       .props()
-      .onValueChange(0)
+      .onValueChange(null, 0)
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('category', true)
     expect(defaultProps.setFieldValue).toHaveBeenCalledWith('category', null)
   })

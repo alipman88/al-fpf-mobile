@@ -50,7 +50,7 @@ export const LoginComponent = ({ navigation, setAccessToken, resendEmail }) => {
       </LinksContainer>
       {['development', 'staging'].includes(Config.ENVIRONMENT) && (
         <Version>
-          v{DeviceInfo.getVersion()} #{DeviceInfo.getBuildNumber()} :{' '}
+          v{DeviceInfo.getVersion()} #{DeviceInfo.getBuildNumber()}:{' '}
           {Config.ENVIRONMENT}
         </Version>
       )}

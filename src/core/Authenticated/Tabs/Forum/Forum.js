@@ -26,6 +26,7 @@ export class Forum extends React.Component {
   constructor(props) {
     super(props)
     this.forumViewRef = React.createRef()
+    this.toastRef = React.createRef()
   }
 
   async componentDidMount() {

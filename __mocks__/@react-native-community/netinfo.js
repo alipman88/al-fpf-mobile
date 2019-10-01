@@ -1,4 +1,4 @@
 module.exports = {
-  addEventListener: jest.fn(),
-  getConnectionInfo: () => Promise.resolve({})
+  addEventListener: () => jest.fn(),
+  fetch: () => Promise.resolve({})
 }
