@@ -62,7 +62,7 @@ describe('BasicInfoFields', () => {
       <BasicInfoFields
         {...defaultProps}
         values={userValues}
-        touched={['firstName']}
+        touched={{ firstName: true }}
       />
     )
     wrapper

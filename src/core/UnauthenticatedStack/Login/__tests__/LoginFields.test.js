@@ -14,7 +14,8 @@ describe('LoginFields', () => {
     setFieldTouched: jest.fn(),
     setFieldValue: jest.fn(),
     touched: {},
-    values: {}
+    values: {},
+    navigation: {}
   }
 
   afterEach(() => {

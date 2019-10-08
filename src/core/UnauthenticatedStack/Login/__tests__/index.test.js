@@ -8,6 +8,7 @@ import { LoginComponent } from '../index'
 describe('LoginComponent', () => {
   const defaultProps = {
     setAccessToken: jest.fn(),
+    resendEmail: jest.fn(),
     navigation: {
       dispatch: jest.fn(),
       navigate: jest.fn()

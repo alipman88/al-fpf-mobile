@@ -72,7 +72,7 @@ describe('BusinessInfoFields', () => {
       <BusinessInfoFields
         {...defaultProps}
         values={inputValues}
-        touched={['name']}
+        touched={{ name: true }}
       />
     )
 

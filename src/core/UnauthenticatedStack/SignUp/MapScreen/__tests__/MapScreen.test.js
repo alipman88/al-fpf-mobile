@@ -112,7 +112,7 @@ describe('MapScreen', () => {
 
   test('submit button sets the checkedAreas in the reducer', () => {
     const wrapper = shallow(<MapScreen {...defaultProps} />)
-    wrapper.setState({ checkedAreas: [1, 2] })
+    wrapper.setState({ checkedAreas: { 1: true, 2: true } })
     wrapper
       .find(FullScreenWizard)
       .props()
@@ -124,7 +124,7 @@ describe('MapScreen', () => {
     const wrapper = shallow(
       <MapScreen {...defaultProps} profileType='government' />
     )
-    wrapper.setState({ checkedAreas: [1, 2] })
+    wrapper.setState({ checkedAreas: { 1: true, 2: true } })
     wrapper
       .find(FullScreenWizard)
       .props()
@@ -139,6 +139,8 @@ describe('MapScreen', () => {
     const wrapper = shallow(
       <MapScreen
         profileType='neighbor'
+        newUser={{}}
+        setNewUserByKey={jest.fn()}
         navigation={{
           getParam: key => {
             return twoAreas[key]
@@ -163,6 +165,8 @@ describe('MapScreen', () => {
     const wrapper = shallow(
       <MapScreen
         profileType='neighbor'
+        newUser={{}}
+        setNewUserByKey={jest.fn()}
         navigation={{
           getParam: key => {
             return twoAreas[key]
@@ -181,6 +185,9 @@ describe('MapScreen', () => {
   test('toggling forum details & map checks the area', () => {
     const wrapper = shallow(
       <MapScreen
+        profileType='neighbor'
+        newUser={{}}
+        setNewUserByKey={jest.fn()}
         navigation={{
           getParam: key => {
             return twoAreas[key]

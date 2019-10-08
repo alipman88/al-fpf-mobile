@@ -17,6 +17,7 @@ describe('EmailVerification', () => {
       profileType: 'business',
       email: 'bob@ross.com'
     },
+    profileType: 'business',
     clearUserData: jest.fn(),
     setRegistrationEmail: jest.fn()
   }

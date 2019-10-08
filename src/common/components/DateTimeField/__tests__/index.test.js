@@ -11,6 +11,7 @@ describe('DateTimeField', () => {
     error: '',
     label: 'Start Date',
     onChangeValue: jest.fn(),
+    onPress: jest.fn(),
     timeLabel: 'Time',
     touched: false,
     value: new Date()

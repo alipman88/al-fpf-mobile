@@ -10,7 +10,6 @@ describe('Search', () => {
     addSearchToHistory: jest.fn(),
     areas: [],
     categories: [],
-    currentAreaId: 1,
     search: jest.fn(),
     navigation: {
       getParam: jest.fn()

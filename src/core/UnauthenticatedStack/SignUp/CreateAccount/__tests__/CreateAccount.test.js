@@ -14,7 +14,7 @@ describe('CreateAccount', () => {
     },
     postSignUp: jest.fn(() => {}),
     setNewUserByKey: jest.fn(),
-    profileType: null,
+    profileType: 'neighbor',
     loading: false
   }
 

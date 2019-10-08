@@ -274,7 +274,6 @@ SearchFields.propTypes = {
   areas: PropTypes.array.isRequired,
   categories: PropTypes.array.isRequired,
   categoryFromLink: PropTypes.object,
-  currentAreaId: PropTypes.number.isRequired,
   errors: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   onClearSearch: PropTypes.func.isRequired,

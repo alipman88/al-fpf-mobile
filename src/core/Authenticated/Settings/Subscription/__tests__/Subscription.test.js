@@ -20,7 +20,8 @@ describe('Subscription', () => {
         plan_type: 'neighbor',
         tier: 'standard'
       },
-      home_nf: 1
+      home_nf: 1,
+      name: 'foo'
     },
     products: [
       {

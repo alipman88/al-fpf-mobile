@@ -1,5 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import Toast from 'react-native-easy-toast'
+
 import { OtherIssues } from '../OtherIssues'
 import { IssueTab } from '../IssueTab'
 
@@ -20,7 +22,8 @@ describe('OtherIssues selector', () => {
     navigation: {
       navigate: jest.fn(),
       dispatch: jest.fn()
-    }
+    },
+    toast: { current: shallow(<Toast />).instance() }
   }
 
   test('it creates 5 tabs to choose from', () => {

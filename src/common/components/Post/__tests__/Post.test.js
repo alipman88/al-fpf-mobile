@@ -92,6 +92,8 @@ describe('Post', () => {
         moreText={defaultProps.moreText}
         post={post}
         postTruncateLength={6}
+        chooseMailApp={jest.fn()}
+        navigation={{}}
       />
     )
     expect(wrapper.find(Autolink).props().text).toEqual('Lorem ...')
