@@ -105,7 +105,6 @@ export class Search extends React.Component {
       <ScreenContainer grey withPadding={false}>
         <Formik
           key={this.state.key}
-          ref={ref => (this.formikRef = ref)}
           initialValues={{
             fromDate: startOfDay(subYears(new Date(), 2)),
             toDate: endOfDay(new Date()),

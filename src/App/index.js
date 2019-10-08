@@ -22,6 +22,11 @@ import { purchaseUpdated, purchaseError } from '@common/purchases'
 import { subscriptionSkus } from '@common/types/subscriptionSkus'
 
 export class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.toastRef = React.createRef()
+  }
+
   state = {
     appState: AppState.currentState,
     connected: true
@@ -70,8 +75,8 @@ export class App extends React.Component {
     NetInfo.fetch().then(async state => {
       const connected = await this.setConnectedStatus(state)
 
-      if (!startConnectionState && !connected) {
-        this.toastRef.show('No cell or wifi signal')
+      if (!startConnectionState && !connected && this.toastRef.current) {
+        this.toastRef.current.show('No cell or wifi signal')
       }
     })
   }
@@ -147,7 +152,7 @@ export class App extends React.Component {
               )}
               <AppMessage />
               <Toast
-                ref={toast => (this.toastRef = toast)}
+                ref={this.toastRef}
                 position='top'
                 style={{ zIndex: 1000 }}
               />
