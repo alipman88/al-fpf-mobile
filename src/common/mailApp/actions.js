@@ -2,7 +2,7 @@
  * Source from React Native Email Link, altered so we can compose
  */
 
-import { ActionSheetIOS, Linking } from 'react-native'
+import { ActionSheetIOS, Linking, Platform } from 'react-native'
 import { mailApp } from './slice'
 
 class EmailException {
@@ -28,7 +28,7 @@ const titles = {
   outlook: 'Outlook'
 }
 
-function getComposeUrl(app, subject, toEmail) {
+function getComposeUrl(app, subject = '', toEmail = '') {
   switch (app) {
     case 'gmail':
       return `${prefixes[app]}co?subject=${subject}&to=${toEmail}`
@@ -113,6 +113,8 @@ function askAppChoice(
 
 /**
  * Compose a message in an email app, or let the user choose what app to open.
+ * Choosing an app is currently only supported by iOS.  Other platforms will
+ * link to the default mailto handler.
  *
  * @param {{
  *     title: string, // of the alert
@@ -131,6 +133,7 @@ export const chooseMailApp = (options = {}) => async (dispatch, getState) => {
 
   const { subject, toEmail } = options
 
+  // Get the current preferred app, and double check that it's available
   let app = mailApp.selectors.getPreferredApp(getState())
   if (app) {
     const available = await isAppInstalled(app, subject, toEmail)
@@ -140,7 +143,9 @@ export const chooseMailApp = (options = {}) => async (dispatch, getState) => {
     }
   }
 
-  if (!app) {
+  // If there's no current preferred app available and we're on iOS,
+  // ask the user which app they prefer
+  if (!app && Platform.OS === 'ios') {
     const { title, message, cancelLabel } = options
     app = await askAppChoice(title, message, cancelLabel, subject, toEmail)
     if (app) {
@@ -148,7 +153,5 @@ export const chooseMailApp = (options = {}) => async (dispatch, getState) => {
     }
   }
 
-  if (app) {
-    return Linking.openURL(getComposeUrl(app, subject, toEmail))
-  }
+  return Linking.openURL(getComposeUrl(app, subject, toEmail))
 }

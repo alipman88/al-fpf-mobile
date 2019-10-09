@@ -27,6 +27,8 @@ import linkIcon from '@assets/images/global-assets/external-link-icons/external-
 
 export class More extends React.Component {
   render() {
+    const { chooseMailApp } = this.props
+
     return (
       <ScreenContainer withPadding={false} grey>
         <ScrollView>
@@ -94,7 +96,13 @@ export class More extends React.Component {
               </CardContent>
               <ExternalLink
                 content='Share your feedback'
-                url='mailto:membersupport@frontporchforum.com?subject=FPF mobile app feedback'
+                onPress={() => {
+                  chooseMailApp({
+                    title: 'Email FPF',
+                    subject: 'FPF mobile app feedback',
+                    toEmail: 'membersupport@frontporchforum.com'
+                  })
+                }}
               />
             </Card>
 
@@ -137,9 +145,12 @@ export class More extends React.Component {
               </FooterLink>
               <FooterLink>
                 <FooterText
-                  onPress={() =>
-                    Linking.openURL('mailto:membersupport@frontporchforum.com')
-                  }
+                  onPress={() => {
+                    chooseMailApp({
+                      title: 'Email FPF',
+                      toEmail: 'membersupport@frontporchforum.com'
+                    })
+                  }}
                 >
                   Member Support
                 </FooterText>
@@ -154,5 +165,6 @@ export class More extends React.Component {
 }
 
 More.propTypes = {
+  chooseMailApp: PropTypes.func.isRequired,
   currentAreaId: PropTypes.number.isRequired
 }

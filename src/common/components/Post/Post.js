@@ -1,5 +1,5 @@
 import React from 'react'
-import { Linking, Platform, TouchableOpacity } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import Autolink from 'react-native-autolink'
 import firebase from 'react-native-firebase'
 import PropTypes from 'prop-types'
@@ -114,17 +114,11 @@ export class Post extends React.Component {
 
                   const subject = this.reTitle(post.title)
 
-                  if (Platform.OS === 'ios') {
-                    chooseMailApp({
-                      title: 'Email author',
-                      subject: subject,
-                      toEmail: post.user_email
-                    })
-                  } else {
-                    Linking.openURL(
-                      `mailto:${post.user_email}?subject=${subject}`
-                    )
-                  }
+                  chooseMailApp({
+                    title: 'Email author',
+                    subject: subject,
+                    toEmail: post.user_email
+                  })
                 }}
                 fullWidth
               >
