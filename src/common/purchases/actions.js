@@ -6,6 +6,7 @@ import { appMessage } from '@components/AppMessage/slice'
 import { profile } from '@common/profile'
 import { purchases as slice } from './slice'
 import { responseError } from '@common/utils/responseError'
+import { rollbar } from '@common/utils/rollbar'
 
 /**
  * Request the purchase of a subscription for the given IAP product SKU for the
@@ -25,6 +26,11 @@ export const requestSubscription = (productId, profileId) => async (
     dispatch(slice.actions.setPurchasing({ profileId }))
     await RNIap.requestSubscription(productId)
   } catch (e) {
+    rollbar.info('requestSubscription failed', e, {
+      productId,
+      profileId
+    })
+
     const message =
       (typeof e === 'string' && e) || (e && e.message) || 'The purchase failed'
 
@@ -42,12 +48,13 @@ export const requestSubscription = (productId, profileId) => async (
  * SKPaymentTransactionStatePurchased event.
  */
 export const purchaseUpdated = purchase => async (dispatch, getState) => {
+  const profileId = slice.selectors.getProfileId(getState())
+
   try {
     // NOTE: on iOS, react-native-iap gets this from the newer "iOS 7 style"
     // ([[NSBundle mainBundle]appStoreReceiptURL]) rather than from the
     // deprecated "iOS 6 style" (transaction.transactionReceipt)
     const receipt = purchase.transactionReceipt
-    const profileId = slice.selectors.getProfileId(getState())
 
     if (receipt && profileId) {
       // Verify the receipt via the FPF API
@@ -80,7 +87,9 @@ export const purchaseUpdated = purchase => async (dispatch, getState) => {
       }
     }
   } catch (e) {
-    let message
+    rollbar.info('purchaseUpdated failed', e, {
+      profileId
+    })
 
     // If an error occurs (even a receipt validation), we do not clear the
     // purchasing state or attempt to cancel the transaction (which actually
@@ -90,6 +99,7 @@ export const purchaseUpdated = purchase => async (dispatch, getState) => {
 
     // An error from the API should include the `response` prop (per the Axios
     // library).  Handle any other error more generically.
+    let message
     if (e.response) {
       message = responseError(e)
     } else {
@@ -110,6 +120,17 @@ export const purchaseUpdated = purchase => async (dispatch, getState) => {
  * SKPaymentTransactionStateFailed event.
  */
 export const purchaseError = error => (dispatch, getState) => {
-  dispatch(appMessage.actions.setAppError(error.message))
-  dispatch(slice.actions.setPurchasing(false))
+  try {
+    const profileId = slice.selectors.getProfileId(getState())
+
+    rollbar.info(
+      'purchaseError',
+      new Error(error.message),
+      Object.assign({}, error, { profileId })
+    )
+
+    dispatch(appMessage.actions.setAppError(error.message))
+  } finally {
+    dispatch(slice.actions.setPurchasing(false))
+  }
 }

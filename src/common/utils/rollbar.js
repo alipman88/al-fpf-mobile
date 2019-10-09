@@ -9,7 +9,7 @@ try {
   const version = `${DeviceInfo.getVersion()} (build ${DeviceInfo.getBuildNumber()})`
 
   const rollbarConfig = new Configuration(Config.ROLLBAR_API_KEY, {
-    enabled: true,
+    enabled: !['development', 'test'].includes(Config.ENVIRONMENT),
     environment: Config.ENVIRONMENT,
     appVersion: version,
     captureUncaught: true,

@@ -166,7 +166,16 @@ describe('purchases - actions', () => {
 
   describe('purchaseError', () => {
     test('dispatches an error message and resets purchasing', async () => {
-      await purchaseError(new Error('boom'))(dispatch, () => ({}))
+      const getState = () => ({
+        main: {
+          purchases: {
+            purchasing: true,
+            profileId: 1
+          }
+        }
+      })
+
+      await purchaseError(new Error('boom'))(dispatch, getState)
 
       expect(dispatch).toHaveBeenCalledWith(
         appMessage.actions.setAppError('boom')
