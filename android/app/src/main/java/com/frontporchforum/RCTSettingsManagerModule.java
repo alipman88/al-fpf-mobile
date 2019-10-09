@@ -40,12 +40,7 @@ public class RCTSettingsManagerModule extends ReactContextBaseJavaModule {
     return NAME;
   }
 
-  @ReactMethod
-  public Map<String, ?> constantsToExport() {
-    return getConstants();
-  }
-
-  @ReactMethod
+  @Override
   public Map<String, Object> getConstants() {
     WritableMap settings = Arguments.createMap();
 

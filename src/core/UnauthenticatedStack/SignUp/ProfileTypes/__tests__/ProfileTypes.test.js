@@ -7,6 +7,7 @@ import { FullScreenWizard } from '@components/FullScreenWizard'
 
 describe('ProfileTypes', () => {
   const defaultProps = {
+    appSettingsLoaded: true,
     setNewUserByKey: jest.fn(),
     newUser: {},
     navigation: {

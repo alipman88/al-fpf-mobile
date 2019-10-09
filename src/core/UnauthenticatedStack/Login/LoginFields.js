@@ -63,7 +63,7 @@ export class LoginFields extends React.Component {
           <Select
             placeholder={getSettingsGroup()}
             items={settingsGroupsLabels}
-            onValueChange={index => {
+            onValueChange={(value, index) => {
               const settingsGroup = settingsGroups[index]
               setSettingsGroup(settingsGroup)
               RNRestart.Restart()

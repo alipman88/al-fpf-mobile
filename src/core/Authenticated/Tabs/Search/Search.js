@@ -99,13 +99,12 @@ export class Search extends React.Component {
       searchResults,
       total
     } = this.state
-    const { areas, categories, currentAreaId, navigation } = this.props
+    const { areas, categories, navigation } = this.props
 
     return (
       <ScreenContainer grey withPadding={false}>
         <Formik
           key={this.state.key}
-          ref={ref => (this.formikRef = ref)}
           initialValues={{
             fromDate: startOfDay(subYears(new Date(), 2)),
             toDate: endOfDay(new Date()),
@@ -137,7 +136,6 @@ export class Search extends React.Component {
               <SearchFields
                 areas={areas}
                 categories={categories}
-                currentAreaId={currentAreaId}
                 errors={errors}
                 handleSubmit={handleSubmit}
                 onClearSearch={() => this.setState({ searched: false })}
@@ -172,7 +170,6 @@ Search.propTypes = {
   addSearchToHistory: PropTypes.func.isRequired,
   areas: PropTypes.array.isRequired,
   categories: PropTypes.array.isRequired,
-  currentAreaId: PropTypes.number.isRequired,
   search: PropTypes.func.isRequired,
   navigation: PropTypes.object.isRequired,
   setAppError: PropTypes.func.isRequired

@@ -1,8 +1,7 @@
-// NOTE: In React 0.61, this should be changed to:
-// import NativeSettingsManager from './NativeSettingsManager';
-// const _settings = NativeSettingsManager.getConstants().settings
-const RCTSettingsManager = require('NativeModules').SettingsManager
-const _settings = (RCTSettingsManager && RCTSettingsManager.settings) || {}
+import { NativeModules } from 'react-native'
+
+const NativeSettingsManager = NativeModules.SettingsManager
+const _settings = NativeSettingsManager.getConstants().settings || {}
 
 /**
  * Android implementation of React Native's Settings js module.
@@ -22,8 +21,8 @@ const Settings = {
   set(settings) {
     Object.assign(this._settings, settings)
 
-    if (RCTSettingsManager) {
-      RCTSettingsManager.setValues(settings)
+    if (NativeSettingsManager) {
+      NativeSettingsManager.setValues(settings)
     }
   },
 

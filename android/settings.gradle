@@ -1,28 +1,8 @@
 rootProject.name = 'FrontPorchForum'
-include ':react-native-restart'
-project(':react-native-restart').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-restart/android')
-// Re-enable this when we need IAP in Android (and #168304197 is fixed) [#168313664]
-// include ':react-native-iap'
-// project(':react-native-iap').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-iap/android')
-include ':@react-native-community_netinfo'
-project(':@react-native-community_netinfo').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/netinfo/android')
-include ':rollbar-react-native'
-project(':rollbar-react-native').projectDir = new File(rootProject.projectDir, '../node_modules/rollbar-react-native/android')
-include ':react-native-splash-screen'
-project(':react-native-splash-screen').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-splash-screen/android')
-include ':react-native-maps'
-project(':react-native-maps').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-maps/lib/android')
 include ':react-native-firebase'
 project(':react-native-firebase').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-firebase/android')
-include ':react-native-sensitive-info'
-project(':react-native-sensitive-info').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-sensitive-info/android')
-include ':react-native-gesture-handler'
-project(':react-native-gesture-handler').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-gesture-handler/android')
-include ':react-native-config'
-project(':react-native-config').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-config/android')
-include ':react-native-device-info'
-project(':react-native-device-info').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-device-info/android')
-include ':react-native-picker-module'
-project(':react-native-picker-module').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-picker-module/android')
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle")
+applyNativeModulesSettingsGradle(settings)
+
 
 include ':app'

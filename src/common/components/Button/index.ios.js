@@ -58,7 +58,7 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   fullWidth: PropTypes.bool,
   tall: PropTypes.bool,
-  width: PropTypes.number,
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   color: PropTypes.string,
   iconRight: PropTypes.bool,
   iconLeft: PropTypes.bool,

@@ -13,6 +13,7 @@ jest.mock('uuid/v4', () => ({
 describe('Profile', () => {
   const defaultProps = {
     navigateWithToken: jest.fn(),
+    navigation: {},
     areas: {
       1: {
         name: 'One'
@@ -30,7 +31,8 @@ describe('Profile', () => {
       profile_plan: {
         plan_type: 'neighbor'
       },
-      home_nf: 1
+      home_nf: 1,
+      name: 'foo'
     },
     updateUser: jest.fn()
   }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { createStackNavigator } from 'react-navigation'
+import { createStackNavigator } from 'react-navigation-stack'
 
 import { Config } from '@common/config'
 import profileIcon from '@assets/images/global-assets/top-nav-elements/profile-icon.png'

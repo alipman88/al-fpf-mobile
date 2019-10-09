@@ -158,7 +158,7 @@ export class ComposeFields extends React.Component {
                 items={profiles.map(profile =>
                   getProfileDisplayName(profile, false)
                 )}
-                onValueChange={index => {
+                onValueChange={(value, index) => {
                   setFieldTouched('profile', true)
                   setFieldValue('profile', index)
                   const newFilteredAreas = this.getAreasForProfile(
@@ -218,7 +218,7 @@ export class ComposeFields extends React.Component {
               )}
               label='Category'
               items={composeCategories.map(category => category.name)}
-              onValueChange={index => {
+              onValueChange={(value, index) => {
                 setFieldTouched('category', true)
                 setFieldValue('category', composeCategories[index])
               }}

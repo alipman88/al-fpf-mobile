@@ -62,9 +62,7 @@ export class More extends React.Component {
               </CardContent>
               <ExternalLink
                 content='Browse local events'
-                url={`${Config.WEBSITE_HOST}/areas/${
-                  this.props.currentAreaId
-                }/calendar`}
+                url={`${Config.WEBSITE_HOST}/areas/${this.props.currentAreaId}/calendar`}
               />
             </Card>
 

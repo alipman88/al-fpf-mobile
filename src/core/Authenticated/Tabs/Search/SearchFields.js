@@ -193,7 +193,7 @@ export class SearchFields extends React.Component {
                   placeholder={get(values.category, 'name', 'All categories')}
                   items={searchCategories.map(category => category.name)}
                   onPress={this.blurTextInput}
-                  onValueChange={index => {
+                  onValueChange={(value, index) => {
                     setFieldTouched('category', true)
                     const selectedCategory =
                       searchCategories[index] &&
@@ -274,7 +274,6 @@ SearchFields.propTypes = {
   areas: PropTypes.array.isRequired,
   categories: PropTypes.array.isRequired,
   categoryFromLink: PropTypes.object,
-  currentAreaId: PropTypes.number.isRequired,
   errors: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   onClearSearch: PropTypes.func.isRequired,

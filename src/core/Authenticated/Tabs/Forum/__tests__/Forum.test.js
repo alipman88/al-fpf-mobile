@@ -15,7 +15,7 @@ describe('Forum', () => {
       setParams: jest.fn(),
       getParam: jest.fn()
     },
-    navigationWithToken: jest.fn(),
+    navigateWithToken: jest.fn(),
     fcmToken: '',
     sendNewFCMToken: jest.fn(),
     currentIssueId: 12,

@@ -22,7 +22,8 @@ describe('SearchResults', () => {
     searched: false,
     searchResults: [],
     setFieldTouched: jest.fn(),
-    setFieldValue: jest.fn()
+    setFieldValue: jest.fn(),
+    values: {}
   }
 
   afterEach(() => {

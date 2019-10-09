@@ -1,6 +1,7 @@
 import React from 'react'
 import firebase from 'react-native-firebase'
 import { AppState, Linking, Platform } from 'react-native'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import SplashScreen from 'react-native-splash-screen'
@@ -21,6 +22,11 @@ import { purchaseUpdated, purchaseError } from '@common/purchases'
 import { subscriptionSkus } from '@common/types/subscriptionSkus'
 
 export class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.toastRef = React.createRef()
+  }
+
   state = {
     appState: AppState.currentState,
     connected: true
@@ -30,7 +36,7 @@ export class App extends React.Component {
     Linking.addEventListener('url', this.handleOpenURL)
     AppState.addEventListener('change', this.handleAppStateChange)
     SplashScreen.hide()
-    NetInfo.addEventListener('connectionChange', this.setConnectedStatus)
+    this.netInfoUnsubscribe = NetInfo.addEventListener(this.setConnectedStatus)
 
     this.updateConnectionStatus()
 
@@ -48,8 +54,11 @@ export class App extends React.Component {
 
   componentWillUnmount() {
     Linking.removeEventListener('url', this.handleOpenURL)
-    AppState.removeEventListener('connectionChange', this.handleAppStateChange)
-    NetInfo.removeEventListener('connectionChange', this.setConnectedStatus)
+    AppState.removeEventListener('change', this.handleAppStateChange)
+    if (this.netInfoUnsubscribe) {
+      this.netInfoUnsubscribe()
+      this.netInfoUnsubscribe = null
+    }
 
     if (this.purchaseUpdatedListener) {
       this.purchaseUpdatedListener.remove()
@@ -63,11 +72,11 @@ export class App extends React.Component {
 
   updateConnectionStatus = () => {
     const startConnectionState = this.state.connected
-    NetInfo.getConnectionInfo().then(async connectionInfo => {
-      const connected = await this.setConnectedStatus(connectionInfo)
+    NetInfo.fetch().then(async state => {
+      const connected = await this.setConnectedStatus(state)
 
-      if (!startConnectionState && !connected) {
-        this.toastRef.show('No cell or wifi signal')
+      if (!startConnectionState && !connected && this.toastRef.current) {
+        this.toastRef.current.show('No cell or wifi signal')
       }
     })
   }
@@ -135,18 +144,20 @@ export class App extends React.Component {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <React.Fragment>
-            <Container handleNavigationChange={this.handleNavigationChange} />
-            {!this.state.connected && (
-              <Offline updateConnectionStatus={this.updateConnectionStatus} />
-            )}
-            <AppMessage />
-            <Toast
-              ref={toast => (this.toastRef = toast)}
-              position='top'
-              style={{ zIndex: 1000 }}
-            />
-          </React.Fragment>
+          <SafeAreaProvider>
+            <React.Fragment>
+              <Container handleNavigationChange={this.handleNavigationChange} />
+              {!this.state.connected && (
+                <Offline updateConnectionStatus={this.updateConnectionStatus} />
+              )}
+              <AppMessage />
+              <Toast
+                ref={this.toastRef}
+                position='top'
+                style={{ zIndex: 1000 }}
+              />
+            </React.Fragment>
+          </SafeAreaProvider>
         </PersistGate>
       </Provider>
     )

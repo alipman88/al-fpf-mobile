@@ -19,7 +19,6 @@ export const getPosts = (issueId, navigation) => async (dispatch, getState) => {
     .find(issue => issue.id === issueId)
 
   if (!issue) {
-    console.error(`Could not find an issue by id ${issueId}`)
     return
   }
 

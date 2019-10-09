@@ -11,7 +11,9 @@ describe('AppMessage', () => {
       hideMessage: jest.fn()
     }
     jest.spyOn(FlashMessageManager, 'getDefault').mockImplementation(() => fake)
-    const wrapper = shallow(<AppMessage setAppError={jest.fn()} message='' />)
+    const wrapper = shallow(
+      <AppMessage setAppError={jest.fn()} message='' type='' />
+    )
     wrapper.setProps({ message: 'Doh!', type: 'danger' })
     expect(fake.showMessage).toHaveBeenCalledWith({
       message: 'Doh!',

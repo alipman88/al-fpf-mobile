@@ -1,4 +1,4 @@
-import { createStackNavigator } from 'react-navigation'
+import { createStackNavigator } from 'react-navigation-stack'
 
 import { Login } from './Login'
 import { MapScreen } from './SignUp/MapScreen'

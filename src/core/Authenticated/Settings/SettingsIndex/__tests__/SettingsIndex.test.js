@@ -20,7 +20,8 @@ describe('SettingsIndex', () => {
       last_name: 'Smith',
       profiles: [
         {
-          id: 5
+          id: 5,
+          name: 'John Smith'
         }
       ]
     }

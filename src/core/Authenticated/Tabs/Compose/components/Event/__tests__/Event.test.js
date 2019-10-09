@@ -13,6 +13,7 @@ describe('Event', () => {
     setDuplicateState: jest.fn(),
     setFieldTouched: jest.fn(),
     setFieldValue: jest.fn(),
+    blurTextInputs: jest.fn(),
     touched: {},
     values: {}
   }
@@ -33,7 +34,8 @@ describe('Event', () => {
           {
             id: 1,
             start_time: new Date().toISOString(),
-            end_time: new Date().toISOString()
+            end_time: new Date().toISOString(),
+            title: 'some event'
           }
         ]
       })

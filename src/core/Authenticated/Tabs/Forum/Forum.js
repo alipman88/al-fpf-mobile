@@ -26,6 +26,7 @@ export class Forum extends React.Component {
   constructor(props) {
     super(props)
     this.forumViewRef = React.createRef()
+    this.toastRef = React.createRef()
   }
 
   async componentDidMount() {
@@ -220,9 +221,11 @@ export class Forum extends React.Component {
   }
 
   scrollPostsToTop() {
-    if (this.forumViewRef) {
+    if (this.forumViewRef.current) {
       // using set timeout to ensure the code doesn't run until rendering is finished
-      setTimeout(() => this.forumViewRef.scrollTo({ y: 0, animated: false }))
+      setTimeout(() =>
+        this.forumViewRef.current.scrollTo({ y: 0, animated: false })
+      )
     }
   }
 
@@ -284,9 +287,7 @@ export class Forum extends React.Component {
     return (
       <ScreenContainer withPadding={false} grey>
         <ScrollView
-          ref={ref => {
-            this.forumViewRef = ref
-          }}
+          ref={this.forumViewRef}
           refreshControl={
             <RefreshControl
               refreshing={loading}
@@ -309,11 +310,7 @@ export class Forum extends React.Component {
           </ForumContainer>
           {get(issues, '[0].id', 0) === currentIssueId ? <OcmMessage /> : null}
         </ScrollView>
-        <Toast
-          ref={toast => (this.toastRef = toast)}
-          position='top'
-          style={{ zIndex: 1000 }}
-        />
+        <Toast ref={this.toastRef} position='top' style={{ zIndex: 1000 }} />
       </ScreenContainer>
     )
   }
