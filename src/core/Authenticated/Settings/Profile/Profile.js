@@ -18,12 +18,11 @@ export class Profile extends React.Component {
   render() {
     const {
       areas,
-      hasIAPSubscription,
-      hasSubscription,
+      canSubscribe,
+      hasAppleSubscription,
       navigateWithToken,
       navigation,
-      profile,
-      userHasIAPSubscription
+      profile
     } = this.props
 
     let subscriptionLink
@@ -35,7 +34,7 @@ export class Profile extends React.Component {
 
     if (Platform.OS === 'ios') {
       // If current profile has IAP subscription, link to native IAP management URL
-      if (hasIAPSubscription) {
+      if (hasAppleSubscription) {
         subscriptionLink = (
           <ExternalLink
             onPress={() =>
@@ -48,9 +47,8 @@ export class Profile extends React.Component {
           </ExternalLink>
         )
       }
-      // If current profile does not have subscription and user does not have
-      // IAP subscription, show subscribe view
-      else if (!hasSubscription && !userHasIAPSubscription) {
+      // If current profile can subscribe, show subscribe view link
+      else if (canSubscribe) {
         subscriptionLink = (
           <NavLink
             linkText='Upgrade FPF Plan'
@@ -150,10 +148,9 @@ Profile.navigationOptions = ({ navigation }) => ({
 
 Profile.propTypes = {
   areas: PropTypes.object.isRequired,
-  hasIAPSubscription: PropTypes.bool,
-  hasSubscription: PropTypes.bool,
+  canSubscribe: PropTypes.bool,
+  hasAppleSubscription: PropTypes.bool,
   navigateWithToken: PropTypes.func.isRequired,
   navigation: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired,
-  userHasIAPSubscription: PropTypes.bool
+  profile: PropTypes.object.isRequired
 }

@@ -178,4 +178,145 @@ describe('profile - slice', () => {
       ).toEqual(105)
     })
   })
+
+  describe('getUserHasAppleSubscription', () => {
+    test('checks whether the user has an Apple subscription - none', () => {
+      const state = profile.reducer(
+        undefined,
+        profile.actions.setUserProfile({
+          id: 1,
+          profiles: [{ id: 5, approved: true }]
+        })
+      )
+
+      expect(
+        profile.selectors.getUserHasAppleSubscription({
+          main: { profile: state }
+        })
+      ).toEqual(false)
+    })
+
+    test('checks whether the user has an Apple subscription - stripe', () => {
+      const state = profile.reducer(
+        undefined,
+        profile.actions.setUserProfile({
+          id: 1,
+          profiles: [
+            {
+              id: 5,
+              approved: true,
+              active_subscription: { service: 'stripe' }
+            }
+          ]
+        })
+      )
+
+      expect(
+        profile.selectors.getUserHasAppleSubscription({
+          main: { profile: state }
+        })
+      ).toEqual(false)
+    })
+
+    test('checks whether the user has an Apple subscription - apple', () => {
+      const state = profile.reducer(
+        undefined,
+        profile.actions.setUserProfile({
+          id: 1,
+          profiles: [
+            { id: 5, approved: true },
+            { id: 6, approved: true, active_subscription: { service: 'apple' } }
+          ]
+        })
+      )
+
+      expect(
+        profile.selectors.getUserHasAppleSubscription({
+          main: { profile: state }
+        })
+      ).toEqual(true)
+    })
+  })
+
+  describe('getSubscriptionState', () => {
+    test('get subscription state for all profiles without Apple sub', () => {
+      const state = profile.reducer(
+        undefined,
+        profile.actions.setUserProfile({
+          id: 1,
+          profiles: [
+            { id: 5, approved: true, profile_plan: { plan_type: 'neighbor' } },
+            { id: 6, approved: true, profile_plan: { plan_type: 'business' } },
+            {
+              id: 7,
+              approved: true,
+              active_subscription: { service: 'stripe' }
+            }
+          ]
+        })
+      )
+
+      expect(
+        profile.selectors.getSubscriptionState({
+          main: { profile: state }
+        })
+      ).toEqual({
+        5: {
+          canSubscribe: false,
+          hasSubscription: false,
+          hasAppleSubscription: false
+        },
+        6: {
+          canSubscribe: true,
+          hasSubscription: false,
+          hasAppleSubscription: false
+        },
+        7: {
+          canSubscribe: false,
+          hasSubscription: true,
+          hasAppleSubscription: false
+        }
+      })
+    })
+
+    test('get subscription state for all profiles with Apple sub', () => {
+      const state = profile.reducer(
+        undefined,
+        profile.actions.setUserProfile({
+          id: 1,
+          profiles: [
+            { id: 5, approved: true, profile_plan: { plan_type: 'neighbor' } },
+            { id: 6, approved: true, profile_plan: { plan_type: 'business' } },
+            {
+              id: 7,
+              approved: true,
+              active_subscription: { service: 'apple' }
+            }
+          ]
+        })
+      )
+
+      expect(
+        profile.selectors.getSubscriptionState({
+          main: { profile: state }
+        })
+      ).toEqual({
+        5: {
+          canSubscribe: false,
+          hasSubscription: false,
+          hasAppleSubscription: false
+        },
+        6: {
+          canSubscribe: false,
+          hasSubscription: false,
+          hasAppleSubscription: false
+        },
+        7: {
+          canSubscribe: false,
+          hasSubscription: true,
+          hasAppleSubscription: true
+        }
+      })
+    })
+  })
 })
