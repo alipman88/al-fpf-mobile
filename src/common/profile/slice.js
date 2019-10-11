@@ -77,22 +77,46 @@ const getCurrentProfile = createSelector(
 )
 
 /**
- * Identifies whether profile / user has an active subscription.
+ * Returns true if the user has an active Apple subscription in any of their profiles.
  */
-const getSubscriptionStatus = createSelector(
-  [getCurrentProfile, getProfiles],
-  (profile, profiles) => ({
-    hasSubscription: !!profile.active_subscription,
-    hasIAPSubscription: !!(
-      profile.active_subscription &&
-      profile.active_subscription.service === 'apple'
-    ),
-    userHasIAPSubscription: !!profiles.some(
+const getUserHasAppleSubscription = createSelector(
+  [getProfiles],
+  profiles =>
+    !!profiles.some(
       profile =>
         profile.active_subscription &&
         profile.active_subscription.service === 'apple'
     )
-  })
+)
+
+/**
+ * Returns subscription status data for all profiles.  The return value is an
+ * hash of profile ids to objects with the following keys:
+ * - canSubscribe {boolean}: true if the user can subscribe via IAP
+ * - hasSubscription {boolean}: true if the user has an active subscription
+ * - hasAppleSubscription {boolean}: true if the user has an active Apple subscription
+ */
+const getSubscriptionState = createSelector(
+  [getProfiles, getUserHasAppleSubscription],
+  (profiles, userHasAppleSubscription) => {
+    return profiles.reduce((data, profile) => {
+      const hasSubscription = !!profile.active_subscription
+      const hasAppleSubscription =
+        get(profile, 'active_subscription.service') === 'apple'
+      const canSubscribe =
+        !hasSubscription &&
+        !userHasAppleSubscription &&
+        get(profile, 'profile_plan.plan_type') === 'business'
+
+      data[profile.id] = {
+        canSubscribe,
+        hasSubscription,
+        hasAppleSubscription
+      }
+
+      return data
+    }, {})
+  }
 )
 
 profile.selectors = {
@@ -108,5 +132,6 @@ profile.selectors = {
   ),
   getCurrentProfileId,
   getCurrentProfile,
-  getSubscriptionStatus
+  getUserHasAppleSubscription,
+  getSubscriptionState
 }
