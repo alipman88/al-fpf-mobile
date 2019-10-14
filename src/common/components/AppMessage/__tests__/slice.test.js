@@ -17,7 +17,7 @@ describe('appMessage slice', () => {
       main: {
         appMessage: appMessage.reducer(
           undefined,
-          appMessage.actions.setAppError('boom')
+          appMessage.actions.setAppError('Boom')
         )
       }
     }
@@ -32,7 +32,7 @@ describe('appMessage slice', () => {
         appMessage: appMessage.reducer(
           undefined,
           appMessage.actions.setAppError({
-            title: 'needs a title',
+            title: 'Needs a title',
             content: 'needs content'
           })
         )

@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
   areas: areas.selectors.getFullAreasList(state),
   currentAreaId: areas.selectors.getCurrentAreaId(state),
   currentProfile: profile.selectors.getCurrentProfile(state),
-  profiles: profile.selectors.getProfiles(state)
+  profiles: profile.selectors.getAvailableProfiles(state)
 })
 
 export const DrawerMenu = connect(

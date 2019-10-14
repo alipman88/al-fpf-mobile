@@ -1,4 +1,4 @@
-import get from 'lodash/get'
+import { filter, find, get } from 'lodash'
 import { createSlice, createSelector } from 'redux-starter-kit'
 
 import { rollbar } from '@common/utils/rollbar'
@@ -9,7 +9,7 @@ const initialState = {
     profiles: []
   },
   loading: false,
-  currentProfileId: 0
+  currentProfileId: undefined
 }
 
 export const profile = createSlice({
@@ -29,17 +29,16 @@ export const profile = createSlice({
         payload.email
       )
 
-      const profiles = (payload.profiles || []).filter(
-        profile => profile.approved
-      )
+      const availableProfiles = filter(payload.profiles, { approved: true })
+      const currentProfileId =
+        state.currentProfileId || get(availableProfiles, '[0].id')
 
       return {
         ...state,
         user: {
-          ...payload,
-          profiles
+          ...payload
         },
-        currentProfileId: state.currentProfileId || get(profiles, '[0].id', 0)
+        currentProfileId
       }
     },
     setCurrentProfileId: (state, action) => ({
@@ -61,6 +60,9 @@ export const profile = createSlice({
   }
 })
 
+const getNavigationProfileId = (state, props) =>
+  props.navigation.getParam('profileId', 0)
+
 const getCurrentProfileId = createSelector(
   ['main.profile'],
   profile => profile.currentProfileId
@@ -71,9 +73,24 @@ const getProfiles = createSelector(
   profile => profile.user.profiles || []
 )
 
+const getAvailableProfiles = createSelector(
+  ['main.profile'],
+  profile => filter(profile.user.profiles, { approved: true })
+)
+
 const getCurrentProfile = createSelector(
-  [getProfiles, getCurrentProfileId],
-  (profiles, id) => profiles.find(profile => profile.id === id) || {}
+  [getAvailableProfiles, getCurrentProfileId],
+  (profiles, id) => find(profiles, { id })
+)
+
+const getNavigationProfile = createSelector(
+  [getProfiles, getNavigationProfileId],
+  (profiles, id) => find(profiles, { id })
+)
+
+const hasUnapprovedProfile = createSelector(
+  [getProfiles],
+  profiles => profiles.some(profile => !profile.available)
 )
 
 /**
@@ -82,7 +99,7 @@ const getCurrentProfile = createSelector(
 const getUserHasAppleSubscription = createSelector(
   [getProfiles],
   profiles =>
-    !!profiles.some(
+    profiles.some(
       profile =>
         profile.active_subscription &&
         profile.active_subscription.service === 'apple'
@@ -119,6 +136,11 @@ const getSubscriptionState = createSelector(
   }
 )
 
+const getNavigationProfileSubscriptionState = createSelector(
+  [getSubscriptionState, getNavigationProfileId],
+  (state, id) => state[id] || {}
+)
+
 profile.selectors = {
   ...profile.selectors,
   getUser: createSelector(
@@ -126,12 +148,16 @@ profile.selectors = {
     profile => profile.user
   ),
   getProfiles,
+  getAvailableProfiles,
+  hasUnapprovedProfile,
   getLoading: createSelector(
     ['main.profile'],
     profile => profile.loading
   ),
   getCurrentProfileId,
   getCurrentProfile,
+  getNavigationProfile,
   getUserHasAppleSubscription,
-  getSubscriptionState
+  getSubscriptionState,
+  getNavigationProfileSubscriptionState
 }

@@ -8,7 +8,7 @@ import { appSettings } from '@common/appSettings'
 const mapStateToProps = state => ({
   areas: areas.selectors.getAreas(state),
   currentAreaId: areas.selectors.getCurrentAreaId(state),
-  profiles: profile.selectors.getProfiles(state),
+  profiles: profile.selectors.getAvailableProfiles(state),
   loading: profile.selectors.getLoading(state),
   currentProfileId: profile.selectors.getCurrentProfileId(state),
   categories: appSettings.selectors.getCategories(state)

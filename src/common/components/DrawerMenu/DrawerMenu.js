@@ -47,19 +47,19 @@ export const DrawerMenu = ({
                   <TouchableOpacity
                     key={area.name}
                     onPress={() => {
-                      if (currentProfile.area_ids.indexOf(area.id) === -1) {
+                      if (
+                        !currentProfile ||
+                        !currentProfile.area_ids.includes(area.id)
+                      ) {
                         const profile = profiles.find(profile => {
-                          if (profile.area_ids.indexOf(area.id) !== -1) {
-                            return profile
-                          } else {
-                            return undefined
-                          }
+                          return profile.area_ids.includes(area.id)
                         })
 
                         if (profile) {
                           setCurrentProfileId(profile.id)
                         }
                       }
+
                       setCurrentAreaId(area.id)
                       setDrawerOpenState(false)
                       navigationService.navigate('Forum')
@@ -86,7 +86,7 @@ export const DrawerMenu = ({
 DrawerMenu.propTypes = {
   areas: PropTypes.array.isRequired,
   currentAreaId: PropTypes.number.isRequired,
-  currentProfile: PropTypes.object.isRequired,
+  currentProfile: PropTypes.object,
   profiles: PropTypes.array.isRequired,
   setCurrentAreaId: PropTypes.func.isRequired,
   setCurrentProfileId: PropTypes.func.isRequired

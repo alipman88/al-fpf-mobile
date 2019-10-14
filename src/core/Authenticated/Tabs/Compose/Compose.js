@@ -139,5 +139,5 @@ Compose.propTypes = {
   navigation: PropTypes.object.isRequired,
   profiles: PropTypes.array.isRequired,
   submitPost: PropTypes.func.isRequired,
-  currentProfileId: PropTypes.number.isRequired
+  currentProfileId: PropTypes.number
 }
