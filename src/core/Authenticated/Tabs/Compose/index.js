@@ -4,10 +4,10 @@ import { areas } from '@common/areas'
 import { profile } from '@common/profile'
 import { submitPost } from './actions'
 import { appSettings } from '@common/appSettings'
+import { navigateWithToken } from '@common/actions/navigateWithToken'
 
 const mapStateToProps = state => ({
   areas: areas.selectors.getAreas(state),
-  currentAreaId: areas.selectors.getCurrentAreaId(state),
   profiles: profile.selectors.getAvailableProfiles(state),
   loading: profile.selectors.getLoading(state),
   currentProfileId: profile.selectors.getCurrentProfileId(state),
@@ -17,6 +17,7 @@ const mapStateToProps = state => ({
 export const Compose = connect(
   mapStateToProps,
   {
+    navigateWithToken,
     submitPost
   }
 )(ComposeScreen)

@@ -1,13 +1,14 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { TouchableOpacity, Linking } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 
 import { Success } from '../index'
 import { Close } from '../styledComponents'
 
 describe('Success', () => {
   const defaultProps = {
-    onClose: jest.fn()
+    onClose: jest.fn(),
+    navigateWithToken: jest.fn()
   }
 
   afterEach(() => {
@@ -21,12 +22,9 @@ describe('Success', () => {
   })
 
   test('pressing link button opens webpage', () => {
-    const linkSpy = jest.spyOn(Linking, 'openURL')
     const wrapper = shallow(<Success {...defaultProps} />)
     wrapper.find(TouchableOpacity).simulate('press')
-    expect(linkSpy).toHaveBeenCalledWith(
-      'https://frontporchforum.com/user/posts'
-    )
-    linkSpy.mockRestore()
+
+    expect(defaultProps.navigateWithToken).toHaveBeenCalledWith('/user/posts')
   })
 })

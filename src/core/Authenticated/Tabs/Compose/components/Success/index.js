@@ -1,10 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { TouchableOpacity, Linking } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import IconEvil from 'react-native-vector-icons/EvilIcons'
 
-import { Config } from '@common/config'
 import { Modal } from '@components/Modal'
 import grassImage from '@assets/images/fpf-grass.png'
 import greyBird from '@assets/images/global-assets/grey-bird/grey-bird.png'
@@ -27,7 +26,7 @@ import {
   TextContainer
 } from './styledComponents'
 
-export const Success = ({ onClose }) => (
+export const Success = ({ onClose, navigateWithToken }) => (
   <Modal>
     <Container>
       <Close onPress={() => onClose()}>
@@ -41,9 +40,7 @@ export const Success = ({ onClose }) => (
         </BodyText>
       </TextContainer>
       <TextContainer>
-        <TouchableOpacity
-          onPress={() => Linking.openURL(`${Config.WEBSITE_HOST}/user/posts`)}
-        >
+        <TouchableOpacity onPress={() => navigateWithToken('/user/posts')}>
           <BodyText>
             To <BodySemibold>edit</BodySemibold> or{' '}
             <BodySemibold>delete</BodySemibold> your posting before publication,
@@ -67,5 +64,6 @@ export const Success = ({ onClose }) => (
 )
 
 Success.propTypes = {
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired,
+  navigateWithToken: PropTypes.func.isRequired
 }

@@ -247,7 +247,13 @@ export class Forum extends React.Component {
   }
 
   render() {
-    const { currentIssueId, issues, loading, navigation } = this.props
+    const {
+      currentIssueId,
+      issues,
+      loading,
+      navigation,
+      navigateWithToken
+    } = this.props
 
     const posts = (this.props.posts[currentIssueId] || []).concat(
       this.props.sharedPosts[currentIssueId] || []
@@ -262,14 +268,26 @@ export class Forum extends React.Component {
       // if we rendered all posts, render remaining ads
       if (index - adOffset >= posts.length) {
         const ad = ads[adOffset]
-        postRender.push(<Advertisement ad={ad} key={ad.id} />)
+        postRender.push(
+          <Advertisement
+            ad={ad}
+            key={ad.id}
+            navigateWithToken={navigateWithToken}
+          />
+        )
         adOffset++
         // were in the middle of posts, and were on an even count
       } else if (ads[adOffset] && (index === 2 || index === 4 || index === 6)) {
         const ad = ads[adOffset]
         adOffset++
 
-        postRender.push(<Advertisement ad={ad} key={ad.id} />)
+        postRender.push(
+          <Advertisement
+            ad={ad}
+            key={ad.id}
+            navigateWithToken={navigateWithToken}
+          />
+        )
       } else if (posts[index - adOffset]) {
         const post = posts[index - adOffset]
         postRender.push(

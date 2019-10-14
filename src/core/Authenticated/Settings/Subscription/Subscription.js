@@ -3,7 +3,6 @@ import { ScrollView } from 'react-native'
 import PropTypes from 'prop-types'
 import Spinner from 'react-native-loading-spinner-overlay'
 
-import { Config } from '@common/config'
 import { Button } from '@components/Button'
 import { ExternalLink } from '@components/ExternalLink'
 import { ScreenContainer } from '@components/ScreenContainer'
@@ -61,7 +60,13 @@ export class Subscription extends React.Component {
   }
 
   render() {
-    const { products, profile, purchasing, hasSubscription } = this.props
+    const {
+      products,
+      profile,
+      purchasing,
+      hasSubscription,
+      navigateWithToken
+    } = this.props
 
     let content
 
@@ -111,12 +116,12 @@ export class Subscription extends React.Component {
 
           <ExternalLink
             content='Terms of Use'
-            url={`${Config.WEBSITE_HOST}/terms-of-use`}
+            onPress={() => navigateWithToken('/terms-of-use')}
           />
 
           <ExternalLink
             content='Privacy Policy'
-            url={`${Config.WEBSITE_HOST}/privacy-policy`}
+            onPress={() => navigateWithToken('/privacy-policy')}
           />
         </PageWrapper>
       )
@@ -138,6 +143,7 @@ Subscription.navigationOptions = ({ navigation }) => ({
 Subscription.propTypes = {
   hasSubscription: PropTypes.bool,
   navigation: PropTypes.object.isRequired,
+  navigateWithToken: PropTypes.func.isRequired,
   products: PropTypes.array.isRequired,
   profile: PropTypes.object.isRequired,
   purchasing: PropTypes.bool,

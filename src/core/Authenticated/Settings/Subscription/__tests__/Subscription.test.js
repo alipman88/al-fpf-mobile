@@ -11,6 +11,7 @@ describe('Subscription', () => {
     navigation: {
       navigate: jest.fn()
     },
+    navigateWithToken: jest.fn(),
     profile: {
       id: 4,
       area_ids: [1, 3],

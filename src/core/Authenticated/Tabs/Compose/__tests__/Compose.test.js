@@ -38,6 +38,7 @@ describe('Compose', () => {
       getParam: jest.fn(),
       navigate: jest.fn()
     },
+    navigateWithToken: jest.fn(),
     profiles: [
       {
         id: 1,
