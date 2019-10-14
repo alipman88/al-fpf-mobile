@@ -66,6 +66,7 @@ export class Compose extends React.Component {
       areas,
       loading,
       navigation,
+      navigateWithToken,
       profiles
     } = this.props
 
@@ -120,7 +121,10 @@ export class Compose extends React.Component {
                 shouldResetForm={navigation.getParam('shouldResetForm')}
               />
               {this.state.modalVisible && (
-                <Success onClose={() => this.onModalClose(resetForm)} />
+                <Success
+                  onClose={() => this.onModalClose(resetForm)}
+                  navigateWithToken={navigateWithToken}
+                />
               )}
             </React.Fragment>
           )}
@@ -133,10 +137,9 @@ export class Compose extends React.Component {
 Compose.propTypes = {
   areas: PropTypes.array.isRequired,
   categories: PropTypes.array.isRequired,
-  // not used yet, removed, but it will be in another ticket
-  currentAreaId: PropTypes.number.isRequired,
   loading: PropTypes.bool,
   navigation: PropTypes.object.isRequired,
+  navigateWithToken: PropTypes.func.isRequired,
   profiles: PropTypes.array.isRequired,
   submitPost: PropTypes.func.isRequired,
   currentProfileId: PropTypes.number

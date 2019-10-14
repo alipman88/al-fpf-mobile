@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Linking, Platform, ScrollView } from 'react-native'
+import { Platform, ScrollView } from 'react-native'
 
-import { Config } from '@common/config'
 import { ExternalLink } from '@components/ExternalLink'
 import { ScreenContainer } from '@components/ScreenContainer'
 import {
@@ -27,7 +26,7 @@ import linkIcon from '@assets/images/global-assets/external-link-icons/external-
 
 export class More extends React.Component {
   render() {
-    const { chooseMailApp } = this.props
+    const { chooseMailApp, navigateWithToken } = this.props
 
     return (
       <ScreenContainer withPadding={false} grey>
@@ -49,7 +48,7 @@ export class More extends React.Component {
               <CenterImgContainer>
                 <ExternalLink
                   content='See business directory'
-                  url={`${Config.WEBSITE_HOST}/business_directories`}
+                  onPress={() => navigateWithToken('/business_directories')}
                 />
               </CenterImgContainer>
             </Card>
@@ -64,7 +63,11 @@ export class More extends React.Component {
               </CardContent>
               <ExternalLink
                 content='Browse local events'
-                url={`${Config.WEBSITE_HOST}/areas/${this.props.currentAreaId}/calendar`}
+                onPress={() =>
+                  navigateWithToken(
+                    `/areas/${this.props.currentAreaId}/calendar`
+                  )
+                }
               />
             </Card>
 
@@ -80,7 +83,7 @@ export class More extends React.Component {
                 </CardContent>
                 <ExternalLink
                   content='Donate Now'
-                  url={`${Config.WEBSITE_HOST}/supporting-members`}
+                  onPress={() => navigateWithToken('/supporting-members')}
                 />
               </Card>
             )}
@@ -118,27 +121,21 @@ export class More extends React.Component {
               </CardContent>
               <ExternalLink
                 content='Go to FrontPorchForum.com'
-                url={Config.WEBSITE_HOST}
+                onPress={() => navigateWithToken('')}
               />
             </Card>
 
             <FooterLinkWrapper>
               <FooterLink>
                 <FooterText
-                  onPress={() =>
-                    Linking.openURL(`${Config.WEBSITE_HOST}/privacy-policy`)
-                  }
+                  onPress={() => navigateWithToken('/privacy-policy')}
                 >
                   Privacy Policy
                 </FooterText>
                 <RightIcon source={linkIcon} />
               </FooterLink>
               <FooterLink>
-                <FooterText
-                  onPress={() =>
-                    Linking.openURL(`${Config.WEBSITE_HOST}/terms-of-use`)
-                  }
-                >
+                <FooterText onPress={() => navigateWithToken('/terms-of-use')}>
                   Terms of Use
                 </FooterText>
                 <RightIcon source={linkIcon} />
@@ -166,5 +163,6 @@ export class More extends React.Component {
 
 More.propTypes = {
   chooseMailApp: PropTypes.func.isRequired,
-  currentAreaId: PropTypes.number.isRequired
+  currentAreaId: PropTypes.number.isRequired,
+  navigateWithToken: PropTypes.func.isRequired
 }
