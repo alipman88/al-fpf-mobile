@@ -18,14 +18,14 @@ export const setupForumData = (
   // pull latest areas, and set current area based on profile
   const currentProfile = profile.selectors.getCurrentProfile(getState())
   const userAreas = areas.selectors.getAreas(getState())
-  const areaIds = currentProfile.area_ids || []
+  const areaIds = (currentProfile && currentProfile.area_ids) || []
   const firstArea = userAreas.find(area => areaIds.indexOf(area.id) !== -1)
   if (firstArea) {
     // set the current area id to the first one in the profile
     dispatch(areas.actions.setCurrentAreaId(firstArea.id))
     // reset the current issue id, the Forum component will handle it from here
     dispatch(issues.actions.setCurrentIssueId(0))
-  } else if (Object.keys(currentProfile).length === 0) {
+  } else if (profile.selectors.hasUnapprovedProfile(getState())) {
     dispatch(
       appMessage.actions.setAppMessage({
         message:

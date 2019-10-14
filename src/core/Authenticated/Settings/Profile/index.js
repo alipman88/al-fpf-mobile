@@ -6,17 +6,11 @@ import { areas } from '@common/areas'
 import { profile } from '@common/profile'
 import { navigateWithToken } from '@common/actions/navigateWithToken'
 
-const mapStateToProps = (state, props) => {
-  const profileId = props.navigation.getParam('profileId', 0)
-
-  return {
-    areas: keyBy(areas.selectors.getAreas(state), 'id'),
-    profile: profile.selectors
-      .getProfiles(state)
-      .find(profile => profile.id === profileId),
-    ...profile.selectors.getSubscriptionState(state)[profileId]
-  }
-}
+const mapStateToProps = (state, props) => ({
+  areas: keyBy(areas.selectors.getAreas(state), 'id'),
+  profile: profile.selectors.getNavigationProfile(state, props),
+  ...profile.selectors.getNavigationProfileSubscriptionState(state, props)
+})
 
 export const Profile = connect(
   mapStateToProps,

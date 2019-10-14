@@ -52,6 +52,7 @@ describe('setupForumData', () => {
             profiles: [
               {
                 id: 1,
+                approved: true,
                 area_ids: [2]
               }
             ]

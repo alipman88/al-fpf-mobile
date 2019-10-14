@@ -1,5 +1,4 @@
 import { createSlice, createSelector } from 'redux-starter-kit'
-import capitalize from 'lodash/capitalize'
 
 const initialState = {
   message: '',
@@ -17,13 +16,13 @@ export const appMessage = createSlice({
         'An error occurred'
 
       return {
-        message: capitalize(message),
+        message,
         type: 'danger'
       }
     },
     setAppMessage: (_, { payload }) => {
       return {
-        message: capitalize(payload.message),
+        message: payload.message,
         type: payload.type,
         autoHide: payload.autoHide
       }

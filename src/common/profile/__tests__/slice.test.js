@@ -8,7 +8,7 @@ describe('profile - slice', () => {
         profiles: []
       },
       loading: false,
-      currentProfileId: 0
+      currentProfileId: undefined
     })
   })
 
@@ -58,6 +58,10 @@ describe('profile - slice', () => {
             id: 3,
             business_category_id: 100,
             approved: true
+          },
+          {
+            id: 4,
+            approved: false
           }
         ]
       })
@@ -73,6 +77,10 @@ describe('profile - slice', () => {
           id: 3,
           business_category_id: 100,
           approved: true
+        },
+        {
+          id: 4,
+          approved: false
         }
       ])
     })
@@ -99,7 +107,7 @@ describe('profile - slice', () => {
 
       expect(state).toEqual({
         loading: false,
-        currentProfileId: 0,
+        currentProfileId: undefined,
         user: {
           id: 1,
           profiles: [],
@@ -126,6 +134,30 @@ describe('profile - slice', () => {
       })
 
       expect(data).toEqual([])
+    })
+  })
+
+  describe('getAvailableProfiles selector', () => {
+    test('returns only approved profiles', () => {
+      const state = profile.reducer(
+        undefined,
+        profile.actions.setUserProfile({
+          id: 1,
+          profiles: [
+            { id: 5, approved: true },
+            { id: 6, approved: false },
+            { id: 7 }
+          ]
+        })
+      )
+
+      const data = profile.selectors.getAvailableProfiles({
+        main: {
+          profile: state
+        }
+      })
+
+      expect(data).toEqual([{ id: 5, approved: true }])
     })
   })
 

@@ -23,6 +23,7 @@ export class AppMessage extends React.Component {
         icon='auto'
         position='top'
         onPress={() => this.props.setAppError('')}
+        style={{ paddingRight: 30 }}
       />
     )
   }
