@@ -2,6 +2,7 @@ import React from 'react'
 import { Linking, Platform } from 'react-native'
 import PropTypes from 'prop-types'
 import capitalize from 'lodash/capitalize'
+import get from 'lodash/get'
 
 import { KeyboardAwareScrollView } from '@components/KeyboardAwareScrollView'
 import { ScreenContainer } from '@components/ScreenContainer'
@@ -93,7 +94,7 @@ export class Profile extends React.Component {
           </Field>
           <FieldLabel>Home Forum</FieldLabel>
           <Field>
-            <FieldText>{areas[profile.home_nf].name}</FieldText>
+            <FieldText>{get(areas[profile.home_nf], 'name')}</FieldText>
           </Field>
           {profile.area_ids.length > 1 && (
             <React.Fragment>
