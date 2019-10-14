@@ -30,9 +30,7 @@ export const validations = yup.object().shape({
   fromDate: yup
     .date()
     .nullable()
-    .test('fromDate', 'From field must be specified for events', function(
-      fromDate
-    ) {
+    .test('fromDate', 'From date is required for events', function(fromDate) {
       return (
         !this.parent.category ||
         !this.parent.category.is_event ||
@@ -42,29 +40,36 @@ export const validations = yup.object().shape({
   toDate: yup
     .date()
     .nullable()
-    .test('toDate', 'To field must be after From field', function(endDate) {
+    .test('toDate', 'To date cannot be earlier than from date', function(
+      endDate
+    ) {
       return (
         !this.parent.category ||
         !this.parent.category.is_event ||
+        !isDate(this.parent.fromDate) ||
+        !isDate(endDate) ||
         isAfter(endDate, this.parent.fromDate)
       )
     })
-    .test('toDate', 'To field must be after current date & time', function(
+    .test('toDate', 'To date must be after current date & time', function(
       endDate
     ) {
       return (
         !this.parent.category ||
         !this.parent.category.is_event ||
+        !isDate(endDate) ||
         isAfter(endDate, new Date())
       )
     })
-    .test('toDate', 'To & from dates can only be up to a week apart', function(
-      endDate
-    ) {
-      return (
-        !this.parent.category ||
-        !this.parent.category.is_event ||
-        differenceInDays(endDate, this.parent.fromDate) <= 7
-      )
-    })
+    .test(
+      'toDate',
+      'To & from dates cannot be more than a week apart',
+      function(endDate) {
+        return (
+          !this.parent.category ||
+          !this.parent.category.is_event ||
+          differenceInDays(endDate, this.parent.fromDate) <= 7
+        )
+      }
+    )
 })
