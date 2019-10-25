@@ -76,7 +76,11 @@ export class Compose extends React.Component {
 
     const profile = profiles[profileIndex] || profiles[0]
     const areaId =
-      navigation.getParam('areaId') || get(profile, 'area_ids[0]') || null
+      navigation.getParam('areaId') ||
+      get(profile, 'last_posted_nf') ||
+      get(profile, 'home_nf') ||
+      get(profile, 'area_ids[0]') ||
+      null
 
     return (
       <ScreenContainer grey withPadding={false}>
