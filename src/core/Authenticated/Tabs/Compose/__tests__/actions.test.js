@@ -1,5 +1,6 @@
 import { submitPost } from '../actions'
 import { api } from '@common/api'
+import { profile } from '@common/profile'
 import { appMessage } from '@components/AppMessage/slice'
 
 describe('Compose - actions', () => {
@@ -30,20 +31,17 @@ describe('Compose - actions', () => {
     test('calls api.post', async () => {
       const spy = jest.spyOn(api, 'post').mockImplementation(() => ({}))
 
-      await submitPost(onSuccess, { subject: 'Subject' }, setSubmitting)(
-        dispatch,
-        getState
-      )
+      const values = { subject: 'Subject', profile_id: 1, area_ids: [2] }
+      await submitPost(onSuccess, values, setSubmitting)(dispatch, getState)
 
       expect(setSubmitting).toHaveBeenCalledWith(true)
-      expect(spy).toHaveBeenCalledWith(
-        '/users/posts',
-        { subject: 'Subject' },
-        {
-          headers: {
-            Authorization: 'Bearer abc123'
-          }
+      expect(spy).toHaveBeenCalledWith('/users/posts', values, {
+        headers: {
+          Authorization: 'Bearer abc123'
         }
+      })
+      expect(dispatch).toHaveBeenCalledWith(
+        profile.actions.setValueInProfileData({ 1: { last_posted_area_id: 2 } })
       )
       expect(setSubmitting).toHaveBeenCalledWith(false)
       expect(onSuccess).toHaveBeenCalled()

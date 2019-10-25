@@ -51,7 +51,23 @@ export const profile = createSlice({
         ...state.user,
         [payload.key]: payload.value
       }
-    })
+    }),
+    setValueInProfileData: (state, { payload }) => {
+      let updated_profiles = state.user.profiles.map(obj => {
+        return {
+          ...obj,
+          ...payload[obj.id]
+        }
+      })
+
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          profiles: updated_profiles
+        }
+      }
+    }
   },
   extraReducers: {
     [resetAction]: () => ({

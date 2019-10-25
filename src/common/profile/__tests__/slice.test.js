@@ -118,6 +118,47 @@ describe('profile - slice', () => {
     })
   })
 
+  describe('setValueInProfileData', () => {
+    test('updates a single value in the users profile array', () => {
+      let state = profile.reducer(
+        undefined,
+        profile.actions.setUserProfile({
+          id: 1,
+          profiles: [
+            {
+              id: 1
+            }
+          ],
+          name: 'test'
+        })
+      )
+
+      state = profile.reducer(
+        state,
+        profile.actions.setValueInProfileData({
+          1: {
+            foo: 'bar'
+          }
+        })
+      )
+
+      expect(state).toEqual({
+        loading: false,
+        currentProfileId: undefined,
+        user: {
+          id: 1,
+          profiles: [
+            {
+              id: 1,
+              foo: 'bar'
+            }
+          ],
+          name: 'test'
+        }
+      })
+    })
+  })
+
   describe('getProfiles selector', () => {
     test('returns an empty array when there is no property', () => {
       const state = profile.reducer(
