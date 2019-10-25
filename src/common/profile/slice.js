@@ -53,7 +53,6 @@ export const profile = createSlice({
       }
     }),
     setValueInProfileData: (state, { payload }) => {
-      console.log(payload)
       let updated_profiles = state.user.profiles.map(obj => {
         return {
           ...obj,

@@ -41,7 +41,7 @@ describe('Compose - actions', () => {
         }
       })
       expect(dispatch).toHaveBeenCalledWith(
-        profile.actions.setValueInProfileData({ 1: { last_posted_nf: 2 } })
+        profile.actions.setValueInProfileData({ 1: { last_posted_area_id: 2 } })
       )
       expect(setSubmitting).toHaveBeenCalledWith(false)
       expect(onSuccess).toHaveBeenCalled()

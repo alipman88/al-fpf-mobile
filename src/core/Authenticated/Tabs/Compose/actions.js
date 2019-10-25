@@ -19,7 +19,7 @@ export const submitPost = (
     await postAuthorized('/users/posts', values, getState())
     let profile_data = {}
     profile_data[values.profile_id] = {
-      last_posted_nf: values.area_ids[0]
+      last_posted_area_id: values.area_ids[0]
     }
     dispatch(profile.actions.setValueInProfileData(profile_data))
     onSuccess()
