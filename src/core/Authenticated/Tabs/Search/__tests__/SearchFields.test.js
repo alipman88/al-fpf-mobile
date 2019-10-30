@@ -50,25 +50,23 @@ describe('SearchFields', () => {
   test('FiltersToggle changes showAdvanced state', () => {
     const wrapper = shallow(<SearchFields {...defaultProps} />)
 
-    expect(wrapper.find(Multiselect).length).toEqual(0)
-    expect(wrapper.find(FieldWrapper).length).toEqual(0)
-
-    wrapper.find(FiltersToggle).simulate('press')
-    expect(wrapper.state().showAdvanced).toEqual(true)
     expect(wrapper.find(Multiselect).length).toEqual(1)
     expect(wrapper.find(FieldWrapper).length).toEqual(4)
 
     wrapper.find(FiltersToggle).simulate('press')
     expect(wrapper.state().showAdvanced).toEqual(false)
+    expect(wrapper.find(Multiselect).length).toEqual(0)
+    expect(wrapper.find(FieldWrapper).length).toEqual(0)
+
+    wrapper.find(FiltersToggle).simulate('press')
+    expect(wrapper.state().showAdvanced).toEqual(true)
   })
 
   test('Submit hides showAdvanced state', () => {
     const wrapper = shallow(<SearchFields {...defaultProps} />)
 
-    expect(wrapper.find(Multiselect).length).toEqual(0)
-    expect(wrapper.find(FieldWrapper).length).toEqual(0)
-
-    wrapper.setState({ showAdvanced: true })
+    // check that showAdvanced state is true by default
+    expect(wrapper.state().showAdvanced).toEqual(true)
 
     wrapper.find(Button).simulate('press')
     expect(wrapper.state().showAdvanced).toEqual(false)
@@ -187,6 +185,26 @@ describe('SearchFields', () => {
     expect(defaultProps.onClearSearch).toHaveBeenCalled()
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('keyword', false)
     expect(defaultProps.setFieldValue).toHaveBeenCalledWith('keyword', '')
+    expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('category', false)
+    expect(defaultProps.setFieldValue).toHaveBeenCalledWith(
+      'category',
+      null,
+      true
+    )
+    expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('forums', false)
+    expect(defaultProps.setFieldValue).toHaveBeenCalledWith('forums', [], true)
+    expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('fromDate', false)
+    expect(defaultProps.setFieldValue).toHaveBeenCalledWith(
+      'fromDate',
+      startOfDay(subYears(new Date(), 2)),
+      true
+    )
+    expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('toDate', false)
+    expect(defaultProps.setFieldValue).toHaveBeenCalledWith(
+      'toDate',
+      endOfDay(new Date()),
+      true
+    )
   })
 
   test('no keyword does not pass an icon to text field', () => {
