@@ -70,7 +70,7 @@ export class Search extends React.Component {
       })
       .then(({ pagination, results }) => {
         if (values.keyword.trim().length > 0) {
-          this.props.addSearchToHistory(values.keyword)
+          this.props.addSearchToHistory(values)
         }
         this.setState(state => ({
           searched: true,

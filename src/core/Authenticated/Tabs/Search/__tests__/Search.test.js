@@ -137,7 +137,10 @@ describe('Search', () => {
         keyword: 'test'
       })
 
-      expect(defaultProps.addSearchToHistory).toHaveBeenCalledWith('test')
+      expect(defaultProps.addSearchToHistory).toHaveBeenCalledWith({
+        keyword: 'test',
+        forums: []
+      })
       expect(setSubmitting).toHaveBeenCalledTimes(2)
       expect(setSubmitting).toHaveBeenCalledWith(true)
       expect(setSubmitting).toHaveBeenCalledWith(false)

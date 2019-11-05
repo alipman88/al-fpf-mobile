@@ -11,7 +11,9 @@ export const searchHistory = createSlice({
       ...state,
       history: [payload].concat(
         // filter out previous entries of the same value
-        state.history.filter(entry => entry !== payload).slice(0, 4)
+        state.history
+          .filter(entry => entry.keyword !== payload.keyword)
+          .slice(0, 4)
       )
     })
   },

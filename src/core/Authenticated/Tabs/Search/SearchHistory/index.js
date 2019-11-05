@@ -7,4 +7,9 @@ const mapStateToProps = state => ({
   history: searchHistory.selectors.getHistory(state)
 })
 
-export const SearchHistory = connect(mapStateToProps)(SearchHistoryComponent)
+export const SearchHistory = connect(
+  mapStateToProps,
+  {
+    clearSearchHistory: searchHistory.actions.resetAction
+  }
+)(SearchHistoryComponent)

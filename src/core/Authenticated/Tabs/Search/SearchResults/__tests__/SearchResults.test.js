@@ -23,7 +23,12 @@ describe('SearchResults', () => {
     searchResults: [],
     setFieldTouched: jest.fn(),
     setFieldValue: jest.fn(),
-    values: {}
+    values: {
+      forums: [],
+      category: [],
+      fromDate: startOfDay(subYears(new Date(), 2)),
+      toDate: endOfDay(new Date())
+    }
   }
 
   afterEach(() => {
@@ -116,11 +121,18 @@ describe('SearchResults', () => {
     wrapper
       .find(SearchHistory)
       .props()
-      .onEntryPress('my search')
+      .onEntryPress({
+        keyword: 'my search',
+        forums: [],
+        category: [],
+        fromDate: startOfDay(subYears(new Date(), 2)),
+        toDate: endOfDay(new Date())
+      })
 
     expect(defaultProps.search).toHaveBeenCalledWith({
       forums: [],
       keyword: 'my search',
+      category: [],
       fromDate: startOfDay(subYears(new Date(), 2)),
       toDate: endOfDay(new Date())
     })

@@ -30,7 +30,7 @@ import {
 
 export class SearchFields extends React.Component {
   state = {
-    showAdvanced: false
+    showAdvanced: true
   }
 
   constructor(props) {
@@ -129,6 +129,7 @@ export class SearchFields extends React.Component {
             onTapIcon={() => {
               setFieldTouched('keyword', false)
               setFieldValue('keyword', '')
+              this.resetForm()
               this.props.onClearSearch()
             }}
             tapIcon={
