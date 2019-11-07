@@ -3,7 +3,7 @@ import {
   passwordValidation,
   validateFirstName,
   validateLastName,
-  validateEmail
+  validateEmailAvailability
 } from '../validations'
 
 describe('BasicInfo validations', () => {
@@ -110,14 +110,14 @@ describe('BasicInfo validations', () => {
     })
   })
 
-  describe('validateEmail', () => {
+  describe('validateEmailAvailability', () => {
     test('validates by calling check_user_email_availability', async () => {
       const email = 'foo@bar.com'
       const getSpy = jest.spyOn(api, 'get').mockImplementation(() => {
         return Promise.resolve({ data: { available: true } })
       })
 
-      await expect(validateEmail(email)).resolves.toBe(true)
+      await expect(validateEmailAvailability(email)).resolves.toBe(true)
       expect(api.get).toHaveBeenCalledWith('/check_user_email_availability', {
         params: { email: email }
       })
@@ -131,7 +131,7 @@ describe('BasicInfo validations', () => {
         return Promise.resolve({ data: { available: false } })
       })
 
-      await expect(validateEmail(email)).resolves.toBe(false)
+      await expect(validateEmailAvailability(email)).resolves.toBe(false)
       expect(api.get).toHaveBeenCalledWith('/check_user_email_availability', {
         params: { email: email }
       })
@@ -148,10 +148,14 @@ describe('BasicInfo validations', () => {
 
       const thisArg = { options: { context: {} } }
 
-      await expect(validateEmail.call(thisArg, email)).resolves.toBe(true)
-      await expect(validateEmail.call(thisArg, email)).toBe(true)
-      await expect(validateEmail.call(thisArg, email2)).resolves.toBe(true)
-      await expect(validateEmail.call(thisArg, email2)).toBe(true)
+      await expect(
+        validateEmailAvailability.call(thisArg, email)
+      ).resolves.toBe(true)
+      await expect(validateEmailAvailability.call(thisArg, email)).toBe(true)
+      await expect(
+        validateEmailAvailability.call(thisArg, email2)
+      ).resolves.toBe(true)
+      await expect(validateEmailAvailability.call(thisArg, email2)).toBe(true)
 
       expect(api.get).toHaveBeenCalledTimes(2)
 

@@ -7,7 +7,7 @@ import { validations } from './validations'
 export class BasicInfo extends React.Component {
   render() {
     const { navigation, setNewUserByKey, newUser, profileType } = this.props
-    // This context object is used by validateEmail to cache the last API
+    // This context object is used by validateEmailAvailability to cache the last API
     // response that checks for email availability to avoid duplicate repeated
     // requests with each validation.
     const validationContext = {}

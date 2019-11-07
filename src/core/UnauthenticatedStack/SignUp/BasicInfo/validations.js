@@ -1,5 +1,6 @@
 import * as yup from 'yup'
 import { api } from '@common/api'
+import { validateEmail } from '@common/validations'
 
 export const validateFirstName = string => {
   return /^(?=.*[a-zA-Z\u00C0-\u017F])[a-zA-Z\u00C0-\u017F.'"\-,/ ()&]*$/.test(
@@ -21,7 +22,7 @@ export const passwordValidation = password => {
  * Validate that the email address is available.
  * Caches the result for the last email checked in the context object.
  */
-export const validateEmail = function(email) {
+export const validateEmailAvailability = function(email) {
   if (email) {
     const context = this.options ? this.options.context : null
 
@@ -59,7 +60,8 @@ export const validations = yup.object().shape({
     .string()
     .required()
     .trim()
-    .test('email', 'email is already in use', validateEmail),
+    .test('email', 'email must be a valid email', validateEmail)
+    .test('email', 'email is already in use', validateEmailAvailability),
   password: yup
     .string()
     .min(8, 'Password should be at least 8 characters long')
