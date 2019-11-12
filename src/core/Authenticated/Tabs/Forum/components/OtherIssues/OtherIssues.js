@@ -58,17 +58,16 @@ export class OtherIssues extends React.Component {
     const issuesRender = issues
       .map(i => {
         const focused = currentIssueId === i.id
+        const mapScopeThis = this // use mapScopeThis so that we have reference to OtherIssues inside `ref` and `onLayout` calls
         return (
           <View
             key={i.id}
-            ref={
-              focused
-                ? ref => {
-                    this.focusedIssueRef = ref
-                  }
-                : undefined
-            }
-            onLayout={focused ? this.scrollToFocusedIssue : undefined}
+            ref={ref => {
+              if (ref && focused) {
+                mapScopeThis.focusedIssueRef = ref
+              }
+            }}
+            onLayout={focused ? mapScopeThis.scrollToFocusedIssue : undefined}
           >
             <IssueTab
               issue={i}
@@ -84,7 +83,7 @@ export class OtherIssues extends React.Component {
             />
           </View>
         )
-      })
+      }, this)
       .reverse()
 
     return (
