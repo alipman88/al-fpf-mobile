@@ -15,6 +15,9 @@ export const searchHistory = createSlice({
           .filter(entry => entry.keyword !== payload.keyword)
           .slice(0, 4)
       )
+    }),
+    clearSearchHistory: state => ({
+      history: []
     })
   },
   extraReducers: {
