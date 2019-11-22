@@ -44,7 +44,7 @@ export class SearchHistory extends React.Component {
             </React.Fragment>
           ))}
         {this.state.showSearchHistory && history.length > 0 && (
-          <SearchHistoryToggle onPress={clearSearchHistory}>
+          <SearchHistoryToggle onPress={async () => clearSearchHistory()}>
             <SearchHistoryText>Clear Search History</SearchHistoryText>
           </SearchHistoryToggle>
         )}

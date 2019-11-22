@@ -1,4 +1,3 @@
-import { resetAction } from '@common/resetAction'
 import { searchHistory } from '../slice'
 
 describe('searchHistory', () => {
@@ -67,7 +66,10 @@ describe('searchHistory', () => {
         history: [{ keyword: 'hi' }]
       })
 
-      state = searchHistory.reducer(state, resetAction())
+      state = searchHistory.reducer(
+        undefined,
+        searchHistory.actions.clearSearchHistory()
+      )
 
       expect(state).toEqual({
         history: []
