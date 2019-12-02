@@ -2,8 +2,7 @@ import { connect } from 'react-redux'
 
 import { NeighboringContent as NeighboringContentComponent } from './NeighboringContent'
 import { posts } from '@common/posts'
-import { issues } from '@common/issues'
-import { areas } from '@common/areas'
+import { fetchSpecificIssue, issues } from '@common/issues'
 
 const mapStateToProps = state => {
   const currentIssueId = issues.selectors.getCurrentIssueId(state)
@@ -17,6 +16,6 @@ const mapStateToProps = state => {
 export const NeighboringContent = connect(
   mapStateToProps,
   {
-    setCurrentAreaId: areas.actions.setCurrentAreaId
+    fetchSpecificIssue
   }
 )(NeighboringContentComponent)
