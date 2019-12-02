@@ -42,6 +42,10 @@ export class PasswordInput extends React.Component {
         }
         secureTextEntry={!this.state.showPassword}
         onTapIcon={() => this.toggleShowPassword()}
+        autoCapitalize='none'
+        autoCompleteType='password'
+        autoCorrect={false}
+        textContentType='password'
         onChangeText={value => {
           setFieldValue(key, value)
           setFieldTouched(key)
