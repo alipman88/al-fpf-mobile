@@ -9,7 +9,7 @@ describe('NeighboringContent', () => {
   test('if news has empty length, component should render null', () => {
     const wrapper = shallow(
       <NeighboringContent
-        setCurrentAreaId={() => ({})}
+        fetchSpecificIssue={() => ({})}
         newsFromNeighboringNfs={[]}
       />
     )
@@ -18,11 +18,11 @@ describe('NeighboringContent', () => {
   })
 
   test('renders a sub items with news content & press handler', () => {
-    const setCurrentAreaId = jest.fn()
+    const fetchSpecificIssue = jest.fn()
 
     const wrapper = shallow(
       <NeighboringContent
-        setCurrentAreaId={setCurrentAreaId}
+        fetchSpecificIssue={fetchSpecificIssue}
         newsFromNeighboringNfs={[
           {
             area_id: 1,
@@ -50,7 +50,7 @@ describe('NeighboringContent', () => {
     expect(firstRow.find(Link).text()).toEqual('Read posting and 1 more')
 
     firstRow.find(TouchableOpacity).simulate('press')
-    expect(setCurrentAreaId).toHaveBeenCalled()
+    expect(fetchSpecificIssue).toHaveBeenCalled()
 
     const secondRow = wrapper.find(Row).at(1)
     expect(secondRow.find(Link).text()).toEqual('Read posting ')

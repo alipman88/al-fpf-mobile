@@ -323,7 +323,7 @@ export class Forum extends React.Component {
             )}
             {postRender}
             {get(issues, '[0].id', 0) === currentIssueId ? (
-              <NeighboringContent />
+              <NeighboringContent navigation={navigation} />
             ) : null}
           </ForumContainer>
           {get(issues, '[0].id', 0) === currentIssueId ? <OcmMessage /> : null}
