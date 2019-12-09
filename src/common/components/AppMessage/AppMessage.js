@@ -4,7 +4,7 @@ import FlashMessage, { FlashMessageManager } from 'react-native-flash-message'
 
 export class AppMessage extends React.Component {
   componentDidUpdate(prevProps) {
-    if (!prevProps.message && this.props.message) {
+    if (this.props.message && this.props.message !== prevProps.message) {
       const ref = FlashMessageManager.getDefault()
       ref.showMessage({
         message: this.props.message,
