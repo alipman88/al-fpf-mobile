@@ -1,7 +1,7 @@
 import queryString from 'query-string'
 
 export const parseURL = url => {
-  const result = /.*\/-\/frontporchforum.com(.*)/.exec(url)
+  const result = /.*[/.]frontporchforum.com(.*)/.exec(url)
   return result ? result[1] : null
 }
 
