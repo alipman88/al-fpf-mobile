@@ -1,4 +1,4 @@
 import { areas } from './slice'
-import { getAreas } from './actions'
+import { getAreas, resetAreas } from './actions'
 
-export { areas, getAreas }
+export { areas, getAreas, resetAreas }

@@ -27,3 +27,7 @@ export const getAreas = navigation => async (dispatch, getState) => {
     }
   }
 }
+
+export const resetAreas = navigation => async (dispatch, getState) => {
+  dispatch(slice.actions.resetAreas())
+}

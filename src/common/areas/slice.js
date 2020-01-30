@@ -43,6 +43,11 @@ export const areas = createSlice({
         ...state,
         currentAreaId: action.payload
       }
+    },
+    resetAreas: (state, action) => {
+      return {
+        ...initialState
+      }
     }
   },
   extraReducers: {
