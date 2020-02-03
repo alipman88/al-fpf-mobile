@@ -3,17 +3,17 @@ import PropTypes from 'prop-types'
 
 import { Pill, CategoryText } from './styledComponents'
 
-export const PostCategory = ({ children, dark }) => (
-  <Pill dark={dark}>
-    <CategoryText dark={dark}>{children}</CategoryText>
+export const PostCategory = ({ children, labelStyle }) => (
+  <Pill labelStyle={labelStyle}>
+    <CategoryText labelStyle={labelStyle}>{children}</CategoryText>
   </Pill>
 )
 
 PostCategory.propTypes = {
   children: PropTypes.string.isRequired,
-  dark: PropTypes.bool
+  labelStyle: PropTypes.string
 }
 
 PostCategory.defaultProps = {
-  dark: false
+  labelStyle: 'light_grey'
 }

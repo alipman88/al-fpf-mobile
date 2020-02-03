@@ -15,7 +15,7 @@ export const Advertisement = ({ ad, navigateWithToken }) => (
       <TouchableOpacity
         onPress={() => navigateWithToken('/advertise-on-fpf/why-paid-ads')}
       >
-        <PostCategory dark={true}>Paid ad</PostCategory>
+        <PostCategory labelStyle={'dark_grey'}>Paid ad</PostCategory>
       </TouchableOpacity>
       <ContentText>{ad.body}</ContentText>
     </CardContent>
