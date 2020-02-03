@@ -1,14 +1,11 @@
-import { Platform } from 'react-native'
-
 import * as api from '@common/api'
 import { currentUser } from '@common/currentUser'
 
 export const sendNewFCMToken = fcmToken => async (dispatch, getState) => {
   await api.postAuthorized(
-    '/devices',
+    '/app_sessions',
     {
-      fcm_token: fcmToken,
-      device_type: Platform.OS
+      fcm_token: fcmToken
     },
     getState()
   )

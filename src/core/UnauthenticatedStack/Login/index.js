@@ -1,6 +1,5 @@
 import React from 'react'
 import { Linking, TouchableOpacity } from 'react-native'
-import firebase from 'react-native-firebase'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import DeviceInfo from 'react-native-device-info'
@@ -8,10 +7,9 @@ import DeviceInfo from 'react-native-device-info'
 import { Config } from '@common/config'
 import { resendEmail } from '../actions'
 import { KeyboardAwareScrollView } from '@components/KeyboardAwareScrollView'
-import { api } from '@common/api'
-import { currentUser } from '@common/currentUser'
 import { responseError } from '@common/utils/responseError'
 import { Formik } from 'formik'
+import { login } from '@common/session'
 import { validations } from './validations'
 import { ScreenContainer } from '@components/ScreenContainer'
 import { LoginFields } from './LoginFields'
@@ -25,7 +23,7 @@ import {
   Version
 } from './styledComponents'
 
-export const LoginComponent = ({ navigation, setAccessToken, resendEmail }) => {
+export const LoginComponent = ({ navigation, login, resendEmail }) => {
   const grassContent = (
     <BottomContainer>
       <LinksContainer>
@@ -65,9 +63,7 @@ export const LoginComponent = ({ navigation, setAccessToken, resendEmail }) => {
           onSubmit={async (values, actions) => {
             actions.setSubmitting(true)
             try {
-              const response = await api.post('/login', values)
-              setAccessToken(response.data.access_token)
-              firebase.analytics().setAnalyticsCollectionEnabled(true)
+              await login(values)
               navigation.navigate('Authenticated')
             } catch (e) {
               actions.setFieldError('email', responseError(e))
@@ -106,14 +102,14 @@ export const LoginComponent = ({ navigation, setAccessToken, resendEmail }) => {
 
 LoginComponent.propTypes = {
   navigation: PropTypes.object.isRequired,
-  setAccessToken: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
   resendEmail: PropTypes.func.isRequired
 }
 
 export const Login = connect(
   null,
   {
-    setAccessToken: currentUser.actions.setAccessToken,
+    login: login,
     resendEmail: resendEmail
   }
 )(LoginComponent)
