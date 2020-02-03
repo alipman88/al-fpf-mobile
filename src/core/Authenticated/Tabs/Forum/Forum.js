@@ -137,7 +137,7 @@ export class Forum extends React.Component {
         this.props.setCurrentIssueId(0)
         this.scrollPostsToTop()
       }
-      this.props.getIssues(currentAreaId, navigation)
+      this.props.getIssues(currentAreaId, navigation, this.props.setupForumData)
     }
   }
 
@@ -216,7 +216,8 @@ export class Forum extends React.Component {
       parseInt(area_id, 10),
       parseInt(issue_id, 10),
       parseInt(issue_number, 10),
-      this.props.navigation
+      this.props.navigation,
+      this.props.setupForumData
     )
   }
 

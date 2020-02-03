@@ -322,7 +322,8 @@ describe('Forum', () => {
 
       expect(defaultProps.getIssues).toHaveBeenCalledWith(
         defaultProps.currentAreaId,
-        defaultProps.navigation
+        defaultProps.navigation,
+        defaultProps.setupForumData
       )
     })
 
@@ -331,7 +332,8 @@ describe('Forum', () => {
       wrapper.setProps({ currentAreaId: 2 })
       expect(defaultProps.getIssues).toHaveBeenCalledWith(
         2,
-        defaultProps.navigation
+        defaultProps.navigation,
+        defaultProps.setupForumData
       )
     })
 
@@ -459,7 +461,8 @@ describe('Forum', () => {
         5,
         6,
         340,
-        defaultProps.navigation
+        defaultProps.navigation,
+        defaultProps.setupForumData
       )
     })
   })

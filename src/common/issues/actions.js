@@ -8,7 +8,10 @@ import { areas } from '@common/areas'
 import { spinner } from '@app/Spinner/slice'
 import * as commonActions from '@common/actions/navigateWithToken'
 
-export const getIssues = (areaId, navigation) => async (dispatch, getState) => {
+export const getIssues = (areaId, navigation, resetForumAction) => async (
+  dispatch,
+  getState
+) => {
   try {
     dispatch(issues.actions.setLoading(true))
     const response = await getAuthorized(
@@ -32,6 +35,9 @@ export const getIssues = (areaId, navigation) => async (dispatch, getState) => {
       dispatch(resetAction())
       navigation.navigate('SplashScreen')
       navigation.dispatch(createResetStackTo('Login'))
+    } else if (e.response.status === 403 && resetForumAction) {
+      dispatch(areas.actions.resetAreas())
+      dispatch(resetForumAction(navigation))
     }
   } finally {
     dispatch(issues.actions.setLoading(false))
@@ -65,7 +71,8 @@ export const fetchSpecificIssue = (
   areaId,
   issueId,
   issueNumber,
-  navigation
+  navigation,
+  resetForumAction
 ) => async (dispatch, getState) => {
   try {
     dispatch(spinner.actions.setVisibility(true))
@@ -94,6 +101,8 @@ export const fetchSpecificIssue = (
       dispatch(resetAction())
       navigation.navigate('SplashScreen')
       navigation.dispatch(createResetStackTo('Login'))
+    } else if (e.response.status === 403 && resetForumAction) {
+      resetForumAction(navigation)
     }
   } finally {
     dispatch(spinner.actions.setVisibility(false))
