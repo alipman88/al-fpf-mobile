@@ -19,6 +19,7 @@ import { getProducts } from '@common/products'
 import { Container } from './Container'
 import { Offline } from './Offline'
 import { purchaseUpdated, purchaseError } from '@common/purchases'
+import { sendDeviceData } from '@common/session'
 import { subscriptionSkus } from '@common/types/subscriptionSkus'
 
 export class App extends React.Component {
@@ -86,6 +87,7 @@ export class App extends React.Component {
       this.state.appState.match(/inactive|background/) &&
       nextAppState === 'active'
     ) {
+      store.dispatch(sendDeviceData())
       await firebase.notifications().setBadge(0)
     }
 
