@@ -4,9 +4,11 @@ import { Post as PostComponent } from './Post'
 import { areas } from '@common/areas'
 import { fetchSpecificIssue } from '@common/issues'
 import { chooseMailApp } from '@common/mailApp'
+import { appSettings } from '@common/appSettings'
 
 const mapStateToProps = state => ({
-  areasIdMap: areas.selectors.getAreasIdMap(state)
+  areasIdMap: areas.selectors.getAreasIdMap(state),
+  categories: appSettings.selectors.getCategories(state)
 })
 
 export const Post = connect(

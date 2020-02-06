@@ -121,7 +121,9 @@ export class ComposeFields extends React.Component {
       duplicatePost && get(values, 'category.is_event', false)
 
     // Add 'None Apply' category unique to post submission
-    const composeCategories = categories.slice()
+    const composeCategories = categories.slice().filter(category => {
+      return !category.visibility || category.visibility === 'public'
+    })
     composeCategories.push({
       name: 'None Apply',
       id: -1

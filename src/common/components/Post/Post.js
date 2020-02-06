@@ -71,7 +71,8 @@ export class Post extends React.Component {
       onTapCategory,
       moreText,
       navigation,
-      showDatePublished
+      showDatePublished,
+      categories
     } = this.props
 
     const Container = hasBorder ? PostContainerBordered : PostContainer
@@ -189,14 +190,24 @@ export class Post extends React.Component {
             <PostDate>{format(post.date_published, 'MMM DD, YYYY')}</PostDate>
           )}
           <CategoryPosts>
-            {post.categories.map(category => (
-              <TouchableOpacity
-                key={category}
-                onPress={() => onTapCategory(category)}
-              >
-                <PostCategory>{category}</PostCategory>
-              </TouchableOpacity>
-            ))}
+            {categories
+              .filter(category => {
+                return post.categories.includes(category.name)
+              })
+              .map(category => {
+                let categoryName = category.name
+                let labelStyle = category.label_style || 'light_grey'
+                return (
+                  <TouchableOpacity
+                    key={categoryName}
+                    onPress={() => onTapCategory(categoryName)}
+                  >
+                    <PostCategory labelStyle={labelStyle}>
+                      {categoryName}
+                    </PostCategory>
+                  </TouchableOpacity>
+                )
+              })}
           </CategoryPosts>
           <PostBody>
             <Autolink
@@ -236,9 +247,11 @@ Post.propTypes = {
   fetchSpecificIssue: PropTypes.func,
   moreText: PropTypes.string.isRequired,
   navigation: PropTypes.object.isRequired,
-  showDatePublished: PropTypes.bool
+  showDatePublished: PropTypes.bool,
+  categories: PropTypes.array
 }
 
 Post.defaultProps = {
-  onTapCategory: () => {}
+  onTapCategory: () => {},
+  categories: []
 }

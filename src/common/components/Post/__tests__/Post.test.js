@@ -30,6 +30,16 @@ describe('Post', () => {
       categories: ['Lost and found'],
       content: 'This is a longer test that we should render'
     },
+    categories: [
+      {
+        name: 'Lost and found',
+        labelStyle: 'light_grey'
+      },
+      {
+        name: 'Seeking Advice',
+        labelStyle: 'dark_grey'
+      }
+    ],
     hasBorder: false,
     moreText: 'Read',
     postTruncateLength: 200,
