@@ -1,3 +1,3 @@
-import { login } from './actions'
+import { login, sendDeviceData } from './actions'
 
-export { login }
+export { login, sendDeviceData }

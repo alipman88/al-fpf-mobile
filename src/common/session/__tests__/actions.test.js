@@ -1,20 +1,21 @@
 import firebase from 'react-native-firebase'
 
-import { api } from '@common/api'
+import * as api from '@common/api'
 import { currentUser } from '@common/currentUser'
-import { login } from '../actions'
+import { login, sendDeviceData } from '../actions'
 
 describe('session actions', () => {
   const getState = () => ({
     secured: {
       currentUser: {
-        accessToken: 'abc123'
+        accessToken: 'abc123',
+        fcmToken: 'fcm-123'
       }
     }
   })
 
   test('requests /login', async () => {
-    const postSpy = jest.spyOn(api, 'post').mockImplementation(() => ({
+    const postSpy = jest.spyOn(api.api, 'post').mockImplementation(() => ({
       data: {
         access_token: 'token abc',
         token_type: 'Bearer'
@@ -28,7 +29,7 @@ describe('session actions', () => {
       os: 'ios',
       device_name: 'Apple iPhone X',
       device_id: '123abc',
-      fcm_token: undefined
+      fcm_token: 'fcm-123'
     })
 
     expect(dispatch).toHaveBeenCalledWith(
@@ -38,6 +39,30 @@ describe('session actions', () => {
     expect(
       firebase.analytics().setAnalyticsCollectionEnabled
     ).toHaveBeenCalledWith(true)
+
+    postSpy.mockRestore()
+  })
+
+  test('requests /app_sessions', async () => {
+    const postSpy = jest
+      .spyOn(api, 'postAuthorized')
+      .mockImplementation(() => {})
+    const dispatch = jest.fn()
+
+    await sendDeviceData()(dispatch, getState)
+
+    expect(postSpy).toHaveBeenCalledWith(
+      '/app_sessions',
+      {
+        os: 'ios',
+        device_name: 'Apple iPhone X',
+        device_id: '123abc',
+        fcm_token: 'fcm-123'
+      },
+      {
+        secured: { currentUser: { accessToken: 'abc123', fcmToken: 'fcm-123' } }
+      }
+    )
 
     postSpy.mockRestore()
   })
