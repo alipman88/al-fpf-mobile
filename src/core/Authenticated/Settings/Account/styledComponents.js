@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 
-import { Text, TextSemibold } from '@components/Text'
+import { Text } from '@components/Text'
 
 export const Notifications = styled.View`
   background-color: white;
@@ -23,11 +23,6 @@ export const SettingsPair = styled.View`
 `
 
 export const SettingsDescription = styled(Text)`
-  color: #4a4a4a;
-  font-size: 14;
-`
-
-export const SettingsDescriptionBold = styled(TextSemibold)`
   color: #4a4a4a;
   font-size: 14;
 `
