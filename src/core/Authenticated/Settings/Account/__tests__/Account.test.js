@@ -20,9 +20,23 @@ describe('Account', () => {
 
   test('changing the switch should call updateUser', () => {
     const wrapper = shallow(<Account {...defaultProps} />)
-    wrapper.find(Switch).simulate('valueChange', true)
+    wrapper
+      .find(Switch)
+      .at(0)
+      .simulate('valueChange', true)
     expect(defaultProps.updateUser).toHaveBeenCalledWith({
-      receive_push_notifications: true
+      receive_issue_push_notifications: true
+    })
+  })
+
+  test('changing the switch should call updateUser', () => {
+    const wrapper = shallow(<Account {...defaultProps} />)
+    wrapper
+      .find(Switch)
+      .at(1)
+      .simulate('valueChange', true)
+    expect(defaultProps.updateUser).toHaveBeenCalledWith({
+      receive_issue_emails: true
     })
   })
 

@@ -76,13 +76,15 @@ describe('profile - actions', () => {
                   id: 33
                 }
               ],
-              receive_push_notifications: true
+              receive_issue_emails: false,
+              receive_issue_push_notifications: true
             }
           }
         }))
 
       const values = {
-        receive_push_notifications: true
+        receive_issue_emails: false,
+        receive_issue_push_notifications: true
       }
       await updateUser(values)(dispatch, () => ({}))
 
@@ -91,7 +93,13 @@ describe('profile - actions', () => {
       expect(dispatch).toHaveBeenCalledWith(profile.actions.setLoading(false))
       expect(dispatch).toHaveBeenCalledWith(
         profile.actions.setValueInUserData({
-          key: 'receive_push_notifications',
+          key: 'receive_issue_emails',
+          value: false
+        })
+      )
+      expect(dispatch).toHaveBeenCalledWith(
+        profile.actions.setValueInUserData({
+          key: 'receive_issue_push_notifications',
           value: true
         })
       )
@@ -103,7 +111,8 @@ describe('profile - actions', () => {
               id: 33
             }
           ],
-          receive_push_notifications: true
+          receive_issue_emails: false,
+          receive_issue_push_notifications: true
         })
       )
       putSpy.mockRestore()
@@ -117,7 +126,7 @@ describe('profile - actions', () => {
       const dispatch = jest.fn()
 
       const values = {
-        receive_push_notifications: true
+        receive_issue_push_notifications: true
       }
       await updateUser(values)(dispatch, () => ({}))
 

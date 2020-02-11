@@ -17,7 +17,6 @@ import {
   CloseAccountText,
   Notifications,
   SettingsDescription,
-  SettingsDescriptionBold,
   SettingsLabel,
   SettingsPair,
   LinkContainer
@@ -44,38 +43,55 @@ export class Account extends React.Component {
           <Field>
             <FieldText>{user.email}</FieldText>
           </Field>
+
+          <ExternalLink hasBorder onPress={() => navigateWithToken('/user')}>
+            Edit account details
+          </ExternalLink>
+
           <FieldLabel>Notifications</FieldLabel>
           <Notifications>
             <SettingsPair>
-              <SettingsLabel>Receive Notifications</SettingsLabel>
+              <SettingsLabel>Receive Newsletter Notifications</SettingsLabel>
               <Switch
                 onValueChange={value =>
-                  updateUser({ receive_push_notifications: value })
+                  updateUser({ receive_issue_push_notifications: value })
                 }
                 trackColor={{
                   false: 'red',
                   true: 'green'
                 }}
                 ios_backgroundColor='red'
-                value={user.receive_push_notifications}
+                value={user.receive_issue_push_notifications}
               />
             </SettingsPair>
             <SettingsDescription>
-              Turn this on to be notified about each new issue of your
+              Turn this on to get mobile notifications about each new issue of
+              your neighborhood forum.{' '}
+            </SettingsDescription>
+            <SettingsPair>
+              <SettingsLabel>Receive Newsletter Emails</SettingsLabel>
+              <Switch
+                onValueChange={value =>
+                  updateUser({ receive_issue_emails: value })
+                }
+                trackColor={{
+                  false: 'red',
+                  true: 'green'
+                }}
+                ios_backgroundColor='red'
+                value={user.receive_issue_emails}
+              />
+            </SettingsPair>
+            <SettingsDescription>
+              Turn this on to get emails with each new issue of your
               neighborhood forum.{' '}
-              <SettingsDescriptionBold>
-                This will not affect your email newsletter settings.
-              </SettingsDescriptionBold>
             </SettingsDescription>
           </Notifications>
 
-          <ExternalLink hasBorder onPress={() => navigateWithToken('/user')}>
-            Edit account details
-          </ExternalLink>
           <ExternalLink
             onPress={() => navigateWithToken('/user/subscriptions')}
           >
-            Manage my email subscriptions
+            Manage my subscriptions
           </ExternalLink>
           <LinkContainer>
             <TouchableOpacity onPress={() => navigateWithToken('/user')}>
