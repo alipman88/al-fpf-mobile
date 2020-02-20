@@ -27,7 +27,7 @@ export const ButtonWrapper = styled.View`
 
 export const ButtonHint = styled(Text)`
   margin-top: 4;
-  font-size: 16;
+  font-size: 12;
   text-align: center;
 `
 
