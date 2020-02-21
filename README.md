@@ -88,6 +88,69 @@ Then:
 yarn android
 ```
 
+
+## Deploy
+
+### Staging deployment
+
+1. Merge `master` to `staging`
+2. In [App Center](https://appcenter.ms/), open the iOS and Android FPF apps,
+  and do the following for each
+    - https://appcenter.ms/orgs/Front-Porch-Forum/apps/Front-Porch-Forum-Android
+    - https://appcenter.ms/orgs/Front-Porch-Forum/apps/Front-Porch-Forum-iOS
+3. Switch to the Build tab
+4. Select the staging branch
+5. Click the Build Now button and wait for the build to complete successfully,
+  which takes around 10-15 minutes for each app
+6. Switch to the Distribute tab
+7. Click on the new release
+8. Click the three dot icon, then Edit release
+9. Enter release notes that specify what stories are included in this release,
+  then save
+10. People should be automatically notified of the new release based on
+  distribution groups
+
+### Production deployment
+1. Update the version number in the following files and commit:
+    - fpf-mobile/ios/FrontPorchForum/Info.plist
+    - fpf-mobile/ios/FrontPorchForum-tvOS/Info.plist
+    - fpf-mobile/ios/FrontPorchForum-tvOSTests/Info.plist
+    - fpf-mobile/ios/FrontPorchForumTests/Info.plist
+    - fpf-mobile/android/app/build.gradle
+2. Merge `staging` to `production` (which will require a non-fast forward merge
+  because the production branch includes details that can't be merged to staging)
+3. Merge `staging` to `master`
+4. In [App Center](https://appcenter.ms/), open the iOS and Android FPF apps,
+  and do the following for each:
+5. Switch to the Build tab
+6. Select the production branch
+7. Click the Build Now button and wait for the build to complete successfully
+8. Click the Distribute button, then "Store", then the appropriate store, then Next
+    - "Production (Google Play)" for Android
+    - "Production (App Store)" for iOS
+9. Enter release notes
+10. Click the Distribute button.  After a few moments, you should see a success
+  notification and a link to view the status, which should go from "processing"
+  to "submitted".
+11. Wait while the stores process the new releases, which may take a few hours
+  to a few days.  Note that in iTunes Connect the build will take some time to
+  be processed, and then the new app version will automatically be submitted
+  for review.  Check the status on the developer site or the app page:
+    - [Google Play Console](https://play.google.com/apps/publish/?account=7669883795652962257#AppDashboardPlace:p=com.frontporchforum&appid=4973842490929321153)
+    - [Google Play Store](https://play.google.com/store/apps/details?id=com.frontporchforum)
+    - [iTunes Connect](https://appstoreconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1458651656)
+    - [iOS App Store](https://apps.apple.com/us/app/front-porch-forum/id1458651656)
+12. Tag the release:
+
+        `git tag -a v1.2.3 -m "1.2.3 release"`
+        `git push --tags`
+
+13. Update the Pivotal Tracker release story's release date and finish the release
+14. Add the `released` label to stories in Pivotal Tracker that have the released
+  version's label
+15. Post release notes to Slack
+
+
 ## Xcode workspace
 
 To open the app in Xcode, only open the workspace file at `ios/FrontPorchForum.xcworkspace`,
