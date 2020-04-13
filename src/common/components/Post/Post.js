@@ -153,8 +153,8 @@ export class Post extends React.Component {
     return (
       <Container key={post.id}>
         <PostBodyContainer hasBorder={hasBorder}>
-          <PostHeader>{post.title}</PostHeader>
-          <PostAuthor>
+          <PostHeader selectable={true}>{post.title}</PostHeader>
+          <PostAuthor selectable={true}>
             {postInfo}
             {showIssueData ? ' - ' : ''}
             {post.user_first_name} {post.user_last_name} -{' '}
@@ -209,7 +209,7 @@ export class Post extends React.Component {
                 )
               })}
           </CategoryPosts>
-          <PostBody>
+          <PostBody selectable={true}>
             <Autolink
               text={truncateText(
                 post.content,
