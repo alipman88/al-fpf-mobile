@@ -6,6 +6,7 @@ const initialState = {
   sharedPostsByIssue: {},
   headlinesByIssue: {},
   adsByIssue: {},
+  placementDateByIssue: {},
   newsFromNeighboringNfsByIssue: {},
   ocmMessageByIssue: {},
   loading: false
@@ -21,7 +22,7 @@ export const posts = createSlice({
       ...state,
       loading: action.payload
     }),
-    setPostsForIssue: (state, { payload }) => ({
+    setContentsForIssue: (state, { payload }) => ({
       ...state,
       postsByIssue: {
         ...state.postsByIssue,
@@ -39,6 +40,10 @@ export const posts = createSlice({
         ...state.adsByIssue,
         [payload.issueId]: payload.ads
       },
+      placementDateByIssue: {
+        ...state.placementDateByIssue,
+        [payload.issueId]: payload.placementDate
+      },
       newsFromNeighboringNfsByIssue: {
         ...state.newsFromNeighboringNfsByIssue,
         [payload.issueId]: payload.newsFromNeighboringNfs
@@ -46,6 +51,18 @@ export const posts = createSlice({
       ocmMessageByIssue: {
         ...state.ocmMessageByIssue,
         [payload.issueId]: payload.ocmMessage
+      },
+      loading: false
+    }),
+    setAdsForIssue: (state, { payload }) => ({
+      ...state,
+      adsByIssue: {
+        ...state.adsByIssue,
+        [payload.issueId]: payload.ads
+      },
+      placementDateByIssue: {
+        ...state.placementDateByIssue,
+        [payload.issueId]: payload.placementDate
       },
       loading: false
     })
@@ -76,6 +93,10 @@ posts.selectors = {
   getAdsByIssue: createSelector(
     [path],
     posts => posts.adsByIssue
+  ),
+  getPlacementDateByIssue: createSelector(
+    [path],
+    posts => posts.placementDateByIssue
   ),
   getLoading: createSelector(
     [path],

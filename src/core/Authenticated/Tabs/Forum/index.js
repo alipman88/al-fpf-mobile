@@ -3,7 +3,7 @@ import { Forum as ForumComponent } from './Forum'
 import { currentUser } from '@common/currentUser'
 import { areas } from '@common/areas'
 import { getIssues, issues, fetchSpecificIssue } from '@common/issues'
-import { getPosts, posts } from '@common/posts'
+import { getContents, posts } from '@common/posts'
 import { setupForumData } from './setupForumData.js'
 import { navigateWithToken } from '@common/actions/navigateWithToken'
 
@@ -18,8 +18,8 @@ const mapStateToProps = state => {
     currentIssueId: issues.selectors.getCurrentIssueId(state),
     issues: issues.selectors.getIssuesForArea(state, areaId),
     posts: posts.selectors.getPostsByIssue(state),
-    sharedPosts: posts.selectors.getSharedPostsByIssue(state),
     ads: posts.selectors.getAdsByIssue(state),
+    sharedPosts: posts.selectors.getSharedPostsByIssue(state),
     accessToken: currentUser.selectors.getAccessToken(state),
     fcmToken: currentUser.selectors.getFCMToken(state),
     loading:
@@ -34,7 +34,7 @@ export const Forum = connect(
   {
     fetchSpecificIssue,
     getIssues,
-    getPosts,
+    getContents,
     setAccessToken: currentUser.actions.setAccessToken,
     setupForumData,
     sendNewFCMToken,

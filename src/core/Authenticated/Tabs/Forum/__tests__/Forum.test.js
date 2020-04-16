@@ -23,7 +23,8 @@ describe('Forum', () => {
     issues: [{ id: 12 }, { id: 13 }],
     areas: [{ id: 1, name: 'Sparta' }, { id: 2, name: 'Athena' }],
     getIssues: jest.fn(),
-    getPosts: jest.fn(),
+    getContents: jest.fn(),
+    getAds: jest.fn(),
     setCurrentIssueId: jest.fn(),
     setCurrentAreaId: jest.fn(),
     fetchSpecificIssue: jest.fn(),
@@ -91,7 +92,7 @@ describe('Forum', () => {
     defaultProps.setupForumData.mockReset()
     defaultProps.sendNewFCMToken.mockReset()
     defaultProps.getIssues.mockReset()
-    defaultProps.getPosts.mockReset()
+    defaultProps.getContents.mockReset()
     defaultProps.setCurrentIssueId.mockReset()
     defaultProps.setCurrentAreaId.mockReset()
     defaultProps.navigation.setParams.mockReset()
@@ -356,7 +357,7 @@ describe('Forum', () => {
     test('if currentIssueId changes, get posts', () => {
       const wrapper = shallow(<Forum {...defaultProps} />)
       wrapper.setProps({ currentIssueId: 45 })
-      expect(defaultProps.getPosts).toHaveBeenCalledWith(
+      expect(defaultProps.getContents).toHaveBeenCalledWith(
         45,
         defaultProps.navigation
       )

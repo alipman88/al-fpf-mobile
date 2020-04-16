@@ -1,4 +1,4 @@
 import { posts } from './slice'
-import { getPosts } from './actions'
+import { getContents } from './actions'
 
-export { posts, getPosts }
+export { posts, getContents }

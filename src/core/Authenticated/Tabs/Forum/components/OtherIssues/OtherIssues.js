@@ -18,7 +18,6 @@ export class OtherIssues extends React.Component {
 
   onTapIssue = id => {
     this.props.setCurrentIssueId(id)
-    this.props.getPosts(id, this.props.navigation)
     if (this.props.issues.find(issue => issue.id === id).isUnread) {
       this.props.toggleIssueUnread({
         id: id,
@@ -101,7 +100,6 @@ OtherIssues.propTypes = {
   issues: PropTypes.array.isRequired,
   currentIssueId: PropTypes.number.isRequired,
   currentAreaId: PropTypes.number.isRequired,
-  getPosts: PropTypes.func.isRequired,
   setCurrentIssueId: PropTypes.func.isRequired,
   toast: PropTypes.shape({ current: PropTypes.instanceOf(Toast) }).isRequired,
   toggleIssueUnread: PropTypes.func.isRequired,
