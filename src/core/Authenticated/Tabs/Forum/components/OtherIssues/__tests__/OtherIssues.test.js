@@ -16,7 +16,6 @@ describe('OtherIssues selector', () => {
     ],
     currentIssueId: 1,
     currentAreaId: 1,
-    getPosts: jest.fn(),
     setCurrentIssueId: jest.fn(),
     toggleIssueUnread: jest.fn(),
     navigation: {
@@ -42,9 +41,5 @@ describe('OtherIssues selector', () => {
       .onTapIssue(4)
 
     expect(defaultProps.setCurrentIssueId).toHaveBeenCalledWith(4)
-    expect(defaultProps.getPosts).toHaveBeenCalledWith(
-      4,
-      defaultProps.navigation
-    )
   })
 })

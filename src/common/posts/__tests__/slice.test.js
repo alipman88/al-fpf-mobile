@@ -7,6 +7,7 @@ describe('posts - slice', () => {
       headlinesByIssue: {},
       postsByIssue: {},
       adsByIssue: {},
+      placementDateByIssue: {},
       sharedPostsByIssue: {},
       loading: false,
       newsFromNeighboringNfsByIssue: {},
@@ -14,7 +15,7 @@ describe('posts - slice', () => {
     })
   })
 
-  describe('setPostsForIssue', () => {
+  describe('setContentsForIssue', () => {
     test('setLoading sets loading state', () => {
       const state = posts.reducer(undefined, posts.actions.setLoading(true))
 
@@ -32,7 +33,7 @@ describe('posts - slice', () => {
 
       state = posts.reducer(
         state,
-        posts.actions.setPostsForIssue({
+        posts.actions.setContentsForIssue({
           issueId: 1,
           posts: [
             {
@@ -43,11 +44,6 @@ describe('posts - slice', () => {
             }
           ],
           headlines: ['An interesting headline'],
-          ads: [
-            {
-              id: 5
-            }
-          ],
           newsFromNeighboringNfs: [
             {
               area_name: 'Other Area'
@@ -83,20 +79,6 @@ describe('posts - slice', () => {
         1: ['An interesting headline']
       })
 
-      data = posts.selectors.getAdsByIssue({
-        main: {
-          posts: state
-        }
-      })
-
-      expect(data).toEqual({
-        1: [
-          {
-            id: 5
-          }
-        ]
-      })
-
       data = posts.selectors.getNewsFromNeighboringNfsByIssue({
         main: {
           posts: state
@@ -107,6 +89,64 @@ describe('posts - slice', () => {
         1: [
           {
             area_name: 'Other Area'
+          }
+        ]
+      })
+
+      expect(
+        posts.selectors.getLoading({
+          main: {
+            posts: state
+          }
+        })
+      ).toEqual(false)
+    })
+  })
+
+  describe('setAdsForIssue', () => {
+    test('setLoading sets loading state', () => {
+      const state = posts.reducer(undefined, posts.actions.setLoading(true))
+
+      expect(
+        posts.selectors.getLoading({
+          main: {
+            posts: state
+          }
+        })
+      ).toEqual(true)
+    })
+
+    test('sets ads by issue number', () => {
+      let state = posts.reducer(undefined, posts.actions.setLoading(true))
+
+      state = posts.reducer(
+        state,
+        posts.actions.setAdsForIssue({
+          issueId: 1,
+          ads: [
+            {
+              id: 1
+            },
+            {
+              id: 2
+            }
+          ]
+        })
+      )
+
+      let data = posts.selectors.getAdsByIssue({
+        main: {
+          posts: state
+        }
+      })
+
+      expect(data).toEqual({
+        1: [
+          {
+            id: 1
+          },
+          {
+            id: 2
           }
         ]
       })

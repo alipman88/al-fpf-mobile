@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import { areas } from '@common/areas'
 import { issues } from '@common/issues'
-import { getPosts } from '@common/posts'
 import { OtherIssues as OtherIssuesComponent } from './OtherIssues'
 
 const mapStateToProps = state => {
@@ -17,7 +16,6 @@ export const OtherIssues = connect(
   mapStateToProps,
   {
     setCurrentIssueId: issues.actions.setCurrentIssueId,
-    toggleIssueUnread: issues.actions.toggleIssueUnread,
-    getPosts
+    toggleIssueUnread: issues.actions.toggleIssueUnread
   }
 )(OtherIssuesComponent)

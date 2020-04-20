@@ -183,7 +183,7 @@ export class Forum extends React.Component {
     ) {
       // scroll to top any time we're rendering a different issue
       this.scrollPostsToTop()
-      this.props.getPosts(this.props.currentIssueId, this.props.navigation)
+      this.props.getContents(this.props.currentIssueId, this.props.navigation)
       this.props.toggleIssueUnread({
         id: this.props.currentIssueId,
         isUnread: false,
@@ -343,7 +343,7 @@ Forum.propTypes = {
   currentIssueId: PropTypes.number.isRequired,
   fcmToken: PropTypes.string,
   fetchSpecificIssue: PropTypes.func.isRequired,
-  getPosts: PropTypes.func.isRequired,
+  getContents: PropTypes.func.isRequired,
   getIssues: PropTypes.func.isRequired,
   issues: PropTypes.array.isRequired,
   loading: PropTypes.bool,

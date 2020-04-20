@@ -8,7 +8,7 @@ jest.mock('@common/issues', () => ({
 }))
 
 jest.mock('@common/posts', () => ({
-  getPosts: jest.fn().mockReturnValue('getPosts')
+  getContents: jest.fn().mockReturnValue('getContents')
 }))
 
 jest.mock('@common/profile', () => ({
