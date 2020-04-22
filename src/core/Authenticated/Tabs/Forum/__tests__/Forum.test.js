@@ -5,6 +5,7 @@ import { ForumContainer } from '../styledComponents'
 import { shallow } from 'enzyme'
 import { Forum } from '../Forum'
 import { ForumPost } from '../components/ForumPost'
+import { ForumMessage } from '../components/ForumMessage'
 import { NeighboringContent } from '../components/NeighboringContent'
 
 describe('Forum', () => {
@@ -20,7 +21,7 @@ describe('Forum', () => {
     sendNewFCMToken: jest.fn(),
     currentIssueId: 12,
     currentAreaId: 1,
-    issues: [{ id: 12 }, { id: 13 }],
+    issues: [{ id: 11 }, { id: 12 }, { id: 13 }],
     areas: [{ id: 1, name: 'Sparta' }, { id: 2, name: 'Athena' }],
     getIssues: jest.fn(),
     getContents: jest.fn(),
@@ -232,13 +233,23 @@ describe('Forum', () => {
   })
 
   test('it renders neighboring content', () => {
-    const wrapper = shallow(<Forum {...defaultProps} />)
+    const wrapper = shallow(<Forum {...defaultProps} currentIssueId={11} />)
     expect(wrapper.find(NeighboringContent).length).toEqual(1)
   })
 
   test('doesnt render neighboring content if not latest issue', () => {
-    const wrapper = shallow(<Forum {...defaultProps} currentIssueId={13} />)
+    const wrapper = shallow(<Forum {...defaultProps} />)
     expect(wrapper.find(NeighboringContent).length).toEqual(0)
+  })
+
+  test('it renders forum message', () => {
+    const wrapper = shallow(<Forum {...defaultProps} currentIssueId={11} />)
+    expect(wrapper.find(ForumMessage).length).toEqual(1)
+  })
+
+  test('doesnt render forum message if not latest issue', () => {
+    const wrapper = shallow(<Forum {...defaultProps} />)
+    expect(wrapper.find(ForumMessage).length).toEqual(0)
   })
 
   test('it sets the title as the current area name', () => {
@@ -267,7 +278,7 @@ describe('Forum', () => {
       }
     }
 
-    expect(children.length).toEqual(9)
+    expect(children.length).toEqual(8)
   })
 
   test('one post, 3 ads, renders 1 followed by 3 ads', () => {
@@ -280,7 +291,7 @@ describe('Forum', () => {
     expect(children.at(3).name()).toEqual('Advertisement')
     expect(children.at(4).name()).toEqual('Advertisement')
 
-    expect(children.length).toEqual(6)
+    expect(children.length).toEqual(5)
   })
 
   test('shared posts integrate with the regular posts & ads', () => {
@@ -307,7 +318,7 @@ describe('Forum', () => {
     expect(children.at(2).props().post.is_shared_post).toEqual(true)
     expect(children.at(4).props().post.is_shared_post).toEqual(true)
 
-    expect(children.length).toEqual(8)
+    expect(children.length).toEqual(7)
   })
 
   describe('componentDidUpdate', () => {

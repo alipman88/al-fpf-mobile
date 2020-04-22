@@ -11,7 +11,8 @@ describe('posts - slice', () => {
       sharedPostsByIssue: {},
       loading: false,
       newsFromNeighboringNfsByIssue: {},
-      ocmMessageByIssue: {}
+      ocmMessageByIssue: {},
+      forumMessageByIssue: {}
     })
   })
 

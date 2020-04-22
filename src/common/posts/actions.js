@@ -61,7 +61,8 @@ const getAllContents = (issue, navigation) => async (dispatch, getState) => {
       headlines,
       ads,
       news_from_neighboring_nfs,
-      ocm_message
+      ocm_message,
+      forum_message
     } = response.data
 
     dispatch(
@@ -73,7 +74,8 @@ const getAllContents = (issue, navigation) => async (dispatch, getState) => {
         ads,
         placementDate: endOfDay(new Date()),
         newsFromNeighboringNfs: news_from_neighboring_nfs,
-        ocmMessage: ocm_message
+        ocmMessage: ocm_message,
+        forumMessage: forum_message
       })
     )
   } catch (e) {

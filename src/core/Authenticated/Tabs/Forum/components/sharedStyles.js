@@ -2,12 +2,23 @@ import styled from 'styled-components/native'
 
 import { Text } from '@components/Text'
 
+export const Card = styled.View`
+  flex: 1;
+  border-color: #ebecf1;
+  border-width: 1;
+  border-radius: 5;
+  justify-content: space-between;
+  background-color: #fff;
+  margin-bottom: 10;
+`
+
 export const Header = styled(Text)`
   font-size: 22;
   font-weight: bold;
   color: #355768;
   margin-bottom: 10;
 `
+
 export const CardContent = styled.View`
   padding: 16px;
 `

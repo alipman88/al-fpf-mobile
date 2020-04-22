@@ -5,8 +5,7 @@ import IconEvil from 'react-native-vector-icons/EvilIcons'
 
 import { Button } from '@components/Button'
 import { PostCategory } from '@components/PostCategory'
-import { Card } from './styledComponents'
-import { CardContent, ContentText, Header, Bottom } from '../sharedStyles'
+import { Card, CardContent, ContentText, Header, Bottom } from '../sharedStyles'
 
 export const Advertisement = ({ ad, navigateWithToken }) => (
   <Card>

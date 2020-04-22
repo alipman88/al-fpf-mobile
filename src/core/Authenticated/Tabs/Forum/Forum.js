@@ -18,7 +18,7 @@ import { Advertisement } from './components/Advertisement'
 import { InThisIssue } from './components/InThisIssue'
 import { OtherIssues } from './components/OtherIssues'
 import { NeighboringContent } from './components/NeighboringContent'
-import { OcmMessage } from './components/OcmMessage'
+import { ForumMessage } from './components/ForumMessage'
 
 import { createChannel, displayNotification } from '@common/notifications'
 
@@ -322,12 +322,14 @@ export class Forum extends React.Component {
                 navigation={navigation}
               />
             )}
+            {get(issues, '[0].id', 0) === currentIssueId ? (
+              <ForumMessage />
+            ) : null}
             {postRender}
             {get(issues, '[0].id', 0) === currentIssueId ? (
               <NeighboringContent navigation={navigation} />
             ) : null}
           </ForumContainer>
-          {get(issues, '[0].id', 0) === currentIssueId ? <OcmMessage /> : null}
         </ScrollView>
         <Toast ref={this.toastRef} position='top' style={{ zIndex: 1000 }} />
       </ScreenContainer>

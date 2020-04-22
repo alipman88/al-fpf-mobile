@@ -1,14 +1,14 @@
 import { connect } from 'react-redux'
 
-import { OcmMessage as OcmMessageComponent } from './OcmMessage'
+import { ForumMessage as ForumMessageComponent } from './ForumMessage'
 import { posts } from '@common/posts'
 import { issues } from '@common/issues'
 
 const mapStateToProps = state => {
   const currentIssueId = issues.selectors.getCurrentIssueId(state)
   return {
-    ocmMessage: posts.selectors.getOcmMessageByIssue(state)[currentIssueId]
+    forumMessage: posts.selectors.getForumMessageByIssue(state)[currentIssueId]
   }
 }
 
-export const OcmMessage = connect(mapStateToProps)(OcmMessageComponent)
+export const ForumMessage = connect(mapStateToProps)(ForumMessageComponent)
