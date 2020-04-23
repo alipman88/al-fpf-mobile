@@ -1,19 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-import { Pill, CategoryText } from './styledComponents'
+import { PostCategory as PostCategoryComponent } from './PostCategory'
+import { appSettings } from '@common/appSettings'
 
-export const PostCategory = ({ children, labelStyle }) => (
-  <Pill labelStyle={labelStyle}>
-    <CategoryText labelStyle={labelStyle}>{children}</CategoryText>
-  </Pill>
-)
+const mapStateToProps = state => ({
+  labelStyles: appSettings.selectors.getLabelStyles(state)
+})
 
-PostCategory.propTypes = {
-  children: PropTypes.string.isRequired,
-  labelStyle: PropTypes.string
-}
-
-PostCategory.defaultProps = {
-  labelStyle: 'light_grey'
-}
+export const PostCategory = connect(mapStateToProps)(PostCategoryComponent)

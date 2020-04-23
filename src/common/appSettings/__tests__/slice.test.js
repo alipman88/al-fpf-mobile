@@ -8,6 +8,7 @@ describe('appSettings - slice', () => {
       searchPostTruncateLength: 1000,
       categories: [],
       businessCategories: {},
+      labelStyles: {},
       onboardingProfilePlans: [],
       governmentTitles: [],
       loading: false,
@@ -31,6 +32,11 @@ describe('appSettings - slice', () => {
           ],
           business_categories: {
             Animals: [['Pet Shop', 1], ['Animal rescue', 2]]
+          },
+          label_styles: {
+            light_grey: {
+              background: '#000000'
+            }
           }
         })
       )
@@ -53,6 +59,11 @@ describe('appSettings - slice', () => {
         ],
         businessCategories: {
           Animals: [['Pet Shop', 1], ['Animal rescue', 2]]
+        },
+        labelStyles: {
+          light_grey: {
+            background: '#000000'
+          }
         },
         loading: false,
         loaded: true

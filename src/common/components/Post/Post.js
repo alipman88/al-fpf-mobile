@@ -196,13 +196,12 @@ export class Post extends React.Component {
               })
               .map(category => {
                 let categoryName = category.name
-                let labelStyle = category.label_style || 'light_grey'
                 return (
                   <TouchableOpacity
                     key={categoryName}
                     onPress={() => onTapCategory(categoryName)}
                   >
-                    <PostCategory labelStyle={labelStyle}>
+                    <PostCategory labelStyle={category.label_style}>
                       {categoryName}
                     </PostCategory>
                   </TouchableOpacity>

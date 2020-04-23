@@ -8,7 +8,8 @@ import { appSettings } from '@common/appSettings'
 
 const mapStateToProps = state => ({
   areasIdMap: areas.selectors.getAreasIdMap(state),
-  categories: appSettings.selectors.getCategories(state)
+  categories: appSettings.selectors.getCategories(state),
+  labelStyles: appSettings.selectors.getLabelStyles(state)
 })
 
 export const Post = connect(

@@ -7,6 +7,7 @@ export const appSettings = createSlice({
     searchPostTruncateLength: 1000,
     categories: [],
     businessCategories: {},
+    labelStyles: {},
     onboardingProfilePlans: [],
     governmentTitles: [],
     loading: false,
@@ -20,6 +21,7 @@ export const appSettings = createSlice({
       searchPostTruncateLength: payload.search_posting_truncate_length,
       categories: payload.categories,
       businessCategories: payload.business_categories,
+      labelStyles: payload.label_styles,
       onboardingProfilePlans: payload.onboarding_profile_plans,
       governmentTitles: payload.official_titles,
       loaded: true
@@ -60,6 +62,11 @@ appSettings.selectors = {
           })
         }
       })
+  ),
+
+  getLabelStyles: createSelector(
+    [path],
+    appSettings => appSettings.labelStyles
   ),
 
   getGovernmentTitles: createSelector(
