@@ -9,6 +9,7 @@ const initialState = {
   placementDateByIssue: {},
   newsFromNeighboringNfsByIssue: {},
   ocmMessageByIssue: {},
+  forumMessageByIssue: {},
   loading: false
 }
 
@@ -51,6 +52,10 @@ export const posts = createSlice({
       ocmMessageByIssue: {
         ...state.ocmMessageByIssue,
         [payload.issueId]: payload.ocmMessage
+      },
+      forumMessageByIssue: {
+        ...state.forumMessageByIssue,
+        [payload.issueId]: payload.forumMessage
       },
       loading: false
     }),
@@ -109,5 +114,9 @@ posts.selectors = {
   getOcmMessageByIssue: createSelector(
     [path],
     posts => posts.ocmMessageByIssue || {}
+  ),
+  getForumMessageByIssue: createSelector(
+    [path],
+    posts => posts.forumMessageByIssue || {}
   )
 }
