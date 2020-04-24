@@ -12,7 +12,8 @@ describe('Search', () => {
     categories: [],
     search: jest.fn(),
     navigation: {
-      getParam: jest.fn()
+      getParam: jest.fn(),
+      setParams: jest.fn()
     },
     setAppError: jest.fn()
   }
@@ -25,7 +26,8 @@ describe('Search', () => {
   test('it prepopulates cateogry when passed through navigation params', () => {
     const categoryName = 'Lost and Found'
     const navigation = {
-      getParam: jest.fn(() => categoryName)
+      getParam: jest.fn(() => categoryName),
+      setParams: jest.fn()
     }
     const categories = [
       { id: 1, name: categoryName },
@@ -46,7 +48,8 @@ describe('Search', () => {
 
     wrapper.setProps({
       navigation: {
-        getParam: jest.fn(() => 'Another Category')
+        getParam: jest.fn(() => 'Another Category'),
+        setParams: jest.fn()
       }
     })
 

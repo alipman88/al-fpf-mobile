@@ -19,6 +19,40 @@ import moreDefault from '@assets/images/global-assets/main-navigation/more-defau
 import searchActive from '@assets/images/global-assets/main-navigation/search-active.png'
 import searchDefault from '@assets/images/global-assets/main-navigation/search-default.png'
 
+// When someone is on the Forum screen we would like to scroll them back to the
+// top when they press the Forum tab again (and same with the Search screen). In order
+// to do this we must expose a reference to the ScrollView and a scroll function to the navigator.
+// This is Adapted from https://medium.com/@dblazeski/react-navigation-call-screen-method-on-tab-bar-press-or-focus-5b93d844e18e
+// with a standard interface scrollRef and scrollToTop. These are defined inside the components on mount and update.
+//
+// This appears to be default behavior in react-navigation 5.x: https://reactnavigation.org/docs/bottom-tab-navigator#tabpress
+// We should upgrade at some point: See #172505832 and https://reactnavigation.org/docs/upgrading-from-4.x
+const scrollTopIfFocused = ({ navigation, defaultHandler }) => {
+  if (navigation && navigation.isFocused()) {
+    const screenParams = getScreenRegisteredParams(navigation.state)
+
+    if (screenParams && typeof screenParams.scrollToTop === 'function') {
+      screenParams.scrollToTop(screenParams.scrollRef)
+    }
+  }
+
+  defaultHandler()
+}
+
+const getScreenRegisteredParams = navState => {
+  // When we use stack navigators.
+  // Also needed for react-navigation@2
+  const { routes, index, params } = navState
+
+  if (navState.hasOwnProperty('index')) {
+    return getScreenRegisteredParams(routes[index])
+  }
+  // When we have the final screen params
+  else {
+    return params
+  }
+}
+
 export const Tabs = createBottomTabNavigator(
   {
     Forum: {
@@ -32,7 +66,8 @@ export const Tabs = createBottomTabNavigator(
         /* eslint-disable-next-line react/prop-types */
         tabBarIcon: ({ focused }) => (
           <NavIcon source={focused ? homeActive : homeDefault} />
-        )
+        ),
+        tabBarOnPress: scrollTopIfFocused
       })
     },
     Compose: {
@@ -59,7 +94,8 @@ export const Tabs = createBottomTabNavigator(
         /* eslint-disable-next-line react/prop-types */
         tabBarIcon: ({ focused }) => (
           <NavIcon source={focused ? searchActive : searchDefault} />
-        )
+        ),
+        tabBarOnPress: scrollTopIfFocused
       })
     },
     More: {
