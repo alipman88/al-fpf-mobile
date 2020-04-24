@@ -16,6 +16,11 @@ import { SearchFields } from './SearchFields'
 import { SearchResults } from './SearchResults'
 
 export class Search extends React.Component {
+  constructor(props) {
+    super(props)
+    this.searchViewRef = React.createRef()
+  }
+
   state = {
     categoryFromLink: null,
     loading: false,
@@ -39,6 +44,11 @@ export class Search extends React.Component {
   componentDidMount() {
     const { navigation } = this.props
 
+    // Set scrollToTop function in navigation params to trigger scroll in tab navigator
+    this.props.navigation.setParams({
+      scrollToTop: this.scrollToTop
+    })
+
     this.setCategoryFromLink(navigation.getParam('category'))
   }
 
@@ -47,6 +57,19 @@ export class Search extends React.Component {
     const categoryNameFromState = get(this.state.categoryFromLink, 'name')
     if (categoryParam !== categoryNameFromState) {
       this.setCategoryFromLink(categoryParam)
+    }
+    // Set the current searchViewRef on navigation so we can trigger scrolling from events
+    // on the tab navigator
+    if (this.searchViewRef !== this.props.navigation.getParam('scrollRef')) {
+      this.props.navigation.setParams({
+        scrollRef: this.searchViewRef
+      })
+    }
+  }
+
+  scrollToTop(ref, animated = true) {
+    if (ref.current) {
+      ref.current.scrollTo({ y: 0, animated: animated })
     }
   }
 
@@ -132,6 +155,7 @@ export class Search extends React.Component {
             <ScrollView
               contentContainerStyle={{ minHeight: '100%' }}
               keyboardShouldPersistTaps='handled'
+              ref={this.searchViewRef}
             >
               <SearchFields
                 areas={areas}

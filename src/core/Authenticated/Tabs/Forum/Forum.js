@@ -32,6 +32,11 @@ export class Forum extends React.Component {
   async componentDidMount() {
     AppState.addEventListener('change', this.handleAppStateChange)
 
+    // Set scrollToTop function in navigation params to trigger scroll in tab navigator
+    this.props.navigation.setParams({
+      scrollToTop: this.scrollToTop
+    })
+
     this.setTitleFromArea()
 
     const fcmToken = await firebase.messaging().getToken()
@@ -207,6 +212,13 @@ export class Forum extends React.Component {
     this.checkNavParams()
     this.fetchIssues(prevProps)
     this.fetchPosts(prevProps)
+    // Set the current forumViewRef on navigation so we can trigger scrolling from events
+    // on the tab navigator
+    if (this.forumViewRef !== this.props.navigation.getParam('scrollRef')) {
+      this.props.navigation.setParams({
+        scrollRef: this.forumViewRef
+      })
+    }
   }
 
   handleNotificationOpen(notificationOpen) {
@@ -224,9 +236,13 @@ export class Forum extends React.Component {
   scrollPostsToTop() {
     if (this.forumViewRef.current) {
       // using set timeout to ensure the code doesn't run until rendering is finished
-      setTimeout(() =>
-        this.forumViewRef.current.scrollTo({ y: 0, animated: false })
-      )
+      setTimeout(() => this.scrollToTop(this.forumViewRef, false))
+    }
+  }
+
+  scrollToTop(ref, animated = true) {
+    if (ref.current) {
+      ref.current.scrollTo({ y: 0, animated: animated })
     }
   }
 
