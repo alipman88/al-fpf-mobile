@@ -6,7 +6,7 @@ import { Config } from '@common/config'
 let rollbar
 
 try {
-  const version = `${DeviceInfo.getVersion()} (build ${DeviceInfo.getBuildNumber()})`
+  const version = DeviceInfo.getBuildNumber()
 
   const rollbarConfig = new Configuration(Config.ROLLBAR_API_KEY, {
     enabled: !['development', 'test'].includes(Config.ENVIRONMENT),
