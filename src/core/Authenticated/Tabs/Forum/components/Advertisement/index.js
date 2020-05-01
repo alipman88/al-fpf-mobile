@@ -16,11 +16,12 @@ export const Advertisement = ({ ad, navigateWithToken }) => (
       >
         <PostCategory labelStyle={'dark_grey'}>Paid ad</PostCategory>
       </TouchableOpacity>
-      <ContentText>{ad.body}</ContentText>
+      <ContentText selectable={true}>{ad.body}</ContentText>
     </CardContent>
     <Bottom>
       <Button color='#fff' onPress={() => Linking.openURL(ad.url)} fullWidth>
-        {ad.link_text || 'Visit'} <IconEvil color='#fff' name='external-link' size={18} />
+        {ad.link_text || 'Visit'}{' '}
+        <IconEvil color='#fff' name='external-link' size={18} />
       </Button>
     </Bottom>
   </Card>
