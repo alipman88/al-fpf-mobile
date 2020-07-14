@@ -48,10 +48,10 @@ export class Account extends React.Component {
             Edit account details
           </ExternalLink>
 
-          <FieldLabel>Notifications</FieldLabel>
+          <FieldLabel>Notifications and Email</FieldLabel>
           <Notifications>
             <SettingsPair>
-              <SettingsLabel>Receive Newsletter Notifications</SettingsLabel>
+              <SettingsLabel>Mobile Forum Notifications</SettingsLabel>
               <Switch
                 onValueChange={value =>
                   updateUser({ receive_issue_push_notifications: value })
@@ -65,11 +65,11 @@ export class Account extends React.Component {
               />
             </SettingsPair>
             <SettingsDescription>
-              Turn this on to get mobile notifications about each new issue of
-              your neighborhood forum.{' '}
+              Turn on to get a notification about each new issue of your local
+              forum when it arrives in this mobile app.{' '}
             </SettingsDescription>
             <SettingsPair>
-              <SettingsLabel>Receive Newsletter Emails</SettingsLabel>
+              <SettingsLabel>Email Forum</SettingsLabel>
               <Switch
                 onValueChange={value =>
                   updateUser({ receive_issue_emails: value })
@@ -83,8 +83,7 @@ export class Account extends React.Component {
               />
             </SettingsPair>
             <SettingsDescription>
-              Turn this on to get emails with each new issue of your
-              neighborhood forum.{' '}
+              Turn on to receive each new issue of your local forum via email.{' '}
             </SettingsDescription>
           </Notifications>
 
