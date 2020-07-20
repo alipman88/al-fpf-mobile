@@ -26,4 +26,32 @@ describe('responseError', () => {
     }
     expect(responseError(error)).toEqual('Request failed')
   })
+
+  test('returns down-for-maintenance message', () => {
+    const error = new Error('boom')
+    error.response = {
+      status: 503,
+      headers: {
+        'x-maintenance-mode': 'on'
+      }
+    }
+    expect(responseError(error)).toEqual(
+      'Front Porch Forum is temporarily down for maintenance'
+    )
+  })
+
+  test('returns service unavailable message', () => {
+    const error = new Error('boom')
+    error.response = {
+      status: 503
+    }
+    expect(responseError(error)).toEqual(
+      'Front Porch Forum is currently unavailable'
+    )
+  })
+
+  test('returns appropriate error if no response', () => {
+    const error = new Error('No response')
+    expect(responseError(error)).toEqual('No response')
+  })
 })
