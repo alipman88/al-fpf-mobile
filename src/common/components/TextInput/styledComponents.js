@@ -6,7 +6,9 @@ export const StyledTextInput = styled.TextInput`
   border-radius: 5;
   border-width: 1;
   border-color: ${({ hasError }) => (hasError ? '#dc4558' : '#d5dde1')};
-  background-color: ${({ hasError }) => (hasError ? '#ffebeb' : '#fff')};
+  background-color: #fff;
+  ${({ hasError }) => hasError && 'background-color: #ffebeb;'}
+  ${({ editable }) => !editable && 'background-color: #e8e9f2;'}
   padding-right: 4;
   padding-left: ${({ hasForwardIcon }) => (hasForwardIcon ? 30 : 4)}
   ${({ multiline }) =>

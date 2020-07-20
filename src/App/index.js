@@ -20,6 +20,7 @@ import { Container } from './Container'
 import { Offline } from './Offline'
 import { purchaseUpdated, purchaseError } from '@common/purchases'
 import { sendDeviceData } from '@common/session'
+import { getProfiles } from '@common/profile'
 import { subscriptionSkus } from '@common/types/subscriptionSkus'
 
 export class App extends React.Component {
@@ -88,6 +89,7 @@ export class App extends React.Component {
       nextAppState === 'active'
     ) {
       store.dispatch(sendDeviceData())
+      store.dispatch(getProfiles())
       await firebase.notifications().setBadge(0)
     }
 

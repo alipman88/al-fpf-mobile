@@ -12,6 +12,7 @@ const Wrapper = styled.TouchableOpacity`
   width: ${({ width }) => width || 'auto'};
   ${({ tall }) => tall && 'padding-vertical: 20;'}
   ${({ fullWidth }) => fullWidth && 'width: 100%;'}
+  ${({ disabled }) => disabled && 'opacity: 0.5;'}
 `
 
 export const Button = ({

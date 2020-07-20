@@ -6,6 +6,7 @@ import { Multiselect } from '@components/Multiselect'
 import { Checkbox } from '@components/Checkbox'
 import { TextInput } from '@components/TextInput'
 import { Select } from '@components/Select'
+import { FormError } from '@components/FormError'
 
 describe('Compose', () => {
   const defaultProps = {
@@ -143,6 +144,73 @@ describe('Compose', () => {
       return prevVal
     }, false)
     expect(hasProfile).toBe(false)
+  })
+
+  test('notifies user if no active profiles', () => {
+    const wrapper = shallow(<ComposeFields {...defaultProps} profiles={[]} />)
+
+    expect(
+      wrapper
+        .find(FormError)
+        .children()
+        .text()
+    ).toEqual('You will not be able to submit without any active profiles.')
+  })
+
+  test('notifies user if no posting access on any profile', () => {
+    const readOnlyProfiles = [
+      {
+        id: 1,
+        area_ids: [1],
+        access: 'read_only'
+      },
+      {
+        id: 2,
+        area_ids: [2, 3],
+        access: 'read_only'
+      }
+    ]
+
+    const wrapper = shallow(
+      <ComposeFields {...defaultProps} profiles={readOnlyProfiles} />
+    )
+
+    expect(
+      wrapper
+        .find(FormError)
+        .children()
+        .text()
+    ).toEqual('You have no profiles with access to submit postings.')
+  })
+
+  test('notifies user if no posting access on selected profile', () => {
+    const mixedAccessProfiles = [
+      {
+        id: 1,
+        area_ids: [1],
+        access: 'owner'
+      },
+      {
+        id: 2,
+        area_ids: [2, 3],
+        access: 'read_only'
+      }
+    ]
+
+    const wrapper = shallow(
+      <ComposeFields
+        {...defaultProps}
+        profiles={mixedAccessProfiles}
+        values={{ profile: 1 }}
+      />
+    )
+
+    expect(
+      wrapper
+        .find(FormError)
+        .children()
+        .text()
+    ).toEqual('You do not have access to submit postings through this profile.')
   })
 
   test('with using other profile id, multi select forums renders', () => {
