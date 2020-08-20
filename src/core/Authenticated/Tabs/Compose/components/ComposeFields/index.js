@@ -137,15 +137,25 @@ export class ComposeFields extends React.Component {
       categoryValue = null
     }
 
+    let errorMessage
+
+    if (profiles.length === 0) {
+      errorMessage =
+        'You will not be able to submit without any active profiles.'
+    } else if (profiles.filter(p => p.access !== 'read_only').length === 0) {
+      errorMessage = 'You have no profiles with access to submit postings.'
+    } else if (profiles[values.profile]?.access === 'read_only') {
+      errorMessage =
+        'You do not have access to submit postings through this profile.'
+    }
+
     return (
       <KeyboardAwareScrollView>
         <Spinner visible={loading || isSubmitting} />
         <FormContainer>
-          {profiles.length === 0 && (
+          {errorMessage && (
             <FieldWrapper>
-              <FormError>
-                You will not be able to submit without any active profiles.
-              </FormError>
+              <FormError>{errorMessage}</FormError>
             </FieldWrapper>
           )}
           {profiles.length > 1 && (
@@ -244,6 +254,7 @@ export class ComposeFields extends React.Component {
               label='Subject'
               maxLength={256}
               inputRef={this.subjectRef}
+              editable={!errorMessage}
             />
           </FieldWrapper>
           {get(values.category, 'is_event', false) && (
@@ -269,6 +280,7 @@ export class ComposeFields extends React.Component {
                 placeholder='Type the body of your posting here'
                 inputRef={this.messageRef}
                 multiline
+                editable={!errorMessage}
               />
             </FieldWrapper>
           )}
@@ -287,7 +299,7 @@ export class ComposeFields extends React.Component {
             </Checkbox>
           )}
           <ButtonSpacer />
-          <Button onPress={this.handleSubmit}>
+          <Button onPress={this.handleSubmit} disabled={!!errorMessage}>
             {isDuplicateEvent ? 'Done' : 'Submit posting'}
           </Button>
         </ButtonContainer>

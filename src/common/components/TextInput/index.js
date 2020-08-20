@@ -26,6 +26,7 @@ export class TextInput extends React.Component {
       required,
       tapIcon,
       touched,
+      editable,
       ...other
     } = this.props
 
@@ -53,6 +54,7 @@ export class TextInput extends React.Component {
             hasForwardIcon={Boolean(forwardIcon)}
             placeholderTextColor='#c5c5c5'
             ref={inputRef}
+            editable={editable}
           />
           {Boolean(forwardIcon) && <ForwardIcon>{forwardIcon}</ForwardIcon>}
           {Boolean(tapIcon) && (
@@ -77,11 +79,13 @@ TextInput.propTypes = {
   nextField: PropTypes.object,
   onTapIcon: PropTypes.func,
   touched: PropTypes.bool,
+  editable: PropTypes.bool,
   required: PropTypes.bool
 }
 
 TextInput.defaultProps = {
   keyboardType: 'default',
   nextField: null,
+  editable: true,
   secureTextEntry: false
 }
