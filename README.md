@@ -188,3 +188,37 @@ Try to avoid using default exports. While default exports can be useful, across 
 ## Styling
 
 We're using [Styled Components](https://www.styled-components.com/) to do component styling. Since React Native styling is not cascading, it means that to apply `font-family: Helvetica` for example, every text node that needs to have that font, needs to declare that style. It does not get inherited from the parent. To get around the duplication, one can use https://www.styled-components.com/docs/basics#extending-styles to create a component with a base style, then extend it as needed for different sizes & colours.
+
+## Misc iOS tips
+
+### Notifications
+
+iOS Notifications may be pushed from the command line using the xcrun utility.
+
+Save the following JSON to an `alert.json` file in the project's root directory:
+
+```
+{
+  "aps" : {
+    "alert" : {
+      "title" : "New Winooski FPF issue available!",
+      "body" : "Testing... 1 2 3"
+    },
+    "badge" : 1
+  }
+}
+```
+
+Then, run `xcrun simctl push booted com.FrontPorchForum.FrontPorchForum alert.json`
+
+(`com.FrontPorchForum.FrontPorchForum`) is our application bundle ID.
+
+### Adding iOS devices & versions
+
+If you need to test a specific device / iOS versions, e.g. ("iPhone 6 running iOS 12.4"):
+
+1. Open XCode and select "Devices and Simulators" from the "Window" menu.
+2. Select the "Simulator" tab.
+3. Click the plus icon at the lower left corner.
+4. Select "Download more simulator runtimes..." from the "OS Version" menu, and install the desired OS version.
+5. Once downloaded, return to the "Simulator" tab and add the desired device/iOS version pair. You should now be able to boot it via a command like `yarn ios --simulator="iPhone 6 (12.4)"`.
