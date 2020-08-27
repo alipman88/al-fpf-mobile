@@ -6,6 +6,8 @@ export const subscriptionSkus = Platform.select({
     'standard_business_monthly',
     'standard_business_yearly',
     'enhanced_business_monthly',
-    'enhanced_business_yearly'
+    'enhanced_business_yearly',
+    'standard_government_monthly',
+    'standard_government_yearly'
   ]
 })

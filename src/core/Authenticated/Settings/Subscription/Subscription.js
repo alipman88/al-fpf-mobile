@@ -70,12 +70,12 @@ export class Subscription extends React.Component {
 
     let content
 
-    if (hasSubscription) {
-      const profilePlan = profile.profile_plan
+    const profilePlan = profile.profile_plan
 
+    if (hasSubscription) {
       content = (
         <PageWrapper>
-          <Title>Business / Nonprofit Plan</Title>
+          <Title>{profilePlan.name} Plan</Title>
 
           {/* prettier-ignore */}
           <Description>
@@ -84,51 +84,79 @@ export class Subscription extends React.Component {
           </Description>
         </PageWrapper>
       )
-    } else {
+    } else if (profilePlan.has_upgrades) {
+      let paymentOptions
+      if (profilePlan.plan_type === 'business') {
+        paymentOptions = (
+          <>
+            <Title>Business / Nonprofit Plan</Title>
+
+            <Description>
+              Upgrade to FPF Enhanced Business Access Plan to receive these
+              benefits:
+            </Description>
+
+            <Description>
+              • Ability to post on your local FPF up to 12 times/year
+            </Description>
+            <Description>
+              • Enhanced listing in FPF Business Directory
+            </Description>
+            <Description>
+              • Featured listing in your neighborhood Forum
+            </Description>
+
+            {products
+              .filter(product =>
+                product.productId.startsWith('enhanced_business_')
+              )
+              .map(product => this.subscriptionButton(product))}
+
+            <Description>
+              Upgrade to FPF Standard Business Access Plan to receive these
+              benefits:
+            </Description>
+
+            <Description>
+              • Ability to post on your local FPF up to 12 times/year
+            </Description>
+            <Description>
+              • Enhanced listing in FPF Business Directory
+            </Description>
+
+            {products
+              .filter(product =>
+                product.productId.startsWith('standard_business_')
+              )
+              .map(product => this.subscriptionButton(product))}
+          </>
+        )
+      } else if (profilePlan.plan_type === 'government') {
+        paymentOptions = (
+          <>
+            <Title>Government Plan</Title>
+
+            <Description>
+              Upgrade to FPF Standard Government Access Plan to receive these
+              benefits:
+            </Description>
+            <Description>
+              • Ability to post on your local FPF up to 12 times/year
+            </Description>
+
+            {products
+              .filter(product =>
+                product.productId.startsWith('standard_government_')
+              )
+              .map(product => this.subscriptionButton(product))}
+          </>
+        )
+      }
       content = (
         <PageWrapper>
           <Spinner visible={purchasing} />
 
-          <Title>Business / Nonprofit Plan</Title>
-
-          <Description>
-            Upgrade to FPF Enhanced Business Access Plan to receive these
-            benefits:
-          </Description>
-
-          <Description>
-            • Ability to post on your local FPF up to 12 times/year
-          </Description>
-          <Description>
-            • Enhanced listing in FPF Business Directory
-          </Description>
-          <Description>
-            • Featured listing in your neighborhood Forum
-          </Description>
-
-          {products
-            .filter(product =>
-              product.productId.startsWith('enhanced_business_')
-            )
-            .map(product => this.subscriptionButton(product))}
-
-          <Description>
-            Upgrade to FPF Standard Business Access Plan to receive these
-            benefits:
-          </Description>
-
-          <Description>
-            • Ability to post on your local FPF up to 12 times/year
-          </Description>
-          <Description>
-            • Enhanced listing in FPF Business Directory
-          </Description>
-
-          {products
-            .filter(product =>
-              product.productId.startsWith('standard_business_')
-            )
-            .map(product => this.subscriptionButton(product))}
+          {paymentOptions}
 
           <HelpText>
             Payment will be charged to your Apple ID account at the confirmation
@@ -148,6 +176,12 @@ export class Subscription extends React.Component {
             content='Privacy Policy'
             onPress={() => navigateWithToken('/privacy-policy')}
           />
+        </PageWrapper>
+      )
+    } else {
+      content = (
+        <PageWrapper>
+          <Title>No upgrades available</Title>
         </PageWrapper>
       )
     }

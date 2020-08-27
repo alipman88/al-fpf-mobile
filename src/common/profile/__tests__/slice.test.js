@@ -318,8 +318,16 @@ describe('profile - slice', () => {
         profile.actions.setUserProfile({
           id: 1,
           profiles: [
-            { id: 5, approved: true, profile_plan: { plan_type: 'neighbor' } },
-            { id: 6, approved: true, profile_plan: { plan_type: 'business' } },
+            {
+              id: 5,
+              approved: true,
+              profile_plan: { plan_type: 'neighbor', has_upgrades: false }
+            },
+            {
+              id: 6,
+              approved: true,
+              profile_plan: { plan_type: 'business', has_upgrades: true }
+            },
             {
               id: 7,
               approved: true,

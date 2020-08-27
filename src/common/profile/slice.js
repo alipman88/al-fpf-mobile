@@ -139,7 +139,7 @@ const getSubscriptionState = createSelector(
       const canSubscribe =
         !hasSubscription &&
         !userHasAppleSubscription &&
-        get(profile, 'profile_plan.plan_type') === 'business'
+        get(profile, 'profile_plan.has_upgrades')
 
       data[profile.id] = {
         canSubscribe,
