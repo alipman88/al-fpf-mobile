@@ -92,18 +92,43 @@ export class Subscription extends React.Component {
           <Title>Business / Nonprofit Plan</Title>
 
           <Description>
+            Upgrade to FPF Enhanced Business Access Plan to receive these
+            benefits:
+          </Description>
+
+          <Description>
+            • Ability to post on your local FPF up to 12 times/year
+          </Description>
+          <Description>
+            • Enhanced listing in FPF Business Directory
+          </Description>
+          <Description>
+            • Featured listing in your neighborhood Forum
+          </Description>
+
+          {products
+            .filter(product =>
+              product.productId.startsWith('enhanced_business_')
+            )
+            .map(product => this.subscriptionButton(product))}
+
+          <Description>
             Upgrade to FPF Standard Business Access Plan to receive these
             benefits:
           </Description>
 
           <Description>
-            • Enhanced listing in FPF Business Directory
-          </Description>
-          <Description>
             • Ability to post on your local FPF up to 12 times/year
           </Description>
+          <Description>
+            • Enhanced listing in FPF Business Directory
+          </Description>
 
-          {products.map(product => this.subscriptionButton(product))}
+          {products
+            .filter(product =>
+              product.productId.startsWith('standard_business_')
+            )
+            .map(product => this.subscriptionButton(product))}
 
           <HelpText>
             Payment will be charged to your Apple ID account at the confirmation
