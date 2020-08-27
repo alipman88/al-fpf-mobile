@@ -18,8 +18,9 @@ describe('Subscription', () => {
       profile_plan: {
         id: 1,
         name: 'Business/ nonprofit',
-        plan_type: 'neighbor',
-        tier: 'standard'
+        plan_type: 'business',
+        tier: 'standard',
+        has_upgrades: true
       },
       home_nf: 1,
       name: 'foo'
@@ -36,6 +37,22 @@ describe('Subscription', () => {
       {
         productId: 'standard_business_yearly',
         title: 'Standard Business (Yearly)',
+        localizedPrice: '$95.99',
+        subscriptionPeriodUnitIOS: 'YEAR',
+        price: '95.99',
+        currency: 'USD'
+      },
+      {
+        productId: 'standard_government_monthly',
+        title: 'Standard government (Monthly)',
+        localizedPrice: '$8.99',
+        subscriptionPeriodUnitIOS: 'MONTH',
+        price: '7.99',
+        currency: 'USD'
+      },
+      {
+        productId: 'standard_government_yearly',
+        title: 'Standard government (Yearly)',
         localizedPrice: '$95.99',
         subscriptionPeriodUnitIOS: 'YEAR',
         price: '95.99',
