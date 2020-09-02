@@ -141,12 +141,56 @@ export class Subscription extends React.Component {
               benefits:
             </Description>
             <Description>
-              • Ability to post on your local FPF up to 12 times/year
+              • Ability to post on your local FPF up to 10 times/month
             </Description>
 
             {products
               .filter(product =>
                 product.productId.startsWith('standard_government_')
+              )
+              .map(product => this.subscriptionButton(product))}
+          </>
+        )
+      } else if (profilePlan.plan_type === 'nonprofit') {
+        paymentOptions = (
+          <>
+            <Title>Nonprofit Plan</Title>
+
+            <Description>
+              Upgrade to FPF Enhanced Nonprofit Access Plan to receive these
+              benefits:
+            </Description>
+
+            <Description>
+              • Ability to post on your local FPF up to 24 times/year
+            </Description>
+            <Description>
+              • Enhanced listing in FPF Business Directory
+            </Description>
+            <Description>
+              • Featured listing in your neighborhood Forum
+            </Description>
+
+            {products
+              .filter(product =>
+                product.productId.startsWith('enhanced_nonprofit_')
+              )
+              .map(product => this.subscriptionButton(product))}
+
+            <Description>
+              Upgrade to FPF Standard Nonprofit Access Plan to receive these
+              benefits:
+            </Description>
+            <Description>
+              • Ability to post on your local FPF up to 24 times/year
+            </Description>
+            <Description>
+              • Enhanced listing in FPF Business Directory
+            </Description>
+
+            {products
+              .filter(product =>
+                product.productId.startsWith('standard_nonprofit_')
               )
               .map(product => this.subscriptionButton(product))}
           </>
