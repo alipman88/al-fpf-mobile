@@ -68,7 +68,7 @@ export class BusinessInfoFields extends React.Component {
           <Spinner visible={loading} />
           <FormHeader>
             To help people learn more about your business through your listing
-            in FPF's Business Directory, please complete the following fields:
+            in FPF's Directory, please complete the following fields:
           </FormHeader>
           <FormFieldsWrapper>
             <FieldWrapper>
