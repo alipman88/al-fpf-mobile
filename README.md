@@ -39,7 +39,7 @@ highly recommended you install it for better performance.
 Install npm packages:
 
 ```
-yarn install
+yarn install --frozen-lockfile
 ```
 
 Install pods (which are specified in `ios/Podfile`):

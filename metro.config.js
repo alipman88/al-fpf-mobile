@@ -8,7 +8,6 @@ module.exports = {
   transformer: {
     getTransformOptions: async () => ({
       transform: {
-        // TODO(NMH): set these to true?
         experimentalImportSupport: false,
         inlineRequires: false,
       },
