@@ -99,9 +99,7 @@ export class Subscription extends React.Component {
             <Description>
               • Ability to post on your local FPF up to 12 times/year
             </Description>
-            <Description>
-              • Enhanced listing in FPF Business Directory
-            </Description>
+            <Description>• Enhanced listing in FPF Directory</Description>
             <Description>
               • Featured listing in your neighborhood Forum
             </Description>
@@ -120,9 +118,7 @@ export class Subscription extends React.Component {
             <Description>
               • Ability to post on your local FPF up to 12 times/year
             </Description>
-            <Description>
-              • Enhanced listing in FPF Business Directory
-            </Description>
+            <Description>• Enhanced listing in FPF Directory</Description>
 
             {products
               .filter(product =>
@@ -164,9 +160,7 @@ export class Subscription extends React.Component {
             <Description>
               • Ability to post on your local FPF up to 24 times/year
             </Description>
-            <Description>
-              • Enhanced listing in FPF Business Directory
-            </Description>
+            <Description>• Enhanced listing in FPF Directory</Description>
             <Description>
               • Featured listing in your neighborhood Forum
             </Description>
@@ -184,9 +178,7 @@ export class Subscription extends React.Component {
             <Description>
               • Ability to post on your local FPF up to 24 times/year
             </Description>
-            <Description>
-              • Enhanced listing in FPF Business Directory
-            </Description>
+            <Description>• Enhanced listing in FPF Directory</Description>
 
             {products
               .filter(product =>

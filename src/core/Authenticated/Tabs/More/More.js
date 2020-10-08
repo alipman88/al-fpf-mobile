@@ -40,14 +40,14 @@ export class More extends React.Component {
               <CenterImgContainer>
                 <CardIcon source={businessDirectoryIcon} />
               </CenterImgContainer>
-              <CardTitle>Business Directory</CardTitle>
+              <CardTitle>Directory</CardTitle>
               <CardContent>
                 Search 10,000 local businesses and nonprofits that participate
                 on Front Porch Forum.
               </CardContent>
               <CenterImgContainer>
                 <ExternalLink
-                  content='See business directory'
+                  content='See directory'
                   onPress={() => navigateWithToken('/business_directories')}
                 />
               </CenterImgContainer>
