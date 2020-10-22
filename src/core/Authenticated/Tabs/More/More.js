@@ -17,7 +17,6 @@ import {
   FooterLink,
   FooterText
 } from './styledComponents'
-import businessDirectoryIcon from '@assets/images/more-section/business-directory-icon.png'
 import calendarIcon from '@assets/images/more-section/calendar-icon.png'
 import donateIcon from '@assets/images/more-section/donate-icon.png'
 import openBookIcon from '@assets/images/more-section/open-book-icon.png'
@@ -35,23 +34,6 @@ export class More extends React.Component {
             <PageHeader>
               Check out additional services and features from FPF below!
             </PageHeader>
-
-            <Card>
-              <CenterImgContainer>
-                <CardIcon source={businessDirectoryIcon} />
-              </CenterImgContainer>
-              <CardTitle>Directory</CardTitle>
-              <CardContent>
-                Search 10,000 local businesses and nonprofits that participate
-                on Front Porch Forum.
-              </CardContent>
-              <CenterImgContainer>
-                <ExternalLink
-                  content='See directory'
-                  onPress={() => navigateWithToken('/business_directories')}
-                />
-              </CenterImgContainer>
-            </Card>
 
             <Card>
               <CenterImgContainer>
