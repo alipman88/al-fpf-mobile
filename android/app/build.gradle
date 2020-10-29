@@ -213,6 +213,7 @@ dependencies {
         implementation jscFlavor
     }
 
+    implementation 'com.google.android.gms:play-services-base:17.5.0'
     implementation "com.google.firebase:firebase-core:16.0.9"
     implementation "com.google.firebase:firebase-messaging:18.0.0"
     implementation 'me.leolin:ShortcutBadger:1.1.21@aar'
