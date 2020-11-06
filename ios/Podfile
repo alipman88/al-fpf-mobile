@@ -43,4 +43,6 @@ target 'FrontPorchForum' do
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
   use_native_modules!
+  pod 'react-native-webview', :path => '../node_modules/react-native-webview'
+
 end
