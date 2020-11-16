@@ -6,12 +6,15 @@ import { Compose } from './Compose'
 import { Forum } from './Forum'
 import { More } from './More'
 import { Search } from './Search'
+import { Directory } from './Directory'
 
 import { NavIcon } from './NavIcon'
 import { NavLabel } from './NavLabel'
 
 import composeActive from '@assets/images/global-assets/main-navigation/compose-active.png'
 import composeDefault from '@assets/images/global-assets/main-navigation/compose-default.png'
+import directoryActive from '@assets/images/global-assets/main-navigation/directory-active.png'
+import directoryDefault from '@assets/images/global-assets/main-navigation/directory-default.png'
 import homeActive from '@assets/images/global-assets/main-navigation/home-active.png'
 import homeDefault from '@assets/images/global-assets/main-navigation/home-default.png'
 import moreActive from '@assets/images/global-assets/main-navigation/more-active.png'
@@ -96,6 +99,19 @@ export const Tabs = createBottomTabNavigator(
           <NavIcon source={focused ? searchActive : searchDefault} />
         ),
         tabBarOnPress: scrollTopIfFocused
+      })
+    },
+    Directory: {
+      screen: Directory,
+      navigationOptions: () => ({
+        /* eslint-disable-next-line react/prop-types */
+        tabBarLabel: ({ focused }) => (
+          <NavLabel focused={focused}>Directory</NavLabel>
+        ),
+        /* eslint-disable-next-line react/prop-types */
+        tabBarIcon: ({ focused }) => (
+          <NavIcon source={focused ? directoryActive : directoryDefault} />
+        )
       })
     },
     More: {
