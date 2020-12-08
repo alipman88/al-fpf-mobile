@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Config } from '@common/config'
 import { Linking } from 'react-native'
 import { WebView as BaseWebView } from 'react-native-webview'
 import PropTypes from 'prop-types'
+import navigationService from '@common/utils/navigationService'
+import queryString from 'query-string'
 
 export const WebView = props => {
   const { uri, onLoadStart, ...restProps } = props
-  const [currentURI, setURI] = useState(props.source.uri)
+  const [currentURI, setURI] = React.useState(props.source.uri)
   const newSource = { ...props.source, uri: currentURI }
 
   // Whitelisted origins - these include external domains we whitelist
@@ -18,10 +20,19 @@ export const WebView = props => {
     Config.WEBSITE_HOST
   ]
 
-  // Permitted paths - any other areas of the FPF website should open in a browser tab
-  // When updating these paths, be sure to update the @mobile_app_permitted_paths array
-  // in the Rails app's ApplicationController#handle_mobile_app_request method.
-  const permittedPaths = ['/directory', '/dir/', '/d/']
+  // Mobile app paths -
+  // Rather than loading in the webview, requests to these paths should be
+  // intercepted, and trigger navigation to the appropriate section of the mobile
+  // app with any necessary parameters captured via Regex.
+  const composeRegex = /\/areas\/(?<areaId>[0-9]+)\/posts\/new\/?\?(?<query>.*)/
+
+  // Whitelisted WebView paths -
+  // Sections of frontporchforum.com that should load inside the webview.
+  // (External URLs and any other areas of the FPF website should open in a
+  // browser tab.) When updating these paths, be sure to update the
+  // @mobile_app_permitted_paths array in the Rails app's
+  // ApplicationController#handle_mobile_app_request method.
+  const whitelistedPaths = ['/directory', '/dir/', '/d/']
 
   return (
     <BaseWebView
@@ -32,25 +43,43 @@ export const WebView = props => {
       onShouldStartLoadWithRequest={request => {
         if (!request.url.startsWith(Config.WEBSITE_HOST)) return false
 
-        const permittedPath = permittedPaths.find(path =>
-          request.url.startsWith(Config.WEBSITE_HOST + path)
-        )
+        const requestPath = request.url.replace(Config.WEBSITE_HOST, '')
 
-        if (!permittedPath) {
-          Linking.openURL(request.url)
+        // Handle post submission through the mobile app,
+        // not the WebView-embedded version of frontporchforum.com
+        const compose = requestPath.match(composeRegex)
+        if (compose) {
+          const query = queryString.parse(compose.groups.query, {
+            arrayFormat: 'bracket'
+          })
+          navigationService.navigate('Compose', {
+            categoryId: Number(query['category_id']),
+            title: query['post[title]'],
+            referencedProfileId: query['post[referenced_profile_id]']
+          })
           return false
         }
 
-        // React Native WebViews only send headers on the initial page load
-        // To work around this, track the current URL via component state,
-        // and update the state when loading a new page to force a re-render
-        // and re-send headers.
+        // Open whitelisted requests in the WebView
+        const whitelistedPath = whitelistedPaths.find(path =>
+          requestPath.startsWith(path)
+        )
+        if (whitelistedPath) {
+          // React Native WebViews only send headers on the initial page load
+          // To work around this, track the current URL via component state,
+          // and update the state when loading a new page to force a re-render
+          // and re-send headers.
 
-        // The WebView's URL hasn't changed - allow it to load
-        if (request.url === currentURI) return true
+          // The WebView's URL hasn't changed - allow it to load
+          if (request.url === currentURI) return true
 
-        // The URL has changed - change state to ensure headers are sent
-        setURI(request.url)
+          // The URL has changed - change state to ensure headers are sent
+          setURI(request.url)
+          return false
+        }
+
+        // Open unpermitted requests in a mobile browser
+        Linking.openURL(request.url)
         return false
       }}
     />
