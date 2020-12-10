@@ -32,6 +32,7 @@ export class Compose extends React.Component {
     const postBody = {
       parent_post_id: parentId,
       profile_id: profiles[values.profile].id,
+      referenced_profile_id: values.referencedProfileId,
       title: values.subject,
       content: values.message,
       is_shared: values.isShared,
@@ -75,6 +76,9 @@ export class Compose extends React.Component {
     )
 
     const profile = profiles[profileIndex] || profiles[0]
+    const category = categories.find(
+      c => c.id === navigation.getParam('categoryId')
+    )
     const areaId =
       navigation.getParam('areaId') ||
       get(profile, 'last_posted_area_id') ||
@@ -85,10 +89,13 @@ export class Compose extends React.Component {
     return (
       <ScreenContainer grey withPadding={false}>
         <Formik
+          enableReinitialize={true}
           initialValues={{
             forums: areaId ? [areaId] : [],
             profile: profileIndex,
-            category: null,
+            category: category || null,
+            referencedProfileId:
+              navigation.getParam('referencedProfileId') || null,
             subject: navigation.getParam('title') || '',
             message: '',
             isShared: true,

@@ -30,6 +30,11 @@ describe('Compose', () => {
         id: 5,
         name: 'Event',
         is_event: true
+      },
+      {
+        id: 6,
+        name: 'Make Recommendation',
+        faq: 'Where to find the good dumplings'
       }
     ],
     currentAreaId: 1,
@@ -62,8 +67,39 @@ describe('Compose', () => {
     expect(wrapper.find(Formik).props().initialValues).toEqual({
       forums: [1],
       profile: 0,
+      referencedProfileId: null,
       category: null,
       subject: '',
+      message: '',
+      isShared: true,
+      fromDate: null,
+      toDate: null
+    })
+  })
+
+  test('Formik accepts navigation parameters', () => {
+    const navParams = {
+      referencedProfileId: 123,
+      categoryId: 6,
+      title: 'Recommending Pawn B Productions'
+    }
+    const navigationProps = {
+      ...defaultProps,
+      navigation: {
+        getParam: jest.fn(param => navParams[param])
+      }
+    }
+    const wrapper = shallow(<Compose {...navigationProps} />)
+    expect(wrapper.find(Formik).props().initialValues).toEqual({
+      forums: [1],
+      profile: 0,
+      referencedProfileId: 123,
+      category: {
+        id: 6,
+        name: 'Make Recommendation',
+        faq: 'Where to find the good dumplings'
+      },
+      subject: 'Recommending Pawn B Productions',
       message: '',
       isShared: true,
       fromDate: null,
