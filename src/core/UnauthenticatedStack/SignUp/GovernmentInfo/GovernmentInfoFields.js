@@ -44,7 +44,7 @@ export const GovernmentInfoFields = ({
             setFieldTouched('title')
             setFieldValue('title', governmentTitles[index])
           }}
-          touched={touched.title}
+          touched={!!touched.title}
           value={
             Boolean(values.title)
               ? governmentTitles.indexOf(values.title)
@@ -66,7 +66,7 @@ export const GovernmentInfoFields = ({
               setFieldValue('name', value)
             }}
             required
-            touched={touched.name}
+            touched={!!touched.name}
             value={values.name}
           />
         </FieldWrapper>
@@ -80,7 +80,7 @@ export const GovernmentInfoFields = ({
             setFieldValue('jurisdiction', value)
           }}
           required
-          touched={touched.jurisdiction}
+          touched={!!touched.jurisdiction}
           value={values.jurisdiction}
           placeholder='Winooski School District'
         />
@@ -94,7 +94,7 @@ export const GovernmentInfoFields = ({
             setFieldValue('tellUsMore', value)
           }}
           multiline
-          touched={touched.tellUsMore}
+          touched={!!touched.tellUsMore}
           value={values.tellUsMore}
         />
       </FieldWrapper>

@@ -135,7 +135,7 @@ export class Event extends React.Component {
                 }}
                 error={errors.fromDate}
                 onPress={blurTextInputs}
-                touched={touched.fromDate}
+                touched={!!touched.fromDate}
                 value={values.fromDate}
               />
             </FieldWrapper>
@@ -151,7 +151,7 @@ export class Event extends React.Component {
                 }}
                 error={errors.toDate}
                 onPress={blurTextInputs}
-                touched={touched.toDate}
+                touched={!!touched.toDate}
                 value={values.toDate}
               />
             </FieldWrapper>
