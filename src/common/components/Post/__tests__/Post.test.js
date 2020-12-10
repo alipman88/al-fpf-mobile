@@ -106,7 +106,7 @@ describe('Post', () => {
         navigation={{}}
       />
     )
-    expect(wrapper.find(Autolink).props().text).toEqual('Lorem ...')
+    expect(wrapper.find(Autolink).props().text).toEqual('Lor...')
 
     const getButton = wrapper => {
       return wrapper.find(TouchableOpacity).last()

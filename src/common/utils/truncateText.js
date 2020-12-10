@@ -1,8 +1,7 @@
+import truncate from 'lodash/truncate'
+
 export const truncateText = (content, postTruncateLength, shouldTruncate) => {
-  if (content.length > postTruncateLength) {
-    return shouldTruncate
-      ? `${content.substring(0, postTruncateLength)}...`
-      : content
-  }
-  return content
+  return shouldTruncate && content.length > postTruncateLength
+    ? truncate(content, { length: postTruncateLength, separator: /\s/ })
+    : content
 }
