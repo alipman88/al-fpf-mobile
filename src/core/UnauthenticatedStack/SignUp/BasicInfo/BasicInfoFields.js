@@ -63,7 +63,7 @@ export class BasicInfoFields extends React.Component {
               <TextInput
                 error={errors.firstName}
                 label='First name'
-                touched={touched.firstName}
+                touched={!!touched.firstName}
                 onBlur={() => setFieldTouched('firstName')}
                 onChangeText={value => {
                   setFieldValue('firstName', value)
@@ -83,7 +83,7 @@ export class BasicInfoFields extends React.Component {
                 inputRef={this.lastNameInput}
                 error={errors.lastName}
                 label='Last name'
-                touched={touched.lastName}
+                touched={!!touched.lastName}
                 onBlur={() => setFieldTouched('lastName')}
                 onChangeText={value => {
                   setFieldValue('lastName', value)
@@ -98,7 +98,7 @@ export class BasicInfoFields extends React.Component {
                 inputRef={this.emailInput}
                 error={errors.email}
                 label='Email'
-                touched={touched.email}
+                touched={!!touched.email}
                 onBlur={() => setFieldTouched('email')}
                 onChangeText={value => {
                   setFieldValue('email', value)
@@ -115,7 +115,7 @@ export class BasicInfoFields extends React.Component {
                 inputRef={this.passwordInput}
                 error={errors.password}
                 label='Password'
-                touched={touched.password}
+                touched={!!touched.password}
                 setFieldValue={setFieldValue}
                 setFieldTouched={setFieldTouched}
                 fieldKey='password'
@@ -134,7 +134,7 @@ export class BasicInfoFields extends React.Component {
                 inputRef={this.passwordConfirmationInput}
                 error={errors.passwordConfirmation}
                 label='Confirm password'
-                touched={touched.passwordConfirmation}
+                touched={!!touched.passwordConfirmation}
                 setFieldValue={setFieldValue}
                 setFieldTouched={setFieldTouched}
                 fieldKey='passwordConfirmation'

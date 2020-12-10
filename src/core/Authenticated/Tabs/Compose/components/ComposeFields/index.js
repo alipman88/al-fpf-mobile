@@ -215,7 +215,7 @@ export class ComposeFields extends React.Component {
                   setFieldValue('forums', selectedItems)
                   this.blurTextInputs()
                 }}
-                touched={touched.forums}
+                touched={!!touched.forums}
                 value={values.forums}
               />
             </FieldWrapper>
@@ -237,7 +237,7 @@ export class ComposeFields extends React.Component {
               title='Select Category'
               value={categoryValue}
               error={errors.category}
-              touched={touched.category}
+              touched={!!touched.category}
             />
             {Boolean(get(values.category, 'faq')) && (
               <InputDetails>{get(values.category, 'faq')}</InputDetails>
@@ -248,7 +248,7 @@ export class ComposeFields extends React.Component {
               error={errors.subject}
               onChangeText={value => setFieldValue('subject', value)}
               onBlur={() => setFieldTouched('subject')}
-              touched={touched.subject}
+              touched={!!touched.subject}
               value={values.subject}
               placeholder='Type the subject of your posting here'
               label='Subject'
@@ -274,7 +274,7 @@ export class ComposeFields extends React.Component {
                 error={errors.message}
                 onChangeText={value => setFieldValue('message', value)}
                 onBlur={() => setFieldTouched('message')}
-                touched={touched.message}
+                touched={!!touched.message}
                 value={values.message}
                 label='Message'
                 placeholder='Type the body of your posting here'

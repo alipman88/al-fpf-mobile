@@ -78,7 +78,7 @@ export class BusinessInfoFields extends React.Component {
                 error={errors.name}
                 label='Name of business or nonprofit'
                 placeholder='Your Business Name'
-                touched={touched.name}
+                touched={!!touched.name}
                 onChangeText={value => {
                   setFieldValue('name', value)
                   setFieldTouched('name')
@@ -97,7 +97,7 @@ export class BusinessInfoFields extends React.Component {
                   setFieldTouched('businessCategoryId', true)
                   setFieldValue('businessCategoryId', selectedItems[0])
                 }}
-                touched={touched.businessCategoryId}
+                touched={!!touched.businessCategoryId}
                 value={[values.businessCategoryId]}
                 ref={this.businessCategoryIdInput}
                 single
@@ -110,7 +110,7 @@ export class BusinessInfoFields extends React.Component {
                 error={errors.url}
                 label='Website'
                 placeholder='example.com'
-                touched={touched.url}
+                touched={!!touched.url}
                 onChangeText={value => {
                   setFieldValue('url', value)
                   setFieldTouched('url')
@@ -129,7 +129,7 @@ export class BusinessInfoFields extends React.Component {
                 error={errors.phone}
                 label='Phone'
                 placeholder='802-123-4567'
-                touched={touched.phone}
+                touched={!!touched.phone}
                 onChangeText={value => {
                   setFieldValue('phone', value)
                   setFieldTouched('phone')
@@ -144,7 +144,7 @@ export class BusinessInfoFields extends React.Component {
               <TextInput
                 error={errors.description}
                 label='Business/nonprofit description'
-                touched={touched.description}
+                touched={!!touched.description}
                 onChangeText={value => {
                   setFieldValue('description', value)
                   setFieldTouched('description')

@@ -92,7 +92,7 @@ export class AddressFields extends React.Component {
                   setFieldValue('streetNumber', text)
                 }}
                 placeholder='154'
-                touched={touched.streetNumber}
+                touched={!!touched.streetNumber}
                 value={values.streetNumber}
                 required
               />
@@ -109,7 +109,7 @@ export class AddressFields extends React.Component {
                   setFieldValue('streetName', text)
                 }}
                 placeholder='Maple St'
-                touched={touched.streetName}
+                touched={!!touched.streetName}
                 value={values.streetName}
                 required
               />
@@ -125,7 +125,7 @@ export class AddressFields extends React.Component {
                   setFieldValue('secondaryAddress', text)
                 }}
                 placeholder='3R'
-                touched={touched.secondaryAddress}
+                touched={!!touched.secondaryAddress}
                 value={values.secondaryAddress}
               />
             </FieldWrapper>
@@ -139,7 +139,7 @@ export class AddressFields extends React.Component {
                   setFieldValue('city', text)
                 }}
                 placeholder='Bristol'
-                touched={touched.city}
+                touched={!!touched.city}
                 value={values.city}
                 nextField={this.stateInput}
                 blurOnSubmit={true} // next element is not a text input
@@ -176,7 +176,7 @@ export class AddressFields extends React.Component {
                 }}
                 onConfirm={onSubmit}
                 searchPlaceholderText='Search'
-                touched={touched.state}
+                touched={!!touched.state}
                 value={[values.state]}
                 single
                 required

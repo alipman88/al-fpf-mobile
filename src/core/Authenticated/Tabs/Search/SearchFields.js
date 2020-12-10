@@ -124,7 +124,7 @@ export class SearchFields extends React.Component {
               setFieldValue('keyword', value)
             }}
             returnKeyType='search'
-            touched={touched.keyword}
+            touched={!!touched.keyword}
             value={values.keyword}
             onTapIcon={() => {
               setFieldTouched('keyword', false)
@@ -185,7 +185,7 @@ export class SearchFields extends React.Component {
                       ? 'Selected local forums'
                       : 'All local forums'
                   }
-                  touched={touched.forums}
+                  touched={!!touched.forums}
                   value={values.forums}
                 />
               </FieldWrapper>
@@ -206,7 +206,7 @@ export class SearchFields extends React.Component {
                   title='Select Category'
                   value={categoryValue}
                   error={errors.category}
-                  touched={touched.category}
+                  touched={!!touched.category}
                 />
               </FieldWrapper>
               <FieldWrapper>
@@ -224,7 +224,7 @@ export class SearchFields extends React.Component {
                         setFieldValue('fromDate', date)
                       }}
                       onPress={this.blurTextInput}
-                      touched={touched.fromDate}
+                      touched={!!touched.fromDate}
                       value={values.fromDate}
                     />
                   </DateFieldContainer>
@@ -240,7 +240,7 @@ export class SearchFields extends React.Component {
                         setFieldValue('toDate', date)
                       }}
                       onPress={this.blurTextInput}
-                      touched={touched.toDate}
+                      touched={!!touched.toDate}
                       value={values.toDate}
                     />
                   </DateFieldContainer>

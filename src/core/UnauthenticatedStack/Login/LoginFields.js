@@ -88,7 +88,7 @@ export class LoginFields extends React.Component {
               error={errors.email}
               onChangeText={value => setFieldValue('email', value)}
               onBlur={() => setFieldTouched('email')}
-              touched={touched.email}
+              touched={!!touched.email}
               value={values.email}
               keyboardType='email-address'
               autoCapitalize='none'
@@ -107,7 +107,7 @@ export class LoginFields extends React.Component {
           <FieldContainer>
             <PasswordInput
               error={errors.password}
-              touched={touched.password}
+              touched={!!touched.password}
               value={values.password}
               setFieldValue={setFieldValue}
               setFieldTouched={setFieldTouched}
