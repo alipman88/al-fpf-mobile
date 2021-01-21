@@ -99,7 +99,7 @@ describe('SearchFields', () => {
     wrapper
       .find(Select)
       .props()
-      .onValueChange('cat', 3)
+      .onValueChange(3)
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('category', true)
     expect(defaultProps.setFieldValue).toHaveBeenCalledWith('category', {
       id: 3,
@@ -114,9 +114,9 @@ describe('SearchFields', () => {
     wrapper
       .find(Select)
       .props()
-      .onValueChange(null, 0)
+      .onValueChange(null)
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('category', true)
-    expect(defaultProps.setFieldValue).toHaveBeenCalledWith('category', null)
+    expect(defaultProps.setFieldValue).toHaveBeenCalledWith('category', undefined)
   })
 
   test('changing DateTimeField calls the prop callbacks', () => {

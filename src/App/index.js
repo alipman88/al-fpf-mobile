@@ -1,5 +1,5 @@
 import React from 'react'
-import firebase from 'react-native-firebase'
+import analytics from '@react-native-firebase/analytics'
 import { AppState, Linking, Platform } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Provider } from 'react-redux'
@@ -22,6 +22,7 @@ import { purchaseUpdated, purchaseError } from '@common/purchases'
 import { sendDeviceData } from '@common/session'
 import { getProfiles } from '@common/profile'
 import { subscriptionSkus } from '@common/types/subscriptionSkus'
+import { setApplicationIconBadgeNumber } from '@common/notifications/bgMessaging'
 
 export class App extends React.Component {
   constructor(props) {
@@ -85,12 +86,12 @@ export class App extends React.Component {
 
   handleAppStateChange = async nextAppState => {
     if (
-      this.state.appState.match(/inactive|background/) &&
+      this.state.appState.match(/inactive|background|unknown/) &&
       nextAppState === 'active'
     ) {
       store.dispatch(sendDeviceData())
       store.dispatch(getProfiles())
-      await firebase.notifications().setBadge(0)
+      setApplicationIconBadgeNumber(0)
     }
 
     this.setState({ appState: nextAppState })
@@ -121,7 +122,7 @@ export class App extends React.Component {
 
     if (prevScreen !== currentScreen) {
       // trigger setting screen name for analytics based on react navigation
-      firebase.analytics().setCurrentScreen(currentScreen)
+      analytics().logScreenView({ screen_name: currentScreen })
     }
   }
 

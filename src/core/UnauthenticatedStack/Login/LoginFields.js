@@ -48,28 +48,25 @@ export class LoginFields extends React.Component {
     // the settings groups that have been defined for this build.
     // When a different settings group is selected, restart the app.
     let settingsGroupField
-    const settingsGroups = getSettingsGroups()
+    const settingsGroups = getSettingsGroups().map(
+      key => key || Config.ORIGINAL_CONFIG.ENVIRONMENT
+    )
     if (
       settingsGroups.length > 1 &&
       Config.ORIGINAL_CONFIG.ENVIRONMENT !== 'production'
     ) {
-      const settingsGroupsLabels = settingsGroups.map(
-        key => key || Config.ORIGINAL_CONFIG.ENVIRONMENT
-      )
-
       settingsGroupField = (
         <FieldContainer>
           <Text style={{ marginTop: 20 }}>Connect to:</Text>
           <Select
             placeholder={getSettingsGroup()}
-            items={settingsGroupsLabels}
-            onValueChange={(value, index) => {
-              const settingsGroup = settingsGroups[index]
+            items={settingsGroups}
+            onValueChange={settingsGroup => {
               setSettingsGroup(settingsGroup)
               RNRestart.Restart()
             }}
             title='Connect to'
-            value={settingsGroups.indexOf(getSettingsGroup())}
+            value={getSettingsGroup()}
           />
         </FieldContainer>
       )
@@ -109,8 +106,11 @@ export class LoginFields extends React.Component {
               error={errors.password}
               touched={!!touched.password}
               value={values.password}
-              setFieldValue={setFieldValue}
-              setFieldTouched={setFieldTouched}
+              onBlur={() => setFieldTouched('password')}
+              onChangeText={value => {
+                setFieldValue('password', value)
+                setFieldTouched('password')
+              }}
             />
           </FieldContainer>
           <Button onPress={handleSubmit} disabled={isSubmitting}>

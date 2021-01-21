@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import SectionedMultiSelect from 'react-native-sectioned-multi-select'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import { FormError } from '@components/FormError'
 import {
@@ -92,6 +93,7 @@ export class Multiselect extends React.Component {
               fontSize: 14
             }
           }}
+          IconRenderer={Icon}
         />
         {hasError && <FormError>{error}</FormError>}
       </Container>

@@ -1,4 +1,4 @@
-import firebase from 'react-native-firebase'
+import analytics from '@react-native-firebase/analytics'
 import DeviceInfo from 'react-native-device-info'
 import { Platform } from 'react-native'
 
@@ -18,7 +18,7 @@ export const login = params => async (dispatch, getState) => {
   const response = await api.post('/login', params)
 
   dispatch(currentUser.actions.setAccessToken(response.data.access_token))
-  firebase.analytics().setAnalyticsCollectionEnabled(true)
+  analytics().setAnalyticsCollectionEnabled(true)
 }
 
 export const sendDeviceData = () => async (dispatch, getState) => {

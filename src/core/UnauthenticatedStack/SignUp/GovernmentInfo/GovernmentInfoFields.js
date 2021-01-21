@@ -40,16 +40,12 @@ export const GovernmentInfoFields = ({
           label='Title'
           title='Title'
           items={governmentTitles}
-          onValueChange={(value, index) => {
+          onValueChange={value => {
             setFieldTouched('title')
-            setFieldValue('title', governmentTitles[index])
+            setFieldValue('title', value)
           }}
           touched={!!touched.title}
-          value={
-            Boolean(values.title)
-              ? governmentTitles.indexOf(values.title)
-              : null
-          }
+          value={values.title}
           placeholder={
             Boolean(values.title) ? values.title : 'School Board Member'
           }

@@ -1,6 +1,5 @@
 import React from 'react'
-import { AppState, PushNotificationIOS } from 'react-native'
-import firebase from 'react-native-firebase'
+import messaging from '@react-native-firebase/messaging'
 import { ForumContainer } from '../styledComponents'
 import { shallow } from 'enzyme'
 import { Forum } from '../Forum'
@@ -115,115 +114,22 @@ describe('Forum', () => {
     expect(defaultProps.sendNewFCMToken).toHaveBeenCalledWith('fcmToken')
   })
 
-  test('sets up notification listener', async () => {
+  test('sets up notification listeners', async () => {
     const wrapper = shallow(<Forum {...defaultProps} />)
     await wrapper.instance().componentDidMount()
-    expect(firebase.notifications().onNotification).toHaveBeenCalled()
+    expect(messaging().onTokenRefresh).toHaveBeenCalled()
+    expect(messaging().onNotificationOpenedApp).toHaveBeenCalled()
+    expect(messaging().onMessage).toHaveBeenCalled()
   })
 
   test('user has not given messaging permission, should ask firebase for it', async () => {
-    const spy = jest
-      .spyOn(firebase.messaging(), 'hasPermission')
-      .mockReturnValue(false)
+    const spy = jest.spyOn(messaging(), 'hasPermission').mockReturnValue(false)
 
     const wrapper = shallow(<Forum {...defaultProps} />)
     await wrapper.instance().componentDidMount()
-    expect(firebase.messaging().requestPermission).toHaveBeenCalled()
-    expect(firebase.notifications().onNotification).toHaveBeenCalled()
+    expect(messaging().requestPermission).toHaveBeenCalled()
 
     spy.mockRestore()
-  })
-
-  test('it sets up app state event listener', () => {
-    const spy = jest.spyOn(AppState, 'addEventListener')
-    const wrapper = shallow(<Forum {...defaultProps} />)
-
-    expect(AppState.addEventListener).toHaveBeenCalledWith(
-      'change',
-      wrapper.instance().handleAppStateChange
-    )
-    spy.mockRestore()
-  })
-
-  describe('handleAppStateChange', () => {
-    test('it sends member to default NF if app badge icon present', async () => {
-      const notificationSpy = jest
-        .spyOn(firebase.notifications(), 'getInitialNotification')
-        .mockReturnValue(Promise.resolve(null))
-      const wrapper = shallow(<Forum {...defaultProps} />)
-      const badgeSpy = jest.spyOn(
-        PushNotificationIOS,
-        'getApplicationIconBadgeNumber'
-      )
-
-      const setBadgeSpy = jest.spyOn(
-        PushNotificationIOS,
-        'setApplicationIconBadgeNumber'
-      )
-
-      await wrapper.instance().handleAppStateChange('active')
-      expect(
-        PushNotificationIOS.getApplicationIconBadgeNumber
-      ).toHaveBeenCalled()
-
-      const fn = badgeSpy.mock.calls[0][0]
-      fn(1)
-
-      expect(setBadgeSpy).toHaveBeenCalledWith(0)
-
-      badgeSpy.mockRestore()
-      notificationSpy.mockRestore()
-      setBadgeSpy.mockRestore()
-    })
-
-    test('it does not change state if theres no badge count', async () => {
-      const notificationSpy = jest
-        .spyOn(firebase.notifications(), 'getInitialNotification')
-        .mockReturnValue(Promise.resolve(null))
-      const wrapper = shallow(<Forum {...defaultProps} />)
-      const badgeSpy = jest.spyOn(
-        PushNotificationIOS,
-        'getApplicationIconBadgeNumber'
-      )
-
-      const setBadgeSpy = jest.spyOn(
-        PushNotificationIOS,
-        'setApplicationIconBadgeNumber'
-      )
-
-      await wrapper.instance().handleAppStateChange('active')
-      expect(
-        PushNotificationIOS.getApplicationIconBadgeNumber
-      ).toHaveBeenCalled()
-
-      const fn = badgeSpy.mock.calls[0][0]
-      fn(0)
-
-      expect(setBadgeSpy).not.toHaveBeenCalled()
-
-      badgeSpy.mockRestore()
-      notificationSpy.mockRestore()
-      setBadgeSpy.mockRestore()
-    })
-
-    test('doesnt check badge count if open via notification', async () => {
-      const notificationSpy = jest
-        .spyOn(firebase.notifications(), 'getInitialNotification')
-        .mockReturnValue(Promise.resolve({}))
-      const wrapper = shallow(<Forum {...defaultProps} />)
-      const badgeSpy = jest.spyOn(
-        PushNotificationIOS,
-        'getApplicationIconBadgeNumber'
-      )
-
-      await wrapper.instance().handleAppStateChange('active')
-      expect(
-        PushNotificationIOS.getApplicationIconBadgeNumber
-      ).not.toHaveBeenCalled()
-
-      badgeSpy.mockRestore()
-      notificationSpy.mockRestore()
-    })
   })
 
   test('it renders some posts', () => {
@@ -460,12 +366,10 @@ describe('Forum', () => {
     test('calls to fetch for the issue from the notificationOpen event', () => {
       const wrapper = shallow(<Forum {...defaultProps} />)
       wrapper.instance().handleNotificationOpen({
-        notification: {
-          _data: {
-            area_id: '5',
-            issue_id: '6',
-            issue_number: '340'
-          }
+        data: {
+          area_id: '5',
+          issue_id: '6',
+          issue_number: '340'
         }
       })
 

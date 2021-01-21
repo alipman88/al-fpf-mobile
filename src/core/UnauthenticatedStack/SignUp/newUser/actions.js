@@ -1,5 +1,5 @@
 import get from 'lodash/get'
-import firebase from 'react-native-firebase'
+import analytics from '@react-native-firebase/analytics'
 
 import { newUser } from './slice'
 import { api } from '@common/api'
@@ -11,7 +11,7 @@ export const postSignUp = navigation => async (dispatch, getState) => {
     dispatch(newUser.actions.setLoading(true))
     const toSave = prepareValues(newUser.selectors.getNewUser(getState()))
     await api.post('/users', toSave)
-    firebase.analytics().setAnalyticsCollectionEnabled(true)
+    analytics().setAnalyticsCollectionEnabled(true)
     navigation.navigate('EmailVerification')
   } catch (e) {
     dispatch(

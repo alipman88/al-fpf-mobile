@@ -82,6 +82,10 @@ export class SearchFields extends React.Component {
     setFieldTouched('category', false)
   }
 
+  categoryWithId(id) {
+    return this.props.categories.find(category => category.id === id)
+  }
+
   render() {
     const {
       areas,
@@ -102,12 +106,14 @@ export class SearchFields extends React.Component {
       id: -1
     })
 
-    let categoryValue = searchCategories.findIndex(
-      category => category.id === get(values, 'category.id')
-    )
+    const areaIds = areas.map(area => area.id)
+    let selectedAreaIds = values.forums
 
-    if (categoryValue === -1) {
-      categoryValue = null
+    // The SectionedMultiSelect component raises an error if a selected value
+    // is not present in the list of items, so filter the selected areas to
+    // limit them by the selectable areas
+    if (selectedAreaIds) {
+      selectedAreaIds = selectedAreaIds.filter(id => areaIds.includes(id))
     }
 
     return (
@@ -186,25 +192,25 @@ export class SearchFields extends React.Component {
                       : 'All local forums'
                   }
                   touched={!!touched.forums}
-                  value={values.forums}
+                  value={selectedAreaIds}
                 />
               </FieldWrapper>
               <FieldWrapper>
                 <Select
                   placeholder={get(values.category, 'name', 'All categories')}
-                  items={searchCategories.map(category => category.name)}
+                  items={searchCategories.map(category => ({
+                    value: category.id,
+                    label: category.name
+                  }))}
                   onPress={this.blurTextInput}
-                  onValueChange={(value, index) => {
+                  onValueChange={id => {
+                    id = parseInt(id, 10)
                     setFieldTouched('category', true)
-                    const selectedCategory =
-                      searchCategories[index] &&
-                      searchCategories[index].id === -1
-                        ? null
-                        : searchCategories[index]
+                    const selectedCategory = this.categoryWithId(id)
                     setFieldValue('category', selectedCategory)
                   }}
                   title='Select Category'
-                  value={categoryValue}
+                  value={get(values, 'category.id')}
                   error={errors.category}
                   touched={!!touched.category}
                 />

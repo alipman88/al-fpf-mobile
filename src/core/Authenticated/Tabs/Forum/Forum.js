@@ -1,16 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {
-  AppState,
-  Platform,
-  PushNotificationIOS,
-  RefreshControl,
-  ScrollView
-} from 'react-native'
+import { RefreshControl, ScrollView } from 'react-native'
 import get from 'lodash/get'
-import firebase from 'react-native-firebase'
+import messaging from '@react-native-firebase/messaging'
 import Toast from 'react-native-easy-toast'
 
+import {
+  hasMessagingPermission,
+  requestMessagingPermission
+} from '@common/notifications/bgMessaging'
 import { ScreenContainer } from '@components/ScreenContainer'
 import { ForumContainer } from './styledComponents'
 import { ForumPost } from './components/ForumPost'
@@ -30,8 +28,6 @@ export class Forum extends React.Component {
   }
 
   async componentDidMount() {
-    AppState.addEventListener('change', this.handleAppStateChange)
-
     // Set scrollToTop function in navigation params to trigger scroll in tab navigator
     this.props.navigation.setParams({
       scrollToTop: this.scrollToTop
@@ -39,95 +35,80 @@ export class Forum extends React.Component {
 
     this.setTitleFromArea()
 
-    const fcmToken = await firebase.messaging().getToken()
-    if (this.props.fcmToken !== fcmToken) {
-      this.props.sendNewFCMToken(fcmToken)
-    }
+    this.configureNotifications()
 
-    this.onTokenRefreshListener = firebase
-      .messaging()
-      .onTokenRefresh(async fcmToken => {
-        this.props.sendNewFCMToken(fcmToken)
-      })
-
-    let enabled = await firebase.messaging().hasPermission()
-    if (!enabled) {
-      try {
-        await firebase.messaging().requestPermission()
-
-        // Some iOS devices need to explicitly register. See https://github.com/invertase/react-native-firebase/pull/1626 and https://rnfirebase.io/docs/v5.x.x/messaging/reference/IOSMessaging
-        await firebase.messaging().registerForRemoteNotifications()
-
-        enabled = true
-      } catch (error) {
-        // User has rejected permissions. We dont do anything, because that's fine
-      }
-    }
-
-    if (enabled) {
-      const channel = createChannel()
-
-      const notificationOpen = await firebase
-        .notifications()
-        .getInitialNotification()
-      if (notificationOpen) {
-        this.handleNotificationOpen(notificationOpen)
-      } else {
-        this.props.setupForumData(this.props.navigation)
-      }
-
-      this.messageListener = firebase
-        .messaging()
-        .onMessage(message => console.log('on message', message))
-
-      this.notificationListener = firebase
-        .notifications()
-        .onNotification(notification => {
-          displayNotification(
-            channel,
-            notification._notificationId,
-            notification._title,
-            notification._body,
-            notification._data
-          )
-        })
-
-      this.notificationOpenedListener = firebase
-        .notifications()
-        .onNotificationOpened(notificationOpen => {
-          this.handleNotificationOpen(notificationOpen)
-        })
+    // Check for notification that triggered the application to open
+    const remoteMessage = await messaging().getInitialNotification()
+    if (remoteMessage) {
+      this.handleNotificationOpen(remoteMessage)
     } else {
       this.props.setupForumData(this.props.navigation)
     }
   }
 
-  componentWillUnmount() {
-    if (this.onTokenRefreshListener) {
-      this.onTokenRefreshListener()
+  /**
+   * Configure Firebase messaging and notifications:
+   * - request permission from the user if not already granted
+   * - send notification token to the server if changed, and listen for new token
+   * - listen for background and foreground notifications
+   */
+  async configureNotifications() {
+    // Request permission for remote notifications
+    let permitted = await hasMessagingPermission()
+    if (!permitted) {
+      permitted = await requestMessagingPermission()
     }
-    if (this.notificationListener) {
-      this.notificationListener()
+
+    // Bail early if messaging permission is not granted
+    if (!permitted) {
+      return
     }
-    if (this.notificationOpenedListener) {
-      this.notificationOpenedListener()
+
+    // Check for new firebase notification token and send to server
+    const fcmToken = await messaging().getToken()
+    if (this.props.fcmToken !== fcmToken) {
+      this.props.sendNewFCMToken(fcmToken)
     }
+
+    // Listen for firebase notification token change, and send to server
+    messaging().onTokenRefresh(async fcmToken => {
+      this.props.sendNewFCMToken(fcmToken)
+    })
+
+    // Listen for app background notification, and handle the notification
+    messaging().onNotificationOpenedApp(remoteMessage => {
+      this.handleNotificationOpen(remoteMessage)
+    })
+
+    // Listen for app foreground notification, and handle the notification
+    const channel = createChannel()
+    messaging().onMessage(remoteMessage =>
+      displayNotification(
+        channel,
+        remoteMessage.messageId,
+        remoteMessage.notification.title,
+        remoteMessage.notification.body,
+        remoteMessage.data
+      )
+    )
   }
 
-  handleAppStateChange = async state => {
-    const notificationOpen = await firebase
-      .notifications()
-      .getInitialNotification()
-    // if we're opening via a notification, we can let that flow do its thing
-    if (!notificationOpen && state === 'active' && Platform.OS === 'ios') {
-      // reset issue/area id to 0 so we fetch the default if badge icon is present
-      PushNotificationIOS.getApplicationIconBadgeNumber(badgeNumber => {
-        if (badgeNumber >= 1) {
-          this.props.setupForumData(this.props.navigation)
-          PushNotificationIOS.setApplicationIconBadgeNumber(0)
-        }
-      })
-    }
+  /**
+   * Handle a notification message that was used to open the app (or bring it to
+   * the foreground) by fetching the issue specified in the message data and
+   * navigating to that issue.
+   *
+   * @param remoteMessage {RemoteMessage} Firebase message
+   */
+  handleNotificationOpen(remoteMessage) {
+    const { area_id, issue_id, issue_number } = remoteMessage.data
+    this.props.fetchSpecificIssue(
+      parseInt(area_id, 10),
+      parseInt(issue_id, 10),
+      parseInt(issue_number, 10),
+      this.props.navigation,
+      this.props.setupForumData
+    )
   }
 
   fetchIssues(prevProps) {
@@ -219,18 +200,6 @@ export class Forum extends React.Component {
         scrollRef: this.forumViewRef
       })
     }
-  }
-
-  handleNotificationOpen(notificationOpen) {
-    const notification = notificationOpen.notification
-    const { area_id, issue_id, issue_number } = notification._data
-    this.props.fetchSpecificIssue(
-      parseInt(area_id, 10),
-      parseInt(issue_id, 10),
-      parseInt(issue_number, 10),
-      this.props.navigation,
-      this.props.setupForumData
-    )
   }
 
   scrollPostsToTop() {

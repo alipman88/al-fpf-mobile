@@ -19,15 +19,7 @@ export class PasswordInput extends React.Component {
     })
   }
   render() {
-    const {
-      setFieldValue,
-      setFieldTouched,
-      label,
-      fieldKey,
-      ...other
-    } = this.props
-
-    const key = fieldKey || 'password'
+    const { label, ...other } = this.props
 
     return (
       <TextInput
@@ -45,23 +37,12 @@ export class PasswordInput extends React.Component {
         autoCapitalize='none'
         autoCompleteType='password'
         autoCorrect={false}
-        textContentType='password'
-        onChangeText={value => {
-          setFieldValue(key, value)
-          setFieldTouched(key)
-        }}
+        textContentType='newPassword'
       />
     )
   }
 }
 
 PasswordInput.propTypes = {
-  error: PropTypes.string,
-  value: PropTypes.string,
-  label: PropTypes.string,
-  touched: PropTypes.bool,
-  required: PropTypes.bool,
-  fieldKey: PropTypes.string,
-  setFieldValue: PropTypes.func,
-  setFieldTouched: PropTypes.func
+  label: PropTypes.string
 }

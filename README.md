@@ -1,5 +1,12 @@
 # Front Porch Forum Mobile App
 
+## OS Support
+
+- iOS 11 - 14
+- Android 7 - 11 (API 24 - 30)
+
+(Last updated 1/15/21)
+
 ## Setup
 
 ### Xcode and Android Studio
@@ -68,7 +75,7 @@ Or to select a different emulator than the default:
 
 ```
 xcrun simctl list devices
-yarn ios --simulator="iPhone 5s (9.3)"
+yarn ios --simulator="iPhone 5s (11.4)"
 ```
 
 To run on android, you need to start up an emulator first.
