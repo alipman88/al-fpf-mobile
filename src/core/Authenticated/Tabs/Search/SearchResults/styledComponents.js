@@ -10,19 +10,19 @@ export const ResultsContainer = styled.View`
 
 export const ResultCounts = styled(TextSemibold)`
   color: #999cad;
-  font-size: 16;
+  font-size: 16px;
   text-align: center;
   flex: 1;
-  margin-top: 23;
-  margin-bottom: 12;
+  margin-top: 23px;
+  margin-bottom: 12px;
 `
 
 export const ResultsDivider = styled.View`
-  height: 1;
+  height: 1px;
   background-color: #d0d1d7;
   width: 100%;
-  margin-bottom: 18;
+  margin-bottom: 18px;
 `
 export const LoadMoreContainer = styled.View`
-  padding-bottom: 10;
+  padding-bottom: 10px;
 `

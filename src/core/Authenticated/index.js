@@ -12,7 +12,7 @@ let headerBackgroundForEnv = ['development', 'staging'].includes(
   Config.ENVIRONMENT
 )
   ? '#ffff00'
-  : ''
+  : null
 
 export const Authenticated = createStackNavigator(
   {

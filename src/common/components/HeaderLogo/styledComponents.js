@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
 
 export const LogoContainer = styled.View`
-  width: 170;
+  width: 170px;
   align-self: center;
 `
 

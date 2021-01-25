@@ -3,15 +3,15 @@ import { Text } from '@components/Text'
 import { Button } from '@components/Button'
 
 export const Image = styled.Image`
-  ${({ width }) => width && `width: ${width};`}
-  ${({ height }) => height && `height: ${height};`}
-  margin-bottom: 20;
+  ${({ width }) => width && `width: ${width}px;`}
+  ${({ height }) => height && `height: ${height}px;`}
+  margin-bottom: 20px;
 `
 
 export const SlideTitle = styled(Text)`
-  font-size: 18;
+  font-size: 18px;
   text-align: center;
-  margin-horizontal: 50;
+  margin-horizontal: 50px;
 `
 
 export const Slide = styled.View`
@@ -24,32 +24,32 @@ export const Slide = styled.View`
 export const Bird = styled.Image`
   position: absolute;
   bottom: 0;
-  ${({ left }) => (left ? 'left: 30;' : 'right: 30;')}
+  ${({ left }) => (left ? 'left: 30px;' : 'right: 30px;')}
 `
 export const Seeds = styled.Image`
   position: absolute;
   bottom: 0;
-  right: 30;
+  right: 30px;
 `
 
 export const InactiveDot = styled.View`
   background-color: #ebecf1;
-  width: 11;
-  height: 11;
-  border-radius: 7;
-  margin-left: 7;
-  margin-right: 7;
+  width: 11px;
+  height: 11px;
+  border-radius: 7px;
+  margin-left: 7px;
+  margin-right: 7px;
 `
 
 export const ActiveDot = styled(InactiveDot)`
   background-color: #f29426;
-  border-width: 2;
+  border-width: 2px;
   border-color: #f29426;
 `
 
 export const SlideButton = styled(Button)``
 
 export const ButtonSpacer = styled.View`
-  height: 20;
+  height: 20px;
   width: 100%;
 `

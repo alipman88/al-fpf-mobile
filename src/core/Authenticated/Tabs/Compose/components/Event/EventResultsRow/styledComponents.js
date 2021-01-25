@@ -3,39 +3,39 @@ import { Text, TextSemibold } from '@components/Text'
 
 export const Container = styled.View`
   flex: 1;
-  border-bottom-width: 1;
+  border-bottom-width: 1px;
   border-color: #d5dde1;
   flex-direction: row;
   padding: 15px 17px 15px 20px;
-  min-height: 62;
+  min-height: 62px;
 `
 
 export const Label = styled(TextSemibold)`
-  font-size: 16;
+  font-size: 16px;
   flex: 1;
 `
 
 export const Date = styled(Text)`
-  font-size: 14;
+  font-size: 14px;
   color: #999cad;
   flex: 1;
 `
 
 export const RadioButtonCircle = styled.View`
-  width: 22;
-  height: 22;
-  border-radius: 11;
-  border-width: 1;
+  width: 22px;
+  height: 22px;
+  border-radius: 11px;
+  border-width: 1px;
   border-color: #d5dde1;
 `
 
 export const RadioButtonActive = styled.View`
-  width: 12;
-  height: 12;
-  border-radius: 6;
+  width: 12px;
+  height: 12px;
+  border-radius: 6px;
   position: absolute;
-  top: 4;
-  left: 4;
+  top: 4px;
+  left: 4px;
   background-color: #90a780;
 `
 
@@ -45,5 +45,5 @@ export const RowContent = styled.View`
 
 export const RadioButtonContainer = styled.View`
   justify-content: center;
-  margin-right: 10;
+  margin-right: 10px;
 `

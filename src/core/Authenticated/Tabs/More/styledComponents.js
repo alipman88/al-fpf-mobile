@@ -4,28 +4,28 @@ import { Text } from '@components/Text'
 const iconSize = 80
 
 export const PageWrapper = styled.View`
-  margin-horizontal: 25;
-  margin-bottom: 50;
+  margin-horizontal: 25px;
+  margin-bottom: 50px;
 `
 
 export const PageHeader = styled(Text)`
   color: black;
-  font-size: 22;
+  font-size: 22px;
   text-align: center;
-  padding-top: 40;
-  padding-bottom: 20;
-  margin-horizontal: 20;
+  padding-top: 40px;
+  padding-bottom: 20px;
+  margin-horizontal: 20px;
 `
 
 export const Card = styled.View`
   border-color: #ebecf1;
-  border-width: 1;
-  border-radius: 5;
+  border-width: 1px;
+  border-radius: 5px;
   flex-direction: column;
   background-color: #fff;
-  margin-top: ${iconSize / 2 + 20};
-  padding-horizontal: 30;
-  padding-bottom: 20;
+  margin-top: ${iconSize / 2 + 20}px;
+  padding-horizontal: 30px;
+  padding-bottom: 20px;
 `
 
 export const CenterImgContainer = styled.View`
@@ -34,52 +34,51 @@ export const CenterImgContainer = styled.View`
 `
 
 export const CardIcon = styled.Image`
-  height: ${iconSize};
-  width: ${iconSize};
+  height: ${iconSize}px;
+  width: ${iconSize}px;
   justify-content: center;
-  text-align: center;
   resize-mode: contain;
   position: absolute;
-  top: ${0 - iconSize / 2};
+  top: ${0 - iconSize / 2}px;
 `
 
 export const CardTitle = styled(Text)`
   color: black;
   font-weight: bold;
-  font-size: 22;
+  font-size: 22px;
   text-align: center;
-  padding-vertical: 10;
-  margin-top: ${iconSize / 2 + 5};
+  padding-vertical: 10px;
+  margin-top: ${iconSize / 2 + 5}px;
 `
 
 export const CardContent = styled(Text)`
   color: black;
-  font-size: 18;
-  line-height: 26;
+  font-size: 18px;
+  line-height: 26px;
   text-align: center;
-  padding-vertical: 10;
+  padding-vertical: 10px;
 `
 
 export const FooterLinkWrapper = styled.View`
-  margin-top: 40;
+  margin-top: 40px;
 `
 
 export const FooterLink = styled.View`
   border-top-color: #333;
   border-top-width: 1px;
-  padding-vertical: 15;
+  padding-vertical: 15px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 `
 
 export const FooterText = styled(Text)`
-  font-size: 18;
+  font-size: 18px;
   width: 100%;
 `
 
 export const RightIcon = styled.Image`
-  height: 18;
-  width: 18;
-  margin-left: -18;
+  height: 18px;
+  width: 18px;
+  margin-left: -18px;
 `

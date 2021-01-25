@@ -2,10 +2,10 @@ import styled from 'styled-components/native'
 import { Text } from '@components/Text'
 
 export const CheckboxWrapper = styled.View`
-  min-height: 80;
+  min-height: 80px;
   padding: 20px;
   background-color: #fff;
-  border-bottom-width: ${({ last }) => (last ? 0 : 1)};
+  border-bottom-width: ${({ last }) => (last ? 0 : 1)}px;
   border-color: #d5dde1;
   ${({ last }) =>
     last
@@ -25,10 +25,10 @@ export const CheckboxWrapper = styled.View`
   align-items: center;
 `
 export const CreateAccountWrapper = styled.View`
-  width: 300;
-  border-width: 1;
+  width: 300px;
+  border-width: 1px;
   border-color: #d5dde1;
-  border-radius: 10;
+  border-radius: 10px;
   align-self: center;
 `
 export const LinkWrapper = styled.View`

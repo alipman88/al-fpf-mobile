@@ -4,27 +4,27 @@ import { Text } from '@components/Text'
 import { paddingTop, paddingHorizontal } from '@common/styles/screenPadding'
 
 export const FormContainer = styled.View`
-  padding-top: ${paddingTop};
+  padding-top: ${paddingTop}px;
 `
 
 export const InputDetails = styled(Text)`
-  font-size: 12;
+  font-size: 12px;
   color: #9b9b9b;
-  margin-vertical: 10;
+  margin-vertical: 10px;
 `
 
 export const FieldWrapper = styled.View`
-  margin-bottom: 10;
-  padding-horizontal: ${paddingHorizontal};
+  margin-bottom: 10px;
+  padding-horizontal: ${paddingHorizontal}px;
 `
 
 export const ButtonContainer = styled.View`
   background-color: white;
-  padding-horizontal: ${paddingHorizontal};
-  padding-vertical: 25;
+  padding-horizontal: ${paddingHorizontal}px;
+  padding-vertical: 25px;
 `
 
 export const ButtonSpacer = styled.View`
-  height: 20;
+  height: 20px;
   width: 100%;
 `

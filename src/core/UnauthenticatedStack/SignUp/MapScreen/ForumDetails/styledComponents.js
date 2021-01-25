@@ -4,10 +4,10 @@ import { Text, TextSemibold } from '@components/Text'
 
 export const Container = styled.View`
   background-color: #fff;
-  border-radius: 5;
+  border-radius: 5px;
   flex: 1;
-  min-width: 244;
-  margin-right: 14;
+  min-width: 244px;
+  margin-right: 14px;
 `
 
 export const Contents = styled.View`
@@ -15,24 +15,24 @@ export const Contents = styled.View`
 `
 
 export const Header = styled(TextSemibold)`
-  font-size: 18;
+  font-size: 18px;
   color: #4a4a4a;
-  margin-bottom: 11;
+  margin-bottom: 11px;
 `
 
 export const Row = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 5;
+  margin-bottom: 5px;
 `
 
 export const Label = styled(Text)`
-  font-size: 14;
+  font-size: 14px;
   color: #000;
 `
 
 export const Value = styled(Text)`
-  font-size: 14;
+  font-size: 14px;
   color: #6b6e7d;
   text-align: right;
 `
@@ -47,6 +47,6 @@ export const JoinContainer = styled.View`
 `
 
 export const JoinText = styled(TextSemibold)`
-  font-size: 14;
+  font-size: 14px;
   color: #4a4a4a;
 `

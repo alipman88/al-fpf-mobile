@@ -10,7 +10,7 @@ const Wrapper = styled.TouchableOpacity`
   ${({ borderColor }) =>
     borderColor ? `border-width: 1; border-color: ${borderColor};` : ''}
   width: ${({ width }) => width || 'auto'};
-  ${({ tall }) => tall && 'padding-vertical: 20;'}
+  ${({ tall }) => tall && 'padding-vertical: 20px;'}
   ${({ fullWidth }) => fullWidth && 'width: 100%;'}
   ${({ disabled }) => disabled && 'opacity: 0.5;'}
 `

@@ -11,20 +11,20 @@ export const Navigation = styled.View``
 
 export const LogoutText = styled(Text)`
   color: #4a4a4a;
-  font-size: 16;
+  font-size: 16px;
   text-decoration: underline;
   text-align: center;
-  padding-bottom: 26;
+  padding-bottom: 26px;
 `
 
 export const ViewPostingsContainer = styled.View`
-  border-top-width: 1;
-  border-bottom-width: 1;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
   border-color: #d0d1d7;
-  padding-vertical: 18;
+  padding-vertical: 18px;
   flex-direction: row;
-  margin-horizontal: 20;
-  margin-top: 30;
+  margin-horizontal: 20px;
+  margin-top: 30px;
   justify-content: space-between;
 `
 
@@ -33,7 +33,7 @@ export const ViewPostings = styled(TextSemibold)`
 `
 
 export const Version = styled(Text)`
-  font-size: 14;
-  margin-left: 20;
-  margin-top: 16;
+  font-size: 14px;
+  margin-left: 20px;
+  margin-top: 16px;
 `

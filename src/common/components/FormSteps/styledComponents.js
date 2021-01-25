@@ -8,11 +8,11 @@ export const Container = styled.View`
 `
 
 export const Step = styled.View`
-  border-radius: 12;
-  border-width: 1;
-  height: 24;
-  width: 24;
-  margin-horizontal: 2;
+  border-radius: 12px;
+  border-width: 1px;
+  height: 24px;
+  width: 24px;
+  margin-horizontal: 2px;
   ${({ active, done }) => {
     if (done) {
       return `
@@ -37,6 +37,6 @@ export const Step = styled.View`
 `
 
 export const Number = styled(Text)`
-  font-size: 12;
+  font-size: 12px;
   color: #23282a;
 `

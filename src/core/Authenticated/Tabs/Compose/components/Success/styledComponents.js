@@ -4,35 +4,35 @@ import { Text, TextSemibold } from '@components/Text'
 export const Container = styled.View`
   justify-content: space-between;
   align-items: center;
-  padding-top: 56;
+  padding-top: 56px;
 `
 
 export const Close = styled.TouchableOpacity`
   position: absolute;
-  top: 20;
-  right: 20;
+  top: 20px;
+  right: 20px;
 `
 
 export const Heading = styled(TextSemibold)`
-  font-size: 27;
-  margin-bottom: 20;
+  font-size: 27px;
+  margin-bottom: 20px;
 `
 
 export const TextContainer = styled.View`
-  padding-horizontal: 30;
-  margin-bottom: 30;
+  padding-horizontal: 30px;
+  margin-bottom: 30px;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
 `
 
 export const BodyText = styled(Text)`
-  font-size: 16;
+  font-size: 16px;
   text-align: center;
 `
 
 export const BodySemibold = styled(TextSemibold)`
-  font-size: 16;
+  font-size: 16px;
   text-align: center;
 `
 
@@ -45,30 +45,30 @@ export const Link = styled(BodySemibold)`
 
 export const GrassContainer = styled.View`
   background-color: #fff;
-  padding-top: 34;
-  height: 112;
+  padding-top: 34px;
+  height: 112px;
   width: 100%;
 `
 
 // Height of this is the height of this container subtract the container's top padding
 export const GrassBg = styled.View`
   background-color: #e3eddd;
-  height: 78;
+  height: 78px;
   bottom: 0;
   left: 0;
   right: 0;
 `
 
 export const Grass = styled.Image`
-  top: 16;
+  top: 16px;
   position: absolute;
   width: 100%;
 `
 
 export const GreyBird = styled.Image`
   position: absolute;
-  left: 19;
-  bottom: 9;
+  left: 19px;
+  bottom: 9px;
 `
 
 export const BirdLetterbox = styled.Image`
@@ -79,6 +79,6 @@ export const BirdLetterbox = styled.Image`
 
 export const BirdEatingBirdseed = styled.Image`
   position: absolute;
-  left: 88;
-  bottom: 11;
+  left: 88px;
+  bottom: 11px;
 `

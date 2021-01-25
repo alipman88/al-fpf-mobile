@@ -8,30 +8,30 @@ export const Container = styled.View`
 `
 
 export const BottomContainer = styled.View`
-  padding-top: 40;
+  padding-top: 40px;
 `
 
 export const BirdContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  padding-horizontal: 20;
+  padding-horizontal: 20px;
 `
 
 export const Bird = styled.Image``
 
 export const SuccessMessage = styled(TextSemibold)`
-  font-size: 14;
-  margin-bottom: 20;
+  font-size: 14px;
+  margin-bottom: 20px;
 `
 
 export const HelpMessage = styled(Text)`
-  font-size: 13;
-  margin-bottom: ${screenSize({ sm: 15 }, 20)};
+  font-size: 13px;
+  margin-bottom: ${screenSize({ sm: 15 }, 20)}px;
   color: #4a4a4a;
 `
 export const MessageContainer = styled.View`
-  margin-vertical: ${screenSize({ sm: 20 }, 40)};
-  padding-horizontal: 10;
+  margin-vertical: ${screenSize({ sm: 20 }, 40)}px;
+  padding-horizontal: 10px;
   flex: 1;
   justify-content: flex-start;
 `
@@ -43,13 +43,13 @@ const linkStyles = `
 
 export const TextLink = styled(Text)`
   ${linkStyles}
-  font-size: 13;
-  padding-horizontal: 20;
+  font-size: 13px;
+  padding-horizontal: 20px;
 `
 
 export const BoldTextLink = styled(TextSemibold)`
   ${linkStyles}
-  font-size: 14;
+  font-size: 14px;
   text-align: center;
-  margin-top: 20;
+  margin-top: 20px;
 `

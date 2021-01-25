@@ -20,13 +20,13 @@ export const NavButtonWrapper = styled.View`
   flex-direction: row;
   justify-content: space-between;
   z-index: 100;
-  padding-top: 20;
-  padding-horizontal: 25;
+  padding-top: 20px;
+  padding-horizontal: 25px;
 `
 
 export const Divider = styled.Image`
   position: absolute;
-  bottom: -5;
+  bottom: -5px;
   width: 100%;
 `
 
@@ -34,13 +34,13 @@ export const TopContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   background-color: #fff;
-  padding-top: ${({ topPadding }) => topPadding || 10};
-  padding-bottom: 18;
+  padding-top: ${({ topPadding }) => topPadding || 10}px;
+  padding-bottom: 18px;
   z-index: 100;
 `
 
 export const TopHeader = styled(TextSemibold)`
-  font-size: 20;
+  font-size: 20px;
   color: #355768;
   text-align: center;
 `

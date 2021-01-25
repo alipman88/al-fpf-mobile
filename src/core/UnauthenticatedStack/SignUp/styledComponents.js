@@ -5,25 +5,25 @@ import { screenPadding } from '@common/styles/screenPadding'
 import { screenSize } from '@common/styles/screenSizeHelper'
 
 export const FormHeader = styled(Text)`
-  font-size: 16;
+  font-size: 16px;
   text-align: center;
-  margin-vertical: 32;
+  margin-vertical: 32px;
 `
 
 export const FormHelper = styled(Text)`
   color: #9b9b9b;
-  margin-bottom: 11;
+  margin-bottom: 11px;
 `
 export const FieldWrapper = styled.View`
-  margin-bottom: 11;
+  margin-bottom: 11px;
 `
 export const FormFieldsWrapper = styled.View`
-  padding-bottom: ${screenSize({ xs: 10, sm: 15 }, 30)};
+  padding-bottom: ${screenSize({ xs: 10, sm: 15 }, 30)}px;
 `
 
 export const Container = styled.ScrollView`
   ${screenPadding}
 `
 export const BottomPadding = styled.View`
-  height: 80;
+  height: 80px;
 `

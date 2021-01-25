@@ -2,9 +2,9 @@ import styled from 'styled-components/native'
 import { Text } from '@components/Text'
 
 export const WrapperStyles = `
-  padding-horizontal: 10;
-  padding-vertical: 10;
-  border-radius: 5;
+  padding-horizontal: 10px;
+  padding-vertical: 10px;
+  border-radius: 5px;
   justify-content: center;
   align-items: center;
   flex-direction: row;

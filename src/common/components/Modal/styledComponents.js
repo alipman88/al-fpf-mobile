@@ -13,7 +13,7 @@ export const Container = styled.View`
 `
 
 export const ContentWrapper = styled.View`
-  border-radius: 6;
+  border-radius: 6px;
   background-color: white;
   width: 90%;
   overflow: hidden;

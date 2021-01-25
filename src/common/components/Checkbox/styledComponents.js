@@ -2,15 +2,15 @@ import styled from 'styled-components/native'
 import { Text } from '@components/Text'
 
 export const Button = styled.View`
-  border-radius: 4;
-  border-width: 1;
+  border-radius: 4px;
+  border-width: 1px;
   border-color: #90a780;
   background-color: ${({ checked }) => (checked ? '#355768' : 'transparent')};
-  height: 18;
-  width: 18;
+  height: 18px;
+  width: 18px;
   align-items: center;
   justify-content: center;
-  margin-right: 5;
+  margin-right: 5px;
 `
 
 export const Icon = styled.Image``

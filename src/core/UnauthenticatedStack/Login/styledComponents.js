@@ -11,11 +11,11 @@ export const FormContainer = styled.View`
 `
 
 export const FieldContainer = styled.View`
-  margin-bottom: 14;
+  margin-bottom: 14px;
 `
 
 export const BottomContainer = styled.View`
-  padding-top: 40;
+  padding-top: 40px;
 `
 
 export const BottomText = styled(Text)`
@@ -28,19 +28,19 @@ export const LinksContainer = styled.View`
 `
 
 export const ResetPasswordContainer = styled.View`
-  padding-right: 8;
-  border-right-width: 1;
+  padding-right: 8px;
+  border-right-width: 1px;
   border-color: #9b9b9b;
 `
 
 export const TroubleLoggingInContainer = styled.View`
-  padding-left: 8;
+  padding-left: 8px;
 `
 
 export const LogoContainer = styled.View`
-  width: 170;
+  width: 170px;
   flex: 1;
-  padding-top: 10;
+  padding-top: 10px;
   align-self: center;
 `
 
@@ -50,9 +50,9 @@ export const Logo = styled.Image`
 
 export const Version = styled(Text)`
   text-align: center;
-  margin-top: 10;
+  margin-top: 10px;
 `
 export const ButtonSpacer = styled.View`
-  height: 10;
+  height: 10px;
   width: 100%;
 `

@@ -10,23 +10,23 @@ export const InputContainer = styled.View`
 `
 
 export const Input = styled.TouchableOpacity`
-  border-radius: 5;
-  border-width: 1;
+  border-radius: 5px;
+  border-width: 1px;
   border-color: ${({ hasError }) => (hasError ? '#dc4558' : '#d5dde1')};
   background-color: ${({ hasError }) => (hasError ? '#ffebeb' : '#fff')};
   padding: 8px 15px 0px 4px;
   flex: 1;
   flex-direction: row;
-  height: 40;
+  height: 40px;
   justify-content: flex-start;
-  margin-right: ${({ marginRight }) => marginRight || 0};
+  margin-right: ${({ marginRight }) => marginRight || 0}px;
 `
 
 export const InputText = styled(Text)`
   color: ${({ touched }) => (touched ? '#000' : '#c5c5c5')};
-  font-size: 18;
+  font-size: 18px;
 `
 
 export const Icon = styled(Ionicons)`
-  margin-right: 6;
+  margin-right: 6px;
 `

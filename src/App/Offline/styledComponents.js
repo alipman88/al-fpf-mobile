@@ -18,16 +18,16 @@ export const Content = styled.View`
 
 export const OfflineHeader = styled(TextSemibold)`
   color: #355768;
-  font-size: 24;
+  font-size: 24px;
   text-align: center;
-  margin-vertical: 20;
+  margin-vertical: 20px;
 `
 
 export const Body = styled(Text)`
-  font-size: 16;
+  font-size: 16px;
   text-align: center;
-  margin-horizontal: 40;
-  margin-bottom: 20;
+  margin-horizontal: 40px;
+  margin-bottom: 20px;
 `
 
 export const Image = styled.Image``
