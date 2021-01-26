@@ -22,7 +22,7 @@ import { purchaseUpdated, purchaseError } from '@common/purchases'
 import { sendDeviceData } from '@common/session'
 import { getProfiles } from '@common/profile'
 import { subscriptionSkus } from '@common/types/subscriptionSkus'
-import { setApplicationIconBadgeNumber } from '@common/notifications/bgMessaging'
+import { setApplicationIconBadgeNumber } from '@common/notifications'
 
 export class App extends React.Component {
   constructor(props) {

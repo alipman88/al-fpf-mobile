@@ -8,7 +8,7 @@ import Toast from 'react-native-easy-toast'
 import {
   hasMessagingPermission,
   requestMessagingPermission
-} from '@common/notifications/bgMessaging'
+} from '@common/notifications'
 import { ScreenContainer } from '@components/ScreenContainer'
 import { ForumContainer } from './styledComponents'
 import { ForumPost } from './components/ForumPost'
@@ -17,8 +17,6 @@ import { InThisIssue } from './components/InThisIssue'
 import { OtherIssues } from './components/OtherIssues'
 import { NeighboringContent } from './components/NeighboringContent'
 import { ForumMessage } from './components/ForumMessage'
-
-import { createChannel, displayNotification } from '@common/notifications'
 
 export class Forum extends React.Component {
   constructor(props) {
@@ -79,18 +77,6 @@ export class Forum extends React.Component {
     messaging().onNotificationOpenedApp(remoteMessage => {
       this.handleNotificationOpen(remoteMessage)
     })
-
-    // Listen for app foreground notification, and handle the notification
-    const channel = createChannel()
-    messaging().onMessage(remoteMessage =>
-      displayNotification(
-        channel,
-        remoteMessage.messageId,
-        remoteMessage.notification.title,
-        remoteMessage.notification.body,
-        remoteMessage.data
-      )
-    )
   }
 
   /**

@@ -119,7 +119,6 @@ describe('Forum', () => {
     await wrapper.instance().componentDidMount()
     expect(messaging().onTokenRefresh).toHaveBeenCalled()
     expect(messaging().onNotificationOpenedApp).toHaveBeenCalled()
-    expect(messaging().onMessage).toHaveBeenCalled()
   })
 
   test('user has not given messaging permission, should ask firebase for it', async () => {
