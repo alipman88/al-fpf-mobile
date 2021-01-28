@@ -1,0 +1,11 @@
+# List of syntax-focused commits to ignore when running git blame
+#
+# Configure:
+#   upgrade to git 2.23+
+#   $ git config blame.ignoreRevsFile .git-blame-ignore-revs
+#
+# For more info:
+# https://www.moxio.com/blog/43/ignoring-bulk-change-commits-with-git-blame
+
+# prettier 2.0 style fixes
+6cfdcd8ea0e3d14115c38ff254c9b951be993f2f
