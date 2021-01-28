@@ -16,5 +16,5 @@ export const ExternalLink = ({ content, url, onPress }) => (
 ExternalLink.propTypes = {
   content: PropTypes.string.isRequired,
   url: PropTypes.string,
-  onPress: PropTypes.func
+  onPress: PropTypes.func,
 }

@@ -11,13 +11,10 @@ const mapStateToProps = (state, props) => ({
   products: products.selectors.getProducts(state),
   purchasing: purchases.selectors.getPurchasing(state),
   profile: profile.selectors.getNavigationProfile(state, props),
-  ...profile.selectors.getNavigationProfileSubscriptionState(state, props)
+  ...profile.selectors.getNavigationProfileSubscriptionState(state, props),
 })
 
-export const Subscription = connect(
-  mapStateToProps,
-  {
-    navigateWithToken,
-    requestSubscription
-  }
-)(SubscriptionComponent)
+export const Subscription = connect(mapStateToProps, {
+  navigateWithToken,
+  requestSubscription,
+})(SubscriptionComponent)

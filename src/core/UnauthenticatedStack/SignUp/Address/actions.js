@@ -16,8 +16,8 @@ export const searchAddress = (values, onSuccess) => async (
           apt_number: values.secondaryAddress,
           street_name: values.streetName,
           city: values.city,
-          state: values.state
-        }
+          state: values.state,
+        },
       },
       getState()
     )

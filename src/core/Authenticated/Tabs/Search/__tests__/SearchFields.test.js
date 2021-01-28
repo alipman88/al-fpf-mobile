@@ -20,7 +20,7 @@ describe('SearchFields', () => {
     categories: [
       { id: 1, name: 'one' },
       { id: 2, name: 'two' },
-      { id: 3, name: 'cat' }
+      { id: 3, name: 'cat' },
     ],
     errors: {},
     handleSubmit: jest.fn(),
@@ -30,7 +30,7 @@ describe('SearchFields', () => {
     isSubmitting: false,
     touched: {},
     values: {},
-    showFilters: false
+    showFilters: false,
   }
 
   afterEach(() => {
@@ -76,7 +76,7 @@ describe('SearchFields', () => {
     const wrapper = shallow(<SearchFields {...defaultProps} />)
     wrapper.setState({ showAdvanced: true })
     expect(wrapper.find(Multiselect).props().items).toEqual([
-      { name: 'Forums', id: 0, children: [{ id: 1, name: 'Area one' }] }
+      { name: 'Forums', id: 0, children: [{ id: 1, name: 'Area one' }] },
     ])
   })
 
@@ -84,10 +84,7 @@ describe('SearchFields', () => {
     const wrapper = shallow(<SearchFields {...defaultProps} />)
     wrapper.setState({ showAdvanced: true })
 
-    wrapper
-      .find(Multiselect)
-      .props()
-      .onSelectedItemsChange([1])
+    wrapper.find(Multiselect).props().onSelectedItemsChange([1])
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('forums', true)
     expect(defaultProps.setFieldValue).toHaveBeenCalledWith('forums', [1])
   })
@@ -96,14 +93,11 @@ describe('SearchFields', () => {
     const wrapper = shallow(<SearchFields {...defaultProps} />)
     wrapper.setState({ showAdvanced: true })
 
-    wrapper
-      .find(Select)
-      .props()
-      .onValueChange(3)
+    wrapper.find(Select).props().onValueChange(3)
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('category', true)
     expect(defaultProps.setFieldValue).toHaveBeenCalledWith('category', {
       id: 3,
-      name: 'cat'
+      name: 'cat',
     })
   })
 
@@ -111,12 +105,12 @@ describe('SearchFields', () => {
     const wrapper = shallow(<SearchFields {...defaultProps} />)
     wrapper.setState({ showAdvanced: true })
 
-    wrapper
-      .find(Select)
-      .props()
-      .onValueChange(null)
+    wrapper.find(Select).props().onValueChange(null)
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('category', true)
-    expect(defaultProps.setFieldValue).toHaveBeenCalledWith('category', undefined)
+    expect(defaultProps.setFieldValue).toHaveBeenCalledWith(
+      'category',
+      undefined
+    )
   })
 
   test('changing DateTimeField calls the prop callbacks', () => {
@@ -126,10 +120,7 @@ describe('SearchFields', () => {
     const date = new Date()
     const fields = wrapper.find(DateTimeField)
 
-    fields
-      .at(0)
-      .props()
-      .onChangeValue(date)
+    fields.at(0).props().onChangeValue(date)
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('fromDate')
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('toDate')
     expect(defaultProps.setFieldValue).toHaveBeenCalledWith('fromDate', date)
@@ -137,10 +128,7 @@ describe('SearchFields', () => {
     defaultProps.setFieldTouched.mockReset()
     defaultProps.setFieldValue.mockReset()
 
-    fields
-      .at(1)
-      .props()
-      .onChangeValue(date)
+    fields.at(1).props().onChangeValue(date)
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('fromDate')
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('toDate')
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('toDate')
@@ -177,10 +165,7 @@ describe('SearchFields', () => {
 
   test('tapping clear icon on text input, calls prop', () => {
     const wrapper = shallow(<SearchFields {...defaultProps} />)
-    wrapper
-      .find(TextInput)
-      .props()
-      .onTapIcon()
+    wrapper.find(TextInput).props().onTapIcon()
 
     expect(defaultProps.onClearSearch).toHaveBeenCalled()
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('keyword', false)

@@ -4,7 +4,7 @@ describe('mailApp - slice', () => {
   test('has correct default state', () => {
     const state = mailApp.reducer(undefined, {})
     expect(state).toEqual({
-      app: null
+      app: null,
     })
   })
 
@@ -17,8 +17,8 @@ describe('mailApp - slice', () => {
     expect(
       mailApp.selectors.getPreferredApp({
         main: {
-          mailApp: state
-        }
+          mailApp: state,
+        },
       })
     ).toEqual('mail')
   })

@@ -4,10 +4,10 @@ import { ForumMessage as ForumMessageComponent } from './ForumMessage'
 import { posts } from '@common/posts'
 import { issues } from '@common/issues'
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const currentIssueId = issues.selectors.getCurrentIssueId(state)
   return {
-    forumMessage: posts.selectors.getForumMessageByIssue(state)[currentIssueId]
+    forumMessage: posts.selectors.getForumMessageByIssue(state)[currentIssueId],
   }
 }
 

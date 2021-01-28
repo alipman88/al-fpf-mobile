@@ -15,7 +15,7 @@ const getSettingsGroup = () =>
 /**
  * Stores the settings group name in the settings.
  */
-const setSettingsGroup = settingsGroup =>
+const setSettingsGroup = (settingsGroup) =>
   Settings.set({ [SETTINGS_GROUP_KEY]: settingsGroup })
 
 /**
@@ -31,8 +31,8 @@ const getSettingsGroups = () => {
   const suffix = 'API_HOST'
 
   return chain(Object.keys(ReactNativeConfig))
-    .filter(key => key.endsWith(suffix))
-    .map(key => key.slice(0, -(suffix.length + 1)).toLowerCase())
+    .filter((key) => key.endsWith(suffix))
+    .map((key) => key.slice(0, -(suffix.length + 1)).toLowerCase())
     .uniq()
     .value()
 }
@@ -61,7 +61,7 @@ const configForSettingsGroup = (config, settingsGroup) => {
     .value()
 
   return Object.assign({}, config, mappedConfig, {
-    ORIGINAL_CONFIG: config
+    ORIGINAL_CONFIG: config,
   })
 }
 
@@ -76,5 +76,5 @@ export {
   getSettingsGroup,
   setSettingsGroup,
   getSettingsGroups,
-  configForSettingsGroup
+  configForSettingsGroup,
 }

@@ -6,7 +6,7 @@ import endOfDay from 'date-fns/end_of_day'
 describe('posts - actions', () => {
   const dispatch = jest.fn()
   const defaultPlacementDateByIssue = {
-    2: endOfDay(new Date())
+    2: endOfDay(new Date()),
   }
   const getState = (placementDates = defaultPlacementDateByIssue) => {
     return () => ({
@@ -17,42 +17,42 @@ describe('posts - actions', () => {
               {
                 id: 1,
                 number: 32,
-                area_id: 55
+                area_id: 55,
               },
               {
                 id: 2,
                 number: 2,
-                area_id: 10
-              }
-            ]
-          }
+                area_id: 10,
+              },
+            ],
+          },
         },
         areas: {
-          currentAreaId: 55
+          currentAreaId: 55,
         },
         posts: {
           postsByIssue: {
             2: [
               {
-                id: 1
-              }
-            ]
+                id: 1,
+              },
+            ],
           },
           adsByIssue: {
             2: [
               {
-                id: 1
-              }
-            ]
+                id: 1,
+              },
+            ],
           },
-          placementDateByIssue: placementDates
-        }
+          placementDateByIssue: placementDates,
+        },
       },
       secured: {
         currentUser: {
-          accessToken: 'abc123'
-        }
-      }
+          accessToken: 'abc123',
+        },
+      },
     })
   }
 
@@ -84,15 +84,15 @@ describe('posts - actions', () => {
           posts: [{ id: 1 }],
           ads: [{ id: 2 }],
           headlines: ['Headline'],
-          news_from_neighboring_nfs: [{ id: 3 }]
-        }
+          news_from_neighboring_nfs: [{ id: 3 }],
+        },
       }))
       await getContents(1)(dispatch, getState())
 
       expect(getSpy).toHaveBeenCalledWith('/areas/55/issues/32/contents', {
         headers: {
-          Authorization: 'Bearer abc123'
-        }
+          Authorization: 'Bearer abc123',
+        },
       })
       expect(dispatch).toHaveBeenCalledWith(
         posts.actions.setContentsForIssue({
@@ -101,7 +101,7 @@ describe('posts - actions', () => {
           ads: [{ id: 2 }],
           placementDate: endOfDay(new Date()),
           headlines: ['Headline'],
-          newsFromNeighboringNfs: [{ id: 3 }]
+          newsFromNeighboringNfs: [{ id: 3 }],
         })
       )
       getSpy.mockRestore()
@@ -110,26 +110,26 @@ describe('posts - actions', () => {
     test('issue found, old ads found, fetches ads', async () => {
       const getSpy = jest.spyOn(api, 'get').mockImplementation(() => ({
         data: {
-          ads: [{ id: 2 }]
-        }
+          ads: [{ id: 2 }],
+        },
       }))
       await getContents(2)(
         dispatch,
         getState({
-          2: new Date(2020, 1, 1)
+          2: new Date(2020, 1, 1),
         })
       )
 
       expect(getSpy).toHaveBeenCalledWith('/areas/10/issues/2/ads', {
         headers: {
-          Authorization: 'Bearer abc123'
-        }
+          Authorization: 'Bearer abc123',
+        },
       })
       expect(dispatch).toHaveBeenCalledWith(
         posts.actions.setAdsForIssue({
           issueId: 2,
           ads: [{ id: 2 }],
-          placementDate: endOfDay(new Date())
+          placementDate: endOfDay(new Date()),
         })
       )
       getSpy.mockRestore()
@@ -138,8 +138,8 @@ describe('posts - actions', () => {
     test('issue found, recent ads found, does not fetch ads', async () => {
       const getSpy = jest.spyOn(api, 'get').mockImplementation(() => ({
         data: {
-          ads: [{ id: 2 }]
-        }
+          ads: [{ id: 2 }],
+        },
       }))
       await getContents(2)(dispatch, getState())
 

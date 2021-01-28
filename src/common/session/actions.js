@@ -8,10 +8,10 @@ import { currentUser } from '@common/currentUser'
 const deviceParams = {
   os: Platform.OS,
   device_name: `${DeviceInfo.getBrand()} ${DeviceInfo.getModel()}`,
-  device_id: DeviceInfo.getUniqueId()
+  device_id: DeviceInfo.getUniqueId(),
 }
 
-export const login = params => async (dispatch, getState) => {
+export const login = (params) => async (dispatch, getState) => {
   const fcmToken = currentUser.selectors.getFCMToken(getState())
   params = Object.assign({ fcm_token: fcmToken }, deviceParams, params)
 

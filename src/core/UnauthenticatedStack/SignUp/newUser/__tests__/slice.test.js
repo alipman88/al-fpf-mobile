@@ -5,8 +5,8 @@ describe('newUser - slice', () => {
     const initialState = {
       user: {
         firstName: '',
-        someArbitraryKey: 'Bugs Bunny'
-      }
+        someArbitraryKey: 'Bugs Bunny',
+      },
     }
 
     const payload = { firstName: 'Salvador' }

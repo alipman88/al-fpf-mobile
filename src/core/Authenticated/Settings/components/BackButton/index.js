@@ -11,5 +11,5 @@ export const BackButton = ({ navigation }) => (
 )
 
 BackButton.propTypes = {
-  navigation: PropTypes.object.isRequired
+  navigation: PropTypes.object.isRequired,
 }

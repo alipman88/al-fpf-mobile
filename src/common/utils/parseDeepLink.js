@@ -1,11 +1,11 @@
 import queryString from 'query-string'
 
-export const parseURL = url => {
+export const parseURL = (url) => {
   const result = /.*[/.]frontporchforum.com(.*)/.exec(url)
   return result ? result[1] : null
 }
 
-export const parseDeepLink = url => {
+export const parseDeepLink = (url) => {
   let route
   let params = {}
 
@@ -20,7 +20,9 @@ export const parseDeepLink = url => {
       // or in the Compose view
       params = { shouldResetForm: true, parentPostId }
     } else if (/^\/areas\/[0-9]+\/issues\/[0-9]+\/shared/.test(path)) {
-      const [areaId, issueNum] = path.split('/').filter(num => !!parseInt(num))
+      const [areaId, issueNum] = path
+        .split('/')
+        .filter((num) => !!parseInt(num))
       route = 'Forum'
       params = { areaId, issueNum }
     } else {

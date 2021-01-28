@@ -29,13 +29,13 @@ const initialState = {
       state: 'VT',
       lat: 0,
       lng: 0,
-      area_ids: []
+      area_ids: [],
     },
     // GovernmentInfo
     government: {
       title: '',
       jurisdiction: '',
-      tellUsMore: ''
+      tellUsMore: '',
     },
     // BusinessInfo
     business: {
@@ -43,16 +43,16 @@ const initialState = {
       businessCategoryId: 0,
       url: '',
       phone: '',
-      description: ''
-    }
+      description: '',
+    },
   },
-  loading: false
+  loading: false,
 }
 
 export const newUser = createSlice({
   slice: 'newUser',
   initialState: {
-    ...initialState
+    ...initialState,
   },
   reducers: {
     setNewUserByKey: (state, { payload }) => {
@@ -62,31 +62,25 @@ export const newUser = createSlice({
     setLoading: (state, { payload }) => {
       return {
         ...state,
-        loading: payload
+        loading: payload,
       }
     },
     clearData: () => {
       return { ...initialState }
-    }
-  }
+    },
+  },
 })
 
 const path = 'main.newUser'
 
 newUser.selectors = {
   ...newUser.selectors,
-  getNewUser: createSelector(
-    [path],
-    newUser => newUser.user
-  ),
+  getNewUser: createSelector([path], (newUser) => newUser.user),
 
   getProfileType: createSelector(
     [path],
-    newUser => newUser.user.profilePlan.plan_type
+    (newUser) => newUser.user.profilePlan.plan_type
   ),
 
-  getLoading: createSelector(
-    [path],
-    newUser => newUser.loading
-  )
+  getLoading: createSelector([path], (newUser) => newUser.loading),
 }

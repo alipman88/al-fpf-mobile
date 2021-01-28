@@ -9,7 +9,7 @@ describe('SettingsIndex', () => {
   const defaultProps = {
     navigation: {
       navigate: jest.fn(),
-      dispatch: jest.fn()
+      dispatch: jest.fn(),
     },
     navigateWithToken: jest.fn(),
     resetAction: jest.fn(),
@@ -21,10 +21,10 @@ describe('SettingsIndex', () => {
       profiles: [
         {
           id: 5,
-          name: 'John Smith'
-        }
-      ]
-    }
+          name: 'John Smith',
+        },
+      ],
+    },
   }
 
   afterEach(() => {
@@ -36,10 +36,7 @@ describe('SettingsIndex', () => {
 
   test('can click to view account', () => {
     const wrapper = shallow(<SettingsIndex {...defaultProps} />)
-    wrapper
-      .find(NavLink)
-      .at(0)
-      .simulate('press')
+    wrapper.find(NavLink).at(0).simulate('press')
 
     expect(defaultProps.navigation.navigate).toHaveBeenCalledWith('Account')
     expect(defaultProps.getProfiles).toHaveBeenCalled()
@@ -47,21 +44,15 @@ describe('SettingsIndex', () => {
 
   test('can click to view profile', () => {
     const wrapper = shallow(<SettingsIndex {...defaultProps} />)
-    wrapper
-      .find(NavLink)
-      .at(1)
-      .simulate('press')
+    wrapper.find(NavLink).at(1).simulate('press')
     expect(defaultProps.navigation.navigate).toHaveBeenCalledWith('Profile', {
-      profileId: 5
+      profileId: 5,
     })
   })
 
   test('can view posts', () => {
     const wrapper = shallow(<SettingsIndex {...defaultProps} />)
-    wrapper
-      .find(TouchableOpacity)
-      .at(0)
-      .simulate('press')
+    wrapper.find(TouchableOpacity).at(0).simulate('press')
     expect(defaultProps.navigateWithToken).toHaveBeenCalledWith(
       '/user/posts',
       expect.any(Function)
@@ -70,10 +61,7 @@ describe('SettingsIndex', () => {
 
   test('can logout', async () => {
     const wrapper = shallow(<SettingsIndex {...defaultProps} />)
-    await wrapper
-      .find(TouchableOpacity)
-      .at(1)
-      .simulate('press')
+    await wrapper.find(TouchableOpacity).at(1).simulate('press')
 
     expect(defaultProps.logoutUser).toHaveBeenCalled()
   })

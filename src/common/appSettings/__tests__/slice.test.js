@@ -12,7 +12,7 @@ describe('appSettings - slice', () => {
       onboardingProfilePlans: [],
       governmentTitles: [],
       loading: false,
-      loaded: false
+      loaded: false,
     })
   })
 
@@ -27,24 +27,27 @@ describe('appSettings - slice', () => {
             {
               id: 1,
               name: 'Lost and found',
-              faq: 'Seeking lost items'
-            }
+              faq: 'Seeking lost items',
+            },
           ],
           business_categories: {
-            Animals: [['Pet Shop', 1], ['Animal rescue', 2]]
+            Animals: [
+              ['Pet Shop', 1],
+              ['Animal rescue', 2],
+            ],
           },
           label_styles: {
             light_grey: {
-              background: '#000000'
-            }
-          }
+              background: '#000000',
+            },
+          },
         })
       )
 
       let data = appSettings.selectors.getAppSettings({
         main: {
-          appSettings: state
-        }
+          appSettings: state,
+        },
       })
 
       expect(data).toEqual({
@@ -54,33 +57,36 @@ describe('appSettings - slice', () => {
           {
             id: 1,
             name: 'Lost and found',
-            faq: 'Seeking lost items'
-          }
+            faq: 'Seeking lost items',
+          },
         ],
         businessCategories: {
-          Animals: [['Pet Shop', 1], ['Animal rescue', 2]]
+          Animals: [
+            ['Pet Shop', 1],
+            ['Animal rescue', 2],
+          ],
         },
         labelStyles: {
           light_grey: {
-            background: '#000000'
-          }
+            background: '#000000',
+          },
         },
         loading: false,
-        loaded: true
+        loaded: true,
       })
 
       data = appSettings.selectors.getCategories({
         main: {
-          appSettings: state
-        }
+          appSettings: state,
+        },
       })
 
       expect(data).toEqual([
         {
           id: 1,
           name: 'Lost and found',
-          faq: 'Seeking lost items'
-        }
+          faq: 'Seeking lost items',
+        },
       ])
     })
   })
@@ -94,8 +100,8 @@ describe('appSettings - slice', () => {
 
       const loading = appSettings.selectors.getLoading({
         main: {
-          appSettings: state
-        }
+          appSettings: state,
+        },
       })
 
       expect(loading).toEqual(true)
@@ -111,8 +117,8 @@ describe('appSettings - slice', () => {
 
       const loaded = appSettings.selectors.getLoaded({
         main: {
-          appSettings: state
-        }
+          appSettings: state,
+        },
       })
 
       expect(loaded).toEqual(true)

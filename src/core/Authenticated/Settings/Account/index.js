@@ -5,15 +5,12 @@ import { Account as AccountComponent } from './Account'
 
 import { navigateWithToken } from '@common/actions/navigateWithToken'
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   loading: profile.selectors.getLoading(state),
-  user: profile.selectors.getUser(state)
+  user: profile.selectors.getUser(state),
 })
 
-export const Account = connect(
-  mapStateToProps,
-  {
-    navigateWithToken,
-    updateUser
-  }
-)(AccountComponent)
+export const Account = connect(mapStateToProps, {
+  navigateWithToken,
+  updateUser,
+})(AccountComponent)

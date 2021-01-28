@@ -30,7 +30,7 @@ describe('NeighboringContent', () => {
             area_name: 'City',
             first_post_title: 'Post title',
             first_post_user_full_name: 'John Smith',
-            additional_posts_count: 1
+            additional_posts_count: 1,
           },
           {
             area_id: 2,
@@ -38,8 +38,8 @@ describe('NeighboringContent', () => {
             area_name: 'Other place',
             first_post_title: 'Second title',
             first_post_user_full_name: 'Jess Smith',
-            additional_posts_count: 0
-          }
+            additional_posts_count: 0,
+          },
         ]}
       />
     )

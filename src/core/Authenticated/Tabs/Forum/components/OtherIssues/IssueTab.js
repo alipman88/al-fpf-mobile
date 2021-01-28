@@ -7,7 +7,7 @@ import {
   IssueText,
   IssueTextBold,
   Triangle,
-  UnreadMarker
+  UnreadMarker,
 } from './styledComponents'
 
 export class IssueTab extends React.Component {
@@ -18,7 +18,7 @@ export class IssueTab extends React.Component {
       onTapIssue,
       isUnread,
       toggleIssueUnread,
-      currentAreaId
+      currentAreaId,
     } = this.props
 
     return (
@@ -28,7 +28,7 @@ export class IssueTab extends React.Component {
           toggleIssueUnread({
             id: issue.id,
             isUnread: true,
-            areaId: currentAreaId
+            areaId: currentAreaId,
           })
         }
       >
@@ -51,5 +51,5 @@ IssueTab.propTypes = {
   onTapIssue: PropTypes.func.isRequired,
   toggleIssueUnread: PropTypes.func.isRequired,
   isUnread: PropTypes.bool.isRequired,
-  currentAreaId: PropTypes.number.isRequired
+  currentAreaId: PropTypes.number.isRequired,
 }

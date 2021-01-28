@@ -8,7 +8,7 @@ import {
   Config,
   getSettingsGroup,
   setSettingsGroup,
-  getSettingsGroups
+  getSettingsGroups,
 } from '@common/config'
 import { TextInput } from '@components/TextInput'
 import { PasswordInput } from '@components/PasswordInput'
@@ -23,11 +23,11 @@ import {
   Logo,
   LogoContainer,
   BottomText,
-  ButtonSpacer
+  ButtonSpacer,
 } from './styledComponents'
 
 export class LoginFields extends React.Component {
-  handleResend = async email => {
+  handleResend = async (email) => {
     const { resendEmail } = this.props
     await resendEmail(email)
   }
@@ -41,7 +41,7 @@ export class LoginFields extends React.Component {
       setFieldTouched,
       touched,
       values,
-      navigation
+      navigation,
     } = this.props
 
     // For non-production builds, show a picker that allows choosing between
@@ -49,7 +49,7 @@ export class LoginFields extends React.Component {
     // When a different settings group is selected, restart the app.
     let settingsGroupField
     const settingsGroups = getSettingsGroups().map(
-      key => key || Config.ORIGINAL_CONFIG.ENVIRONMENT
+      (key) => key || Config.ORIGINAL_CONFIG.ENVIRONMENT
     )
     if (
       settingsGroups.length > 1 &&
@@ -61,7 +61,7 @@ export class LoginFields extends React.Component {
           <Select
             placeholder={getSettingsGroup()}
             items={settingsGroups}
-            onValueChange={settingsGroup => {
+            onValueChange={(settingsGroup) => {
               setSettingsGroup(settingsGroup)
               RNRestart.Restart()
             }}
@@ -83,7 +83,7 @@ export class LoginFields extends React.Component {
             <TextInput
               label='Email'
               error={errors.email}
-              onChangeText={value => setFieldValue('email', value)}
+              onChangeText={(value) => setFieldValue('email', value)}
               onBlur={() => setFieldTouched('email')}
               touched={!!touched.email}
               value={values.email}
@@ -107,7 +107,7 @@ export class LoginFields extends React.Component {
               touched={!!touched.password}
               value={values.password}
               onBlur={() => setFieldTouched('password')}
-              onChangeText={value => {
+              onChangeText={(value) => {
                 setFieldValue('password', value)
                 setFieldTouched('password')
               }}
@@ -136,5 +136,5 @@ LoginFields.propTypes = {
   setFieldValue: PropTypes.func.isRequired,
   touched: PropTypes.object.isRequired,
   values: PropTypes.object.isRequired,
-  navigation: PropTypes.object.isRequired
+  navigation: PropTypes.object.isRequired,
 }

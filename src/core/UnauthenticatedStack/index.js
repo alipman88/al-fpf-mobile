@@ -29,9 +29,9 @@ export const UnauthenticatedStack = createStackNavigator(
     Welcome: {
       screen: Welcome,
       navigationOptions: {
-        gesturesEnabled: false
-      }
-    }
+        gesturesEnabled: false,
+      },
+    },
   },
   {
     initialRouteName: 'Welcome',
@@ -41,8 +41,8 @@ export const UnauthenticatedStack = createStackNavigator(
       headerStyle: {
         elevation: 0,
         shadowOpacity: 0,
-        borderBottomWidth: 0
-      }
-    }
+        borderBottomWidth: 0,
+      },
+    },
   }
 )

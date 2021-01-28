@@ -4,7 +4,7 @@ describe('spinner - slice', () => {
   test('initial state has visibility = false', () => {
     const state = spinner.reducer(undefined, {})
     expect(state).toEqual({
-      visible: false
+      visible: false,
     })
   })
 
@@ -15,14 +15,14 @@ describe('spinner - slice', () => {
         spinner.actions.setVisibility(true)
       )
       expect(state).toEqual({
-        visible: true
+        visible: true,
       })
 
       expect(
         spinner.selectors.getVisible({
           main: {
-            spinner: state
-          }
+            spinner: state,
+          },
         })
       ).toEqual(true)
     })

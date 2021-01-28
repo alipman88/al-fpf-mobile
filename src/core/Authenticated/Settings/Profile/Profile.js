@@ -23,7 +23,7 @@ export class Profile extends React.Component {
       hasAppleSubscription,
       navigateWithToken,
       navigation,
-      profile
+      profile,
     } = this.props
 
     let subscriptionLink
@@ -101,8 +101,8 @@ export class Profile extends React.Component {
               <FieldLabel>Additional Forums</FieldLabel>
               <Field>
                 {profile.area_ids
-                  .filter(id => id !== profile.home_nf)
-                  .map(areaId => (
+                  .filter((id) => id !== profile.home_nf)
+                  .map((areaId) => (
                     <FieldText key={areaId}>{areas[areaId].name}</FieldText>
                   ))}
               </Field>
@@ -144,7 +144,7 @@ export class Profile extends React.Component {
 
 Profile.navigationOptions = ({ navigation }) => ({
   headerLeft: <BackButton navigation={navigation} />,
-  title: 'My profile'
+  title: 'My profile',
 })
 
 Profile.propTypes = {
@@ -153,5 +153,5 @@ Profile.propTypes = {
   hasAppleSubscription: PropTypes.bool,
   navigateWithToken: PropTypes.func.isRequired,
   navigation: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
 }

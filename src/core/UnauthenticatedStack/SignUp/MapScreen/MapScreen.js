@@ -11,7 +11,7 @@ import { ForumScrollView } from './styledComponents'
 
 export class MapScreen extends React.Component {
   static navigationOptions = {
-    header: null
+    header: null,
   }
 
   state = {
@@ -23,8 +23,8 @@ export class MapScreen extends React.Component {
       latitude: 0,
       longitude: 0,
       latitudeDelta: 0,
-      longitudeDelta: 0
-    }
+      longitudeDelta: 0,
+    },
   }
 
   componentDidMount() {
@@ -64,8 +64,8 @@ export class MapScreen extends React.Component {
         latitude: minLat - latitudeDelta / 3,
         longitude: minLong + longitudeDelta / 2,
         latitudeDelta: latitudeDelta * 3,
-        longitudeDelta
-      }
+        longitudeDelta,
+      },
     })
   }
 
@@ -74,7 +74,7 @@ export class MapScreen extends React.Component {
     checkedAreas[id] = checked
 
     this.setState({
-      checkedAreas
+      checkedAreas,
     })
   }
 
@@ -86,8 +86,8 @@ export class MapScreen extends React.Component {
         ...newUser.address,
         lat: region.latitude,
         lng: region.longitude,
-        area_ids: Object.keys(checkedAreas)
-      }
+        area_ids: Object.keys(checkedAreas),
+      },
     })
 
     let route
@@ -126,7 +126,7 @@ export class MapScreen extends React.Component {
           )
         }
         contentContainerStyle={{
-          flex: 1
+          flex: 1,
         }}
       >
         {region.latitudeDelta > 0 && region.longitudeDelta > 0 && (
@@ -139,12 +139,12 @@ export class MapScreen extends React.Component {
             zoomEnabled={false}
             zoomTapEnabled={false}
           >
-            {areas.map(area => (
+            {areas.map((area) => (
               <Polygon
                 key={area.id}
-                coordinates={area.coordinates.map(coordinate => ({
+                coordinates={area.coordinates.map((coordinate) => ({
                   latitude: parseFloat(coordinate[0]),
-                  longitude: parseFloat(coordinate[1])
+                  longitude: parseFloat(coordinate[1]),
                 }))}
                 strokeColor='#ff0000'
                 fillColor={
@@ -164,7 +164,7 @@ export class MapScreen extends React.Component {
               <Marker
                 coordinate={{
                   latitude: parseFloat(address.lat),
-                  longitude: parseFloat(address.lng)
+                  longitude: parseFloat(address.lng),
                 }}
               />
             )}
@@ -175,16 +175,16 @@ export class MapScreen extends React.Component {
           contentContainerStyle={{
             padding: 10,
             paddingLeft: 50,
-            paddingBottom: 30
+            paddingBottom: 30,
           }}
         >
-          {areas.map(area => (
+          {areas.map((area) => (
             <ForumDetails
               key={area.id}
               area={area}
               checkboxValue={this.state.checkedAreas[area.id]}
               hasForumCheckbox={areas.length > 1}
-              onPress={value => this.toggleArea(value, area.id)}
+              onPress={(value) => this.toggleArea(value, area.id)}
             />
           ))}
         </ForumScrollView>
@@ -205,5 +205,5 @@ MapScreen.propTypes = {
   navigation: PropTypes.object.isRequired,
   newUser: PropTypes.object.isRequired,
   profileType: PropTypes.string.isRequired,
-  setNewUserByKey: PropTypes.func.isRequired
+  setNewUserByKey: PropTypes.func.isRequired,
 }

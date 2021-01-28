@@ -4,7 +4,7 @@ import { resetAction } from '@common/resetAction'
 export const searchHistory = createSlice({
   name: 'searchHistory',
   initialState: {
-    history: []
+    history: [],
   },
   reducers: {
     addSearchToHistory: (state, { payload }) => ({
@@ -12,24 +12,24 @@ export const searchHistory = createSlice({
       history: [payload].concat(
         // filter out previous entries of the same value
         state.history
-          .filter(entry => entry.keyword !== payload.keyword)
+          .filter((entry) => entry.keyword !== payload.keyword)
           .slice(0, 4)
-      )
+      ),
     }),
-    clearSearchHistory: state => ({
-      history: []
-    })
+    clearSearchHistory: (state) => ({
+      history: [],
+    }),
   },
   extraReducers: {
     [resetAction]: () => ({
-      history: []
-    })
-  }
+      history: [],
+    }),
+  },
 })
 
 searchHistory.selectors = {
   getHistory: createSelector(
     ['main.searchHistory'],
-    searchHistory => searchHistory.history
-  )
+    (searchHistory) => searchHistory.history
+  ),
 }

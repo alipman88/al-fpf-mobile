@@ -18,24 +18,24 @@ export class CreateAccount extends React.Component {
       {
         type: 'termsOfUse',
         value: false,
-        text: 'I accept Front Porch Forum’s Terms of Use'
+        text: 'I accept Front Porch Forum’s Terms of Use',
       },
       {
         type: 'postIntro',
         value: true,
-        text: 'Introduce me to the members of my neighborhood forum'
+        text: 'Introduce me to the members of my neighborhood forum',
       },
       {
         type: 'isNfBooster',
         value: false,
-        text: 'I would like to help spread the word about my FPF to neighbors'
-      }
-    ]
+        text: 'I would like to help spread the word about my FPF to neighbors',
+      },
+    ],
   }
 
   toggleCheckbox = (type, value) => {
     const options = [...this.state.options]
-    const option = options.find(o => o.type === type)
+    const option = options.find((o) => o.type === type)
     option.value = value
     options.splice(options.indexOf(option), 1, option)
     this.setState({ options })
@@ -62,12 +62,12 @@ export class CreateAccount extends React.Component {
         {
           type: 'includeInDirectory',
           value: true,
-          text: 'Include my business in the FPF Directory'
+          text: 'Include my business in the FPF Directory',
         },
         {
           type: 'showAddress',
           value: true,
-          text: 'Show my street address in my Directory listing'
+          text: 'Show my street address in my Directory listing',
         }
       )
       this.setState({ options })
@@ -78,7 +78,7 @@ export class CreateAccount extends React.Component {
     const { navigation, profileType, loading } = this.props
 
     const nextDisabled = !this.state.options.find(
-      option => option.type === 'termsOfUse'
+      (option) => option.type === 'termsOfUse'
     ).value
 
     const toggles = this.state.options.map(({ type, value, text }) => {
@@ -123,5 +123,5 @@ CreateAccount.propTypes = {
   postSignUp: PropTypes.func.isRequired,
   profileType: PropTypes.string.isRequired,
   navigation: PropTypes.object.isRequired,
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired,
 }

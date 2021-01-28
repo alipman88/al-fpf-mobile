@@ -16,15 +16,15 @@ class ContainerComponent extends React.Component {
     super(props)
 
     // defined here so we can put it in inital state
-    this.setDrawerOpenState = open => {
+    this.setDrawerOpenState = (open) => {
       this.setState(() => ({
-        open
+        open,
       }))
     }
 
     this.state = {
       open: false,
-      setDrawerOpenState: this.setDrawerOpenState
+      setDrawerOpenState: this.setDrawerOpenState,
     }
   }
 
@@ -35,7 +35,7 @@ class ContainerComponent extends React.Component {
         <SideMenu
           menu={<DrawerMenu />}
           isOpen={this.state.open}
-          onChange={open => this.setDrawerOpenState(open)}
+          onChange={(open) => this.setDrawerOpenState(open)}
           openMenuOffset={
             isTabletWidth()
               ? (getDimensions().width * 1) / 3
@@ -47,7 +47,7 @@ class ContainerComponent extends React.Component {
           <Spinner />
           <SwitchNavigatorContainer
             onNavigationStateChange={handleNavigationChange}
-            ref={navigatorRef => {
+            ref={(navigatorRef) => {
               navigationService.setTopLevelNavigator(navigatorRef)
             }}
           />
@@ -59,11 +59,11 @@ class ContainerComponent extends React.Component {
 
 ContainerComponent.propTypes = {
   accessToken: PropTypes.string,
-  handleNavigationChange: PropTypes.func
+  handleNavigationChange: PropTypes.func,
 }
 
-const mapStateToProps = state => ({
-  accessToken: currentUser.selectors.getAccessToken(state)
+const mapStateToProps = (state) => ({
+  accessToken: currentUser.selectors.getAccessToken(state),
 })
 
 export const Container = connect(mapStateToProps)(ContainerComponent)

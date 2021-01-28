@@ -7,7 +7,7 @@ import { FormError } from '@components/FormError'
 import {
   FormFieldLabel,
   FormFieldLabelWrapper,
-  FormFieldRequired
+  FormFieldRequired,
 } from '@components/FormFieldLabel'
 
 import { Container } from './styledComponents'
@@ -37,7 +37,7 @@ export class Multiselect extends React.Component {
       selectText,
       single,
       touched,
-      value
+      value,
     } = this.props
 
     const hasError = Boolean(error) && touched
@@ -61,20 +61,20 @@ export class Multiselect extends React.Component {
           onConfirm={onConfirm}
           onSelectedItemsChange={onSelectedItemsChange}
           selectedItems={value}
-          onToggleSelector={opened => {
+          onToggleSelector={(opened) => {
             if (onToggle) {
               onToggle(opened)
             }
           }}
           searchTextFontFamily={{
-            fontFamily: 'ProximaNova-Regular'
+            fontFamily: 'ProximaNova-Regular',
           }}
           itemFontFamily={{ fontFamily: 'ProximaNova-Regular' }}
           subItemFontFamily={{
-            fontFamily: 'ProximaNova-Regular'
+            fontFamily: 'ProximaNova-Regular',
           }}
           confirmFontFamily={{
-            fontFamily: 'ProximaNova-Regular'
+            fontFamily: 'ProximaNova-Regular',
           }}
           showDropDown={false}
           expandDropDowns
@@ -87,11 +87,11 @@ export class Multiselect extends React.Component {
               borderColor: hasError ? '#dc4558' : '#d5dde1',
               backgroundColor: hasError ? '#ffebeb' : '#fff',
               paddingHorizontal: 4,
-              height: 40
+              height: 40,
             },
             selectToggleText: {
-              fontSize: 14
-            }
+              fontSize: 14,
+            },
           }}
           IconRenderer={Icon}
         />
@@ -107,7 +107,7 @@ Multiselect.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired
+      name: PropTypes.string.isRequired,
     })
   ).isRequired,
   label: PropTypes.string,
@@ -119,5 +119,5 @@ Multiselect.propTypes = {
   selectText: PropTypes.string,
   single: PropTypes.bool,
   touched: PropTypes.bool,
-  value: PropTypes.array
+  value: PropTypes.array,
 }

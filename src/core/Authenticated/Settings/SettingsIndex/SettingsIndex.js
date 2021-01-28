@@ -16,7 +16,7 @@ import {
   Navigation,
   Version,
   ViewPostings,
-  ViewPostingsContainer
+  ViewPostingsContainer,
 } from './styledComponents'
 
 import linkIcon from '@assets/images/global-assets/external-link-icons/external-link-icon-blue.png'
@@ -27,7 +27,7 @@ let envDisplay = ['development', 'staging'].includes(Config.ENVIRONMENT)
 
 export class SettingsIndex extends React.Component {
   state = {
-    loading: false
+    loading: false,
   }
 
   constructor(props) {
@@ -44,7 +44,7 @@ export class SettingsIndex extends React.Component {
     )
   }
 
-  setLoading = loadingVal => {
+  setLoading = (loadingVal) => {
     this.setState({ loading: loadingVal })
   }
 
@@ -74,7 +74,7 @@ export class SettingsIndex extends React.Component {
             ))}
             <TouchableOpacity
               onPress={() =>
-                navigateWithToken('/user/posts', loading =>
+                navigateWithToken('/user/posts', (loading) =>
                   this.setState({ loading })
                 )
               }
@@ -99,7 +99,7 @@ export class SettingsIndex extends React.Component {
 }
 
 SettingsIndex.navigationOptions = {
-  title: 'Settings'
+  title: 'Settings',
 }
 
 SettingsIndex.propTypes = {
@@ -108,5 +108,5 @@ SettingsIndex.propTypes = {
   user: PropTypes.object.isRequired,
   getProfiles: PropTypes.func.isRequired,
   logoutUser: PropTypes.func.isRequired,
-  fcmToken: PropTypes.string
+  fcmToken: PropTypes.string,
 }

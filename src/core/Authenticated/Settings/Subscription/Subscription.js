@@ -14,11 +14,11 @@ import {
   Description,
   ButtonHint,
   ButtonWrapper,
-  HelpText
+  HelpText,
 } from './styledComponents'
 
 export class Subscription extends React.Component {
-  purchase = async productId => {
+  purchase = async (productId) => {
     this.props.requestSubscription(productId, this.props.profile.id)
   }
 
@@ -40,7 +40,7 @@ export class Subscription extends React.Component {
       const perMonthPrice = Number(product.price) / 12
       const perMonth = perMonthPrice.toLocaleString('en-US', {
         style: 'currency',
-        currency: product.currency
+        currency: product.currency,
       })
       perMonthText = `(12 months at ${perMonth}/mo.)`
     }
@@ -65,7 +65,7 @@ export class Subscription extends React.Component {
       profile,
       purchasing,
       hasSubscription,
-      navigateWithToken
+      navigateWithToken,
     } = this.props
 
     let content
@@ -105,10 +105,10 @@ export class Subscription extends React.Component {
             </Description>
 
             {products
-              .filter(product =>
+              .filter((product) =>
                 product.productId.startsWith('enhanced_business_')
               )
-              .map(product => this.subscriptionButton(product))}
+              .map((product) => this.subscriptionButton(product))}
 
             <Description>
               Upgrade to FPF Standard Business Access Plan to receive these
@@ -121,10 +121,10 @@ export class Subscription extends React.Component {
             <Description>• Enhanced listing in FPF Directory</Description>
 
             {products
-              .filter(product =>
+              .filter((product) =>
                 product.productId.startsWith('standard_business_')
               )
-              .map(product => this.subscriptionButton(product))}
+              .map((product) => this.subscriptionButton(product))}
           </>
         )
       } else if (profilePlan.plan_type === 'government') {
@@ -141,10 +141,10 @@ export class Subscription extends React.Component {
             </Description>
 
             {products
-              .filter(product =>
+              .filter((product) =>
                 product.productId.startsWith('standard_government_')
               )
-              .map(product => this.subscriptionButton(product))}
+              .map((product) => this.subscriptionButton(product))}
           </>
         )
       } else if (profilePlan.plan_type === 'nonprofit') {
@@ -166,10 +166,10 @@ export class Subscription extends React.Component {
             </Description>
 
             {products
-              .filter(product =>
+              .filter((product) =>
                 product.productId.startsWith('enhanced_nonprofit_')
               )
-              .map(product => this.subscriptionButton(product))}
+              .map((product) => this.subscriptionButton(product))}
 
             <Description>
               Upgrade to FPF Standard Nonprofit Access Plan to receive these
@@ -181,10 +181,10 @@ export class Subscription extends React.Component {
             <Description>• Enhanced listing in FPF Directory</Description>
 
             {products
-              .filter(product =>
+              .filter((product) =>
                 product.productId.startsWith('standard_nonprofit_')
               )
-              .map(product => this.subscriptionButton(product))}
+              .map((product) => this.subscriptionButton(product))}
           </>
         )
       }
@@ -232,7 +232,7 @@ export class Subscription extends React.Component {
 
 Subscription.navigationOptions = ({ navigation }) => ({
   headerLeft: <BackButton navigation={navigation} />,
-  title: 'Upgrade FPF Plan'
+  title: 'Upgrade FPF Plan',
 })
 
 Subscription.propTypes = {
@@ -242,5 +242,5 @@ Subscription.propTypes = {
   products: PropTypes.array.isRequired,
   profile: PropTypes.object.isRequired,
   purchasing: PropTypes.bool,
-  requestSubscription: PropTypes.func.isRequired
+  requestSubscription: PropTypes.func.isRequired,
 }

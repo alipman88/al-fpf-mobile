@@ -4,7 +4,7 @@ import { shallow } from 'enzyme'
 
 describe('PasswordInput', () => {
   const defaultProps = {
-    value: ''
+    value: '',
   }
 
   test('toggleShowPassword toggles showPassword', () => {

@@ -7,13 +7,13 @@ describe('areas actions', () => {
   const getState = () => ({
     secured: {
       currentUser: {
-        accessToken: 'abc123'
-      }
-    }
+        accessToken: 'abc123',
+      },
+    },
   })
   const navigation = {
     navigate: jest.fn(),
-    dispatch: jest.fn()
+    dispatch: jest.fn(),
   }
 
   test('requests /areas with authorization header', async () => {
@@ -21,9 +21,9 @@ describe('areas actions', () => {
       data: {
         areas: [{ id: 1 }],
         pagination: {
-          pages: 1
-        }
-      }
+          pages: 1,
+        },
+      },
     }))
     const dispatch = jest.fn()
 
@@ -31,8 +31,8 @@ describe('areas actions', () => {
 
     expect(getSpy).toHaveBeenCalledWith('/areas?page=1', {
       headers: {
-        Authorization: 'Bearer abc123'
-      }
+        Authorization: 'Bearer abc123',
+      },
     })
 
     expect(dispatch).toHaveBeenCalledWith(areas.actions.setLoading(true))
@@ -48,17 +48,17 @@ describe('areas actions', () => {
         data: {
           areas: [{ id: 1 }],
           pagination: {
-            pages: 2
-          }
-        }
+            pages: 2,
+          },
+        },
       }))
       .mockImplementationOnce(() => ({
         data: {
           areas: [{ id: 2 }],
           pagination: {
-            pages: 2
-          }
-        }
+            pages: 2,
+          },
+        },
       }))
     const dispatch = jest.fn()
 
@@ -66,14 +66,14 @@ describe('areas actions', () => {
 
     expect(getSpy).toHaveBeenCalledWith('/areas?page=1', {
       headers: {
-        Authorization: 'Bearer abc123'
-      }
+        Authorization: 'Bearer abc123',
+      },
     })
 
     expect(getSpy).toHaveBeenCalledWith('/areas?page=2', {
       headers: {
-        Authorization: 'Bearer abc123'
-      }
+        Authorization: 'Bearer abc123',
+      },
     })
 
     expect(getSpy).toHaveBeenCalledTimes(2)
@@ -96,8 +96,8 @@ describe('areas actions', () => {
 
     expect(getSpy).toHaveBeenCalledWith('/areas?page=1', {
       headers: {
-        Authorization: 'Bearer abc123'
-      }
+        Authorization: 'Bearer abc123',
+      },
     })
 
     expect(dispatch).toHaveBeenCalledWith(

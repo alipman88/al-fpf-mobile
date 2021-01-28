@@ -3,7 +3,7 @@ import { createSlice, createSelector } from 'redux-starter-kit'
 const initialState = {
   message: '',
   type: '',
-  autoHide: false
+  autoHide: false,
 }
 
 export const appMessage = createSlice({
@@ -17,32 +17,32 @@ export const appMessage = createSlice({
 
       return {
         message,
-        type: 'danger'
+        type: 'danger',
       }
     },
     setAppMessage: (_, { payload }) => {
       return {
         message: payload.message,
         type: payload.type,
-        autoHide: payload.autoHide
+        autoHide: payload.autoHide,
       }
     },
-    hideNetworkError: state =>
-      state.message === 'Network error' ? initialState : state
-  }
+    hideNetworkError: (state) =>
+      state.message === 'Network error' ? initialState : state,
+  },
 })
 
 appMessage.selectors = {
   getMessage: createSelector(
     ['main.appMessage'],
-    appMessage => appMessage.message
+    (appMessage) => appMessage.message
   ),
   getMessageType: createSelector(
     ['main.appMessage'],
-    appMessage => appMessage.type
+    (appMessage) => appMessage.type
   ),
   getAutoHide: createSelector(
     ['main.appMessage'],
-    appMessage => appMessage.autoHide
-  )
+    (appMessage) => appMessage.autoHide
+  ),
 }

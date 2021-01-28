@@ -12,8 +12,8 @@ export class Directory extends React.Component {
         source={{
           uri: Config.WEBSITE_HOST + '/directory',
           headers: {
-            authorization: accessToken
-          }
+            authorization: accessToken,
+          },
         }}
       />
     )
@@ -21,5 +21,5 @@ export class Directory extends React.Component {
 }
 
 Directory.propTypes = {
-  accessToken: PropTypes.string
+  accessToken: PropTypes.string,
 }

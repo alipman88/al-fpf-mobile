@@ -7,7 +7,7 @@ import { appMessage } from '@components/AppMessage/slice'
 import { spinner } from '@app/Spinner/slice'
 import { responseError } from '@common/utils/responseError'
 
-export const navigateWithToken = url => async (dispatch, getState) => {
+export const navigateWithToken = (url) => async (dispatch, getState) => {
   try {
     dispatch(spinner.actions.setVisibility(true))
     const urlObj = parse(`${Config.WEBSITE_HOST}${url}`, true)

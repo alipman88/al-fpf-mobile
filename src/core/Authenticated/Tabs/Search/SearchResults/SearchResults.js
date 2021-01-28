@@ -10,7 +10,7 @@ import {
   LoadMoreContainer,
   ResultsContainer,
   ResultCounts,
-  ResultsDivider
+  ResultsDivider,
 } from './styledComponents'
 
 export class SearchResults extends React.Component {
@@ -26,7 +26,7 @@ export class SearchResults extends React.Component {
       searchResults,
       setFieldTouched,
       setFieldValue,
-      values
+      values,
     } = this.props
 
     const numberOfVisiblePosts = Math.min(searchResults.length, total)
@@ -36,7 +36,7 @@ export class SearchResults extends React.Component {
         <PaddingContainer>
           {!searched && (
             <SearchHistory
-              onEntryPress={entry => {
+              onEntryPress={(entry) => {
                 setFieldValue('keyword', entry.keyword)
                 setFieldTouched('keyword', true)
                 setFieldValue('forums', entry.forums)
@@ -52,7 +52,7 @@ export class SearchResults extends React.Component {
                   fromDate: new Date(entry.fromDate),
                   toDate: new Date(entry.toDate),
                   category: entry.category,
-                  forums: entry.forums
+                  forums: entry.forums,
                 })
               }}
             />
@@ -81,8 +81,10 @@ export class SearchResults extends React.Component {
                 includeBottomButtons
                 moreText={'Read'}
                 showIssueData
-                onTapCategory={categoryName => {
-                  const category = categories.find(c => c.name === categoryName)
+                onTapCategory={(categoryName) => {
+                  const category = categories.find(
+                    (c) => c.name === categoryName
+                  )
                   setFieldTouched('category', true)
                   setFieldValue('category', category)
                   search({ ...values, category })
@@ -123,5 +125,5 @@ SearchResults.propTypes = {
   searchResults: PropTypes.array.isRequired,
   setFieldTouched: PropTypes.func.isRequired,
   setFieldValue: PropTypes.func.isRequired,
-  values: PropTypes.object.isRequired
+  values: PropTypes.object.isRequired,
 }

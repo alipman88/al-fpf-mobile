@@ -21,12 +21,12 @@ import {
   FormContainer,
   FieldWrapper,
   InputDetails,
-  ButtonContainer
+  ButtonContainer,
 } from '../styledComponents'
 
 export class ComposeFields extends React.Component {
   state = {
-    duplicatePost: false
+    duplicatePost: false,
   }
 
   constructor(props) {
@@ -51,7 +51,7 @@ export class ComposeFields extends React.Component {
       return obj
     }, {})
 
-    return areas.filter(area => profileAreaIds[area.id])
+    return areas.filter((area) => profileAreaIds[area.id])
   }
 
   getNeighborNames(areas) {
@@ -61,9 +61,9 @@ export class ComposeFields extends React.Component {
     const neighborNames = uniq(
       flatten(
         areas
-          .filter(area => selectedAreas.includes(area.id))
-          .map(area => area.neighbor_areas)
-      ).map(area => area.name)
+          .filter((area) => selectedAreas.includes(area.id))
+          .map((area) => area.neighbor_areas)
+      ).map((area) => area.name)
     ).join(', ')
     if (neighborNames.length > 0) {
       return neighborNames
@@ -82,7 +82,7 @@ export class ComposeFields extends React.Component {
     }
   }
 
-  setDuplicateState = duplicatePost => {
+  setDuplicateState = (duplicatePost) => {
     this.setState({ duplicatePost })
   }
 
@@ -106,7 +106,7 @@ export class ComposeFields extends React.Component {
       setFieldValue,
       setFieldTouched,
       touched,
-      values
+      values,
     } = this.props
 
     const { duplicatePost } = this.state
@@ -121,16 +121,16 @@ export class ComposeFields extends React.Component {
       duplicatePost && get(values, 'category.is_event', false)
 
     // Add 'None Apply' category unique to post submission
-    const composeCategories = categories.slice().filter(category => {
+    const composeCategories = categories.slice().filter((category) => {
       return !category.visibility || category.visibility === 'public'
     })
     composeCategories.push({
       name: 'None Apply',
-      id: -1
+      id: -1,
     })
 
     let categoryValue = composeCategories.findIndex(
-      category => category.id === get(values, 'category.id')
+      (category) => category.id === get(values, 'category.id')
     )
 
     if (categoryValue === -1) {
@@ -142,7 +142,7 @@ export class ComposeFields extends React.Component {
     if (profiles.length === 0) {
       errorMessage =
         'You will not be able to submit without any active profiles.'
-    } else if (profiles.filter(p => p.access !== 'read_only').length === 0) {
+    } else if (profiles.filter((p) => p.access !== 'read_only').length === 0) {
       errorMessage = 'You have no profiles with access to submit postings.'
     } else if (profiles[values.profile]?.access === 'read_only') {
       errorMessage =
@@ -169,9 +169,9 @@ export class ComposeFields extends React.Component {
                 label='Profile'
                 items={profiles.map((profile, i) => ({
                   value: i,
-                  label: getProfileDisplayName(profile, false)
+                  label: getProfileDisplayName(profile, false),
                 }))}
-                onValueChange={index => {
+                onValueChange={(index) => {
                   index = parseInt(index, 10)
                   setFieldTouched('profile', true)
                   setFieldValue('profile', index)
@@ -193,7 +193,7 @@ export class ComposeFields extends React.Component {
           {filteredAreas.length > 1 && (
             <FieldWrapper>
               <Multiselect
-                onToggle={opened => {
+                onToggle={(opened) => {
                   if (opened) {
                     this.blurTextInputs()
                   }
@@ -204,15 +204,15 @@ export class ComposeFields extends React.Component {
                   {
                     name: 'Forums',
                     id: 0,
-                    children: filteredAreas.map(area => ({
+                    children: filteredAreas.map((area) => ({
                       id: area.id,
-                      name: area.name
-                    }))
-                  }
+                      name: area.name,
+                    })),
+                  },
                 ]}
                 selectText='Select Forums'
                 searchPlaceholderText='Search Forums'
-                onSelectedItemsChange={selectedItems => {
+                onSelectedItemsChange={(selectedItems) => {
                   setFieldTouched('forums', true)
                   setFieldValue('forums', selectedItems)
                   this.blurTextInputs()
@@ -233,9 +233,9 @@ export class ComposeFields extends React.Component {
               label='Category'
               items={composeCategories.map((category, i) => ({
                 value: i,
-                label: category.name
+                label: category.name,
               }))}
-              onValueChange={index => {
+              onValueChange={(index) => {
                 index = parseInt(index, 10)
                 setFieldTouched('category', true)
                 setFieldValue('category', composeCategories[index])
@@ -252,7 +252,7 @@ export class ComposeFields extends React.Component {
           <FieldWrapper>
             <TextInput
               error={errors.subject}
-              onChangeText={value => setFieldValue('subject', value)}
+              onChangeText={(value) => setFieldValue('subject', value)}
               onBlur={() => setFieldTouched('subject')}
               touched={!!touched.subject}
               value={values.subject}
@@ -278,7 +278,7 @@ export class ComposeFields extends React.Component {
             <FieldWrapper>
               <TextInput
                 error={errors.message}
-                onChangeText={value => setFieldValue('message', value)}
+                onChangeText={(value) => setFieldValue('message', value)}
                 onBlur={() => setFieldTouched('message')}
                 touched={!!touched.message}
                 value={values.message}
@@ -295,7 +295,7 @@ export class ComposeFields extends React.Component {
           {!isDuplicateEvent && (
             <Checkbox
               value={values.isShared}
-              onPress={value => {
+              onPress={(value) => {
                 setFieldTouched('isShared', true)
                 setFieldValue('isShared', value)
               }}
@@ -328,5 +328,5 @@ ComposeFields.propTypes = {
   setFieldValue: PropTypes.func.isRequired,
   shouldResetForm: PropTypes.bool,
   touched: PropTypes.object.isRequired,
-  values: PropTypes.object.isRequired
+  values: PropTypes.object.isRequired,
 }

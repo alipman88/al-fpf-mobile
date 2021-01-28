@@ -11,15 +11,15 @@ describe('EmailVerification', () => {
     email: 'foo@bar.com',
     resendEmail: jest.fn(),
     navigation: {
-      navigate: jest.fn()
+      navigate: jest.fn(),
     },
     newUser: {
       profileType: 'business',
-      email: 'bob@ross.com'
+      email: 'bob@ross.com',
     },
     profileType: 'business',
     clearUserData: jest.fn(),
-    setRegistrationEmail: jest.fn()
+    setRegistrationEmail: jest.fn(),
   }
 
   afterEach(() => {
@@ -43,10 +43,7 @@ describe('EmailVerification', () => {
 
   test('it clears data and navigates on Login link tap', () => {
     const wrapper = shallow(<EmailVerification {...defaultProps} />)
-    wrapper
-      .find(TouchableOpacity)
-      .last()
-      .simulate('press')
+    wrapper.find(TouchableOpacity).last().simulate('press')
     expect(defaultProps.clearUserData).toHaveBeenCalled()
     expect(defaultProps.navigation.navigate).toHaveBeenCalledWith('Login')
   })
@@ -55,11 +52,7 @@ describe('EmailVerification', () => {
     test('hits the api, clears data', async () => {
       const wrapper = shallow(<EmailVerification {...defaultProps} />)
       jest.spyOn(api, 'post').mockImplementation(() => ({}))
-      await wrapper
-        .find(TouchableOpacity)
-        .first()
-        .props()
-        .onPress()
+      await wrapper.find(TouchableOpacity).first().props().onPress()
 
       expect(defaultProps.resendEmail).toHaveBeenCalledWith(defaultProps.email)
       api.post.mockRestore()

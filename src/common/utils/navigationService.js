@@ -10,12 +10,14 @@ function navigate(routeName, params) {
   _navigator.dispatch(
     NavigationActions.navigate({
       routeName,
-      params
+      params,
     })
   )
 }
 
-export default {
+const navigationService = {
   navigate,
-  setTopLevelNavigator
+  setTopLevelNavigator,
 }
+
+export default navigationService

@@ -16,7 +16,7 @@ import {
   ForumText,
   SafeAreaView,
   View,
-  Birds
+  Birds,
 } from './styledComponents'
 
 export const DrawerMenu = ({
@@ -25,7 +25,7 @@ export const DrawerMenu = ({
   currentProfile,
   profiles,
   setCurrentAreaId,
-  setCurrentProfileId
+  setCurrentProfileId,
 }) => {
   const birdies = (
     <Birds>
@@ -43,7 +43,7 @@ export const DrawerMenu = ({
             <Container>
               <ScrollView>
                 <Header>Forums</Header>
-                {areas.map(area => (
+                {areas.map((area) => (
                   <TouchableOpacity
                     key={area.name}
                     onPress={() => {
@@ -51,7 +51,7 @@ export const DrawerMenu = ({
                         !currentProfile ||
                         !currentProfile.area_ids.includes(area.id)
                       ) {
-                        const profile = profiles.find(profile => {
+                        const profile = profiles.find((profile) => {
                           return profile.area_ids.includes(area.id)
                         })
 
@@ -89,5 +89,5 @@ DrawerMenu.propTypes = {
   currentProfile: PropTypes.object,
   profiles: PropTypes.array.isRequired,
   setCurrentAreaId: PropTypes.func.isRequired,
-  setCurrentProfileId: PropTypes.func.isRequired
+  setCurrentProfileId: PropTypes.func.isRequired,
 }

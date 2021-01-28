@@ -12,7 +12,7 @@ describe('OtherIssues selector', () => {
       { id: 2, number: 20, sent_at: '02-01-2001' },
       { id: 3, number: 30, sent_at: '03-01-2001' },
       { id: 4, number: 40, sent_at: '04-01-2001' },
-      { id: 5, number: 50, sent_at: '05-01-2001' }
+      { id: 5, number: 50, sent_at: '05-01-2001' },
     ],
     currentIssueId: 1,
     currentAreaId: 1,
@@ -20,9 +20,9 @@ describe('OtherIssues selector', () => {
     toggleIssueUnread: jest.fn(),
     navigation: {
       navigate: jest.fn(),
-      dispatch: jest.fn()
+      dispatch: jest.fn(),
     },
-    toast: { current: shallow(<Toast />).instance() }
+    toast: { current: shallow(<Toast />).instance() },
   }
 
   test('it creates 5 tabs to choose from', () => {
@@ -35,7 +35,7 @@ describe('OtherIssues selector', () => {
 
     wrapper
       .find(IssueTab)
-      .findWhere(i => i.props().issue.number === 40)
+      .findWhere((i) => i.props().issue.number === 40)
       .first()
       .props()
       .onTapIssue(4)

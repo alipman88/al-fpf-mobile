@@ -42,7 +42,7 @@ export const ForumMessage = ({ forumMessage }) => {
   )
 }
 
-const forumMessageEmpty = forumMessage => {
+const forumMessageEmpty = (forumMessage) => {
   return (
     forumMessage === undefined ||
     forumMessage === null ||
@@ -55,7 +55,7 @@ const forumMessageEmpty = forumMessage => {
 }
 
 ForumMessage.propTypes = {
-  forumMessage: PropTypes.object
+  forumMessage: PropTypes.object,
 }
 
 ForumMessage.defaultProps = {
@@ -63,6 +63,6 @@ ForumMessage.defaultProps = {
     title: '',
     content: '',
     button_text: '',
-    button_url: ''
-  }
+    button_url: '',
+  },
 }

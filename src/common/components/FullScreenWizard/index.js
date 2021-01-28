@@ -19,7 +19,7 @@ import {
   SafeAreaViewContainer,
   ScreenWrapper,
   TopContainer,
-  TopHeader
+  TopHeader,
 } from './styledComponents'
 
 export class FullScreenWizard extends React.Component {
@@ -35,7 +35,7 @@ export class FullScreenWizard extends React.Component {
       currentStep,
       topPadding,
       nextDisabled,
-      customHeader
+      customHeader,
     } = this.props
 
     const navButtons = (
@@ -122,7 +122,7 @@ export class FullScreenWizard extends React.Component {
                       // https://medium.com/@peterpme/taming-react-natives-scrollview-with-flex-144e6ff76c08
                       flexGrow: 1,
                       justifyContent: 'space-between',
-                      ...contentContainerStyle
+                      ...contentContainerStyle,
                     }}
                   >
                     {children}
@@ -153,9 +153,9 @@ FullScreenWizard.propTypes = {
   onNextPress: PropTypes.func.isRequired,
   steps: PropTypes.number,
   topPadding: PropTypes.number,
-  nextDisabled: PropTypes.bool
+  nextDisabled: PropTypes.bool,
 }
 
 FullScreenWizard.defaultProps = {
-  nextLabel: '    Continue'
+  nextLabel: '    Continue',
 }

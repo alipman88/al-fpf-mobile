@@ -76,7 +76,7 @@ describe('purchases - actions', () => {
       const putSpy = jest
         .spyOn(api, 'putAuthorized')
         .mockImplementation(() => ({
-          data: { profile: updatedProfile }
+          data: { profile: updatedProfile },
         }))
 
       const rniapSpy = jest.spyOn(RNIap, 'finishTransactionIOS')
@@ -85,16 +85,16 @@ describe('purchases - actions', () => {
         transactionReceipt: 'receipt-data',
         productId: 'some-sku',
         transactionId: 'transaction-id',
-        purchaseToken: 'purchase-token'
+        purchaseToken: 'purchase-token',
       }
 
       const getState = () => ({
         main: {
           purchases: {
             purchasing: true,
-            profileId: 1
-          }
-        }
+            profileId: 1,
+          },
+        },
       })
 
       await purchaseUpdated(purchase)(dispatch, getState)
@@ -102,7 +102,7 @@ describe('purchases - actions', () => {
       expect(putSpy).toHaveBeenCalledWith(
         '/profiles/1/apple_subscription',
         {
-          receipt: 'receipt-data'
+          receipt: 'receipt-data',
         },
         getState()
       )
@@ -119,7 +119,7 @@ describe('purchases - actions', () => {
         appMessage.actions.setAppMessage({
           message: 'FPF plan upgrade successful!',
           type: 'success',
-          autoHide: true
+          autoHide: true,
         })
       )
 
@@ -138,16 +138,16 @@ describe('purchases - actions', () => {
         transactionReceipt: 'receipt',
         productId: 'product-id',
         transactionId: 'transaction-id',
-        purchaseToken: 'purchase-token'
+        purchaseToken: 'purchase-token',
       }
 
       const getState = () => ({
         main: {
           purchases: {
             purchasing: true,
-            profileId: 1
-          }
-        }
+            profileId: 1,
+          },
+        },
       })
 
       await purchaseUpdated(purchase)(dispatch, getState)
@@ -170,9 +170,9 @@ describe('purchases - actions', () => {
         main: {
           purchases: {
             purchasing: true,
-            profileId: 1
-          }
-        }
+            profileId: 1,
+          },
+        },
       })
 
       await purchaseError(new Error('boom'))(dispatch, getState)

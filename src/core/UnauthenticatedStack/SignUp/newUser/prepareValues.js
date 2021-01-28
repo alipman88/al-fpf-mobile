@@ -2,7 +2,7 @@ import { omit } from 'lodash'
 import { snakeCaseData } from '@common/utils/snakeCaseData'
 import { profileTypes } from '@common/types/profileTypes'
 
-export const prepareValues = values => {
+export const prepareValues = (values) => {
   let newValues = values
 
   // flatten nested values if they're used, build profile
@@ -15,7 +15,7 @@ export const prepareValues = values => {
   newValues.profile = {
     ...newValues.profile,
     ...snakeCaseData(values.address),
-    profile_plan_id: newValues.profilePlan.id
+    profile_plan_id: newValues.profilePlan.id,
   }
 
   // remove temp fields
@@ -23,11 +23,11 @@ export const prepareValues = values => {
     profileTypes.BUSINESS,
     profileTypes.GOVERNMENT,
     'address',
-    'profilePlan'
+    'profilePlan',
   ])
   return {
     user: {
-      ...snakeCaseData(newValues)
-    }
+      ...snakeCaseData(newValues),
+    },
   }
 }

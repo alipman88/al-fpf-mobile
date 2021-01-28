@@ -27,8 +27,8 @@ describe('SearchResults', () => {
       forums: [],
       category: [],
       fromDate: startOfDay(subYears(new Date(), 2)),
-      toDate: endOfDay(new Date())
-    }
+      toDate: endOfDay(new Date()),
+    },
   }
 
   afterEach(() => {
@@ -57,8 +57,8 @@ describe('SearchResults', () => {
             user_email: 'test@example.com',
             user_profile_name: 'profile name',
             event: {},
-            categories: ['Lost and found']
-          }
+            categories: ['Lost and found'],
+          },
         ]}
       />
     )
@@ -86,7 +86,7 @@ describe('SearchResults', () => {
             user_email: 'test@example.com',
             user_profile_name: 'profile name',
             event: {},
-            categories: ['Lost and found']
+            categories: ['Lost and found'],
           },
           {
             id: 2,
@@ -96,8 +96,8 @@ describe('SearchResults', () => {
             user_email: 'test@example.com',
             user_profile_name: 'profile name',
             event: {},
-            categories: ['Announcement']
-          }
+            categories: ['Announcement'],
+          },
         ]}
       />
     )
@@ -126,7 +126,7 @@ describe('SearchResults', () => {
         forums: [],
         category: [],
         fromDate: startOfDay(subYears(new Date(), 2)),
-        toDate: endOfDay(new Date())
+        toDate: endOfDay(new Date()),
       })
 
     expect(defaultProps.search).toHaveBeenCalledWith({
@@ -134,7 +134,7 @@ describe('SearchResults', () => {
       keyword: 'my search',
       category: [],
       fromDate: startOfDay(subYears(new Date(), 2)),
-      toDate: endOfDay(new Date())
+      toDate: endOfDay(new Date()),
     })
   })
 
@@ -158,8 +158,8 @@ describe('SearchResults', () => {
             user_email: 'test@example.com',
             user_profile_name: 'profile name',
             event: {},
-            categories: ['Lost and found']
-          }
+            categories: ['Lost and found'],
+          },
         ]}
       />
     )
@@ -181,8 +181,8 @@ describe('SearchResults', () => {
             user_email: 'test@example.com',
             user_profile_name: 'profile name',
             event: {},
-            categories: ['Lost and found']
-          }
+            categories: ['Lost and found'],
+          },
         ]}
       />
     )

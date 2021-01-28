@@ -9,7 +9,7 @@ import { FullScreenWizard } from '@components/FullScreenWizard'
 describe('MapScreen', () => {
   const defaultProps = {
     navigation: {
-      getParam: key => {
+      getParam: (key) => {
         const data = {
           areas: [
             {
@@ -19,22 +19,22 @@ describe('MapScreen', () => {
                 ['20.5', '-23.3'],
                 ['20.56', '-23.0'],
                 ['21.2', '-26.0'],
-                ['20.5', '-23.3']
-              ]
-            }
+                ['20.5', '-23.3'],
+              ],
+            },
           ],
           address: {
             lat: '21.32',
-            lng: '-24.3'
-          }
+            lng: '-24.3',
+          },
         }
         return data[key]
       },
-      navigate: jest.fn()
+      navigate: jest.fn(),
     },
     newUser: {},
     profileType: 'neighbor',
-    setNewUserByKey: jest.fn()
+    setNewUserByKey: jest.fn(),
   }
 
   const twoAreas = {
@@ -46,8 +46,8 @@ describe('MapScreen', () => {
           ['20.5', '-23.3'],
           ['20.56', '-23.0'],
           ['21.2', '-26.0'],
-          ['20.5', '-23.3']
-        ]
+          ['20.5', '-23.3'],
+        ],
       },
       {
         id: 2,
@@ -56,14 +56,14 @@ describe('MapScreen', () => {
           ['22.5', '-25.3'],
           ['22.56', '-25.0'],
           ['23.2', '-28.0'],
-          ['22.5', '-25.3']
-        ]
-      }
+          ['22.5', '-25.3'],
+        ],
+      },
     ],
     address: {
       lat: '21.32',
-      lng: '-24.3'
-    }
+      lng: '-24.3',
+    },
   }
 
   afterEach(() => {
@@ -76,7 +76,7 @@ describe('MapScreen', () => {
 
     expect(wrapper.state()).toEqual({
       checkedAreas: {
-        1: true
+        1: true,
       },
       areas: [
         {
@@ -86,21 +86,21 @@ describe('MapScreen', () => {
             ['20.5', '-23.3'],
             ['20.56', '-23.0'],
             ['21.2', '-26.0'],
-            ['20.5', '-23.3']
-          ]
-        }
+            ['20.5', '-23.3'],
+          ],
+        },
       ],
       address: {
         lat: '21.32',
-        lng: '-24.3'
+        lng: '-24.3',
       },
       modalOpen: false,
       region: {
         latitude: 20.266666666666666,
         longitude: -24.5,
         latitudeDelta: 2.099999999999998, // darn floats
-        longitudeDelta: 3
-      }
+        longitudeDelta: 3,
+      },
     })
   })
 
@@ -113,10 +113,7 @@ describe('MapScreen', () => {
   test('submit button sets the checkedAreas in the reducer', () => {
     const wrapper = shallow(<MapScreen {...defaultProps} />)
     wrapper.setState({ checkedAreas: { 1: true, 2: true } })
-    wrapper
-      .find(FullScreenWizard)
-      .props()
-      .onNextPress()
+    wrapper.find(FullScreenWizard).props().onNextPress()
     expect(defaultProps.setNewUserByKey).toHaveBeenCalled()
   })
 
@@ -125,10 +122,7 @@ describe('MapScreen', () => {
       <MapScreen {...defaultProps} profileType='government' />
     )
     wrapper.setState({ checkedAreas: { 1: true, 2: true } })
-    wrapper
-      .find(FullScreenWizard)
-      .props()
-      .onNextPress()
+    wrapper.find(FullScreenWizard).props().onNextPress()
     expect(defaultProps.navigation.navigate).toHaveBeenCalledWith(
       'GovernmentInfo'
     )
@@ -142,9 +136,9 @@ describe('MapScreen', () => {
         newUser={{}}
         setNewUserByKey={jest.fn()}
         navigation={{
-          getParam: key => {
+          getParam: (key) => {
             return twoAreas[key]
-          }
+          },
         }}
       />
     )
@@ -168,9 +162,9 @@ describe('MapScreen', () => {
         newUser={{}}
         setNewUserByKey={jest.fn()}
         navigation={{
-          getParam: key => {
+          getParam: (key) => {
             return twoAreas[key]
-          }
+          },
         }}
       />
     )
@@ -189,40 +183,28 @@ describe('MapScreen', () => {
         newUser={{}}
         setNewUserByKey={jest.fn()}
         navigation={{
-          getParam: key => {
+          getParam: (key) => {
             return twoAreas[key]
-          }
+          },
         }}
       />
     )
 
-    wrapper
-      .find(ForumDetails)
-      .first()
-      .props()
-      .onPress(true)
-    expect(wrapper.state().checkedAreas).toEqual({
-      1: true
-    })
-
-    wrapper
-      .find(ForumDetails)
-      .at(1)
-      .props()
-      .onPress(true)
+    wrapper.find(ForumDetails).first().props().onPress(true)
     expect(wrapper.state().checkedAreas).toEqual({
       1: true,
-      2: true
     })
 
-    wrapper
-      .find(Polygon)
-      .first()
-      .props()
-      .onPress()
+    wrapper.find(ForumDetails).at(1).props().onPress(true)
+    expect(wrapper.state().checkedAreas).toEqual({
+      1: true,
+      2: true,
+    })
+
+    wrapper.find(Polygon).first().props().onPress()
     expect(wrapper.state().checkedAreas).toEqual({
       1: false,
-      2: true
+      2: true,
     })
   })
 })

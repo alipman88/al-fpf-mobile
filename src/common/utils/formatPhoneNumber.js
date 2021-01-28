@@ -1,4 +1,4 @@
-export const formatPhoneNumber = phoneNumber => {
+export const formatPhoneNumber = (phoneNumber) => {
   if (phoneNumber && phoneNumber.trim().length >= 10) {
     const num = phoneNumber
       .replace(/[^\w\s]/gi, '')

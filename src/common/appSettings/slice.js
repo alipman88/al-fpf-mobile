@@ -11,7 +11,7 @@ export const appSettings = createSlice({
     onboardingProfilePlans: [],
     governmentTitles: [],
     loading: false,
-    loaded: false
+    loaded: false,
   },
 
   reducers: {
@@ -24,78 +24,67 @@ export const appSettings = createSlice({
       labelStyles: payload.label_styles,
       onboardingProfilePlans: payload.onboarding_profile_plans,
       governmentTitles: payload.official_titles,
-      loaded: true
+      loaded: true,
     }),
     setLoading: (state, { payload }) => ({
       ...state,
-      loading: payload
+      loading: payload,
     }),
     setLoaded: (state, { payload }) => ({
       ...state,
-      loaded: payload
-    })
-  }
+      loaded: payload,
+    }),
+  },
 })
 
 const path = 'main.appSettings'
 
 appSettings.selectors = {
-  getAppSettings: createSelector(
-    [path],
-    appSettings => appSettings
-  ),
+  getAppSettings: createSelector([path], (appSettings) => appSettings),
 
   getCategories: createSelector(
     [path],
-    appSettings => appSettings.categories
+    (appSettings) => appSettings.categories
   ),
 
-  getBusinessCategories: createSelector(
-    [path],
-    appSettings =>
-      Object.entries(appSettings.businessCategories).map(([key, value]) => {
-        return {
-          name: key,
-          id: Number(uniqueId()),
-          children: value.map(item => {
-            return { name: item[0], id: item[1] }
-          })
-        }
-      })
+  getBusinessCategories: createSelector([path], (appSettings) =>
+    Object.entries(appSettings.businessCategories).map(([key, value]) => {
+      return {
+        name: key,
+        id: Number(uniqueId()),
+        children: value.map((item) => {
+          return { name: item[0], id: item[1] }
+        }),
+      }
+    })
   ),
 
   getLabelStyles: createSelector(
     [path],
-    appSettings => appSettings.labelStyles
+    (appSettings) => appSettings.labelStyles
   ),
 
   getGovernmentTitles: createSelector(
     [path],
-    appSettings => appSettings.governmentTitles
+    (appSettings) => appSettings.governmentTitles
   ),
 
   getProfilePlans: createSelector(
     [path],
-    appSettings => appSettings.onboardingProfilePlans
+    (appSettings) => appSettings.onboardingProfilePlans
   ),
 
   getForumPostTruncateLength: createSelector(
     [path],
-    appSettings => appSettings.forumPostTruncateLength
+    (appSettings) => appSettings.forumPostTruncateLength
   ),
 
   getSearchPostTruncateLength: createSelector(
     [path],
-    appSettings => appSettings.searchPostTruncateLength
+    (appSettings) => appSettings.searchPostTruncateLength
   ),
 
-  getLoading: createSelector(
-    ['main.appSettings'],
-    ({ loading }) => loading
-  ),
+  getLoading: createSelector(['main.appSettings'], ({ loading }) => loading),
 
-  getLoaded: createSelector(
-    ['main.appSettings'],
-    ({ loaded }) => loaded
-  )
+  getLoaded: createSelector(['main.appSettings'], ({ loaded }) => loaded),
 }

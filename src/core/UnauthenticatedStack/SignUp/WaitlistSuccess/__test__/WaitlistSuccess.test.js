@@ -9,9 +9,9 @@ import { createResetStackTo } from '@common/utils/navigation'
 describe('WaitlistSuccess', () => {
   const defaultProps = {
     navigation: {
-      dispatch: jest.fn()
+      dispatch: jest.fn(),
     },
-    clearUserData: jest.fn()
+    clearUserData: jest.fn(),
   }
 
   afterEach(() => {

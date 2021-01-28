@@ -17,5 +17,5 @@ export class SplashScreen extends React.Component {
 
 SplashScreen.propTypes = {
   accessToken: PropTypes.string.isRequired,
-  navigation: PropTypes.object
+  navigation: PropTypes.object,
 }

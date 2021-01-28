@@ -8,8 +8,8 @@ export const validations = yup.object().shape({
   toDate: yup
     .date()
     .required()
-    .test('toDate', 'End date must be after Start date', function(endDate) {
+    .test('toDate', 'End date must be after Start date', function (endDate) {
       return isAfter(endDate, this.parent.fromDate)
     }),
-  keyword: yup.string()
+  keyword: yup.string(),
 })

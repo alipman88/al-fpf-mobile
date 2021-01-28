@@ -10,8 +10,8 @@ describe('navigation', () => {
           index: 0,
           key: 'blah',
           actions: [
-            NavigationActions.navigate({ routeName: 'Home', title: 'Hi' })
-          ]
+            NavigationActions.navigate({ routeName: 'Home', title: 'Hi' }),
+          ],
         })
       )
     })

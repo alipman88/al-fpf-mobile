@@ -9,7 +9,7 @@ describe('Subscription', () => {
   const defaultProps = {
     hasSubscription: false,
     navigation: {
-      navigate: jest.fn()
+      navigate: jest.fn(),
     },
     navigateWithToken: jest.fn(),
     profile: {
@@ -20,10 +20,10 @@ describe('Subscription', () => {
         name: 'Business/ nonprofit',
         plan_type: 'business',
         tier: 'standard',
-        has_upgrades: true
+        has_upgrades: true,
       },
       home_nf: 1,
-      name: 'foo'
+      name: 'foo',
     },
     products: [
       {
@@ -32,7 +32,7 @@ describe('Subscription', () => {
         localizedPrice: '$8.99',
         subscriptionPeriodUnitIOS: 'MONTH',
         price: '8.99',
-        currency: 'USD'
+        currency: 'USD',
       },
       {
         productId: 'standard_business_yearly',
@@ -40,7 +40,7 @@ describe('Subscription', () => {
         localizedPrice: '$95.99',
         subscriptionPeriodUnitIOS: 'YEAR',
         price: '95.99',
-        currency: 'USD'
+        currency: 'USD',
       },
       {
         productId: 'standard_government_monthly',
@@ -48,7 +48,7 @@ describe('Subscription', () => {
         localizedPrice: '$8.99',
         subscriptionPeriodUnitIOS: 'MONTH',
         price: '7.99',
-        currency: 'USD'
+        currency: 'USD',
       },
       {
         productId: 'standard_government_yearly',
@@ -56,11 +56,11 @@ describe('Subscription', () => {
         localizedPrice: '$95.99',
         subscriptionPeriodUnitIOS: 'YEAR',
         price: '95.99',
-        currency: 'USD'
-      }
+        currency: 'USD',
+      },
     ],
     purchasing: false,
-    requestSubscription: jest.fn()
+    requestSubscription: jest.fn(),
   }
 
   test('products render as buttons', () => {

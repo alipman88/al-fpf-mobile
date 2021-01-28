@@ -25,12 +25,12 @@ import {
   FiltersText,
   FiltersToggle,
   PaddingContainer,
-  SearchFormContainer
+  SearchFormContainer,
 } from './styledComponents'
 
 export class SearchFields extends React.Component {
   state = {
-    showAdvanced: true
+    showAdvanced: true,
   }
 
   constructor(props) {
@@ -83,7 +83,7 @@ export class SearchFields extends React.Component {
   }
 
   categoryWithId(id) {
-    return this.props.categories.find(category => category.id === id)
+    return this.props.categories.find((category) => category.id === id)
   }
 
   render() {
@@ -96,24 +96,24 @@ export class SearchFields extends React.Component {
       setFieldValue,
       isSubmitting,
       touched,
-      values
+      values,
     } = this.props
 
     // Add 'All Categories' category unique to post submission
     const searchCategories = categories.slice()
     searchCategories.unshift({
       name: 'All categories',
-      id: -1
+      id: -1,
     })
 
-    const areaIds = areas.map(area => area.id)
+    const areaIds = areas.map((area) => area.id)
     let selectedAreaIds = values.forums
 
     // The SectionedMultiSelect component raises an error if a selected value
     // is not present in the list of items, so filter the selected areas to
     // limit them by the selectable areas
     if (selectedAreaIds) {
-      selectedAreaIds = selectedAreaIds.filter(id => areaIds.includes(id))
+      selectedAreaIds = selectedAreaIds.filter((id) => areaIds.includes(id))
     }
 
     return (
@@ -125,7 +125,7 @@ export class SearchFields extends React.Component {
             forwardIcon={<Icon color='#9b9b9b' name='search' size={18} />}
             placeholder='Type keyword here'
             inputRef={this.keywordRef}
-            onChangeText={value => {
+            onChangeText={(value) => {
               setFieldTouched('keyword', true)
               setFieldValue('keyword', value)
             }}
@@ -152,7 +152,7 @@ export class SearchFields extends React.Component {
           />
           <FiltersToggle
             onPress={() =>
-              this.setState(state => ({ showAdvanced: !state.showAdvanced }))
+              this.setState((state) => ({ showAdvanced: !state.showAdvanced }))
             }
           >
             <FeatherIcon name='filter' color='#6b6e7d' size={16} />
@@ -164,7 +164,7 @@ export class SearchFields extends React.Component {
             <Filters>
               <FieldWrapper>
                 <Multiselect
-                  onToggle={opened => {
+                  onToggle={(opened) => {
                     if (opened) {
                       this.blurTextInput()
                     }
@@ -175,13 +175,13 @@ export class SearchFields extends React.Component {
                     {
                       name: 'Forums',
                       id: 0,
-                      children: areas.map(area => ({
+                      children: areas.map((area) => ({
                         id: area.id,
-                        name: area.name
-                      }))
-                    }
+                        name: area.name,
+                      })),
+                    },
                   ]}
-                  onSelectedItemsChange={selectedItems => {
+                  onSelectedItemsChange={(selectedItems) => {
                     setFieldTouched('forums', true)
                     setFieldValue('forums', selectedItems)
                   }}
@@ -198,12 +198,12 @@ export class SearchFields extends React.Component {
               <FieldWrapper>
                 <Select
                   placeholder={get(values.category, 'name', 'All categories')}
-                  items={searchCategories.map(category => ({
+                  items={searchCategories.map((category) => ({
                     value: category.id,
-                    label: category.name
+                    label: category.name,
                   }))}
                   onPress={this.blurTextInput}
-                  onValueChange={id => {
+                  onValueChange={(id) => {
                     id = parseInt(id, 10)
                     setFieldTouched('category', true)
                     const selectedCategory = this.categoryWithId(id)
@@ -223,7 +223,7 @@ export class SearchFields extends React.Component {
                       dateOnly
                       defaultTimeForDate={startOfDay}
                       error={errors.fromDate}
-                      onChangeValue={date => {
+                      onChangeValue={(date) => {
                         // both fields are set as touched, so errors will show to user
                         setFieldTouched('fromDate')
                         setFieldTouched('toDate')
@@ -240,7 +240,7 @@ export class SearchFields extends React.Component {
                       dateOnly
                       defaultTimeForDate={endOfDay}
                       error={errors.toDate}
-                      onChangeValue={date => {
+                      onChangeValue={(date) => {
                         setFieldTouched('fromDate')
                         setFieldTouched('toDate')
                         setFieldValue('toDate', date)
@@ -265,7 +265,7 @@ export class SearchFields extends React.Component {
           )}
           <Button
             onPress={() => {
-              this.setState(state => ({ showAdvanced: false }))
+              this.setState((state) => ({ showAdvanced: false }))
               handleSubmit()
             }}
           >
@@ -289,5 +289,5 @@ SearchFields.propTypes = {
   isSubmitting: PropTypes.bool,
   touched: PropTypes.object.isRequired,
   values: PropTypes.object.isRequired,
-  showFilters: PropTypes.bool
+  showFilters: PropTypes.bool,
 }

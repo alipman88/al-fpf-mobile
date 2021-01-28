@@ -26,7 +26,7 @@ export const getIssues = (areaId, navigation, resetForumAction) => async (
     dispatch(
       issues.actions.setIssues({
         issues: response.data.issues,
-        areaId
+        areaId,
       })
     )
   } catch (e) {
@@ -62,7 +62,7 @@ export const getIssue = (areaId, issueNumber) => async (dispatch, getState) => {
   dispatch(
     issues.actions.setIssue({
       issue: response.data.issue,
-      areaId
+      areaId,
     })
   )
 }
@@ -83,7 +83,7 @@ export const fetchSpecificIssue = (
 
     // if the desired issue is not in the latest 30 for that forum
     const issuesForArea = issues.selectors.getIssuesForArea(getState(), areaId)
-    if (!issuesForArea.find(issue => issue.id === issueId)) {
+    if (!issuesForArea.find((issue) => issue.id === issueId)) {
       await dispatch(
         commonActions.navigateWithToken(
           `/areas/${areaId}/issues/${issueNumber}`

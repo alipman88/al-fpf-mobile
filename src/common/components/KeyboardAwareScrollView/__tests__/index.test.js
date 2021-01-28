@@ -9,11 +9,11 @@ describe('KeyboardAwareScrollView', () => {
     let wrapper = shallow(<KeyboardAwareScrollView stretchToHeightOfScreen />)
     wrapper = shallow(
       wrapper.find(KeyboardOpen).prop('render')({
-        open: false
+        open: false,
       })
     )
     expect(wrapper.props().contentContainerStyle).toEqual({
-      flex: 1
+      flex: 1,
     })
   })
 })

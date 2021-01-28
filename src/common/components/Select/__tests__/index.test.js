@@ -11,7 +11,7 @@ describe('Select', () => {
     onValueChange: jest.fn(),
     placeholder: 'select',
     title: 'Select Things',
-    value: 0
+    value: 0,
   }
 
   test('no FormFieldLabel if theres no label', () => {

@@ -20,7 +20,7 @@ import {
   LinksContainer,
   ResetPasswordContainer,
   TroubleLoggingInContainer,
-  Version
+  Version,
 } from './styledComponents'
 
 export const LoginComponent = ({ navigation, login, resendEmail }) => {
@@ -80,7 +80,7 @@ export const LoginComponent = ({ navigation, login, resendEmail }) => {
             setFieldValue,
             setFieldTouched,
             touched,
-            values
+            values,
           }) => (
             <LoginFields
               values={values}
@@ -103,13 +103,10 @@ export const LoginComponent = ({ navigation, login, resendEmail }) => {
 LoginComponent.propTypes = {
   navigation: PropTypes.object.isRequired,
   login: PropTypes.func.isRequired,
-  resendEmail: PropTypes.func.isRequired
+  resendEmail: PropTypes.func.isRequired,
 }
 
-export const Login = connect(
-  null,
-  {
-    login: login,
-    resendEmail: resendEmail
-  }
-)(LoginComponent)
+export const Login = connect(null, {
+  login: login,
+  resendEmail: resendEmail,
+})(LoginComponent)

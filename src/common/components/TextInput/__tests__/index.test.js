@@ -16,7 +16,7 @@ describe('TextInput', () => {
     value: '',
     touched: false,
     error: '',
-    onTapIcon: jest.fn()
+    onTapIcon: jest.fn(),
   }
 
   test('input calls onChangeText', () => {
@@ -45,10 +45,7 @@ describe('TextInput', () => {
     const wrapper = shallow(
       <TextInput {...defaultProps} tapIcon={<TestIcon />} />
     )
-    wrapper
-      .find(TouchableWithoutFeedback)
-      .first()
-      .simulate('press')
+    wrapper.find(TouchableWithoutFeedback).first().simulate('press')
     expect(defaultProps.onTapIcon).toBeCalled()
   })
 

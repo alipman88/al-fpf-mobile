@@ -19,7 +19,7 @@ import {
   SettingsDescription,
   SettingsLabel,
   SettingsPair,
-  LinkContainer
+  LinkContainer,
 } from './styledComponents'
 
 export class Account extends React.Component {
@@ -53,12 +53,12 @@ export class Account extends React.Component {
             <SettingsPair>
               <SettingsLabel>Mobile Forum Notifications</SettingsLabel>
               <Switch
-                onValueChange={value =>
+                onValueChange={(value) =>
                   updateUser({ receive_issue_push_notifications: value })
                 }
                 trackColor={{
                   false: 'red',
-                  true: 'green'
+                  true: 'green',
                 }}
                 ios_backgroundColor='red'
                 value={user.receive_issue_push_notifications}
@@ -71,12 +71,12 @@ export class Account extends React.Component {
             <SettingsPair>
               <SettingsLabel>Email Forum</SettingsLabel>
               <Switch
-                onValueChange={value =>
+                onValueChange={(value) =>
                   updateUser({ receive_issue_emails: value })
                 }
                 trackColor={{
                   false: 'red',
-                  true: 'green'
+                  true: 'green',
                 }}
                 ios_backgroundColor='red'
                 value={user.receive_issue_emails}
@@ -105,12 +105,12 @@ export class Account extends React.Component {
 
 Account.navigationOptions = ({ navigation }) => ({
   headerLeft: <BackButton navigation={navigation} />,
-  title: 'My account'
+  title: 'My account',
 })
 
 Account.propTypes = {
   loading: PropTypes.bool,
   navigateWithToken: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
-  updateUser: PropTypes.func.isRequired
+  updateUser: PropTypes.func.isRequired,
 }

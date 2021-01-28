@@ -8,7 +8,7 @@ import { Container, Number, Step } from './styledComponents'
 
 export const FormSteps = ({ currentStep, steps }) => (
   <Container>
-    {range(steps).map(i => (
+    {range(steps).map((i) => (
       <Step key={i} active={i === currentStep - 1} done={i < currentStep - 1}>
         {i < currentStep - 1 ? (
           <Icon size={12} name='check' color='#97b57b' />
@@ -22,5 +22,5 @@ export const FormSteps = ({ currentStep, steps }) => (
 
 FormSteps.propTypes = {
   currentStep: PropTypes.number.isRequired,
-  steps: PropTypes.number.isRequired
+  steps: PropTypes.number.isRequired,
 }

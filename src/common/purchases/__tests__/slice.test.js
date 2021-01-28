@@ -5,7 +5,7 @@ describe('purchases - slice', () => {
     const state = purchases.reducer(undefined, {})
     expect(state).toEqual({
       profileId: undefined,
-      purchasing: false
+      purchasing: false,
     })
   })
 

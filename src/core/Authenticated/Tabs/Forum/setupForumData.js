@@ -19,7 +19,7 @@ export const setupForumData = (
   const currentProfile = profile.selectors.getCurrentProfile(getState())
   const userAreas = areas.selectors.getAreas(getState())
   const areaIds = (currentProfile && currentProfile.area_ids) || []
-  const firstArea = userAreas.find(area => areaIds.indexOf(area.id) !== -1)
+  const firstArea = userAreas.find((area) => areaIds.indexOf(area.id) !== -1)
   if (firstArea) {
     // set the current area id to the first one in the profile
     dispatch(areas.actions.setCurrentAreaId(firstArea.id))
@@ -30,7 +30,7 @@ export const setupForumData = (
       appMessage.actions.setAppMessage({
         message:
           'Your government profile will be reviewed within 48 hours. Once approved, you will have access to your FPF(s). Please contact us as needed.',
-        type: 'warning'
+        type: 'warning',
       })
     )
   }

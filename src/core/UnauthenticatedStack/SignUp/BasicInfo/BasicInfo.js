@@ -18,7 +18,7 @@ export class BasicInfo extends React.Component {
         validate={(values, props) => {
           return validations
             .validate(values, { abortEarly: false, context: validationContext })
-            .catch(err => {
+            .catch((err) => {
               throw yupToFormErrors(err)
             })
         }}
@@ -28,7 +28,7 @@ export class BasicInfo extends React.Component {
           setFieldValue,
           setFieldTouched,
           touched,
-          values
+          values,
         }) => (
           <BasicInfoFields
             errors={errors}
@@ -51,5 +51,5 @@ BasicInfo.propTypes = {
   setNewUserByKey: PropTypes.func.isRequired,
   navigation: PropTypes.object.isRequired,
   newUser: PropTypes.object.isRequired,
-  profileType: PropTypes.string.isRequired
+  profileType: PropTypes.string.isRequired,
 }

@@ -7,7 +7,7 @@ import {
   ProfileTypePill,
   PillText,
   ProfileTypeText,
-  CheckBox
+  CheckBox,
 } from './styledComponents'
 
 export const ProfileTypeButton = ({
@@ -16,7 +16,7 @@ export const ProfileTypeButton = ({
   label,
   type,
   active,
-  disabled
+  disabled,
 }) => {
   const check = active && (
     <View style={{ paddingLeft: 15 }}>
@@ -41,5 +41,5 @@ ProfileTypeButton.propTypes = {
   label: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   active: PropTypes.bool,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
 }

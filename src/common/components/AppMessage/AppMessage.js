@@ -8,7 +8,7 @@ export class AppMessage extends React.Component {
       const ref = FlashMessageManager.getDefault()
       ref.showMessage({
         message: this.props.message,
-        type: this.props.type
+        type: this.props.type,
       })
     } else if (prevProps.message && !this.props.message) {
       const ref = FlashMessageManager.getDefault()
@@ -33,9 +33,9 @@ AppMessage.propTypes = {
   message: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   autoHide: PropTypes.bool,
-  setAppError: PropTypes.func.isRequired
+  setAppError: PropTypes.func.isRequired,
 }
 
 AppMessage.defaultProps = {
-  autoHide: false
+  autoHide: false,
 }

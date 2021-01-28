@@ -5,7 +5,7 @@ import { resetAction } from '@common/resetAction'
 
 const initialState = {
   profileId: undefined,
-  purchasing: false
+  purchasing: false,
 }
 
 export const purchases = createSlice({
@@ -15,12 +15,12 @@ export const purchases = createSlice({
     setPurchasing: (state, { payload }) => ({
       ...state,
       profileId: isObject(payload) ? payload.profileId : undefined,
-      purchasing: false !== payload
-    })
+      purchasing: false !== payload,
+    }),
   },
   extraReducers: {
-    [resetAction]: () => ({ ...initialState })
-  }
+    [resetAction]: () => ({ ...initialState }),
+  },
 })
 
 const path = 'main.purchases'
@@ -28,13 +28,7 @@ const path = 'main.purchases'
 purchases.selectors = {
   ...purchases.selectors,
 
-  getPurchasing: createSelector(
-    [path],
-    state => state.purchasing
-  ),
+  getPurchasing: createSelector([path], (state) => state.purchasing),
 
-  getProfileId: createSelector(
-    [path],
-    state => state.profileId
-  )
+  getProfileId: createSelector([path], (state) => state.profileId),
 }

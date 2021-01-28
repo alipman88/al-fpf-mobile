@@ -10,7 +10,7 @@ import {
   Close,
   Container,
   TextContainer,
-  Link
+  Link,
 } from './styledComponents'
 
 export const WaitlistSuccess = ({ navigation, clearUserData }) => (
@@ -46,5 +46,5 @@ export const WaitlistSuccess = ({ navigation, clearUserData }) => (
 
 WaitlistSuccess.propTypes = {
   navigation: PropTypes.object.isRequired,
-  clearUserData: PropTypes.func.isRequired
+  clearUserData: PropTypes.func.isRequired,
 }

@@ -5,7 +5,7 @@ import { responseError } from '@common/utils/responseError'
 
 import { appMessage } from '@components/AppMessage/slice'
 
-export const joinWaitlist = values => async dispatch => {
+export const joinWaitlist = (values) => async (dispatch) => {
   try {
     await api.post('/waitlist_users', {
       user: {
@@ -23,10 +23,10 @@ export const joinWaitlist = values => async dispatch => {
             'firstName',
             'lastName',
             'organizationName',
-            'webAddress'
+            'webAddress',
           ])
-        )
-      }
+        ),
+      },
     })
   } catch (e) {
     dispatch(appMessage.actions.setAppError(responseError(e)))

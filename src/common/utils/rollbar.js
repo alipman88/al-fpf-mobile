@@ -19,10 +19,10 @@ try {
           // https://docs.rollbar.com/docs/react-native#section-source-maps
           source_map_enabled: true,
           code_version: version,
-          environment: Config.ENVIRONMENT
-        }
-      }
-    }
+          environment: Config.ENVIRONMENT,
+        },
+      },
+    },
   })
 
   rollbar = new Client(rollbarConfig)
@@ -32,7 +32,7 @@ try {
   rollbar = new Client(
     '',
     new Configuration({
-      enabled: false
+      enabled: false,
     })
   )
 }

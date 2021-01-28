@@ -5,11 +5,11 @@ import { issues } from '@common/issues'
 
 import { InThisIssue as InThisIssueComponent } from './InThisIssue'
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const currentIssueId = issues.selectors.getCurrentIssueId(state)
   return {
     headlines: posts.selectors.getHeadlinesByIssue(state)[currentIssueId],
-    posts: posts.selectors.getPostsByIssue(state)[currentIssueId]
+    posts: posts.selectors.getPostsByIssue(state)[currentIssueId],
   }
 }
 

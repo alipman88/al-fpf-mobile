@@ -21,7 +21,7 @@ export const getContents = (issueId, navigation) => async (
   const currentAreaId = areas.selectors.getCurrentAreaId(getState())
   const issue = issues.selectors
     .getIssuesForArea(getState(), currentAreaId)
-    .find(issue => issue.id === issueId)
+    .find((issue) => issue.id === issueId)
 
   if (!issue) {
     return
@@ -62,7 +62,7 @@ const getAllContents = (issue, navigation) => async (dispatch, getState) => {
       ads,
       news_from_neighboring_nfs,
       ocm_message,
-      forum_message
+      forum_message,
     } = response.data
 
     dispatch(
@@ -75,7 +75,7 @@ const getAllContents = (issue, navigation) => async (dispatch, getState) => {
         placementDate: endOfDay(new Date()),
         newsFromNeighboringNfs: news_from_neighboring_nfs,
         ocmMessage: ocm_message,
-        forumMessage: forum_message
+        forumMessage: forum_message,
       })
     )
   } catch (e) {
@@ -102,7 +102,7 @@ const getAds = (issue, navigation) => async (dispatch, getState) => {
       posts.actions.setAdsForIssue({
         issueId: issue.id,
         ads: adsData,
-        placementDate: endOfDay(new Date())
+        placementDate: endOfDay(new Date()),
       })
     )
   } catch (e) {

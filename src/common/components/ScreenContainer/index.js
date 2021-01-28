@@ -5,7 +5,7 @@ import { Grass } from '@components/Grass'
 import {
   ContentWrapper,
   SafeAreaViewContainer,
-  ScreenWrapper
+  ScreenWrapper,
 } from './styledComponents'
 
 export const ScreenContainer = ({
@@ -13,7 +13,7 @@ export const ScreenContainer = ({
   grassBackground,
   grassContent,
   grey,
-  withPadding
+  withPadding,
 }) => {
   return (
     <ScreenWrapper grey={grey}>
@@ -31,9 +31,9 @@ ScreenContainer.propTypes = {
   grassBackground: PropTypes.bool,
   grassContent: PropTypes.node,
   grey: PropTypes.bool,
-  withPadding: PropTypes.bool
+  withPadding: PropTypes.bool,
 }
 
 ScreenContainer.defaultProps = {
-  withPadding: true
+  withPadding: true,
 }

@@ -12,5 +12,5 @@ export const Pill = ({ children, style, image }) => (
 Pill.propTypes = {
   children: PropTypes.node.isRequired,
   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
-  image: PropTypes.node
+  image: PropTypes.node,
 }

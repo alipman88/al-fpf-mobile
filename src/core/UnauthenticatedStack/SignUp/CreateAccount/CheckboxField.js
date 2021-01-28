@@ -9,7 +9,7 @@ import {
   CheckboxWrapper,
   LinkWrapper,
   LinkText,
-  RequiredText
+  RequiredText,
 } from './styledComponents'
 
 export const CheckboxField = ({
@@ -18,11 +18,11 @@ export const CheckboxField = ({
   truthiness,
   onToggle,
   last,
-  first
+  first,
 }) => {
   return (
     <CheckboxWrapper last={last} first={first}>
-      <Checkbox onPress={value => onToggle(type, value)} value={truthiness}>
+      <Checkbox onPress={(value) => onToggle(type, value)} value={truthiness}>
         <Text>{text}</Text>
       </Checkbox>
       {type === 'termsOfUse' && (
@@ -47,5 +47,5 @@ CheckboxField.propTypes = {
   truthiness: PropTypes.bool.isRequired,
   onToggle: PropTypes.func.isRequired,
   last: PropTypes.bool,
-  first: PropTypes.bool
+  first: PropTypes.bool,
 }

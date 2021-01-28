@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 
-export const validateBusinessName = name => {
+export const validateBusinessName = (name) => {
   return /\w[^.]/.test(name)
 }
 
@@ -17,8 +17,5 @@ export const validations = yup.object().shape({
     .required('Name of business is a required field'),
   businessCategoryId: yup.number().required(),
   url: yup.string(),
-  phone: yup
-    .string()
-    .min(10)
-    .max(20)
+  phone: yup.string().min(10).max(20),
 })

@@ -12,7 +12,7 @@ describe('posts - slice', () => {
       loading: false,
       newsFromNeighboringNfsByIssue: {},
       ocmMessageByIssue: {},
-      forumMessageByIssue: {}
+      forumMessageByIssue: {},
     })
   })
 
@@ -23,8 +23,8 @@ describe('posts - slice', () => {
       expect(
         posts.selectors.getLoading({
           main: {
-            posts: state
-          }
+            posts: state,
+          },
         })
       ).toEqual(true)
     })
@@ -38,67 +38,67 @@ describe('posts - slice', () => {
           issueId: 1,
           posts: [
             {
-              id: 1
+              id: 1,
             },
             {
-              id: 2
-            }
+              id: 2,
+            },
           ],
           headlines: ['An interesting headline'],
           newsFromNeighboringNfs: [
             {
-              area_name: 'Other Area'
-            }
-          ]
+              area_name: 'Other Area',
+            },
+          ],
         })
       )
 
       let data = posts.selectors.getPostsByIssue({
         main: {
-          posts: state
-        }
+          posts: state,
+        },
       })
 
       expect(data).toEqual({
         1: [
           {
-            id: 1
+            id: 1,
           },
           {
-            id: 2
-          }
-        ]
+            id: 2,
+          },
+        ],
       })
 
       data = posts.selectors.getHeadlinesByIssue({
         main: {
-          posts: state
-        }
+          posts: state,
+        },
       })
 
       expect(data).toEqual({
-        1: ['An interesting headline']
+        1: ['An interesting headline'],
       })
 
       data = posts.selectors.getNewsFromNeighboringNfsByIssue({
         main: {
-          posts: state
-        }
+          posts: state,
+        },
       })
 
       expect(data).toEqual({
         1: [
           {
-            area_name: 'Other Area'
-          }
-        ]
+            area_name: 'Other Area',
+          },
+        ],
       })
 
       expect(
         posts.selectors.getLoading({
           main: {
-            posts: state
-          }
+            posts: state,
+          },
         })
       ).toEqual(false)
     })
@@ -111,8 +111,8 @@ describe('posts - slice', () => {
       expect(
         posts.selectors.getLoading({
           main: {
-            posts: state
-          }
+            posts: state,
+          },
         })
       ).toEqual(true)
     })
@@ -126,37 +126,37 @@ describe('posts - slice', () => {
           issueId: 1,
           ads: [
             {
-              id: 1
+              id: 1,
             },
             {
-              id: 2
-            }
-          ]
+              id: 2,
+            },
+          ],
         })
       )
 
       let data = posts.selectors.getAdsByIssue({
         main: {
-          posts: state
-        }
+          posts: state,
+        },
       })
 
       expect(data).toEqual({
         1: [
           {
-            id: 1
+            id: 1,
           },
           {
-            id: 2
-          }
-        ]
+            id: 2,
+          },
+        ],
       })
 
       expect(
         posts.selectors.getLoading({
           main: {
-            posts: state
-          }
+            posts: state,
+          },
         })
       ).toEqual(false)
     })

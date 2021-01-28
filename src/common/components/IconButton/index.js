@@ -23,5 +23,5 @@ IconButton.propTypes = {
   width: PropTypes.number,
   color: PropTypes.string,
   iconName: PropTypes.string,
-  onPress: PropTypes.func.isRequired
+  onPress: PropTypes.func.isRequired,
 }

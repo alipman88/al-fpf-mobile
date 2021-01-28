@@ -1,54 +1,54 @@
 export const provinces = [
   {
     id: 'AB',
-    name: 'Alberta'
+    name: 'Alberta',
   },
   {
     id: 'BC',
-    name: 'British Columbia'
+    name: 'British Columbia',
   },
   {
     id: 'MB',
-    name: 'Manitoba'
+    name: 'Manitoba',
   },
   {
     id: 'NB',
-    name: 'New Brunswick'
+    name: 'New Brunswick',
   },
   {
     id: 'NL',
-    name: 'Newfoundland and Labrador'
+    name: 'Newfoundland and Labrador',
   },
   {
     id: 'NS',
-    name: 'Nova Scotia'
+    name: 'Nova Scotia',
   },
   {
     id: 'NU',
-    name: 'Nunavut'
+    name: 'Nunavut',
   },
   {
     id: 'NT',
-    name: 'Northwest Territories'
+    name: 'Northwest Territories',
   },
   {
     id: 'ON',
-    name: 'Ontario'
+    name: 'Ontario',
   },
   {
     id: 'PE',
-    name: 'Prince Edward Island'
+    name: 'Prince Edward Island',
   },
   {
     id: 'QC',
-    name: 'Quebec'
+    name: 'Quebec',
   },
   {
     id: 'SK',
-    name: 'Saskatchewan'
+    name: 'Saskatchewan',
   },
   {
     id: 'YT',
-    name: 'Yukon'
-  }
+    name: 'Yukon',
+  },
 ]

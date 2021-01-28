@@ -27,16 +27,16 @@ import {
   BottomBordered,
   ButtonWrapper,
   ButtonSpacer,
-  AutoPostLinkStyle
+  AutoPostLinkStyle,
 } from './styledComponents'
 
 export class Post extends React.Component {
   state = {
-    showMore: false
+    showMore: false,
   }
 
   toggleShowMore() {
-    this.setState(state => ({ showMore: !state.showMore }))
+    this.setState((state) => ({ showMore: !state.showMore }))
   }
 
   reTitle(title, prefix = 'Re:') {
@@ -45,15 +45,15 @@ export class Post extends React.Component {
       : `${prefix} ${title}`
   }
 
-  handleReplyPress = post => {
+  handleReplyPress = (post) => {
     this.props.navigation.navigate({
       routeName: 'Compose',
       params: {
         shouldResetForm: true,
         title: this.reTitle(post.title),
         parentPostId: post.id,
-        areaId: post.area_id
-      }
+        areaId: post.area_id,
+      },
     })
   }
 
@@ -72,7 +72,7 @@ export class Post extends React.Component {
       moreText,
       navigation,
       showDatePublished,
-      categories
+      categories,
     } = this.props
 
     const Container = hasBorder ? PostContainerBordered : PostContainer
@@ -94,13 +94,13 @@ export class Post extends React.Component {
       ''
     )
 
-    const getBottomButtons = post => {
+    const getBottomButtons = (post) => {
       const includeReplyButton =
         !post.is_shared_post && areasIdMap[post.area_id]
       const postAnalyticsData = {
         area_id: post.area_id,
         post_id: post.id,
-        issue_id: post.issue_id
+        issue_id: post.issue_id,
       }
       return (
         <BottomContainer>
@@ -116,7 +116,7 @@ export class Post extends React.Component {
                   chooseMailApp({
                     title: 'Email author',
                     subject: subject,
-                    toEmail: post.user_email
+                    toEmail: post.user_email,
                   })
                 }}
                 fullWidth
@@ -190,10 +190,10 @@ export class Post extends React.Component {
           )}
           <CategoryPosts>
             {categories
-              .filter(category => {
+              .filter((category) => {
                 return post.categories.includes(category.name)
               })
-              .map(category => {
+              .map((category) => {
                 let categoryName = category.name
                 return (
                   <TouchableOpacity
@@ -246,10 +246,10 @@ Post.propTypes = {
   moreText: PropTypes.string.isRequired,
   navigation: PropTypes.object.isRequired,
   showDatePublished: PropTypes.bool,
-  categories: PropTypes.array
+  categories: PropTypes.array,
 }
 
 Post.defaultProps = {
   onTapCategory: () => {},
-  categories: []
+  categories: [],
 }

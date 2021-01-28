@@ -10,7 +10,7 @@ describe('Address - actions', () => {
       secondaryAddress: '200',
       streetName: 'Yonge St',
       city: 'Toronto',
-      state: 'ON'
+      state: 'ON',
     }
 
     test('it grabs the address and passes the data to the callback', async () => {
@@ -23,8 +23,8 @@ describe('Address - actions', () => {
         .mockImplementation(() => ({
           data: {
             areas: [],
-            address: {}
-          }
+            address: {},
+          },
         }))
       await searchAddress(values, onSuccess)(dispatch, getState)
 
@@ -36,8 +36,8 @@ describe('Address - actions', () => {
             apt_number: '200',
             street_name: 'Yonge St',
             city: 'Toronto',
-            state: 'ON'
-          }
+            state: 'ON',
+          },
         },
         'getState'
       )
@@ -66,8 +66,8 @@ describe('Address - actions', () => {
             apt_number: '200',
             street_name: 'Yonge St',
             city: 'Toronto',
-            state: 'ON'
-          }
+            state: 'ON',
+          },
         },
         'getState'
       )

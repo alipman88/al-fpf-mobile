@@ -16,72 +16,72 @@ describe('Compose', () => {
         name: 'Center',
         neighbor_areas: [
           {
-            name: 'Alpha'
+            name: 'Alpha',
           },
           {
-            name: 'Beta'
-          }
-        ]
+            name: 'Beta',
+          },
+        ],
       },
       {
         id: 2,
         name: 'River',
         neighbor_areas: [
           {
-            name: 'Charlie'
+            name: 'Charlie',
           },
           {
-            name: 'Beta'
-          }
-        ]
+            name: 'Beta',
+          },
+        ],
       },
       {
         id: 3,
         name: 'Lake',
         neighbor_areas: [
           {
-            name: 'Alpha'
+            name: 'Alpha',
           },
           {
-            name: 'Delta'
-          }
-        ]
-      }
+            name: 'Delta',
+          },
+        ],
+      },
     ],
     categories: [
       {
         id: 3,
         name: 'Lost and Found',
-        faq: 'About L&F'
+        faq: 'About L&F',
       },
       {
         id: 4,
         name: 'Announcements',
-        faq: 'Announcements to the community'
-      }
+        faq: 'Announcements to the community',
+      },
     ],
     errors: {},
     handleSubmit: jest.fn(),
     loading: false,
     navigation: {
       navigate: jest.fn(),
-      setParams: jest.fn()
+      setParams: jest.fn(),
     },
     profiles: [
       {
         id: 1,
-        area_ids: [1]
+        area_ids: [1],
       },
       {
         id: 2,
-        area_ids: [2, 3]
-      }
+        area_ids: [2, 3],
+      },
     ],
     resetForm: jest.fn(),
     setFieldTouched: jest.fn(),
     setFieldValue: jest.fn(),
     touched: {},
-    values: {}
+    values: {},
   }
 
   afterEach(() => {
@@ -112,7 +112,7 @@ describe('Compose', () => {
 
     test('Select profile onValueChange changes the areas available', () => {
       let componentCalled = false
-      wrapper.find(Select).forEach(component => {
+      wrapper.find(Select).forEach((component) => {
         if (component.props().label === 'Profile') {
           componentCalled = true
           component.props().onValueChange(1)
@@ -149,12 +149,9 @@ describe('Compose', () => {
   test('notifies user if no active profiles', () => {
     const wrapper = shallow(<ComposeFields {...defaultProps} profiles={[]} />)
 
-    expect(
-      wrapper
-        .find(FormError)
-        .children()
-        .text()
-    ).toEqual('You will not be able to submit without any active profiles.')
+    expect(wrapper.find(FormError).children().text()).toEqual(
+      'You will not be able to submit without any active profiles.'
+    )
   })
 
   test('notifies user if no posting access on any profile', () => {
@@ -162,25 +159,22 @@ describe('Compose', () => {
       {
         id: 1,
         area_ids: [1],
-        access: 'read_only'
+        access: 'read_only',
       },
       {
         id: 2,
         area_ids: [2, 3],
-        access: 'read_only'
-      }
+        access: 'read_only',
+      },
     ]
 
     const wrapper = shallow(
       <ComposeFields {...defaultProps} profiles={readOnlyProfiles} />
     )
 
-    expect(
-      wrapper
-        .find(FormError)
-        .children()
-        .text()
-    ).toEqual('You have no profiles with access to submit postings.')
+    expect(wrapper.find(FormError).children().text()).toEqual(
+      'You have no profiles with access to submit postings.'
+    )
   })
 
   test('notifies user if no posting access on selected profile', () => {
@@ -188,13 +182,13 @@ describe('Compose', () => {
       {
         id: 1,
         area_ids: [1],
-        access: 'owner'
+        access: 'owner',
       },
       {
         id: 2,
         area_ids: [2, 3],
-        access: 'read_only'
-      }
+        access: 'read_only',
+      },
     ]
 
     const wrapper = shallow(
@@ -205,12 +199,9 @@ describe('Compose', () => {
       />
     )
 
-    expect(
-      wrapper
-        .find(FormError)
-        .children()
-        .text()
-    ).toEqual('You do not have access to submit postings through this profile.')
+    expect(wrapper.find(FormError).children().text()).toEqual(
+      'You do not have access to submit postings through this profile.'
+    )
   })
 
   test('with using other profile id, multi select forums renders', () => {
@@ -243,7 +234,7 @@ describe('Compose', () => {
     expect(wrapper.find(Checkbox).length).toEqual(0)
     const labels = wrapper
       .find(TextInput)
-      .map(component => component.props().label)
+      .map((component) => component.props().label)
     expect(labels).toEqual(['Subject'])
   })
 
@@ -271,12 +262,12 @@ describe('Compose', () => {
       let areas = wrapper
         .instance()
         .getAreasForProfile(defaultProps.profiles, defaultProps.areas, 0)
-      expect(areas.map(area => area.id)).toEqual([1])
+      expect(areas.map((area) => area.id)).toEqual([1])
 
       areas = wrapper
         .instance()
         .getAreasForProfile(defaultProps.profiles, defaultProps.areas, 1)
-      expect(areas.map(area => area.id)).toEqual([2, 3])
+      expect(areas.map((area) => area.id)).toEqual([2, 3])
     })
   })
 

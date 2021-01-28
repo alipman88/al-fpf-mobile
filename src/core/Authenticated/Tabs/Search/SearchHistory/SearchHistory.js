@@ -7,12 +7,12 @@ import {
   Divider,
   Link,
   SearchHistoryToggle,
-  SearchHistoryText
+  SearchHistoryText,
 } from './styledComponents'
 
 export class SearchHistory extends React.Component {
   state = {
-    showSearchHistory: false
+    showSearchHistory: false,
   }
   render() {
     const { history, onEntryPress, clearSearchHistory } = this.props
@@ -25,8 +25,8 @@ export class SearchHistory extends React.Component {
       <Container>
         <SearchHistoryToggle
           onPress={() =>
-            this.setState(state => ({
-              showSearchHistory: !state.showSearchHistory
+            this.setState((state) => ({
+              showSearchHistory: !state.showSearchHistory,
             }))
           }
         >
@@ -56,5 +56,5 @@ export class SearchHistory extends React.Component {
 SearchHistory.propTypes = {
   history: PropTypes.array.isRequired,
   onEntryPress: PropTypes.func.isRequired,
-  clearSearchHistory: PropTypes.func.isRequired
+  clearSearchHistory: PropTypes.func.isRequired,
 }

@@ -7,14 +7,14 @@ import { FormError } from '@components/FormError'
 import {
   FormFieldLabel,
   FormFieldLabelWrapper,
-  FormFieldRequired
+  FormFieldRequired,
 } from '@components/FormFieldLabel'
 
 import {
   Container,
   DownArrowWrapper,
   SelectButton,
-  SelectPlaceholder
+  SelectPlaceholder,
 } from './styledComponents'
 
 export class Select extends React.Component {
@@ -34,7 +34,7 @@ export class Select extends React.Component {
       onValueChange,
       touched,
       error,
-      required
+      required,
     } = this.props
 
     const hasError = touched && Boolean(error)
@@ -89,5 +89,5 @@ Select.propTypes = {
   title: PropTypes.string.isRequired,
   touched: PropTypes.bool,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  required: PropTypes.bool
+  required: PropTypes.bool,
 }

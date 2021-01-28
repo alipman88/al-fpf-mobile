@@ -5,7 +5,7 @@ import { resetAction } from '@common/resetAction'
 import { createResetStackTo } from '@common/utils/navigation'
 import { responseError } from '@common/utils/responseError'
 
-export const getAreas = navigation => async (dispatch, getState) => {
+export const getAreas = (navigation) => async (dispatch, getState) => {
   try {
     let page = 0
     let areas = []
@@ -28,6 +28,6 @@ export const getAreas = navigation => async (dispatch, getState) => {
   }
 }
 
-export const resetAreas = navigation => async (dispatch, getState) => {
+export const resetAreas = (navigation) => async (dispatch, getState) => {
   dispatch(slice.actions.resetAreas())
 }

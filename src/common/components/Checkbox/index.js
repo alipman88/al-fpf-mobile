@@ -15,5 +15,5 @@ export const Checkbox = ({ children, onPress, value }) => (
 Checkbox.propTypes = {
   children: PropTypes.node,
   onPress: PropTypes.func.isRequired,
-  value: PropTypes.bool
+  value: PropTypes.bool,
 }

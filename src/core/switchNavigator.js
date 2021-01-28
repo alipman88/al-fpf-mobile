@@ -7,10 +7,10 @@ const SwitchNavigator = createSwitchNavigator(
   {
     SplashScreen,
     UnauthenticatedStack,
-    Authenticated
+    Authenticated,
   },
   {
-    initialRouteName: 'SplashScreen'
+    initialRouteName: 'SplashScreen',
   }
 )
 

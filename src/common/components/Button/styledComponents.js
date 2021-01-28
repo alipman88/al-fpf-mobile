@@ -11,7 +11,7 @@ export const WrapperStyles = `
 `
 
 export const ButtonText = styled(Text)`
-  color: ${props => props.color || '#502c02'};
+  color: ${(props) => props.color || '#502c02'};
   text-align: center;
   font-weight: bold;
 `

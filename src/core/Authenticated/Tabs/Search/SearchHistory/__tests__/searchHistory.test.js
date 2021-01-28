@@ -7,7 +7,7 @@ describe('searchHistory', () => {
   })
 
   describe('addSearchToHistory', () => {
-    const wrapStateToMain = state => ({ main: { searchHistory: state } })
+    const wrapStateToMain = (state) => ({ main: { searchHistory: state } })
 
     test('appending entries adds to front of the array, limiting to 5', () => {
       let state = searchHistory.reducer(
@@ -33,13 +33,13 @@ describe('searchHistory', () => {
         { keyword: 'Term 5' },
         { keyword: 'Term 4' },
         { keyword: 'Term 3' },
-        { keyword: 'Term 2' }
+        { keyword: 'Term 2' },
       ])
 
       state = searchHistory.reducer(
         state,
         searchHistory.actions.addSearchToHistory({
-          keyword: 'Term 3'
+          keyword: 'Term 3',
         })
       )
 
@@ -50,7 +50,7 @@ describe('searchHistory', () => {
         { keyword: 'Term 6' },
         { keyword: 'Term 5' },
         { keyword: 'Term 4' },
-        { keyword: 'Term 2' }
+        { keyword: 'Term 2' },
       ])
     })
   })
@@ -63,7 +63,7 @@ describe('searchHistory', () => {
       )
 
       expect(state).toEqual({
-        history: [{ keyword: 'hi' }]
+        history: [{ keyword: 'hi' }],
       })
 
       state = searchHistory.reducer(
@@ -72,7 +72,7 @@ describe('searchHistory', () => {
       )
 
       expect(state).toEqual({
-        history: []
+        history: [],
       })
     })
   })

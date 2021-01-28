@@ -6,5 +6,5 @@ export const validations = yup.object().shape({
     .string()
     .required()
     .test('email', 'email must be a valid email', validateEmail),
-  password: yup.string().required()
+  password: yup.string().required(),
 })

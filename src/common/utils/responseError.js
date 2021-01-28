@@ -1,6 +1,6 @@
 import get from 'lodash/get'
 
-const customizedMessageFor = error => {
+const customizedMessageFor = (error) => {
   if (!error.response) return error.message
 
   const status = error.response.status,

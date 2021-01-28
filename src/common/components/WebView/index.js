@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import navigationService from '@common/utils/navigationService'
 import queryString from 'query-string'
 
-export const WebView = props => {
+export const WebView = (props) => {
   const { uri, onLoadStart, ...restProps } = props
   const [currentURI, setURI] = React.useState(props.source.uri)
   const newSource = { ...props.source, uri: currentURI }
@@ -17,7 +17,7 @@ export const WebView = props => {
     'https://js.stripe.com',
     'https://m.stripe.network',
     'https://bid.g.doubleclick.net',
-    Config.WEBSITE_HOST
+    Config.WEBSITE_HOST,
   ]
 
   // Mobile app paths -
@@ -40,7 +40,7 @@ export const WebView = props => {
       source={newSource}
       originWhitelist={whitelistedOrigins}
       applicationNameForUserAgent={'FpfMobileApp/802'}
-      onShouldStartLoadWithRequest={request => {
+      onShouldStartLoadWithRequest={(request) => {
         if (!request.url.startsWith(Config.WEBSITE_HOST)) return false
 
         const requestPath = request.url.replace(Config.WEBSITE_HOST, '')
@@ -50,18 +50,18 @@ export const WebView = props => {
         const compose = requestPath.match(composeRegex)
         if (compose) {
           const query = queryString.parse(compose.groups.query, {
-            arrayFormat: 'bracket'
+            arrayFormat: 'bracket',
           })
           navigationService.navigate('Compose', {
             categoryId: Number(query['category_id']),
             title: query['post[title]'],
-            referencedProfileId: query['post[referenced_profile_id]']
+            referencedProfileId: query['post[referenced_profile_id]'],
           })
           return false
         }
 
         // Open whitelisted requests in the WebView
-        const whitelistedPath = whitelistedPaths.find(path =>
+        const whitelistedPath = whitelistedPaths.find((path) =>
           requestPath.startsWith(path)
         )
         if (whitelistedPath) {
@@ -89,5 +89,5 @@ export const WebView = props => {
 WebView.propTypes = {
   onLoadStart: PropTypes.func,
   source: PropTypes.object,
-  uri: PropTypes.string
+  uri: PropTypes.string,
 }

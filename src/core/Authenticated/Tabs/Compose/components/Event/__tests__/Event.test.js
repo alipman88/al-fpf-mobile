@@ -15,7 +15,7 @@ describe('Event', () => {
     setFieldValue: jest.fn(),
     blurTextInputs: jest.fn(),
     touched: {},
-    values: {}
+    values: {},
   }
 
   afterEach(() => {
@@ -35,9 +35,9 @@ describe('Event', () => {
             id: 1,
             start_time: new Date().toISOString(),
             end_time: new Date().toISOString(),
-            title: 'some event'
-          }
-        ]
+            title: 'some event',
+          },
+        ],
       })
     })
 
@@ -46,19 +46,13 @@ describe('Event', () => {
     })
 
     test('pressing first row sets index to 0, and setDuplicateState called with false', () => {
-      wrapper
-        .find(EventResultsRow)
-        .first()
-        .simulate('press')
+      wrapper.find(EventResultsRow).first().simulate('press')
       expect(wrapper.state().selectedDuplicate).toEqual(0)
       expect(defaultProps.setDuplicateState).toHaveBeenCalledWith(false)
     })
 
     test('pressing second row sets index to 1, and setDuplicateState called with false', () => {
-      wrapper
-        .find(EventResultsRow)
-        .at(1)
-        .simulate('press')
+      wrapper.find(EventResultsRow).at(1).simulate('press')
       expect(wrapper.state().selectedDuplicate).toEqual(1)
       expect(defaultProps.setDuplicateState).toHaveBeenCalledWith(true)
     })
@@ -83,33 +77,33 @@ describe('Event', () => {
       const fromDate = new Date()
 
       wrapper.setProps({
-        values: { subject: 'new subject 1', forums: [1], fromDate }
+        values: { subject: 'new subject 1', forums: [1], fromDate },
       })
       expect(spy).toHaveBeenCalled()
       spy.mockReset()
 
       wrapper.setProps({
-        values: { subject: 'new subject 1', forums: [1], fromDate }
+        values: { subject: 'new subject 1', forums: [1], fromDate },
       })
       expect(spy).not.toHaveBeenCalled()
 
       // call because subject changed
       wrapper.setProps({
-        values: { subject: 'new subject 2', forums: [1], fromDate }
+        values: { subject: 'new subject 2', forums: [1], fromDate },
       })
       expect(debounceSpy).toHaveBeenCalled()
       debounceSpy.mockReset()
 
       // call because forums changed
       wrapper.setProps({
-        values: { subject: 'new subject 2', forums: [2], fromDate }
+        values: { subject: 'new subject 2', forums: [2], fromDate },
       })
       expect(spy).toHaveBeenCalled()
       spy.mockReset()
 
       // call because fromDate changed
       wrapper.setProps({
-        values: { subject: 'new subject 2', forums: [2], fromDate: new Date() }
+        values: { subject: 'new subject 2', forums: [2], fromDate: new Date() },
       })
       expect(spy).toHaveBeenCalled()
 
@@ -144,10 +138,10 @@ describe('Event', () => {
             results: [
               {
                 id: 1,
-                title: 'ABC'
-              }
-            ]
-          }
+                title: 'ABC',
+              },
+            ],
+          },
         }))
 
       await wrapper.instance().searchEvents()
@@ -157,7 +151,7 @@ describe('Event', () => {
         {
           query: 'AB',
           area_ids: [1],
-          start_date: fromDate
+          start_date: fromDate,
         },
         expect.any(Object)
       )
@@ -165,8 +159,8 @@ describe('Event', () => {
       expect(wrapper.state().similarEvents).toEqual([
         {
           id: 1,
-          title: 'ABC'
-        }
+          title: 'ABC',
+        },
       ])
 
       apiSpy.mockRestore()

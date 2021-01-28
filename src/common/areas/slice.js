@@ -7,22 +7,22 @@ const initialState = {
   areas: [],
   currentAreaId: 0,
   neighboringAreas: {},
-  loading: false
+  loading: false,
 }
 
 export const areas = createSlice({
   slice: 'areas',
   initialState: {
-    ...initialState
+    ...initialState,
   },
   reducers: {
     setLoading: (state, action) => ({
       ...state,
-      loading: action.payload
+      loading: action.payload,
     }),
     setAreas: (state, action) => {
       const neighboringAreas = {
-        ...state.neighboringAreas
+        ...state.neighboringAreas,
       }
 
       for (const area of action.payload) {
@@ -35,94 +35,79 @@ export const areas = createSlice({
         ...state,
         areas: sortBy(action.payload, ['name']),
         neighboringAreas,
-        loading: false
+        loading: false,
       }
     },
     setCurrentAreaId: (state, action) => {
       return {
         ...state,
-        currentAreaId: action.payload
+        currentAreaId: action.payload,
       }
     },
     resetAreas: (state, action) => {
       return {
-        ...initialState
+        ...initialState,
       }
-    }
+    },
   },
   extraReducers: {
     [resetAction]: () => ({
-      ...initialState
-    })
-  }
+      ...initialState,
+    }),
+  },
 })
 
 const path = 'main.areas'
 
-const getAreas = createSelector(
-  [path],
-  areas => areas.areas
-)
+const getAreas = createSelector([path], (areas) => areas.areas)
 
 areas.selectors = {
   ...areas.selectors,
   getAreas,
-  getAreasIdMap: createSelector(
-    [getAreas],
-    areas => keyBy(areas, 'id')
-  ),
-  getCurrentAreaId: createSelector(
-    [path],
-    areas => areas.currentAreaId
-  ),
-  getLoading: createSelector(
-    [path],
-    areas => areas.loading
-  ),
+  getAreasIdMap: createSelector([getAreas], (areas) => keyBy(areas, 'id')),
+  getCurrentAreaId: createSelector([path], (areas) => areas.currentAreaId),
+  getLoading: createSelector([path], (areas) => areas.loading),
   getNeighboringAreas: createSelector(
     [path],
-    areas => areas.neighboringAreas
+    (areas) => areas.neighboringAreas
   ),
   // returns home forums & neighboring forums
-  getFullAreasList: createSelector(
-    [path],
-    areas => {
-      const uniqueAreaNames = new Set()
-      const data = areas.areas
-        .map(area => ({
-          id: area.id,
-          name: area.name,
-          access: 'primary'
-        }))
-        .concat(
-          Object.keys(areas.neighboringAreas).map(id => {
-            return {
-              id: parseInt(id, 10),
-              name: areas.neighboringAreas[id],
-              access: 'neighbor'
-            }
-          })
-        )
-        .filter(area => {
-          // remove duplicates such as neighbor areas that the member also has primary access to
-          const newArea = !uniqueAreaNames.has(area.name)
-          if (newArea) {
-            uniqueAreaNames.add(area.name)
+  getFullAreasList: createSelector([path], (areas) => {
+    const uniqueAreaNames = new Set()
+    const data = areas.areas
+      .map((area) => ({
+        id: area.id,
+        name: area.name,
+        access: 'primary',
+      }))
+      .concat(
+        Object.keys(areas.neighboringAreas).map((id) => {
+          return {
+            id: parseInt(id, 10),
+            name: areas.neighboringAreas[id],
+            access: 'neighbor',
           }
-          return newArea
         })
-
-      data.sort((a, b) => {
-        if (a.name === b.name) {
-          return 0
-        } else if (a.name < b.name) {
-          return -1
-        } else {
-          return 1
+      )
+      .filter((area) => {
+        // remove duplicates such as neighbor areas that the member also has primary access to
+        const newArea = !uniqueAreaNames.has(area.name)
+        if (newArea) {
+          uniqueAreaNames.add(area.name)
         }
+        return newArea
       })
 
-      return data
-    }
-  )
+    data.sort((a, b) => {
+      if (a.name === b.name) {
+        return 0
+      } else if (a.name < b.name) {
+        return -1
+      } else {
+        return 1
+      }
+    })
+
+    return data
+  }),
 }

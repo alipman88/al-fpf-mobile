@@ -11,9 +11,9 @@ describe('Advertisement', () => {
       url: 'https://frontporchforum.com',
       link_text: 'Website',
       headline: 'Advertisement',
-      body: 'This is some ad copy'
+      body: 'This is some ad copy',
     },
-    navigateWithToken: jest.fn()
+    navigateWithToken: jest.fn(),
   }
 
   test('onPress button opens ad URL', () => {

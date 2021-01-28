@@ -7,7 +7,7 @@ import { validations } from './validations'
 
 export class GovernmentInfo extends React.Component {
   render() {
-    const handleSubmit = values => {
+    const handleSubmit = (values) => {
       const { setNewUserByKey, navigation } = this.props
       setNewUserByKey({ government: values })
       navigation.navigate('CreateAccount')
@@ -18,9 +18,9 @@ export class GovernmentInfo extends React.Component {
     return (
       <Formik
         initialValues={newUser.government}
-        onSubmit={values => handleSubmit(values)}
+        onSubmit={(values) => handleSubmit(values)}
         validationSchema={validations}
-        render={props => (
+        render={(props) => (
           <GovernmentInfoFields
             {...props}
             navigation={navigation}
@@ -36,5 +36,5 @@ GovernmentInfo.propTypes = {
   navigation: PropTypes.object.isRequired,
   setNewUserByKey: PropTypes.func.isRequired,
   newUser: PropTypes.object.isRequired,
-  governmentTitles: PropTypes.array.isRequired
+  governmentTitles: PropTypes.array.isRequired,
 }

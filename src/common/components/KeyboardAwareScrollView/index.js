@@ -20,7 +20,7 @@ export const KeyboardAwareScrollView = ({
             keyboardShouldPersistTaps='handled'
             contentContainerStyle={{
               ...style,
-              ...contentContainerStyle
+              ...contentContainerStyle,
             }}
             {...otherProps}
           >
@@ -35,5 +35,5 @@ export const KeyboardAwareScrollView = ({
 KeyboardAwareScrollView.propTypes = {
   children: PropTypes.node,
   contentContainerStyle: PropTypes.object,
-  stretchToHeightOfScreen: PropTypes.bool
+  stretchToHeightOfScreen: PropTypes.bool,
 }

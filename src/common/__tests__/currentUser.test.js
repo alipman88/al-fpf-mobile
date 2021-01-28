@@ -5,7 +5,7 @@ describe('currentUser reducer', () => {
     const state = currentUser.reducer(undefined, {})
     expect(state).toEqual({
       accessToken: '',
-      fcmToken: ''
+      fcmToken: '',
     })
   })
 
@@ -15,8 +15,8 @@ describe('currentUser reducer', () => {
         currentUser: currentUser.reducer(
           undefined,
           currentUser.actions.setAccessToken('token')
-        )
-      }
+        ),
+      },
     }
 
     expect(currentUser.selectors.getAccessToken(state)).toEqual('token')
@@ -28,8 +28,8 @@ describe('currentUser reducer', () => {
         currentUser: currentUser.reducer(
           undefined,
           currentUser.actions.setFCMToken('token')
-        )
-      }
+        ),
+      },
     }
 
     expect(currentUser.selectors.getFCMToken(state)).toEqual('token')

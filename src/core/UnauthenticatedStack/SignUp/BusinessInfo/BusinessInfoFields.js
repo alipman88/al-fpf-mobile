@@ -14,7 +14,7 @@ import {
   Container,
   FieldWrapper,
   FormFieldsWrapper,
-  FormHeader
+  FormHeader,
 } from '../styledComponents'
 
 export class BusinessInfoFields extends React.Component {
@@ -36,7 +36,7 @@ export class BusinessInfoFields extends React.Component {
       navigation,
       setNewUserByKey,
       categories,
-      loading
+      loading,
     } = this.props
 
     const nextDisabled =
@@ -44,7 +44,7 @@ export class BusinessInfoFields extends React.Component {
       isEmpty(touched) ||
       !Boolean(values.businessCategoryId)
 
-    const onSubmit = values => {
+    const onSubmit = (values) => {
       if (!nextDisabled) {
         setNewUserByKey({ business: values })
         navigation.navigate('CreateAccount')
@@ -61,7 +61,7 @@ export class BusinessInfoFields extends React.Component {
         topPadding={35}
         nextDisabled={nextDisabled}
         contentContainerStyle={{
-          backgroundColor: '#f2f2f2'
+          backgroundColor: '#f2f2f2',
         }}
       >
         <Container>
@@ -79,7 +79,7 @@ export class BusinessInfoFields extends React.Component {
                 label='Name of business or nonprofit'
                 placeholder='Your Business Name'
                 touched={!!touched.name}
-                onChangeText={value => {
+                onChangeText={(value) => {
                   setFieldValue('name', value)
                   setFieldTouched('name')
                 }}
@@ -93,7 +93,7 @@ export class BusinessInfoFields extends React.Component {
                 label='Category'
                 selectText={'Select category'}
                 items={categories}
-                onSelectedItemsChange={selectedItems => {
+                onSelectedItemsChange={(selectedItems) => {
                   setFieldTouched('businessCategoryId', true)
                   setFieldValue('businessCategoryId', selectedItems[0])
                 }}
@@ -111,7 +111,7 @@ export class BusinessInfoFields extends React.Component {
                 label='Website'
                 placeholder='example.com'
                 touched={!!touched.url}
-                onChangeText={value => {
+                onChangeText={(value) => {
                   setFieldValue('url', value)
                   setFieldTouched('url')
                 }}
@@ -130,7 +130,7 @@ export class BusinessInfoFields extends React.Component {
                 label='Phone'
                 placeholder='802-123-4567'
                 touched={!!touched.phone}
-                onChangeText={value => {
+                onChangeText={(value) => {
                   setFieldValue('phone', value)
                   setFieldTouched('phone')
                 }}
@@ -145,7 +145,7 @@ export class BusinessInfoFields extends React.Component {
                 error={errors.description}
                 label='Business/nonprofit description'
                 touched={!!touched.description}
-                onChangeText={value => {
+                onChangeText={(value) => {
                   setFieldValue('description', value)
                   setFieldTouched('description')
                 }}
@@ -172,5 +172,5 @@ BusinessInfoFields.propTypes = {
   values: PropTypes.object.isRequired,
   newUser: PropTypes.object.isRequired,
   categories: PropTypes.array.isRequired,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
 }

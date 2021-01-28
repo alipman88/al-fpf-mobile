@@ -17,7 +17,7 @@ const prefixes = {
   gmail: 'googlegmail://',
   spark: 'readdle-spark://',
   airmail: 'airmail://',
-  outlook: 'ms-outlook://'
+  outlook: 'ms-outlook://',
 }
 
 const titles = {
@@ -25,7 +25,7 @@ const titles = {
   gmail: 'Gmail',
   spark: 'Spark',
   airmail: 'Airmail',
-  outlook: 'Outlook'
+  outlook: 'Outlook',
 }
 
 function getComposeUrl(app, subject = '', toEmail = '') {
@@ -50,7 +50,7 @@ function getComposeUrl(app, subject = '', toEmail = '') {
  * @returns {Promise<boolean>}
  */
 function isAppInstalled(app, subject, toEmail) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     if (!(app in prefixes)) {
       console.log(app, 'not in', prefixes)
       return resolve(false)
@@ -58,7 +58,7 @@ function isAppInstalled(app, subject, toEmail) {
 
     const url = getComposeUrl(app, subject, toEmail)
     Linking.canOpenURL(url)
-      .then(isSupported => resolve(isSupported))
+      .then((isSupported) => resolve(isSupported))
       .catch(() => resolve(false))
   })
 }
@@ -77,7 +77,7 @@ function askAppChoice(
   subject = '',
   toEmail = ''
 ) {
-  return new Promise(async resolve => {
+  return new Promise(async (resolve) => {
     const availableApps = []
     for (let app in prefixes) {
       const avail = await isAppInstalled(app, subject, toEmail)
@@ -89,7 +89,7 @@ function askAppChoice(
       return resolve(availableApps[0] || null)
     }
 
-    const options = availableApps.map(app => titles[app])
+    const options = availableApps.map((app) => titles[app])
     options.push(cancelLabel)
 
     ActionSheetIOS.showActionSheetWithOptions(
@@ -97,9 +97,9 @@ function askAppChoice(
         title: title,
         message: message,
         options: options,
-        cancelButtonIndex: options.length - 1
+        cancelButtonIndex: options.length - 1,
       },
-      buttonIndex => {
+      (buttonIndex) => {
         if (buttonIndex === options.length - 1) {
           return resolve(null)
         }

@@ -2,7 +2,7 @@ import { createSlice, createSelector } from 'redux-starter-kit'
 
 const initialState = {
   products: [],
-  loading: false
+  loading: false,
 }
 
 export const products = createSlice({
@@ -11,14 +11,14 @@ export const products = createSlice({
   reducers: {
     setLoading: (state, { payload }) => ({
       ...state,
-      loading: payload
+      loading: payload,
     }),
 
     setProducts: (state, { payload }) => ({
       ...state,
-      products: payload
-    })
-  }
+      products: payload,
+    }),
+  },
 })
 
 const path = 'main.products'
@@ -26,13 +26,7 @@ const path = 'main.products'
 products.selectors = {
   ...products.selectors,
 
-  getProducts: createSelector(
-    [path],
-    state => state.products
-  ),
+  getProducts: createSelector([path], (state) => state.products),
 
-  getLoading: createSelector(
-    [path],
-    state => state.loading
-  )
+  getLoading: createSelector([path], (state) => state.loading),
 }

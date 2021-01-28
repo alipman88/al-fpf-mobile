@@ -7,7 +7,7 @@ describe('areas - slice', () => {
       areas: [],
       currentAreaId: 0,
       loading: false,
-      neighboringAreas: {}
+      neighboringAreas: {},
     })
   })
 
@@ -16,8 +16,8 @@ describe('areas - slice', () => {
 
     const data = areas.selectors.getLoading({
       main: {
-        areas: state
-      }
+        areas: state,
+      },
     })
 
     expect(data).toEqual(true)
@@ -29,33 +29,33 @@ describe('areas - slice', () => {
     state = areas.reducer(
       state,
       areas.actions.setAreas([
-        { id: 1, neighbor_areas: [{ id: 2, name: 'neighbor' }] }
+        { id: 1, neighbor_areas: [{ id: 2, name: 'neighbor' }] },
       ])
     )
     let data = areas.selectors.getAreas({
       main: {
-        areas: state
-      }
+        areas: state,
+      },
     })
 
     expect(data).toEqual([
-      { id: 1, neighbor_areas: [{ id: 2, name: 'neighbor' }] }
+      { id: 1, neighbor_areas: [{ id: 2, name: 'neighbor' }] },
     ])
 
     data = areas.selectors.getNeighboringAreas({
       main: {
-        areas: state
-      }
+        areas: state,
+      },
     })
 
     expect(data).toEqual({
-      2: 'neighbor'
+      2: 'neighbor',
     })
 
     data = areas.selectors.getLoading({
       main: {
-        areas: state
-      }
+        areas: state,
+      },
     })
 
     expect(data).toEqual(false)
@@ -66,8 +66,8 @@ describe('areas - slice', () => {
     expect(
       areas.selectors.getCurrentAreaId({
         main: {
-          areas: state
-        }
+          areas: state,
+        },
       })
     ).toEqual(3)
   })
@@ -80,21 +80,24 @@ describe('areas - slice', () => {
         {
           id: 2,
           name: 'aaaa',
-          neighbor_areas: [{ id: 3, name: 'neighbor' }, { id: 1, name: 'zzzz' }]
-        }
+          neighbor_areas: [
+            { id: 3, name: 'neighbor' },
+            { id: 1, name: 'zzzz' },
+          ],
+        },
       ])
     )
 
     const data = areas.selectors.getFullAreasList({
       main: {
-        areas: state
-      }
+        areas: state,
+      },
     })
 
     expect(data).toEqual([
       { id: 2, name: 'aaaa', access: 'primary' },
       { id: 3, name: 'neighbor', access: 'neighbor' },
-      { id: 1, name: 'zzzz', access: 'primary' }
+      { id: 1, name: 'zzzz', access: 'primary' },
     ])
   })
 })

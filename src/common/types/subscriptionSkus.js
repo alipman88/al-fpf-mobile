@@ -12,6 +12,6 @@ export const subscriptionSkus = Platform.select({
     'standard_nonprofit_monthly',
     'standard_nonprofit_yearly',
     'enhanced_nonprofit_monthly',
-    'enhanced_nonprofit_yearly'
-  ]
+    'enhanced_nonprofit_yearly',
+  ],
 })

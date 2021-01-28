@@ -9,7 +9,7 @@ import { Button } from '@components/Button'
 import {
   PostDate,
   PostContainerBordered,
-  ShowMoreButton
+  ShowMoreButton,
 } from '../styledComponents'
 import Autolink from 'react-native-autolink'
 
@@ -24,21 +24,21 @@ describe('Post', () => {
       user_profile_name: 'profile name',
       show_user_email: true,
       event: {
-        start_date: new Date()
+        start_date: new Date(),
       },
       area_id: 2,
       categories: ['Lost and found'],
-      content: 'This is a longer test that we should render'
+      content: 'This is a longer test that we should render',
     },
     categories: [
       {
         name: 'Lost and found',
-        labelStyle: 'light_grey'
+        labelStyle: 'light_grey',
       },
       {
         name: 'Seeking Advice',
-        labelStyle: 'dark_grey'
-      }
+        labelStyle: 'dark_grey',
+      },
     ],
     hasBorder: false,
     moreText: 'Read',
@@ -46,14 +46,14 @@ describe('Post', () => {
     onTapCategory: jest.fn(),
     includeBottomButtons: true,
     navigation: {
-      navigate: jest.fn()
+      navigate: jest.fn(),
     },
     chooseMailApp: jest.fn(),
     areasIdMap: {
       2: {
-        id: 2
-      }
-    }
+        id: 2,
+      },
+    },
   }
 
   afterEach(() => {
@@ -72,8 +72,8 @@ describe('Post', () => {
       ...defaultProps,
       post: {
         ...defaultProps.post,
-        categories: ['Lost and found', 'Seeking Advice']
-      }
+        categories: ['Lost and found', 'Seeking Advice'],
+      },
     }
     const wrapper = shallow(<Post {...props} />)
     expect(wrapper.find(PostCategory).length).toEqual(2)
@@ -94,7 +94,7 @@ describe('Post', () => {
           aliquip ex ea commodo consequat. Duis aute irure dolor in
           reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.`
+          culpa qui officia deserunt mollit anim id est laborum.`,
     }
 
     const wrapper = shallow(
@@ -108,27 +108,21 @@ describe('Post', () => {
     )
     expect(wrapper.find(Autolink).props().text).toEqual('Lor...')
 
-    const getButton = wrapper => {
+    const getButton = (wrapper) => {
       return wrapper.find(TouchableOpacity).last()
     }
 
-    expect(
-      getButton(wrapper)
-        .find(ShowMoreButton)
-        .last()
-        .text()
-    ).toEqual('Read more')
+    expect(getButton(wrapper).find(ShowMoreButton).last().text()).toEqual(
+      'Read more'
+    )
 
     getButton(wrapper).simulate('press')
 
     expect(wrapper.find(Autolink).props().text).toEqual(post.content)
 
-    expect(
-      getButton(wrapper)
-        .find(ShowMoreButton)
-        .last()
-        .text()
-    ).toEqual('Read less')
+    expect(getButton(wrapper).find(ShowMoreButton).last().text()).toEqual(
+      'Read less'
+    )
   })
 
   test('it uses a boredered component if hasBorder is true', () => {
@@ -139,47 +133,35 @@ describe('Post', () => {
 
   test('reply button press', () => {
     const wrapper = shallow(<Post {...defaultProps} />)
-    wrapper
-      .find(Button)
-      .last()
-      .simulate('press')
-    expect(analytics().logEvent).toHaveBeenCalledWith(
-      'press_reply_to_forum',
-      {
-        area_id: defaultProps.post.area_id,
-        post_id: defaultProps.post.id,
-        issue_id: defaultProps.post.issue_id
-      }
-    )
+    wrapper.find(Button).last().simulate('press')
+    expect(analytics().logEvent).toHaveBeenCalledWith('press_reply_to_forum', {
+      area_id: defaultProps.post.area_id,
+      post_id: defaultProps.post.id,
+      issue_id: defaultProps.post.issue_id,
+    })
     expect(defaultProps.navigation.navigate).toHaveBeenCalledWith({
       routeName: 'Compose',
       params: {
         shouldResetForm: true,
         parentPostId: defaultProps.post.id,
         areaId: defaultProps.post.area_id,
-        title: `Re: ${defaultProps.post.title}`
-      }
+        title: `Re: ${defaultProps.post.title}`,
+      },
     })
   })
 
   test('email button press', () => {
     const wrapper = shallow(<Post {...defaultProps} />)
-    wrapper
-      .find(Button)
-      .first()
-      .simulate('press')
-    expect(analytics().logEvent).toHaveBeenCalledWith(
-      'press_email_author',
-      {
-        area_id: defaultProps.post.area_id,
-        post_id: defaultProps.post.id,
-        issue_id: defaultProps.post.issue_id
-      }
-    )
+    wrapper.find(Button).first().simulate('press')
+    expect(analytics().logEvent).toHaveBeenCalledWith('press_email_author', {
+      area_id: defaultProps.post.area_id,
+      post_id: defaultProps.post.id,
+      issue_id: defaultProps.post.issue_id,
+    })
     expect(defaultProps.chooseMailApp).toHaveBeenCalledWith({
       subject: `Re: ${defaultProps.post.title}`,
       toEmail: defaultProps.post.user_email,
-      title: 'Email author'
+      title: 'Email author',
     })
   })
 })

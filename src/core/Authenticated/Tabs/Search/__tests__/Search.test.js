@@ -13,9 +13,9 @@ describe('Search', () => {
     search: jest.fn(),
     navigation: {
       getParam: jest.fn(),
-      setParams: jest.fn()
+      setParams: jest.fn(),
     },
-    setAppError: jest.fn()
+    setAppError: jest.fn(),
   }
 
   afterEach(() => {
@@ -27,11 +27,11 @@ describe('Search', () => {
     const categoryName = 'Lost and Found'
     const navigation = {
       getParam: jest.fn(() => categoryName),
-      setParams: jest.fn()
+      setParams: jest.fn(),
     }
     const categories = [
       { id: 1, name: categoryName },
-      { id: 2, name: 'Another Category' }
+      { id: 2, name: 'Another Category' },
     ]
     const wrapper = shallow(
       <Search
@@ -43,19 +43,19 @@ describe('Search', () => {
     wrapper.instance().componentDidMount()
     expect(wrapper.state().categoryFromLink).toEqual({
       id: 1,
-      name: categoryName
+      name: categoryName,
     })
 
     wrapper.setProps({
       navigation: {
         getParam: jest.fn(() => 'Another Category'),
-        setParams: jest.fn()
-      }
+        setParams: jest.fn(),
+      },
     })
 
     expect(wrapper.state().categoryFromLink).toEqual({
       id: 2,
-      name: 'Another Category'
+      name: 'Another Category',
     })
   })
 
@@ -79,7 +79,7 @@ describe('Search', () => {
 
       defaultProps.search.mockResolvedValue({
         pagination: { total: 15, page: 2, pages: 3, page_item_count: 5 },
-        results: [{ id: 2 }, { id: 3 }, { id: 4 }]
+        results: [{ id: 2 }, { id: 3 }, { id: 4 }],
       })
 
       return wrapper
@@ -89,7 +89,7 @@ describe('Search', () => {
           expect(defaultProps.search).toHaveBeenCalledWith({
             keyword: 'test',
             page: 2,
-            count: 25
+            count: 25,
           })
 
           expect(wrapper.state()).toEqual({
@@ -100,7 +100,7 @@ describe('Search', () => {
             total: 15,
             page: 2,
             pages: 3,
-            pageItemCount: 5
+            pageItemCount: 5,
           })
         })
     })
@@ -119,12 +119,12 @@ describe('Search', () => {
         user_email: 'test@example.com',
         user_profile_name: 'profile name',
         event: {},
-        categories: ['Lost and found']
+        categories: ['Lost and found'],
       }
 
       defaultProps.search.mockResolvedValue({
         pagination: { total: 5, page: 1, pages: 2, page_item_count: 3 },
-        results: [post]
+        results: [post],
       })
 
       const setSubmitting = jest.fn()
@@ -137,12 +137,12 @@ describe('Search', () => {
         forums: [],
         page: 1,
         count: 25,
-        keyword: 'test'
+        keyword: 'test',
       })
 
       expect(defaultProps.addSearchToHistory).toHaveBeenCalledWith({
         keyword: 'test',
-        forums: []
+        forums: [],
       })
       expect(setSubmitting).toHaveBeenCalledTimes(2)
       expect(setSubmitting).toHaveBeenCalledWith(true)
@@ -158,7 +158,7 @@ describe('Search', () => {
         total: 5,
         page: 1,
         pages: 2,
-        pageItemCount: 3
+        pageItemCount: 3,
       })
     })
   })

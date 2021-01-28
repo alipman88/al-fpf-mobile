@@ -10,34 +10,34 @@ describe('DrawerMenu', () => {
     areas: [
       {
         id: 1,
-        name: 'C'
+        name: 'C',
       },
       {
         id: 2,
-        name: 'B'
+        name: 'B',
       },
       {
         id: 3,
-        name: 'A'
-      }
+        name: 'A',
+      },
     ],
     currentAreaId: 1,
     currentProfile: {
       id: 1,
-      area_ids: [1, 3]
+      area_ids: [1, 3],
     },
     profiles: [
       {
         id: 1,
-        area_ids: [1, 3]
+        area_ids: [1, 3],
       },
       {
         id: 2,
-        area_ids: [1]
-      }
+        area_ids: [1],
+      },
     ],
     setCurrentAreaId: jest.fn(),
-    setCurrentProfileId: jest.fn()
+    setCurrentProfileId: jest.fn(),
   }
 
   test('renders areas', () => {

@@ -16,5 +16,5 @@ export const Grass = ({ content, height, resizeMode }) => {
 Grass.propTypes = {
   content: PropTypes.node,
   height: PropTypes.number,
-  resizeMode: PropTypes.string
+  resizeMode: PropTypes.string,
 }

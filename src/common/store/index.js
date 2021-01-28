@@ -10,38 +10,35 @@ import { mainReducer } from './mainReducer'
 import { securedReducer } from './securedReducer'
 
 const loggerMiddleware = createLogger({
-  predicate: () => window.__DEV__ && !window.__TEST__
+  predicate: () => window.__DEV__ && !window.__TEST__,
 })
 
 const sensitiveStorage = createSensitiveStorage({
   keychainService: 'frontPorchForumKeychain',
-  sharedPreferencesName: 'frontPorchForumSharedPrefs'
+  sharedPreferencesName: 'frontPorchForumSharedPrefs',
 })
 
 const mainPersistConfig = {
   key: 'main',
   storage: AsyncStorage,
-  blacklist: ['appMessage', 'newUser', 'spinner']
+  blacklist: ['appMessage', 'newUser', 'spinner'],
 }
 
 const securedPersistConfig = {
   key: 'token',
-  storage: sensitiveStorage
+  storage: sensitiveStorage,
 }
 
 const reducer = combineReducers({
   main: persistReducer(mainPersistConfig, mainReducer),
-  secured: persistReducer(securedPersistConfig, securedReducer)
+  secured: persistReducer(securedPersistConfig, securedReducer),
 })
 
 const middlewares = compose(applyMiddleware(thunk, loggerMiddleware))
 
 const composedMiddlewares =
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__DEV__
-    ? compose(
-        middlewares,
-        window.__REDUX_DEVTOOLS_EXTENSION__()
-      )
+    ? compose(middlewares, window.__REDUX_DEVTOOLS_EXTENSION__())
     : middlewares
 
 export const store = createStore(reducer, undefined, composedMiddlewares)

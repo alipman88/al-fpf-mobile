@@ -8,15 +8,15 @@ describe('Compose - actions', () => {
   const getState = () => ({
     secured: {
       currentUser: {
-        accessToken: 'abc123'
-      }
-    }
+        accessToken: 'abc123',
+      },
+    },
   })
   const setSubmitting = jest.fn()
   const onSuccess = jest.fn()
   const navigation = {
     navigate: jest.fn(),
-    dispatch: jest.fn()
+    dispatch: jest.fn(),
   }
 
   afterEach(() => {
@@ -37,8 +37,8 @@ describe('Compose - actions', () => {
       expect(setSubmitting).toHaveBeenCalledWith(true)
       expect(spy).toHaveBeenCalledWith('/users/posts', values, {
         headers: {
-          Authorization: 'Bearer abc123'
-        }
+          Authorization: 'Bearer abc123',
+        },
       })
       expect(dispatch).toHaveBeenCalledWith(
         profile.actions.setValueInProfileData({ 1: { last_posted_area_id: 2 } })
@@ -70,8 +70,8 @@ describe('Compose - actions', () => {
         { subject: 'Subject' },
         {
           headers: {
-            Authorization: 'Bearer abc123'
-          }
+            Authorization: 'Bearer abc123',
+          },
         }
       )
       expect(dispatch).toHaveBeenCalledWith(

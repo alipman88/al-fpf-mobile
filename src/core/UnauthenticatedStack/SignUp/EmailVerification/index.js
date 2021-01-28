@@ -5,17 +5,14 @@ import { registrationEmail } from '../registrationEmail'
 import { resendEmail } from '../../actions'
 import { newUser } from '../newUser'
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   email: registrationEmail.selectors.getRegistrationEmail(state),
   newUser: newUser.selectors.getNewUser(state),
-  profileType: newUser.selectors.getProfileType(state)
+  profileType: newUser.selectors.getProfileType(state),
 })
 
-export const EmailVerification = connect(
-  mapStateToProps,
-  {
-    resendEmail,
-    setRegistrationEmail: registrationEmail.actions.setRegistrationEmail,
-    clearUserData: newUser.actions.clearData
-  }
-)(EmailVerificationComponent)
+export const EmailVerification = connect(mapStateToProps, {
+  resendEmail,
+  setRegistrationEmail: registrationEmail.actions.setRegistrationEmail,
+  clearUserData: newUser.actions.clearData,
+})(EmailVerificationComponent)

@@ -10,9 +10,9 @@ export const FormError = ({ children }) => (
 )
 
 FormError.propTypes = {
-  children: PropTypes.string
+  children: PropTypes.string,
 }
 
 FormError.defaultProps = {
-  children: ''
+  children: '',
 }

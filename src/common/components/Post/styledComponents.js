@@ -91,6 +91,6 @@ export const ButtonSpacer = styled.View`
 
 export const AutoPostLinkStyle = StyleSheet.create({
   link: {
-    color: '#d77400'
-  }
+    color: '#d77400',
+  },
 })

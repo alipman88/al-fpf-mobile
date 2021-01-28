@@ -6,7 +6,7 @@ import { api } from '@common/api'
 import { appMessage } from '@components/AppMessage/slice'
 import { prepareValues } from './prepareValues'
 
-export const postSignUp = navigation => async (dispatch, getState) => {
+export const postSignUp = (navigation) => async (dispatch, getState) => {
   try {
     dispatch(newUser.actions.setLoading(true))
     const toSave = prepareValues(newUser.selectors.getNewUser(getState()))

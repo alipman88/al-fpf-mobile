@@ -6,8 +6,8 @@ describe('SplashScreen', () => {
   const defaultProps = {
     accessToken: '',
     navigation: {
-      navigate: jest.fn()
-    }
+      navigate: jest.fn(),
+    },
   }
 
   afterEach(() => {

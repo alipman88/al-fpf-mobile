@@ -6,7 +6,7 @@ import { validations } from './validations'
 
 export class Address extends React.Component {
   state = {
-    submitted: false
+    submitted: false,
   }
 
   onSubmit = async (values, actions) => {
@@ -33,7 +33,7 @@ export class Address extends React.Component {
       <Formik
         onSubmit={this.onSubmit}
         initialValues={newUser.address}
-        render={props => (
+        render={(props) => (
           <AddressFields
             {...props}
             navigation={navigation}
@@ -53,5 +53,5 @@ Address.propTypes = {
   newUser: PropTypes.object.isRequired,
   searchAddress: PropTypes.func.isRequired,
   setNewUserByKey: PropTypes.func.isRequired,
-  profileType: PropTypes.string.isRequired
+  profileType: PropTypes.string.isRequired,
 }

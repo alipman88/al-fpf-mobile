@@ -14,22 +14,22 @@ export class ProfileTypes extends React.Component {
         buttonText: 'Neighbor',
         label: 'Personal account, just for me',
         type: profileTypes.NEIGHBOR,
-        active: this.props.profileType === profileTypes.NEIGHBOR
+        active: this.props.profileType === profileTypes.NEIGHBOR,
       },
       {
         buttonText: 'Business/Nonprofit',
         label: 'Business or nonprofit organization',
         type: profileTypes.BUSINESS,
-        active: this.props.profileType === profileTypes.BUSINESS
+        active: this.props.profileType === profileTypes.BUSINESS,
       },
       {
         buttonText: 'Government',
         label:
           'Public official, muncipal department, public school, town library, etc.',
         type: profileTypes.GOVERNMENT,
-        active: this.props.profileType === profileTypes.GOVERNMENT
-      }
-    ]
+        active: this.props.profileType === profileTypes.GOVERNMENT,
+      },
+    ],
   }
 
   componentDidMount() {
@@ -42,16 +42,18 @@ export class ProfileTypes extends React.Component {
     }
   }
 
-  onTapProfileButton = type => {
-    const profilePlan = this.props.profilePlans.find(p => p.plan_type === type)
+  onTapProfileButton = (type) => {
+    const profilePlan = this.props.profilePlans.find(
+      (p) => p.plan_type === type
+    )
 
     this.props.setNewUserByKey({ profilePlan })
 
     this.setState({
-      profileOptions: this.state.profileOptions.map(profile => {
+      profileOptions: this.state.profileOptions.map((profile) => {
         profile.active = profile.type === type
         return profile
-      })
+      }),
     })
 
     this.props.navigation.navigate('BasicInfo')
@@ -59,7 +61,7 @@ export class ProfileTypes extends React.Component {
 
   render() {
     const { navigation, profileType, appSettingsLoaded } = this.props
-    const profileTypeButtons = this.state.profileOptions.map(profileType => {
+    const profileTypeButtons = this.state.profileOptions.map((profileType) => {
       return (
         <ProfileTypeButton
           {...profileType}
@@ -97,5 +99,5 @@ ProfileTypes.propTypes = {
   navigation: PropTypes.object.isRequired,
   profilePlans: PropTypes.array.isRequired,
   profileType: PropTypes.string,
-  appSettingsLoaded: PropTypes.bool.isRequired
+  appSettingsLoaded: PropTypes.bool.isRequired,
 }

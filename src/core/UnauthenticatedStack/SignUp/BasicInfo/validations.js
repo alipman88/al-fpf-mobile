@@ -2,19 +2,19 @@ import * as yup from 'yup'
 import { api } from '@common/api'
 import { validateEmail } from '@common/validations'
 
-export const validateFirstName = string => {
+export const validateFirstName = (string) => {
   return /^(?=.*[a-zA-Z\u00C0-\u017F])[a-zA-Z\u00C0-\u017F.'"\-,/ ()&]*$/.test(
     string
   )
 }
 
-export const validateLastName = string => {
+export const validateLastName = (string) => {
   return /^(?=.*[a-zA-Z\u00C0-\u017F]{2})[a-zA-Z\u00C0-\u017F.'"\-,/ ()&]*$/.test(
     string
   )
 }
 
-export const passwordValidation = password => {
+export const passwordValidation = (password) => {
   return /(?=.*[a-zA-Z].*)(?=.*\d.*)(?=.*[!#$%&?@"].*)/.test(password)
 }
 
@@ -22,7 +22,7 @@ export const passwordValidation = password => {
  * Validate that the email address is available.
  * Caches the result for the last email checked in the context object.
  */
-export const validateEmailAvailability = function(email) {
+export const validateEmailAvailability = function (email) {
   if (email) {
     const context = this.options ? this.options.context : null
 
@@ -32,7 +32,7 @@ export const validateEmailAvailability = function(email) {
 
     return api
       .get('/check_user_email_availability', { params: { email: email } })
-      .then(resp => {
+      .then((resp) => {
         const available = resp.data.available === true
         if (context) {
           context.lastValidatedEmail = email
@@ -77,9 +77,9 @@ export const validations = yup.object().shape({
     .test(
       'passwordConfirmation',
       'Password and confirm password must match',
-      function(passConfirm) {
+      function (passConfirm) {
         return this.parent.password === passConfirm
       }
     )
-    .required('Confirm password is a required field')
+    .required('Confirm password is a required field'),
 })

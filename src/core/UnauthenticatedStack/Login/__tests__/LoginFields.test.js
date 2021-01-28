@@ -15,7 +15,7 @@ describe('LoginFields', () => {
     setFieldValue: jest.fn(),
     touched: {},
     values: {},
-    navigation: {}
+    navigation: {},
   }
 
   afterEach(() => {
@@ -27,19 +27,13 @@ describe('LoginFields', () => {
 
   test('setFieldTouched called onBlur', () => {
     const wrapper = shallow(<LoginFields {...defaultProps} />)
-    wrapper
-      .find(TextInput)
-      .first()
-      .simulate('blur')
+    wrapper.find(TextInput).first().simulate('blur')
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('email')
   })
 
   test('setFieldValue called onChangeText', () => {
     const wrapper = shallow(<LoginFields {...defaultProps} />)
-    wrapper
-      .find(TextInput)
-      .first()
-      .simulate('changeText', 'value')
+    wrapper.find(TextInput).first().simulate('changeText', 'value')
     expect(defaultProps.setFieldValue).toHaveBeenCalledWith('email', 'value')
   })
 
@@ -59,7 +53,7 @@ describe('LoginFields', () => {
 
     const error = {
       text: 'something went wrong',
-      button: { text: 'fix it', url: 'some url' }
+      button: { text: 'fix it', url: 'some url' },
     }
     const wrapperWithError = shallow(
       <LoginFields {...defaultProps} errors={error} />
@@ -79,7 +73,7 @@ describe('LoginFields', () => {
 
     const error = {
       text: 'something went wrong',
-      button: { text: 'fix it', action: 'resend_email' }
+      button: { text: 'fix it', action: 'resend_email' },
     }
     const wrapperWithError = shallow(
       <LoginFields {...defaultProps} errors={error} />
@@ -89,10 +83,7 @@ describe('LoginFields', () => {
     expect(defaultProps.handleSubmit).toHaveBeenCalled()
     expect(wrapperWithError.find(BottomText).length).toEqual(2) // 2 with error
 
-    wrapperWithError
-      .find(BottomText)
-      .at(0)
-      .simulate('press')
+    wrapperWithError.find(BottomText).at(0).simulate('press')
     expect(defaultProps.resendEmail).toHaveBeenCalled()
   })
 })

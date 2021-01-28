@@ -8,8 +8,8 @@ describe('navigateWithToken', () => {
   test('gets the token, and directs the user', async () => {
     const apiSpy = jest.spyOn(api, 'postAuthorized').mockImplementation(() => ({
       data: {
-        token: 'abc123'
-      }
+        token: 'abc123',
+      },
     }))
 
     const openUrlSpy = jest

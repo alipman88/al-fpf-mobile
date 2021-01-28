@@ -6,12 +6,12 @@ import {
   Container,
   ForwardIcon,
   IconContainer,
-  StyledTextInput
+  StyledTextInput,
 } from './styledComponents'
 import {
   FormFieldLabel,
   FormFieldLabelWrapper,
-  FormFieldRequired
+  FormFieldRequired,
 } from '@components/FormFieldLabel'
 
 export class TextInput extends React.Component {
@@ -80,12 +80,12 @@ TextInput.propTypes = {
   onTapIcon: PropTypes.func,
   touched: PropTypes.bool,
   editable: PropTypes.bool,
-  required: PropTypes.bool
+  required: PropTypes.bool,
 }
 
 TextInput.defaultProps = {
   keyboardType: 'default',
   nextField: null,
   editable: true,
-  secureTextEntry: false
+  secureTextEntry: false,
 }

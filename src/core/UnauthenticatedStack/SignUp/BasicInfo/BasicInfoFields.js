@@ -13,7 +13,7 @@ import {
   FieldWrapper,
   FormHelper,
   FormFieldsWrapper,
-  FormHeader
+  FormHeader,
 } from '../styledComponents'
 
 export class BasicInfoFields extends React.Component {
@@ -33,12 +33,12 @@ export class BasicInfoFields extends React.Component {
       touched,
       values,
       navigation,
-      profileType
+      profileType,
     } = this.props
 
     const nextDisabled = !isEmpty(errors) || isEmpty(touched)
 
-    const onSubmit = values => {
+    const onSubmit = (values) => {
       if (!nextDisabled) {
         this.props.setNewUserByKey(values)
         this.props.navigation.navigate('Address')
@@ -53,7 +53,7 @@ export class BasicInfoFields extends React.Component {
         steps={getStepCount(profileType)}
         nextDisabled={nextDisabled}
         contentContainerStyle={{
-          backgroundColor: '#f2f2f2'
+          backgroundColor: '#f2f2f2',
         }}
       >
         <Container>
@@ -65,7 +65,7 @@ export class BasicInfoFields extends React.Component {
                 label='First name'
                 touched={!!touched.firstName}
                 onBlur={() => setFieldTouched('firstName')}
-                onChangeText={value => {
+                onChangeText={(value) => {
                   setFieldValue('firstName', value)
                 }}
                 nextField={this.lastNameInput}
@@ -85,7 +85,7 @@ export class BasicInfoFields extends React.Component {
                 label='Last name'
                 touched={!!touched.lastName}
                 onBlur={() => setFieldTouched('lastName')}
-                onChangeText={value => {
+                onChangeText={(value) => {
                   setFieldValue('lastName', value)
                 }}
                 nextField={this.emailInput}
@@ -100,7 +100,7 @@ export class BasicInfoFields extends React.Component {
                 label='Email'
                 touched={!!touched.email}
                 onBlur={() => setFieldTouched('email')}
-                onChangeText={value => {
+                onChangeText={(value) => {
                   setFieldValue('email', value)
                 }}
                 nextField={this.passwordInput}
@@ -117,7 +117,7 @@ export class BasicInfoFields extends React.Component {
                 label='Password'
                 touched={!!touched.password}
                 onBlur={() => setFieldTouched('password')}
-                onChangeText={value => {
+                onChangeText={(value) => {
                   setFieldValue('password', value)
                 }}
                 nextField={this.passwordConfirmationInput}
@@ -137,7 +137,7 @@ export class BasicInfoFields extends React.Component {
                 label='Confirm password'
                 touched={!!touched.passwordConfirmation}
                 onBlur={() => setFieldTouched('passwordConfirmation')}
-                onChangeText={value => {
+                onChangeText={(value) => {
                   setFieldValue('passwordConfirmation', value)
                   setFieldTouched('passwordConfirmation')
                 }}
@@ -167,5 +167,5 @@ BasicInfoFields.propTypes = {
   touched: PropTypes.object.isRequired,
   values: PropTypes.object.isRequired,
   newUser: PropTypes.object.isRequired,
-  profileType: PropTypes.string.isRequired
+  profileType: PropTypes.string.isRequired,
 }

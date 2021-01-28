@@ -10,8 +10,8 @@ describe('Search - actions', () => {
         .mockImplementation(() => ({
           data: {
             results: [],
-            pagination: {}
-          }
+            pagination: {},
+          },
         }))
 
       const dispatch = jest.fn()
@@ -25,8 +25,8 @@ describe('Search - actions', () => {
         toDate: date,
         page: 1,
         count: 10,
-        keyword: 'cats'
-      })(dispatch, () => ({})).then(data => {
+        keyword: 'cats',
+      })(dispatch, () => ({})).then((data) => {
         expect(postSpy).toHaveBeenCalledWith(
           '/posts?count=10&page=1',
           {
@@ -34,7 +34,7 @@ describe('Search - actions', () => {
             category_ids: [2],
             from: '2019-04-08',
             to: '2019-04-08',
-            query: 'cats'
+            query: 'cats',
           },
           {}
         )
@@ -52,8 +52,8 @@ describe('Search - actions', () => {
         .mockImplementation(() => ({
           data: {
             results: [],
-            pagination: {}
-          }
+            pagination: {},
+          },
         }))
 
       const dispatch = jest.fn()
@@ -66,8 +66,8 @@ describe('Search - actions', () => {
         toDate: date,
         page: 1,
         count: 10,
-        keyword: 'cats'
-      })(dispatch, () => ({})).then(data => {
+        keyword: 'cats',
+      })(dispatch, () => ({})).then((data) => {
         expect(postSpy).toHaveBeenCalledWith(
           '/posts?count=10&page=1',
           {
@@ -75,7 +75,7 @@ describe('Search - actions', () => {
             category_ids: undefined,
             from: '2019-04-08',
             to: '2019-04-08',
-            query: 'cats'
+            query: 'cats',
           },
           {}
         )
@@ -105,15 +105,15 @@ describe('Search - actions', () => {
         fromDate: date,
         toDate: date,
         page: 1,
-        count: 10
-      })(dispatch, () => ({})).catch(data => {
+        count: 10,
+      })(dispatch, () => ({})).catch((data) => {
         expect(postSpy).toHaveBeenCalledWith(
           '/posts?count=10&page=1',
           {
             area_ids: undefined,
             category_ids: undefined,
             from: '2019-04-08',
-            to: '2019-04-08'
+            to: '2019-04-08',
           },
           {}
         )

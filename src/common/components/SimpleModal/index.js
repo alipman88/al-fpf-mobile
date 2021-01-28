@@ -30,5 +30,5 @@ SimpleModal.propTypes = {
   children: PropTypes.string.isRequired,
   dark: PropTypes.bool,
   open: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired,
 }

@@ -7,43 +7,43 @@ import { resetAction } from '@common/resetAction'
 const initialState = {
   currentIssueId: 0,
   firstLoadOfIssues: null,
-  loading: false
+  loading: false,
 }
 
 export const issues = createSlice({
   slice: 'issues',
   initialState: {
     ...initialState,
-    issuesByAreaId: {}
+    issuesByAreaId: {},
   },
   reducers: {
     setLoading: (state, action) => ({
       ...state,
-      loading: action.payload
+      loading: action.payload,
     }),
     setCurrentIssueId: (state, action) => {
       return {
         ...state,
-        currentIssueId: action.payload
+        currentIssueId: action.payload,
       }
     },
     toggleIssueUnread: (state, action) => {
       const { id, isUnread, areaId } = action.payload
-      const issues = state.issuesByAreaId[areaId].map(issue => {
+      const issues = state.issuesByAreaId[areaId].map((issue) => {
         return issue.id === id ? { ...issue, isUnread: isUnread } : issue
       })
       return {
         ...state,
         issuesByAreaId: {
           ...state.issuesByAreaId,
-          [areaId]: issues
-        }
+          [areaId]: issues,
+        },
       }
     },
-    setFirstLoadOfIssues: state => {
+    setFirstLoadOfIssues: (state) => {
       return {
         ...state,
-        firstLoadOfIssues: new Date()
+        firstLoadOfIssues: new Date(),
       }
     },
     setIssues: (state, { payload: { issues, areaId } }) => {
@@ -52,8 +52,8 @@ export const issues = createSlice({
       const existingIssueIds = keyBy(existingIssues, 'id')
 
       let newIssues = issues
-        .filter(issue => !existingIssueIds[issue.id])
-        .map(issue => {
+        .filter((issue) => !existingIssueIds[issue.id])
+        .map((issue) => {
           issue.isUnread =
             getTime(state.firstLoadOfIssues) < getTime(new Date(issue.sent_at))
           return issue
@@ -69,10 +69,10 @@ export const issues = createSlice({
         ...state,
         issuesByAreaId: {
           ...state.issuesByAreaId,
-          [areaId]: newIssues
+          [areaId]: newIssues,
         },
         currentIssueId,
-        loading: false
+        loading: false,
       }
     },
     setIssue: (state, { payload: { issue, areaId } }) => {
@@ -90,16 +90,16 @@ export const issues = createSlice({
         ...state,
         issuesByAreaId: {
           ...state.issuesByAreaId,
-          [areaId]: existingIssues
+          [areaId]: existingIssues,
         },
         currentIssueId,
-        loading: false
+        loading: false,
       }
-    }
+    },
   },
   extraReducers: {
-    [resetAction]: () => ({ ...initialState, issuesByAreaId: {} })
-  }
+    [resetAction]: () => ({ ...initialState, issuesByAreaId: {} }),
+  },
 })
 
 const path = 'main.issues'
@@ -113,19 +113,10 @@ issues.selectors = {
   ...issues.selectors,
   getFirstLoadIssues: createSelector(
     [path],
-    issues => issues.firstLoadOfIssues
+    (issues) => issues.firstLoadOfIssues
   ),
-  getIssues: createSelector(
-    [path],
-    issues => issues.issuesByAreaId
-  ),
-  getCurrentIssueId: createSelector(
-    [path],
-    issues => issues.currentIssueId
-  ),
-  getLoading: createSelector(
-    [path],
-    issues => issues.loading
-  ),
-  getIssuesForArea
+  getIssues: createSelector([path], (issues) => issues.issuesByAreaId),
+  getCurrentIssueId: createSelector([path], (issues) => issues.currentIssueId),
+  getLoading: createSelector([path], (issues) => issues.loading),
+  getIssuesForArea,
 }

@@ -20,9 +20,9 @@ export const Authenticated = createStackNavigator(
     Settings: {
       screen: Settings,
       navigationOptions: {
-        header: null
-      }
-    }
+        header: null,
+      },
+    },
   },
   {
     initialRouteName: 'Tabs',
@@ -47,8 +47,8 @@ export const Authenticated = createStackNavigator(
         color: '#355768',
         backgroundColor: headerBackgroundForEnv,
         textAlign: 'center',
-        flex: 1
-      }
-    })
+        flex: 1,
+      },
+    }),
   }
 )

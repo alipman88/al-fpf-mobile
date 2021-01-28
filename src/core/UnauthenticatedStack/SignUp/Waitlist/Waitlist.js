@@ -8,7 +8,7 @@ import { createResetStackTo } from '@common/utils/navigation'
 
 export class Waitlist extends React.Component {
   state = {
-    submitted: false
+    submitted: false,
   }
 
   onSubmit = (values, actions) => {
@@ -28,9 +28,9 @@ export class Waitlist extends React.Component {
         onSubmit={this.onSubmit}
         initialValues={{
           ...newUser,
-          ...newUser.address
+          ...newUser.address,
         }}
-        render={props => (
+        render={(props) => (
           <WaitlistFields
             {...props}
             navigation={navigation}
@@ -47,5 +47,5 @@ Waitlist.propTypes = {
   navigation: PropTypes.object.isRequired,
   newUser: PropTypes.object.isRequired,
   setNewUserByKey: PropTypes.func.isRequired,
-  joinWaitlist: PropTypes.func.isRequired
+  joinWaitlist: PropTypes.func.isRequired,
 }

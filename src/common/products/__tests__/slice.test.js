@@ -5,7 +5,7 @@ describe('products - slice', () => {
     const state = products.reducer(undefined, {})
     expect(state).toEqual({
       products: [],
-      loading: false
+      loading: false,
     })
   })
 
@@ -14,8 +14,8 @@ describe('products - slice', () => {
 
     const data = products.selectors.getLoading({
       main: {
-        products: state
-      }
+        products: state,
+      },
     })
 
     expect(data).toEqual(true)
@@ -29,8 +29,8 @@ describe('products - slice', () => {
 
     const data = products.selectors.getProducts({
       main: {
-        products: state
-      }
+        products: state,
+      },
     })
 
     expect(data).toEqual([1, 2])

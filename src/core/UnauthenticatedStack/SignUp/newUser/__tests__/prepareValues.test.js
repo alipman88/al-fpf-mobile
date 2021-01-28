@@ -2,17 +2,17 @@ import { prepareValues } from '../prepareValues'
 
 describe('prepareValues', () => {
   test('it restructures data depending on profile type', () => {
-    const values = planType => ({
+    const values = (planType) => ({
       profilePlan: { id: 4, plan_type: planType },
       business: {
-        businessCategoryId: 3
+        businessCategoryId: 3,
       },
       government: {
-        tellUsMore: 'some text'
+        tellUsMore: 'some text',
       },
       address: {
-        streetName: 'Test St'
-      }
+        streetName: 'Test St',
+      },
     })
 
     const neighbor = values('neighbor')
@@ -23,9 +23,9 @@ describe('prepareValues', () => {
       user: {
         profile: {
           profile_plan_id: 4,
-          street_name: 'Test St'
-        }
-      }
+          street_name: 'Test St',
+        },
+      },
     })
 
     expect(prepareValues(business)).toEqual({
@@ -33,9 +33,9 @@ describe('prepareValues', () => {
         profile: {
           profile_plan_id: 4,
           business_category_id: 3,
-          street_name: 'Test St'
-        }
-      }
+          street_name: 'Test St',
+        },
+      },
     })
 
     expect(prepareValues(government)).toEqual({
@@ -43,9 +43,9 @@ describe('prepareValues', () => {
         profile: {
           profile_plan_id: 4,
           tell_us_more: 'some text',
-          street_name: 'Test St'
-        }
-      }
+          street_name: 'Test St',
+        },
+      },
     })
   })
 })

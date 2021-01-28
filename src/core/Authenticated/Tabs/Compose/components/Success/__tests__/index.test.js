@@ -8,7 +8,7 @@ import { Close } from '../styledComponents'
 describe('Success', () => {
   const defaultProps = {
     onClose: jest.fn(),
-    navigateWithToken: jest.fn()
+    navigateWithToken: jest.fn(),
   }
 
   afterEach(() => {

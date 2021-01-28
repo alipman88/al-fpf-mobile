@@ -11,5 +11,5 @@ export const Modal = ({ children, dark }) => (
 
 Modal.propTypes = {
   children: PropTypes.node.isRequired,
-  dark: PropTypes.bool
+  dark: PropTypes.bool,
 }

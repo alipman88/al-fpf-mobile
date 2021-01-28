@@ -33,7 +33,7 @@ const Settings = {
 
   clearWatch(watchId) {
     console.warn('Settings.clearWatch is not yet supported on Android')
-  }
+  },
 }
 
 export default Settings

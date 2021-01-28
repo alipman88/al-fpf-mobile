@@ -24,7 +24,7 @@ describe('parseDeepLink', () => {
       expect(result.route).toEqual('Compose')
       expect(result.params).toEqual({
         shouldResetForm: true,
-        parentPostId: 123
+        parentPostId: 123,
       })
     })
 

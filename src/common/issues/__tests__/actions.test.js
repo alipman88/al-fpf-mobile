@@ -10,27 +10,27 @@ describe('issues actions', () => {
   const getState = () => ({
     secured: {
       currentUser: {
-        accessToken: 'abc123'
-      }
+        accessToken: 'abc123',
+      },
     },
     main: {
       issues: {
         firstLoadOfIssues: null,
-        issuesByAreaId: {}
-      }
-    }
+        issuesByAreaId: {},
+      },
+    },
   })
 
   const navigation = {
     navigate: jest.fn(),
-    dispatch: jest.fn()
+    dispatch: jest.fn(),
   }
 
   test('requests /issues with authorization header', async () => {
     const getSpy = jest.spyOn(api, 'get').mockImplementation(() => ({
       data: {
-        issues: [{ id: 1 }]
-      }
+        issues: [{ id: 1 }],
+      },
     }))
     const dispatch = jest.fn()
 
@@ -38,8 +38,8 @@ describe('issues actions', () => {
 
     expect(getSpy).toHaveBeenCalledWith('/areas/1/issues?page=1&count=30', {
       headers: {
-        Authorization: 'Bearer abc123'
-      }
+        Authorization: 'Bearer abc123',
+      },
     })
 
     expect(dispatch).toHaveBeenCalledWith(issues.actions.setLoading(true))
@@ -53,8 +53,8 @@ describe('issues actions', () => {
   test('sets firstLoadOfIssues if there were no issues', async () => {
     const getSpy = jest.spyOn(api, 'get').mockImplementation(() => ({
       data: {
-        issues: [{ id: 1 }]
-      }
+        issues: [{ id: 1 }],
+      },
     }))
 
     const state = () => ({
@@ -62,10 +62,10 @@ describe('issues actions', () => {
       main: {
         issues: {
           issuesByAreaId: {
-            3: [{ id: 1 }]
-          }
-        }
-      }
+            3: [{ id: 1 }],
+          },
+        },
+      },
     })
 
     const dispatch = jest.fn()
@@ -93,8 +93,8 @@ describe('issues actions', () => {
 
     expect(getSpy).toHaveBeenCalledWith('/areas/2/issues?page=1&count=30', {
       headers: {
-        Authorization: 'Bearer abc123'
-      }
+        Authorization: 'Bearer abc123',
+      },
     })
 
     expect(dispatch).toHaveBeenCalledWith(
@@ -111,24 +111,27 @@ describe('issues actions', () => {
   describe('fetchSpecificIssue', () => {
     test('dispatches go to a specific issue', async () => {
       const dispatch = jest.fn()
-      const issuesArray = [{ id: 26, number: 500 }, { id: 27, number: 501 }]
+      const issuesArray = [
+        { id: 26, number: 500 },
+        { id: 27, number: 501 },
+      ]
       const getState = () => ({
         main: {
           issues: {
             issuesByAreaId: {
-              50: issuesArray
-            }
+              50: issuesArray,
+            },
           },
           areas: {
-            currentAreaId: 35
-          }
-        }
+            currentAreaId: 35,
+          },
+        },
       })
 
       const getSpy = jest.spyOn(api, 'get').mockImplementation(() => ({
         data: {
-          issuesArray
-        }
+          issuesArray,
+        },
       }))
 
       const navigate = jest.fn()
@@ -149,24 +152,27 @@ describe('issues actions', () => {
 
     test('issue is not in current list, goes to web instead', async () => {
       const dispatch = jest.fn()
-      const issuesArray = [{ id: 26, number: 500 }, { id: 27, number: 501 }]
+      const issuesArray = [
+        { id: 26, number: 500 },
+        { id: 27, number: 501 },
+      ]
       const getState = () => ({
         main: {
           issues: {
             issuesByAreaId: {
-              50: issuesArray
-            }
+              50: issuesArray,
+            },
           },
           areas: {
-            currentAreaId: 35
-          }
-        }
+            currentAreaId: 35,
+          },
+        },
       })
 
       const getSpy = jest.spyOn(api, 'get').mockImplementation(() => ({
         data: {
-          issuesArray
-        }
+          issuesArray,
+        },
       }))
 
       const navigateWithTokenSpy = jest.spyOn(

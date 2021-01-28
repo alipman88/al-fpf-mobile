@@ -10,13 +10,13 @@ import {
   NewsHeader,
   Row,
   SectionContainer,
-  SectionHeader
+  SectionHeader,
 } from './styledComponents'
 
 export const NeighboringContent = ({
   fetchSpecificIssue,
   newsFromNeighboringNfs,
-  navigation
+  navigation,
 }) => {
   if (newsFromNeighboringNfs.length === 0) {
     return null
@@ -59,9 +59,9 @@ export const NeighboringContent = ({
 NeighboringContent.propTypes = {
   fetchSpecificIssue: PropTypes.func.isRequired,
   newsFromNeighboringNfs: PropTypes.array,
-  navigation: PropTypes.object
+  navigation: PropTypes.object,
 }
 
 NeighboringContent.defaultProps = {
-  newsFromNeighboringNfs: []
+  newsFromNeighboringNfs: [],
 }

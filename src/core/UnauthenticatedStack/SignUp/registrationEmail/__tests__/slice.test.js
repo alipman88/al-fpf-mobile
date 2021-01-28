@@ -3,7 +3,7 @@ import { registrationEmail } from '../slice'
 describe('registrationEmail - slice', () => {
   test('setRegistrationEmail sets email', () => {
     const initialState = {
-      email: ''
+      email: '',
     }
 
     const payload = 'bar@foo.com'
@@ -13,7 +13,7 @@ describe('registrationEmail - slice', () => {
     )
 
     const data = registrationEmail.selectors.getRegistrationEmail({
-      main: { registrationEmail: state }
+      main: { registrationEmail: state },
     })
     expect(data).toEqual('bar@foo.com')
   })

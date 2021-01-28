@@ -12,7 +12,7 @@ import {
   ActiveDot,
   Bird,
   SlideButton,
-  ButtonSpacer
+  ButtonSpacer,
 } from './styledComponents'
 
 import speechBubble from '@assets/images/onboarding/speech-bubble.png'
@@ -32,7 +32,7 @@ export const SwiperComponent = ({ navigation }) => {
       dot={<InactiveDot />}
       activeDot={<ActiveDot />}
       paginationStyle={{
-        bottom: 40
+        bottom: 40,
       }}
     >
       <Slide>
@@ -84,5 +84,5 @@ export const SwiperComponent = ({ navigation }) => {
 }
 
 SwiperComponent.propTypes = {
-  navigation: PropTypes.object.isRequired
+  navigation: PropTypes.object.isRequired,
 }

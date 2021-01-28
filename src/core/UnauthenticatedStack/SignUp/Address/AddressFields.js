@@ -18,7 +18,7 @@ import {
   Description,
   NoAreasContainer,
   NoAreasHeader,
-  NoAreasText
+  NoAreasText,
 } from './styledComponents'
 
 export class AddressFields extends React.Component {
@@ -41,12 +41,12 @@ export class AddressFields extends React.Component {
       setFieldValue,
       touched,
       values,
-      profileType
+      profileType,
     } = this.props
 
     const nextDisabled = !isEmpty(errors) || isEmpty(touched)
 
-    const onSubmit = values => {
+    const onSubmit = (values) => {
       if (!nextDisabled) {
         handleSubmit()
       }
@@ -60,7 +60,7 @@ export class AddressFields extends React.Component {
         onNextPress={onSubmit}
         nextDisabled={nextDisabled}
         contentContainerStyle={{
-          backgroundColor: '#f2f2f2'
+          backgroundColor: '#f2f2f2',
         }}
       >
         <Container>
@@ -87,7 +87,7 @@ export class AddressFields extends React.Component {
                 error={errors.streetNumber}
                 keyboardType='number-pad'
                 label='House/building number'
-                onChangeText={text => {
+                onChangeText={(text) => {
                   setFieldTouched('streetNumber')
                   setFieldValue('streetNumber', text)
                 }}
@@ -104,7 +104,7 @@ export class AddressFields extends React.Component {
                 inputRef={this.streetNameInput}
                 error={errors.streetName}
                 label='Street name (no house number)'
-                onChangeText={text => {
+                onChangeText={(text) => {
                   setFieldTouched('streetName')
                   setFieldValue('streetName', text)
                 }}
@@ -120,7 +120,7 @@ export class AddressFields extends React.Component {
                 inputRef={this.secondaryAddressInput}
                 error={errors.secondaryAddress}
                 label='Apt/suite (if applicable)'
-                onChangeText={text => {
+                onChangeText={(text) => {
                   setFieldTouched('secondaryAddress')
                   setFieldValue('secondaryAddress', text)
                 }}
@@ -134,7 +134,7 @@ export class AddressFields extends React.Component {
                 inputRef={this.cityInput}
                 error={errors.city}
                 label='City'
-                onChangeText={text => {
+                onChangeText={(text) => {
                   setFieldTouched('city')
                   setFieldValue('city', text)
                 }}
@@ -156,20 +156,20 @@ export class AddressFields extends React.Component {
                   {
                     name: 'Our Service Area',
                     id: 0,
-                    children: fpfStates
+                    children: fpfStates,
                   },
                   {
                     name: 'States',
                     id: 1,
-                    children: states
+                    children: states,
                   },
                   {
                     name: 'Provinces',
                     id: 2,
-                    children: provinces
-                  }
+                    children: provinces,
+                  },
                 ]}
-                onSelectedItemsChange={state => {
+                onSelectedItemsChange={(state) => {
                   setFieldTouched('state')
                   setFieldValue('state', state[0])
                   onSubmit()
@@ -199,5 +199,5 @@ AddressFields.propTypes = {
   setFieldValue: PropTypes.func.isRequired,
   touched: PropTypes.object.isRequired,
   values: PropTypes.object.isRequired,
-  profileType: PropTypes.string.isRequired
+  profileType: PropTypes.string.isRequired,
 }

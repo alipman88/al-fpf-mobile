@@ -32,7 +32,7 @@ export class App extends React.Component {
 
   state = {
     appState: AppState.currentState,
-    connected: true
+    connected: true,
   }
 
   componentDidMount() {
@@ -46,10 +46,12 @@ export class App extends React.Component {
     // Remove this guard when adding support for Google Play [#168313664]
     if (Platform.OS === 'ios') {
       store.dispatch(getProducts(subscriptionSkus))
-      this.purchaseUpdatedListener = RNIap.purchaseUpdatedListener(purchase => {
-        store.dispatch(purchaseUpdated(purchase))
-      })
-      this.purchaseErrorListener = RNIap.purchaseErrorListener(error => {
+      this.purchaseUpdatedListener = RNIap.purchaseUpdatedListener(
+        (purchase) => {
+          store.dispatch(purchaseUpdated(purchase))
+        }
+      )
+      this.purchaseErrorListener = RNIap.purchaseErrorListener((error) => {
         store.dispatch(purchaseError(error))
       })
     }
@@ -75,7 +77,7 @@ export class App extends React.Component {
 
   updateConnectionStatus = () => {
     const startConnectionState = this.state.connected
-    NetInfo.fetch().then(async state => {
+    NetInfo.fetch().then(async (state) => {
       const connected = await this.setConnectedStatus(state)
 
       if (!startConnectionState && !connected && this.toastRef.current) {
@@ -84,7 +86,7 @@ export class App extends React.Component {
     })
   }
 
-  handleAppStateChange = async nextAppState => {
+  handleAppStateChange = async (nextAppState) => {
     if (
       this.state.appState.match(/inactive|background|unknown/) &&
       nextAppState === 'active'
@@ -97,14 +99,14 @@ export class App extends React.Component {
     this.setState({ appState: nextAppState })
   }
 
-  handleOpenURL = event => {
+  handleOpenURL = (event) => {
     if (currentUser.selectors.getAccessToken(store.getState())) {
       const { route, params } = parseDeepLink(event.url)
       navigationService.navigate(route, params)
     }
   }
 
-  getActiveRouteName = navigationState => {
+  getActiveRouteName = (navigationState) => {
     if (!navigationState) {
       return null
     }

@@ -6,12 +6,12 @@ import { Address } from '../Address'
 describe('Address', () => {
   const defaultProps = {
     navigation: {
-      navigate: jest.fn()
+      navigate: jest.fn(),
     },
     newUser: {},
     searchAddress: jest.fn(),
     setNewUserByKey: jest.fn(),
-    profileType: 'neighbor'
+    profileType: 'neighbor',
   }
 
   afterEach(() => {
@@ -38,11 +38,11 @@ describe('Address', () => {
       callback([{ id: 1 }], { lat: '1', lng: '-1' })
 
       expect(wrapper.state()).toEqual({
-        submitted: false
+        submitted: false,
       })
 
       expect(defaultProps.setNewUserByKey).toHaveBeenCalledWith({
-        address: { streetName: 'Main' }
+        address: { streetName: 'Main' },
       })
 
       expect(defaultProps.navigation.navigate).toHaveBeenCalledWith(
@@ -70,7 +70,7 @@ describe('Address', () => {
       callback([], {})
 
       expect(wrapper.state()).toEqual({
-        submitted: true
+        submitted: true,
       })
 
       expect(defaultProps.setNewUserByKey).toHaveBeenCalled()
@@ -95,7 +95,7 @@ describe('Address', () => {
       callback([], {})
 
       expect(wrapper.state()).toEqual({
-        submitted: true
+        submitted: true,
       })
 
       expect(defaultProps.setNewUserByKey).toHaveBeenCalled()

@@ -37,7 +37,7 @@ export async function requestMessagingPermission() {
  * @param value {number}
  */
 export async function setApplicationIconBadgeNumber(value) {
-  PushNotificationIOS.getApplicationIconBadgeNumber(badgeNumber => {
+  PushNotificationIOS.getApplicationIconBadgeNumber((badgeNumber) => {
     if (badgeNumber !== value) {
       PushNotificationIOS.setApplicationIconBadgeNumber(value)
     }

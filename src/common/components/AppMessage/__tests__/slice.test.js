@@ -4,8 +4,8 @@ describe('appMessage slice', () => {
   test('message should be empty by default', () => {
     const state = {
       main: {
-        appMessage: appMessage.reducer(undefined, {})
-      }
+        appMessage: appMessage.reducer(undefined, {}),
+      },
     }
     expect(appMessage.selectors.getMessage(state)).toEqual('')
     expect(appMessage.selectors.getMessageType(state)).toEqual('')
@@ -18,8 +18,8 @@ describe('appMessage slice', () => {
         appMessage: appMessage.reducer(
           undefined,
           appMessage.actions.setAppError('Boom')
-        )
-      }
+        ),
+      },
     }
     expect(appMessage.selectors.getMessage(state)).toEqual('Boom')
     expect(appMessage.selectors.getMessageType(state)).toEqual('danger')
@@ -33,10 +33,10 @@ describe('appMessage slice', () => {
           undefined,
           appMessage.actions.setAppError({
             title: 'Needs a title',
-            content: 'needs content'
+            content: 'needs content',
           })
-        )
-      }
+        ),
+      },
     }
     expect(appMessage.selectors.getMessage(state)).toEqual(
       'Needs a title, needs content'
@@ -54,8 +54,8 @@ describe('appMessage slice', () => {
           appMessage: appMessage.reducer(
             message,
             appMessage.actions.setAppError(null)
-          )
-        }
+          ),
+        },
       }
       expect(appMessage.selectors.getMessage(state)).toEqual(
         'An error occurred'
@@ -73,10 +73,10 @@ describe('appMessage slice', () => {
           appMessage.actions.setAppMessage({
             message: 'Done!',
             type: 'success',
-            autoHide: true
+            autoHide: true,
           })
-        )
-      }
+        ),
+      },
     }
 
     expect(appMessage.selectors.getMessage(state)).toEqual('Done!')

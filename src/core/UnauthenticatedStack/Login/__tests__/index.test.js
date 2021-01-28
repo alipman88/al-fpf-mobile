@@ -10,8 +10,8 @@ describe('LoginComponent', () => {
     resendEmail: jest.fn(),
     navigation: {
       dispatch: jest.fn(),
-      navigate: jest.fn()
-    }
+      navigate: jest.fn(),
+    },
   }
 
   afterEach(() => {

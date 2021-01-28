@@ -18,5 +18,5 @@ export const ExternalLink = ({ children, hasBorder, onPress }) => (
 ExternalLink.propTypes = {
   children: PropTypes.string.isRequired,
   hasBorder: PropTypes.bool,
-  onPress: PropTypes.func.isRequired
+  onPress: PropTypes.func.isRequired,
 }

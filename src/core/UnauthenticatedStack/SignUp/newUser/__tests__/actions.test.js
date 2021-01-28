@@ -16,10 +16,10 @@ describe('newUser actions', () => {
           passwordConfirmation: 'testtest1',
           business: {},
           government: {},
-          address: {}
-        }
-      }
-    }
+          address: {},
+        },
+      },
+    },
   }))
 
   const dispatch = jest.fn()
@@ -35,11 +35,11 @@ describe('newUser actions', () => {
       password: 'testtest1',
       password_confirmation: 'testtest1',
       email: 'test@testing.org',
-      profilePlan: { id: 1, plan_type: 'neighbor' }
+      profilePlan: { id: 1, plan_type: 'neighbor' },
     }
 
     const navigation = {
-      navigate: jest.fn()
+      navigate: jest.fn(),
     }
 
     afterEach(() => {
@@ -49,8 +49,8 @@ describe('newUser actions', () => {
     test('posts user data', async () => {
       const postSpy = jest.spyOn(api, 'post').mockImplementation(() => ({
         data: {
-          user: values
-        }
+          user: values,
+        },
       }))
       await postSignUp(navigation)(dispatch, getState)
       expect(postSpy).toHaveBeenCalledWith('/users', {
@@ -60,8 +60,8 @@ describe('newUser actions', () => {
           last_name: 'Testerson',
           password: 'testtest1',
           password_confirmation: 'testtest1',
-          profile: { profile_plan_id: 1 }
-        }
+          profile: { profile_plan_id: 1 },
+        },
       })
 
       expect(navigation.navigate).toHaveBeenCalledWith('EmailVerification')
@@ -86,8 +86,8 @@ describe('newUser actions', () => {
           last_name: 'Testerson',
           password: 'testtest1',
           password_confirmation: 'testtest1',
-          profile: { profile_plan_id: 1 }
-        }
+          profile: { profile_plan_id: 1 },
+        },
       })
       expect(dispatch).toHaveBeenCalledWith(
         appMessage.actions.setAppError('boom')

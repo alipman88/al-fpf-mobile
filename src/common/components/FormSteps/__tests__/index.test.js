@@ -13,22 +13,22 @@ describe('FormSteps', () => {
     const steps = wrapper.find(Step)
     expect(pick(steps.at(0).props(), ['active', 'done'])).toEqual({
       active: false,
-      done: true
+      done: true,
     })
 
     expect(pick(steps.at(1).props(), ['active', 'done'])).toEqual({
       active: true,
-      done: false
+      done: false,
     })
 
     expect(pick(steps.at(2).props(), ['active', 'done'])).toEqual({
       active: false,
-      done: false
+      done: false,
     })
 
     expect(pick(steps.at(3).props(), ['active', 'done'])).toEqual({
       active: false,
-      done: false
+      done: false,
     })
   })
 })

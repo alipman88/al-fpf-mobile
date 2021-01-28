@@ -5,10 +5,10 @@ describe('profile - slice', () => {
     const state = profile.reducer(undefined, {})
     expect(state).toEqual({
       user: {
-        profiles: []
+        profiles: [],
       },
       loading: false,
-      currentProfileId: undefined
+      currentProfileId: undefined,
     })
   })
 
@@ -17,8 +17,8 @@ describe('profile - slice', () => {
       const state = profile.reducer(undefined, profile.actions.setLoading(true))
       const data = profile.selectors.getLoading({
         main: {
-          profile: state
-        }
+          profile: state,
+        },
       })
 
       expect(data).toEqual(true)
@@ -35,20 +35,20 @@ describe('profile - slice', () => {
             {
               id: 3,
               business_category_id: 100,
-              approved: true
+              approved: true,
             },
             {
               id: 4,
-              approved: false
-            }
-          ]
+              approved: false,
+            },
+          ],
         })
       )
 
       let data = profile.selectors.getUser({
         main: {
-          profile: state
-        }
+          profile: state,
+        },
       })
 
       expect(data).toEqual({
@@ -57,31 +57,31 @@ describe('profile - slice', () => {
           {
             id: 3,
             business_category_id: 100,
-            approved: true
+            approved: true,
           },
           {
             id: 4,
-            approved: false
-          }
-        ]
+            approved: false,
+          },
+        ],
       })
 
       data = profile.selectors.getProfiles({
         main: {
-          profile: state
-        }
+          profile: state,
+        },
       })
 
       expect(data).toEqual([
         {
           id: 3,
           business_category_id: 100,
-          approved: true
+          approved: true,
         },
         {
           id: 4,
-          approved: false
-        }
+          approved: false,
+        },
       ])
     })
   })
@@ -93,7 +93,7 @@ describe('profile - slice', () => {
         profile.actions.setUserProfile({
           id: 1,
           profiles: [],
-          name: 'test'
+          name: 'test',
         })
       )
 
@@ -101,7 +101,7 @@ describe('profile - slice', () => {
         state,
         profile.actions.setValueInUserData({
           key: 'email',
-          value: 'test@example.com'
+          value: 'test@example.com',
         })
       )
 
@@ -112,8 +112,8 @@ describe('profile - slice', () => {
           id: 1,
           profiles: [],
           name: 'test',
-          email: 'test@example.com'
-        }
+          email: 'test@example.com',
+        },
       })
     })
   })
@@ -126,10 +126,10 @@ describe('profile - slice', () => {
           id: 1,
           profiles: [
             {
-              id: 1
-            }
+              id: 1,
+            },
           ],
-          name: 'test'
+          name: 'test',
         })
       )
 
@@ -137,8 +137,8 @@ describe('profile - slice', () => {
         state,
         profile.actions.setValueInProfileData({
           1: {
-            foo: 'bar'
-          }
+            foo: 'bar',
+          },
         })
       )
 
@@ -150,11 +150,11 @@ describe('profile - slice', () => {
           profiles: [
             {
               id: 1,
-              foo: 'bar'
-            }
+              foo: 'bar',
+            },
           ],
-          name: 'test'
-        }
+          name: 'test',
+        },
       })
     })
   })
@@ -164,14 +164,14 @@ describe('profile - slice', () => {
       const state = profile.reducer(
         undefined,
         profile.actions.setUserProfile({
-          id: 1
+          id: 1,
         })
       )
 
       const data = profile.selectors.getProfiles({
         main: {
-          profile: state
-        }
+          profile: state,
+        },
       })
 
       expect(data).toEqual([])
@@ -187,15 +187,15 @@ describe('profile - slice', () => {
           profiles: [
             { id: 5, approved: true },
             { id: 6, approved: false },
-            { id: 7 }
-          ]
+            { id: 7 },
+          ],
         })
       )
 
       const data = profile.selectors.getAvailableProfiles({
         main: {
-          profile: state
-        }
+          profile: state,
+        },
       })
 
       expect(data).toEqual([{ id: 5, approved: true }])
@@ -212,25 +212,25 @@ describe('profile - slice', () => {
             { id: 5 },
             {
               id: 3,
-              approved: true
-            }
-          ]
+              approved: true,
+            },
+          ],
         })
       )
 
       expect(
         profile.selectors.getCurrentProfileId({
           main: {
-            profile: state
-          }
+            profile: state,
+          },
         })
       ).toEqual(3)
 
       expect(
         profile.selectors.getCurrentProfile({
           main: {
-            profile: state
-          }
+            profile: state,
+          },
         })
       ).toEqual({ id: 3, approved: true })
     })
@@ -245,8 +245,8 @@ describe('profile - slice', () => {
       expect(
         profile.selectors.getCurrentProfileId({
           main: {
-            profile: state
-          }
+            profile: state,
+          },
         })
       ).toEqual(105)
     })
@@ -258,13 +258,13 @@ describe('profile - slice', () => {
         undefined,
         profile.actions.setUserProfile({
           id: 1,
-          profiles: [{ id: 5, approved: true }]
+          profiles: [{ id: 5, approved: true }],
         })
       )
 
       expect(
         profile.selectors.getUserHasAppleSubscription({
-          main: { profile: state }
+          main: { profile: state },
         })
       ).toEqual(false)
     })
@@ -278,15 +278,15 @@ describe('profile - slice', () => {
             {
               id: 5,
               approved: true,
-              active_subscription: { service: 'stripe' }
-            }
-          ]
+              active_subscription: { service: 'stripe' },
+            },
+          ],
         })
       )
 
       expect(
         profile.selectors.getUserHasAppleSubscription({
-          main: { profile: state }
+          main: { profile: state },
         })
       ).toEqual(false)
     })
@@ -298,14 +298,18 @@ describe('profile - slice', () => {
           id: 1,
           profiles: [
             { id: 5, approved: true },
-            { id: 6, approved: true, active_subscription: { service: 'apple' } }
-          ]
+            {
+              id: 6,
+              approved: true,
+              active_subscription: { service: 'apple' },
+            },
+          ],
         })
       )
 
       expect(
         profile.selectors.getUserHasAppleSubscription({
-          main: { profile: state }
+          main: { profile: state },
         })
       ).toEqual(true)
     })
@@ -321,42 +325,42 @@ describe('profile - slice', () => {
             {
               id: 5,
               approved: true,
-              profile_plan: { plan_type: 'neighbor', has_upgrades: false }
+              profile_plan: { plan_type: 'neighbor', has_upgrades: false },
             },
             {
               id: 6,
               approved: true,
-              profile_plan: { plan_type: 'business', has_upgrades: true }
+              profile_plan: { plan_type: 'business', has_upgrades: true },
             },
             {
               id: 7,
               approved: true,
-              active_subscription: { service: 'stripe' }
-            }
-          ]
+              active_subscription: { service: 'stripe' },
+            },
+          ],
         })
       )
 
       expect(
         profile.selectors.getSubscriptionState({
-          main: { profile: state }
+          main: { profile: state },
         })
       ).toEqual({
         5: {
           canSubscribe: false,
           hasSubscription: false,
-          hasAppleSubscription: false
+          hasAppleSubscription: false,
         },
         6: {
           canSubscribe: true,
           hasSubscription: false,
-          hasAppleSubscription: false
+          hasAppleSubscription: false,
         },
         7: {
           canSubscribe: false,
           hasSubscription: true,
-          hasAppleSubscription: false
-        }
+          hasAppleSubscription: false,
+        },
       })
     })
 
@@ -371,32 +375,32 @@ describe('profile - slice', () => {
             {
               id: 7,
               approved: true,
-              active_subscription: { service: 'apple' }
-            }
-          ]
+              active_subscription: { service: 'apple' },
+            },
+          ],
         })
       )
 
       expect(
         profile.selectors.getSubscriptionState({
-          main: { profile: state }
+          main: { profile: state },
         })
       ).toEqual({
         5: {
           canSubscribe: false,
           hasSubscription: false,
-          hasAppleSubscription: false
+          hasAppleSubscription: false,
         },
         6: {
           canSubscribe: false,
           hasSubscription: false,
-          hasAppleSubscription: false
+          hasAppleSubscription: false,
         },
         7: {
           canSubscribe: false,
           hasSubscription: true,
-          hasAppleSubscription: true
-        }
+          hasAppleSubscription: true,
+        },
       })
     })
   })

@@ -16,15 +16,15 @@ describe('GovernmentInfoFields', () => {
     values: {
       title: '',
       jurisdiction: '',
-      tellUsMore: ''
+      tellUsMore: '',
     },
     governmentTitles: [
       'Mayor',
       'Feudal Lord',
       'Feudal Lady',
       'Mr. Rogers',
-      'Other'
-    ]
+      'Other',
+    ],
   }
 
   afterEach(() => {
@@ -55,20 +55,14 @@ describe('GovernmentInfoFields', () => {
   test('changing jurisdiction calls handlers', () => {
     const wrapper = shallow(<GovernmentInfoFields {...defaultProps} />)
 
-    wrapper
-      .find(TextInput)
-      .first()
-      .simulate('changeText', 'hi')
+    wrapper.find(TextInput).first().simulate('changeText', 'hi')
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('jurisdiction')
   })
 
   test('changing tell us more calls handlers', () => {
     const wrapper = shallow(<GovernmentInfoFields {...defaultProps} />)
 
-    wrapper
-      .find(TextInput)
-      .at(1)
-      .simulate('changeText', 'hi')
+    wrapper.find(TextInput).at(1).simulate('changeText', 'hi')
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('tellUsMore')
     expect(defaultProps.setFieldValue).toHaveBeenCalledWith('tellUsMore', 'hi')
   })

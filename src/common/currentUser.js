@@ -5,34 +5,34 @@ export const currentUser = createSlice({
   slice: 'currentUser',
   initialState: {
     accessToken: '',
-    fcmToken: ''
+    fcmToken: '',
   },
   reducers: {
     setAccessToken: (state, action) => ({
       ...state,
-      accessToken: action.payload
+      accessToken: action.payload,
     }),
     setFCMToken: (state, action) => ({
       ...state,
-      fcmToken: action.payload
-    })
+      fcmToken: action.payload,
+    }),
   },
   extraReducers: {
-    [resetAction]: state => ({
+    [resetAction]: (state) => ({
       accessToken: '',
-      fcmToken: ''
-    })
-  }
+      fcmToken: '',
+    }),
+  },
 })
 
 currentUser.selectors = {
   ...currentUser.selectors,
   getAccessToken: createSelector(
     ['secured.currentUser'],
-    currentUser => currentUser.accessToken
+    (currentUser) => currentUser.accessToken
   ),
   getFCMToken: createSelector(
     ['secured.currentUser'],
-    currentUser => currentUser.fcmToken
-  )
+    (currentUser) => currentUser.fcmToken
+  ),
 }

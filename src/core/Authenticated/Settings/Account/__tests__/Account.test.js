@@ -10,7 +10,7 @@ describe('Account', () => {
     loading: false,
     navigateWithToken: jest.fn(),
     user: {},
-    updateUser: jest.fn()
+    updateUser: jest.fn(),
   }
 
   afterEach(() => {
@@ -20,30 +20,24 @@ describe('Account', () => {
 
   test('changing the switch should call updateUser', () => {
     const wrapper = shallow(<Account {...defaultProps} />)
-    wrapper
-      .find(Switch)
-      .at(0)
-      .simulate('valueChange', true)
+    wrapper.find(Switch).at(0).simulate('valueChange', true)
     expect(defaultProps.updateUser).toHaveBeenCalledWith({
-      receive_issue_push_notifications: true
+      receive_issue_push_notifications: true,
     })
   })
 
   test('changing the switch should call updateUser', () => {
     const wrapper = shallow(<Account {...defaultProps} />)
-    wrapper
-      .find(Switch)
-      .at(1)
-      .simulate('valueChange', true)
+    wrapper.find(Switch).at(1).simulate('valueChange', true)
     expect(defaultProps.updateUser).toHaveBeenCalledWith({
-      receive_issue_emails: true
+      receive_issue_emails: true,
     })
   })
 
   test('External links open the right places', () => {
     const wrapper = shallow(<Account {...defaultProps} />)
     const nodes = wrapper.find(ExternalLink)
-    nodes.forEach(node => node.simulate('press'))
+    nodes.forEach((node) => node.simulate('press'))
 
     expect(defaultProps.navigateWithToken).toHaveBeenCalledWith('/user')
     expect(defaultProps.navigateWithToken).toHaveBeenCalledWith(

@@ -7,15 +7,15 @@ import { CheckboxField } from '../CheckboxField'
 describe('CreateAccount', () => {
   const defaultProps = {
     newUser: {
-      profileType: 'neighbor'
+      profileType: 'neighbor',
     },
     navigation: {
-      navigate: jest.fn()
+      navigate: jest.fn(),
     },
     postSignUp: jest.fn(() => {}),
     setNewUserByKey: jest.fn(),
     profileType: 'neighbor',
-    loading: false
+    loading: false,
   }
 
   afterEach(() => {
@@ -61,16 +61,12 @@ describe('CreateAccount', () => {
     const wrapper = shallow(<CreateAccount {...defaultProps} />)
     wrapper.instance().toggleCheckbox('termsOfUse', true)
 
-    wrapper
-      .find(FullScreenWizard)
-      .first()
-      .props()
-      .onNextPress()
+    wrapper.find(FullScreenWizard).first().props().onNextPress()
 
     expect(defaultProps.setNewUserByKey).toHaveBeenCalledWith({
       termsOfUse: true,
       postIntro: true,
-      isNfBooster: false
+      isNfBooster: false,
     })
     await expect(defaultProps.postSignUp).toHaveBeenCalled()
   })

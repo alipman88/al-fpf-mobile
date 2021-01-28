@@ -9,7 +9,7 @@ export const BusinessInfo = ({
   setNewUserByKey,
   newUser,
   categories,
-  loading
+  loading,
 }) => (
   <Formik
     initialValues={newUser.business}
@@ -36,5 +36,5 @@ BusinessInfo.propTypes = {
   navigation: PropTypes.object.isRequired,
   categories: PropTypes.array.isRequired,
   newUser: PropTypes.object,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
 }

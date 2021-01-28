@@ -7,13 +7,13 @@ import { createResetStackTo } from '@common/utils/navigation'
 describe('Waitlist', () => {
   const defaultProps = {
     navigation: {
-      dispatch: jest.fn()
+      dispatch: jest.fn(),
     },
     newUser: {
-      user: { profilePlan: { id: 1, plan_type: 'neighbor' } }
+      user: { profilePlan: { id: 1, plan_type: 'neighbor' } },
     },
     setNewUserByKey: jest.fn(),
-    joinWaitlist: jest.fn()
+    joinWaitlist: jest.fn(),
   }
 
   afterEach(() => {
@@ -30,7 +30,7 @@ describe('Waitlist', () => {
       expect(setSubmitting).toHaveBeenCalledWith(true)
 
       expect(wrapper.state()).toEqual({
-        submitted: false
+        submitted: false,
       })
 
       expect(defaultProps.joinWaitlist).toHaveBeenCalled()

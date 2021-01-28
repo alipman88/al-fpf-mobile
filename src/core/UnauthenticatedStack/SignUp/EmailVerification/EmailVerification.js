@@ -15,7 +15,7 @@ import {
   HelpMessage,
   MessageContainer,
   BoldTextLink,
-  TextLink
+  TextLink,
 } from './styledComponents'
 
 import yellowBird from '@assets/images/onboarding/yellow-bird.png'
@@ -120,5 +120,5 @@ EmailVerification.propTypes = {
   resendEmail: PropTypes.func.isRequired,
   setRegistrationEmail: PropTypes.func.isRequired,
   clearUserData: PropTypes.func.isRequired,
-  profileType: PropTypes.string.isRequired
+  profileType: PropTypes.string.isRequired,
 }

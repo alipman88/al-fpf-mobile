@@ -5,7 +5,7 @@ import { App } from '../index'
 import { Offline } from '../Offline'
 
 jest.mock('../Container.js', () => ({
-  Container: () => null
+  Container: () => null,
 }))
 
 describe('App', () => {

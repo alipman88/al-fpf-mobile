@@ -12,5 +12,5 @@ TopNavIcon.propTypes = {
   height: PropTypes.number.isRequired,
   onPress: PropTypes.func,
   source: PropTypes.oneOfType([PropTypes.object, PropTypes.number]).isRequired,
-  width: PropTypes.number.isRequired
+  width: PropTypes.number.isRequired,
 }

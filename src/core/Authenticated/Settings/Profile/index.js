@@ -9,10 +9,9 @@ import { navigateWithToken } from '@common/actions/navigateWithToken'
 const mapStateToProps = (state, props) => ({
   areas: keyBy(areas.selectors.getAreas(state), 'id'),
   profile: profile.selectors.getNavigationProfile(state, props),
-  ...profile.selectors.getNavigationProfileSubscriptionState(state, props)
+  ...profile.selectors.getNavigationProfileSubscriptionState(state, props),
 })
 
-export const Profile = connect(
-  mapStateToProps,
-  { navigateWithToken }
-)(ProfileComponent)
+export const Profile = connect(mapStateToProps, { navigateWithToken })(
+  ProfileComponent
+)

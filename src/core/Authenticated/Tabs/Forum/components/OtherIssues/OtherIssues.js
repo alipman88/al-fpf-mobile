@@ -9,20 +9,20 @@ import { IssueScrollView } from './styledComponents'
 export class OtherIssues extends React.Component {
   state = {
     x: 0,
-    scrollWidth: Number.MAX_VALUE
+    scrollWidth: Number.MAX_VALUE,
   }
 
   componentDidUpdate() {
     this.scrollToFocusedIssue()
   }
 
-  onTapIssue = id => {
+  onTapIssue = (id) => {
     this.props.setCurrentIssueId(id)
-    if (this.props.issues.find(issue => issue.id === id).isUnread) {
+    if (this.props.issues.find((issue) => issue.id === id).isUnread) {
       this.props.toggleIssueUnread({
         id: id,
         isUnread: false,
-        areaId: this.props.currentAreaId
+        areaId: this.props.currentAreaId,
       })
     }
   }
@@ -33,10 +33,10 @@ export class OtherIssues extends React.Component {
       if (this.focusedIssueRef) {
         this.focusedIssueRef.measureLayout(
           findNodeHandle(this.scrollViewRef),
-          x => {
+          (x) => {
             this.scrollViewRef.scrollTo({
               x: Math.min(this.state.scrollWidth, x),
-              animated: true
+              animated: true,
             })
           }
         )
@@ -46,19 +46,19 @@ export class OtherIssues extends React.Component {
     })
   }
 
-  sizeChange = width => {
+  sizeChange = (width) => {
     this.setState({ scrollWidth: width - Dimensions.get('screen').width })
   }
 
   render() {
     const { issues, currentIssueId, currentAreaId } = this.props
     const issuesRender = issues
-      .map(i => {
+      .map((i) => {
         const focused = currentIssueId === i.id
         return (
           <View
             key={i.id}
-            ref={ref => {
+            ref={(ref) => {
               if (ref && focused) {
                 this.focusedIssueRef = ref
               }
@@ -70,7 +70,7 @@ export class OtherIssues extends React.Component {
               focused={focused}
               isUnread={!!i.isUnread}
               currentAreaId={currentAreaId}
-              toggleIssueUnread={id => {
+              toggleIssueUnread={(id) => {
                 this.props.toggleIssueUnread(id)
                 this.props.toast.current.show('Issue marked as unread')
               }}
@@ -86,7 +86,7 @@ export class OtherIssues extends React.Component {
         horizontal
         showsHorizontalScrollIndicator={false}
         onContentSizeChange={this.sizeChange}
-        ref={ref => {
+        ref={(ref) => {
           this.scrollViewRef = ref
         }}
       >
@@ -103,5 +103,5 @@ OtherIssues.propTypes = {
   setCurrentIssueId: PropTypes.func.isRequired,
   toast: PropTypes.shape({ current: PropTypes.instanceOf(Toast) }).isRequired,
   toggleIssueUnread: PropTypes.func.isRequired,
-  navigation: PropTypes.object.isRequired
+  navigation: PropTypes.object.isRequired,
 }

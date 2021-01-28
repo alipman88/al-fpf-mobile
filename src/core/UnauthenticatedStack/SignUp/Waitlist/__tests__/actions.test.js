@@ -15,7 +15,7 @@ describe('Address - actions', () => {
       webAddress: 'web.addr',
       organizationName: 'org name',
       comment: 'comment',
-      reference: 'reference'
+      reference: 'reference',
     }
 
     test('it hits teh api with waitlist info', async () => {
@@ -36,8 +36,8 @@ describe('Address - actions', () => {
           web_address: 'web.addr',
           organization_name: 'org name',
           comment: 'comment',
-          reference: 'reference'
-        }
+          reference: 'reference',
+        },
       })
       post.mockRestore()
     })
@@ -62,8 +62,8 @@ describe('Address - actions', () => {
           web_address: 'web.addr',
           organization_name: 'org name',
           comment: 'comment',
-          reference: 'reference'
-        }
+          reference: 'reference',
+        },
       })
 
       expect(dispatch).toHaveBeenCalledWith(

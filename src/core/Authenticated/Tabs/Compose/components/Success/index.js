@@ -23,7 +23,7 @@ import {
   GreyBird,
   Heading,
   Link,
-  TextContainer
+  TextContainer,
 } from './styledComponents'
 
 export const Success = ({ onClose, navigateWithToken }) => (
@@ -65,5 +65,5 @@ export const Success = ({ onClose, navigateWithToken }) => (
 
 Success.propTypes = {
   onClose: PropTypes.func.isRequired,
-  navigateWithToken: PropTypes.func.isRequired
+  navigateWithToken: PropTypes.func.isRequired,
 }

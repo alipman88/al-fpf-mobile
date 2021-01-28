@@ -10,13 +10,13 @@ describe('IssueTab', () => {
     issue: {
       number: 122,
       sent_date: new Date().toISOString(),
-      id: 55
+      id: 55,
     },
     focused: true,
     isUnread: false,
     currentAreaId: 1,
     onTapIssue: jest.fn(),
-    toggleIssueUnread: jest.fn()
+    toggleIssueUnread: jest.fn(),
   }
 
   afterEach(() => {

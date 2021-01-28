@@ -16,7 +16,7 @@ export const GovernmentInfoFields = ({
   setFieldValue,
   touched,
   values,
-  governmentTitles
+  governmentTitles,
 }) => (
   <FullScreenWizard
     onBackPress={() => navigation.goBack()}
@@ -27,7 +27,7 @@ export const GovernmentInfoFields = ({
     withPadding={false}
     contentContainerStyle={{
       paddingBottom: 20,
-      backgroundColor: '#f2f2f2'
+      backgroundColor: '#f2f2f2',
     }}
   >
     <Container>
@@ -40,7 +40,7 @@ export const GovernmentInfoFields = ({
           label='Title'
           title='Title'
           items={governmentTitles}
-          onValueChange={value => {
+          onValueChange={(value) => {
             setFieldTouched('title')
             setFieldValue('title', value)
           }}
@@ -57,7 +57,7 @@ export const GovernmentInfoFields = ({
           <TextInput
             error={errors.name}
             label='If other, please specify'
-            onChangeText={value => {
+            onChangeText={(value) => {
               setFieldTouched('name')
               setFieldValue('name', value)
             }}
@@ -71,7 +71,7 @@ export const GovernmentInfoFields = ({
         <TextInput
           error={errors.jurisdiction}
           label='Jurisdiction'
-          onChangeText={value => {
+          onChangeText={(value) => {
             setFieldTouched('jurisdiction')
             setFieldValue('jurisdiction', value)
           }}
@@ -85,7 +85,7 @@ export const GovernmentInfoFields = ({
         <TextInput
           error={errors.tellUsMore}
           label='Tell us more'
-          onChangeText={value => {
+          onChangeText={(value) => {
             setFieldTouched('tellUsMore')
             setFieldValue('tellUsMore', value)
           }}
@@ -106,5 +106,5 @@ GovernmentInfoFields.propTypes = {
   setFieldValue: PropTypes.func.isRequired,
   touched: PropTypes.object.isRequired,
   values: PropTypes.object.isRequired,
-  governmentTitles: PropTypes.array.isRequired
+  governmentTitles: PropTypes.array.isRequired,
 }

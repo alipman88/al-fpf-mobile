@@ -9,7 +9,7 @@ import { navigateWithToken } from '@common/actions/navigateWithToken'
 
 import { sendNewFCMToken } from './actions'
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const areaId = areas.selectors.getCurrentAreaId(state)
   return {
     areas: areas.selectors.getAreas(state),
@@ -25,22 +25,19 @@ const mapStateToProps = state => {
     loading:
       areas.selectors.getLoading(state) ||
       issues.selectors.getLoading(state) ||
-      posts.selectors.getLoading(state)
+      posts.selectors.getLoading(state),
   }
 }
 
-export const Forum = connect(
-  mapStateToProps,
-  {
-    fetchSpecificIssue,
-    getIssues,
-    getContents,
-    setAccessToken: currentUser.actions.setAccessToken,
-    setupForumData,
-    sendNewFCMToken,
-    setCurrentIssueId: issues.actions.setCurrentIssueId,
-    setCurrentAreaId: areas.actions.setCurrentAreaId,
-    navigateWithToken,
-    toggleIssueUnread: issues.actions.toggleIssueUnread
-  }
-)(ForumComponent)
+export const Forum = connect(mapStateToProps, {
+  fetchSpecificIssue,
+  getIssues,
+  getContents,
+  setAccessToken: currentUser.actions.setAccessToken,
+  setupForumData,
+  sendNewFCMToken,
+  setCurrentIssueId: issues.actions.setCurrentIssueId,
+  setCurrentAreaId: areas.actions.setCurrentAreaId,
+  navigateWithToken,
+  toggleIssueUnread: issues.actions.toggleIssueUnread,
+})(ForumComponent)

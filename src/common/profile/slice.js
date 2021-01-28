@@ -6,21 +6,21 @@ import { resetAction } from '@common/resetAction'
 
 const initialState = {
   user: {
-    profiles: []
+    profiles: [],
   },
   loading: false,
-  currentProfileId: undefined
+  currentProfileId: undefined,
 }
 
 export const profile = createSlice({
   slice: 'profile',
   initialState: {
-    ...initialState
+    ...initialState,
   },
   reducers: {
     setLoading: (state, action) => ({
       ...state,
-      loading: action.payload
+      loading: action.payload,
     }),
     setUserProfile: (state, { payload }) => {
       rollbar.setPerson(
@@ -36,27 +36,27 @@ export const profile = createSlice({
       return {
         ...state,
         user: {
-          ...payload
+          ...payload,
         },
-        currentProfileId
+        currentProfileId,
       }
     },
     setCurrentProfileId: (state, action) => ({
       ...state,
-      currentProfileId: action.payload
+      currentProfileId: action.payload,
     }),
     setValueInUserData: (state, { payload }) => ({
       ...state,
       user: {
         ...state.user,
-        [payload.key]: payload.value
-      }
+        [payload.key]: payload.value,
+      },
     }),
     setValueInProfileData: (state, { payload }) => {
-      let updated_profiles = state.user.profiles.map(obj => {
+      let updated_profiles = state.user.profiles.map((obj) => {
         return {
           ...obj,
-          ...payload[obj.id]
+          ...payload[obj.id],
         }
       })
 
@@ -64,16 +64,16 @@ export const profile = createSlice({
         ...state,
         user: {
           ...state.user,
-          profiles: updated_profiles
-        }
+          profiles: updated_profiles,
+        },
       }
-    }
+    },
   },
   extraReducers: {
     [resetAction]: () => ({
-      ...initialState
-    })
-  }
+      ...initialState,
+    }),
+  },
 })
 
 const getNavigationProfileId = (state, props) =>
@@ -81,17 +81,16 @@ const getNavigationProfileId = (state, props) =>
 
 const getCurrentProfileId = createSelector(
   ['main.profile'],
-  profile => profile.currentProfileId
+  (profile) => profile.currentProfileId
 )
 
 const getProfiles = createSelector(
   ['main.profile'],
-  profile => profile.user.profiles || []
+  (profile) => profile.user.profiles || []
 )
 
-const getAvailableProfiles = createSelector(
-  ['main.profile'],
-  profile => filter(profile.user.profiles, { approved: true })
+const getAvailableProfiles = createSelector(['main.profile'], (profile) =>
+  filter(profile.user.profiles, { approved: true })
 )
 
 const getCurrentProfile = createSelector(
@@ -104,22 +103,19 @@ const getNavigationProfile = createSelector(
   (profiles, id) => find(profiles, { id })
 )
 
-const hasUnapprovedProfile = createSelector(
-  [getProfiles],
-  profiles => profiles.some(profile => !profile.available)
+const hasUnapprovedProfile = createSelector([getProfiles], (profiles) =>
+  profiles.some((profile) => !profile.available)
 )
 
 /**
  * Returns true if the user has an active Apple subscription in any of their profiles.
  */
-const getUserHasAppleSubscription = createSelector(
-  [getProfiles],
-  profiles =>
-    profiles.some(
-      profile =>
-        profile.active_subscription &&
-        profile.active_subscription.service === 'apple'
-    )
+const getUserHasAppleSubscription = createSelector([getProfiles], (profiles) =>
+  profiles.some(
+    (profile) =>
+      profile.active_subscription &&
+      profile.active_subscription.service === 'apple'
+  )
 )
 
 /**
@@ -144,7 +140,7 @@ const getSubscriptionState = createSelector(
       data[profile.id] = {
         canSubscribe,
         hasSubscription,
-        hasAppleSubscription
+        hasAppleSubscription,
       }
 
       return data
@@ -159,21 +155,15 @@ const getNavigationProfileSubscriptionState = createSelector(
 
 profile.selectors = {
   ...profile.selectors,
-  getUser: createSelector(
-    ['main.profile'],
-    profile => profile.user
-  ),
+  getUser: createSelector(['main.profile'], (profile) => profile.user),
   getProfiles,
   getAvailableProfiles,
   hasUnapprovedProfile,
-  getLoading: createSelector(
-    ['main.profile'],
-    profile => profile.loading
-  ),
+  getLoading: createSelector(['main.profile'], (profile) => profile.loading),
   getCurrentProfileId,
   getCurrentProfile,
   getNavigationProfile,
   getUserHasAppleSubscription,
   getSubscriptionState,
-  getNavigationProfileSubscriptionState
+  getNavigationProfileSubscriptionState,
 }

@@ -9,11 +9,11 @@ export const NavIcon = ({ source }) => (
       width: 35,
       height: 20,
       marginTop: 4,
-      resizeMode: 'contain'
+      resizeMode: 'contain',
     }}
   />
 )
 
 NavIcon.propTypes = {
-  source: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
+  source: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 }

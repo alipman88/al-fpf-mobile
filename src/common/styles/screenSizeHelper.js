@@ -4,12 +4,12 @@ import { Dimensions } from 'react-native'
 const screenSizes = [
   {
     name: 'xs',
-    height: 568 // iPhone SE
+    height: 568, // iPhone SE
   },
   {
     name: 'sm',
-    height: 667 // iPhone 6, 7, 8
-  }
+    height: 667, // iPhone 6, 7, 8
+  },
 ]
 
 // Example usage:
@@ -18,12 +18,12 @@ const screenSizes = [
 // screenSize({xs: 8}, 16)
 export function screenSize(screenSizeOptions, defaultValue) {
   const windowHeight = Dimensions.get('window').height
-  const matchedScreenSizes = screenSizes.filter(screenSize => {
+  const matchedScreenSizes = screenSizes.filter((screenSize) => {
     return windowHeight < screenSize.height
   })
 
   let value
-  const hasScreenSizeOption = matchedScreenSizes.some(matchedScreenSize => {
+  const hasScreenSizeOption = matchedScreenSizes.some((matchedScreenSize) => {
     if (screenSizeOptions.hasOwnProperty(matchedScreenSize.name)) {
       value = screenSizeOptions[matchedScreenSize.name]
       return true

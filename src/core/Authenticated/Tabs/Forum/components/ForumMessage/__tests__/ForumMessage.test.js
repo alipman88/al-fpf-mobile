@@ -16,7 +16,7 @@ describe('ForumMessage', () => {
 
   test('renders with a string', () => {
     const message = {
-      content: 'foo'
+      content: 'foo',
     }
     const wrapper = shallow(<ForumMessage forumMessage={message} />)
 
@@ -27,7 +27,7 @@ describe('ForumMessage', () => {
 
   test('renders with a title', () => {
     const message = {
-      title: 'foo'
+      title: 'foo',
     }
     const wrapper = shallow(<ForumMessage forumMessage={message} />)
 
@@ -39,7 +39,7 @@ describe('ForumMessage', () => {
   test('renders with a button', () => {
     const message = {
       button_text: 'foo',
-      button_url: 'foo'
+      button_url: 'foo',
     }
     const wrapper = shallow(<ForumMessage forumMessage={message} />)
 

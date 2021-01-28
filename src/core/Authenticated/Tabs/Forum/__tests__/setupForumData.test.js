@@ -4,25 +4,25 @@ import { issues } from '@common/issues/slice'
 
 jest.mock('@common/issues', () => ({
   getIssues: jest.fn().mockReturnValue('getIssues'),
-  issues: require('@common/issues/slice').issues
+  issues: require('@common/issues/slice').issues,
 }))
 
 jest.mock('@common/posts', () => ({
-  getContents: jest.fn().mockReturnValue('getContents')
+  getContents: jest.fn().mockReturnValue('getContents'),
 }))
 
 jest.mock('@common/profile', () => ({
   getProfiles: jest.fn().mockReturnValue('getProfiles'),
-  profile: require('../../../../../common/profile/slice').profile
+  profile: require('../../../../../common/profile/slice').profile,
 }))
 
 jest.mock('@common/appSettings', () => ({
-  getAppSettings: jest.fn().mockReturnValue('getAppSettings')
+  getAppSettings: jest.fn().mockReturnValue('getAppSettings'),
 }))
 
 jest.mock('@common/areas', () => ({
   getAreas: jest.fn().mockReturnValue('getAreas'),
-  areas: require('../../../../../common/areas/slice').areas
+  areas: require('../../../../../common/areas/slice').areas,
 }))
 
 describe('setupForumData', () => {
@@ -33,19 +33,19 @@ describe('setupForumData', () => {
         areas: {
           areas: [
             {
-              id: 2
-            }
+              id: 2,
+            },
           ],
-          currentAreaId: 0
+          currentAreaId: 0,
         },
         issues: {
           issues: [
             {
               id: 1,
-              number: 1
-            }
+              number: 1,
+            },
           ],
-          currentIssueId: 1
+          currentIssueId: 1,
         },
         profile: {
           user: {
@@ -53,13 +53,13 @@ describe('setupForumData', () => {
               {
                 id: 1,
                 approved: true,
-                area_ids: [2]
-              }
-            ]
+                area_ids: [2],
+              },
+            ],
           },
-          currentProfileId: 1
-        }
-      }
+          currentProfileId: 1,
+        },
+      },
     })
     await setupForumData()(dispatch, getState)
 

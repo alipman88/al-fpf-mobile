@@ -4,5 +4,5 @@ export const createResetStackTo = (nextScreen, params = {}, key) =>
   StackActions.reset({
     index: 0,
     key,
-    actions: [NavigationActions.navigate({ routeName: nextScreen, ...params })]
+    actions: [NavigationActions.navigate({ routeName: nextScreen, ...params })],
   })

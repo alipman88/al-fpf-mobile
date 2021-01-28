@@ -11,19 +11,14 @@ describe('ProfileTypeButton', () => {
     buttonText: 'Business/Nonprofit',
     label: 'Business or nonprofit organization',
     type: 'business',
-    active: false
+    active: false,
   }
 
   test('it shows a checkbox when active', () => {
     const wrapper = shallow(
       <ProfileTypeButton {...defaultProps} active={true} />
     )
-    expect(
-      wrapper
-        .find(ProfileTypePill)
-        .first()
-        .props().image
-    ).toBeTruthy()
+    expect(wrapper.find(ProfileTypePill).first().props().image).toBeTruthy()
   })
 
   test('it fires the tap handler when tapped', () => {

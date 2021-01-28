@@ -22,7 +22,7 @@ export class Event extends React.Component {
   state = {
     loading: false,
     similarEvents: [],
-    selectedDuplicate: 0
+    selectedDuplicate: 0,
   }
 
   constructor(props) {
@@ -38,7 +38,7 @@ export class Event extends React.Component {
     const {
       subject: prevSubject,
       forums: prevForums,
-      fromDate: prevFromDate
+      fromDate: prevFromDate,
     } = prevProps.values
 
     const fromDateChanged = !isEqual(prevFromDate, fromDate)
@@ -82,7 +82,7 @@ export class Event extends React.Component {
     }
   }
 
-  setSelectedDuplicate = index => {
+  setSelectedDuplicate = (index) => {
     this.setState({ selectedDuplicate: index })
     this.props.setDuplicateState(index > 0)
   }
@@ -94,7 +94,7 @@ export class Event extends React.Component {
       setFieldValue,
       setFieldTouched,
       touched,
-      values
+      values,
     } = this.props
 
     const { loading, selectedDuplicate, similarEvents } = this.state
@@ -129,7 +129,7 @@ export class Event extends React.Component {
                 dateLabel='Start Date'
                 defaultTimeForDate={startOfDay}
                 timeLabel='Start Time'
-                onChangeValue={date => {
+                onChangeValue={(date) => {
                   setFieldValue('fromDate', date)
                   setFieldTouched('fromDate')
                 }}
@@ -145,7 +145,7 @@ export class Event extends React.Component {
                 dateLabel='End Date'
                 defaultTimeForDate={endOfDay}
                 timeLabel='End Time'
-                onChangeValue={date => {
+                onChangeValue={(date) => {
                   setFieldValue('toDate', date)
                   setFieldTouched('toDate')
                 }}
@@ -170,5 +170,5 @@ Event.propTypes = {
   setFieldTouched: PropTypes.func.isRequired,
   setFieldValue: PropTypes.func.isRequired,
   touched: PropTypes.object.isRequired,
-  values: PropTypes.object.isRequired
+  values: PropTypes.object.isRequired,
 }

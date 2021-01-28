@@ -9,8 +9,8 @@ describe('responseError', () => {
     const error = new Error('boom')
     error.response = {
       data: {
-        errors: 'Request failed'
-      }
+        errors: 'Request failed',
+      },
     }
     expect(responseError(error)).toEqual('Request failed')
   })
@@ -20,9 +20,9 @@ describe('responseError', () => {
     error.response = {
       data: {
         errors: {
-          base: ['Request failed']
-        }
-      }
+          base: ['Request failed'],
+        },
+      },
     }
     expect(responseError(error)).toEqual('Request failed')
   })
@@ -32,8 +32,8 @@ describe('responseError', () => {
     error.response = {
       status: 503,
       headers: {
-        'x-maintenance-mode': 'on'
-      }
+        'x-maintenance-mode': 'on',
+      },
     }
     expect(responseError(error)).toEqual(
       'Front Porch Forum is temporarily down for maintenance'
@@ -43,7 +43,7 @@ describe('responseError', () => {
   test('returns service unavailable message', () => {
     const error = new Error('boom')
     error.response = {
-      status: 503
+      status: 503,
     }
     expect(responseError(error)).toEqual(
       'Front Porch Forum is currently unavailable'

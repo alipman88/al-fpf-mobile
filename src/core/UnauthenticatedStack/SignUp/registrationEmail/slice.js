@@ -3,21 +3,21 @@
 import { createSlice, createSelector } from 'redux-starter-kit'
 
 const initialState = {
-  email: 'test1000@frontporchforum.com'
+  email: 'test1000@frontporchforum.com',
 }
 
 export const registrationEmail = createSlice({
   slice: 'registrationEmail',
   initialState: {
-    ...initialState
+    ...initialState,
   },
   reducers: {
     setRegistrationEmail: (state, { payload }) => {
       return {
-        email: payload
+        email: payload,
       }
-    }
-  }
+    },
+  },
 })
 
 const path = 'main.registrationEmail'
@@ -26,6 +26,6 @@ registrationEmail.selectors = {
   ...registrationEmail.selectors,
   getRegistrationEmail: createSelector(
     [path],
-    registrationEmail => registrationEmail.email
-  )
+    (registrationEmail) => registrationEmail.email
+  ),
 }

@@ -9,7 +9,7 @@ export class PostCategory extends React.Component {
 
     let style = labelStyles[labelStyle] || {
       color: '#000000',
-      background: '#ebecf1'
+      background: '#ebecf1',
     }
 
     return (
@@ -23,10 +23,10 @@ export class PostCategory extends React.Component {
 PostCategory.propTypes = {
   children: PropTypes.string.isRequired,
   labelStyle: PropTypes.string,
-  labelStyles: PropTypes.object
+  labelStyles: PropTypes.object,
 }
 
 PostCategory.defaultProps = {
   labelStyle: 'light_grey',
-  labelStyles: {}
+  labelStyles: {},
 }

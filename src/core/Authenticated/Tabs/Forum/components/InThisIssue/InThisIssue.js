@@ -6,7 +6,7 @@ import {
   Heading,
   ListItem,
   ListItemBullet,
-  ListItemText
+  ListItemText,
 } from './styledComponents'
 
 export const InThisIssue = ({ headlines, number, posts }) => (
@@ -31,10 +31,10 @@ export const InThisIssue = ({ headlines, number, posts }) => (
 InThisIssue.propTypes = {
   headlines: PropTypes.array,
   number: PropTypes.number,
-  posts: PropTypes.array
+  posts: PropTypes.array,
 }
 
 InThisIssue.defaultProps = {
   headlines: [],
-  posts: []
+  posts: [],
 }

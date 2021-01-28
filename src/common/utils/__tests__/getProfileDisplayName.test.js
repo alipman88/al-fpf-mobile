@@ -5,11 +5,11 @@ describe('getProfileDisplayName', () => {
     expect(
       getProfileDisplayName({
         profile_plan: {
-          plan_type: 'neighbor'
+          plan_type: 'neighbor',
         },
         street_number: 100,
         street_name: 'Yonge St',
-        city: 'Toronto'
+        city: 'Toronto',
       })
     ).toEqual('Neighbor: 100 Yonge St Toronto')
   })
@@ -18,9 +18,9 @@ describe('getProfileDisplayName', () => {
     expect(
       getProfileDisplayName({
         profile_plan: {
-          plan_type: 'business'
+          plan_type: 'business',
         },
-        name: 'Front Porch Forum'
+        name: 'Front Porch Forum',
       })
     ).toEqual('Business: Front Porch Forum')
   })
@@ -29,10 +29,10 @@ describe('getProfileDisplayName', () => {
     expect(
       getProfileDisplayName({
         profile_plan: {
-          plan_type: 'government'
+          plan_type: 'government',
         },
         name: 'City Hall',
-        jurisdiction: 'Newport'
+        jurisdiction: 'Newport',
       })
     ).toEqual('Government: City Hall Newport')
   })
@@ -40,7 +40,7 @@ describe('getProfileDisplayName', () => {
   test('no plan type returns name', () => {
     expect(
       getProfileDisplayName({
-        name: 'Front Porch Forum'
+        name: 'Front Porch Forum',
       })
     ).toEqual('Front Porch Forum')
   })
@@ -50,10 +50,10 @@ describe('getProfileDisplayName', () => {
       getProfileDisplayName(
         {
           profile_plan: {
-            plan_type: 'government'
+            plan_type: 'government',
           },
           name: 'City Hall',
-          jurisdiction: 'Newport'
+          jurisdiction: 'Newport',
         },
         false
       )

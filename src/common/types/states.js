@@ -1,230 +1,230 @@
 export const states = [
   {
     id: 'AL',
-    name: 'Alabama'
+    name: 'Alabama',
   },
   {
     id: 'AK',
-    name: 'Alaska'
+    name: 'Alaska',
   },
   {
     id: 'AZ',
-    name: 'Arizona'
+    name: 'Arizona',
   },
   {
     id: 'AR',
-    name: 'Arkansas'
+    name: 'Arkansas',
   },
   {
     id: 'CA',
-    name: 'California'
+    name: 'California',
   },
   {
     id: 'CO',
-    name: 'Colorado'
+    name: 'Colorado',
   },
   {
     id: 'CT',
-    name: 'Connecticut'
+    name: 'Connecticut',
   },
   {
     id: 'DC',
-    name: 'District of Columbia'
+    name: 'District of Columbia',
   },
   {
     id: 'DE',
-    name: 'Delaware'
+    name: 'Delaware',
   },
   {
     id: 'FL',
-    name: 'Florida'
+    name: 'Florida',
   },
   {
     id: 'GA',
-    name: 'Georgia'
+    name: 'Georgia',
   },
   {
     id: 'HI',
-    name: 'Hawaii'
+    name: 'Hawaii',
   },
   {
     id: 'ID',
-    name: 'Idaho'
+    name: 'Idaho',
   },
   {
     id: 'IL',
-    name: 'Illinois'
+    name: 'Illinois',
   },
   {
     id: 'IN',
-    name: 'Indiana'
+    name: 'Indiana',
   },
   {
     id: 'IA',
-    name: 'Iowa'
+    name: 'Iowa',
   },
   {
     id: 'KS',
-    name: 'Kansas'
+    name: 'Kansas',
   },
   {
     id: 'KY',
-    name: 'Kentucky'
+    name: 'Kentucky',
   },
   {
     id: 'LA',
-    name: 'Louisiana'
+    name: 'Louisiana',
   },
   {
     id: 'ME',
-    name: 'Maine'
+    name: 'Maine',
   },
   {
     id: 'MD',
-    name: 'Maryland'
+    name: 'Maryland',
   },
   {
     id: 'MA',
-    name: 'Massachusetts'
+    name: 'Massachusetts',
   },
   {
     id: 'MI',
-    name: 'Michigan'
+    name: 'Michigan',
   },
   {
     id: 'MN',
-    name: 'Minnesota'
+    name: 'Minnesota',
   },
   {
     id: 'MS',
-    name: 'Mississippi'
+    name: 'Mississippi',
   },
   {
     id: 'MO',
-    name: 'Missouri'
+    name: 'Missouri',
   },
   {
     id: 'MT',
-    name: 'Montana'
+    name: 'Montana',
   },
   {
     id: 'NE',
-    name: 'Nebraska'
+    name: 'Nebraska',
   },
   {
     id: 'NV',
-    name: 'Nevada'
+    name: 'Nevada',
   },
   {
     id: 'NH',
-    name: 'New Hampshire'
+    name: 'New Hampshire',
   },
   {
     id: 'NJ',
-    name: 'New Jersey'
+    name: 'New Jersey',
   },
   {
     id: 'NM',
-    name: 'New Mexico'
+    name: 'New Mexico',
   },
   {
     id: 'NY',
-    name: 'New York'
+    name: 'New York',
   },
   {
     id: 'NC',
-    name: 'North Carolina'
+    name: 'North Carolina',
   },
   {
     id: 'ND',
-    name: 'North Dakota'
+    name: 'North Dakota',
   },
   {
     id: 'OH',
-    name: 'Ohio'
+    name: 'Ohio',
   },
   {
     id: 'OK',
-    name: 'Oklahoma'
+    name: 'Oklahoma',
   },
   {
     id: 'OR',
-    name: 'Oregon'
+    name: 'Oregon',
   },
   {
     id: 'PA',
-    name: 'Pennsylvania'
+    name: 'Pennsylvania',
   },
   {
     id: 'RI',
-    name: 'Rhode Island'
+    name: 'Rhode Island',
   },
   {
     id: 'SC',
-    name: 'South Carolina'
+    name: 'South Carolina',
   },
   {
     id: 'SD',
-    name: 'South Dakota'
+    name: 'South Dakota',
   },
   {
     id: 'TN',
-    name: 'Tennessee'
+    name: 'Tennessee',
   },
   {
     id: 'TX',
-    name: 'Texas'
+    name: 'Texas',
   },
   {
     id: 'UT',
-    name: 'Utah'
+    name: 'Utah',
   },
   {
     id: 'VT',
-    name: 'Vermont'
+    name: 'Vermont',
   },
   {
     id: 'VA',
-    name: 'Virginia'
+    name: 'Virginia',
   },
   {
     id: 'WA',
-    name: 'Washington'
+    name: 'Washington',
   },
   {
     id: 'WV',
-    name: 'West Virginia'
+    name: 'West Virginia',
   },
   {
     id: 'WI',
-    name: 'Wisconsin'
+    name: 'Wisconsin',
   },
   {
     id: 'WY',
-    name: 'Wyoming'
+    name: 'Wyoming',
   },
   {
     id: 'AS',
-    name: 'American Samoa'
+    name: 'American Samoa',
   },
   {
     id: 'GU',
-    name: 'Guam'
+    name: 'Guam',
   },
   {
     id: 'MP',
-    name: 'Northern Mariana Islands'
+    name: 'Northern Mariana Islands',
   },
   {
     id: 'PR',
-    name: 'Puerto Rico'
+    name: 'Puerto Rico',
   },
   {
     id: 'UM',
-    name: 'United States Minor Outlying Islands'
+    name: 'United States Minor Outlying Islands',
   },
   {
     id: 'VI',
-    name: 'Virgin Islands'
-  }
+    name: 'Virgin Islands',
+  },
 ]

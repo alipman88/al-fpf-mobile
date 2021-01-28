@@ -42,7 +42,7 @@ const scrollTopIfFocused = ({ navigation, defaultHandler }) => {
   defaultHandler()
 }
 
-const getScreenRegisteredParams = navState => {
+const getScreenRegisteredParams = (navState) => {
   // When we use stack navigators.
   // Also needed for react-navigation@2
   const { routes, index, params } = navState
@@ -70,8 +70,8 @@ export const Tabs = createBottomTabNavigator(
         tabBarIcon: ({ focused }) => (
           <NavIcon source={focused ? homeActive : homeDefault} />
         ),
-        tabBarOnPress: scrollTopIfFocused
-      })
+        tabBarOnPress: scrollTopIfFocused,
+      }),
     },
     Compose: {
       screen: Compose,
@@ -84,8 +84,8 @@ export const Tabs = createBottomTabNavigator(
         /* eslint-disable-next-line react/prop-types */
         tabBarIcon: ({ focused }) => (
           <NavIcon source={focused ? composeActive : composeDefault} />
-        )
-      })
+        ),
+      }),
     },
     Search: {
       screen: Search,
@@ -98,8 +98,8 @@ export const Tabs = createBottomTabNavigator(
         tabBarIcon: ({ focused }) => (
           <NavIcon source={focused ? searchActive : searchDefault} />
         ),
-        tabBarOnPress: scrollTopIfFocused
-      })
+        tabBarOnPress: scrollTopIfFocused,
+      }),
     },
     Directory: {
       screen: Directory,
@@ -111,8 +111,8 @@ export const Tabs = createBottomTabNavigator(
         /* eslint-disable-next-line react/prop-types */
         tabBarIcon: ({ focused }) => (
           <NavIcon source={focused ? directoryActive : directoryDefault} />
-        )
-      })
+        ),
+      }),
     },
     More: {
       screen: More,
@@ -124,18 +124,18 @@ export const Tabs = createBottomTabNavigator(
         /* eslint-disable-next-line react/prop-types */
         tabBarIcon: ({ focused }) => (
           <NavIcon source={focused ? moreActive : moreDefault} />
-        )
-      })
-    }
+        ),
+      }),
+    },
   },
   {
     initialRouteName: 'Forum',
     tabBarOptions: {
       tabStyle: {
         flexDirection: 'column',
-        justifyContent: 'space-around'
-      }
-    }
+        justifyContent: 'space-around',
+      },
+    },
   }
 )
 
@@ -147,6 +147,6 @@ Tabs.navigationOptions = ({ navigation }) => {
   const headerTitle = get(params, 'navTitle', routeName)
 
   return {
-    headerTitle
+    headerTitle,
   }
 }

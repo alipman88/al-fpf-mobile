@@ -29,12 +29,12 @@ export class Search extends React.Component {
     total: 0,
     page: 1,
     pages: 0,
-    pageItemCount: 25
+    pageItemCount: 25,
   }
 
-  nextPage = values => {
+  nextPage = (values) => {
     this.setState(
-      state => ({ ...state, page: state.page + 1 }),
+      (state) => ({ ...state, page: state.page + 1 }),
       () => {
         this.search(values)
       }
@@ -46,7 +46,7 @@ export class Search extends React.Component {
 
     // Set scrollToTop function in navigation params to trigger scroll in tab navigator
     this.props.navigation.setParams({
-      scrollToTop: this.scrollToTop
+      scrollToTop: this.scrollToTop,
     })
 
     this.setCategoryFromLink(navigation.getParam('category'))
@@ -62,7 +62,7 @@ export class Search extends React.Component {
     // on the tab navigator
     if (this.searchViewRef !== this.props.navigation.getParam('scrollRef')) {
       this.props.navigation.setParams({
-        scrollRef: this.searchViewRef
+        scrollRef: this.searchViewRef,
       })
     }
   }
@@ -75,27 +75,27 @@ export class Search extends React.Component {
 
   setCategoryFromLink(categoryName) {
     const { categories } = this.props
-    const categoryFromLink = categories.find(cat => cat.name === categoryName)
+    const categoryFromLink = categories.find((cat) => cat.name === categoryName)
 
     this.setState({
-      categoryFromLink
+      categoryFromLink,
     })
   }
 
-  search = values => {
+  search = (values) => {
     this.setState({ loading: true })
 
     return this.props
       .search({
         ...values,
         page: this.state.page,
-        count: 25
+        count: 25,
       })
       .then(({ pagination, results }) => {
         if (values.keyword.trim().length > 0) {
           this.props.addSearchToHistory(values)
         }
-        this.setState(state => ({
+        this.setState((state) => ({
           searched: true,
           // add the results from the query if they are from next page
           searchResults:
@@ -103,10 +103,10 @@ export class Search extends React.Component {
           total: pagination.total,
           page: pagination.page,
           pages: pagination.pages,
-          pageItemCount: pagination.page_item_count
+          pageItemCount: pagination.page_item_count,
         }))
       })
-      .catch(e => {
+      .catch((e) => {
         this.props.setAppError(responseError(e))
       })
       .finally(() => {
@@ -120,7 +120,7 @@ export class Search extends React.Component {
       loading,
       searched,
       searchResults,
-      total
+      total,
     } = this.state
     const { areas, categories, navigation } = this.props
 
@@ -133,7 +133,7 @@ export class Search extends React.Component {
             toDate: endOfDay(new Date()),
             keyword: '',
             category: null,
-            forums: []
+            forums: [],
           }}
           onSubmit={(values, actions) => {
             actions.setSubmitting(true)
@@ -150,7 +150,7 @@ export class Search extends React.Component {
             setFieldValue,
             isSubmitting,
             touched,
-            values
+            values,
           }) => (
             <ScrollView
               contentContainerStyle={{ minHeight: '100%' }}
@@ -196,5 +196,5 @@ Search.propTypes = {
   categories: PropTypes.array.isRequired,
   search: PropTypes.func.isRequired,
   navigation: PropTypes.object.isRequired,
-  setAppError: PropTypes.func.isRequired
+  setAppError: PropTypes.func.isRequired,
 }

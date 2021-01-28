@@ -3,18 +3,15 @@ import { createSlice, createSelector } from 'redux-starter-kit'
 export const spinner = createSlice({
   slice: 'spinner',
   initialState: {
-    visible: false
+    visible: false,
   },
   reducers: {
     setVisibility: (state, { payload }) => ({
-      visible: payload
-    })
-  }
+      visible: payload,
+    }),
+  },
 })
 
 spinner.selectors = {
-  getVisible: createSelector(
-    ['main.spinner'],
-    spinner => spinner.visible
-  )
+  getVisible: createSelector(['main.spinner'], (spinner) => spinner.visible),
 }

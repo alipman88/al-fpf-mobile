@@ -18,5 +18,5 @@ export class Welcome extends React.Component {
 }
 
 Welcome.propTypes = {
-  navigation: PropTypes.object.isRequired
+  navigation: PropTypes.object.isRequired,
 }

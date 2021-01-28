@@ -15,12 +15,12 @@ describe('BusinessInfoFields', () => {
       businessCategoryId: 1,
       url: '',
       phone: '',
-      description: ''
+      description: '',
     },
     newUser: {},
     stepCount: 4,
     navigation: {
-      navigate: jest.fn()
+      navigate: jest.fn(),
     },
     setNewUserByKey: jest.fn(),
     categories: [
@@ -28,9 +28,9 @@ describe('BusinessInfoFields', () => {
       {
         id: 2,
         name: 'Community',
-        children: [{ id: 9, name: 'Chamber of commerce' }]
-      }
-    ]
+        children: [{ id: 9, name: 'Chamber of commerce' }],
+      },
+    ],
   }
 
   afterEach(() => {
@@ -47,10 +47,7 @@ describe('BusinessInfoFields', () => {
       .find(TextInput)
       .first()
       .simulate('changeText', 'Legitimate Business')
-    wrapper
-      .find(TextInput)
-      .first()
-      .simulate('blur')
+    wrapper.find(TextInput).first().simulate('blur')
 
     expect(defaultProps.setFieldValue).toHaveBeenCalledWith(
       'name',
@@ -65,7 +62,7 @@ describe('BusinessInfoFields', () => {
       businessCategoryId: 1,
       url: 'http://made-it-up.work',
       phone: '',
-      description: ''
+      description: '',
     }
 
     const wrapper = shallow(
@@ -76,59 +73,46 @@ describe('BusinessInfoFields', () => {
       />
     )
 
-    wrapper
-      .find(FullScreenWizard)
-      .first()
-      .props()
-      .onNextPress()
+    wrapper.find(FullScreenWizard).first().props().onNextPress()
 
     expect(defaultProps.setNewUserByKey).toHaveBeenCalledWith({
-      business: inputValues
+      business: inputValues,
     })
     expect(defaultProps.navigation.navigate).toHaveBeenCalled()
   })
 
   test('Continue button is disabled unless required fields are filled', () => {
     const wrapper = shallow(<BusinessInfoFields {...defaultProps} />)
-    expect(
-      wrapper
-        .find(FullScreenWizard)
-        .first()
-        .props().nextDisabled
-    ).toEqual(true)
+    expect(wrapper.find(FullScreenWizard).first().props().nextDisabled).toEqual(
+      true
+    )
   })
 
   test('Continue button is enabled if there are no errors and fields have been touched', () => {
     const touched = {
       name: true,
-      businessCategoryId: true
+      businessCategoryId: true,
     }
 
     const wrapper = shallow(
       <BusinessInfoFields {...defaultProps} touched={touched} />
     )
-    expect(
-      wrapper
-        .find(FullScreenWizard)
-        .first()
-        .props().nextDisabled
-    ).toEqual(false)
+    expect(wrapper.find(FullScreenWizard).first().props().nextDisabled).toEqual(
+      false
+    )
   })
 
   test('Continue button is disabled if there are errors', () => {
     const errors = {
-      name: 'is arbitrarily erroring'
+      name: 'is arbitrarily erroring',
     }
 
     const wrapper = shallow(
       <BusinessInfoFields {...defaultProps} errors={errors} />
     )
 
-    expect(
-      wrapper
-        .find(FullScreenWizard)
-        .first()
-        .props().nextDisabled
-    ).toEqual(true)
+    expect(wrapper.find(FullScreenWizard).first().props().nextDisabled).toEqual(
+      true
+    )
   })
 })

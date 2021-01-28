@@ -3,7 +3,7 @@ import {
   passwordValidation,
   validateFirstName,
   validateLastName,
-  validateEmailAvailability
+  validateEmailAvailability,
 } from '../validations'
 
 describe('BasicInfo validations', () => {
@@ -33,7 +33,7 @@ describe('BasicInfo validations', () => {
     expect(validateFirstName('.')).toEqual(false)
 
     const validChars = ['.', "'", '-', ',', '(', ')', '"', '/', '&', 'é', 'ö']
-    validChars.forEach(char => {
+    validChars.forEach((char) => {
       expect(validateFirstName(`a${char}`)).toEqual(true)
     })
 
@@ -58,9 +58,9 @@ describe('BasicInfo validations', () => {
       ';',
       '<',
       '>',
-      '|'
+      '|',
     ]
-    invalidChars.forEach(char => {
+    invalidChars.forEach((char) => {
       expect(validateFirstName(`a${char}`)).toEqual(false)
     })
   })
@@ -78,7 +78,7 @@ describe('BasicInfo validations', () => {
     expect(validateLastName('b.')).toEqual(false)
 
     const validChars = ['.', "'", '-', ',', '(', ')', '"', '/', '&', 'é', 'ö']
-    validChars.forEach(char => {
+    validChars.forEach((char) => {
       expect(validateLastName(`bc${char}`)).toEqual(true)
     })
 
@@ -103,9 +103,9 @@ describe('BasicInfo validations', () => {
       ';',
       '<',
       '>',
-      '|'
+      '|',
     ]
-    invalidChars.forEach(char => {
+    invalidChars.forEach((char) => {
       expect(validateLastName(`bc${char}`)).toEqual(false)
     })
   })
@@ -119,7 +119,7 @@ describe('BasicInfo validations', () => {
 
       await expect(validateEmailAvailability(email)).resolves.toBe(true)
       expect(api.get).toHaveBeenCalledWith('/check_user_email_availability', {
-        params: { email: email }
+        params: { email: email },
       })
 
       getSpy.mockRestore()
@@ -133,7 +133,7 @@ describe('BasicInfo validations', () => {
 
       await expect(validateEmailAvailability(email)).resolves.toBe(false)
       expect(api.get).toHaveBeenCalledWith('/check_user_email_availability', {
-        params: { email: email }
+        params: { email: email },
       })
 
       getSpy.mockRestore()
@@ -163,7 +163,7 @@ describe('BasicInfo validations', () => {
         1,
         '/check_user_email_availability',
         {
-          params: { email: email }
+          params: { email: email },
         }
       )
 
@@ -171,7 +171,7 @@ describe('BasicInfo validations', () => {
         2,
         '/check_user_email_availability',
         {
-          params: { email: email2 }
+          params: { email: email2 },
         }
       )
 

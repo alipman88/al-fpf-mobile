@@ -10,113 +10,104 @@ const initialState = {
   newsFromNeighboringNfsByIssue: {},
   ocmMessageByIssue: {},
   forumMessageByIssue: {},
-  loading: false
+  loading: false,
 }
 
 export const posts = createSlice({
   slice: 'posts',
   initialState: {
-    ...initialState
+    ...initialState,
   },
   reducers: {
     setLoading: (state, action) => ({
       ...state,
-      loading: action.payload
+      loading: action.payload,
     }),
     setContentsForIssue: (state, { payload }) => ({
       ...state,
       postsByIssue: {
         ...state.postsByIssue,
-        [payload.issueId]: payload.posts
+        [payload.issueId]: payload.posts,
       },
       sharedPostsByIssue: {
         ...state.sharedPostsByIssue,
-        [payload.issueId]: payload.sharedPosts
+        [payload.issueId]: payload.sharedPosts,
       },
       headlinesByIssue: {
         ...state.headlinesByIssue,
-        [payload.issueId]: payload.headlines
+        [payload.issueId]: payload.headlines,
       },
       adsByIssue: {
         ...state.adsByIssue,
-        [payload.issueId]: payload.ads
+        [payload.issueId]: payload.ads,
       },
       placementDateByIssue: {
         ...state.placementDateByIssue,
-        [payload.issueId]: payload.placementDate
+        [payload.issueId]: payload.placementDate,
       },
       newsFromNeighboringNfsByIssue: {
         ...state.newsFromNeighboringNfsByIssue,
-        [payload.issueId]: payload.newsFromNeighboringNfs
+        [payload.issueId]: payload.newsFromNeighboringNfs,
       },
       ocmMessageByIssue: {
         ...state.ocmMessageByIssue,
-        [payload.issueId]: payload.ocmMessage
+        [payload.issueId]: payload.ocmMessage,
       },
       forumMessageByIssue: {
         ...state.forumMessageByIssue,
-        [payload.issueId]: payload.forumMessage
+        [payload.issueId]: payload.forumMessage,
       },
-      loading: false
+      loading: false,
     }),
     setAdsForIssue: (state, { payload }) => ({
       ...state,
       adsByIssue: {
         ...state.adsByIssue,
-        [payload.issueId]: payload.ads
+        [payload.issueId]: payload.ads,
       },
       placementDateByIssue: {
         ...state.placementDateByIssue,
-        [payload.issueId]: payload.placementDate
+        [payload.issueId]: payload.placementDate,
       },
-      loading: false
-    })
+      loading: false,
+    }),
   },
   extraReducers: {
     [resetAction]: () => ({
-      ...initialState
-    })
-  }
+      ...initialState,
+    }),
+  },
 })
 
 const path = 'main.posts'
 
 posts.selectors = {
   ...posts.selectors,
-  getPostsByIssue: createSelector(
-    [path],
-    posts => posts.postsByIssue
-  ),
+  getPostsByIssue: createSelector([path], (posts) => posts.postsByIssue),
   getSharedPostsByIssue: createSelector(
     [path],
-    posts => posts.sharedPostsByIssue
+    (posts) => posts.sharedPostsByIssue
   ),
   getHeadlinesByIssue: createSelector(
     [path],
-    posts => posts.headlinesByIssue
+    (posts) => posts.headlinesByIssue
   ),
-  getAdsByIssue: createSelector(
-    [path],
-    posts => posts.adsByIssue
-  ),
+  getAdsByIssue: createSelector([path], (posts) => posts.adsByIssue),
   getPlacementDateByIssue: createSelector(
     [path],
-    posts => posts.placementDateByIssue
+    (posts) => posts.placementDateByIssue
   ),
-  getLoading: createSelector(
-    [path],
-    posts => posts.loading
-  ),
+  getLoading: createSelector([path], (posts) => posts.loading),
   getNewsFromNeighboringNfsByIssue: createSelector(
     [path],
-    posts => posts.newsFromNeighboringNfsByIssue || {}
+    (posts) => posts.newsFromNeighboringNfsByIssue || {}
   ),
   getOcmMessageByIssue: createSelector(
     [path],
-    posts => posts.ocmMessageByIssue || {}
+    (posts) => posts.ocmMessageByIssue || {}
   ),
   getForumMessageByIssue: createSelector(
     [path],
-    posts => posts.forumMessageByIssue || {}
-  )
+    (posts) => posts.forumMessageByIssue || {}
+  ),
 }

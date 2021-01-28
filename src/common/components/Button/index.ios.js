@@ -29,7 +29,7 @@ export const Button = ({
   iconLeft,
   iconNameLeft,
   tall,
-  hasBorder
+  hasBorder,
 }) => {
   return (
     <Wrapper
@@ -66,5 +66,5 @@ Button.propTypes = {
   hasBorder: PropTypes.bool,
   iconNameRight: PropTypes.string,
   iconNameLeft: PropTypes.string,
-  onPress: PropTypes.func.isRequired
+  onPress: PropTypes.func.isRequired,
 }

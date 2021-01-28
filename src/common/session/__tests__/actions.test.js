@@ -9,17 +9,17 @@ describe('session actions', () => {
     secured: {
       currentUser: {
         accessToken: 'abc123',
-        fcmToken: 'fcm-123'
-      }
-    }
+        fcmToken: 'fcm-123',
+      },
+    },
   })
 
   test('requests /login', async () => {
     const postSpy = jest.spyOn(api.api, 'post').mockImplementation(() => ({
       data: {
         access_token: 'token abc',
-        token_type: 'Bearer'
-      }
+        token_type: 'Bearer',
+      },
     }))
     const dispatch = jest.fn()
 
@@ -29,7 +29,7 @@ describe('session actions', () => {
       os: 'ios',
       device_name: 'Apple iPhone X',
       device_id: '123abc',
-      fcm_token: 'fcm-123'
+      fcm_token: 'fcm-123',
     })
 
     expect(dispatch).toHaveBeenCalledWith(
@@ -55,10 +55,12 @@ describe('session actions', () => {
         os: 'ios',
         device_name: 'Apple iPhone X',
         device_id: '123abc',
-        fcm_token: 'fcm-123'
+        fcm_token: 'fcm-123',
       },
       {
-        secured: { currentUser: { accessToken: 'abc123', fcmToken: 'fcm-123' } }
+        secured: {
+          currentUser: { accessToken: 'abc123', fcmToken: 'fcm-123' },
+        },
       }
     )
 

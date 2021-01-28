@@ -26,5 +26,5 @@ export const mainReducer = combineReducers({
   registrationEmail: registrationEmail.reducer,
   newUser: newUser.reducer,
   spinner: spinner.reducer,
-  mailApp: mailApp.reducer
+  mailApp: mailApp.reducer,
 })

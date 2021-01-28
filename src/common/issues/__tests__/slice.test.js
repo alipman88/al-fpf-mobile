@@ -9,7 +9,7 @@ describe('issues - slice', () => {
       issuesByAreaId: {},
       currentIssueId: 0,
       firstLoadOfIssues: null,
-      loading: false
+      loading: false,
     })
   })
 
@@ -22,8 +22,8 @@ describe('issues - slice', () => {
     expect(
       issues.selectors.getLoading({
         main: {
-          issues: state
-        }
+          issues: state,
+        },
       })
     ).toEqual(true)
   })
@@ -32,7 +32,7 @@ describe('issues - slice', () => {
     const date = new Date()
     const initialState = {
       firstLoadOfIssues: date,
-      issuesByAreaId: {}
+      issuesByAreaId: {},
     }
 
     let state = issues.reducer(initialState, issues.actions.setLoading(true))
@@ -41,33 +41,33 @@ describe('issues - slice', () => {
       state,
       issues.actions.setIssues({
         issues: [{ id: 1, number: 32, sent_at: date }],
-        areaId: 5
+        areaId: 5,
       })
     )
 
     const data = issues.selectors.getIssues({
       main: {
-        issues: state
-      }
+        issues: state,
+      },
     })
 
     expect(data).toEqual({
-      5: [{ id: 1, number: 32, isUnread: false, sent_at: date }]
+      5: [{ id: 1, number: 32, isUnread: false, sent_at: date }],
     })
 
     expect(
       issues.selectors.getCurrentIssueId({
         main: {
-          issues: state
-        }
+          issues: state,
+        },
       })
     ).toEqual(1)
 
     expect(
       issues.selectors.getLoading({
         main: {
-          issues: state
-        }
+          issues: state,
+        },
       })
     ).toEqual(false)
   })
@@ -80,8 +80,8 @@ describe('issues - slice', () => {
         issues: [
           { id: 1, number: 4 },
           { id: 2, number: 5 },
-          { id: 3, number: 6 }
-        ]
+          { id: 3, number: 6 },
+        ],
       })
     )
 
@@ -89,12 +89,20 @@ describe('issues - slice', () => {
       state,
       issues.actions.setIssues({
         areaId: 1,
-        issues: [{ id: 1, number: 4 }, { id: 4, number: 7 }]
+        issues: [
+          { id: 1, number: 4 },
+          { id: 4, number: 7 },
+        ],
       })
     )
 
     expect(state.issuesByAreaId[1].length).toEqual(4)
-    expect(state.issuesByAreaId[1].map(issue => issue.id)).toEqual([4, 3, 2, 1])
+    expect(state.issuesByAreaId[1].map((issue) => issue.id)).toEqual([
+      4,
+      3,
+      2,
+      1,
+    ])
   })
 
   test('setIssues log contents', () => {
@@ -102,81 +110,81 @@ describe('issues - slice', () => {
       {
         firstLoadOfIssues: new Date(),
         issuesByAreaId: {
-          '462': [
+          462: [
             {
               id: 349373,
               area_id: 462,
               number: 335,
               sent_at: '2019-04-04T00:10:12-04:00',
-              isUnread: false
+              isUnread: false,
             },
             {
               id: 349327,
               area_id: 462,
               number: 334,
               sent_at: '2019-04-01T18:12:01-04:00',
-              isUnread: false
+              isUnread: false,
             },
             {
               id: 349211,
               area_id: 462,
               number: 333,
               sent_at: '2019-03-31T17:04:48-04:00',
-              isUnread: false
+              isUnread: false,
             },
             {
               id: 349065,
               area_id: 462,
               number: 332,
               sent_at: '2019-03-30T16:41:59-04:00',
-              isUnread: false
+              isUnread: false,
             },
             {
               id: 348460,
               area_id: 462,
               number: 331,
               sent_at: '2019-03-29T17:22:36-04:00',
-              isUnread: false
+              isUnread: false,
             },
             {
               id: 347946,
               area_id: 462,
               number: 330,
               sent_at: '2019-03-25T17:02:11-04:00',
-              isUnread: false
+              isUnread: false,
             },
             {
               id: 347837,
               area_id: 462,
               number: 329,
               sent_at: '2019-03-21T16:44:54-04:00',
-              isUnread: false
+              isUnread: false,
             },
             {
               id: 347710,
               area_id: 462,
               number: 328,
               sent_at: '2019-03-20T17:02:26-04:00',
-              isUnread: false
+              isUnread: false,
             },
             {
               id: 347603,
               area_id: 462,
               number: 327,
               sent_at: '2019-03-19T17:16:26-04:00',
-              isUnread: false
+              isUnread: false,
             },
             {
               id: 347323,
               area_id: 462,
               number: 326,
               sent_at: '2019-03-18T17:45:21-04:00',
-              isUnread: false
-            }
-          ]
+              isUnread: false,
+            },
+          ],
         },
         currentIssueId: 349373,
-        loading: true
+        loading: true,
       },
       {
         type: 'issues/setIssues',
@@ -186,65 +194,65 @@ describe('issues - slice', () => {
               id: 349373,
               area_id: 462,
               number: 335,
-              sent_at: '2019-04-04T00:10:12-04:00'
+              sent_at: '2019-04-04T00:10:12-04:00',
             },
             {
               id: 349327,
               area_id: 462,
               number: 334,
-              sent_at: '2019-04-01T18:12:01-04:00'
+              sent_at: '2019-04-01T18:12:01-04:00',
             },
             {
               id: 349211,
               area_id: 462,
               number: 333,
-              sent_at: '2019-03-31T17:04:48-04:00'
+              sent_at: '2019-03-31T17:04:48-04:00',
             },
             {
               id: 349065,
               area_id: 462,
               number: 332,
-              sent_at: '2019-03-30T16:41:59-04:00'
+              sent_at: '2019-03-30T16:41:59-04:00',
             },
             {
               id: 348460,
               area_id: 462,
               number: 331,
-              sent_at: '2019-03-29T17:22:36-04:00'
+              sent_at: '2019-03-29T17:22:36-04:00',
             },
             {
               id: 347946,
               area_id: 462,
               number: 330,
-              sent_at: '2019-03-25T17:02:11-04:00'
+              sent_at: '2019-03-25T17:02:11-04:00',
             },
             {
               id: 347837,
               area_id: 462,
               number: 329,
-              sent_at: '2019-03-21T16:44:54-04:00'
+              sent_at: '2019-03-21T16:44:54-04:00',
             },
             {
               id: 347710,
               area_id: 462,
               number: 328,
-              sent_at: '2019-03-20T17:02:26-04:00'
+              sent_at: '2019-03-20T17:02:26-04:00',
             },
             {
               id: 347603,
               area_id: 462,
               number: 327,
-              sent_at: '2019-03-19T17:16:26-04:00'
+              sent_at: '2019-03-19T17:16:26-04:00',
             },
             {
               id: 347323,
               area_id: 462,
               number: 326,
-              sent_at: '2019-03-18T17:45:21-04:00'
-            }
+              sent_at: '2019-03-18T17:45:21-04:00',
+            },
           ],
-          areaId: 462
-        }
+          areaId: 462,
+        },
       }
     )
 
@@ -258,9 +266,9 @@ describe('issues - slice', () => {
         issues: [
           { id: 1, number: 11, sent_at: subDays(endOfToday(), 11) },
           { id: 2, number: 22, sent_at: subDays(endOfToday(), 13) },
-          { id: 3, number: 33, sent_at: subDays(endOfToday(), 16) }
+          { id: 3, number: 33, sent_at: subDays(endOfToday(), 16) },
         ],
-        areaId: 9
+        areaId: 9,
       })
     )
 
@@ -268,9 +276,9 @@ describe('issues - slice', () => {
       {
         main: {
           issues: {
-            ...state
-          }
-        }
+            ...state,
+          },
+        },
       },
       9
     )
@@ -286,16 +294,16 @@ describe('issues - slice', () => {
         3: [
           { id: 1, number: 11, isUnread: false },
           { id: 2, number: 22, isUnread: false },
-          { id: 3, number: 33, isUnread: true }
-        ]
+          { id: 3, number: 33, isUnread: true },
+        ],
       },
-      firstLoadOfIssues: endOfToday()
+      firstLoadOfIssues: endOfToday(),
     }
     const state = issues.reducer(
       initialState,
       issues.actions.setIssues({
         issues: [{ id: 4, number: 9, sent_at: addDays(endOfToday(), 1) }],
-        areaId: 3
+        areaId: 3,
       })
     )
 
@@ -303,15 +311,15 @@ describe('issues - slice', () => {
       {
         main: {
           issues: {
-            ...state
-          }
-        }
+            ...state,
+          },
+        },
       },
       3
     )
-    const newestIssue = data.find(i => i.id === 4)
-    const previouslyUnread = data.find(i => i.id === 3)
-    const alreadyRead = data.filter(i => !i.isUnread)
+    const newestIssue = data.find((i) => i.id === 4)
+    const previouslyUnread = data.find((i) => i.id === 3)
+    const alreadyRead = data.filter((i) => !i.isUnread)
 
     expect(newestIssue.isUnread).toBeTruthy()
     expect(previouslyUnread.isUnread).toBeTruthy()
@@ -322,29 +330,29 @@ describe('issues - slice', () => {
 
     expect(data.length).toEqual(4)
     // newest issue by number is first
-    expect(data.map(issue => issue.id)).toEqual([3, 2, 1, 4])
+    expect(data.map((issue) => issue.id)).toEqual([3, 2, 1, 4])
   })
 
   test('it keeps the latest 30 issues', () => {
     const state = issues.reducer(
       undefined,
       issues.actions.setIssues({
-        issues: range(1, 31).map(id => ({ id, number: id + 32 })),
-        areaId: 5
+        issues: range(1, 31).map((id) => ({ id, number: id + 32 })),
+        areaId: 5,
       })
     )
 
     const data = issues.selectors.getIssuesForArea(
       {
         main: {
-          issues: state
-        }
+          issues: state,
+        },
       },
       5
     )
 
     // cant find the 31st issue
-    expect(data.find(issue => issue.id === 31)).toEqual(undefined)
+    expect(data.find((issue) => issue.id === 31)).toEqual(undefined)
     expect(data.length).toEqual(30)
   })
 })

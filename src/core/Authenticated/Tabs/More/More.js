@@ -15,7 +15,7 @@ import {
   RightIcon,
   FooterLinkWrapper,
   FooterLink,
-  FooterText
+  FooterText,
 } from './styledComponents'
 import calendarIcon from '@assets/images/more-section/calendar-icon.png'
 import donateIcon from '@assets/images/more-section/donate-icon.png'
@@ -85,7 +85,7 @@ export class More extends React.Component {
                   chooseMailApp({
                     title: 'Email FPF',
                     subject: 'FPF mobile app feedback',
-                    toEmail: 'membersupport@frontporchforum.com'
+                    toEmail: 'membersupport@frontporchforum.com',
                   })
                 }}
               />
@@ -127,7 +127,7 @@ export class More extends React.Component {
                   onPress={() => {
                     chooseMailApp({
                       title: 'Email FPF',
-                      toEmail: 'membersupport@frontporchforum.com'
+                      toEmail: 'membersupport@frontporchforum.com',
                     })
                   }}
                 >
@@ -146,5 +146,5 @@ export class More extends React.Component {
 More.propTypes = {
   chooseMailApp: PropTypes.func.isRequired,
   currentAreaId: PropTypes.number.isRequired,
-  navigateWithToken: PropTypes.func.isRequired
+  navigateWithToken: PropTypes.func.isRequired,
 }

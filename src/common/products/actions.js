@@ -6,7 +6,7 @@ import { products as slice } from './slice'
  * Get In App Purchasing products that are defined in the App Store
  * (via react-native-iap).
  */
-export const getProducts = productIds => async (dispatch, getState) => {
+export const getProducts = (productIds) => async (dispatch, getState) => {
   try {
     if (productIds && productIds.length) {
       dispatch(slice.actions.setLoading(true))

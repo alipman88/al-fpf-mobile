@@ -12,7 +12,7 @@ import { ComposeFields } from './components/ComposeFields'
 
 export class Compose extends React.Component {
   state = {
-    modalVisible: false
+    modalVisible: false,
   }
 
   onSubmit = (values, actions) => {
@@ -25,7 +25,7 @@ export class Compose extends React.Component {
           parent_event_id: parentId,
           start_date: values.fromDate,
           end_date: values.toDate,
-          title: values.subject
+          title: values.subject,
         }
       : {}
 
@@ -38,7 +38,7 @@ export class Compose extends React.Component {
       is_shared: values.isShared,
       area_ids: values.forums,
       category_ids: [categoryId],
-      event
+      event,
     }
     this.props.submitPost(
       this.onSuccess,
@@ -50,11 +50,11 @@ export class Compose extends React.Component {
 
   onSuccess = () => {
     this.setState({
-      modalVisible: true
+      modalVisible: true,
     })
   }
 
-  onModalClose = resetFormMethod => {
+  onModalClose = (resetFormMethod) => {
     this.setState({ modalVisible: false })
     resetFormMethod()
     this.props.navigation.navigate('Forum')
@@ -68,16 +68,16 @@ export class Compose extends React.Component {
       loading,
       navigation,
       navigateWithToken,
-      profiles
+      profiles,
     } = this.props
 
     let profileIndex = profiles.findIndex(
-      profile => profile.id === currentProfileId
+      (profile) => profile.id === currentProfileId
     )
 
     const profile = profiles[profileIndex] || profiles[0]
     const category = categories.find(
-      c => c.id === navigation.getParam('categoryId')
+      (c) => c.id === navigation.getParam('categoryId')
     )
     const areaId =
       navigation.getParam('areaId') ||
@@ -100,7 +100,7 @@ export class Compose extends React.Component {
             message: '',
             isShared: true,
             fromDate: null,
-            toDate: null
+            toDate: null,
           }}
           validationSchema={validations}
           onSubmit={this.onSubmit}
@@ -112,7 +112,7 @@ export class Compose extends React.Component {
             setFieldValue,
             setFieldTouched,
             touched,
-            values
+            values,
           }) => (
             <React.Fragment>
               <ComposeFields
@@ -153,5 +153,5 @@ Compose.propTypes = {
   navigateWithToken: PropTypes.func.isRequired,
   profiles: PropTypes.array.isRequired,
   submitPost: PropTypes.func.isRequired,
-  currentProfileId: PropTypes.number
+  currentProfileId: PropTypes.number,
 }

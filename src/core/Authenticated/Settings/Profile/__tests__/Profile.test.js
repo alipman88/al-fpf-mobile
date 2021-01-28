@@ -11,25 +11,25 @@ describe('Profile', () => {
     navigation: {},
     areas: {
       1: {
-        name: 'One'
+        name: 'One',
       },
       2: {
-        name: 'Two'
+        name: 'Two',
       },
       3: {
-        name: 'Three'
-      }
+        name: 'Three',
+      },
     },
     profile: {
       id: 4,
       area_ids: [1, 3],
       profile_plan: {
-        plan_type: 'neighbor'
+        plan_type: 'neighbor',
       },
       home_nf: 1,
-      name: 'foo'
+      name: 'foo',
     },
-    updateUser: jest.fn()
+    updateUser: jest.fn(),
   }
 
   afterEach(() => {
@@ -38,24 +38,14 @@ describe('Profile', () => {
 
   test('areas render as names', () => {
     const wrapper = shallow(<Profile {...defaultProps} />)
-    expect(
-      wrapper
-        .find(FieldText)
-        .at(3)
-        .text()
-    ).toEqual('One')
-    expect(
-      wrapper
-        .find(FieldText)
-        .at(4)
-        .text()
-    ).toEqual('Three')
+    expect(wrapper.find(FieldText).at(3).text()).toEqual('One')
+    expect(wrapper.find(FieldText).at(4).text()).toEqual('Three')
   })
 
   test('External links open the right places', () => {
     const wrapper = shallow(<Profile {...defaultProps} />)
     const nodes = wrapper.find(ExternalLink)
-    nodes.forEach(node => node.simulate('press'))
+    nodes.forEach((node) => node.simulate('press'))
 
     expect(defaultProps.navigateWithToken).toHaveBeenNthCalledWith(
       1,

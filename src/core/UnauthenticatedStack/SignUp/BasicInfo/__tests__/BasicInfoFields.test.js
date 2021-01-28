@@ -16,14 +16,14 @@ describe('BasicInfoFields', () => {
       lastName: '',
       email: '',
       password: '',
-      passwordConfirmation: ''
+      passwordConfirmation: '',
     },
     newUser: {},
     stepCount: 4,
     navigation: {
-      navigate: jest.fn()
+      navigate: jest.fn(),
     },
-    setNewUserByKey: jest.fn()
+    setNewUserByKey: jest.fn(),
   }
 
   afterEach(() => {
@@ -36,14 +36,8 @@ describe('BasicInfoFields', () => {
   test('changing an input setsValues, calls setFieldTouched', () => {
     const wrapper = shallow(<BasicInfoFields {...defaultProps} />)
 
-    wrapper
-      .find(TextInput)
-      .first()
-      .simulate('changeText', 'Bob')
-    wrapper
-      .find(TextInput)
-      .first()
-      .simulate('blur')
+    wrapper.find(TextInput).first().simulate('changeText', 'Bob')
+    wrapper.find(TextInput).first().simulate('blur')
 
     expect(defaultProps.setFieldValue).toHaveBeenCalledWith('firstName', 'Bob')
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('firstName')
@@ -55,7 +49,7 @@ describe('BasicInfoFields', () => {
       lastName: 'Ross',
       email: 'happy@little.tree',
       password: ' TreesCoverUpAMultitudeOfSins.',
-      passwordConfirmation: ' TreesCoverUpAMultitudeOfSins.'
+      passwordConfirmation: ' TreesCoverUpAMultitudeOfSins.',
     }
 
     const wrapper = shallow(
@@ -65,11 +59,7 @@ describe('BasicInfoFields', () => {
         touched={{ firstName: true }}
       />
     )
-    wrapper
-      .find(FullScreenWizard)
-      .first()
-      .props()
-      .onNextPress()
+    wrapper.find(FullScreenWizard).first().props().onNextPress()
 
     expect(defaultProps.setNewUserByKey).toHaveBeenCalledWith(userValues)
     expect(defaultProps.navigation.navigate).toHaveBeenCalled()
@@ -77,33 +67,27 @@ describe('BasicInfoFields', () => {
 
   test('Continue button is disabled unless fields are full', () => {
     const wrapper = shallow(<BasicInfoFields {...defaultProps} />)
-    expect(
-      wrapper
-        .find(FullScreenWizard)
-        .first()
-        .props().nextDisabled
-    ).toEqual(true)
+    expect(wrapper.find(FullScreenWizard).first().props().nextDisabled).toEqual(
+      true
+    )
   })
 
   test('Continue button is disabled if there are errors', () => {
     const errors = {
-      firstName: 'is a terrible name'
+      firstName: 'is a terrible name',
     }
 
     const wrapper = shallow(
       <BasicInfoFields {...defaultProps} errors={errors} />
     )
 
-    expect(
-      wrapper
-        .find(FullScreenWizard)
-        .first()
-        .props().nextDisabled
-    ).toEqual(true)
+    expect(wrapper.find(FullScreenWizard).first().props().nextDisabled).toEqual(
+      true
+    )
   })
 
   test('it sets 4 or 5 steps depending on the profile', () => {
-    const wrapper = type => {
+    const wrapper = (type) => {
       return shallow(<BasicInfoFields {...defaultProps} profileType={type} />)
         .find(FullScreenWizard)
         .first()

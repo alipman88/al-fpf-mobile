@@ -8,9 +8,9 @@ describe('appSettings - actions', () => {
   const getState = () => ({
     secured: {
       currentUser: {
-        accessToken: 'abc123'
-      }
-    }
+        accessToken: 'abc123',
+      },
+    },
   })
 
   afterEach(() => {
@@ -22,8 +22,8 @@ describe('appSettings - actions', () => {
       const getSpy = jest.spyOn(api, 'get').mockImplementation(() => ({
         data: {
           posting_truncate_length: 500,
-          categories: [{ id: 1 }]
-        }
+          categories: [{ id: 1 }],
+        },
       }))
       await getAppSettings()(dispatch, getState)
 
@@ -37,7 +37,7 @@ describe('appSettings - actions', () => {
       expect(dispatch).toHaveBeenCalledWith(
         appSettings.actions.setAppSettings({
           posting_truncate_length: 500,
-          categories: [{ id: 1 }]
+          categories: [{ id: 1 }],
         })
       )
       getSpy.mockRestore()

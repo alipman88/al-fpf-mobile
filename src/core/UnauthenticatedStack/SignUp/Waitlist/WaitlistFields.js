@@ -17,7 +17,7 @@ import {
   TopContainer,
   SubTitle,
   DividerContainer,
-  TrioBird
+  TrioBird,
 } from './styledComponents'
 
 import lineDivider from '@assets/images/createAccount/line-divider/accountsetup-line-divider.png'
@@ -33,7 +33,7 @@ export class WaitlistFields extends React.Component {
       setFieldValue,
       touched,
       values,
-      newUser
+      newUser,
     } = this.props
 
     const CustomHeader = () => (
@@ -56,7 +56,7 @@ export class WaitlistFields extends React.Component {
         nextWidth={141}
         nextDisabled={!isEmpty(errors)}
         contentContainerStyle={{
-          backgroundColor: '#f2f2f2'
+          backgroundColor: '#f2f2f2',
         }}
       >
         <Spinner visible={isSubmitting} />
@@ -67,7 +67,7 @@ export class WaitlistFields extends React.Component {
               error={errors.streetNumber}
               keyboardType='number-pad'
               label='House/building number'
-              onChangeText={text => {
+              onChangeText={(text) => {
                 setFieldTouched('streetNumber')
                 setFieldValue('streetNumber', text)
               }}
@@ -82,7 +82,7 @@ export class WaitlistFields extends React.Component {
             <TextInput
               error={errors.streetName}
               label='Street name (no house number)'
-              onChangeText={text => {
+              onChangeText={(text) => {
                 setFieldTouched('streetName')
                 setFieldValue('streetName', text)
               }}
@@ -96,7 +96,7 @@ export class WaitlistFields extends React.Component {
             <TextInput
               error={errors.secondaryAddress}
               label='Apt/suite (if applicable)'
-              onChangeText={text => {
+              onChangeText={(text) => {
                 setFieldTouched('secondaryAddress')
                 setFieldValue('secondaryAddress', text)
               }}
@@ -109,7 +109,7 @@ export class WaitlistFields extends React.Component {
             <TextInput
               error={errors.city}
               label='City'
-              onChangeText={text => {
+              onChangeText={(text) => {
                 setFieldTouched('city')
                 setFieldValue('city', text)
               }}
@@ -128,15 +128,15 @@ export class WaitlistFields extends React.Component {
                 {
                   name: 'States',
                   id: 0,
-                  children: states
+                  children: states,
                 },
                 {
                   name: 'Provinces',
                   id: 1,
-                  children: provinces
-                }
+                  children: provinces,
+                },
               ]}
-              onSelectedItemsChange={state => {
+              onSelectedItemsChange={(state) => {
                 setFieldTouched('state')
                 setFieldValue('state', state[0])
               }}
@@ -156,7 +156,7 @@ export class WaitlistFields extends React.Component {
               error={errors.firstName}
               label='First name'
               touched={!!touched.firstName}
-              onChangeText={value => {
+              onChangeText={(value) => {
                 setFieldValue('firstName', value)
                 setFieldTouched('firstName')
               }}
@@ -169,7 +169,7 @@ export class WaitlistFields extends React.Component {
               error={errors.lastName}
               label='Last name'
               touched={!!touched.lastName}
-              onChangeText={value => {
+              onChangeText={(value) => {
                 setFieldValue('lastName', value)
                 setFieldTouched('lastName')
               }}
@@ -182,7 +182,7 @@ export class WaitlistFields extends React.Component {
               error={errors.email}
               label='Email'
               touched={!!touched.email}
-              onChangeText={value => {
+              onChangeText={(value) => {
                 setFieldValue('email', value)
                 setFieldTouched('email')
               }}
@@ -197,7 +197,7 @@ export class WaitlistFields extends React.Component {
                   error={errors.organizationName}
                   label='Organization name'
                   touched={!!touched.organizationName}
-                  onChangeText={value => {
+                  onChangeText={(value) => {
                     setFieldValue('organizationName', value)
                     setFieldTouched('organizationName')
                   }}
@@ -209,7 +209,7 @@ export class WaitlistFields extends React.Component {
                   error={errors.webAddress}
                   label='Web address'
                   touched={!!touched.webAddress}
-                  onChangeText={value => {
+                  onChangeText={(value) => {
                     setFieldValue('webAddress', value)
                     setFieldTouched('webAddress')
                   }}
@@ -227,7 +227,7 @@ export class WaitlistFields extends React.Component {
               error={errors.comment}
               label='If you want to help bring Front Porch Forum to your town, please tell us how you propose to pitch in (plus any other comments you would like to share):'
               touched={!!touched.comment}
-              onChangeText={value => {
+              onChangeText={(value) => {
                 setFieldValue('comment', value)
                 setFieldTouched('comment')
               }}
@@ -241,7 +241,7 @@ export class WaitlistFields extends React.Component {
               error={errors.reference}
               label='How did you learn about Front Porch Forum?'
               touched={!!touched.reference}
-              onChangeText={value => {
+              onChangeText={(value) => {
                 setFieldValue('reference', value)
                 setFieldTouched('reference')
               }}
@@ -265,5 +265,5 @@ WaitlistFields.propTypes = {
   setFieldValue: PropTypes.func.isRequired,
   touched: PropTypes.object.isRequired,
   values: PropTypes.object.isRequired,
-  newUser: PropTypes.object.isRequired
+  newUser: PropTypes.object.isRequired,
 }

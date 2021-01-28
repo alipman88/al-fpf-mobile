@@ -7,7 +7,7 @@ import Toast from 'react-native-easy-toast'
 
 import {
   hasMessagingPermission,
-  requestMessagingPermission
+  requestMessagingPermission,
 } from '@common/notifications'
 import { ScreenContainer } from '@components/ScreenContainer'
 import { ForumContainer } from './styledComponents'
@@ -28,7 +28,7 @@ export class Forum extends React.Component {
   async componentDidMount() {
     // Set scrollToTop function in navigation params to trigger scroll in tab navigator
     this.props.navigation.setParams({
-      scrollToTop: this.scrollToTop
+      scrollToTop: this.scrollToTop,
     })
 
     this.setTitleFromArea()
@@ -69,12 +69,12 @@ export class Forum extends React.Component {
     }
 
     // Listen for firebase notification token change, and send to server
-    messaging().onTokenRefresh(async fcmToken => {
+    messaging().onTokenRefresh(async (fcmToken) => {
       this.props.sendNewFCMToken(fcmToken)
     })
 
     // Listen for app background notification, and handle the notification
-    messaging().onNotificationOpenedApp(remoteMessage => {
+    messaging().onNotificationOpenedApp((remoteMessage) => {
       this.handleNotificationOpen(remoteMessage)
     })
   }
@@ -122,13 +122,13 @@ export class Forum extends React.Component {
 
       if (!!issueNum && issues.length) {
         navigation.setParams({ issueNum: undefined })
-        const current = issues.find(i => i.number === issueNum)
+        const current = issues.find((i) => i.number === issueNum)
         if (current && current.id !== this.props.currentIssueId) {
           this.props.setCurrentIssueId(current.id)
           this.props.toggleIssueUnread({
             id: current.id,
             isUnread: false,
-            areaId: currentAreaId
+            areaId: currentAreaId,
           })
         } else if (!current) {
           navigateWithToken(`/areas/${currentAreaId}/issues/${issueNum}`)
@@ -137,14 +137,14 @@ export class Forum extends React.Component {
       // if this list of issues doesnt have the current id, set a new one
       if (
         issues.length > 0 &&
-        !issues.find(issue => issue.id === this.props.currentIssueId)
+        !issues.find((issue) => issue.id === this.props.currentIssueId)
       ) {
         this.scrollPostsToTop()
         this.props.setCurrentIssueId(issues[0].id)
         this.props.toggleIssueUnread({
           id: issues[0].id,
           isUnread: false,
-          areaId: currentAreaId
+          areaId: currentAreaId,
         })
       }
     }
@@ -159,7 +159,7 @@ export class Forum extends React.Component {
       this.props.toggleIssueUnread({
         id: this.props.currentIssueId,
         isUnread: false,
-        areaId: currentAreaId
+        areaId: currentAreaId,
       })
     }
   }
@@ -183,7 +183,7 @@ export class Forum extends React.Component {
     // on the tab navigator
     if (this.forumViewRef !== this.props.navigation.getParam('scrollRef')) {
       this.props.navigation.setParams({
-        scrollRef: this.forumViewRef
+        scrollRef: this.forumViewRef,
       })
     }
   }
@@ -203,7 +203,7 @@ export class Forum extends React.Component {
 
   setTitleFromArea() {
     const currentArea = this.props.areas.find(
-      a => a.id === this.props.currentAreaId
+      (a) => a.id === this.props.currentAreaId
     )
 
     let name = ''
@@ -214,7 +214,7 @@ export class Forum extends React.Component {
     }
 
     this.props.navigation.setParams({
-      navTitle: name
+      navTitle: name,
     })
   }
 
@@ -224,7 +224,7 @@ export class Forum extends React.Component {
       issues,
       loading,
       navigation,
-      navigateWithToken
+      navigateWithToken,
     } = this.props
 
     const posts = (this.props.posts[currentIssueId] || []).concat(
@@ -272,7 +272,7 @@ export class Forum extends React.Component {
       }
     }
 
-    const currentIssue = issues.find(issue => issue.id === currentIssueId)
+    const currentIssue = issues.find((issue) => issue.id === currentIssueId)
 
     return (
       <ScreenContainer withPadding={false} grey>
@@ -329,5 +329,5 @@ Forum.propTypes = {
   setCurrentIssueId: PropTypes.func.isRequired,
   setupForumData: PropTypes.func.isRequired,
   sharedPosts: PropTypes.object.isRequired,
-  toggleIssueUnread: PropTypes.func.isRequired
+  toggleIssueUnread: PropTypes.func.isRequired,
 }

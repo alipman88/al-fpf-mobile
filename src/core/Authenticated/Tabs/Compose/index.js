@@ -6,18 +6,15 @@ import { submitPost } from './actions'
 import { appSettings } from '@common/appSettings'
 import { navigateWithToken } from '@common/actions/navigateWithToken'
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   areas: areas.selectors.getAreas(state),
   profiles: profile.selectors.getAvailableProfiles(state),
   loading: profile.selectors.getLoading(state),
   currentProfileId: profile.selectors.getCurrentProfileId(state),
-  categories: appSettings.selectors.getCategories(state)
+  categories: appSettings.selectors.getCategories(state),
 })
 
-export const Compose = connect(
-  mapStateToProps,
-  {
-    navigateWithToken,
-    submitPost
-  }
-)(ComposeScreen)
+export const Compose = connect(mapStateToProps, {
+  navigateWithToken,
+  submitPost,
+})(ComposeScreen)

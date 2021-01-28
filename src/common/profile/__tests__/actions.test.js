@@ -20,11 +20,11 @@ describe('profile - actions', () => {
               id: 1,
               profiles: [
                 {
-                  id: 33
-                }
-              ]
-            }
-          }
+                  id: 33,
+                },
+              ],
+            },
+          },
         }))
       await getProfiles()(dispatch, () => ({}))
 
@@ -36,9 +36,9 @@ describe('profile - actions', () => {
           id: 1,
           profiles: [
             {
-              id: 33
-            }
-          ]
+              id: 33,
+            },
+          ],
         })
       )
       getSpy.mockRestore()
@@ -73,18 +73,18 @@ describe('profile - actions', () => {
               id: 1,
               profiles: [
                 {
-                  id: 33
-                }
+                  id: 33,
+                },
               ],
               receive_issue_emails: false,
-              receive_issue_push_notifications: true
-            }
-          }
+              receive_issue_push_notifications: true,
+            },
+          },
         }))
 
       const values = {
         receive_issue_emails: false,
-        receive_issue_push_notifications: true
+        receive_issue_push_notifications: true,
       }
       await updateUser(values)(dispatch, () => ({}))
 
@@ -94,13 +94,13 @@ describe('profile - actions', () => {
       expect(dispatch).toHaveBeenCalledWith(
         profile.actions.setValueInUserData({
           key: 'receive_issue_emails',
-          value: false
+          value: false,
         })
       )
       expect(dispatch).toHaveBeenCalledWith(
         profile.actions.setValueInUserData({
           key: 'receive_issue_push_notifications',
-          value: true
+          value: true,
         })
       )
       expect(dispatch).toHaveBeenCalledWith(
@@ -108,11 +108,11 @@ describe('profile - actions', () => {
           id: 1,
           profiles: [
             {
-              id: 33
-            }
+              id: 33,
+            },
           ],
           receive_issue_emails: false,
-          receive_issue_push_notifications: true
+          receive_issue_push_notifications: true,
         })
       )
       putSpy.mockRestore()
@@ -126,7 +126,7 @@ describe('profile - actions', () => {
       const dispatch = jest.fn()
 
       const values = {
-        receive_issue_push_notifications: true
+        receive_issue_push_notifications: true,
       }
       await updateUser(values)(dispatch, () => ({}))
 

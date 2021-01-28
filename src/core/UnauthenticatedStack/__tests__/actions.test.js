@@ -12,13 +12,13 @@ describe('EmailVerification - actions', () => {
       await resendEmail('foo@bar.com')(dispatch, () => ({}))
 
       expect(post).toHaveBeenCalledWith('/resend_email_verification', {
-        email: 'foo@bar.com'
+        email: 'foo@bar.com',
       })
       expect(dispatch).toHaveBeenCalledWith(
         appMessage.actions.setAppMessage({
           type: 'success',
           message: 'Verification resent',
-          autoHide: true
+          autoHide: true,
         })
       )
 
@@ -34,7 +34,7 @@ describe('EmailVerification - actions', () => {
       await resendEmail('foo@bar.com')(dispatch, () => ({}))
 
       expect(post).toHaveBeenCalledWith('/resend_email_verification', {
-        email: 'foo@bar.com'
+        email: 'foo@bar.com',
       })
 
       expect(dispatch).toHaveBeenCalledWith(

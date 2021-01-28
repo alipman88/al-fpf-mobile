@@ -4,7 +4,7 @@ import { Keyboard } from 'react-native'
 
 export class KeyboardOpen extends React.Component {
   state = {
-    keyboardOpen: false
+    keyboardOpen: false,
   }
 
   componentDidMount() {
@@ -25,13 +25,13 @@ export class KeyboardOpen extends React.Component {
 
   keyboardDidShow() {
     this.setState({
-      keyboardOpen: true
+      keyboardOpen: true,
     })
   }
 
   keyboardDidHide() {
     this.setState({
-      keyboardOpen: false
+      keyboardOpen: false,
     })
   }
 
@@ -42,5 +42,5 @@ export class KeyboardOpen extends React.Component {
 }
 
 KeyboardOpen.propTypes = {
-  render: PropTypes.func.isRequired
+  render: PropTypes.func.isRequired,
 }

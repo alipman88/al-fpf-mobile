@@ -8,13 +8,13 @@ import passwordEyeInactive from '@assets/images/createAccount/password-eyes/inAc
 
 export class PasswordInput extends React.Component {
   state = {
-    showPassword: false
+    showPassword: false,
   }
 
   toggleShowPassword() {
-    this.setState(prevState => {
+    this.setState((prevState) => {
       return {
-        showPassword: !prevState.showPassword
+        showPassword: !prevState.showPassword,
       }
     })
   }
@@ -44,5 +44,5 @@ export class PasswordInput extends React.Component {
 }
 
 PasswordInput.propTypes = {
-  label: PropTypes.string
+  label: PropTypes.string,
 }

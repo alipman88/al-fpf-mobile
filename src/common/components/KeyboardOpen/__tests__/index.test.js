@@ -6,7 +6,7 @@ import { KeyboardOpen } from '../index'
 
 describe('KeyboardOpen', () => {
   const defaultProps = {
-    render: () => {}
+    render: () => {},
   }
 
   test('subscribes to keyboard events onmount', () => {

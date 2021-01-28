@@ -11,5 +11,5 @@ export const FieldLabel = styled(Text)`
 `
 
 FieldLabel.defaultProps = {
-  bottomMargin: 4
+  bottomMargin: 4,
 }

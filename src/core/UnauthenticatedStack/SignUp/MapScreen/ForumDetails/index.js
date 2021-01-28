@@ -12,14 +12,14 @@ import {
   JoinText,
   Label,
   Row,
-  Value
+  Value,
 } from './styledComponents'
 
 export const ForumDetails = ({
   area,
   onPress,
   hasForumCheckbox,
-  checkboxValue
+  checkboxValue,
 }) => (
   <Container hasForumCheckbox={hasForumCheckbox}>
     <Contents>
@@ -54,5 +54,5 @@ ForumDetails.propTypes = {
   area: PropTypes.object.isRequired,
   checkboxValue: PropTypes.bool,
   hasForumCheckbox: PropTypes.bool,
-  onPress: PropTypes.func.isRequired
+  onPress: PropTypes.func.isRequired,
 }

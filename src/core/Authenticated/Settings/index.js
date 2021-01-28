@@ -14,7 +14,7 @@ export const Settings = createStackNavigator(
     Account,
     Profile,
     SettingsIndex,
-    Subscription
+    Subscription,
   },
   {
     initialRouteName: 'SettingsIndex',
@@ -33,8 +33,8 @@ export const Settings = createStackNavigator(
         fontSize: 18,
         color: '#355768',
         textAlign: 'center',
-        flex: 1
-      }
-    })
+        flex: 1,
+      },
+    }),
   }
 )

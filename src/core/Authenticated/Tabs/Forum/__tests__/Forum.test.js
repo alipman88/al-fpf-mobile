@@ -13,7 +13,7 @@ describe('Forum', () => {
     setupForumData: jest.fn(),
     navigation: {
       setParams: jest.fn(),
-      getParam: jest.fn()
+      getParam: jest.fn(),
     },
     navigateWithToken: jest.fn(),
     fcmToken: '',
@@ -21,7 +21,10 @@ describe('Forum', () => {
     currentIssueId: 12,
     currentAreaId: 1,
     issues: [{ id: 11 }, { id: 12 }, { id: 13 }],
-    areas: [{ id: 1, name: 'Sparta' }, { id: 2, name: 'Athena' }],
+    areas: [
+      { id: 1, name: 'Sparta' },
+      { id: 2, name: 'Athena' },
+    ],
     getIssues: jest.fn(),
     getContents: jest.fn(),
     getAds: jest.fn(),
@@ -38,7 +41,7 @@ describe('Forum', () => {
           categories: ['test'],
           user_first_name: 'test',
           user_last_name: 'test',
-          user_profile_name: 'Mayor, Test Ontario'
+          user_profile_name: 'Mayor, Test Ontario',
         },
         {
           id: 2,
@@ -47,7 +50,7 @@ describe('Forum', () => {
           categories: ['test'],
           user_first_name: 'test',
           user_last_name: 'test',
-          user_profile_name: 'Mayor, Test Ontario'
+          user_profile_name: 'Mayor, Test Ontario',
         },
         {
           id: 3,
@@ -56,7 +59,7 @@ describe('Forum', () => {
           categories: ['test'],
           user_first_name: 'test',
           user_last_name: 'test',
-          user_profile_name: 'Mayor, Test Ontario'
+          user_profile_name: 'Mayor, Test Ontario',
         },
         {
           id: 4,
@@ -65,27 +68,27 @@ describe('Forum', () => {
           categories: ['test'],
           user_first_name: 'test',
           user_last_name: 'test',
-          user_profile_name: 'Mayor, Test Ontario'
-        }
-      ]
+          user_profile_name: 'Mayor, Test Ontario',
+        },
+      ],
     },
     neighboringAreas: {},
     ads: {
       12: [
         {
-          id: 1
+          id: 1,
         },
         {
-          id: 2
+          id: 2,
         },
         {
-          id: 3
-        }
-      ]
+          id: 3,
+        },
+      ],
     },
     sharedPosts: {
-      12: []
-    }
+      12: [],
+    },
   }
 
   afterEach(() => {
@@ -160,12 +163,12 @@ describe('Forum', () => {
   test('it sets the title as the current area name', () => {
     const wrapper = shallow(<Forum {...defaultProps} />)
     expect(defaultProps.navigation.setParams).toHaveBeenCalledWith({
-      navTitle: 'Sparta'
+      navTitle: 'Sparta',
     })
 
     wrapper.setProps({ currentAreaId: 2 })
     expect(defaultProps.navigation.setParams).toHaveBeenCalledWith({
-      navTitle: 'Athena'
+      navTitle: 'Athena',
     })
   })
 
@@ -204,7 +207,7 @@ describe('Forum', () => {
     const sharedPosts = {
       12: defaultProps.posts[12]
         .slice(1, 3)
-        .map(post => ({ ...post, is_shared_post: true }))
+        .map((post) => ({ ...post, is_shared_post: true })),
     }
 
     const wrapper = shallow(
@@ -233,8 +236,8 @@ describe('Forum', () => {
         areas: [
           { id: 1, name: 'Sparta' },
           { id: 2, name: 'Athena' },
-          { id: 3, name: '' }
-        ]
+          { id: 3, name: '' },
+        ],
       })
 
       expect(defaultProps.getIssues).toHaveBeenCalledWith(
@@ -286,16 +289,16 @@ describe('Forum', () => {
           ...defaultProps.navigation,
           getParam: jest.fn(() => 30),
           areaId: '30',
-          issueId: '2121'
-        }
+          issueId: '2121',
+        },
       })
 
       expect(defaultProps.setCurrentAreaId).toHaveBeenCalledWith(30)
       expect(defaultProps.navigation.setParams).toHaveBeenCalledWith({
-        areaId: undefined
+        areaId: undefined,
       })
       expect(defaultProps.navigation.setParams).toHaveBeenCalledWith({
-        issueNum: undefined
+        issueNum: undefined,
       })
     })
 
@@ -305,8 +308,8 @@ describe('Forum', () => {
       const scrollTo = jest.fn()
       wrapper.instance().refs = {
         forumViewRef: {
-          scrollTo: scrollTo
-        }
+          scrollTo: scrollTo,
+        },
       }
       wrapper.setProps({
         navigation: {
@@ -314,8 +317,8 @@ describe('Forum', () => {
           getParam: jest.fn(() => 30),
           setParams: jest.fn(),
           areaId: '30',
-          issueId: '2121'
-        }
+          issueId: '2121',
+        },
       })
 
       wrapper.setProps({
@@ -324,9 +327,9 @@ describe('Forum', () => {
           getParam: jest.fn(() => 2121),
           setParams: jest.fn(),
           areaId: '30',
-          issueId: '2121'
+          issueId: '2121',
         },
-        issues: [{ id: 1000, number: 2121 }]
+        issues: [{ id: 1000, number: 2121 }],
       })
 
       expect(defaultProps.setCurrentIssueId).toHaveBeenCalledWith(1000)
@@ -341,8 +344,8 @@ describe('Forum', () => {
           ...defaultProps.navigation,
           getParam: jest.fn(() => 30),
           areaId: '30',
-          issueId: '2121'
-        }
+          issueId: '2121',
+        },
       })
 
       wrapper.setProps({
@@ -351,9 +354,9 @@ describe('Forum', () => {
           getParam: jest.fn(() => 2121),
           setParams: jest.fn(),
           areaId: '30',
-          issueId: '2121'
+          issueId: '2121',
         },
-        issues: [{ id: 1000, number: 2121 }]
+        issues: [{ id: 1000, number: 2121 }],
       })
 
       // This is called on mount. Assert that it was only called on mount (once)
@@ -368,8 +371,8 @@ describe('Forum', () => {
         data: {
           area_id: '5',
           issue_id: '6',
-          issue_number: '340'
-        }
+          issue_number: '340',
+        },
       })
 
       expect(defaultProps.fetchSpecificIssue).toHaveBeenCalledWith(

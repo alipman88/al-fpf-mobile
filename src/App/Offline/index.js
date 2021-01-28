@@ -11,7 +11,7 @@ import {
   Content,
   Image,
   FullscreenContainer,
-  OfflineHeader
+  OfflineHeader,
 } from './styledComponents'
 
 export class Offline extends React.Component {
@@ -38,5 +38,5 @@ export class Offline extends React.Component {
 }
 
 Offline.propTypes = {
-  updateConnectionStatus: PropTypes.func.isRequired
+  updateConnectionStatus: PropTypes.func.isRequired,
 }

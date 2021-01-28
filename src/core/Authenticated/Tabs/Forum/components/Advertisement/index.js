@@ -29,7 +29,7 @@ export const Advertisement = ({ ad, navigateWithToken }) => (
 
 Advertisement.propTypes = {
   ad: PropTypes.object.isRequired,
-  navigateWithToken: PropTypes.func.isRequired
+  navigateWithToken: PropTypes.func.isRequired,
 }
 
 Advertisement.displayName = 'Advertisement'

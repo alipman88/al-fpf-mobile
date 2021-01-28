@@ -30,7 +30,7 @@ export const Button = ({
   iconLeft,
   iconNameLeft,
   hasBorder,
-  tall
+  tall,
 }) => {
   return (
     <TouchableNativeFeedback disabled={disabled} onPress={onPress}>
@@ -67,5 +67,5 @@ Button.propTypes = {
   hasBorder: PropTypes.bool,
   iconNameRight: PropTypes.string,
   iconNameLeft: PropTypes.string,
-  onPress: PropTypes.func.isRequired
+  onPress: PropTypes.func.isRequired,
 }

@@ -4,18 +4,15 @@ import { NeighboringContent as NeighboringContentComponent } from './Neighboring
 import { posts } from '@common/posts'
 import { fetchSpecificIssue, issues } from '@common/issues'
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const currentIssueId = issues.selectors.getCurrentIssueId(state)
   return {
     newsFromNeighboringNfs: posts.selectors.getNewsFromNeighboringNfsByIssue(
       state
-    )[currentIssueId]
+    )[currentIssueId],
   }
 }
 
-export const NeighboringContent = connect(
-  mapStateToProps,
-  {
-    fetchSpecificIssue
-  }
-)(NeighboringContentComponent)
+export const NeighboringContent = connect(mapStateToProps, {
+  fetchSpecificIssue,
+})(NeighboringContentComponent)

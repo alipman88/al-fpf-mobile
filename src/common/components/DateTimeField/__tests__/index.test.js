@@ -14,7 +14,7 @@ describe('DateTimeField', () => {
     onPress: jest.fn(),
     timeLabel: 'Time',
     touched: false,
-    value: new Date()
+    value: new Date(),
   }
 
   afterEach(() => {
@@ -43,7 +43,7 @@ describe('DateTimeField', () => {
 
     wrapper.instance().updateFormDateValue({
       date: new Date(2019, 2, 10, 0, 0, 0),
-      time: new Date(2018, 5, 15, 10, 10, 0)
+      time: new Date(2018, 5, 15, 10, 10, 0),
     })
 
     const arg = defaultProps.onChangeValue.mock.calls[0][0]
@@ -58,7 +58,7 @@ describe('DateTimeField', () => {
   test('componentDidUpdate should set dates in state from value prop when date changes', () => {
     const wrapper = shallow(<DateTimeField {...defaultProps} />)
     wrapper.setProps({
-      value: new Date(2018, 11, 15, 10, 10, 0)
+      value: new Date(2018, 11, 15, 10, 10, 0),
     })
 
     const date = wrapper.state().date

@@ -8,54 +8,54 @@ describe('Compose', () => {
     areas: [
       {
         id: 1,
-        name: 'Center'
+        name: 'Center',
       },
       {
         id: 2,
-        name: 'River'
-      }
+        name: 'River',
+      },
     ],
     categories: [
       {
         id: 3,
         name: 'Lost and Found',
-        faq: 'About L&F'
+        faq: 'About L&F',
       },
       {
         id: 4,
         name: 'Announcements',
-        faq: 'Announcements to the community'
+        faq: 'Announcements to the community',
       },
       {
         id: 5,
         name: 'Event',
-        is_event: true
+        is_event: true,
       },
       {
         id: 6,
         name: 'Make Recommendation',
-        faq: 'Where to find the good dumplings'
-      }
+        faq: 'Where to find the good dumplings',
+      },
     ],
     currentAreaId: 1,
     loading: false,
     navigation: {
       getParam: jest.fn(),
-      navigate: jest.fn()
+      navigate: jest.fn(),
     },
     navigateWithToken: jest.fn(),
     profiles: [
       {
         id: 1,
-        area_ids: [1]
+        area_ids: [1],
       },
       {
         id: 2,
-        area_ids: [1, 2]
-      }
+        area_ids: [1, 2],
+      },
     ],
     submitPost: jest.fn(),
-    currentProfileId: 1
+    currentProfileId: 1,
   }
 
   afterEach(() => {
@@ -73,7 +73,7 @@ describe('Compose', () => {
       message: '',
       isShared: true,
       fromDate: null,
-      toDate: null
+      toDate: null,
     })
   })
 
@@ -81,13 +81,13 @@ describe('Compose', () => {
     const navParams = {
       referencedProfileId: 123,
       categoryId: 6,
-      title: 'Recommending Pawn B Productions'
+      title: 'Recommending Pawn B Productions',
     }
     const navigationProps = {
       ...defaultProps,
       navigation: {
-        getParam: jest.fn(param => navParams[param])
-      }
+        getParam: jest.fn((param) => navParams[param]),
+      },
     }
     const wrapper = shallow(<Compose {...navigationProps} />)
     expect(wrapper.find(Formik).props().initialValues).toEqual({
@@ -97,13 +97,13 @@ describe('Compose', () => {
       category: {
         id: 6,
         name: 'Make Recommendation',
-        faq: 'Where to find the good dumplings'
+        faq: 'Where to find the good dumplings',
       },
       subject: 'Recommending Pawn B Productions',
       message: '',
       isShared: true,
       fromDate: null,
-      toDate: null
+      toDate: null,
     })
   })
 
@@ -121,8 +121,8 @@ describe('Compose', () => {
           category: {
             id: 3,
             name: 'Lost and Found',
-            faq: 'About L&F'
-          }
+            faq: 'About L&F',
+          },
         },
         { setSubmitting }
       )
@@ -137,7 +137,7 @@ describe('Compose', () => {
           is_shared: true,
           area_ids: [1, 2, 3],
           category_ids: [3],
-          event: {}
+          event: {},
         },
         setSubmitting,
         defaultProps.navigation
@@ -160,10 +160,10 @@ describe('Compose', () => {
           category: {
             id: 5,
             name: 'Event',
-            is_event: true
+            is_event: true,
           },
           fromDate,
-          toDate
+          toDate,
         },
         { setSubmitting }
       )
@@ -182,8 +182,8 @@ describe('Compose', () => {
             parent_event_id: null,
             start_date: fromDate,
             end_date: toDate,
-            title: 'Hello'
-          }
+            title: 'Hello',
+          },
         },
         setSubmitting,
         defaultProps.navigation
@@ -194,14 +194,14 @@ describe('Compose', () => {
       const props = {
         ...defaultProps,
         navigation: {
-          getParam: jest.fn(param => (param === 'subject' ? 'Test' : 200)),
+          getParam: jest.fn((param) => (param === 'subject' ? 'Test' : 200)),
           state: {
             params: {
               subject: 'Test',
-              parentPostId: 200
-            }
-          }
-        }
+              parentPostId: 200,
+            },
+          },
+        },
       }
 
       const setSubmitting = jest.fn()
@@ -217,8 +217,8 @@ describe('Compose', () => {
           category: {
             id: 3,
             name: 'Lost and Found',
-            faq: 'About L&F'
-          }
+            faq: 'About L&F',
+          },
         },
         { setSubmitting }
       )
@@ -232,7 +232,7 @@ describe('Compose', () => {
           is_shared: true,
           area_ids: [1, 2, 3],
           category_ids: [3],
-          event: {}
+          event: {},
         },
         setSubmitting,
         props.navigation
@@ -243,14 +243,14 @@ describe('Compose', () => {
       const props = {
         ...defaultProps,
         navigation: {
-          getParam: jest.fn(param => (param === 'subject' ? 'Test' : 200)),
+          getParam: jest.fn((param) => (param === 'subject' ? 'Test' : 200)),
           state: {
             params: {
               subject: 'Test',
-              parentPostId: 200
-            }
-          }
-        }
+              parentPostId: 200,
+            },
+          },
+        },
       }
 
       const setSubmitting = jest.fn()
@@ -265,8 +265,8 @@ describe('Compose', () => {
           forums: [1, 2, 3],
           category: {
             id: -1,
-            name: 'None Apply'
-          }
+            name: 'None Apply',
+          },
         },
         { setSubmitting }
       )
@@ -280,7 +280,7 @@ describe('Compose', () => {
           is_shared: true,
           area_ids: [1, 2, 3],
           category_ids: [''],
-          event: {}
+          event: {},
         },
         setSubmitting,
         props.navigation

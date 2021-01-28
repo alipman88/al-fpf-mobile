@@ -1,14 +1,14 @@
 export const fpfStates = [
   {
     id: 'MA',
-    name: 'Massachusetts'
+    name: 'Massachusetts',
   },
   {
     id: 'NY',
-    name: 'New York'
+    name: 'New York',
   },
   {
     id: 'VT',
-    name: 'Vermont'
-  }
+    name: 'Vermont',
+  },
 ]

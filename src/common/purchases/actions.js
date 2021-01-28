@@ -28,7 +28,7 @@ export const requestSubscription = (productId, profileId) => async (
   } catch (e) {
     rollbar.info('requestSubscription failed', e, {
       productId,
-      profileId
+      profileId,
     })
 
     const message =
@@ -47,7 +47,7 @@ export const requestSubscription = (productId, profileId) => async (
  * On iOS, this method is called when the payment queue registers a
  * SKPaymentTransactionStatePurchased event.
  */
-export const purchaseUpdated = purchase => async (dispatch, getState) => {
+export const purchaseUpdated = (purchase) => async (dispatch, getState) => {
   const profileId = slice.selectors.getProfileId(getState())
 
   try {
@@ -73,7 +73,7 @@ export const purchaseUpdated = purchase => async (dispatch, getState) => {
         appMessage.actions.setAppMessage({
           message: 'FPF plan upgrade successful!',
           type: 'success',
-          autoHide: true
+          autoHide: true,
         })
       )
 
@@ -88,7 +88,7 @@ export const purchaseUpdated = purchase => async (dispatch, getState) => {
     }
   } catch (e) {
     rollbar.info('purchaseUpdated failed', e, {
-      profileId
+      profileId,
     })
 
     // If an error occurs (even a receipt validation), we do not clear the
@@ -119,7 +119,7 @@ export const purchaseUpdated = purchase => async (dispatch, getState) => {
  * On iOS, this method is called when the payment queue registers a
  * SKPaymentTransactionStateFailed event.
  */
-export const purchaseError = error => (dispatch, getState) => {
+export const purchaseError = (error) => (dispatch, getState) => {
   try {
     const profileId = slice.selectors.getProfileId(getState())
 

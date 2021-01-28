@@ -11,14 +11,14 @@ describe('ProfileTypes', () => {
     setNewUserByKey: jest.fn(),
     newUser: {},
     navigation: {
-      navigate: jest.fn()
+      navigate: jest.fn(),
     },
     getAppSettings: jest.fn().mockResolvedValue(),
     profilePlans: [
       { id: 1, plan_type: 'neighbor' },
       { id: 2, plan_type: 'business' },
-      { id: 3, plan_type: 'government' }
-    ]
+      { id: 3, plan_type: 'government' },
+    ],
   }
 
   afterEach(() => {
@@ -34,7 +34,7 @@ describe('ProfileTypes', () => {
     const wrapper = shallow(<ProfileTypes {...defaultProps} />)
     const actives = wrapper
       .state()
-      .profileOptions.map(profile => profile.active)
+      .profileOptions.map((profile) => profile.active)
     expect(actives.includes(true)).toBe(false)
   })
 
@@ -45,8 +45,8 @@ describe('ProfileTypes', () => {
     expect(defaultProps.setNewUserByKey).toHaveBeenCalledWith({
       profilePlan: {
         id: 1,
-        plan_type: 'neighbor'
-      }
+        plan_type: 'neighbor',
+      },
     })
 
     expect(wrapper.state().profileOptions[0].active).toBe(true)
@@ -61,10 +61,7 @@ describe('ProfileTypes', () => {
         newUser={{ profileType: profileTypes.NEIGHBOR }}
       />
     )
-    wrapper
-      .find(FullScreenWizard)
-      .props()
-      .onNextPress()
+    wrapper.find(FullScreenWizard).props().onNextPress()
     expect(defaultProps.navigation.navigate).toHaveBeenCalledWith('BasicInfo')
   })
 
@@ -75,10 +72,7 @@ describe('ProfileTypes', () => {
         newUser={{ profileType: profileTypes.BUSINESS }}
       />
     )
-    wrapper
-      .find(FullScreenWizard)
-      .props()
-      .onNextPress()
+    wrapper.find(FullScreenWizard).props().onNextPress()
     expect(defaultProps.navigation.navigate).toHaveBeenCalledWith('BasicInfo')
   })
 
@@ -89,10 +83,7 @@ describe('ProfileTypes', () => {
         newUser={{ profileType: profileTypes.GOVERNMENT }}
       />
     )
-    wrapper
-      .find(FullScreenWizard)
-      .props()
-      .onNextPress()
+    wrapper.find(FullScreenWizard).props().onNextPress()
     expect(defaultProps.navigation.navigate).toHaveBeenCalledWith('BasicInfo')
   })
 })

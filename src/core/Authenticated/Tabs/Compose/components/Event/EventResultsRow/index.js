@@ -10,7 +10,7 @@ import {
   RadioButtonActive,
   RadioButtonCircle,
   RadioButtonContainer,
-  RowContent
+  RowContent,
 } from './styledComponents'
 
 export const EventResultsRow = ({
@@ -18,7 +18,7 @@ export const EventResultsRow = ({
   fromDate,
   onPress,
   toDate,
-  label
+  label,
 }) => (
   <TouchableWithoutFeedback onPress={onPress}>
     <Container>
@@ -43,5 +43,5 @@ EventResultsRow.propTypes = {
   fromDate: PropTypes.object,
   toDate: PropTypes.object,
   label: PropTypes.string.isRequired,
-  onPress: PropTypes.func.isRequired
+  onPress: PropTypes.func.isRequired,
 }

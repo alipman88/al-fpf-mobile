@@ -12,7 +12,7 @@ import {
   Icon,
   Input,
   InputText,
-  InputContainer
+  InputContainer,
 } from './styledComponents'
 
 export class DateTimeField extends React.Component {
@@ -20,7 +20,7 @@ export class DateTimeField extends React.Component {
     dateVisible: false,
     timeVisible: false,
     date: null,
-    time: null
+    time: null,
   }
 
   componentDidMount() {
@@ -48,7 +48,7 @@ export class DateTimeField extends React.Component {
           date.getMinutes(),
           0,
           0
-        )
+        ),
       })
     }
   }
@@ -64,7 +64,7 @@ export class DateTimeField extends React.Component {
     this.setState({ dateVisible: false })
   }
 
-  handleDatePicked = date => {
+  handleDatePicked = (date) => {
     let updatedState
     if (!this.state.time) {
       updatedState = { date, time: this.props.defaultTimeForDate(date) }
@@ -88,7 +88,7 @@ export class DateTimeField extends React.Component {
     this.setState({ timeVisible: false })
   }
 
-  handleTimePicked = time => {
+  handleTimePicked = (time) => {
     let updatedState
     if (!this.state.date) {
       updatedState = { date: time, time }
@@ -122,7 +122,7 @@ export class DateTimeField extends React.Component {
       label,
       timeLabel,
       touched,
-      value
+      value,
     } = this.props
     const { date, time } = this.state
 
@@ -187,9 +187,9 @@ DateTimeField.propTypes = {
   onPress: PropTypes.func.isRequired,
   timeLabel: PropTypes.string,
   touched: PropTypes.bool,
-  value: PropTypes.object
+  value: PropTypes.object,
 }
 
 DateTimeField.defaultProps = {
-  defaultTimeForDate: date => date
+  defaultTimeForDate: (date) => date,
 }

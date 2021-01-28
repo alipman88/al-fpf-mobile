@@ -19,15 +19,15 @@ export const retry = (fn, delay = 500, maxDelay = 10000) => {
     cancel: () => {
       canceled = false
       clearTimeout(timeoutId)
-    }
+    },
   }
 
-  const _pause = duration =>
-    new Promise(res => {
+  const _pause = (duration) =>
+    new Promise((res) => {
       timeoutId = setTimeout(res, duration)
     })
 
-  const _retry = delay => {
+  const _retry = (delay) => {
     if (!canceled) {
       fn().catch(() =>
         _pause(delay).then(() => {

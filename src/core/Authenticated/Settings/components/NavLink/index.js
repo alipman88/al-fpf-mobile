@@ -16,5 +16,5 @@ export const NavLink = ({ linkText, onPress, hasBorder }) => (
 NavLink.propTypes = {
   linkText: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
-  hasBorder: PropTypes.bool.isRequired
+  hasBorder: PropTypes.bool.isRequired,
 }
