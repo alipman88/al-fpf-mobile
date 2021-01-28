@@ -208,11 +208,14 @@ Save the following JSON to an `alert.json` file in the project's root directory:
 {
   "aps" : {
     "alert" : {
-      "title" : "New Winooski FPF issue available!",
-      "body" : "Testing... 1 2 3"
+      "title": "New Montpelier FPF issue available!",
+      "body": "Testing... 1 2 3"
     },
-    "badge" : 1
-  }
+    "badge": 1
+  },
+  "area_id": 448,
+  "issue_id": 443650,
+  "issue_number": 4923
 }
 ```
 
