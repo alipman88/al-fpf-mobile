@@ -5,11 +5,6 @@ import { Profile } from '../Profile'
 import { ExternalLink } from '../../components/ExternalLink'
 import { FieldText } from '../../components/FieldText'
 
-jest.mock('uuid/v4', () => ({
-  __esModule: true,
-  default: () => 'abcdefgh123'
-}))
-
 describe('Profile', () => {
   const defaultProps = {
     navigateWithToken: jest.fn(),

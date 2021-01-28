@@ -167,10 +167,12 @@ export class ComposeFields extends React.Component {
                   'Select Profile'
                 }
                 label='Profile'
-                items={profiles.map(profile =>
-                  getProfileDisplayName(profile, false)
-                )}
-                onValueChange={(value, index) => {
+                items={profiles.map((profile, i) => ({
+                  value: i,
+                  label: getProfileDisplayName(profile, false)
+                }))}
+                onValueChange={index => {
+                  index = parseInt(index, 10)
                   setFieldTouched('profile', true)
                   setFieldValue('profile', index)
                   const newFilteredAreas = this.getAreasForProfile(
@@ -229,8 +231,12 @@ export class ComposeFields extends React.Component {
                 'Select category that best applies'
               )}
               label='Category'
-              items={composeCategories.map(category => category.name)}
-              onValueChange={(value, index) => {
+              items={composeCategories.map((category, i) => ({
+                value: i,
+                label: category.name
+              }))}
+              onValueChange={index => {
+                index = parseInt(index, 10)
                 setFieldTouched('category', true)
                 setFieldValue('category', composeCategories[index])
               }}

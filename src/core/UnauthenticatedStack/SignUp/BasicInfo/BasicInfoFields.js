@@ -116,9 +116,10 @@ export class BasicInfoFields extends React.Component {
                 error={errors.password}
                 label='Password'
                 touched={!!touched.password}
-                setFieldValue={setFieldValue}
-                setFieldTouched={setFieldTouched}
-                fieldKey='password'
+                onBlur={() => setFieldTouched('password')}
+                onChangeText={value => {
+                  setFieldValue('password', value)
+                }}
                 nextField={this.passwordConfirmationInput}
                 value={values.password}
                 required
@@ -135,9 +136,11 @@ export class BasicInfoFields extends React.Component {
                 error={errors.passwordConfirmation}
                 label='Confirm password'
                 touched={!!touched.passwordConfirmation}
-                setFieldValue={setFieldValue}
-                setFieldTouched={setFieldTouched}
-                fieldKey='passwordConfirmation'
+                onBlur={() => setFieldTouched('passwordConfirmation')}
+                onChangeText={value => {
+                  setFieldValue('passwordConfirmation', value)
+                  setFieldTouched('passwordConfirmation')
+                }}
                 onSubmitEditing={() => onSubmit(values)}
                 value={values.passwordConfirmation}
                 returnKeyType='next'

@@ -1,4 +1,4 @@
-import firebase from 'react-native-firebase'
+import analytics from '@react-native-firebase/analytics'
 
 import * as api from '@common/api'
 import { currentUser } from '@common/currentUser'
@@ -36,9 +36,7 @@ describe('session actions', () => {
       currentUser.actions.setAccessToken('token abc')
     )
 
-    expect(
-      firebase.analytics().setAnalyticsCollectionEnabled
-    ).toHaveBeenCalledWith(true)
+    expect(analytics().setAnalyticsCollectionEnabled).toHaveBeenCalledWith(true)
 
     postSpy.mockRestore()
   })

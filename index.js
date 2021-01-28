@@ -5,7 +5,6 @@ import { AppRegistry, YellowBox } from 'react-native'
 import 'react-native-gesture-handler'
 
 import { App } from './src/App'
-import { bgMessaging } from './bgMessaging'
 
 // Configure rollbar
 import '@common/utils/rollbar'
@@ -21,7 +20,3 @@ YellowBox.ignoreWarnings([
 ])
 
 AppRegistry.registerComponent('FrontPorchForum', () => App)
-AppRegistry.registerHeadlessTask(
-  'RNFirebaseBackgroundMessage',
-  () => bgMessaging
-)

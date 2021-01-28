@@ -18,6 +18,11 @@ import {
 } from './styledComponents'
 
 export class Select extends React.Component {
+  constructor(props) {
+    super(props)
+    this.pickerRef = React.createRef()
+  }
+
   render() {
     const {
       onPress,
@@ -50,7 +55,7 @@ export class Select extends React.Component {
             if (onPress) {
               onPress()
             }
-            this.selectModuleRef.show()
+            this.pickerRef.current.show()
           }}
           hasError={hasError}
         >
@@ -62,10 +67,8 @@ export class Select extends React.Component {
           </DownArrowWrapper>
         </SelectButton>
         <ReactNativePickerModule
-          pickerRef={e => {
-            this.selectModuleRef = e
-          }}
-          value={value}
+          pickerRef={this.pickerRef}
+          value={value != null ? '' + value : value}
           title={title}
           items={items}
           onValueChange={onValueChange}
@@ -85,6 +88,6 @@ Select.propTypes = {
   placeholder: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   touched: PropTypes.bool,
-  value: PropTypes.number,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   required: PropTypes.bool
 }

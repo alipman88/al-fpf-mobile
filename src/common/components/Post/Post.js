@@ -1,7 +1,7 @@
 import React from 'react'
 import { TouchableOpacity } from 'react-native'
 import Autolink from 'react-native-autolink'
-import firebase from 'react-native-firebase'
+import analytics from '@react-native-firebase/analytics'
 import PropTypes from 'prop-types'
 
 import format from 'date-fns/format'
@@ -109,9 +109,7 @@ export class Post extends React.Component {
               <Button
                 color={'#fff'}
                 onPress={async () => {
-                  firebase
-                    .analytics()
-                    .logEvent('press_email_author', postAnalyticsData)
+                  analytics().logEvent('press_email_author', postAnalyticsData)
 
                   const subject = this.reTitle(post.title)
 
@@ -135,9 +133,10 @@ export class Post extends React.Component {
                 <Button
                   color={'#fff'}
                   onPress={() => {
-                    firebase
-                      .analytics()
-                      .logEvent('press_reply_to_forum', postAnalyticsData)
+                    analytics().logEvent(
+                      'press_reply_to_forum',
+                      postAnalyticsData
+                    )
                     this.handleReplyPress(post)
                   }}
                 >
