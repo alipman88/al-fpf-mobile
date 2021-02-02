@@ -126,8 +126,8 @@ export class BasicInfoFields extends React.Component {
               />
             </FieldWrapper>
             <FormHelper>
-              Must be at least 8 characters long, including a number and a
-              symbol.
+              Must be at least 8 characters long, including a letter, a number,
+              and a symbol.
             </FormHelper>
 
             <FieldWrapper>
