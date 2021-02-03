@@ -30,7 +30,7 @@ export class OtherIssues extends React.Component {
   scrollToFocusedIssue() {
     // using set timeout to ensure the code doesn't run until rendering is finished
     setTimeout(() => {
-      if (this.focusedIssueRef) {
+      if (this.focusedIssueRef && this.scrollViewRef) {
         this.focusedIssueRef.measureLayout(
           findNodeHandle(this.scrollViewRef),
           (x) => {
