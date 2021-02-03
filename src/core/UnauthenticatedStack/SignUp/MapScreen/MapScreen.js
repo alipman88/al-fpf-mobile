@@ -81,12 +81,14 @@ export class MapScreen extends React.Component {
   onNextPress = () => {
     const { setNewUserByKey, newUser, navigation, profileType } = this.props
     const { checkedAreas, region } = this.state
+    const areaIds = Object.keys(checkedAreas).filter((id) => checkedAreas[id])
+
     setNewUserByKey({
       address: {
         ...newUser.address,
         lat: region.latitude,
         lng: region.longitude,
-        area_ids: Object.keys(checkedAreas),
+        area_ids: areaIds,
       },
     })
 
