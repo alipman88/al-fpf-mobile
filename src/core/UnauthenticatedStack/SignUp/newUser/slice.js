@@ -24,7 +24,7 @@ const initialState = {
     address: {
       streetNumber: null,
       streetName: '',
-      secondaryAddress: '',
+      aptNumber: '',
       city: '',
       state: 'VT',
       lat: 0,

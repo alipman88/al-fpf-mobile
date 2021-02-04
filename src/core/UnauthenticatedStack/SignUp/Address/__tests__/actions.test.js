@@ -7,7 +7,7 @@ describe('Address - actions', () => {
   describe('searchAddress', () => {
     const values = {
       streetNumber: 32,
-      secondaryAddress: '200',
+      aptNumber: '200',
       streetName: 'Yonge St',
       city: 'Toronto',
       state: 'ON',

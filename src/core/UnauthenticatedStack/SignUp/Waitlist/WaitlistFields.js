@@ -94,15 +94,15 @@ export class WaitlistFields extends React.Component {
           </FieldWrapper>
           <FieldWrapper>
             <TextInput
-              error={errors.secondaryAddress}
+              error={errors.aptNumber}
               label='Apt/suite (if applicable)'
               onChangeText={(text) => {
-                setFieldTouched('secondaryAddress')
-                setFieldValue('secondaryAddress', text)
+                setFieldTouched('aptNumber')
+                setFieldValue('aptNumber', text)
               }}
               placeholder='3R'
-              touched={!!touched.secondaryAddress}
-              value={values.secondaryAddress}
+              touched={!!touched.aptNumber}
+              value={values.aptNumber}
             />
           </FieldWrapper>
           <FieldWrapper>
