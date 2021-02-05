@@ -44,6 +44,18 @@ export class Forum extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    if (this.unsubscribeTokenRefresh) {
+      this.unsubscribeTokenRefresh()
+      delete this.unsubscribeTokenRefresh
+    }
+
+    if (this.unsubscribeNotificationOpenedApp) {
+      this.unsubscribeNotificationOpenedApp()
+      delete this.unsubscribeNotificationOpenedApp
+    }
+  }
+
   /**
    * Configure Firebase messaging and notifications:
    * - request permission from the user if not already granted
@@ -69,14 +81,18 @@ export class Forum extends React.Component {
     }
 
     // Listen for firebase notification token change, and send to server
-    messaging().onTokenRefresh(async (fcmToken) => {
-      this.props.sendNewFCMToken(fcmToken)
-    })
+    this.unsubscribeTokenRefresh = messaging().onTokenRefresh(
+      async (fcmToken) => {
+        this.props.sendNewFCMToken(fcmToken)
+      }
+    )
 
     // Listen for app background notification, and handle the notification
-    messaging().onNotificationOpenedApp((remoteMessage) => {
-      this.handleNotificationOpen(remoteMessage)
-    })
+    this.unsubscribeNotificationOpenedApp = messaging().onNotificationOpenedApp(
+      (remoteMessage) => {
+        this.handleNotificationOpen(remoteMessage)
+      }
+    )
   }
 
   /**
