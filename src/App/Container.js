@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import SideMenu from 'react-native-side-menu'
+import SideMenu from 'react-native-side-menu-updated'
 
 import { currentUser } from '@common/currentUser'
 import { DrawerContext } from './context'
