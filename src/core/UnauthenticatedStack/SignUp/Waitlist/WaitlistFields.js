@@ -214,6 +214,9 @@ export class WaitlistFields extends React.Component {
                     setFieldTouched('webAddress')
                   }}
                   value={values.webAddress}
+                  keyboardType='url'
+                  autoCapitalize='none'
+                  autoCorrect={false}
                 />
               </FieldWrapper>
             </>

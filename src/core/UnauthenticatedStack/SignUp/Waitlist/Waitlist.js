@@ -29,6 +29,7 @@ export class Waitlist extends React.Component {
         initialValues={{
           ...newUser,
           ...newUser.address,
+          ...newUser.waitlist,
         }}
         render={(props) => (
           <WaitlistFields

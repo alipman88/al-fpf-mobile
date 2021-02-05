@@ -83,15 +83,15 @@ export const GovernmentInfoFields = ({
       </FieldWrapper>
       <FieldWrapper>
         <TextInput
-          error={errors.tellUsMore}
+          error={errors.notes}
           label='Tell us more'
           onChangeText={(value) => {
-            setFieldTouched('tellUsMore')
-            setFieldValue('tellUsMore', value)
+            setFieldTouched('notes')
+            setFieldValue('notes', value)
           }}
           multiline
-          touched={!!touched.tellUsMore}
-          value={values.tellUsMore}
+          touched={!!touched.notes}
+          value={values.notes}
         />
       </FieldWrapper>
     </Container>
