@@ -232,3 +232,15 @@ If you need to test a specific device / iOS versions, e.g. ("iPhone 6 running iO
 3. Click the plus icon at the lower left corner.
 4. Select "Download more simulator runtimes..." from the "OS Version" menu, and install the desired OS version.
 5. Once downloaded, return to the "Simulator" tab and add the desired device/iOS version pair. You should now be able to boot it via a command like `yarn ios --simulator="iPhone 6 (12.4)"`.
+
+### In app purchases
+
+In app purchases for profile subscriptions are supported on iOS only (because
+Apple required them for the original app submission).
+
+Purchaseable products are configured through the App Store Connect website:
+https://appstoreconnect.apple.com/apps/1458651656/appstore/addons?m=
+
+However, the simulator does not connect to the app store, so debug only products
+are also configured in `ios/Configuration.storekit`.  These products are only
+shown in the simulator.

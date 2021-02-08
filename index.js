@@ -1,4 +1,4 @@
-import { AppRegistry, YellowBox } from 'react-native'
+import { AppRegistry, LogBox } from 'react-native'
 
 // Prevent potential crash by importing gesture handler
 // https://github.com/kmagiera/react-native-gesture-handler/issues/746#issuecomment-537562738
@@ -11,12 +11,13 @@ import '@common/utils/rollbar'
 
 // Ignore warnings from third party libraries
 // LATER: remove this when these libraries have been fixed
-YellowBox.ignoreWarnings([
+LogBox.ignoreLogs([
   'componentWillMount',
   'componentWillUpdate',
   'componentWillReceiveProps',
-  'DatePickerIOS', // https://github.com/mmazzarolo/react-native-modal-datetime-picker/pull/262
-  'RCTRootView cancelTouches' // https://github.com/kmagiera/react-native-gesture-handler/issues/746
+  // Silence many warnings about styles missing units
+  // https://github.com/styled-components/css-to-react-native/issues/40
+  'Expected style',
 ])
 
 AppRegistry.registerComponent('FrontPorchForum', () => App)
