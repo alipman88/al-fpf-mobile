@@ -91,9 +91,12 @@ export class App extends React.Component {
       this.state.appState.match(/inactive|background|unknown/) &&
       nextAppState === 'active'
     ) {
-      store.dispatch(sendDeviceData())
-      store.dispatch(getProfiles())
       setApplicationIconBadgeNumber(0)
+
+      if (currentUser.selectors.getAccessToken(store.getState())) {
+        store.dispatch(sendDeviceData())
+        store.dispatch(getProfiles())
+      }
     }
 
     this.setState({ appState: nextAppState })
