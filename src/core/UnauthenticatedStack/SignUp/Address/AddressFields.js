@@ -25,7 +25,7 @@ export class AddressFields extends React.Component {
   constructor(props) {
     super(props)
     this.streetNameInput = React.createRef()
-    this.secondaryAddressInput = React.createRef()
+    this.aptNumberInput = React.createRef()
     this.cityInput = React.createRef()
     this.stateInput = React.createRef()
   }
@@ -100,7 +100,7 @@ export class AddressFields extends React.Component {
 
             <FieldWrapper>
               <TextInput
-                nextField={this.secondaryAddressInput}
+                nextField={this.aptNumberInput}
                 inputRef={this.streetNameInput}
                 error={errors.streetName}
                 label='Street name (no house number)'
@@ -117,16 +117,16 @@ export class AddressFields extends React.Component {
             <FieldWrapper>
               <TextInput
                 nextField={this.cityInput}
-                inputRef={this.secondaryAddressInput}
-                error={errors.secondaryAddress}
+                inputRef={this.aptNumberInput}
+                error={errors.aptNumber}
                 label='Apt/suite (if applicable)'
                 onChangeText={(text) => {
-                  setFieldTouched('secondaryAddress')
-                  setFieldValue('secondaryAddress', text)
+                  setFieldTouched('aptNumber')
+                  setFieldValue('aptNumber', text)
                 }}
                 placeholder='3R'
-                touched={!!touched.secondaryAddress}
-                value={values.secondaryAddress}
+                touched={!!touched.aptNumber}
+                value={values.aptNumber}
               />
             </FieldWrapper>
             <FieldWrapper>

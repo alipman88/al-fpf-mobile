@@ -14,7 +14,7 @@ describe('GovernmentInfo', () => {
       government: {
         title: '',
         jurisdiction: '',
-        tellUsMore: '',
+        notes: '',
       },
     },
     profileType: 'government',

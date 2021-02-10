@@ -27,5 +27,5 @@ export const validations = yup.object().shape({
       validateGovernmentFieldPresence
     )
     .required(),
-  tellUsMore: yup.string(),
+  notes: yup.string(),
 })

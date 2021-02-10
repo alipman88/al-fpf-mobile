@@ -14,17 +14,19 @@ const initialState = {
     termsOfUse: false,
     postIntro: true,
     isNfBooster: false,
-    // CreateAccount: business edition
-    includeInDirectory: true,
-    showAddress: true,
+    // CreateAccount: additional fields for business profile
+    showInBusinessDirectory: true,
+    showAddressOnBusinessDirectory: true,
     // Waitlist
-    comment: '',
-    reference: '',
+    waitlist: {
+      comment: '',
+      reference: '',
+    },
     // Address
     address: {
       streetNumber: null,
       streetName: '',
-      secondaryAddress: '',
+      aptNumber: '',
       city: '',
       state: 'VT',
       lat: 0,
@@ -35,7 +37,7 @@ const initialState = {
     government: {
       title: '',
       jurisdiction: '',
-      tellUsMore: '',
+      notes: '',
     },
     // BusinessInfo
     business: {

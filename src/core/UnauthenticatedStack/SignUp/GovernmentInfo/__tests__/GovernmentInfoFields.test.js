@@ -16,7 +16,7 @@ describe('GovernmentInfoFields', () => {
     values: {
       title: '',
       jurisdiction: '',
-      tellUsMore: '',
+      notes: '',
     },
     governmentTitles: [
       'Mayor',
@@ -63,7 +63,7 @@ describe('GovernmentInfoFields', () => {
     const wrapper = shallow(<GovernmentInfoFields {...defaultProps} />)
 
     wrapper.find(TextInput).at(1).simulate('changeText', 'hi')
-    expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('tellUsMore')
-    expect(defaultProps.setFieldValue).toHaveBeenCalledWith('tellUsMore', 'hi')
+    expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('notes')
+    expect(defaultProps.setFieldValue).toHaveBeenCalledWith('notes', 'hi')
   })
 })

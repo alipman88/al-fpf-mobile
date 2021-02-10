@@ -17,7 +17,7 @@ export const joinWaitlist = (values) => async (dispatch) => {
             'state',
             'comment',
             'reference',
-            'secondaryAddress',
+            'aptNumber',
             'streetNumber',
             'streetName',
             'firstName',

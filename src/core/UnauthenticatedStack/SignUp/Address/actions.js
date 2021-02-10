@@ -13,7 +13,7 @@ export const searchAddress = (values, onSuccess) => async (
       {
         address: {
           street_number: values.streetNumber,
-          apt_number: values.secondaryAddress,
+          apt_number: values.aptNumber,
           street_name: values.streetName,
           city: values.city,
           state: values.state,

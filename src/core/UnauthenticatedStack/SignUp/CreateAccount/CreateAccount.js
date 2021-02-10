@@ -60,12 +60,12 @@ export class CreateAccount extends React.Component {
         2,
         0,
         {
-          type: 'includeInDirectory',
+          type: 'showInBusinessDirectory',
           value: true,
           text: 'Include my business in the FPF Directory',
         },
         {
-          type: 'showAddress',
+          type: 'showAddressOnBusinessDirectory',
           value: true,
           text: 'Show my street address in my Directory listing',
         }

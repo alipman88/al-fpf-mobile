@@ -6,7 +6,7 @@ describe('Address - actions', () => {
   describe('joinWaitlist', () => {
     const values = {
       streetNumber: '32',
-      secondaryAddress: '200',
+      aptNumber: '200',
       streetName: 'Yonge St',
       city: 'Toronto',
       state: 'ON',
@@ -26,7 +26,7 @@ describe('Address - actions', () => {
 
       expect(post).toHaveBeenCalledWith('/waitlist_users', {
         user: {
-          secondary_address: '200',
+          apt_number: '200',
           street_number: '32',
           street_name: 'Yonge St',
           city: 'Toronto',
@@ -52,7 +52,7 @@ describe('Address - actions', () => {
 
       expect(post).toHaveBeenCalledWith('/waitlist_users', {
         user: {
-          secondary_address: '200',
+          apt_number: '200',
           street_number: '32',
           street_name: 'Yonge St',
           city: 'Toronto',
