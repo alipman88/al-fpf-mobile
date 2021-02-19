@@ -34,10 +34,12 @@ export class OtherIssues extends React.Component {
         this.focusedIssueRef.measureLayout(
           findNodeHandle(this.scrollViewRef),
           (x) => {
-            this.scrollViewRef.scrollTo({
-              x: Math.min(this.state.scrollWidth, x),
-              animated: true,
-            })
+            if (this.scrollViewRef) {
+              this.scrollViewRef.scrollTo({
+                x: Math.min(this.state.scrollWidth, x),
+                animated: true,
+              })
+            }
           }
         )
       } else if (this.scrollViewRef) {
