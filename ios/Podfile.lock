@@ -415,7 +415,7 @@ PODS:
     - RNFBApp
   - RNGestureHandler (1.9.0):
     - React-Core
-  - RNIap (5.2.3):
+  - RNIap (5.2.7):
     - React-Core
   - RNReanimated (1.13.2):
     - React-Core
@@ -694,7 +694,7 @@ SPEC CHECKSUMS:
   RNFBApp: 43a062dc6a1a88edd934d2229d1ba64f25381598
   RNFBMessaging: 7ca5248796434376c186b65029b1cec7d3e0990b
   RNGestureHandler: 9b7e605a741412e20e13c512738a31bd1611759b
-  RNIap: ff51c3dd160cd2e40f7f905ebc1bcfb7d34c7d15
+  RNIap: 69c0e2cbf78c91c1bd636d53ecf1d41f66738dca
   RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
   RNScreens: 3d682bcaba69a4f8e55543d90818704f34338db1
   RNVectorIcons: f67a1abce2ec73e62fe4606e8110e95a832bc859
