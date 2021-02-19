@@ -46,13 +46,15 @@ export class App extends React.Component {
     // Remove this guard when adding support for Google Play [#168313664]
     if (Platform.OS === 'ios') {
       store.dispatch(getProducts(subscriptionSkus))
-      this.purchaseUpdatedListener = RNIap.purchaseUpdatedListener(
-        (purchase) => {
-          store.dispatch(purchaseUpdated(purchase))
-        }
-      )
-      this.purchaseErrorListener = RNIap.purchaseErrorListener((error) => {
-        store.dispatch(purchaseError(error))
+      RNIap.initConnection().then(() => {
+        this.purchaseUpdatedListener = RNIap.purchaseUpdatedListener(
+          (purchase) => {
+            store.dispatch(purchaseUpdated(purchase))
+          }
+        )
+        this.purchaseErrorListener = RNIap.purchaseErrorListener((error) => {
+          store.dispatch(purchaseError(error))
+        })
       })
     }
   }
