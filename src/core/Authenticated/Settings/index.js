@@ -25,7 +25,7 @@ export const Settings = createStackNavigator(
             navigation.dismiss()
           }}
         >
-          <CloseText>Close</CloseText>
+          <CloseText allowFontScaling={false}>Close</CloseText>
         </TouchableOpacity>
       ),
       headerTitleStyle: {

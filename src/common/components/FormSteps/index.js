@@ -13,7 +13,7 @@ export const FormSteps = ({ currentStep, steps }) => (
         {i < currentStep - 1 ? (
           <Icon size={12} name='check' color='#97b57b' />
         ) : (
-          <Number>{i + 1}</Number>
+          <Number allowFontScaling={false}>{i + 1}</Number>
         )}
       </Step>
     ))}

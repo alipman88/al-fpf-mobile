@@ -64,7 +64,9 @@ export const Tabs = createBottomTabNavigator(
         title: 'Forum',
         /* eslint-disable-next-line react/prop-types */
         tabBarLabel: ({ focused }) => (
-          <NavLabel focused={focused}>Forum</NavLabel>
+          <NavLabel allowFontScaling={false} focused={focused}>
+            Forum
+          </NavLabel>
         ),
         /* eslint-disable-next-line react/prop-types */
         tabBarIcon: ({ focused }) => (
@@ -79,7 +81,9 @@ export const Tabs = createBottomTabNavigator(
         title: 'Compose',
         /* eslint-disable-next-line react/prop-types */
         tabBarLabel: ({ focused }) => (
-          <NavLabel focused={focused}>Compose</NavLabel>
+          <NavLabel allowFontScaling={false} focused={focused}>
+            Compose
+          </NavLabel>
         ),
         /* eslint-disable-next-line react/prop-types */
         tabBarIcon: ({ focused }) => (
@@ -92,7 +96,9 @@ export const Tabs = createBottomTabNavigator(
       navigationOptions: () => ({
         /* eslint-disable-next-line react/prop-types */
         tabBarLabel: ({ focused }) => (
-          <NavLabel focused={focused}>Search</NavLabel>
+          <NavLabel allowFontScaling={false} focused={focused}>
+            Search
+          </NavLabel>
         ),
         /* eslint-disable-next-line react/prop-types */
         tabBarIcon: ({ focused }) => (
@@ -106,7 +112,9 @@ export const Tabs = createBottomTabNavigator(
       navigationOptions: () => ({
         /* eslint-disable-next-line react/prop-types */
         tabBarLabel: ({ focused }) => (
-          <NavLabel focused={focused}>Directory</NavLabel>
+          <NavLabel allowFontScaling={false} focused={focused}>
+            Directory
+          </NavLabel>
         ),
         /* eslint-disable-next-line react/prop-types */
         tabBarIcon: ({ focused }) => (
@@ -119,7 +127,9 @@ export const Tabs = createBottomTabNavigator(
       navigationOptions: () => ({
         /* eslint-disable-next-line react/prop-types */
         tabBarLabel: ({ focused }) => (
-          <NavLabel focused={focused}>More</NavLabel>
+          <NavLabel allowFontScaling={false} focused={focused}>
+            More
+          </NavLabel>
         ),
         /* eslint-disable-next-line react/prop-types */
         tabBarIcon: ({ focused }) => (

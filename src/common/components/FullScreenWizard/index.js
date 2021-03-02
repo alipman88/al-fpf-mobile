@@ -49,6 +49,7 @@ export class FullScreenWizard extends React.Component {
           hasBorder={false}
           iconNameLeft='keyboard-arrow-left'
           width={118}
+          allowFontScaling={false}
           iconLeft
         >
           Back
@@ -63,6 +64,7 @@ export class FullScreenWizard extends React.Component {
           disabled={nextDisabled}
           bgColor={nextDisabled ? 'rgba(242, 148, 38, 0.5)' : null}
           width={nextWidth || 118}
+          allowFontScaling={false}
           iconRight
         >
           {nextLabel}

@@ -30,6 +30,7 @@ export const Button = ({
   iconNameLeft,
   tall,
   hasBorder,
+  allowFontScaling,
 }) => {
   return (
     <Wrapper
@@ -44,7 +45,9 @@ export const Button = ({
       {iconLeft && iconNameLeft && (
         <Icon name={iconNameLeft} color={color || '#502c02'} size={26} />
       )}
-      <ButtonText color={color}>{children}</ButtonText>
+      <ButtonText allowFontScaling={allowFontScaling} color={color}>
+        {children}
+      </ButtonText>
       {iconRight && iconNameRight && (
         <Icon name={iconNameRight} color={color || '#502c02'} size={26} />
       )}
@@ -64,6 +67,7 @@ Button.propTypes = {
   iconRight: PropTypes.bool,
   iconLeft: PropTypes.bool,
   hasBorder: PropTypes.bool,
+  allowFontScaling: PropTypes.bool,
   iconNameRight: PropTypes.string,
   iconNameLeft: PropTypes.string,
   onPress: PropTypes.func.isRequired,
