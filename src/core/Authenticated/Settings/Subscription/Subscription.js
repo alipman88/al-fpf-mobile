@@ -89,7 +89,7 @@ export class Subscription extends React.Component {
       if (profilePlan.plan_type === 'business') {
         paymentOptions = (
           <>
-            <Title>Business / Nonprofit Plan</Title>
+            <Title>Business Plan</Title>
 
             <Description>
               Upgrade to FPF Enhanced Business Access Plan to receive these

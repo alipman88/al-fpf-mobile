@@ -8,8 +8,8 @@ import { ProfileTypePill } from '../styledComponents'
 describe('ProfileTypeButton', () => {
   const defaultProps = {
     onTapHandler: jest.fn(),
-    buttonText: 'Business/Nonprofit',
-    label: 'Business or nonprofit organization',
+    buttonText: 'Business',
+    label: 'Business organization',
     type: 'business',
     active: false,
   }

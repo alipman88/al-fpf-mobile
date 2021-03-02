@@ -14,7 +14,7 @@ export const validations = yup.object().shape({
       'Name must contain at least two characters',
       validateBusinessName
     )
-    .required('Name of business is a required field'),
+    .required('Name is a required field'),
   businessCategoryId: yup.number().required(),
   url: yup.string(),
   phone: yup.string().min(10).max(20),

@@ -17,7 +17,9 @@ describe('BusinessInfoFields', () => {
       phone: '',
       description: '',
     },
-    newUser: {},
+    newUser: {
+      profilePlan: { plan_type: 'business' },
+    },
     stepCount: 4,
     navigation: {
       navigate: jest.fn(),

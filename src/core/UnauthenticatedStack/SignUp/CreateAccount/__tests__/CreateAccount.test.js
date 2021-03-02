@@ -38,10 +38,27 @@ describe('CreateAccount', () => {
     expect(wrapper.instance().state.options.length).toEqual(5)
   })
 
-  test('it creates the right number of Checkboxes', () => {
+  test('it adds options when nonprofit profiletype', () => {
+    const wrapper = shallow(
+      <CreateAccount {...defaultProps} profileType='nonprofit' />
+    )
+
+    expect(wrapper.instance().state.options.length).toEqual(5)
+  })
+
+  test('it creates the right number of Checkboxes for business profiletype', () => {
     const wrapper1 = shallow(<CreateAccount {...defaultProps} />)
     const wrapper2 = shallow(
       <CreateAccount {...defaultProps} profileType='business' />
+    )
+    expect(wrapper1.find(CheckboxField).length).toEqual(3)
+    expect(wrapper2.find(CheckboxField).length).toEqual(5)
+  })
+
+  test('it creates the right number of Checkboxes for nonprofit profiletype', () => {
+    const wrapper1 = shallow(<CreateAccount {...defaultProps} />)
+    const wrapper2 = shallow(
+      <CreateAccount {...defaultProps} profileType='nonprofit' />
     )
     expect(wrapper1.find(CheckboxField).length).toEqual(3)
     expect(wrapper2.find(CheckboxField).length).toEqual(5)
