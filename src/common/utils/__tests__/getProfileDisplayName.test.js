@@ -25,6 +25,17 @@ describe('getProfileDisplayName', () => {
     ).toEqual('Business: Front Porch Forum')
   })
 
+  test('nonprofit returns name', () => {
+    expect(
+      getProfileDisplayName({
+        profile_plan: {
+          plan_type: 'nonprofit',
+        },
+        name: 'Front Porch Forum',
+      })
+    ).toEqual('Nonprofit: Front Porch Forum')
+  })
+
   test('government returns name + jurisdiction', () => {
     expect(
       getProfileDisplayName({

@@ -14,7 +14,7 @@ const initialState = {
     termsOfUse: false,
     postIntro: true,
     isNfBooster: false,
-    // CreateAccount: additional fields for business profile
+    // CreateAccount: additional fields for business or nonprofit profile
     showInBusinessDirectory: true,
     showAddressOnBusinessDirectory: true,
     // Waitlist

@@ -17,10 +17,16 @@ export class ProfileTypes extends React.Component {
         active: this.props.profileType === profileTypes.NEIGHBOR,
       },
       {
-        buttonText: 'Business/Nonprofit',
-        label: 'Business or nonprofit organization',
+        buttonText: 'Business',
+        label: 'Business organization',
         type: profileTypes.BUSINESS,
         active: this.props.profileType === profileTypes.BUSINESS,
+      },
+      {
+        buttonText: 'Nonprofit',
+        label: 'Nonprofit organization',
+        type: profileTypes.NONPROFIT,
+        active: this.props.profileType === profileTypes.NONPROFIT,
       },
       {
         buttonText: 'Government',

@@ -11,6 +11,8 @@ export const getProfileDisplayName = (profile = {}, withPrefix = true) => {
       } ${profile.city}`
     case profileTypes.BUSINESS:
       return `${withPrefix ? 'Business: ' : ''}${profile.name}`
+    case profileTypes.NONPROFIT:
+      return `${withPrefix ? 'Nonprofit: ' : ''}${profile.name}`
     case profileTypes.GOVERNMENT:
       return `${withPrefix ? 'Government: ' : ''}${profile.name} ${
         profile.jurisdiction

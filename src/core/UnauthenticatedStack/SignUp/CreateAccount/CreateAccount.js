@@ -54,7 +54,10 @@ export class CreateAccount extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.profileType === profileTypes.BUSINESS) {
+    if (
+      this.props.profileType === profileTypes.BUSINESS ||
+      this.props.profileType === profileTypes.NONPROFIT
+    ) {
       const options = [...this.state.options]
       options.splice(
         2,
@@ -62,7 +65,7 @@ export class CreateAccount extends React.Component {
         {
           type: 'showInBusinessDirectory',
           value: true,
-          text: 'Include my business in the FPF Directory',
+          text: `Include my ${this.props.profileType} in the FPF Directory`,
         },
         {
           type: 'showAddressOnBusinessDirectory',

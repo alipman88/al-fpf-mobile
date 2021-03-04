@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { isEmpty } from 'lodash'
+import { capitalize, isEmpty } from 'lodash'
 
 import Spinner from 'react-native-loading-spinner-overlay'
 
@@ -39,6 +39,8 @@ export class BusinessInfoFields extends React.Component {
       loading,
     } = this.props
 
+    const planType = this.props.newUser.profilePlan.plan_type
+
     const nextDisabled =
       !isEmpty(errors) ||
       isEmpty(touched) ||
@@ -67,8 +69,8 @@ export class BusinessInfoFields extends React.Component {
         <Container>
           <Spinner visible={loading} />
           <FormHeader>
-            To help people learn more about your business through your listing
-            in FPF's Directory, please complete the following fields:
+            {`To help people learn more about your ${planType} through your ` +
+              `listing in FPF's Directory, please complete the following fields:`}
           </FormHeader>
           <FormFieldsWrapper>
             <FieldWrapper>
@@ -76,8 +78,8 @@ export class BusinessInfoFields extends React.Component {
                 nextField={this.businessCategoryIdInput}
                 blurOnSubmit={true} // next element is not a text input
                 error={errors.name}
-                label='Name of business or nonprofit'
-                placeholder='Your Business Name'
+                label={`Name of ${planType}`}
+                placeholder={`Your ${capitalize(planType)} Name`}
                 touched={!!touched.name}
                 onChangeText={(value) => {
                   setFieldValue('name', value)
@@ -143,7 +145,7 @@ export class BusinessInfoFields extends React.Component {
             <FieldWrapper>
               <TextInput
                 error={errors.description}
-                label='Business/nonprofit description'
+                label={`${capitalize(planType)} description`}
                 touched={!!touched.description}
                 onChangeText={(value) => {
                   setFieldValue('description', value)

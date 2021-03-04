@@ -12,7 +12,10 @@ export const prepareValues = (values) => {
   let newValues = values
 
   // set plan type specific data as profile object
-  if (values.profilePlan.plan_type === profileTypes.BUSINESS) {
+  if (
+    values.profilePlan.plan_type === profileTypes.BUSINESS ||
+    values.profilePlan.plan_type === profileTypes.NONPROFIT
+  ) {
     newValues.profile = values[profileTypes.BUSINESS]
   } else if (values.profilePlan.plan_type === profileTypes.GOVERNMENT) {
     newValues.profile = values[profileTypes.GOVERNMENT]

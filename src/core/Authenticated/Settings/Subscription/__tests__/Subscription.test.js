@@ -17,7 +17,7 @@ describe('Subscription', () => {
       area_ids: [1, 3],
       profile_plan: {
         id: 1,
-        name: 'Business/ nonprofit',
+        name: 'Business',
         plan_type: 'business',
         tier: 'standard',
         has_upgrades: true,
@@ -83,7 +83,7 @@ describe('Subscription', () => {
 
     expect(wrapper.find(Button).length).toEqual(0)
     expect(wrapper.find(Description).text()).toEqual(
-      'You are subscribed to the FPF Business/ nonprofit standard plan.'
+      'You are subscribed to the FPF Business standard plan.'
     )
   })
 })
