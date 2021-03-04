@@ -34,10 +34,10 @@ export class IssueTab extends React.Component {
       >
         {isUnread && <UnreadMarker focused={focused} />}
         <IssueBox focused={focused} isUnread={isUnread}>
-          <IssueTextBold>
+          <IssueTextBold allowFontScaling={false}>
             {format(new Date(issue.sent_at), 'MMM D YYYY')}
           </IssueTextBold>
-          <IssueText>Issue #{issue.number}</IssueText>
+          <IssueText allowFontScaling={false}>Issue #{issue.number}</IssueText>
         </IssueBox>
         {focused && <Triangle />}
       </TouchableOpacity>
