@@ -12,6 +12,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		3CA655A200D19DEC3EA412D1 /* libPods-FrontPorchForum.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C464E3D4436E0A13344128 /* libPods-FrontPorchForum.a */; };
 		49A869758CA447DBA2A929DC /* ProximaNova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 20728C53B8F34FB1BF296047 /* ProximaNova-Semibold.otf */; };
+		4F0A2DEF25F9232B00872B4F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F0A2DEE25F9232B00872B4F /* LaunchScreen.storyboard */; };
 		4F1361B822F48D8B005680F7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F1361B722F48D8B005680F7 /* StoreKit.framework */; };
 		8C58751EC31B4198B53E8EC8 /* ProximaNova-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6A77E211D5364283A316FC0E /* ProximaNova-Thin.otf */; };
 		9A9E0B9E224127CF00163B03 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9A9E0B71224127CE00163B03 /* GoogleService-Info.plist */; };
@@ -30,6 +31,7 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = FrontPorchForum/main.m; sourceTree = "<group>"; };
 		20728C53B8F34FB1BF296047 /* ProximaNova-Semibold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "ProximaNova-Semibold.otf"; path = "../src/assets/fonts/ProximaNova-Semibold.otf"; sourceTree = "<group>"; };
 		3C7C24F14C14F29D3D434B14 /* Pods-FrontPorchForum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FrontPorchForum.debug.xcconfig"; path = "Target Support Files/Pods-FrontPorchForum/Pods-FrontPorchForum.debug.xcconfig"; sourceTree = "<group>"; };
+		4F0A2DEE25F9232B00872B4F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = FrontPorchForum/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F1361B722F48D8B005680F7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		4FC2790125BA234A00712FB7 /* FrontPorchForum-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FrontPorchForum-Bridging-Header.h"; sourceTree = "<group>"; };
 		6A77E211D5364283A316FC0E /* ProximaNova-Thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "ProximaNova-Thin.otf"; path = "../src/assets/fonts/ProximaNova-Thin.otf"; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 		13B07FAE1A68108700A75B9A /* FrontPorchForum */ = {
 			isa = PBXGroup;
 			children = (
+				4F0A2DEE25F9232B00872B4F /* LaunchScreen.storyboard */,
 				9AE457F4224943DF00D4E5B6 /* FrontPorchForum.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -227,6 +230,7 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				C4BEDA7503734CEEB59E5596 /* ProximaNova-Regular.otf in Resources */,
 				49A869758CA447DBA2A929DC /* ProximaNova-Semibold.otf in Resources */,
+				4F0A2DEF25F9232B00872B4F /* LaunchScreen.storyboard in Resources */,
 				8C58751EC31B4198B53E8EC8 /* ProximaNova-Thin.otf in Resources */,
 				9A9E0B9E224127CF00163B03 /* GoogleService-Info.plist in Resources */,
 			);
