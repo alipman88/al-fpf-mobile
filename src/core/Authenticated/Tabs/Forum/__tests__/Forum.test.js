@@ -6,6 +6,7 @@ import { Forum } from '../Forum'
 import { ForumPost } from '../components/ForumPost'
 import { ForumMessage } from '../components/ForumMessage'
 import { NeighboringContent } from '../components/NeighboringContent'
+import { ExternalLink } from '@components/ExternalLink'
 
 describe('Forum', () => {
   const defaultProps = {
@@ -170,6 +171,14 @@ describe('Forum', () => {
     expect(defaultProps.navigation.setParams).toHaveBeenCalledWith({
       navTitle: 'Athena',
     })
+  })
+
+  test('notifies user if no active profiles or enabled areas', () => {
+    const wrapper = shallow(<Forum {...defaultProps} currentAreaId={-1} />)
+    const notification = wrapper.find(ExternalLink).props()['content']
+    expect(notification).toContain(
+      'You have no active profiles on your account'
+    )
   })
 
   test('renders posts & ads in the right order', () => {

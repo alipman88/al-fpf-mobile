@@ -74,4 +74,25 @@ describe('setupForumData', () => {
 
     expect(dispatch).toHaveBeenCalledTimes(6)
   })
+
+  test('if no available areas, currentAreaId set to -1', async () => {
+    const dispatch = jest.fn()
+    const getState = () => ({
+      main: {
+        areas: {
+          areas: [],
+          currentAreaId: 0,
+        },
+        profile: {
+          user: {
+            profiles: [],
+          },
+          currentProfileId: 1,
+        },
+      },
+    })
+    await setupForumData()(dispatch, getState)
+
+    expect(dispatch).toHaveBeenCalledWith(areas.actions.setCurrentAreaId(-1))
+  })
 })

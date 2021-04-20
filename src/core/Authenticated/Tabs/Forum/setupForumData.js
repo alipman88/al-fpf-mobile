@@ -33,5 +33,9 @@ export const setupForumData = (
         type: 'warning',
       })
     )
+  } else {
+    // use a special area ID value of -1 to signify that a user either
+    // has no active profiles or access to no enabled areas
+    dispatch(areas.actions.setCurrentAreaId(-1))
   }
 }
