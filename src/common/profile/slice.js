@@ -104,7 +104,7 @@ const getNavigationProfile = createSelector(
 )
 
 const hasUnapprovedProfile = createSelector([getProfiles], (profiles) =>
-  profiles.some((profile) => !profile.available)
+  profiles.some((profile) => !profile.approved)
 )
 
 /**
