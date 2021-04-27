@@ -174,7 +174,7 @@ describe('Forum', () => {
   })
 
   test('notifies user if no active profiles or enabled areas', () => {
-    const wrapper = shallow(<Forum {...defaultProps} currentAreaId={-1} />)
+    const wrapper = shallow(<Forum {...defaultProps} hasAreaAccess={false} />)
     const notification = wrapper.find(ExternalLink).props()['content']
     expect(notification).toContain(
       'You have no active profiles on your account'

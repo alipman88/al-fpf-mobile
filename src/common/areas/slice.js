@@ -5,7 +5,8 @@ import keyBy from 'lodash/keyBy'
 
 const initialState = {
   areas: [],
-  currentAreaId: 0,
+  currentAreaId: null,
+  hasAreaAccess: true,
   neighboringAreas: {},
   loading: false,
 }
@@ -44,6 +45,12 @@ export const areas = createSlice({
         currentAreaId: action.payload,
       }
     },
+    setHasAreaAccess: (state, action) => {
+      return {
+        ...state,
+        hasAreaAccess: action.payload,
+      }
+    },
     resetAreas: (state, action) => {
       return {
         ...initialState,
@@ -66,6 +73,7 @@ areas.selectors = {
   getAreas,
   getAreasIdMap: createSelector([getAreas], (areas) => keyBy(areas, 'id')),
   getCurrentAreaId: createSelector([path], (areas) => areas.currentAreaId),
+  getHasAreaAccess: createSelector([path], (areas) => areas.hasAreaAccess),
   getLoading: createSelector([path], (areas) => areas.loading),
   getNeighboringAreas: createSelector(
     [path],

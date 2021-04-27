@@ -16,6 +16,7 @@ const mapStateToProps = (state) => {
     neighboringAreas: areas.selectors.getNeighboringAreas(state),
     currentAreaId: areas.selectors.getCurrentAreaId(state),
     currentIssueId: issues.selectors.getCurrentIssueId(state),
+    hasAreaAccess: areas.selectors.getHasAreaAccess(state),
     issues: issues.selectors.getIssuesForArea(state, areaId),
     posts: posts.selectors.getPostsByIssue(state),
     ads: posts.selectors.getAdsByIssue(state),

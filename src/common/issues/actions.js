@@ -13,7 +13,7 @@ export const getIssues = (areaId, navigation, resetForumAction) => async (
   dispatch,
   getState
 ) => {
-  if (areaId < 1) return
+  if (!areaId) return
 
   try {
     dispatch(issues.actions.setLoading(true))

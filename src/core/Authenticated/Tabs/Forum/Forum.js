@@ -118,7 +118,7 @@ export class Forum extends React.Component {
     const { currentAreaId, areas, navigation } = this.props
 
     if (
-      currentAreaId > 0 &&
+      currentAreaId &&
       (prevProps.areas !== areas || prevProps.currentAreaId !== currentAreaId)
     ) {
       this.setTitleFromArea()
@@ -304,7 +304,7 @@ export class Forum extends React.Component {
         >
           <OtherIssues navigation={navigation} toast={this.toastRef} />
           <ForumContainer>
-            {this.props.currentAreaId === -1 && (
+            {this.props.hasAreaAccess === false && (
               <ExternalLink
                 content='You have no active profiles on your account! Create a new one at frontporchforum.com'
                 onPress={() => navigateWithToken('/user')}
@@ -341,6 +341,7 @@ Forum.propTypes = {
   fetchSpecificIssue: PropTypes.func.isRequired,
   getContents: PropTypes.func.isRequired,
   getIssues: PropTypes.func.isRequired,
+  hasAreaAccess: PropTypes.bool.isRequired,
   issues: PropTypes.array.isRequired,
   loading: PropTypes.bool,
   navigation: PropTypes.object.isRequired,

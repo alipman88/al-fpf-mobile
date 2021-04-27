@@ -12,8 +12,11 @@ export const setupForumData = (
   await dispatch(getAppSettings())
   await dispatch(getAreas(navigation))
 
-  // reset current area to 0, area fetches newest issues
-  dispatch(areas.actions.setCurrentAreaId(0))
+  // Reset current area to null - this triggers a React state
+  // change, ensureing any newly-published issues are fetched
+  // via API before rendering the forum.
+  // (NOTE: This may no longer be necessary.)
+  dispatch(areas.actions.setCurrentAreaId(null))
 
   // pull latest areas, and set current area based on profile
   const currentProfile = profile.selectors.getCurrentProfile(getState())
@@ -34,8 +37,8 @@ export const setupForumData = (
       })
     )
   } else {
-    // use a special area ID value of -1 to signify that a user either
-    // has no active profiles or access to no enabled areas
-    dispatch(areas.actions.setCurrentAreaId(-1))
+    // User either has no active profiles or access to no enabled areas
+    // Set hasAreaAccess to false to trigger an alert.
+    dispatch(areas.actions.setHasAreaAccess(false))
   }
 }
