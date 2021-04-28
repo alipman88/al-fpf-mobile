@@ -102,6 +102,7 @@ export class ComposeFields extends React.Component {
       errors,
       isSubmitting,
       loading,
+      user,
       profiles,
       setFieldValue,
       setFieldTouched,
@@ -111,8 +112,15 @@ export class ComposeFields extends React.Component {
 
     const { duplicatePost } = this.state
 
+    const postingProfiles = profiles.filter((profile) => {
+      return (
+        profile.access !== 'read_only' &&
+        !(profile.permissions || []).includes('cannot_create_post')
+      )
+    })
+
     const filteredAreas = this.getAreasForProfile(
-      profiles,
+      postingProfiles,
       areas,
       values.profile
     )
@@ -139,14 +147,13 @@ export class ComposeFields extends React.Component {
 
     let errorMessage
 
-    if (profiles.length === 0) {
+    if ((user.permissions || []).includes('cannot_create_post')) {
+      errorMessage = 'You do not have access to submit postings.'
+    } else if (profiles.length === 0) {
       errorMessage =
         'You will not be able to submit without any active profiles.'
-    } else if (profiles.filter((p) => p.access !== 'read_only').length === 0) {
+    } else if (postingProfiles.length === 0) {
       errorMessage = 'You have no profiles with access to submit postings.'
-    } else if (profiles[values.profile]?.access === 'read_only') {
-      errorMessage =
-        'You do not have access to submit postings through this profile.'
     }
 
     return (
@@ -158,16 +165,18 @@ export class ComposeFields extends React.Component {
               <FormError>{errorMessage}</FormError>
             </FieldWrapper>
           )}
-          {profiles.length > 1 && (
+          {postingProfiles.length > 1 && (
             <FieldWrapper>
               <Select
                 onPress={this.blurTextInputs}
                 placeholder={
-                  getProfileDisplayName(profiles[values.profile], false) ||
-                  'Select Profile'
+                  getProfileDisplayName(
+                    postingProfiles[values.profile],
+                    false
+                  ) || 'Select Profile'
                 }
                 label='Profile'
-                items={profiles.map((profile, i) => ({
+                items={postingProfiles.map((profile, i) => ({
                   value: i,
                   label: getProfileDisplayName(profile, false),
                 }))}
@@ -176,7 +185,7 @@ export class ComposeFields extends React.Component {
                   setFieldTouched('profile', true)
                   setFieldValue('profile', index)
                   const newFilteredAreas = this.getAreasForProfile(
-                    profiles,
+                    postingProfiles,
                     areas,
                     index
                   )
@@ -322,6 +331,7 @@ ComposeFields.propTypes = {
   isSubmitting: PropTypes.bool,
   loading: PropTypes.bool,
   navigation: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
   profiles: PropTypes.array.isRequired,
   resetForm: PropTypes.func.isRequired,
   setFieldTouched: PropTypes.func.isRequired,

@@ -67,6 +67,7 @@ describe('Compose', () => {
       navigate: jest.fn(),
       setParams: jest.fn(),
     },
+    user: {},
     profiles: [
       {
         id: 1,
@@ -154,6 +155,18 @@ describe('Compose', () => {
     )
   })
 
+  test('notifies user if not allowed to post', () => {
+    const user = {
+      permissions: ['cannot_create_post'],
+    }
+
+    const wrapper = shallow(<ComposeFields {...defaultProps} user={user} />)
+
+    expect(wrapper.find(FormError).children().text()).toEqual(
+      'You do not have access to submit postings.'
+    )
+  })
+
   test('notifies user if no posting access on any profile', () => {
     const readOnlyProfiles = [
       {
@@ -166,6 +179,12 @@ describe('Compose', () => {
         area_ids: [2, 3],
         access: 'read_only',
       },
+      {
+        id: 3,
+        area_ids: [2, 3],
+        access: 'owner',
+        permissions: ['cannot_create_post'],
+      },
     ]
 
     const wrapper = shallow(
@@ -174,33 +193,6 @@ describe('Compose', () => {
 
     expect(wrapper.find(FormError).children().text()).toEqual(
       'You have no profiles with access to submit postings.'
-    )
-  })
-
-  test('notifies user if no posting access on selected profile', () => {
-    const mixedAccessProfiles = [
-      {
-        id: 1,
-        area_ids: [1],
-        access: 'owner',
-      },
-      {
-        id: 2,
-        area_ids: [2, 3],
-        access: 'read_only',
-      },
-    ]
-
-    const wrapper = shallow(
-      <ComposeFields
-        {...defaultProps}
-        profiles={mixedAccessProfiles}
-        values={{ profile: 1 }}
-      />
-    )
-
-    expect(wrapper.find(FormError).children().text()).toEqual(
-      'You do not have access to submit postings through this profile.'
     )
   })
 

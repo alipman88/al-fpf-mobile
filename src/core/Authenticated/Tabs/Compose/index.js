@@ -8,6 +8,7 @@ import { navigateWithToken } from '@common/actions/navigateWithToken'
 
 const mapStateToProps = (state) => ({
   areas: areas.selectors.getAreas(state),
+  user: profile.selectors.getUser(state),
   profiles: profile.selectors.getAvailableProfiles(state),
   loading: profile.selectors.getLoading(state),
   currentProfileId: profile.selectors.getCurrentProfileId(state),
