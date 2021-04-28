@@ -20,8 +20,10 @@ describe('Profile', () => {
         name: 'Three',
       },
     },
+    user: {},
     profile: {
       id: 4,
+      access: 'owner',
       area_ids: [1, 3],
       profile_plan: {
         plan_type: 'neighbor',
