@@ -68,6 +68,7 @@ export class Compose extends React.Component {
       loading,
       navigation,
       navigateWithToken,
+      user,
       profiles,
     } = this.props
 
@@ -123,6 +124,7 @@ export class Compose extends React.Component {
                 isSubmitting={isSubmitting}
                 loading={loading}
                 navigation={navigation}
+                user={user}
                 profiles={profiles}
                 resetForm={resetForm}
                 setFieldValue={setFieldValue}
@@ -151,6 +153,7 @@ Compose.propTypes = {
   loading: PropTypes.bool,
   navigation: PropTypes.object.isRequired,
   navigateWithToken: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
   profiles: PropTypes.array.isRequired,
   submitPost: PropTypes.func.isRequired,
   currentProfileId: PropTypes.number,

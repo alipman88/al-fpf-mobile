@@ -1,5 +1,5 @@
 import React from 'react'
-import { Linking, Platform } from 'react-native'
+import { Linking, Platform, View } from 'react-native'
 import PropTypes from 'prop-types'
 import capitalize from 'lodash/capitalize'
 import get from 'lodash/get'
@@ -23,10 +23,19 @@ export class Profile extends React.Component {
       hasAppleSubscription,
       navigateWithToken,
       navigation,
+      user,
       profile,
     } = this.props
 
     let subscriptionLink
+
+    const canCreateProfile = !(user.permissions || []).includes(
+      'cannot_create_profile'
+    )
+    const canManageProfile = profile.access === 'owner'
+    const canUpdateProfilePlan =
+      canManageProfile &&
+      !(profile.permissions || []).includes('cannot_update_profile_plan')
 
     // LATER: it would be helpful to also check whether the current Apple ID
     // has a subscription.  If so, and user doesn't have one, then we could
@@ -35,7 +44,7 @@ export class Profile extends React.Component {
 
     if (Platform.OS === 'ios') {
       // If current profile has IAP subscription, link to native IAP management URL
-      if (hasAppleSubscription) {
+      if (canManageProfile && hasAppleSubscription) {
         subscriptionLink = (
           <ExternalLink
             onPress={() =>
@@ -49,7 +58,7 @@ export class Profile extends React.Component {
         )
       }
       // If current profile can subscribe, show subscribe view link
-      else if (canSubscribe) {
+      else if (canSubscribe && canUpdateProfilePlan) {
         subscriptionLink = (
           <NavLink
             linkText='Upgrade FPF Plan'
@@ -65,21 +74,24 @@ export class Profile extends React.Component {
     return (
       <ScreenContainer withPadding={false} grey>
         <KeyboardAwareScrollView>
-          <Description>
-            To edit your account, click on the link below to open the FPF
-            website in your browser.
-          </Description>
-
-          <FieldLabel bottomMargin={0}>Profile type</FieldLabel>
-          <ExternalLink
-            hasBorder={!subscriptionLink}
-            hasLabel
-            onPress={() =>
-              navigateWithToken(`/user/profiles/${profile.id}/edit`)
-            }
-          >
-            {capitalize(profile.profile_plan.plan_type)}
-          </ExternalLink>
+          {canManageProfile && (
+            <View>
+              <Description>
+                To edit your account, click on the link below to open the FPF
+                website in your browser.
+              </Description>
+              <FieldLabel bottomMargin={0}>Profile type</FieldLabel>
+              <ExternalLink
+                hasBorder={!subscriptionLink}
+                hasLabel
+                onPress={() =>
+                  navigateWithToken(`/user/profiles/${profile.id}/edit`)
+                }
+              >
+                {capitalize(profile.profile_plan.plan_type)}
+              </ExternalLink>
+            </View>
+          )}
 
           {subscriptionLink}
 
@@ -109,33 +121,41 @@ export class Profile extends React.Component {
             </React.Fragment>
           )}
 
-          <ExternalLink
-            hasBorder
-            onPress={() =>
-              navigateWithToken(`/user/profiles/${profile.id}/edit`)
-            }
-          >
-            Change your address
-          </ExternalLink>
-          <ExternalLink
-            hasBorder
-            onPress={() =>
-              navigateWithToken(
-                '/user/profiles/new?disable_plan_type_change=true&profile%5Bprofile_plan_id%5D=3'
-              )
-            }
-          >
-            Add a second home
-          </ExternalLink>
-          <ExternalLink
-            onPress={() =>
-              navigateWithToken(
-                '/user/profiles/new?profile%5Bprofile_plan_id%5D=4'
-              )
-            }
-          >
-            Add government profile
-          </ExternalLink>
+          {canManageProfile && (
+            <ExternalLink
+              hasBorder
+              onPress={() =>
+                navigateWithToken(`/user/profiles/${profile.id}/edit`)
+              }
+            >
+              Change your address
+            </ExternalLink>
+          )}
+
+          {canCreateProfile && (
+            <ExternalLink
+              hasBorder
+              onPress={() =>
+                navigateWithToken(
+                  '/user/profiles/new?disable_plan_type_change=true&profile%5Bprofile_plan_id%5D=3'
+                )
+              }
+            >
+              Add a second home
+            </ExternalLink>
+          )}
+
+          {canCreateProfile && (
+            <ExternalLink
+              onPress={() =>
+                navigateWithToken(
+                  '/user/profiles/new?profile%5Bprofile_plan_id%5D=4'
+                )
+              }
+            >
+              Add government profile
+            </ExternalLink>
+          )}
         </KeyboardAwareScrollView>
       </ScreenContainer>
     )
@@ -153,5 +173,6 @@ Profile.propTypes = {
   hasAppleSubscription: PropTypes.bool,
   navigateWithToken: PropTypes.func.isRequired,
   navigation: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
 }

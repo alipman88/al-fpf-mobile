@@ -8,6 +8,7 @@ import { navigateWithToken } from '@common/actions/navigateWithToken'
 
 const mapStateToProps = (state, props) => ({
   areas: keyBy(areas.selectors.getAreas(state), 'id'),
+  user: profile.selectors.getUser(state),
   profile: profile.selectors.getNavigationProfile(state, props),
   ...profile.selectors.getNavigationProfileSubscriptionState(state, props),
 })
