@@ -69,7 +69,7 @@
     "redux-thunk": "^2.3.0",
     "rollbar-react-native": "^0.9.1",
     "styled-components": "^5.2.1",
-    "url-parse": "^1.4.7",
+    "url-parse": "^1.5.0",
     "yup": "^0.32.8"
   },
   "devDependencies": {
