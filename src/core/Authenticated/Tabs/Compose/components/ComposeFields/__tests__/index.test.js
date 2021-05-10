@@ -167,7 +167,7 @@ describe('Compose', () => {
     )
   })
 
-  test('notifies user if no posting access on any profile', () => {
+  test('notifies user if read only profile does not allow posting', () => {
     const readOnlyProfiles = [
       {
         id: 1,
@@ -179,6 +179,19 @@ describe('Compose', () => {
         area_ids: [2, 3],
         access: 'read_only',
       },
+    ]
+
+    const wrapper = shallow(
+      <ComposeFields {...defaultProps} profiles={readOnlyProfiles} />
+    )
+
+    expect(wrapper.find(FormError).children().text()).toEqual(
+      'You are not allowed to submit postings for this profile.'
+    )
+  })
+
+  test('notifies user if cannot create post profile does not allow posting', () => {
+    const readOnlyProfiles = [
       {
         id: 3,
         area_ids: [2, 3],
@@ -192,7 +205,7 @@ describe('Compose', () => {
     )
 
     expect(wrapper.find(FormError).children().text()).toEqual(
-      'You have no profiles with access to submit postings.'
+      'You are not allowed to submit postings for this profile.'
     )
   })
 
