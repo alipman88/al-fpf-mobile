@@ -161,4 +161,51 @@ describe('posts - slice', () => {
       ).toEqual(false)
     })
   })
+
+  describe('expire', () => {
+    test('expires orphaned data', () => {
+      let state = {
+        headlinesByIssue: { 1: [], 2: [] },
+        postsByIssue: { 1: [], 2: [] },
+        adsByIssue: { 1: [], 2: [] },
+        placementDateByIssue: { 1: [], 2: [] },
+        sharedPostsByIssue: { 1: [], 2: [] },
+        loading: false,
+        newsFromNeighboringNfsByIssue: { 1: [], 2: [] },
+        ocmMessageByIssue: { 1: [], 2: [] },
+        forumMessageByIssue: { 1: [], 2: [] },
+      }
+
+      state = posts.reducer(
+        state,
+        posts.actions.expire({ exceptIssueIds: [2] })
+      )
+
+      expect(state).toEqual({
+        headlinesByIssue: { 2: [] },
+        postsByIssue: { 2: [] },
+        adsByIssue: { 2: [] },
+        placementDateByIssue: { 2: [] },
+        sharedPostsByIssue: { 2: [] },
+        loading: false,
+        newsFromNeighboringNfsByIssue: { 2: [] },
+        ocmMessageByIssue: { 2: [] },
+        forumMessageByIssue: { 2: [] },
+      })
+
+      state = posts.reducer(state, posts.actions.expire({ exceptIssueIds: [] }))
+
+      expect(state).toEqual({
+        headlinesByIssue: {},
+        postsByIssue: {},
+        adsByIssue: {},
+        placementDateByIssue: {},
+        sharedPostsByIssue: {},
+        loading: false,
+        newsFromNeighboringNfsByIssue: {},
+        ocmMessageByIssue: {},
+        forumMessageByIssue: {},
+      })
+    })
+  })
 })

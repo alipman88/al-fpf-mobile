@@ -1,4 +1,6 @@
 import { createSlice, createSelector } from 'redux-starter-kit'
+import { omit, without } from 'lodash'
+
 import { resetAction } from '@common/resetAction'
 
 const initialState = {
@@ -71,6 +73,29 @@ export const posts = createSlice({
       },
       loading: false,
     }),
+    /**
+     * Remove posts and related content for issue ids that are not present in
+     * the payload's exceptIssueIds array.
+     */
+    expire: (state, { payload }) => {
+      const exceptIssueIds = payload.exceptIssueIds.map((i) => i.toString())
+      const omitExpiredIssues = (byIssue) =>
+        omit(byIssue, without(Object.keys(byIssue), ...exceptIssueIds))
+
+      return {
+        ...state,
+        postsByIssue: omitExpiredIssues(state.postsByIssue),
+        sharedPostsByIssue: omitExpiredIssues(state.sharedPostsByIssue),
+        headlinesByIssue: omitExpiredIssues(state.headlinesByIssue),
+        adsByIssue: omitExpiredIssues(state.adsByIssue),
+        placementDateByIssue: omitExpiredIssues(state.placementDateByIssue),
+        newsFromNeighboringNfsByIssue: omitExpiredIssues(
+          state.newsFromNeighboringNfsByIssue
+        ),
+        ocmMessageByIssue: omitExpiredIssues(state.ocmMessageByIssue),
+        forumMessageByIssue: omitExpiredIssues(state.forumMessageByIssue),
+      }
+    },
   },
   extraReducers: {
     [resetAction]: () => ({

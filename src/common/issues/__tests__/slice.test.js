@@ -13,6 +13,20 @@ describe('issues - slice', () => {
     })
   })
 
+  test('getIssueIds returns an array of ids', () => {
+    const state = {
+      issuesByAreaId: {
+        1: [{ id: 1 }, { id: 2 }],
+        10: [{ id: 10 }],
+      },
+    }
+
+    const expectedIds = [1, 2, 10]
+    expect(issues.selectors.getIssueIds({ main: { issues: state } })).toEqual(
+      expectedIds
+    )
+  })
+
   test('setLoading sets loading state', () => {
     const state = issues.reducer(
       { firstLoadOfIssues: new Date() },
