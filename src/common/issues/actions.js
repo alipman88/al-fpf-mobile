@@ -1,4 +1,5 @@
-import { issues } from './slice'
+import { issues, maxIssuesCount } from './slice'
+import { posts } from '@common/posts/slice'
 import { getAuthorized } from '@common/api'
 import { appMessage } from '@components/AppMessage/slice'
 import { resetAction } from '@common/resetAction'
@@ -15,7 +16,7 @@ export const getIssues = (areaId, navigation, resetForumAction) => async (
   try {
     dispatch(issues.actions.setLoading(true))
     const response = await getAuthorized(
-      `/areas/${areaId}/issues?page=1&count=30`,
+      `/areas/${areaId}/issues?page=1&count=${maxIssuesCount}`,
       getState()
     )
 
@@ -29,6 +30,11 @@ export const getIssues = (areaId, navigation, resetForumAction) => async (
         areaId,
       })
     )
+
+    // After fetching new issues, old ones may have been removed.  Expire
+    // orphaned posts for missing issues for all areas.
+    const issueIds = issues.selectors.getIssueIds(getState())
+    dispatch(posts.actions.expire({ exceptIssueIds: issueIds }))
   } catch (e) {
     dispatch(appMessage.actions.setAppError(responseError(e)))
     if (e.response.status === 401) {
@@ -81,7 +87,7 @@ export const fetchSpecificIssue = (
     dispatch(areas.actions.setCurrentAreaId(areaId))
     await dispatch(getIssues(areaId, navigation))
 
-    // if the desired issue is not in the latest 30 for that forum
+    // if the desired issue is not in the persisted issues for that forum
     const issuesForArea = issues.selectors.getIssuesForArea(getState(), areaId)
     if (!issuesForArea.find((issue) => issue.id === issueId)) {
       await dispatch(

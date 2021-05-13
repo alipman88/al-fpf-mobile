@@ -10,6 +10,8 @@ const initialState = {
   loading: false,
 }
 
+export const maxIssuesCount = 30
+
 export const issues = createSlice({
   slice: 'issues',
   initialState: {
@@ -63,7 +65,9 @@ export const issues = createSlice({
       newIssues = newIssues.sort((a, b) => {
         return b.number - a.number
       })
-      newIssues = newIssues.slice(0, 30)
+
+      // Keep only the latest issues
+      newIssues = newIssues.slice(0, maxIssuesCount)
 
       return {
         ...state,
@@ -115,7 +119,18 @@ issues.selectors = {
     [path],
     (issues) => issues.firstLoadOfIssues
   ),
+  /**
+   * Returns a hash of area ids to arrays of issue hashes.
+   */
   getIssues: createSelector([path], (issues) => issues.issuesByAreaId),
+  /**
+   * Returns an array of all issue ids present in the state.
+   */
+  getIssueIds: createSelector([path], (issues) =>
+    Object.values(issues.issuesByAreaId).flatMap((issuesForArea) =>
+      issuesForArea.map((issue) => issue.id)
+    )
+  ),
   getCurrentIssueId: createSelector([path], (issues) => issues.currentIssueId),
   getLoading: createSelector([path], (issues) => issues.loading),
   getIssuesForArea,

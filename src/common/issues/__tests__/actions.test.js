@@ -1,6 +1,7 @@
 import { api } from '@common/api'
 import { getIssues, fetchSpecificIssue } from '../actions'
 import { issues } from '../slice'
+import { posts } from '@common/posts/slice'
 import { appMessage } from '@components/AppMessage/slice'
 import { areas } from '@common/areas'
 import { spinner } from '@app/Spinner/slice'
@@ -34,7 +35,19 @@ describe('issues actions', () => {
     }))
     const dispatch = jest.fn()
 
-    await getIssues(1)(dispatch, getState)
+    const state = () => ({
+      ...getState(),
+      main: {
+        issues: {
+          firstLoadOfIssues: null,
+          issuesByAreaId: {
+            1: [{ id: 1 }],
+          },
+        },
+      },
+    })
+
+    await getIssues(1)(dispatch, state)
 
     expect(getSpy).toHaveBeenCalledWith('/areas/1/issues?page=1&count=30', {
       headers: {
@@ -43,9 +56,16 @@ describe('issues actions', () => {
     })
 
     expect(dispatch).toHaveBeenCalledWith(issues.actions.setLoading(true))
+
     expect(dispatch).toHaveBeenCalledWith(
       issues.actions.setIssues({ issues: [{ id: 1 }], areaId: 1 })
     )
+
+    expect(dispatch).toHaveBeenCalledWith(
+      posts.actions.expire({ exceptIssueIds: [1] })
+    )
+
+    expect(dispatch).toHaveBeenCalledWith(issues.actions.setLoading(false))
 
     getSpy.mockRestore()
   })
