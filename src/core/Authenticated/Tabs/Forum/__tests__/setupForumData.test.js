@@ -67,11 +67,32 @@ describe('setupForumData', () => {
     expect(dispatch).toHaveBeenCalledWith('getAppSettings')
     expect(dispatch).toHaveBeenCalledWith('getAreas')
     // called with zero to reset it first
-    expect(dispatch).toHaveBeenCalledWith(areas.actions.setCurrentAreaId(0))
+    expect(dispatch).toHaveBeenCalledWith(areas.actions.setCurrentAreaId(null))
     expect(dispatch).toHaveBeenCalledWith(areas.actions.setCurrentAreaId(2))
     // reset the current issue
     expect(dispatch).toHaveBeenCalledWith(issues.actions.setCurrentIssueId(0))
 
     expect(dispatch).toHaveBeenCalledTimes(6)
+  })
+
+  test('if no available areas, currentAreaId set to null', async () => {
+    const dispatch = jest.fn()
+    const getState = () => ({
+      main: {
+        areas: {
+          areas: [],
+          currentAreaId: null,
+        },
+        profile: {
+          user: {
+            profiles: [],
+          },
+          currentProfileId: 1,
+        },
+      },
+    })
+    await setupForumData()(dispatch, getState)
+
+    expect(dispatch).toHaveBeenCalledWith(areas.actions.setCurrentAreaId(null))
   })
 })

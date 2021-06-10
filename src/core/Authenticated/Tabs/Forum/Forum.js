@@ -10,6 +10,7 @@ import {
   requestMessagingPermission,
 } from '@common/notifications'
 import { ScreenContainer } from '@components/ScreenContainer'
+import { ExternalLink } from '@components/ExternalLink'
 import { ForumContainer } from './styledComponents'
 import { ForumPost } from './components/ForumPost'
 import { Advertisement } from './components/Advertisement'
@@ -117,7 +118,7 @@ export class Forum extends React.Component {
     const { currentAreaId, areas, navigation } = this.props
 
     if (
-      currentAreaId !== 0 &&
+      currentAreaId &&
       (prevProps.areas !== areas || prevProps.currentAreaId !== currentAreaId)
     ) {
       this.setTitleFromArea()
@@ -303,6 +304,12 @@ export class Forum extends React.Component {
         >
           <OtherIssues navigation={navigation} toast={this.toastRef} />
           <ForumContainer>
+            {this.props.hasAreaAccess === false && (
+              <ExternalLink
+                content='You have no active profiles on your account! Create a new one at frontporchforum.com'
+                onPress={() => navigateWithToken('/user')}
+              />
+            )}
             {Boolean(currentIssue) && (
               <InThisIssue
                 number={currentIssue.number}
@@ -334,6 +341,7 @@ Forum.propTypes = {
   fetchSpecificIssue: PropTypes.func.isRequired,
   getContents: PropTypes.func.isRequired,
   getIssues: PropTypes.func.isRequired,
+  hasAreaAccess: PropTypes.bool.isRequired,
   issues: PropTypes.array.isRequired,
   loading: PropTypes.bool,
   navigation: PropTypes.object.isRequired,

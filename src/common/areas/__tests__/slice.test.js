@@ -5,7 +5,8 @@ describe('areas - slice', () => {
     const data = areas.reducer(undefined, {})
     expect(data).toEqual({
       areas: [],
-      currentAreaId: 0,
+      currentAreaId: null,
+      hasAreaAccess: true,
       loading: false,
       neighboringAreas: {},
     })

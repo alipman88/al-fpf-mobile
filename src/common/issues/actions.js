@@ -13,6 +13,8 @@ export const getIssues = (areaId, navigation, resetForumAction) => async (
   dispatch,
   getState
 ) => {
+  if (!areaId) return
+
   try {
     dispatch(issues.actions.setLoading(true))
     const response = await getAuthorized(
