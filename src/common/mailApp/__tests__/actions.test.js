@@ -1,17 +1,21 @@
-import { ActionSheetIOS, Linking } from 'react-native'
+import { ActionSheetIOS, Linking, Platform } from 'react-native'
 
 import { chooseMailApp } from '../actions'
 // import { mailApp } from '../slice'
 
 describe('mailApp - actions', () => {
   const dispatch = jest.fn()
+  const originalPlatform = Platform.OS
 
   afterEach(() => {
     dispatch.mockReset()
+    Platform.OS = originalPlatform
   })
 
   describe('chooseMailApp', () => {
-    test('opens a mailto url with no apps installed', async () => {
+    test('opens a mailto url with no apps installed (Android)', async () => {
+      Platform.OS = 'android'
+
       const canOpenURLSpy = jest
         .spyOn(Linking, 'canOpenURL')
         .mockResolvedValue(false)
@@ -31,7 +35,9 @@ describe('mailApp - actions', () => {
       canOpenURLSpy.mockRestore()
     })
 
-    test('opens a mailto url with apps installed but none chosen', async () => {
+    test('opens a mailto url with apps installed but none chosen (Android)', async () => {
+      Platform.OS = 'android'
+
       const canOpenURLSpy = jest
         .spyOn(Linking, 'canOpenURL')
         .mockResolvedValue(true)
@@ -56,6 +62,27 @@ describe('mailApp - actions', () => {
       openURLSpy.mockRestore()
       canOpenURLSpy.mockRestore()
       actionSheetSpy.mockRestore()
+    })
+
+    test('does not open a mailto url with no apps installed (iOS)', async () => {
+      Platform.OS = 'ios'
+
+      const canOpenURLSpy = jest
+        .spyOn(Linking, 'canOpenURL')
+        .mockResolvedValue(false)
+
+      const openURLSpy = jest.spyOn(Linking, 'openURL')
+
+      await chooseMailApp()(dispatch, () => ({}))
+      await chooseMailApp({ toEmail: 'foo@bar.com', subject: 'bar' })(
+        dispatch,
+        () => ({})
+      )
+
+      expect(openURLSpy).not.toHaveBeenCalled()
+
+      openURLSpy.mockRestore()
+      canOpenURLSpy.mockRestore()
     })
 
     test('opens a gmail url', async () => {
