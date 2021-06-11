@@ -4,6 +4,7 @@
 
 import { ActionSheetIOS, Linking, Platform } from 'react-native'
 import { mailApp } from './slice'
+import { appMessage } from '@components/AppMessage/slice'
 
 class EmailException {
   constructor(message) {
@@ -85,8 +86,10 @@ function askAppChoice(
         availableApps.push(app)
       }
     }
-    if (availableApps.length < 2) {
-      return resolve(availableApps[0] || null)
+    if (availableApps.length === 0) {
+      return resolve({ app: null, status: 'unavailable' })
+    } else if (availableApps.length === 1) {
+      return resolve({ app: availableApps[0], status: 'selected' })
     }
 
     const options = availableApps.map((app) => titles[app])
@@ -101,9 +104,9 @@ function askAppChoice(
       },
       (buttonIndex) => {
         if (buttonIndex === options.length - 1) {
-          return resolve(null)
+          return resolve({ app: null, status: 'canceled' })
         }
-        return resolve(availableApps[buttonIndex])
+        return resolve({ app: availableApps[buttonIndex], status: 'selected' })
       }
     )
 
@@ -147,10 +150,29 @@ export const chooseMailApp = (options = {}) => async (dispatch, getState) => {
   // ask the user which app they prefer
   if (!app && Platform.OS === 'ios') {
     const { title, message, cancelLabel } = options
-    app = await askAppChoice(title, message, cancelLabel, subject, toEmail)
-    if (app) {
-      dispatch(mailApp.actions.setPreferredApp(app))
+    let status
+    ;({ app, status } = await askAppChoice(
+      title,
+      message,
+      cancelLabel,
+      subject,
+      toEmail
+    ))
+
+    if (status === 'unavailable') {
+      // No application available to open mailto links - alert user
+      return dispatch(
+        appMessage.actions.setAppError(
+          'No application configured to handle email links'
+        )
+      )
+    } else if (status === 'canceled') {
+      // User clicked cancel button when asked to select app - take no action
+      return
     }
+
+    // Use user-selected app to open mailto link
+    dispatch(mailApp.actions.setPreferredApp(app))
   }
 
   return Linking.openURL(getComposeUrl(app, subject, toEmail))
