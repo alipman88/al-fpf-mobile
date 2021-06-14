@@ -11,10 +11,8 @@ export const BusinessInfo = ({
   categories,
   loading,
 }) => (
-  <Formik
-    initialValues={newUser.business}
-    validationSchema={validations}
-    render={({ errors, setFieldValue, setFieldTouched, touched, values }) => (
+  <Formik initialValues={newUser.business} validationSchema={validations}>
+    {({ errors, setFieldValue, setFieldTouched, touched, values }) => (
       <BusinessInfoFields
         errors={errors}
         setFieldValue={setFieldValue}
@@ -28,7 +26,7 @@ export const BusinessInfo = ({
         loading={loading}
       />
     )}
-  />
+  </Formik>
 )
 
 BusinessInfo.propTypes = {

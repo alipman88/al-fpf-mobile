@@ -73,7 +73,8 @@ export const LoginComponent = ({ navigation, login, resendEmail }) => {
             actions.setSubmitting(false)
           }}
           validationSchema={validations}
-          render={({
+        >
+          {({
             errors,
             handleSubmit,
             isSubmitting,
@@ -94,7 +95,7 @@ export const LoginComponent = ({ navigation, login, resendEmail }) => {
               navigation={navigation}
             />
           )}
-        />
+        </Formik>
       </KeyboardAwareScrollView>
     </ScreenContainer>
   )
