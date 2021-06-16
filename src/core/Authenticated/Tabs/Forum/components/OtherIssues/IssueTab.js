@@ -51,5 +51,5 @@ IssueTab.propTypes = {
   onTapIssue: PropTypes.func.isRequired,
   toggleIssueUnread: PropTypes.func.isRequired,
   isUnread: PropTypes.bool.isRequired,
-  currentAreaId: PropTypes.number.isRequired,
+  currentAreaId: PropTypes.number,
 }

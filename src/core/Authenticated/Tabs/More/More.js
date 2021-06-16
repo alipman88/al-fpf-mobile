@@ -145,6 +145,6 @@ export class More extends React.Component {
 
 More.propTypes = {
   chooseMailApp: PropTypes.func.isRequired,
-  currentAreaId: PropTypes.number.isRequired,
+  currentAreaId: PropTypes.number,
   navigateWithToken: PropTypes.func.isRequired,
 }

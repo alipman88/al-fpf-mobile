@@ -101,7 +101,7 @@ export class OtherIssues extends React.Component {
 OtherIssues.propTypes = {
   issues: PropTypes.array.isRequired,
   currentIssueId: PropTypes.number.isRequired,
-  currentAreaId: PropTypes.number.isRequired,
+  currentAreaId: PropTypes.number,
   setCurrentIssueId: PropTypes.func.isRequired,
   toast: PropTypes.shape({ current: PropTypes.instanceOf(Toast) }).isRequired,
   toggleIssueUnread: PropTypes.func.isRequired,
