@@ -102,7 +102,7 @@
       "./jest.setup.js"
     ],
     "transformIgnorePatterns": [
-      "node_modules/(?!(jest-)?react-native|react-navigation|@react-native-community|@react-native-picker|react-native-autolink|autolinker)"
+      "node_modules/(?!(jest-)?@?react-native|react-navigation|@react-native-community|@react-native-picker|react-native-autolink|autolinker)"
     ]
   },
   "resolutions": {
