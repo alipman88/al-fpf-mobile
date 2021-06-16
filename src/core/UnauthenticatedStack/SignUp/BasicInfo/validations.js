@@ -1,6 +1,5 @@
 import * as yup from 'yup'
 import { api } from '@common/api'
-import { validateEmail } from '@common/validations'
 
 export const validateFirstName = (string) => {
   return /^(?=.*[a-zA-Z\u00C0-\u017F])[a-zA-Z\u00C0-\u017F.'"\-,/ ()&]*$/.test(
@@ -58,9 +57,9 @@ export const validations = yup.object().shape({
     .trim(),
   email: yup
     .string()
+    .email()
     .required()
     .trim()
-    .test('email', 'email must be a valid email', validateEmail)
     .test('email', 'email is already in use', validateEmailAvailability),
   password: yup
     .string()
