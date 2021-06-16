@@ -14,8 +14,8 @@ export const logoutUser = (navigation, values, setLoading) => async (
   } catch (e) {
   } finally {
     dispatch(resetAction())
+    setLoading(false)
     navigation.navigate('SplashScreen')
     navigation.dispatch(createResetStackTo('Login'))
-    setLoading(false)
   }
 }

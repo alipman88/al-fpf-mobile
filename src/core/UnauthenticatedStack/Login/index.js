@@ -64,13 +64,13 @@ export const LoginComponent = ({ navigation, login, resendEmail }) => {
             actions.setSubmitting(true)
             try {
               await login(values)
+              actions.setSubmitting(false)
               navigation.navigate('Authenticated')
             } catch (e) {
               actions.setFieldError('email', responseError(e))
               actions.setFieldError('button', responseError(e, 'button'))
+              actions.setSubmitting(false)
             }
-
-            actions.setSubmitting(false)
           }}
           validationSchema={validations}
         >
