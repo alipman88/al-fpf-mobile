@@ -85,7 +85,7 @@ export const DrawerMenu = ({
 
 DrawerMenu.propTypes = {
   areas: PropTypes.array.isRequired,
-  currentAreaId: PropTypes.number.isRequired,
+  currentAreaId: PropTypes.number,
   currentProfile: PropTypes.object,
   profiles: PropTypes.array.isRequired,
   setCurrentAreaId: PropTypes.func.isRequired,
