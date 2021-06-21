@@ -325,12 +325,21 @@ describe('profile - slice', () => {
             {
               id: 5,
               approved: true,
-              profile_plan: { plan_type: 'neighbor', has_upgrades: false },
+              profile_plan: { plan_type: 'neighbor' },
+              user_available_upgrades: [],
             },
             {
               id: 6,
               approved: true,
-              profile_plan: { plan_type: 'business', has_upgrades: true },
+              profile_plan: { plan_type: 'business' },
+              user_available_upgrades: [
+                {
+                  id: 1,
+                  name: 'Business (Standard)',
+                  plan_type: 'business',
+                  tier: 'standard',
+                },
+              ],
             },
             {
               id: 7,

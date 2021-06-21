@@ -135,7 +135,7 @@ const getSubscriptionState = createSelector(
       const canSubscribe =
         !hasSubscription &&
         !userHasAppleSubscription &&
-        get(profile, 'profile_plan.has_upgrades')
+        !!get(profile, 'user_available_upgrades.length')
 
       data[profile.id] = {
         canSubscribe,
