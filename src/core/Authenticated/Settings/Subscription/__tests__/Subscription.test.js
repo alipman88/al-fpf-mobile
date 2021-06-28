@@ -17,11 +17,19 @@ describe('Subscription', () => {
       area_ids: [1, 3],
       profile_plan: {
         id: 1,
-        name: 'Business',
+        name: 'Business (Free)',
         plan_type: 'business',
-        tier: 'standard',
-        has_upgrades: true,
+        tier: 'free',
       },
+      user_available_upgrades: [
+        {
+          id: 1,
+          name: 'Business (Standard)',
+          plan_type: 'business',
+          tier: 'standard',
+          description: 'Hello\nworld',
+        },
+      ],
       home_nf: 1,
       name: 'foo',
     },
@@ -76,6 +84,16 @@ describe('Subscription', () => {
     expect(b2.children().text()).toEqual('$95.99 / Year')
   })
 
+  test('receives dynamic profile plan descriptions from api', () => {
+    const wrapper = shallow(<Subscription {...defaultProps} />)
+
+    const d1 = wrapper.find(Description).at(0)
+    const d2 = wrapper.find(Description).at(1)
+
+    expect(d1.text()).toEqual('Hello')
+    expect(d2.text()).toEqual('world')
+  })
+
   test('has subscription renders information only', () => {
     const wrapper = shallow(
       <Subscription {...{ ...defaultProps, hasSubscription: true }} />
@@ -83,7 +101,7 @@ describe('Subscription', () => {
 
     expect(wrapper.find(Button).length).toEqual(0)
     expect(wrapper.find(Description).text()).toEqual(
-      'You are subscribed to the FPF Business standard plan.'
+      'You are subscribed to the FPF free business plan.'
     )
   })
 })

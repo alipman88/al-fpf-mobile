@@ -80,114 +80,29 @@ export class Subscription extends React.Component {
           {/* prettier-ignore */}
           <Description>
             You are subscribed to the
-            FPF {profilePlan.name} {profilePlan.tier} plan.
+            FPF {profilePlan.tier} {profilePlan.plan_type} plan.
           </Description>
         </PageWrapper>
       )
-    } else if (profilePlan.has_upgrades) {
-      let paymentOptions
-      if (profilePlan.plan_type === 'business') {
-        paymentOptions = (
-          <>
-            <Title>Business Plan</Title>
+    } else if (profile.user_available_upgrades.length) {
+      let paymentOptions = profile.user_available_upgrades.map((plan) => (
+        <React.Fragment key={plan.id}>
+          <Title>{plan.name}</Title>
 
-            <Description>
-              Upgrade to FPF Enhanced Business Access Plan to receive these
-              benefits:
-            </Description>
+          {plan.description
+            .match(/[^\r\n]+/g) // split on line breaks
+            .map((segment) => (
+              <Description key={plan.id}>{segment}</Description>
+            ))}
 
-            <Description>
-              • Ability to post on your local FPF up to 12 times/year
-            </Description>
-            <Description>• Enhanced listing in FPF Directory</Description>
-            <Description>
-              • Featured listing in your neighborhood Forum
-            </Description>
+          {products
+            .filter((product) =>
+              product.productId.startsWith(`${plan.tier}_${plan.plan_type}_`)
+            )
+            .map((product) => this.subscriptionButton(product))}
+        </React.Fragment>
+      ))
 
-            {products
-              .filter((product) =>
-                product.productId.startsWith('enhanced_business_')
-              )
-              .map((product) => this.subscriptionButton(product))}
-
-            <Description>
-              Upgrade to FPF Standard Business Access Plan to receive these
-              benefits:
-            </Description>
-
-            <Description>
-              • Ability to post on your local FPF up to 12 times/year
-            </Description>
-            <Description>• Enhanced listing in FPF Directory</Description>
-
-            {products
-              .filter((product) =>
-                product.productId.startsWith('standard_business_')
-              )
-              .map((product) => this.subscriptionButton(product))}
-          </>
-        )
-      } else if (profilePlan.plan_type === 'government') {
-        paymentOptions = (
-          <>
-            <Title>Government Plan</Title>
-
-            <Description>
-              Upgrade to FPF Standard Government Access Plan to receive these
-              benefits:
-            </Description>
-            <Description>
-              • Ability to post on your local FPF up to 10 times/month
-            </Description>
-
-            {products
-              .filter((product) =>
-                product.productId.startsWith('standard_government_')
-              )
-              .map((product) => this.subscriptionButton(product))}
-          </>
-        )
-      } else if (profilePlan.plan_type === 'nonprofit') {
-        paymentOptions = (
-          <>
-            <Title>Nonprofit Plan</Title>
-
-            <Description>
-              Upgrade to FPF Enhanced Nonprofit Access Plan to receive these
-              benefits:
-            </Description>
-
-            <Description>
-              • Ability to post on your local FPF up to 24 times/year
-            </Description>
-            <Description>• Enhanced listing in FPF Directory</Description>
-            <Description>
-              • Featured listing in your neighborhood Forum
-            </Description>
-
-            {products
-              .filter((product) =>
-                product.productId.startsWith('enhanced_nonprofit_')
-              )
-              .map((product) => this.subscriptionButton(product))}
-
-            <Description>
-              Upgrade to FPF Standard Nonprofit Access Plan to receive these
-              benefits:
-            </Description>
-            <Description>
-              • Ability to post on your local FPF up to 24 times/year
-            </Description>
-            <Description>• Enhanced listing in FPF Directory</Description>
-
-            {products
-              .filter((product) =>
-                product.productId.startsWith('standard_nonprofit_')
-              )
-              .map((product) => this.subscriptionButton(product))}
-          </>
-        )
-      }
       content = (
         <PageWrapper>
           <Spinner visible={purchasing} />
