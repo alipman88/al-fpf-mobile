@@ -6,6 +6,7 @@ buildscript {
         minSdkVersion = 24 // Android 7
         compileSdkVersion = 29 // Android 10
         targetSdkVersion = 29
+        ndkVersion = "20.1.5948944"
         supportLibVersion = "29.0.0"
         playServicesVersion = "17.0.0"
         androidMapsUtilsVersion = "0.6.1"
@@ -15,7 +16,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:3.5.3")
+        classpath("com.android.tools.build:gradle:4.0.0")
         classpath("com.google.gms:google-services:4.3.4")
 
         // NOTE: Do not place your application dependencies here; they belong

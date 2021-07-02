@@ -143,7 +143,8 @@ export class Search extends React.Component {
             })
           }}
           validationSchema={validations}
-          render={({
+        >
+          {({
             errors,
             handleSubmit,
             setFieldTouched,
@@ -184,7 +185,7 @@ export class Search extends React.Component {
               />
             </ScrollView>
           )}
-        />
+        </Formik>
       </ScreenContainer>
     )
   }

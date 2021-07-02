@@ -105,7 +105,8 @@ export class Compose extends React.Component {
           }}
           validationSchema={validations}
           onSubmit={this.onSubmit}
-          render={({
+        >
+          {({
             errors,
             handleSubmit,
             isSubmitting,
@@ -141,7 +142,7 @@ export class Compose extends React.Component {
               )}
             </React.Fragment>
           )}
-        />
+        </Formik>
       </ScreenContainer>
     )
   }

@@ -55,6 +55,7 @@ describe('Compose', () => {
       },
     ],
     submitPost: jest.fn(),
+    user: {},
     currentProfileId: 1,
   }
 

@@ -31,15 +31,16 @@ export class Waitlist extends React.Component {
           ...newUser.address,
           ...newUser.waitlist,
         }}
-        render={(props) => (
+        validationSchema={validations}
+      >
+        {(props) => (
           <WaitlistFields
             {...props}
             navigation={navigation}
             newUser={newUser}
           />
         )}
-        validationSchema={validations}
-      />
+      </Formik>
     )
   }
 }

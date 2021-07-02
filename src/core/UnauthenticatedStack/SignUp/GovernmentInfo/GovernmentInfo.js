@@ -20,14 +20,15 @@ export class GovernmentInfo extends React.Component {
         initialValues={newUser.government}
         onSubmit={(values) => handleSubmit(values)}
         validationSchema={validations}
-        render={(props) => (
+      >
+        {(props) => (
           <GovernmentInfoFields
             {...props}
             navigation={navigation}
             governmentTitles={governmentTitles}
           />
         )}
-      />
+      </Formik>
     )
   }
 }

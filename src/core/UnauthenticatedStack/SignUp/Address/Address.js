@@ -33,7 +33,9 @@ export class Address extends React.Component {
       <Formik
         onSubmit={this.onSubmit}
         initialValues={newUser.address}
-        render={(props) => (
+        validationSchema={validations}
+      >
+        {(props) => (
           <AddressFields
             {...props}
             navigation={navigation}
@@ -42,8 +44,7 @@ export class Address extends React.Component {
             profileType={profileType}
           />
         )}
-        validationSchema={validations}
-      />
+      </Formik>
     )
   }
 }
