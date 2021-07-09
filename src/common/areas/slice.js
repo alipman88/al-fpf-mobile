@@ -65,6 +65,10 @@ areas.selectors = {
   ...areas.selectors,
   getAreas,
   getAreasIdMap: createSelector([getAreas], (areas) => keyBy(areas, 'id')),
+  // returns home forums & neighboring forums
+  getFullAreasIdMap: createSelector([getAreas], (areas) =>
+    keyBy(areas.concat(areas.flatMap((area) => area.neighboringAreas)), 'id')
+  ),
   getCurrentAreaId: createSelector([path], (areas) => areas.currentAreaId),
   getLoading: createSelector([path], (areas) => areas.loading),
   getNeighboringAreas: createSelector(
