@@ -5,6 +5,7 @@ import { WebView as BaseWebView } from 'react-native-webview'
 import PropTypes from 'prop-types'
 import navigationService from '@common/utils/navigationService'
 import queryString from 'query-string'
+import Spinner from 'react-native-loading-spinner-overlay'
 
 export const WebView = (props) => {
   const { uri, onLoadStart, ...restProps } = props
@@ -40,6 +41,8 @@ export const WebView = (props) => {
       source={newSource}
       originWhitelist={whitelistedOrigins}
       applicationNameForUserAgent={'FpfMobileApp/802'}
+      startInLoadingState={true}
+      renderLoading={() => <Spinner visible={true} />}
       onShouldStartLoadWithRequest={(request) => {
         if (!request.url.startsWith(Config.WEBSITE_HOST)) return false
 
