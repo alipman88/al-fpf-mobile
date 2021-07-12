@@ -9,6 +9,7 @@ import { Button } from '@components/Button'
 import {
   PostDate,
   PostContainerBordered,
+  PostLink,
   ShowMoreButton,
 } from '../styledComponents'
 import Autolink from 'react-native-autolink'
@@ -44,12 +45,18 @@ describe('Post', () => {
     moreText: 'Read',
     postTruncateLength: 200,
     onTapCategory: jest.fn(),
+    fetchSpecificIssue: jest.fn(),
     includeBottomButtons: true,
     navigation: {
       navigate: jest.fn(),
     },
     chooseMailApp: jest.fn(),
     areasIdMap: {
+      2: {
+        id: 2,
+      },
+    },
+    fullAreasIdMap: {
       2: {
         id: 2,
       },
@@ -104,6 +111,8 @@ describe('Post', () => {
         postTruncateLength={6}
         chooseMailApp={jest.fn()}
         navigation={{}}
+        areasIdMap={{ 2: { id: 2 } }}
+        fullAreasIdMap={{ 2: { id: 2 } }}
       />
     )
     expect(wrapper.find(Autolink).props().text).toEqual('Lor...')
@@ -163,5 +172,23 @@ describe('Post', () => {
       toEmail: defaultProps.post.user_email,
       title: 'Email author',
     })
+  })
+
+  test('"See more postings" button press', () => {
+    const post = { ...defaultProps.post, is_shared_post: true }
+    const wrapper = shallow(<Post {...defaultProps} post={post} />)
+    wrapper.find(PostLink).last().simulate('press')
+    expect(defaultProps.fetchSpecificIssue).toHaveBeenCalledWith(
+      defaultProps.post.area_id,
+      defaultProps.post.issue_id,
+      defaultProps.post.issue_number,
+      defaultProps.navigation
+    )
+  })
+
+  test('Inaccessible shared post area does not have "See more postings" button', () => {
+    const post = { ...defaultProps.post, area_id: 123, is_shared_post: true }
+    const wrapper = shallow(<Post {...defaultProps} post={post} />)
+    expect(wrapper.find(PostLink).length).toEqual(0)
   })
 })

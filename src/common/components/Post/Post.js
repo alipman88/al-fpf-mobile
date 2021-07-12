@@ -3,6 +3,7 @@ import { TouchableOpacity } from 'react-native'
 import Autolink from 'react-native-autolink'
 import analytics from '@react-native-firebase/analytics'
 import PropTypes from 'prop-types'
+import { Text } from '@components/Text'
 
 import format from 'date-fns/format'
 
@@ -61,6 +62,7 @@ export class Post extends React.Component {
     const {
       post,
       areasIdMap,
+      fullAreasIdMap,
       chooseMailApp,
       postTruncateLength,
       fetchSpecificIssue,
@@ -161,20 +163,25 @@ export class Post extends React.Component {
           </PostAuthor>
           {post.is_shared_post && (
             <PostShared>
-              Shared from a neighboring FPF (
-              <PostLink
-                onPress={() =>
-                  fetchSpecificIssue(
-                    post.area_id,
-                    post.issue_id,
-                    post.issue_number,
-                    navigation
-                  )
-                }
-              >
-                See more postings
-              </PostLink>
-              )
+              Shared from a neighboring FPF
+              {fullAreasIdMap[post.area_id] && (
+                <>
+                  <Text> (</Text>
+                  <PostLink
+                    onPress={() =>
+                      fetchSpecificIssue(
+                        post.area_id,
+                        post.issue_id,
+                        post.issue_number,
+                        navigation
+                      )
+                    }
+                  >
+                    See more postings
+                  </PostLink>
+                  <Text>)</Text>
+                </>
+              )}
             </PostShared>
           )}
           {Boolean(post.event.start_date) && (
@@ -234,7 +241,8 @@ export class Post extends React.Component {
 
 Post.propTypes = {
   post: PropTypes.object.isRequired,
-  areasIdMap: PropTypes.object,
+  areasIdMap: PropTypes.object.isRequired,
+  fullAreasIdMap: PropTypes.object.isRequired,
   postTruncateLength: PropTypes.number.isRequired,
   children: PropTypes.element,
   chooseMailApp: PropTypes.func.isRequired,
