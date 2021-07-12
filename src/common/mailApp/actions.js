@@ -53,7 +53,6 @@ function getComposeUrl(app, subject = '', toEmail = '') {
 function isAppInstalled(app, subject, toEmail) {
   return new Promise((resolve) => {
     if (!(app in prefixes)) {
-      console.log(app, 'not in', prefixes)
       return resolve(false)
     }
 

@@ -9,6 +9,7 @@ export class Directory extends React.Component {
 
     return (
       <WebView
+        navigation={this.props.navigation}
         source={{
           uri: Config.WEBSITE_HOST + '/directory',
           headers: {
@@ -22,4 +23,5 @@ export class Directory extends React.Component {
 
 Directory.propTypes = {
   accessToken: PropTypes.string,
+  navigation: PropTypes.object.isRequired,
 }
