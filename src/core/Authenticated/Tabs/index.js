@@ -152,11 +152,20 @@ export const Tabs = createBottomTabNavigator(
 Tabs.navigationOptions = ({ navigation }) => {
   const { params, routeName } = navigation.state.routes[navigation.state.index]
 
-  // Sadly we cannot pull out the static props title from this
-  // To set a different title, do something similar to Forum.js and call setParams
-  const headerTitle = get(params, 'navTitle', routeName)
+  // To set a non-static value for any of these options, call navigation.setParams, e.g.:
+  //
+  //    this.props.navigation.setParams({
+  //      navTitle: areaName,
+  //    })
 
-  return {
-    headerTitle,
+  const headerTitle = get(params, 'navTitle', routeName)
+  const headerLeft = get(params, 'headerLeft')
+
+  const options = { headerTitle }
+
+  if (headerLeft !== undefined) {
+    options.headerLeft = headerLeft
   }
+
+  return options
 }

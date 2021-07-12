@@ -5,10 +5,14 @@ import { WebView as BaseWebView } from 'react-native-webview'
 import PropTypes from 'prop-types'
 import navigationService from '@common/utils/navigationService'
 import queryString from 'query-string'
+import Spinner from 'react-native-loading-spinner-overlay'
+import { BackButton } from '@core/Authenticated/Settings/components/BackButton'
 
 export const WebView = (props) => {
-  const { uri, onLoadStart, ...restProps } = props
-  const [currentURI, setURI] = React.useState(props.source.uri)
+  const { uri, onLoadStart, navigation, ...restProps } = props
+  let [stack, setStack] = React.useState([props.source.uri])
+
+  const currentURI = stack[stack.length - 1]
   const newSource = { ...props.source, uri: currentURI }
 
   // Whitelisted origins - these include external domains we whitelist
@@ -19,6 +23,15 @@ export const WebView = (props) => {
     'https://bid.g.doubleclick.net',
     Config.WEBSITE_HOST,
   ]
+
+  const onBackPress = () => {
+    // Note that we can't use WebView's goBack because we reset the source of
+    // the WebView with each new request, which interrupts its internal stack.
+    if (stack.length > 1) {
+      stack = stack.slice(0, -1)
+      setStack(stack)
+    }
+  }
 
   // Mobile app paths -
   // Rather than loading in the webview, requests to these paths should be
@@ -40,6 +53,8 @@ export const WebView = (props) => {
       source={newSource}
       originWhitelist={whitelistedOrigins}
       applicationNameForUserAgent={'FpfMobileApp/802'}
+      startInLoadingState={true}
+      renderLoading={() => <Spinner visible={true} />}
       onShouldStartLoadWithRequest={(request) => {
         if (!request.url.startsWith(Config.WEBSITE_HOST)) return false
 
@@ -74,7 +89,9 @@ export const WebView = (props) => {
           if (request.url === currentURI) return true
 
           // The URL has changed - change state to ensure headers are sent
-          setURI(request.url)
+          stack = [...stack, request.url]
+          setStack(stack)
+
           return false
         }
 
@@ -82,11 +99,18 @@ export const WebView = (props) => {
         Linking.openURL(request.url)
         return false
       }}
+      onLoadEnd={() => {
+        navigation.setParams({
+          headerLeft:
+            stack.length > 1 ? <BackButton onPress={onBackPress} /> : null,
+        })
+      }}
     />
   )
 }
 
 WebView.propTypes = {
+  navigation: PropTypes.object.isRequired,
   onLoadStart: PropTypes.func,
   source: PropTypes.object,
   uri: PropTypes.string,
