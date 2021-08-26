@@ -1,7 +1,9 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <!-- NOTE: The theme may switched from Light to the newer DayNight upon upgrading to react-native 0.66.
+         see https://github.com/facebook/react-native/commit/b3a715f6ea3d0faaf6d09e2a49267f2a5fb3fad2 -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowDisablePreview">true</item>
         <!-- Customize your theme here. -->
     </style>
