@@ -205,7 +205,7 @@ export class Post extends React.Component {
                 return (
                   <TouchableOpacity
                     key={categoryName}
-                    onPress={() => onTapCategory(categoryName)}
+                    onPress={() => onTapCategory(category.id)}
                   >
                     <PostCategory labelStyle={category.label_style}>
                       {categoryName}

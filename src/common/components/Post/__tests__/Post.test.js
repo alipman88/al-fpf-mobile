@@ -33,6 +33,7 @@ describe('Post', () => {
     },
     categories: [
       {
+        id: 3,
         name: 'Lost and found',
         labelStyle: 'light_grey',
       },
@@ -89,7 +90,7 @@ describe('Post', () => {
   test('can navigate to category search', () => {
     const wrapper = shallow(<Post {...defaultProps} />)
     wrapper.find(TouchableOpacity).simulate('press')
-    expect(defaultProps.onTapCategory).toHaveBeenCalledWith('Lost and found')
+    expect(defaultProps.onTapCategory).toHaveBeenCalledWith(3)
   })
 
   test('show more button displays on long posts and works', () => {

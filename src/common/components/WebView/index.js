@@ -4,16 +4,28 @@ import { Linking } from 'react-native'
 import { WebView as BaseWebView } from 'react-native-webview'
 import PropTypes from 'prop-types'
 import navigationService from '@common/utils/navigationService'
-import queryString from 'query-string'
 import Spinner from 'react-native-loading-spinner-overlay'
 import { BackButton } from '@core/Authenticated/Settings/components/BackButton'
+import {
+  composeRegex,
+  composePathParams,
+} from '@core/Authenticated/Tabs/Compose/parseUrl'
+
+// Directory URL regex
+const directoryRegex = /^\/(d|directory)(\/.*)?$/
+// Search URL regex
+const searchRegex = /^\/search\/?(\?.*)?$/
 
 export const WebView = (props) => {
-  const { uri, onLoadStart, navigation, ...restProps } = props
-  let [stack, setStack] = React.useState([props.source.uri])
+  const { source, onLoadStart, navigation, useBackButton, ...restProps } = props
+  let [stack, setStack] = React.useState([source.uri])
+
+  if (source.uri !== stack[0]) {
+    setStack([source.uri])
+  }
 
   const currentURI = stack[stack.length - 1]
-  const newSource = { ...props.source, uri: currentURI }
+  const newSource = { ...source, uri: currentURI }
 
   // Whitelisted origins - these include external domains we whitelist
   // so they don't open an empty browser tab.
@@ -33,11 +45,46 @@ export const WebView = (props) => {
     }
   }
 
-  // Mobile app paths -
-  // Rather than loading in the webview, requests to these paths should be
-  // intercepted, and trigger navigation to the appropriate section of the mobile
-  // app with any necessary parameters captured via Regex.
-  const composeRegex = /\/areas\/(?<areaId>[0-9]+)\/posts\/new\/?\?(?<query>.*)/
+  /**
+   * Some request paths should be handled by navigating to an appropriate section
+   * of the mobile app, rather than loading the requested page in the web view.
+   *
+   * @param {string} requestPath - the requested path, with the host removed.
+   * @param {boolean} true if navigating, false if not handled.
+   */
+  const navigateForRequest = (requestPath) => {
+    // Compose URL
+    if (composeRegex.test(requestPath)) {
+      navigationService.navigate('Compose', {
+        ...composePathParams(requestPath),
+      })
+      return true
+    }
+
+    // Directory URL
+    if (
+      navigation.state.routeName !== 'Directory' &&
+      directoryRegex.test(requestPath)
+    ) {
+      navigationService.navigate('Directory', {
+        sourceUrl: requestPath,
+      })
+      return true
+    }
+
+    // Search URL
+    if (
+      navigation.state.routeName !== 'Search' &&
+      searchRegex.test(requestPath)
+    ) {
+      navigationService.navigate('Search', {
+        sourceUrl: requestPath,
+      })
+      return true
+    }
+
+    return false
+  }
 
   // Whitelisted WebView paths -
   // Sections of frontporchforum.com that should load inside the webview.
@@ -45,7 +92,7 @@ export const WebView = (props) => {
   // browser tab.) When updating these paths, be sure to update the
   // @mobile_app_permitted_paths array in the Rails app's
   // ApplicationController#handle_mobile_app_request method.
-  const whitelistedPaths = ['/directory', '/dir/', '/d/']
+  const whitelistedPaths = ['/directory', '/d/', '/search']
 
   return (
     <BaseWebView
@@ -60,18 +107,7 @@ export const WebView = (props) => {
 
         const requestPath = request.url.replace(Config.WEBSITE_HOST, '')
 
-        // Handle post submission through the mobile app,
-        // not the WebView-embedded version of frontporchforum.com
-        const compose = requestPath.match(composeRegex)
-        if (compose) {
-          const query = queryString.parse(compose.groups.query, {
-            arrayFormat: 'bracket',
-          })
-          navigationService.navigate('Compose', {
-            categoryId: Number(query['category_id']),
-            title: query['post[title]'],
-            referencedProfileId: query['post[referenced_profile_id]'],
-          })
+        if (navigateForRequest(requestPath)) {
           return false
         }
 
@@ -100,10 +136,12 @@ export const WebView = (props) => {
         return false
       }}
       onLoadEnd={() => {
-        navigation.setParams({
-          headerLeft:
-            stack.length > 1 ? <BackButton onPress={onBackPress} /> : null,
-        })
+        if (useBackButton) {
+          navigation.setParams({
+            headerLeft:
+              stack.length > 1 ? <BackButton onPress={onBackPress} /> : null,
+          })
+        }
       }}
     />
   )
@@ -113,5 +151,9 @@ WebView.propTypes = {
   navigation: PropTypes.object.isRequired,
   onLoadStart: PropTypes.func,
   source: PropTypes.object,
-  uri: PropTypes.string,
+  useBackButton: PropTypes.bool,
+}
+
+WebView.defaultProps = {
+  useBackButton: true,
 }

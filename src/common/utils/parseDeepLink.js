@@ -1,4 +1,7 @@
-import queryString from 'query-string'
+import {
+  composeRegex,
+  composePathParams,
+} from '@core/Authenticated/Tabs/Compose/parseUrl'
 
 export const parseURL = (url) => {
   const result = /.*[/.]frontporchforum.com(.*)/.exec(url)
@@ -11,14 +14,9 @@ export const parseDeepLink = (url) => {
 
   const path = parseURL(url)
   if (path) {
-    if (/posts\/new/.test(path)) {
+    if (composeRegex.test(path)) {
       route = 'Compose'
-      const queryParams = queryString.parseUrl(url, { parseNumbers: true })
-        .query
-      const parentPostId = queryParams['post[parent_post_id]']
-      // LATER: it would be nice to get the parent post title and area id here
-      // or in the Compose view
-      params = { shouldResetForm: true, parentPostId }
+      params = { shouldResetForm: true, ...composePathParams(path) }
     } else if (/^\/areas\/[0-9]+\/issues\/[0-9]+\/shared/.test(path)) {
       const [areaId, issueNum] = path
         .split('/')
