@@ -3,9 +3,13 @@ import PropTypes from 'prop-types'
 import { Post } from '@components/Post'
 
 export const ForumPost = ({ post, postTruncateLength, navigation }) => {
-  const onTapCategory = (category) => {
-    navigation.setParams({ category })
-    navigation.navigate({ routeName: 'Search', params: { category } })
+  const onTapCategory = (categoryId) => {
+    const searchParams = {
+      index: 'posts',
+      's[sent_at]': 'desc',
+      'category_ids[]': categoryId,
+    }
+    navigation.navigate({ routeName: 'Search', params: { searchParams } })
   }
 
   return (
