@@ -101,6 +101,8 @@ export const WebView = (props) => {
       originWhitelist={whitelistedOrigins}
       applicationNameForUserAgent={'FpfMobileApp/802'}
       startInLoadingState={true}
+      scalesPageToFit={false}
+      setBuiltInZoomControls={false}
       renderLoading={() => <Spinner visible={true} />}
       onShouldStartLoadWithRequest={(request) => {
         if (!request.url.startsWith(Config.WEBSITE_HOST)) return false
