@@ -264,7 +264,7 @@ export class ComposeFields extends React.Component {
               value={values.subject}
               placeholder='Type the subject of your posting here'
               label='Subject'
-              maxLength={256}
+              maxLength={55}
               inputRef={this.subjectRef}
               editable={!errorMessage}
             />
