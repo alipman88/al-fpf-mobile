@@ -28,14 +28,18 @@ export const setupForumData = (
     dispatch(areas.actions.setCurrentAreaId(firstArea.id))
     // reset the current issue id, the Forum component will handle it from here
     dispatch(issues.actions.setCurrentIssueId(0))
+    dispatch(areas.actions.setHasAreaAccess(true))
   } else if (profile.selectors.hasUnapprovedProfile(getState())) {
     dispatch(
       appMessage.actions.setAppMessage({
         message:
-          'Your government profile will be reviewed within 48 hours. Once approved, you will have access to your FPF(s). Please contact us as needed.',
+          'Your government profile will be reviewed within 48 hours. Once ' +
+          'approved, you will have access to your FPF(s). Please contact us ' +
+          'as needed.',
         type: 'warning',
       })
     )
+    dispatch(areas.actions.setHasAreaAccess(true))
   } else {
     // User either has no active profiles or access to no enabled areas
     // Set hasAreaAccess to false to trigger an alert.
