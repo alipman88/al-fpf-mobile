@@ -5,6 +5,7 @@ import { WebView as BaseWebView } from 'react-native-webview'
 import PropTypes from 'prop-types'
 import navigationService from '@common/utils/navigationService'
 import Spinner from 'react-native-loading-spinner-overlay'
+
 import { BackButton } from '@core/Authenticated/Settings/components/BackButton'
 import {
   composeRegex,
