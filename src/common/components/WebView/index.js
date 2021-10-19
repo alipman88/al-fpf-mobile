@@ -6,19 +6,42 @@ import PropTypes from 'prop-types'
 import navigationService from '@common/utils/navigationService'
 import Spinner from 'react-native-loading-spinner-overlay'
 import { BackButton } from '@core/Authenticated/Settings/components/BackButton'
+import { Button } from '@components/Button'
 import {
   composeRegex,
   composePathParams,
 } from '@core/Authenticated/Tabs/Compose/parseUrl'
+import { ErrorContainer, ErrorText } from './styledComponents'
 
 // Directory URL regex
 const directoryRegex = /^\/(d|directory)(\/.*)?$/
 // Search URL regex
 const searchRegex = /^\/search\/?(\?.*)?$/
 
+/**
+ * Render a generic error view with a reload button.
+ */
+const ErrorView = ({ reload }) => {
+  return (
+    <ErrorContainer>
+      <Button onPress={reload}>Reload</Button>
+      <ErrorText>An error occurred. Please try reloading.</ErrorText>
+    </ErrorContainer>
+  )
+}
+
+ErrorView.propTypes = {
+  reload: PropTypes.func.isRequired,
+}
+
+/**
+ * Render a native web view.
+ */
 export const WebView = (props) => {
+  const webViewRef = React.useRef(null)
   const { source, onLoadStart, navigation, useBackButton, ...restProps } = props
   let [stack, setStack] = React.useState([source.uri])
+  let [showError, setShowError] = React.useState(false)
 
   if (source.uri !== stack[0]) {
     setStack([source.uri])
@@ -35,6 +58,13 @@ export const WebView = (props) => {
     'https://bid.g.doubleclick.net',
     Config.WEBSITE_HOST,
   ]
+
+  // Reset the web view to its initial page
+  const reset = () => {
+    setStack([source.uri])
+    setShowError(false)
+    webViewRef.current.reload()
+  }
 
   const onBackPress = () => {
     // Note that we can't use WebView's goBack because we reset the source of
@@ -95,57 +125,63 @@ export const WebView = (props) => {
   const whitelistedPaths = ['/directory', '/d/', '/search']
 
   return (
-    <BaseWebView
-      {...restProps}
-      source={newSource}
-      originWhitelist={whitelistedOrigins}
-      applicationNameForUserAgent={'FpfMobileApp/802'}
-      startInLoadingState={true}
-      scalesPageToFit={false}
-      setBuiltInZoomControls={false}
-      renderLoading={() => <Spinner visible={true} />}
-      onShouldStartLoadWithRequest={(request) => {
-        if (!request.url.startsWith(Config.WEBSITE_HOST)) return false
+    <>
+      <BaseWebView
+        {...restProps}
+        ref={webViewRef}
+        source={newSource}
+        originWhitelist={whitelistedOrigins}
+        applicationNameForUserAgent={'FpfMobileApp/802'}
+        startInLoadingState={true}
+        scalesPageToFit={false}
+        setBuiltInZoomControls={false}
+        renderLoading={() => <Spinner visible={true} />}
+        onError={() => setShowError(true)}
+        onHttpError={() => setShowError(true)}
+        onShouldStartLoadWithRequest={(request) => {
+          if (!request.url.startsWith(Config.WEBSITE_HOST)) return false
 
-        const requestPath = request.url.replace(Config.WEBSITE_HOST, '')
+          const requestPath = request.url.replace(Config.WEBSITE_HOST, '')
 
-        if (navigateForRequest(requestPath)) {
+          if (navigateForRequest(requestPath)) {
+            return false
+          }
+
+          // Open whitelisted requests in the WebView
+          const whitelistedPath = whitelistedPaths.find((path) =>
+            requestPath.startsWith(path)
+          )
+          if (whitelistedPath) {
+            // React Native WebViews only send headers on the initial page load
+            // To work around this, track the current URL via component state,
+            // and update the state when loading a new page to force a re-render
+            // and re-send headers.
+
+            // The WebView's URL hasn't changed - allow it to load
+            if (request.url === currentURI) return true
+
+            // The URL has changed - change state to ensure headers are sent
+            stack = [...stack, request.url]
+            setStack(stack)
+
+            return false
+          }
+
+          // Open unpermitted requests in a mobile browser
+          Linking.openURL(request.url)
           return false
-        }
-
-        // Open whitelisted requests in the WebView
-        const whitelistedPath = whitelistedPaths.find((path) =>
-          requestPath.startsWith(path)
-        )
-        if (whitelistedPath) {
-          // React Native WebViews only send headers on the initial page load
-          // To work around this, track the current URL via component state,
-          // and update the state when loading a new page to force a re-render
-          // and re-send headers.
-
-          // The WebView's URL hasn't changed - allow it to load
-          if (request.url === currentURI) return true
-
-          // The URL has changed - change state to ensure headers are sent
-          stack = [...stack, request.url]
-          setStack(stack)
-
-          return false
-        }
-
-        // Open unpermitted requests in a mobile browser
-        Linking.openURL(request.url)
-        return false
-      }}
-      onLoadEnd={() => {
-        if (useBackButton) {
-          navigation.setParams({
-            headerLeft:
-              stack.length > 1 ? <BackButton onPress={onBackPress} /> : null,
-          })
-        }
-      }}
-    />
+        }}
+        onLoadEnd={() => {
+          if (useBackButton) {
+            navigation.setParams({
+              headerLeft:
+                stack.length > 1 ? <BackButton onPress={onBackPress} /> : null,
+            })
+          }
+        }}
+      />
+      {showError && <ErrorView reload={reset} />}
+    </>
   )
 }
 
