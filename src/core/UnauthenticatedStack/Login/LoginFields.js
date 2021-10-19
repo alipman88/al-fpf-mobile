@@ -89,6 +89,7 @@ export class LoginFields extends React.Component {
               value={values.email}
               keyboardType='email-address'
               autoCapitalize='none'
+              autoCorrect={false}
             />
             {errors.button && errors.button.url && (
               <BottomText onPress={() => Linking.openURL(errors.button.url)}>
