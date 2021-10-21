@@ -72,7 +72,7 @@ describe('setupForumData', () => {
     // reset the current issue
     expect(dispatch).toHaveBeenCalledWith(issues.actions.setCurrentIssueId(0))
 
-    expect(dispatch).toHaveBeenCalledTimes(6)
+    expect(dispatch).toHaveBeenCalledTimes(7)
   })
 
   test('if no available areas, currentAreaId set to null', async () => {
