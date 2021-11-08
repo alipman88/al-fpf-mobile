@@ -216,6 +216,8 @@ export class Post extends React.Component {
           </CategoryPosts>
           <PostBody selectable={true}>
             <Autolink
+              url
+              email
               text={truncateText(
                 post.content,
                 postTruncateLength,

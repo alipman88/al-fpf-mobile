@@ -20,10 +20,13 @@ target 'FrontPorchForum' do
 
   post_install do |installer|
     react_native_post_install(installer)
-  end
+    __apply_Xcode_12_5_M1_post_install_workaround(installer)
 
-  # FPF-specific pods
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
-  pod 'react-native-webview', :path => '../node_modules/react-native-webview'
-  pod 'RollbarReactNative', path: '../node_modules/rollbar-react-native'
+    # Fix "Undefined symbols for architecture arm64" when building project
+    # https://github.com/facebook/react-native/issues/31118#issuecomment-811881922
+    # https://stackoverflow.com/a/63955114/154764
+    installer.pods_project.build_configurations.each do |installer_config|
+      installer_config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
+    end
+  end
 end
