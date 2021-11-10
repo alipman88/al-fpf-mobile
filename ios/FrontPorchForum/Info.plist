@@ -49,13 +49,13 @@
 	<string>Your location is required to determine if you are in our service area.</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>ProximaNova-Regular.otf</string>
+		<string>ProximaNova-Semibold.otf</string>
+		<string>ProximaNova-Thin.otf</string>
 		<string>EvilIcons.ttf</string>
 		<string>Feather.ttf</string>
 		<string>Ionicons.ttf</string>
 		<string>MaterialIcons.ttf</string>
-		<string>ProximaNova-Regular.otf</string>
-		<string>ProximaNova-Semibold.otf</string>
-		<string>ProximaNova-Thin.otf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

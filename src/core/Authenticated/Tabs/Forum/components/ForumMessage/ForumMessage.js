@@ -20,6 +20,8 @@ export const ForumMessage = ({ forumMessage }) => {
         {Boolean(forumMessage.content) && (
           <Text style={{ fontSize: 16 }}>
             <Autolink
+              url
+              email
               text={forumMessage.content}
               linkStyle={AutoMessageLinkStyle.link}
             />
