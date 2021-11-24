@@ -125,6 +125,11 @@ export const WebView = (props) => {
   // ApplicationController#handle_mobile_app_request method.
   const whitelistedPaths = ['/directory', '/d/', '/search']
 
+  // The staging version of the app includes basic auth credentials in the WEBSITE_HOST
+  // configuration. Provide a regex to match the basic auth credentials in the host so we can
+  // strip the credentials when checking if paths match.
+  const basicAuthRe = new RegExp('([a-z]*:[a-z0-9%]*)@')
+
   return (
     <>
       <BaseWebView
@@ -140,7 +145,12 @@ export const WebView = (props) => {
         onError={() => setShowError(true)}
         onHttpError={() => setShowError(true)}
         onShouldStartLoadWithRequest={(request) => {
-          if (!request.url.startsWith(Config.WEBSITE_HOST)) return false
+          if (
+            !request.url.startsWith(
+              Config.WEBSITE_HOST.replace(basicAuthRe, '')
+            )
+          )
+            return false
 
           const requestPath = request.url.replace(Config.WEBSITE_HOST, '')
 
