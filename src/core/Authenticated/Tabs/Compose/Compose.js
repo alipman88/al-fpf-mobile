@@ -81,7 +81,9 @@ export class Compose extends React.Component {
       (c) => c.id === navigation.getParam('categoryId')
     )
     const areaId =
-      navigation.getParam('areaId') ||
+      profile.area_ids.find(
+        (area_id) => area_id === navigation.getParam('areaId')
+      ) ||
       get(profile, 'last_posted_area_id') ||
       get(profile, 'home_nf') ||
       get(profile, 'area_ids[0]') ||
