@@ -12,6 +12,7 @@ import {
   CardIcon,
   CardTitle,
   CardContent,
+  CopyrightText,
   RightIcon,
   FooterLinkWrapper,
   FooterLink,
@@ -107,11 +108,11 @@ export class More extends React.Component {
               />
             </Card>
 
-            <CardContent>
+            <CopyrightText>
               © Copyright 2021 Front Porch Forum®. All rights reserved. FRONT
               PORCH FORUM® is the registered trademark of Front Porch Forum,
               Inc.
-            </CardContent>
+            </CopyrightText>
 
             <FooterLinkWrapper>
               <FooterLink>

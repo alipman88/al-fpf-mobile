@@ -59,6 +59,13 @@ export const CardContent = styled(Text)`
   padding-vertical: 10px;
 `
 
+export const CopyrightText = styled(Text)`
+  color: black;
+  font-size: 12px;
+  text-align: center;
+  padding-vertical: 10px;
+`
+
 export const FooterLinkWrapper = styled.View`
   margin-top: 40px;
 `
