@@ -90,6 +90,7 @@ export class Subscription extends React.Component {
           <Title>{plan.name}</Title>
 
           {plan.description
+            .replace(/<[^>]*>?/gm, '') // strip out html tags
             .match(/[^\r\n]+/g) // split on line breaks
             .map((segment) => (
               <Description key={plan.id}>{segment}</Description>
