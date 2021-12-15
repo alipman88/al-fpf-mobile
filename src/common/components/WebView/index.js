@@ -12,6 +12,10 @@ import {
   composeRegex,
   composePathParams,
 } from '@core/Authenticated/Tabs/Compose/parseUrl'
+import {
+  issueRegex,
+  issuePathParams,
+} from '@core/Authenticated/Tabs/Forum/parseUrl'
 import { ErrorContainer, ErrorText } from './styledComponents'
 
 // Directory URL regex
@@ -88,6 +92,14 @@ export const WebView = (props) => {
     if (composeRegex.test(requestPath)) {
       navigationService.navigate('Compose', {
         ...composePathParams(requestPath),
+      })
+      return true
+    }
+
+    // Issue URL
+    if (issueRegex.test(requestPath)) {
+      navigationService.navigate('Forum', {
+        ...issuePathParams(requestPath),
       })
       return true
     }

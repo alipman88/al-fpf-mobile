@@ -34,7 +34,7 @@ describe('parseDeepLink', () => {
       const result = parseDeepLink(url)
 
       expect(result.route).toEqual('Forum')
-      expect(result.params).toEqual({ areaId: '10', issueNum: '20' })
+      expect(result.params).toEqual({ areaId: 10, issueNum: 20 })
     })
 
     test('it returns false if the url is nonsense', () => {
