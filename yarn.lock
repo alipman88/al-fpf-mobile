@@ -6421,10 +6421,10 @@ react-native-screens@^2.15.2:
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.18.1.tgz#47b9991c6f762d00d0ed3233e5283d523e859885"
   integrity sha512-r5WZLpmx2hHjC1RgMdPq5YpSU9tEhBpUaZ5M1SUtNIONyiLqQVxabhRCINdebIk4depJiIl7yw2Q85zJyeX6fw==
 
-react-native-sectioned-multi-select@^0.8.1:
-  version "0.8.1"
-  resolved "https://registry.yarnpkg.com/react-native-sectioned-multi-select/-/react-native-sectioned-multi-select-0.8.1.tgz#5ec8e4fe4136c36dc5df1222b288896760e43c86"
-  integrity sha512-iH/5PHBo64yFhKzjd+6sCG0aEvgDnUwpn3I7R0ohcGo/+gJdw47mYmJMTwJTmR9JqBFXHx+2bkQi4ij2ghfqRQ==
+react-native-sectioned-multi-select@^0.8.3:
+  version "0.8.4"
+  resolved "https://registry.yarnpkg.com/react-native-sectioned-multi-select/-/react-native-sectioned-multi-select-0.8.4.tgz#aeccdebd4d01808fa8c5c68d90abe5b3ecdf5b84"
+  integrity sha512-mQXtgfYR9hEStvwKI7GvTPosoZZ8dHc5uZLDNAumSSiGTruDw7bSYShiEk/3rMBBVruKzASUBsCTcbz9X2FYQw==
 
 react-native-sensitive-info@^5.5.8:
   version "5.5.8"
