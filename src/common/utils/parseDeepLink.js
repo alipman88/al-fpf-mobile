@@ -2,6 +2,10 @@ import {
   composeRegex,
   composePathParams,
 } from '@core/Authenticated/Tabs/Compose/parseUrl'
+import {
+  issueRegex,
+  issuePathParams,
+} from '@core/Authenticated/Tabs/Forum/parseUrl'
 
 export const parseURL = (url) => {
   const result = /.*[/.]frontporchforum.com(.*)/.exec(url)
@@ -17,12 +21,9 @@ export const parseDeepLink = (url) => {
     if (composeRegex.test(path)) {
       route = 'Compose'
       params = { shouldResetForm: true, ...composePathParams(path) }
-    } else if (/^\/areas\/[0-9]+\/issues\/[0-9]+\/shared/.test(path)) {
-      const [areaId, issueNum] = path
-        .split('/')
-        .filter((num) => !!parseInt(num))
+    } else if (issueRegex.test(path)) {
       route = 'Forum'
-      params = { areaId, issueNum }
+      params = issuePathParams(path)
     } else {
       return false
     }
