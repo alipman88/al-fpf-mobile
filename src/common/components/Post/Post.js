@@ -29,6 +29,8 @@ import {
   ButtonWrapper,
   ButtonSpacer,
   AutoPostLinkStyle,
+  PillPrimary,
+  PillText,
 } from './styledComponents'
 
 export class Post extends React.Component {
@@ -38,6 +40,13 @@ export class Post extends React.Component {
 
   toggleShowMore() {
     this.setState((state) => ({ showMore: !state.showMore }))
+  }
+
+  showDirectoryListing(profile) {
+    const listingPath = `/d/${profile.slug || profile.id}`
+    this.props.navigation.navigate('Directory', {
+      sourceUrl: listingPath,
+    })
   }
 
   reTitle(title, prefix = 'Re:') {
@@ -213,6 +222,15 @@ export class Post extends React.Component {
                   </TouchableOpacity>
                 )
               })}
+            {post.profile?.in_directory && (
+              <TouchableOpacity
+                onPress={() => this.showDirectoryListing(post.profile)}
+              >
+                <PillPrimary>
+                  <PillText>View Directory Listing</PillText>
+                </PillPrimary>
+              </TouchableOpacity>
+            )}
           </CategoryPosts>
           <PostBody selectable={true}>
             <Autolink

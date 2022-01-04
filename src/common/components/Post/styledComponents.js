@@ -65,6 +65,23 @@ export const CategoryPosts = styled.View`
   flex-wrap: wrap;
 `
 
+export const Pill = styled.View`
+  background-color: #ebecf1;
+  padding: 1px 10px 1px 10px;
+  margin: 0 2px 2px 0;
+  border-radius: 5px;
+  border-color: #355768;
+  align-self: flex-start;
+`
+
+export const PillText = styled.Text`
+  color: #ffffff;
+`
+
+export const PillPrimary = styled(Pill)`
+  background-color: #f29426;
+`
+
 export const BottomBordered = styled.View`
   flex-direction: row;
   justify-content: space-between;
