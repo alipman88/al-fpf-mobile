@@ -109,9 +109,9 @@ export class More extends React.Component {
             </Card>
 
             <CopyrightText>
-              © Copyright 2021 Front Porch Forum®. All rights reserved. FRONT
-              PORCH FORUM® is the registered trademark of Front Porch Forum,
-              Inc.
+              © Copyright {new Date().getFullYear()} Front Porch Forum®. All
+              rights reserved. FRONT PORCH FORUM® is the registered trademark of
+              Front Porch Forum, Inc.
             </CopyrightText>
 
             <FooterLinkWrapper>
