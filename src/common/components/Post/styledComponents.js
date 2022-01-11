@@ -74,7 +74,7 @@ export const Pill = styled.View`
   align-self: flex-start;
 `
 
-export const PillText = styled.Text`
+export const PillText = styled(Text)`
   color: #ffffff;
 `
 
