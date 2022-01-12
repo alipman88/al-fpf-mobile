@@ -6,6 +6,8 @@ IS_CI = ENV['APPCENTER_BUILD_ID']
 
 platform :ios, '11.0'
 
+pod 'Firebase/Analytics'
+
 target 'FrontPorchForum' do
   config = use_native_modules!
 
