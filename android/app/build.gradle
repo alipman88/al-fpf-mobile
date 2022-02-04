@@ -240,6 +240,7 @@ dependencies {
     implementation 'me.leolin:ShortcutBadger:1.1.21@aar'
 
     implementation platform('com.google.firebase:firebase-bom:29.0.3')
+    implementation 'com.google.firebase:firebase-iid'
     implementation 'com.google.firebase:firebase-analytics'
 }
 
