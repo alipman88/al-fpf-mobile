@@ -22,7 +22,6 @@ export class Compose extends React.Component {
     const parentId = navigation.getParam('parentPostId') || null
     const event = category.is_event
       ? {
-          parent_event_id: parentId,
           start_date: values.fromDate,
           end_date: values.toDate,
           title: values.subject,
