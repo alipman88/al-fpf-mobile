@@ -180,7 +180,6 @@ describe('Compose', () => {
           category_ids: [5],
           parent_post_id: null,
           event: {
-            parent_event_id: null,
             start_date: fromDate,
             end_date: toDate,
             title: 'Hello',
