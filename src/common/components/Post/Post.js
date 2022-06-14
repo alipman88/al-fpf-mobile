@@ -194,12 +194,7 @@ export class Post extends React.Component {
             </PostShared>
           )}
           {Boolean(post.event.start_date) && (
-            <PostDate>
-              Event:{' '}
-              {format(new Date(post.event.start_date), 'MMM DD, YYYY h:mm A')}
-              {Boolean(post.event.end_date) &&
-                ` - ${format(new Date(post.event.end_date), 'h:mm A')}`}
-            </PostDate>
+            <PostDate>Event: {post.event.display_date}</PostDate>
           )}
           {showDatePublished && Boolean(post.date_published) && (
             <PostDate>{format(post.date_published, 'MMM DD, YYYY')}</PostDate>
