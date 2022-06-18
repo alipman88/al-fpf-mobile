@@ -217,6 +217,17 @@ export class Post extends React.Component {
                   </TouchableOpacity>
                 )
               })}
+            {post.show_directory_recommendation_link && (
+              <TouchableOpacity
+                onPress={() =>
+                  this.showDirectoryListing(post.referenced_profile)
+                }
+              >
+                <PillPrimary>
+                  <PillText>View Recommended Listing</PillText>
+                </PillPrimary>
+              </TouchableOpacity>
+            )}
             {post.profile?.in_directory && (
               <TouchableOpacity
                 onPress={() => this.showDirectoryListing(post.profile)}
