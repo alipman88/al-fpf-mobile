@@ -18,13 +18,12 @@ describe('parseDeepLink', () => {
   describe('parseDeepLink', () => {
     test('it gets correct route name for a new post url', () => {
       const url =
-        baseTrackingURL + '/areas/1/posts/new?post%5Bparent_post_id%5D=123'
+        baseTrackingURL + '/compose/1/new?post%5Bparent_post_id%5D=123'
       const result = parseDeepLink(url)
 
       expect(result.route).toEqual('Compose')
       expect(result.params).toEqual({
         areaId: 1,
-        shouldResetForm: true,
         parentPostId: 123,
       })
     })

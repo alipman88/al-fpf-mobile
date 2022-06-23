@@ -59,10 +59,11 @@ export class Post extends React.Component {
     this.props.navigation.navigate({
       routeName: 'Compose',
       params: {
-        shouldResetForm: true,
-        title: this.reTitle(post.title),
-        parentPostId: post.id,
         areaId: post.area_id,
+        categoryId: null,
+        parentPostId: post.id,
+        referencedProfileId: null,
+        title: this.reTitle(post.title),
       },
     })
   }

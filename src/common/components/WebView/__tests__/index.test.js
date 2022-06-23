@@ -28,14 +28,13 @@ describe('WebView', () => {
     const wrapper = shallow(<WebView {...defaultProps} />)
     wrapper.find('WebView').props().onShouldStartLoadWithRequest({
       url:
-        'https://frontporchforum.com/areas/92/posts/new?category_id=5&post%5Breferenced_profile_id%5D=123&post%5Btitle%5D=Recommending+Pawnshop+Productions',
+        'https://frontporchforum.com/compose/92?category_id=5&post%5Breferenced_profile_id%5D=123&post%5Btitle%5D=Recommending+Pawnshop+Productions',
     })
 
     expect(navigate).toHaveBeenCalledWith('Compose', {
       areaId: 92,
       categoryId: 5,
       referencedProfileId: 123,
-      shouldResetForm: true,
       title: 'Recommending Pawnshop Productions',
     })
   })

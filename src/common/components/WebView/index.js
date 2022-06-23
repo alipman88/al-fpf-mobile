@@ -20,6 +20,8 @@ import { ErrorContainer, ErrorText } from './styledComponents'
 
 // Directory URL regex
 const directoryRegex = /^\/(d|directory)(\/.*)?$/
+// Post submitted URL regex
+const postSubmittedRegex = /(\?|&)mobile_submitted_content_type=(?<contentType>post|event)/
 // Search URL regex
 const searchRegex = /^\/search\/?(\?.*)?$/
 
@@ -89,9 +91,23 @@ export const WebView = (props) => {
    */
   const navigateForRequest = (requestPath) => {
     // Compose URL
-    if (composeRegex.test(requestPath)) {
+    if (
+      navigation.state.routeName !== 'Compose' &&
+      composeRegex.test(requestPath)
+    ) {
       navigationService.navigate('Compose', {
         ...composePathParams(requestPath),
+      })
+      return true
+    }
+
+    // Content submitted URL
+    const submittedContentType = requestPath.match(postSubmittedRegex)?.groups
+      ?.contentType
+    if (submittedContentType) {
+      navigationService.navigate('Compose', {
+        postSubmittedConfirmation: true,
+        submittedContentType,
       })
       return true
     }
@@ -135,7 +151,7 @@ export const WebView = (props) => {
   // browser tab.) When updating these paths, be sure to update the
   // @mobile_app_permitted_paths array in the Rails app's
   // ApplicationController#handle_mobile_app_request method.
-  const whitelistedPaths = ['/directory', '/d/', '/search']
+  const whitelistedPaths = ['/compose', '/directory', '/d/', '/search']
 
   return (
     <>
