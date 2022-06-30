@@ -173,6 +173,11 @@ export const WebView = (props) => {
             // The WebView's URL hasn't changed - allow it to load
             if (request.url === currentURI) return true
 
+            // POST requests should be allowed to load. As the request object does not
+            // expose its HTTP method, a dummy method=post param may be appended to URLs
+            // when submitting a form on the Rails side.
+            if (/(\?|&)method=post/.test(request.url)) return true
+
             // The URL has changed - change state to ensure headers are sent
             stack = [...stack, request.url]
             setStack(stack)
