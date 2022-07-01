@@ -3,6 +3,7 @@ import { Config } from '@common/config'
 import { Linking } from 'react-native'
 import { WebView as BaseWebView } from 'react-native-webview'
 import PropTypes from 'prop-types'
+import DeviceInfo from 'react-native-device-info'
 import navigationService from '@common/utils/navigationService'
 import Spinner from 'react-native-loading-spinner-overlay'
 
@@ -160,7 +161,7 @@ export const WebView = (props) => {
         ref={webViewRef}
         source={newSource}
         originWhitelist={whitelistedOrigins}
-        applicationNameForUserAgent={'FpfMobileApp/802'}
+        applicationNameForUserAgent={`FpfMobileApp/802.${DeviceInfo.getVersion()}`}
         startInLoadingState={true}
         scalesPageToFit={false}
         setBuiltInZoomControls={false}
