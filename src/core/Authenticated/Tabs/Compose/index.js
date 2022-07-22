@@ -1,21 +1,12 @@
 import { connect } from 'react-redux'
-import { Compose as ComposeScreen } from './Compose'
-import { areas } from '@common/areas'
+import { currentUser } from '@common/currentUser'
 import { profile } from '@common/profile'
-import { submitPost } from './actions'
-import { appSettings } from '@common/appSettings'
-import { navigateWithToken } from '@common/actions/navigateWithToken'
+import { Compose as ComposeScreen } from './Compose'
 
 const mapStateToProps = (state) => ({
-  areas: areas.selectors.getAreas(state),
-  user: profile.selectors.getUser(state),
-  profiles: profile.selectors.getAvailableProfiles(state),
-  loading: profile.selectors.getLoading(state),
+  accessToken: currentUser.selectors.getAccessToken(state),
   currentProfileId: profile.selectors.getCurrentProfileId(state),
-  categories: appSettings.selectors.getCategories(state),
+  profiles: profile.selectors.getAvailableProfiles(state),
 })
 
-export const Compose = connect(mapStateToProps, {
-  navigateWithToken,
-  submitPost,
-})(ComposeScreen)
+export const Compose = connect(mapStateToProps)(ComposeScreen)

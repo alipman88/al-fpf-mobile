@@ -3,6 +3,7 @@ import { Config } from '@common/config'
 import { Linking } from 'react-native'
 import { WebView as BaseWebView } from 'react-native-webview'
 import PropTypes from 'prop-types'
+import DeviceInfo from 'react-native-device-info'
 import navigationService from '@common/utils/navigationService'
 import Spinner from 'react-native-loading-spinner-overlay'
 
@@ -20,6 +21,8 @@ import { ErrorContainer, ErrorText } from './styledComponents'
 
 // Directory URL regex
 const directoryRegex = /^\/(d|directory)(\/.*)?$/
+// Post submitted URL regex
+const postSubmittedRegex = /(\?|&)mobile_submitted_content_type=(?<contentType>post|event)/
 // Search URL regex
 const searchRegex = /^\/search\/?(\?.*)?$/
 
@@ -89,9 +92,23 @@ export const WebView = (props) => {
    */
   const navigateForRequest = (requestPath) => {
     // Compose URL
-    if (composeRegex.test(requestPath)) {
+    if (
+      navigation.state.routeName !== 'Compose' &&
+      composeRegex.test(requestPath)
+    ) {
       navigationService.navigate('Compose', {
         ...composePathParams(requestPath),
+      })
+      return true
+    }
+
+    // Content submitted URL
+    const submittedContentType = requestPath.match(postSubmittedRegex)?.groups
+      ?.contentType
+    if (submittedContentType) {
+      navigationService.navigate('Compose', {
+        postSubmittedConfirmation: true,
+        submittedContentType,
       })
       return true
     }
@@ -135,7 +152,7 @@ export const WebView = (props) => {
   // browser tab.) When updating these paths, be sure to update the
   // @mobile_app_permitted_paths array in the Rails app's
   // ApplicationController#handle_mobile_app_request method.
-  const whitelistedPaths = ['/directory', '/d/', '/search']
+  const whitelistedPaths = ['/compose', '/directory', '/d/', '/search']
 
   return (
     <>
@@ -144,7 +161,7 @@ export const WebView = (props) => {
         ref={webViewRef}
         source={newSource}
         originWhitelist={whitelistedOrigins}
-        applicationNameForUserAgent={'FpfMobileApp/802'}
+        applicationNameForUserAgent={`FpfMobileApp/802.${DeviceInfo.getVersion()}`}
         startInLoadingState={true}
         scalesPageToFit={false}
         setBuiltInZoomControls={false}
@@ -172,6 +189,11 @@ export const WebView = (props) => {
 
             // The WebView's URL hasn't changed - allow it to load
             if (request.url === currentURI) return true
+
+            // POST requests should be allowed to load. As the request object does not
+            // expose its HTTP method, a dummy method=post param may be appended to URLs
+            // when submitting a form on the Rails side.
+            if (/(\?|&)method=post/.test(request.url)) return true
 
             // The URL has changed - change state to ensure headers are sent
             stack = [...stack, request.url]

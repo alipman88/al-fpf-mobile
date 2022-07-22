@@ -25,6 +25,8 @@ describe('Success', () => {
     const wrapper = shallow(<Success {...defaultProps} />)
     wrapper.find(TouchableOpacity).simulate('press')
 
-    expect(defaultProps.navigateWithToken).toHaveBeenCalledWith('/user/posts')
+    expect(defaultProps.navigateWithToken).toHaveBeenCalledWith(
+      '/user/submissions'
+    )
   })
 })

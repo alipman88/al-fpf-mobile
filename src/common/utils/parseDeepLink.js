@@ -20,7 +20,7 @@ export const parseDeepLink = (url) => {
   if (path) {
     if (composeRegex.test(path)) {
       route = 'Compose'
-      params = { shouldResetForm: true, ...composePathParams(path) }
+      params = composePathParams(path)
     } else if (issueRegex.test(path)) {
       route = 'Forum'
       params = issuePathParams(path)

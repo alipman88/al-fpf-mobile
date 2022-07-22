@@ -152,9 +152,10 @@ describe('Post', () => {
     expect(defaultProps.navigation.navigate).toHaveBeenCalledWith({
       routeName: 'Compose',
       params: {
-        shouldResetForm: true,
-        parentPostId: defaultProps.post.id,
         areaId: defaultProps.post.area_id,
+        categoryId: null,
+        parentPostId: defaultProps.post.id,
+        referencedProfileId: null,
         title: `Re: ${defaultProps.post.title}`,
       },
     })

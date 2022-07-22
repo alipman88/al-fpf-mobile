@@ -26,7 +26,7 @@ import {
   TextContainer,
 } from './styledComponents'
 
-export const Success = ({ onClose, navigateWithToken }) => (
+export const Success = ({ contentType, onClose, navigateWithToken }) => (
   <Modal>
     <Container>
       <Close onPress={() => onClose()}>
@@ -34,16 +34,27 @@ export const Success = ({ onClose, navigateWithToken }) => (
       </Close>
       <Heading>Success!</Heading>
       <TextContainer>
-        <BodyText>
-          Your posting will appear in the next issue of your local FPF, which
-          will be published today or soon after.
-        </BodyText>
+        {contentType !== 'event' && (
+          <BodyText>
+            Your posting will appear in the next issue of your local FPF, which
+            will be published today or soon after.
+          </BodyText>
+        )}
+        {contentType === 'event' && (
+          <BodyText>
+            Your event will appear on your Community Calendar, typically within
+            24 hours.
+          </BodyText>
+        )}
       </TextContainer>
       <TextContainer>
-        <TouchableOpacity onPress={() => navigateWithToken('/user/posts')}>
+        <TouchableOpacity
+          onPress={() => navigateWithToken('/user/submissions')}
+        >
           <BodyText>
             To <BodySemibold>edit</BodySemibold> or{' '}
-            <BodySemibold>delete</BodySemibold> your posting before publication,
+            <BodySemibold>delete</BodySemibold> your posting before{' '}
+            {contentType === 'event' ? 'it appears' : 'publication'},
             <Link>
               {' '}
               click here{' '}
@@ -64,6 +75,7 @@ export const Success = ({ onClose, navigateWithToken }) => (
 )
 
 Success.propTypes = {
+  contentType: PropTypes.string,
   onClose: PropTypes.func.isRequired,
   navigateWithToken: PropTypes.func.isRequired,
 }

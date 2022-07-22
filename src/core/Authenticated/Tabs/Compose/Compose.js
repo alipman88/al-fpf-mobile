@@ -1,162 +1,74 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import get from 'lodash/get'
-import { Formik } from 'formik'
 
-import { ScreenContainer } from '@components/ScreenContainer'
+import { Config } from '@common/config'
+import { WebView } from '@components/WebView'
+import navigationService from '@common/utils/navigationService'
+
 import { Success } from './components/Success'
 
-import { validations } from './validations'
-
-import { ComposeFields } from './components/ComposeFields'
-
 export class Compose extends React.Component {
-  state = {
-    modalVisible: false,
-  }
-
-  onSubmit = (values, actions) => {
-    const { profiles, navigation } = this.props
-    const { category } = values
-    const categoryId = category.id > 0 ? category.id : ''
-    const parentId = navigation.getParam('parentPostId') || null
-    const event = category.is_event
-      ? {
-          start_date: values.fromDate,
-          end_date: values.toDate,
-          title: values.subject,
-        }
-      : {}
-
-    const postBody = {
-      parent_post_id: parentId,
-      profile_id: profiles[values.profile].id,
-      referenced_profile_id: values.referencedProfileId,
-      title: values.subject,
-      content: values.message,
-      is_shared: values.isShared,
-      area_ids: values.forums,
-      category_ids: [categoryId],
-      event,
-    }
-    this.props.submitPost(
-      this.onSuccess,
-      postBody,
-      actions.setSubmitting,
-      navigation
-    )
-  }
-
-  onSuccess = () => {
-    this.setState({
-      modalVisible: true,
-    })
-  }
-
-  onModalClose = (resetFormMethod) => {
-    this.setState({ modalVisible: false })
-    resetFormMethod()
-    this.props.navigation.navigate('Forum')
-  }
-
   render() {
+    const { navigation } = this.props
+    const accessToken = this.props.accessToken.toString()
+
+    // Use a dummy URL param which may be incremented to
+    // reset the compose tab and clear its form inputs after dismissing the success modal.
+    //
+    // NOTE: It would be cleaner to trigger the WebView's built-in reset function,
+    // if that function can be triggered externally.
+    const resetToken = navigation.getParam('resetToken') || 0
+
     const {
-      categories,
-      currentProfileId,
-      areas,
-      loading,
-      navigation,
-      navigateWithToken,
-      user,
-      profiles,
-    } = this.props
+      areaId,
+      categoryId,
+      parentPostId,
+      referencedProfileId,
+      submittedContentType,
+      title,
+    } = navigation.state.params || {}
+    let params = []
+    params.push(`area_id=${areaId || ''}`)
+    params.push(`category_id=${categoryId || ''}`)
+    params.push(`post[parent_post_id]=${parentPostId || ''}`)
+    params.push(`post[referenced_profile_id]=${referencedProfileId || ''}`)
+    params.push(`post[title]=${title || ''}`)
+    params.push(`resetToken=${resetToken}`)
+    const query = params.join('&')
+    const sourceUrl = `${Config.WEBSITE_HOST}/compose?${query}`
 
-    let profileIndex = profiles.findIndex(
-      (profile) => profile.id === currentProfileId
-    )
-
-    const profile = profiles[profileIndex] || profiles[0]
-    const category = categories.find(
-      (c) => c.id === navigation.getParam('categoryId')
-    )
-    const areaId =
-      profile.area_ids.find(
-        (area_id) => area_id === navigation.getParam('areaId')
-      ) ||
-      get(profile, 'last_posted_area_id') ||
-      get(profile, 'home_nf') ||
-      get(profile, 'area_ids[0]') ||
-      null
+    let modalVisible = !!submittedContentType
 
     return (
-      <ScreenContainer grey withPadding={false}>
-        <Formik
-          enableReinitialize={true}
-          initialValues={{
-            forums: areaId ? [areaId] : [],
-            profile: profileIndex,
-            category: category || null,
-            referencedProfileId:
-              navigation.getParam('referencedProfileId') || null,
-            subject: navigation.getParam('title') || '',
-            message: '',
-            isShared: true,
-            fromDate: null,
-            toDate: null,
+      <React.Fragment>
+        <WebView
+          navigation={navigation}
+          source={{
+            uri: sourceUrl,
+            headers: {
+              authorization: accessToken,
+            },
           }}
-          validationSchema={validations}
-          onSubmit={this.onSubmit}
-        >
-          {({
-            errors,
-            handleSubmit,
-            isSubmitting,
-            resetForm,
-            setFieldValue,
-            setFieldTouched,
-            touched,
-            values,
-          }) => (
-            <React.Fragment>
-              <ComposeFields
-                areas={areas}
-                categories={categories}
-                errors={errors}
-                handleSubmit={handleSubmit}
-                isSubmitting={isSubmitting}
-                loading={loading}
-                navigation={navigation}
-                user={user}
-                profiles={profiles}
-                resetForm={resetForm}
-                setFieldValue={setFieldValue}
-                setFieldTouched={setFieldTouched}
-                touched={touched}
-                values={values}
-                shouldResetForm={navigation.getParam('shouldResetForm')}
-              />
-              {this.state.modalVisible && (
-                <Success
-                  onClose={() => this.onModalClose(resetForm)}
-                  navigateWithToken={navigateWithToken}
-                />
-              )}
-            </React.Fragment>
-          )}
-        </Formik>
-      </ScreenContainer>
+          useBackButton={false}
+        />
+        {modalVisible && (
+          <Success
+            contentType={submittedContentType || 'post'}
+            onClose={() => {
+              navigation.setParams({
+                submittedContentType: null,
+                resetToken: resetToken + 1,
+              })
+              navigationService.navigate('Forum')
+            }}
+          />
+        )}
+      </React.Fragment>
     )
   }
 }
 
 Compose.propTypes = {
-  areas: PropTypes.array.isRequired,
-  categories: PropTypes.array.isRequired,
-  loading: PropTypes.bool,
+  accessToken: PropTypes.string,
   navigation: PropTypes.object.isRequired,
-  navigateWithToken: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired,
-  profiles: PropTypes.array.isRequired,
-  submitPost: PropTypes.func.isRequired,
-  currentProfileId: PropTypes.number,
 }
