@@ -29,7 +29,9 @@ export const NeighboringContent = ({
           <Row key={`${news.area_id}_${news.issue_number}`}>
             <NewsHeader>{news.area_name}</NewsHeader>
             <NewsBody>
-              {news.first_post_title} - {news.first_post_user_full_name}
+              {news.first_post_title}
+              {news.first_post_user_full_name ? ' - ' : ''}
+              {news.first_post_user_full_name}
             </NewsBody>
             <TouchableOpacity
               onPress={() =>
