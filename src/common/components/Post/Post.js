@@ -168,7 +168,9 @@ export class Post extends React.Component {
           <PostAuthor selectable={true}>
             {postInfo}
             {showIssueData ? ' - ' : ''}
-            {post.user_full_name} - {post.user_profile_name}
+            {post.user_full_name}
+            {post.user_full_name ? ' - ' : ''}
+            {post.user_profile_name}
           </PostAuthor>
           {post.is_shared_post && (
             <PostShared>
