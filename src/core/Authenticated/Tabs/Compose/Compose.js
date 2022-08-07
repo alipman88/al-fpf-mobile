@@ -9,7 +9,7 @@ import { Success } from './components/Success'
 
 export class Compose extends React.Component {
   render() {
-    const { navigation } = this.props
+    const { navigation, navigateWithToken } = this.props
     const accessToken = this.props.accessToken.toString()
 
     // Use a dummy URL param which may be incremented to
@@ -54,6 +54,7 @@ export class Compose extends React.Component {
         {modalVisible && (
           <Success
             contentType={submittedContentType || 'post'}
+            navigateWithToken={navigateWithToken}
             onClose={() => {
               navigation.setParams({
                 submittedContentType: null,
@@ -71,4 +72,5 @@ export class Compose extends React.Component {
 Compose.propTypes = {
   accessToken: PropTypes.string,
   navigation: PropTypes.object.isRequired,
+  navigateWithToken: PropTypes.func.isRequired,
 }
