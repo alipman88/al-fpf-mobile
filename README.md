@@ -157,6 +157,61 @@ yarn android
   version's label
 15. Post release notes to Slack
 
+### App Center configuration
+
+App Center has access to our GitHub repository through tech@frontporchforum.com.
+
+Each branch that can be built needs to be configured individually.  Config
+setting details:
+
+- `Build Android App Bundle`: on for Android production branch
+- `Automatically increment version code`: on
+- `Environment variables`: on (see below)
+- `Sign builds`: on
+  - For iOS, configure:
+    - `Provisioning profile`: upload the "App Store" provisioning file,
+      downloaded from https://developer.apple.com/account/resources/profiles/list
+    - `Certificate`: upload the .p12 signing certificate file, downloaded from
+      the 1Password Tech Team vault item "Apple iOS p12 Certificate"
+    - `Certificate password`: see 1Password item "Apple iOS p12 Certificate Password"
+  - For Android, configure:
+    - `Keystore file`: upload the .keystore file, downloaded from the 1Password
+      Tech Team vault item "fpf_android.keystore"
+    - `Keystore password`: see 1Password item "fpf_android.keystore creds"
+    - `Key alias`: "fpf_android"
+    - `Key password`: see 1Password item "fpf_android.keystore creds" (same password
+      as for "Keystore password" above)
+- `Test on a real device`: on
+- `Distribute builds`: on
+  - For the staging branch, choose "Groups" and select the "QA" group
+  - For the production branch, choose "Store" and select the "Production" store
+
+The following environment variables should be configured for each branch.  Make
+sure to lock any variables that store sensitive data.
+
+- `API_HOST`: URL for FPF API, e.g. https://frontporchforum.com/api/v1
+- `API_KEY`: FPF key, currently stored in `FPF_API_KEY` env var
+- `BUILD_PLATFORM`: React platform, e.g. "ios" or "android"
+- `ENVIRONMENT`: Rails environment name, e.g. "production"
+- `GOOGLE_MAPS_API_KEY`: "mobile embed maps API key" credential configured for the
+  "fpf-webapp" project at https://console.cloud.google.com/apis/credentials?project=rare-citadel-197119
+- `JAVA_HOME`: sets the Java version for Android (run by App Center for the build).
+  Currently we use "$(JAVA_HOME_11_X64)".  Not required for the iOS app.
+- `ROLLBAR_API_KEY`: "write" token configured at https://rollbar.com/settings/accounts/FrontPorchForum/access_tokens/
+- `ROLLBAR_SERVER_KEY`: same as `ROLLBAR_API_KEY`
+- `WEBSITE_HOST`: URL for FPF root, e.g. https://frontporchforum.com
+
+For the staging branch,es also configure the following environment variables
+with production values.  Doing so allows the staging build of the app to
+optionally connected to the production API.
+
+- `PRODUCTION_API_HOST`
+- `PRODUCTION_API_KEY`
+- `PRODUCTION_ENVIRONMENT`
+- `PRODUCTION_GOOGLE_MAPS_API_KEY`
+- `PRODUCTION_ROLLBAR_API_KEY`
+- `PRODUCTION_WEBSITE_HOST`
+
 
 ## Xcode workspace
 
