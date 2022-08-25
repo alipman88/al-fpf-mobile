@@ -83,7 +83,6 @@ export class Post extends React.Component {
       onTapCategory,
       moreText,
       navigation,
-      showDatePublished,
       categories,
     } = this.props
 
@@ -198,9 +197,6 @@ export class Post extends React.Component {
           {Boolean(post.event.start_date) && (
             <PostDate>Event: {post.event.display_date}</PostDate>
           )}
-          {showDatePublished && Boolean(post.date_published) && (
-            <PostDate>{format(post.date_published, 'MMM DD, YYYY')}</PostDate>
-          )}
           <CategoryPosts>
             {categories
               .filter((category) => {
@@ -281,7 +277,6 @@ Post.propTypes = {
   fetchSpecificIssue: PropTypes.func,
   moreText: PropTypes.string.isRequired,
   navigation: PropTypes.object.isRequired,
-  showDatePublished: PropTypes.bool,
   categories: PropTypes.array,
 }
 
