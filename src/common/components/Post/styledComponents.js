@@ -40,7 +40,21 @@ export const PostShared = styled(TextSemibold)`
   margin-bottom: 7px;
 `
 
-export const PostDate = styled(PostAuthor)``
+export const PostDate = styled(Text)`
+  color: #4a4a4a;
+  font-size: 16px;
+  margin-top: 7px;
+`
+
+export const PostLocation = styled(Text)`
+  color: #4a4a4a;
+  font-size: 16px;
+`
+
+export const PostUrl = styled(Text)`
+  color: #d77400;
+  text-decoration-color: #d77400;
+`
 
 export const PostBody = styled(Text)`
   color: #4a4a4a;
