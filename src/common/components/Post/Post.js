@@ -5,8 +5,6 @@ import analytics from '@react-native-firebase/analytics'
 import PropTypes from 'prop-types'
 import { Text, TextSemibold } from '@components/Text'
 
-import format from 'date-fns/format'
-
 import { truncateText } from '@common/utils/truncateText'
 import { PostCategory } from '@components/PostCategory'
 import { Button } from '@components/Button'
