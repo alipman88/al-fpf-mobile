@@ -10,6 +10,7 @@ import {
   PostDate,
   PostContainerBordered,
   PostLink,
+  PostLocation,
   ShowMoreButton,
 } from '../styledComponents'
 import Autolink from 'react-native-autolink'
@@ -192,5 +193,49 @@ describe('Post', () => {
     const post = { ...defaultProps.post, area_id: 123, is_shared_post: true }
     const wrapper = shallow(<Post {...defaultProps} post={post} />)
     expect(wrapper.find(PostLink).length).toEqual(0)
+  })
+
+  test('Displays event address and URL', () => {
+    const props = {
+      ...defaultProps,
+      post: {
+        ...defaultProps.post,
+        event: { address: '14 Decatur Street' },
+      },
+    }
+    const wrapper = shallow(<Post {...props} />)
+    expect(wrapper.find(PostLocation).text()).toEqual(
+      'Where: 14 Decatur Street'
+    )
+
+    const props2 = {
+      ...defaultProps,
+      post: {
+        ...defaultProps.post,
+        event: { url: 'https://zoom.us/j/0123456789' },
+      },
+    }
+    const wrapper2 = shallow(<Post {...props2} />)
+    expect(wrapper2.find(PostLocation).text()).toEqual(
+      'Join online: https://zoom.us/j/0123456789'
+    )
+
+    const props3 = {
+      ...defaultProps,
+      post: {
+        ...defaultProps.post,
+        event: {
+          address: '8 Main Street',
+          url: 'https://zoom.us/j/0123456789',
+        },
+      },
+    }
+    const wrapper3 = shallow(<Post {...props3} />)
+    expect(wrapper3.find(PostLocation).first().text()).toEqual(
+      'Where: 8 Main Street'
+    )
+    expect(wrapper3.find(PostLocation).last().text()).toEqual(
+      'Join online: https://zoom.us/j/0123456789'
+    )
   })
 })

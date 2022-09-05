@@ -1,11 +1,9 @@
 import React from 'react'
-import { TouchableOpacity } from 'react-native'
+import { TouchableOpacity, Linking } from 'react-native'
 import Autolink from 'react-native-autolink'
 import analytics from '@react-native-firebase/analytics'
 import PropTypes from 'prop-types'
-import { Text } from '@components/Text'
-
-import format from 'date-fns/format'
+import { Text, TextSemibold } from '@components/Text'
 
 import { truncateText } from '@common/utils/truncateText'
 import { PostCategory } from '@components/PostCategory'
@@ -20,6 +18,8 @@ import {
   PostContainerBordered,
   PostBodyContainer,
   PostDate,
+  PostLocation,
+  PostUrl,
   PostHeader,
   PostLink,
   CategoryPosts,
@@ -83,7 +83,6 @@ export class Post extends React.Component {
       onTapCategory,
       moreText,
       navigation,
-      showDatePublished,
       categories,
     } = this.props
 
@@ -195,12 +194,6 @@ export class Post extends React.Component {
               )}
             </PostShared>
           )}
-          {Boolean(post.event.start_date) && (
-            <PostDate>Event: {post.event.display_date}</PostDate>
-          )}
-          {showDatePublished && Boolean(post.date_published) && (
-            <PostDate>{format(post.date_published, 'MMM DD, YYYY')}</PostDate>
-          )}
           <CategoryPosts>
             {categories
               .filter((category) => {
@@ -240,6 +233,24 @@ export class Post extends React.Component {
               </TouchableOpacity>
             )}
           </CategoryPosts>
+          {Boolean(post.event.start_date) && (
+            <PostDate>
+              <TextSemibold>When:</TextSemibold> {post.event.display_date}
+            </PostDate>
+          )}
+          {Boolean(post.event.address) && (
+            <PostLocation>
+              <TextSemibold>Where:</TextSemibold> {post.event.address}
+            </PostLocation>
+          )}
+          {Boolean(post.event.url) && (
+            <PostLocation>
+              <TextSemibold>Join online:</TextSemibold>{' '}
+              <PostUrl onPress={() => Linking.openURL(post.event.url)}>
+                {post.event.url}
+              </PostUrl>
+            </PostLocation>
+          )}
           <PostBody selectable={true}>
             <Autolink
               url
@@ -281,7 +292,6 @@ Post.propTypes = {
   fetchSpecificIssue: PropTypes.func,
   moreText: PropTypes.string.isRequired,
   navigation: PropTypes.object.isRequired,
-  showDatePublished: PropTypes.bool,
   categories: PropTypes.array,
 }
 
