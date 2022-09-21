@@ -131,7 +131,8 @@ yarn android
   and do the following for each:
 5. Switch to the Build tab
 6. Select the production branch
-7. Click the Build Now button and wait for the build to complete successfully
+7. Click the Build Now button and wait for both the iOS and Android builds to
+  complete successfully
 8. Click the Distribute button, then "Store", then the appropriate store, then Next
     - "Production (Google Play)" for Android
     - "Production (App Store)" for iOS
@@ -158,6 +159,8 @@ yarn android
 15. Post release notes to Slack
 
 ### App Center configuration
+
+#### Build configuration
 
 App Center has access to our GitHub repository through tech@frontporchforum.com.
 
@@ -201,9 +204,9 @@ sure to lock any variables that store sensitive data.
 - `ROLLBAR_SERVER_KEY`: same as `ROLLBAR_API_KEY`
 - `WEBSITE_HOST`: URL for FPF root, e.g. https://frontporchforum.com
 
-For the staging branch,es also configure the following environment variables
-with production values.  Doing so allows the staging build of the app to
-optionally connected to the production API.
+For the staging branch, also configure the following environment variables with
+production and staging2 values.  Doing so allows the staging build of the app
+to optionally connected to the production and staging2 stacks.
 
 - `PRODUCTION_API_HOST`
 - `PRODUCTION_API_KEY`
@@ -211,6 +214,27 @@ optionally connected to the production API.
 - `PRODUCTION_GOOGLE_MAPS_API_KEY`
 - `PRODUCTION_ROLLBAR_API_KEY`
 - `PRODUCTION_WEBSITE_HOST`
+- `STAGING2_API_HOST`
+- `STAGING2_API_KEY`
+- `STAGING2_ENVIRONMENT`
+- `STAGING2_GOOGLE_MAPS_API_KEY`
+- `STAGING2_ROLLBAR_API_KEY`
+- `STAGING2_WEBSITE_HOST`
+
+#### Store configuration
+
+App Center also needs to be configured to connect to Apple:
+https://appcenter.ms/settings/accounts.
+
+It's currently configured to use the tech-admin@frontporchforum.com account with
+an app-specific password (stored in 1Password under "Apple / AppCenter password
+for tech-admin@frontporchforum.com"):
+
+- https://appleid.apple.com/account/manage
+- https://support.apple.com/en-us/HT204397
+
+Then the production App Store can be connected:
+https://appcenter.ms/orgs/Front-Porch-Forum/apps/Front-Porch-Forum-iOS/distribute/distribution-stores
 
 
 ## Xcode workspace
