@@ -5,13 +5,14 @@ import { StyleSheet } from 'react-native'
 
 export const PostContainer = styled.View`
   margin-bottom: 10px;
+  background-color: ${({ isClosed }) => (isClosed ? '#e8e9f2' : '#fff')};
 `
 
 export const PostContainerBordered = styled.View`
   border-color: #ebecf1;
   border-width: 1px;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: ${({ isClosed }) => (isClosed ? '#e8e9f2' : '#fff')};
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
