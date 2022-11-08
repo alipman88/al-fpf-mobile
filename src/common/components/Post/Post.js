@@ -161,7 +161,7 @@ export class Post extends React.Component {
     }
 
     return (
-      <Container key={post.id}>
+      <Container key={post.id} isClosed={post.closed}>
         <PostBodyContainer hasBorder={hasBorder}>
           <PostHeader selectable={true}>{post.title}</PostHeader>
           <PostAuthor selectable={true}>
