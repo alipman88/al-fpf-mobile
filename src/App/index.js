@@ -1,7 +1,7 @@
 import React from 'react'
 import analytics from '@react-native-firebase/analytics'
 import { AppState, Linking, Platform } from 'react-native'
-import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import SplashScreen from 'react-native-splash-screen'
@@ -157,18 +157,24 @@ export class App extends React.Component {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <SafeAreaProvider>
-            <React.Fragment>
-              <Container handleNavigationChange={this.handleNavigationChange} />
-              {!this.state.connected && (
-                <Offline updateConnectionStatus={this.updateConnectionStatus} />
-              )}
-              <AppMessage />
-              <Toast
-                ref={this.toastRef}
-                position='top'
-                style={{ zIndex: 1000 }}
-              />
-            </React.Fragment>
+            <SafeAreaView style={{ flex: 1 }}>
+              <React.Fragment>
+                <Container
+                  handleNavigationChange={this.handleNavigationChange}
+                />
+                {!this.state.connected && (
+                  <Offline
+                    updateConnectionStatus={this.updateConnectionStatus}
+                  />
+                )}
+                <AppMessage />
+                <Toast
+                  ref={this.toastRef}
+                  position='top'
+                  style={{ zIndex: 1000 }}
+                />
+              </React.Fragment>
+            </SafeAreaView>
           </SafeAreaProvider>
         </PersistGate>
       </Provider>
