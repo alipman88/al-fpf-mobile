@@ -275,6 +275,10 @@ Try to avoid using default exports. While default exports can be useful, across 
 
 We're using [Styled Components](https://www.styled-components.com/) to do component styling. Since React Native styling is not cascading, it means that to apply `font-family: Helvetica` for example, every text node that needs to have that font, needs to declare that style. It does not get inherited from the parent. To get around the duplication, one can use https://www.styled-components.com/docs/basics#extending-styles to create a component with a base style, then extend it as needed for different sizes & colours.
 
+## Misc Android tips
+
+If the app errors during build when running `yarn android`, first try increasing the Internal Storage and SD Card Storage settings to at least 4098 MB. Next, try setting your system's Java version to 11 or later.
+
 ## Misc iOS tips
 
 ### Notifications
