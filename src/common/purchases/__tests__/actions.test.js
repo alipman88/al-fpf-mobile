@@ -79,7 +79,7 @@ describe('purchases - actions', () => {
           data: { profile: updatedProfile },
         }))
 
-      const rniapSpy = jest.spyOn(RNIap, 'finishTransactionIOS')
+      const rniapSpy = jest.spyOn(RNIap, 'finishTransaction')
 
       const purchase = {
         transactionReceipt: 'receipt-data',

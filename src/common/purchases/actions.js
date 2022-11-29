@@ -79,12 +79,9 @@ export const purchaseUpdated = (purchase) => async (dispatch, getState) => {
 
       // Acknowledge the transaction via the native IAP API.  (Otherwise, the
       // API won't consider the purchase complete).
-      if (Platform.OS === 'ios') {
-        RNIap.finishTransactionIOS(purchase.transactionId)
-      } else if (Platform.OS === 'android') {
-        // Assume non-consumable product
-        RNIap.acknowledgePurchaseAndroid(purchase.purchaseToken)
-      }
+      const identifier =
+        Platform.OS === 'ios' ? purchase.transactionId : purchase.purchaseToken
+      RNIap.finishTransaction(identifier)
     }
   } catch (e) {
     rollbar.info('purchaseUpdated failed', e, {
