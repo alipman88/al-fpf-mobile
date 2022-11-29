@@ -140,6 +140,7 @@ android {
     defaultConfig {
         applicationId "com.frontporchforum"
         minSdkVersion rootProject.ext.minSdkVersion
+        missingDimensionStrategy "store", "play"
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.10.0"

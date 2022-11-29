@@ -23,7 +23,7 @@ describe('purchases - actions', () => {
         purchases.actions.setPurchasing({ profileId: 1 })
       )
 
-      expect(rniapSpy).toHaveBeenCalledWith('some-sku')
+      expect(rniapSpy).toHaveBeenCalledWith({ sku: 'some-sku' })
 
       rniapSpy.mockRestore()
     })

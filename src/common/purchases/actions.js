@@ -24,7 +24,7 @@ export const requestSubscription = (productId, profileId) => async (
 ) => {
   try {
     dispatch(slice.actions.setPurchasing({ profileId }))
-    await RNIap.requestSubscription(productId)
+    await RNIap.requestSubscription({ sku: productId })
   } catch (e) {
     rollbar.info('requestSubscription failed', e, {
       productId,
