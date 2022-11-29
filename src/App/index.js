@@ -139,8 +139,8 @@ export class App extends React.Component {
       type === 'unknown' ||
       (type !== 'wifi' && effectiveType === '2g')
 
-    // some cases where both values are unknown, lets see if we can reach the server
-    if (connectionWeak && type === 'unknown' && effectiveType === 'unknown') {
+    // React's NetInfo is unreliable. Double-check before alerting user of weak connection.
+    if (connectionWeak) {
       try {
         await fetch(`${Config.WEBSITE_HOST}/_health_check`)
         connectionWeak = false
