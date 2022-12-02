@@ -40,7 +40,7 @@
     "react-native-easy-toast": "^2.0.0",
     "react-native-flash-message": "^0.1.21",
     "react-native-gesture-handler": "^1.9.0",
-    "react-native-iap": "5.2.9",
+    "react-native-iap": "^9.0.4",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-loading-spinner-overlay": "^2.0.0",
     "react-native-maps": "git+https://github.com/react-native-maps/react-native-maps#93a6afde70ec7a8f21bc9266ad29fb2eaa0632ab",

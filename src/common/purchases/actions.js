@@ -24,7 +24,7 @@ export const requestSubscription = (productId, profileId) => async (
 ) => {
   try {
     dispatch(slice.actions.setPurchasing({ profileId }))
-    await RNIap.requestSubscription(productId)
+    await RNIap.requestSubscription({ sku: productId })
   } catch (e) {
     rollbar.info('requestSubscription failed', e, {
       productId,
@@ -79,12 +79,9 @@ export const purchaseUpdated = (purchase) => async (dispatch, getState) => {
 
       // Acknowledge the transaction via the native IAP API.  (Otherwise, the
       // API won't consider the purchase complete).
-      if (Platform.OS === 'ios') {
-        RNIap.finishTransactionIOS(purchase.transactionId)
-      } else if (Platform.OS === 'android') {
-        // Assume non-consumable product
-        RNIap.acknowledgePurchaseAndroid(purchase.purchaseToken)
-      }
+      const identifier =
+        Platform.OS === 'ios' ? purchase.transactionId : purchase.purchaseToken
+      RNIap.finishTransaction(identifier)
     }
   } catch (e) {
     rollbar.info('purchaseUpdated failed', e, {
