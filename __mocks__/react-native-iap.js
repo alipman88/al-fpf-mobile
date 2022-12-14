@@ -1,7 +1,7 @@
 module.exports = {
   acknowledgePurchaseAndroid: jest.fn(),
   finishTransaction: jest.fn(),
-  getProducts: productIds => new Promise((resolve, reject) => resolve(productIds)),
+  getSubscriptions: productIds => new Promise((resolve, reject) => resolve(productIds)),
   purchaseErrorListener: () => ({ remove: jest.fn() }),
   purchaseUpdatedListener: () => ({ remove: jest.fn() }),
   initConnection: () => Promise.resolve(),
