@@ -10,7 +10,7 @@ export const getProducts = (productIds) => async (dispatch, getState) => {
   try {
     if (productIds && productIds.length) {
       dispatch(slice.actions.setLoading(true))
-      const products = await RNIap.getProducts(productIds)
+      const products = await RNIap.getSubscriptions(productIds)
       dispatch(slice.actions.setProducts(products))
     }
   } catch (err) {
