@@ -61,7 +61,7 @@ describe('SettingsIndex', () => {
 
   test('can logout', async () => {
     const wrapper = shallow(<SettingsIndex {...defaultProps} />)
-    await wrapper.find(TouchableOpacity).at(1).simulate('press')
+    await wrapper.find(TouchableOpacity).at(5).simulate('press')
 
     expect(defaultProps.logoutUser).toHaveBeenCalled()
   })

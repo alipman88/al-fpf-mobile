@@ -17,14 +17,12 @@ export const LogoutText = styled(Text)`
   padding-bottom: 26px;
 `
 
-export const ViewPostingsContainer = styled.View`
-  border-top-width: 1px;
+export const ExternalLinkContainer = styled.View`
   border-bottom-width: 1px;
   border-color: #d0d1d7;
-  padding-vertical: 18px;
+  padding-vertical: 6px;
   flex-direction: row;
   margin-horizontal: 20px;
-  margin-top: 30px;
   justify-content: space-between;
 `
 

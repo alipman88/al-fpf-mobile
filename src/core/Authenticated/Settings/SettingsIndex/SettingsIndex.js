@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import DeviceInfo from 'react-native-device-info'
-import { Image, TouchableOpacity } from 'react-native'
+import { Image, Linking, TouchableOpacity } from 'react-native'
 import Spinner from 'react-native-loading-spinner-overlay'
 
 import { Config } from '@common/config'
@@ -9,6 +9,7 @@ import { ScreenContainer } from '@components/ScreenContainer'
 import { getProfileDisplayName } from '@common/utils/getProfileDisplayName'
 import { NavLink } from '../components/NavLink'
 import { FieldLabel } from '../components/FieldLabel'
+import { FieldHeading } from '../components/FieldHeading'
 
 import {
   Container,
@@ -16,7 +17,7 @@ import {
   Navigation,
   Version,
   ViewPostings,
-  ViewPostingsContainer,
+  ExternalLinkContainer,
 } from './styledComponents'
 
 import linkIcon from '@assets/images/global-assets/external-link-icons/external-link-icon-blue.png'
@@ -55,7 +56,8 @@ export class SettingsIndex extends React.Component {
         <Spinner visible={this.state.loading} />
         <Container>
           <Navigation>
-            <FieldLabel>My account</FieldLabel>
+            <FieldHeading>Account</FieldHeading>
+            <FieldLabel style={{ marginTop: 12 }}>My account</FieldLabel>
             <NavLink
               linkText={`${user.first_name} ${user.last_name}`}
               onPress={() => navigation.navigate('Account')}
@@ -79,10 +81,51 @@ export class SettingsIndex extends React.Component {
                 )
               }
             >
-              <ViewPostingsContainer>
+              <ExternalLinkContainer style={{ marginTop: 18 }}>
                 <ViewPostings>View my postings</ViewPostings>
                 <Image source={linkIcon} />
-              </ViewPostingsContainer>
+              </ExternalLinkContainer>
+            </TouchableOpacity>
+            <FieldHeading style={{ marginTop: 30 }}>Help</FieldHeading>
+            <TouchableOpacity
+              onPress={() =>
+                Linking.openURL('https://help.frontporchforum.com')
+              }
+            >
+              <ExternalLinkContainer>
+                <ViewPostings>Member Support</ViewPostings>
+                <Image source={linkIcon} />
+              </ExternalLinkContainer>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() =>
+                Linking.openURL('https://frontporchforum.com/privacy-policy')
+              }
+            >
+              <ExternalLinkContainer>
+                <ViewPostings>Privacy Policy</ViewPostings>
+                <Image source={linkIcon} />
+              </ExternalLinkContainer>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() =>
+                Linking.openURL('https://frontporchforum.com/terms-of-use')
+              }
+            >
+              <ExternalLinkContainer>
+                <ViewPostings>Terms of Use</ViewPostings>
+                <Image source={linkIcon} />
+              </ExternalLinkContainer>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() =>
+                Linking.openURL('https://frontporchforum.com/about-us')
+              }
+            >
+              <ExternalLinkContainer>
+                <ViewPostings>About FPF</ViewPostings>
+                <Image source={linkIcon} />
+              </ExternalLinkContainer>
             </TouchableOpacity>
             <Version>
               v{DeviceInfo.getVersion()} #{DeviceInfo.getBuildNumber()}
