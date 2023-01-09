@@ -152,7 +152,13 @@ export const WebView = (props) => {
   // browser tab.) When updating these paths, be sure to update the
   // @mobile_app_permitted_paths array in the Rails app's
   // ApplicationController#handle_mobile_app_request method.
-  const whitelistedPaths = ['/compose', '/directory', '/d/', '/search']
+  const whitelistedPaths = [
+    '/calendar',
+    '/compose',
+    '/directory',
+    '/d/',
+    '/search',
+  ]
 
   return (
     <>

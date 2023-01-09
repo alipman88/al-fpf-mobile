@@ -28,6 +28,7 @@ export const Settings = createStackNavigator(
           <CloseText allowFontScaling={false}>Close</CloseText>
         </TouchableOpacity>
       ),
+      headerTitle: 'Account & Help',
       headerTitleStyle: {
         fontFamily: 'ProximaNova-SemiBold',
         fontSize: 18,

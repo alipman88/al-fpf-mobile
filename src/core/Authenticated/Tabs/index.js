@@ -4,7 +4,7 @@ import get from 'lodash/get'
 
 import { Compose } from './Compose'
 import { Forum } from './Forum'
-import { More } from './More'
+import { Calendar } from './Calendar'
 import { Search } from './Search'
 import { Directory } from './Directory'
 
@@ -17,8 +17,8 @@ import directoryActive from '@assets/images/global-assets/main-navigation/direct
 import directoryDefault from '@assets/images/global-assets/main-navigation/directory-default.png'
 import homeActive from '@assets/images/global-assets/main-navigation/home-active.png'
 import homeDefault from '@assets/images/global-assets/main-navigation/home-default.png'
-import moreActive from '@assets/images/global-assets/main-navigation/more-active.png'
-import moreDefault from '@assets/images/global-assets/main-navigation/more-default.png'
+import calendarActive from '@assets/images/global-assets/main-navigation/calendar-active.png'
+import calendarDefault from '@assets/images/global-assets/main-navigation/calendar-default.png'
 import searchActive from '@assets/images/global-assets/main-navigation/search-active.png'
 import searchDefault from '@assets/images/global-assets/main-navigation/search-default.png'
 
@@ -122,18 +122,18 @@ export const Tabs = createBottomTabNavigator(
         ),
       }),
     },
-    More: {
-      screen: More,
+    Calendar: {
+      screen: Calendar,
       navigationOptions: () => ({
         /* eslint-disable-next-line react/prop-types */
         tabBarLabel: ({ focused }) => (
           <NavLabel allowFontScaling={false} focused={focused}>
-            More
+            Calendar
           </NavLabel>
         ),
         /* eslint-disable-next-line react/prop-types */
         tabBarIcon: ({ focused }) => (
-          <NavIcon source={focused ? moreActive : moreDefault} />
+          <NavIcon source={focused ? calendarActive : calendarDefault} />
         ),
       }),
     },
