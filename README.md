@@ -9,25 +9,41 @@
 
 ## Setup
 
-### Xcode and Android Studio
+Install homebrew if not already installed.
 
-First you'll need to setup iOS & Android dev tools. Install
-[XCode](https://itunes.apple.com/ca/app/xcode/id497799835?mt=12) and
-[Android Studio](https://developer.android.com/studio).
+### Xcode
+
+Install [XCode](https://itunes.apple.com/ca/app/xcode/id497799835?mt=12).
 
 Once XCode is installed, be sure to install xcode command line tools `xcode-select --install`.
 
-Launch Android studio, and install the latest SDK version & SDK Tools. We're using SDK 28 for this app.
+### Android Studio
 
-Add the `ANDROID_HOME` variable to your .bash_profile or .bashrc
+For more information, see https://reactnative.dev/docs/environment-setup.
+
+Install [Android Studio](https://developer.android.com/studio).
+
+Install OpenJDK 11:
 
 ```
-export ANDROID_HOME=$HOME/Library/Android/sdk
+brew tap homebrew/cask-versions
+brew install --cask zulu11
+```
+
+Launch Android studio, and install the latest SDK version & SDK Tools.  See
+`android/build.gradle` for the currently supported SDK versions.
+
+Ensure JDK 11 is used if running the app from within Android Studio:
+Android Studio > Preferences > Build, Execution, Deployment > Build Tools > Gradle > Gradle JDK
+
+Add to your `.bash_profile` or `.bashrc`:
+```
+export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
+export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
 ```
 
 ### Tools
-
-Install homebrew if not already installed.
 
 Install the following tools:
 
@@ -38,7 +54,7 @@ brew install watchman
 sudo gem install cocoapods
 ```
 
-If you have already installed Node on your system, make sure it is Node 8.3 or newer.
+If you have already installed Node on your system, make sure it is Node 14 or newer.
 
 Watchman is a tool by Facebook for watching changes in the filesystem. It is
 highly recommended you install it for better performance.
