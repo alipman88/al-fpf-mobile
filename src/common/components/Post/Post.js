@@ -4,8 +4,8 @@ import Autolink from 'react-native-autolink'
 import analytics from '@react-native-firebase/analytics'
 import PropTypes from 'prop-types'
 import { Text, TextSemibold } from '@components/Text'
+import truncate from 'lodash/truncate'
 
-import { truncateText } from '@common/utils/truncateText'
 import { PostCategory } from '@components/PostCategory'
 import { Button } from '@components/Button'
 
@@ -32,6 +32,8 @@ import {
   PillPrimary,
   PillText,
 } from './styledComponents'
+
+import { Disclaimer } from '@core/Authenticated/Tabs/Forum/components/sharedStyles'
 
 export class Post extends React.Component {
   state = {
@@ -85,6 +87,22 @@ export class Post extends React.Component {
       navigation,
       categories,
     } = this.props
+
+    // Sort out post truncation, taking into account the length of a disclaimer
+
+    let postContent = post.content
+    const disclaimerContent = post.disclaimer?.content_plain || ''
+
+    const requiresTruncation =
+      postContent.length + disclaimerContent.length > postTruncateLength
+    const truncated = requiresTruncation && !this.state.showMore
+
+    if (requiresTruncation && truncated) {
+      postContent = truncate(postContent, {
+        length: postTruncateLength,
+        separator: /\s/,
+      })
+    }
 
     const Container = hasBorder ? PostContainerBordered : PostContainer
     const BottomContainer = hasBorder ? BottomBordered : Bottom
@@ -255,18 +273,24 @@ export class Post extends React.Component {
             <Autolink
               url
               email
-              text={truncateText(
-                post.content,
-                postTruncateLength,
-                !this.state.showMore
-              )}
+              text={postContent}
               linkStyle={AutoPostLinkStyle.link}
             />
           </PostBody>
-          {post.content.length > postTruncateLength && (
+          {!!disclaimerContent && !truncated && (
+            <Disclaimer selectable={true}>
+              <Autolink
+                url
+                email
+                text={disclaimerContent}
+                linkStyle={AutoPostLinkStyle.link}
+              />
+            </Disclaimer>
+          )}
+          {requiresTruncation && (
             <TouchableOpacity onPress={() => this.toggleShowMore()}>
               <ShowMoreButton>
-                {moreText} {this.state.showMore ? 'less' : 'more'}
+                {moreText} {truncated ? 'more' : 'less'}
               </ShowMoreButton>
             </TouchableOpacity>
           )}

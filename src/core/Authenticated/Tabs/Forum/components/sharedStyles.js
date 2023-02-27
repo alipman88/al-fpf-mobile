@@ -35,3 +35,9 @@ export const Bottom = styled.View`
   padding: 0px 10px 13px 10px;
   align-items: stretch;
 `
+
+export const Disclaimer = styled(Text)`
+  font-size: 16px;
+  color: #6c757d;
+  padding: 7px 14px;
+`

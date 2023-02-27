@@ -13,6 +13,7 @@ import {
   PostLocation,
   ShowMoreButton,
 } from '../styledComponents'
+import { Disclaimer } from '@core/Authenticated/Tabs/Forum/components/sharedStyles'
 import Autolink from 'react-native-autolink'
 
 describe('Post', () => {
@@ -237,5 +238,18 @@ describe('Post', () => {
     expect(wrapper3.find(PostLocation).last().text()).toEqual(
       'Join online: https://zoom.us/j/0123456789'
     )
+  })
+
+  test('renders post disclaimer', () => {
+    const props = {
+      ...defaultProps,
+      post: {
+        ...defaultProps.post,
+        disclaimer: { content_plain: 'foo', content_html: 'bar' },
+      },
+    }
+    const wrapper = shallow(<Post {...props} />)
+
+    expect(wrapper.find(Disclaimer).length).toEqual(1)
   })
 })
