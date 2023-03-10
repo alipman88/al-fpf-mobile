@@ -3,6 +3,7 @@ import { Linking, TouchableOpacity } from 'react-native'
 import { shallow } from 'enzyme'
 
 import { Button } from '@components/Button'
+import { Disclaimer } from '@core/Authenticated/Tabs/Forum/components/sharedStyles'
 import { Advertisement } from '../index'
 
 describe('Advertisement', () => {
@@ -35,5 +36,18 @@ describe('Advertisement', () => {
     wrapper.find(TouchableOpacity).first().simulate('press')
     expect(openURLSpy).toHaveBeenCalledWith(defaultProps.ad.url)
     openURLSpy.mockRestore()
+  })
+
+  test('renders ad disclaimer', () => {
+    const props = {
+      ...defaultProps,
+      ad: {
+        ...defaultProps.ad,
+        disclaimer: { content_plain: 'foo', content_html: 'bar' },
+      },
+    }
+    const wrapper = shallow(<Advertisement {...props} />)
+
+    expect(wrapper.find(Disclaimer).length).toEqual(1)
   })
 })

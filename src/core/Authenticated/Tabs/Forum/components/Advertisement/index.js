@@ -1,4 +1,5 @@
 import React from 'react'
+import Autolink from 'react-native-autolink'
 import { Linking, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
 import IconEvil from 'react-native-vector-icons/EvilIcons'
@@ -6,6 +7,10 @@ import { Button } from '@components/Button'
 import { SizedImage } from '@components/SizedImage'
 import { ImageWrapper } from './styledComponents'
 import { PostCategory } from '@components/PostCategory'
+import {
+  Disclaimer,
+  AutoPostLinkStyle,
+} from '@core/Authenticated/Tabs/Forum/components/sharedStyles'
 import { Card, CardContent, ContentText, Header, Bottom } from '../sharedStyles'
 
 export const Advertisement = ({ ad, navigateWithToken }) => (
@@ -23,6 +28,16 @@ export const Advertisement = ({ ad, navigateWithToken }) => (
         </TouchableOpacity>
       </ImageWrapper>
       <ContentText selectable={true}>{ad.body}</ContentText>
+      {!!ad.disclaimer?.content_plain && (
+        <Disclaimer selectable={true}>
+          <Autolink
+            url
+            email
+            text={ad.disclaimer?.content_plain}
+            linkStyle={AutoPostLinkStyle.link}
+          />
+        </Disclaimer>
+      )}
     </CardContent>
     <Bottom>
       <Button color='#fff' onPress={() => Linking.openURL(ad.url)} fullWidth>
