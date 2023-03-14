@@ -1,4 +1,5 @@
 import styled from 'styled-components/native'
+import { StyleSheet } from 'react-native'
 
 import { Text } from '@components/Text'
 
@@ -35,6 +36,12 @@ export const Bottom = styled.View`
   padding: 0px 10px 13px 10px;
   align-items: stretch;
 `
+
+export const AutoPostLinkStyle = StyleSheet.create({
+  link: {
+    color: '#d77400',
+  },
+})
 
 export const Disclaimer = styled(Text)`
   font-size: 16px;

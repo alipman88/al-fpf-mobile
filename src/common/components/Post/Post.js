@@ -28,12 +28,14 @@ import {
   BottomBordered,
   ButtonWrapper,
   ButtonSpacer,
-  AutoPostLinkStyle,
   PillPrimary,
   PillText,
 } from './styledComponents'
 
-import { Disclaimer } from '@core/Authenticated/Tabs/Forum/components/sharedStyles'
+import {
+  Disclaimer,
+  AutoPostLinkStyle,
+} from '@core/Authenticated/Tabs/Forum/components/sharedStyles'
 
 export class Post extends React.Component {
   state = {

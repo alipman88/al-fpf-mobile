@@ -1,7 +1,6 @@
 import styled from 'styled-components/native'
 
 import { Text, TextSemibold } from '@components/Text'
-import { StyleSheet } from 'react-native'
 
 export const PostContainer = styled.View`
   margin-bottom: 10px;
@@ -120,9 +119,3 @@ export const ButtonWrapper = styled.View`
 export const ButtonSpacer = styled.View`
   flex: 1;
 `
-
-export const AutoPostLinkStyle = StyleSheet.create({
-  link: {
-    color: '#d77400',
-  },
-})
