@@ -134,45 +134,67 @@ yarn android
   distribution groups
 
 ### Production deployment
+
 1. Update the version number in the following files and commit:
-    - fpf-mobile/ios/FrontPorchForum/Info.plist
-    - fpf-mobile/ios/FrontPorchForum-tvOS/Info.plist
-    - fpf-mobile/ios/FrontPorchForum-tvOSTests/Info.plist
-    - fpf-mobile/ios/FrontPorchForumTests/Info.plist
-    - fpf-mobile/android/app/build.gradle
+    - `fpf-mobile/ios/FrontPorchForum/Info.plist`
+    - `fpf-mobile/ios/FrontPorchForum-tvOS/Info.plist`
+    - `fpf-mobile/ios/FrontPorchForum-tvOSTests/Info.plist`
+    - `fpf-mobile/ios/FrontPorchForumTests/Info.plist`
+    - `fpf-mobile/android/app/build.gradle`
 2. Merge `staging` to `production` (which will require a non-fast forward merge
   because the production branch includes details that can't be merged to staging)
-3. Merge `staging` to `master`
+3. Merge `staging` to `master` (if it's not already merged, which it should be)
 4. In [App Center](https://appcenter.ms/), open the iOS and Android FPF apps,
   and do the following for each:
-5. Switch to the Build tab
-6. Select the production branch
-7. Click the Build Now button and wait for both the iOS and Android builds to
-  complete successfully
-8. Click the Distribute button, then "Store", then the appropriate store, then Next
+  - Switch to the Build tab
+  - Select the production branch
+  - Click on the wrench icon, update the release notes, and click Save.
+  - If the build didn't start automatically (it should) or if it fails (it might),
+    click the Build Now button
+  - Wait for both the iOS and Android builds to complete successfully
+5. If the build wasn't automatically sent to the app stores (it should be), click
+  the Distribute button, then "Store", then the appropriate store, then Next
     - "Production (Google Play)" for Android
     - "Production (App Store)" for iOS
-9. Enter release notes
-10. Click the Distribute button.  After a few moments, you should see a success
-  notification and a link to view the status, which should go from "processing"
-  to "submitted".
-11. Wait while the stores process the new releases, which may take a few hours
-  to a few days.  Note that in iTunes Connect the build will take some time to
-  be processed, and then the new app version will automatically be submitted
-  for review.  Check the status on the developer site or the app page:
-    - [Google Play Console](https://play.google.com/apps/publish/?account=7669883795652962257#AppDashboardPlace:p=com.frontporchforum&appid=4973842490929321153)
-    - [Google Play Store](https://play.google.com/store/apps/details?id=com.frontporchforum)
-    - [iTunes Connect](https://appstoreconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1458651656)
-    - [iOS App Store](https://apps.apple.com/us/app/front-porch-forum/id1458651656)
-12. Tag the release:
+  After a few moments, you should see a success notification and a link to view
+  the status, which should go from "processing" to "submitted".
+6. If the iOS build fails store distribution due to an authentication problem,
+  go to Distribute -> Stores -> and then click the "Reconnect" button.  Note the
+  connection is made through the tech-admin@frontporchforum.com Apple ID; the
+  credentials for that account are stored in 1Password, and there's a separate
+  app-specific Apple password used by App Center to connect to Apple also stored
+  in 1Password under "Apple AppCenter: Tech-Admin".
+7. For the iOS build:
+  - Go to [App Store Connect](https://appstoreconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1458651656)
+  - Ensure that the new version is shown in the "Prepare for Submission" status
+  - Enter text into the "What's New in This Version" field and click Save
+  - Wait a few hours until the new build appears in the "Build" table (you might
+    receive an email with the subject "Version x.y.z... has completed processing")
+  - If status is "Missing Compliance", click "Manage" and in the modal titled
+    "Export Compliance Information" select "None of the algorithms mentioned above"
+  - Click "Add for Review"
+  - Click "Submit to App Review"
+  - Wait for a few days until you receive a review sucessfully completed email
+8. For the Android build:
+  - Go to [Google Play Console](https://play.google.com/console/u/0/developers/7669883795652962257/app/4973842490929321153/releases/overview) -> "Releases overview"
+  - Ensure that the new version is shown in the "Latest releases" table with a
+    release status of "Available on Google Play".  This may take a few hours.
+9. Tag the release:
 
-        `git tag -a v1.2.3 -m "1.2.3 release"`
-        `git push --tags`
+        git tag -a v1.2.3 -m "1.2.3 release"
+        git push --tags
 
-13. Update the Pivotal Tracker release story's release date and finish the release
-14. Add the `released` label to stories in Pivotal Tracker that have the released
-  version's label
-15. Post release notes to Slack
+10. Update the Pivotal Tracker release story's release date and finish the release
+11. Add the `released` label to stories in Pivotal Tracker that have the released version's label
+12. Post release notes to Slack
+
+Stores:
+- [iOS App Store](https://apps.apple.com/us/app/front-porch-forum/id1458651656)
+- [Google Play Store](https://play.google.com/store/apps/details?id=com.frontporchforum)
+
+Installed version reports:
+- [iOS active devices by app version](https://appstoreconnect.apple.com/analytics/app/d90/1458651656/metrics?annotationsVisible=true&chartType=singleaxis&groupDimensionKey=appVersion&measureKey=activeDevices&zoomType=week)
+- [Android active devices by app version](https://play.google.com/console/u/0/developers/7669883795652962257/app/4973842490929321153/statistics?metrics=ACTIVE_DEVICES-ALL-UNIQUE-PER_INTERVAL-DAY&dimension=APP_VERSION&dimensionValues=239%2C232%2C156%2C198%2C181%2C116%2C151%2C145&dateRange=2022_9_24-2023_3_22&tab=APP_STATISTICS&ctpMetric=DAU_MAU-ACQUISITION_UNSPECIFIED-COUNT_UNSPECIFIED-CALCULATION_UNSPECIFIED-DAY&ctpDateRange=2023_2_21-2023_3_22&ctpDimension=COUNTRY&ctpDimensionValue=OVERALL&ctpPeersetKey=3%3A2689e48fc22c04ea)
 
 ### App Center configuration
 
