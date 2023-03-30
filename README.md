@@ -54,7 +54,8 @@ brew install watchman
 sudo gem install cocoapods
 ```
 
-If you have already installed Node on your system, make sure it is Node 14 or newer.
+If you have already installed Node on your system, make sure it matches the version
+used in `fpf-mobile/.travis.yml`.
 
 Watchman is a tool by Facebook for watching changes in the filesystem. It is
 highly recommended you install it for better performance.
