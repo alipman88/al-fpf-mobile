@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { ScrollView, TouchableOpacity, Image } from 'react-native'
-import navigationService from '@common/utils/navigationService'
+import { useNavigation } from '@react-navigation/native'
 
 import bird1 from '@assets/images/onboarding/yellow-bird.png'
 import bird2 from '@assets/images/onboarding/grey-bird.png'
@@ -27,6 +27,9 @@ export const DrawerMenu = ({
   setCurrentAreaId,
   setCurrentProfileId,
 }) => {
+  const navigation = useNavigation()
+  const { setDrawerOpenState } = React.useContext(DrawerContext)
+
   const birdies = (
     <Birds>
       {[bird1, bird2, bird3].map((bird, index) => (
@@ -36,50 +39,46 @@ export const DrawerMenu = ({
   )
 
   return (
-    <DrawerContext.Consumer>
-      {({ setDrawerOpenState }) => (
-        <View>
-          <SafeAreaView>
-            <Container>
-              <ScrollView>
-                <Header>Forums</Header>
-                {areas.map((area) => (
-                  <TouchableOpacity
-                    key={area.name}
-                    onPress={() => {
-                      if (
-                        !currentProfile ||
-                        !currentProfile.area_ids.includes(area.id)
-                      ) {
-                        const profile = profiles.find((profile) => {
-                          return profile.area_ids.includes(area.id)
-                        })
+    <View>
+      <SafeAreaView>
+        <Container>
+          <ScrollView>
+            <Header>Forums</Header>
+            {areas.map((area) => (
+              <TouchableOpacity
+                key={area.name}
+                onPress={() => {
+                  if (
+                    !currentProfile ||
+                    !currentProfile.area_ids.includes(area.id)
+                  ) {
+                    const profile = profiles.find((profile) => {
+                      return profile.area_ids.includes(area.id)
+                    })
 
-                        if (profile) {
-                          setCurrentProfileId(profile.id)
-                        }
-                      }
+                    if (profile) {
+                      setCurrentProfileId(profile.id)
+                    }
+                  }
 
-                      setCurrentAreaId(area.id)
-                      setDrawerOpenState(false)
-                      navigationService.navigate('Forum')
-                    }}
-                  >
-                    <ForumText
-                      active={area.id === currentAreaId}
-                      access={area.access}
-                    >
-                      {area.name}
-                    </ForumText>
-                  </TouchableOpacity>
-                ))}
-              </ScrollView>
-            </Container>
-            <Grass height={90} content={birdies} />
-          </SafeAreaView>
-        </View>
-      )}
-    </DrawerContext.Consumer>
+                  setCurrentAreaId(area.id)
+                  setDrawerOpenState(false)
+                  navigation.navigate('Forum')
+                }}
+              >
+                <ForumText
+                  active={area.id === currentAreaId}
+                  access={area.access}
+                >
+                  {area.name}
+                </ForumText>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </Container>
+        <Grass height={90} content={birdies} />
+      </SafeAreaView>
+    </View>
   )
 }
 

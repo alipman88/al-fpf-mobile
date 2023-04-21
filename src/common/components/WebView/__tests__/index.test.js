@@ -1,20 +1,19 @@
 import React from 'react'
-import navigationService from '@common/utils/navigationService'
+import { render, screen } from '@testing-library/react-native'
+
 import { WebView } from '@components/WebView'
-import { shallow } from 'enzyme'
 
 describe('WebView', () => {
   const setState = jest.fn()
   const useStateMock = (initState) => [initState, setState]
   jest.spyOn(React, 'useState').mockImplementation(useStateMock)
 
-  const navigateMock = (route, param) => true
-  const navigate = jest
-    .spyOn(navigationService, 'navigate')
-    .mockImplementation(navigateMock)
+  const navigate = jest.fn(() => true)
+  const setOptions = jest.fn()
 
   const defaultProps = {
-    navigation: { state: {} },
+    navigation: { navigate, setOptions },
+    route: { name: 'foo' },
     source: {
       uri: 'https://frontporchforum.com/directory',
     },
@@ -22,13 +21,13 @@ describe('WebView', () => {
 
   afterEach(() => {
     navigate.mockReset()
+    setOptions.mockReset()
   })
 
   test('WebView compose post requests are intercepted', () => {
-    const wrapper = shallow(<WebView {...defaultProps} />)
-    wrapper.find('WebView').props().onShouldStartLoadWithRequest({
-      url:
-        'https://frontporchforum.com/compose/92?category_id=5&post%5Breferenced_profile_id%5D=123&post%5Btitle%5D=Recommending+Pawnshop+Productions',
+    render(<WebView {...defaultProps} />)
+    screen.getByTestId('webView').props.onShouldStartLoadWithRequest({
+      url: 'https://frontporchforum.com/compose/92?category_id=5&post%5Breferenced_profile_id%5D=123&post%5Btitle%5D=Recommending+Pawnshop+Productions',
     })
 
     expect(navigate).toHaveBeenCalledWith('Compose', {
@@ -40,8 +39,8 @@ describe('WebView', () => {
   })
 
   test('WebView search requests are intercepted', () => {
-    const wrapper = shallow(<WebView {...defaultProps} />)
-    wrapper.find('WebView').props().onShouldStartLoadWithRequest({
+    render(<WebView {...defaultProps} />)
+    screen.getByTestId('webView').props.onShouldStartLoadWithRequest({
       url: 'https://frontporchforum.com/search?query=foo',
     })
 
@@ -51,13 +50,13 @@ describe('WebView', () => {
   })
 
   test('WebView search requests are not intercepted when in Search view already', () => {
-    const wrapper = shallow(
+    render(
       <WebView
         {...defaultProps}
-        navigation={{ state: { routeName: 'Search' } }}
+        route={{ ...defaultProps.route, name: 'Search' }}
       />
     )
-    wrapper.find('WebView').props().onShouldStartLoadWithRequest({
+    screen.getByTestId('webView').props.onShouldStartLoadWithRequest({
       url: 'https://frontporchforum.com/search?query=foo',
     })
 
@@ -65,8 +64,8 @@ describe('WebView', () => {
   })
 
   test('WebView directory requests are intercepted', () => {
-    const wrapper = shallow(<WebView {...defaultProps} />)
-    wrapper.find('WebView').props().onShouldStartLoadWithRequest({
+    render(<WebView {...defaultProps} />)
+    screen.getByTestId('webView').props.onShouldStartLoadWithRequest({
       url: 'https://frontporchforum.com/directory',
     })
 
@@ -74,7 +73,7 @@ describe('WebView', () => {
       sourceUrl: '/directory',
     })
 
-    wrapper.find('WebView').props().onShouldStartLoadWithRequest({
+    screen.getByTestId('webView').props.onShouldStartLoadWithRequest({
       url: 'https://frontporchforum.com/d/foo',
     })
 
@@ -84,13 +83,13 @@ describe('WebView', () => {
   })
 
   test('WebView directory requests are not intercepted when in Directory view already', () => {
-    const wrapper = shallow(
+    render(
       <WebView
         {...defaultProps}
-        navigation={{ state: { routeName: 'Directory' } }}
+        route={{ ...defaultProps.route, name: 'Directory' }}
       />
     )
-    wrapper.find('WebView').props().onShouldStartLoadWithRequest({
+    screen.getByTestId('webView').props.onShouldStartLoadWithRequest({
       url: 'https://frontporchforum.com/directory',
     })
 

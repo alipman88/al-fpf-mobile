@@ -1,9 +1,13 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import TestRenderer from 'react-test-renderer'
 
 import { DrawerMenu } from '../DrawerMenu'
 
 import { ForumText } from '../styledComponents'
+
+jest.mock('@react-navigation/native', () => ({
+  useNavigation: () => ({ navigate: jest.fn() }),
+}))
 
 describe('DrawerMenu', () => {
   const defaultProps = {
@@ -41,10 +45,7 @@ describe('DrawerMenu', () => {
   }
 
   test('renders areas', () => {
-    const outer = shallow(<DrawerMenu {...defaultProps} />)
-    const Children = outer.prop('children')
-    const wrapper = shallow(<Children />)
-
-    expect(wrapper.find(ForumText).length).toEqual(3)
+    const wrapper = TestRenderer.create(<DrawerMenu {...defaultProps} />).root
+    expect(wrapper.findAllByType(ForumText).length).toEqual(3)
   })
 })

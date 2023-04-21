@@ -1,21 +1,27 @@
 import React from 'react'
 import messaging from '@react-native-firebase/messaging'
-import { ForumContainer } from '../styledComponents'
 import { shallow } from 'enzyme'
-import { Forum } from '../Forum'
+import { waitFor } from '@testing-library/react-native'
+
+import { ForumContainer } from '../styledComponents'
+import { ForumComponent as Forum } from '../Forum'
 import { ForumPost } from '../components/ForumPost'
 import { ForumMessage } from '../components/ForumMessage'
 import { NeighboringContent } from '../components/NeighboringContent'
 import { ExternalLink } from '@components/ExternalLink'
 
+jest.mock('@react-navigation/native', () => ({
+  useScrollToTop: jest.fn(),
+}))
+
 describe('Forum', () => {
   const defaultProps = {
-    accessToken: 'abc',
     setupForumData: jest.fn(),
     navigation: {
       setParams: jest.fn(),
-      getParam: jest.fn(),
+      setOptions: jest.fn(),
     },
+    route: { params: {} },
     navigateWithToken: jest.fn(),
     fcmToken: '',
     sendNewFCMToken: jest.fn(),
@@ -100,7 +106,6 @@ describe('Forum', () => {
     defaultProps.setCurrentIssueId.mockReset()
     defaultProps.setCurrentAreaId.mockReset()
     defaultProps.navigation.setParams.mockReset()
-    defaultProps.navigation.getParam.mockReset()
   })
 
   test('calls setupForumData on mount', async () => {
@@ -113,9 +118,10 @@ describe('Forum', () => {
   })
 
   test('calls sendNewFCMToken when firebase returns a different token', async () => {
-    const wrapper = shallow(<Forum {...defaultProps} />)
-    await wrapper.instance().componentDidMount()
-    expect(defaultProps.sendNewFCMToken).toHaveBeenCalledWith('fcmToken')
+    shallow(<Forum {...defaultProps} />)
+    await waitFor(() =>
+      expect(defaultProps.sendNewFCMToken).toHaveBeenCalledWith('fcmToken')
+    )
   })
 
   test('sets up notification listeners', async () => {
@@ -163,13 +169,13 @@ describe('Forum', () => {
 
   test('it sets the title as the current area name', () => {
     const wrapper = shallow(<Forum {...defaultProps} />)
-    expect(defaultProps.navigation.setParams).toHaveBeenCalledWith({
-      navTitle: 'Sparta',
+    expect(defaultProps.navigation.setOptions).toHaveBeenCalledWith({
+      headerTitle: 'Sparta',
     })
 
     wrapper.setProps({ currentAreaId: 2 })
-    expect(defaultProps.navigation.setParams).toHaveBeenCalledWith({
-      navTitle: 'Athena',
+    expect(defaultProps.navigation.setOptions).toHaveBeenCalledWith({
+      headerTitle: 'Athena',
     })
   })
 
@@ -296,10 +302,10 @@ describe('Forum', () => {
       wrapper.setProps({
         navigation: {
           ...defaultProps.navigation,
-          getParam: jest.fn(() => 30),
           areaId: '30',
           issueId: '2121',
         },
+        route: { params: { areaId: 30 } },
       })
 
       expect(defaultProps.setCurrentAreaId).toHaveBeenCalledWith(30)
@@ -323,21 +329,21 @@ describe('Forum', () => {
       wrapper.setProps({
         navigation: {
           ...defaultProps.navigation,
-          getParam: jest.fn(() => 30),
           setParams: jest.fn(),
           areaId: '30',
           issueId: '2121',
         },
+        route: { params: { areaId: 30 } },
       })
 
       wrapper.setProps({
         navigation: {
           ...defaultProps.navigation,
-          getParam: jest.fn(() => 2121),
           setParams: jest.fn(),
           areaId: '30',
           issueId: '2121',
         },
+        route: { params: { issueNum: 2121 } },
         issues: [{ id: 1000, number: 2121 }],
       })
 
@@ -351,20 +357,20 @@ describe('Forum', () => {
       wrapper.setProps({
         navigation: {
           ...defaultProps.navigation,
-          getParam: jest.fn(() => 30),
           areaId: '30',
           issueId: '2121',
         },
+        route: { params: { areaId: 30 } },
       })
 
       wrapper.setProps({
         navigation: {
           ...defaultProps.navigation,
-          getParam: jest.fn(() => 2121),
           setParams: jest.fn(),
           areaId: '30',
           issueId: '2121',
         },
+        route: { params: { issueNum: 2121 } },
         issues: [{ id: 1000, number: 2121 }],
       })
 

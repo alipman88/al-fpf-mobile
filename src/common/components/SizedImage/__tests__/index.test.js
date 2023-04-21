@@ -1,6 +1,8 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import TestRenderer from 'react-test-renderer'
+import { render, screen } from '@testing-library/react-native'
 import { Image } from 'react-native'
+
 import { SizedImage } from '../index'
 
 describe('SizedImage', () => {
@@ -12,7 +14,7 @@ describe('SizedImage', () => {
     const getSizeMock = jest.spyOn(Image, 'getSize')
     getSizeMock.mockImplementation(() => {})
 
-    const wrapper = shallow(<SizedImage {...props} />)
+    render(<SizedImage {...props} />)
 
     expect(getSizeMock).toHaveBeenCalledTimes(1)
 
@@ -21,14 +23,13 @@ describe('SizedImage', () => {
 
     // second argument is the success callback that we need to invoke
     const success_callback = args[1]
-    success_callback(200, 100)
+    TestRenderer.act(() => {
+      success_callback(200, 100)
+    })
 
-    // verify that the image was scaled to maximum height
-    const state = wrapper.state()
-    expect(state.width).toEqual(100)
-    expect(state.height).toEqual(50)
-
-    expect(wrapper.find(Image).length).toEqual(1)
+    const image = screen.getByTestId('image')
+    expect(image).toHaveStyle('width', 100)
+    expect(image).toHaveStyle('height', 50)
 
     getSizeMock.mockRestore()
   })
@@ -36,11 +37,7 @@ describe('SizedImage', () => {
   test('does not render image or set width and height when uri is missing', () => {
     const props = { source: {} }
 
-    const wrapper = shallow(<SizedImage {...props} />)
-
-    const state = wrapper.state()
-    expect(state.width).toBeFalsy()
-    expect(state.height).toBeFalsy()
-    expect(wrapper.find(Image).length).toEqual(0)
+    render(<SizedImage {...props} />)
+    expect(screen.queryByRole('image')).not.toBeOnTheScreen()
   })
 })

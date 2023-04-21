@@ -4,7 +4,6 @@ import { Linking } from 'react-native'
 import { WebView as BaseWebView } from 'react-native-webview'
 import PropTypes from 'prop-types'
 import DeviceInfo from 'react-native-device-info'
-import navigationService from '@common/utils/navigationService'
 import Spinner from 'react-native-loading-spinner-overlay'
 
 import { BackButton } from '@core/Authenticated/Settings/components/BackButton'
@@ -22,7 +21,8 @@ import { ErrorContainer, ErrorText } from './styledComponents'
 // Directory URL regex
 const directoryRegex = /^\/(d|directory)(\/.*)?$/
 // Post submitted URL regex
-const postSubmittedRegex = /(\?|&)mobile_submitted_content_type=(?<contentType>post|event)/
+const postSubmittedRegex =
+  /(\?|&)mobile_submitted_content_type=(?<contentType>post|event)/
 // Search URL regex
 const searchRegex = /^\/search\/?(\?.*)?$/
 
@@ -47,13 +47,9 @@ ErrorView.propTypes = {
  */
 export const WebView = (props) => {
   const webViewRef = React.useRef(null)
-  const { source, onLoadStart, navigation, useBackButton, ...restProps } = props
+  const { source, navigation, route, useBackButton, ...restProps } = props
   let [stack, setStack] = React.useState([source.uri])
   let [showError, setShowError] = React.useState(false)
-
-  if (source.uri !== stack[0]) {
-    setStack([source.uri])
-  }
 
   const currentURI = stack[stack.length - 1]
   const newSource = { ...source, uri: currentURI }
@@ -78,9 +74,21 @@ export const WebView = (props) => {
     // Note that we can't use WebView's goBack because we reset the source of
     // the WebView with each new request, which interrupts its internal stack.
     if (stack.length > 1) {
-      stack = stack.slice(0, -1)
-      setStack(stack)
+      setStack(stack.slice(0, -1))
     }
+  }
+
+  // Hide the header left button if this WebView uses a back button.  The back
+  // button will be programmatically shown in the onLoadEnd callback when
+  // appropriate.
+  React.useEffect(() => {
+    if (useBackButton) {
+      navigation.setOptions({ headerLeft: null })
+    }
+  }, [navigation, useBackButton])
+
+  if (source.uri !== stack[0]) {
+    setStack([source.uri])
   }
 
   /**
@@ -92,21 +100,18 @@ export const WebView = (props) => {
    */
   const navigateForRequest = (requestPath) => {
     // Compose URL
-    if (
-      navigation.state.routeName !== 'Compose' &&
-      composeRegex.test(requestPath)
-    ) {
-      navigationService.navigate('Compose', {
+    if (route.name !== 'Compose' && composeRegex.test(requestPath)) {
+      navigation.navigate('Compose', {
         ...composePathParams(requestPath),
       })
       return true
     }
 
     // Content submitted URL
-    const submittedContentType = requestPath.match(postSubmittedRegex)?.groups
-      ?.contentType
+    const submittedContentType =
+      requestPath.match(postSubmittedRegex)?.groups?.contentType
     if (submittedContentType) {
-      navigationService.navigate('Compose', {
+      navigation.navigate('Compose', {
         postSubmittedConfirmation: true,
         submittedContentType,
       })
@@ -115,29 +120,23 @@ export const WebView = (props) => {
 
     // Issue URL
     if (issueRegex.test(requestPath)) {
-      navigationService.navigate('Forum', {
+      navigation.navigate('Forum', {
         ...issuePathParams(requestPath),
       })
       return true
     }
 
     // Directory URL
-    if (
-      navigation.state.routeName !== 'Directory' &&
-      directoryRegex.test(requestPath)
-    ) {
-      navigationService.navigate('Directory', {
+    if (route.name !== 'Directory' && directoryRegex.test(requestPath)) {
+      navigation.navigate('Directory', {
         sourceUrl: requestPath,
       })
       return true
     }
 
     // Search URL
-    if (
-      navigation.state.routeName !== 'Search' &&
-      searchRegex.test(requestPath)
-    ) {
-      navigationService.navigate('Search', {
+    if (route.name !== 'Search' && searchRegex.test(requestPath)) {
+      navigation.navigate('Search', {
         sourceUrl: requestPath,
       })
       return true
@@ -166,6 +165,7 @@ export const WebView = (props) => {
         {...restProps}
         ref={webViewRef}
         source={newSource}
+        testID='webView'
         originWhitelist={whitelistedOrigins}
         applicationNameForUserAgent={`FpfMobileApp/802.${DeviceInfo.getVersion()}`}
         startInLoadingState={true}
@@ -213,11 +213,13 @@ export const WebView = (props) => {
           return false
         }}
         onLoadEnd={() => {
+          // Show the back button when appropriate
           if (useBackButton) {
-            navigation.setParams({
-              headerLeft:
-                stack.length > 1 ? <BackButton onPress={onBackPress} /> : null,
-            })
+            const backButton =
+              stack.length > 1
+                ? () => <BackButton onPress={onBackPress} />
+                : null
+            navigation.setOptions({ headerLeft: backButton })
           }
         }}
       />
@@ -228,7 +230,7 @@ export const WebView = (props) => {
 
 WebView.propTypes = {
   navigation: PropTypes.object.isRequired,
-  onLoadStart: PropTypes.func,
+  route: PropTypes.object.isRequired,
   source: PropTypes.object,
   useBackButton: PropTypes.bool,
 }

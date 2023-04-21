@@ -2,10 +2,10 @@
 
 ## OS Support
 
-- iOS 11 - 14
-- Android 7 - 11 (API 24 - 30)
+- iOS 12 - 16
+- Android 8 - 13 (API 26 - 33) -- see `android/build.gradle`
 
-(Last updated 1/15/21)
+(Last updated 4/20/23)
 
 ## Setup
 
@@ -242,6 +242,7 @@ sure to lock any variables that store sensitive data.
 - `ROLLBAR_API_KEY`: "write" token configured at https://rollbar.com/settings/accounts/FrontPorchForum/access_tokens/
 - `ROLLBAR_SERVER_KEY`: same as `ROLLBAR_API_KEY`
 - `WEBSITE_HOST`: URL for FPF root, e.g. https://frontporchforum.com
+- `NO_FLIPPER`: "1" to disable flipper since it has a large performance impact on build time
 
 For the staging branch, also configure the following environment variables with
 production and staging2 values.  Doing so allows the staging build of the app
@@ -366,3 +367,12 @@ https://appstoreconnect.apple.com/apps/1458651656/appstore/addons?m=
 However, the simulator does not connect to the app store, so debug only products
 are also configured in `ios/Configuration.storekit`.  These products are only
 shown in the simulator.
+
+## Testing
+
+Testing resources:
+
+- https://callstack.github.io/react-native-testing-library/docs/api-queries
+- https://legacy.reactjs.org/docs/test-renderer.html
+- https://kentcdodds.com/blog/common-mistakes-with-react-testing-library
+- https://github.com/testing-library/jest-native

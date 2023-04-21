@@ -4,6 +4,7 @@ import { RefreshControl, ScrollView } from 'react-native'
 import get from 'lodash/get'
 import messaging from '@react-native-firebase/messaging'
 import Toast from 'react-native-easy-toast'
+import { useScrollToTop } from '@react-navigation/native'
 
 import {
   hasMessagingPermission,
@@ -19,19 +20,13 @@ import { OtherIssues } from './components/OtherIssues'
 import { NeighboringContent } from './components/NeighboringContent'
 import { ForumMessage } from './components/ForumMessage'
 
-export class Forum extends React.Component {
+export class ForumComponent extends React.Component {
   constructor(props) {
     super(props)
-    this.forumViewRef = React.createRef()
     this.toastRef = React.createRef()
   }
 
   async componentDidMount() {
-    // Set scrollToTop function in navigation params to trigger scroll in tab navigator
-    this.props.navigation.setParams({
-      scrollToTop: this.scrollToTop,
-    })
-
     this.setTitleFromArea()
 
     this.configureNotifications()
@@ -131,11 +126,12 @@ export class Forum extends React.Component {
   }
 
   fetchPosts(prevProps) {
-    const { currentAreaId, issues, navigation, navigateWithToken } = this.props
+    const { currentAreaId, issues, navigation, navigateWithToken, route } =
+      this.props
 
     if (prevProps.issues !== issues) {
       //if we got here from a deeplink, find issue and set current ID
-      const issueNum = parseInt(navigation.getParam('issueNum', 0), 10)
+      const issueNum = parseInt(route.params?.issueNum ?? 0, 10)
 
       if (!!issueNum && issues.length) {
         navigation.setParams({ issueNum: undefined })
@@ -151,7 +147,7 @@ export class Forum extends React.Component {
           navigateWithToken(`/areas/${currentAreaId}/issues/${issueNum}`)
         }
       }
-      // if this list of issues doesnt have the current id, set a new one
+      // if this list of issues doesn't have the current id, set a new one
       if (
         issues.length > 0 &&
         !issues.find((issue) => issue.id === this.props.currentIssueId)
@@ -182,9 +178,9 @@ export class Forum extends React.Component {
   }
 
   checkNavParams() {
-    const { currentAreaId, navigation, setCurrentAreaId } = this.props
+    const { currentAreaId, navigation, route, setCurrentAreaId } = this.props
 
-    const areaId = parseInt(navigation.getParam('areaId', 0), 10)
+    const areaId = parseInt(route.params?.areaId ?? 0, 10)
     if (!!areaId && areaId !== currentAreaId) {
       setCurrentAreaId(areaId)
       // if theres no issue number, clear the area ID
@@ -196,19 +192,12 @@ export class Forum extends React.Component {
     this.checkNavParams()
     this.fetchIssues(prevProps)
     this.fetchPosts(prevProps)
-    // Set the current forumViewRef on navigation so we can trigger scrolling from events
-    // on the tab navigator
-    if (this.forumViewRef !== this.props.navigation.getParam('scrollRef')) {
-      this.props.navigation.setParams({
-        scrollRef: this.forumViewRef,
-      })
-    }
   }
 
   scrollPostsToTop() {
-    if (this.forumViewRef.current) {
+    if (this.props.scrollViewRef?.current) {
       // using set timeout to ensure the code doesn't run until rendering is finished
-      setTimeout(() => this.scrollToTop(this.forumViewRef, false))
+      setTimeout(() => this.scrollToTop(this.props.scrollViewRef, false))
     }
   }
 
@@ -230,19 +219,14 @@ export class Forum extends React.Component {
       name = this.props.neighboringAreas[this.props.currentAreaId]
     }
 
-    this.props.navigation.setParams({
-      navTitle: name,
+    this.props.navigation.setOptions({
+      headerTitle: name,
     })
   }
 
   render() {
-    const {
-      currentIssueId,
-      issues,
-      loading,
-      navigation,
-      navigateWithToken,
-    } = this.props
+    const { currentIssueId, issues, loading, navigation, navigateWithToken } =
+      this.props
 
     const posts = (this.props.posts[currentIssueId] || []).concat(
       this.props.sharedPosts[currentIssueId] || []
@@ -260,7 +244,7 @@ export class Forum extends React.Component {
         postRender.push(
           <Advertisement
             ad={ad}
-            key={ad.id}
+            key={`ad-${ad.id}`}
             navigateWithToken={navigateWithToken}
           />
         )
@@ -273,7 +257,7 @@ export class Forum extends React.Component {
         postRender.push(
           <Advertisement
             ad={ad}
-            key={ad.id}
+            key={`ad-${ad.id}`}
             navigateWithToken={navigateWithToken}
           />
         )
@@ -283,7 +267,7 @@ export class Forum extends React.Component {
           <ForumPost
             post={post}
             navigation={this.props.navigation}
-            key={post.id}
+            key={`post-${post.id}`}
           />
         )
       }
@@ -294,7 +278,7 @@ export class Forum extends React.Component {
     return (
       <ScreenContainer withPadding={false} grey>
         <ScrollView
-          ref={this.forumViewRef}
+          ref={this.props.scrollViewRef}
           refreshControl={
             <RefreshControl
               refreshing={loading}
@@ -331,8 +315,7 @@ export class Forum extends React.Component {
   }
 }
 
-Forum.propTypes = {
-  accessToken: PropTypes.string.isRequired,
+ForumComponent.propTypes = {
   ads: PropTypes.object.isRequired,
   areas: PropTypes.array.isRequired,
   currentAreaId: PropTypes.number,
@@ -348,10 +331,22 @@ Forum.propTypes = {
   navigateWithToken: PropTypes.func.isRequired,
   neighboringAreas: PropTypes.object.isRequired,
   posts: PropTypes.object.isRequired,
+  route: PropTypes.object.isRequired,
+  scrollViewRef: PropTypes.object,
   sendNewFCMToken: PropTypes.func.isRequired,
   setCurrentAreaId: PropTypes.func.isRequired,
   setCurrentIssueId: PropTypes.func.isRequired,
   setupForumData: PropTypes.func.isRequired,
   sharedPosts: PropTypes.object.isRequired,
   toggleIssueUnread: PropTypes.func.isRequired,
+}
+
+export function Forum(props) {
+  const ref = React.useRef(null)
+
+  // Connect react navigation to the forum scroll view
+  // https://reactnavigation.org/docs/use-scroll-to-top
+  useScrollToTop(ref)
+
+  return <ForumComponent {...props} scrollViewRef={ref} />
 }

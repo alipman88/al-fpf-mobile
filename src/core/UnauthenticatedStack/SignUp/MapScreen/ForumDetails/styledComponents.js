@@ -40,8 +40,8 @@ export const Value = styled(Text)`
 export const JoinContainer = styled.View`
   padding: 12px 12px;
   background-color: #f5f6f9;
-  border-bottom-left-radius: 5;
-  border-bottom-right-radius: 5;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
   justify-content: space-between;
   flex-direction: row;
 `

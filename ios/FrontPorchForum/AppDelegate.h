@@ -1,9 +1,10 @@
-#import <React/RCTBridgeDelegate.h>
-#import <UserNotifications/UNUserNotificationCenter.h>
+#import <Firebase.h>
+#import <RCTAppDelegate.h>
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, RCTBridgeDelegate, UNUserNotificationCenterDelegate>
+// FPF addition, plus the interface below
+#import <UserNotifications/UNUserNotificationCenter.h>
 
-@property (nonatomic, strong) UIWindow *window;
+@interface AppDelegate : RCTAppDelegate <UNUserNotificationCenterDelegate>
 
 @end

@@ -1,4 +1,4 @@
 module.exports = {
   getApplicationIconBadgeNumber: () => jest.fn(),
-  setApplicationIconBadgeNumber: () => Promise.resolve({})
+  setApplicationIconBadgeNumber: () => Promise.resolve({}),
 }

@@ -141,10 +141,6 @@ export class SettingsIndex extends React.Component {
   }
 }
 
-SettingsIndex.navigationOptions = {
-  title: 'Settings',
-}
-
 SettingsIndex.propTypes = {
   navigation: PropTypes.object.isRequired,
   navigateWithToken: PropTypes.func.isRequired,

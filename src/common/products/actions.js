@@ -1,4 +1,4 @@
-import RNIap from 'react-native-iap'
+import * as RNIap from 'react-native-iap'
 
 import { products as slice } from './slice'
 
@@ -10,7 +10,7 @@ export const getProducts = (productIds) => async (dispatch, getState) => {
   try {
     if (productIds && productIds.length) {
       dispatch(slice.actions.setLoading(true))
-      const products = await RNIap.getSubscriptions(productIds)
+      const products = await RNIap.getSubscriptions({ skus: productIds })
       dispatch(slice.actions.setProducts(products))
     }
   } catch (err) {

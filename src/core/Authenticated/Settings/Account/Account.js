@@ -6,7 +6,6 @@ import Spinner from 'react-native-loading-spinner-overlay'
 import { ScreenContainer } from '@components/ScreenContainer'
 import { KeyboardAwareScrollView } from '@components/KeyboardAwareScrollView'
 
-import { BackButton } from '../components/BackButton'
 import { Description } from '../components/Description'
 import { Field } from '../components/Field'
 import { FieldLabel } from '../components/FieldLabel'
@@ -102,11 +101,6 @@ export class Account extends React.Component {
     )
   }
 }
-
-Account.navigationOptions = ({ navigation }) => ({
-  headerLeft: <BackButton navigation={navigation} />,
-  title: 'My account',
-})
 
 Account.propTypes = {
   loading: PropTypes.bool,

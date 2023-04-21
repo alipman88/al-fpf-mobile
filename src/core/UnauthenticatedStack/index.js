@@ -1,4 +1,4 @@
-import { createStackNavigator } from 'react-navigation-stack'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import { Login } from './Login'
 import { MapScreen } from './SignUp/MapScreen'
@@ -13,36 +13,32 @@ import { WaitlistSuccess } from './SignUp/WaitlistSuccess'
 import { BusinessInfo } from './SignUp/BusinessInfo'
 import { CreateAccount } from './SignUp/CreateAccount'
 
-export const UnauthenticatedStack = createStackNavigator(
-  {
-    Login,
-    MapScreen,
-    ProfileTypes,
-    Address,
-    EmailVerification,
-    BasicInfo,
-    GovernmentInfo,
-    Waitlist,
-    WaitlistSuccess,
-    BusinessInfo,
-    CreateAccount,
-    Welcome: {
-      screen: Welcome,
-      navigationOptions: {
-        gesturesEnabled: false,
-      },
-    },
-  },
-  {
-    initialRouteName: 'Welcome',
-    defaultNavigationOptions: {
-      headerTransparent: true,
-      header: null,
-      headerStyle: {
-        elevation: 0,
-        shadowOpacity: 0,
-        borderBottomWidth: 0,
-      },
-    },
-  }
-)
+const Stack = createNativeStackNavigator()
+
+export function UnauthenticatedStack() {
+  return (
+    <Stack.Navigator
+      initialRouteName='Welcome'
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name='Welcome' component={Welcome} />
+      <Stack.Screen name='Login' component={Login} />
+      <Stack.Screen
+        name='MapScreen'
+        component={MapScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen name='ProfileTypes' component={ProfileTypes} />
+      <Stack.Screen name='Address' component={Address} />
+      <Stack.Screen name='EmailVerification' component={EmailVerification} />
+      <Stack.Screen name='BasicInfo' component={BasicInfo} />
+      <Stack.Screen name='GovernmentInfo' component={GovernmentInfo} />
+      <Stack.Screen name='Waitlist' component={Waitlist} />
+      <Stack.Screen name='WaitlistSuccess' component={WaitlistSuccess} />
+      <Stack.Screen name='BusinessInfo' component={BusinessInfo} />
+      <Stack.Screen name='CreateAccount' component={CreateAccount} />
+    </Stack.Navigator>
+  )
+}

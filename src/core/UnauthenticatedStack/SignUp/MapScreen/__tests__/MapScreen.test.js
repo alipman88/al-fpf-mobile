@@ -8,29 +8,26 @@ import { FullScreenWizard } from '@components/FullScreenWizard'
 
 describe('MapScreen', () => {
   const defaultProps = {
-    navigation: {
-      getParam: (key) => {
-        const data = {
-          areas: [
-            {
-              id: 1,
-              name: 'test',
-              coordinates: [
-                ['20.5', '-23.3'],
-                ['20.56', '-23.0'],
-                ['21.2', '-26.0'],
-                ['20.5', '-23.3'],
-              ],
-            },
-          ],
-          address: {
-            lat: '21.32',
-            lng: '-24.3',
+    navigation: { navigate: jest.fn() },
+    route: {
+      params: {
+        areas: [
+          {
+            id: 1,
+            name: 'test',
+            coordinates: [
+              ['20.5', '-23.3'],
+              ['20.56', '-23.0'],
+              ['21.2', '-26.0'],
+              ['20.5', '-23.3'],
+            ],
           },
-        }
-        return data[key]
+        ],
+        address: {
+          lat: '21.32',
+          lng: '-24.3',
+        },
       },
-      navigate: jest.fn(),
     },
     newUser: {},
     profileType: 'neighbor',
@@ -132,14 +129,11 @@ describe('MapScreen', () => {
   test('no checked areas, nextButton should be disabled', () => {
     const wrapper = shallow(
       <MapScreen
+        {...defaultProps}
         profileType='neighbor'
         newUser={{}}
         setNewUserByKey={jest.fn()}
-        navigation={{
-          getParam: (key) => {
-            return twoAreas[key]
-          },
-        }}
+        route={{ ...defaultProps.route, params: twoAreas }}
       />
     )
 
@@ -158,14 +152,11 @@ describe('MapScreen', () => {
   test('map has polygons & details for each area', () => {
     const wrapper = shallow(
       <MapScreen
+        {...defaultProps}
         profileType='neighbor'
         newUser={{}}
         setNewUserByKey={jest.fn()}
-        navigation={{
-          getParam: (key) => {
-            return twoAreas[key]
-          },
-        }}
+        route={{ ...defaultProps.route, params: twoAreas }}
       />
     )
 
@@ -179,14 +170,11 @@ describe('MapScreen', () => {
   test('toggling forum details & map checks the area', () => {
     const wrapper = shallow(
       <MapScreen
+        {...defaultProps}
         profileType='neighbor'
         newUser={{}}
         setNewUserByKey={jest.fn()}
-        navigation={{
-          getParam: (key) => {
-            return twoAreas[key]
-          },
-        }}
+        route={{ ...defaultProps.route, params: twoAreas }}
       />
     )
 

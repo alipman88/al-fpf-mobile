@@ -1,3 +1,5 @@
+import { StackActions } from '@react-navigation/native'
+
 import { api } from '@common/api'
 import { getIssues, fetchSpecificIssue } from '../actions'
 import { issues } from '../slice'
@@ -122,8 +124,9 @@ describe('issues actions', () => {
     )
     expect(dispatch).toHaveBeenCalledWith(issues.actions.setLoading(false))
 
-    expect(navigation.navigate).toHaveBeenCalledWith('SplashScreen')
-    expect(navigation.dispatch).toHaveBeenCalledTimes(1)
+    expect(navigation.dispatch).toHaveBeenCalledWith(
+      StackActions.replace('Login')
+    )
 
     getSpy.mockRestore()
   })

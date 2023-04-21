@@ -1,3 +1,5 @@
+import { StackActions } from '@react-navigation/native'
+
 import { api } from '@common/api'
 import { getAreas } from '../actions'
 import { areas } from '../slice'
@@ -104,8 +106,9 @@ describe('areas actions', () => {
       appMessage.actions.setAppError('boom')
     )
 
-    expect(navigation.navigate).toHaveBeenCalledWith('SplashScreen')
-    expect(navigation.dispatch).toHaveBeenCalledTimes(1)
+    expect(navigation.dispatch).toHaveBeenCalledWith(
+      StackActions.replace('Login')
+    )
 
     getSpy.mockRestore()
   })

@@ -88,6 +88,7 @@ export class LoginFields extends React.Component {
               touched={!!touched.email}
               value={values.email}
               keyboardType='email-address'
+              inputMode='email'
               autoCapitalize='none'
               autoCorrect={false}
             />

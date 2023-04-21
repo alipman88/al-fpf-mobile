@@ -1,8 +1,9 @@
+import { StackActions } from '@react-navigation/native'
+
 import { areas as slice } from './slice'
 import { getAuthorized } from '@common/api'
 import { appMessage } from '@components/AppMessage/slice'
 import { resetAction } from '@common/resetAction'
-import { createResetStackTo } from '@common/utils/navigation'
 import { responseError } from '@common/utils/responseError'
 
 export const getAreas = (navigation) => async (dispatch, getState) => {
@@ -22,8 +23,7 @@ export const getAreas = (navigation) => async (dispatch, getState) => {
     dispatch(appMessage.actions.setAppError(responseError(e)))
     if (e.response.status === 401) {
       dispatch(resetAction())
-      navigation.navigate('SplashScreen')
-      navigation.dispatch(createResetStackTo('Login'))
+      navigation.dispatch(StackActions.replace('Login'))
     }
   }
 }

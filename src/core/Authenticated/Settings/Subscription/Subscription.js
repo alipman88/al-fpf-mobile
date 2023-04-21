@@ -7,7 +7,6 @@ import { Button } from '@components/Button'
 import { ExternalLink } from '@components/ExternalLink'
 import { ScreenContainer } from '@components/ScreenContainer'
 
-import { BackButton } from '../components/BackButton'
 import {
   PageWrapper,
   Title,
@@ -145,11 +144,6 @@ export class Subscription extends React.Component {
     )
   }
 }
-
-Subscription.navigationOptions = ({ navigation }) => ({
-  headerLeft: <BackButton navigation={navigation} />,
-  title: 'Upgrade FPF Plan',
-})
 
 Subscription.propTypes = {
   hasSubscription: PropTypes.bool,

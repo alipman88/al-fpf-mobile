@@ -1,18 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import FlashMessage, { FlashMessageManager } from 'react-native-flash-message'
+import FlashMessage, {
+  showMessage,
+  hideMessage,
+} from 'react-native-flash-message'
 
 export class AppMessage extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.message && this.props.message !== prevProps.message) {
-      const ref = FlashMessageManager.getDefault()
-      ref.showMessage({
+      showMessage({
         message: this.props.message,
         type: this.props.type,
       })
     } else if (prevProps.message && !this.props.message) {
-      const ref = FlashMessageManager.getDefault()
-      ref.hideMessage()
+      hideMessage()
     }
   }
 

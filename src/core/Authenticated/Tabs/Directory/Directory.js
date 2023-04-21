@@ -6,15 +6,16 @@ import { WebView } from '@components/WebView'
 
 export class Directory extends React.Component {
   render() {
-    const { navigation } = this.props
+    const { navigation, route } = this.props
     const accessToken = this.props.accessToken.toString()
 
     const sourceUrl =
-      Config.WEBSITE_HOST + (navigation.getParam('sourceUrl') || '/directory')
+      Config.WEBSITE_HOST + (route.params?.sourceUrl ?? '/directory')
 
     return (
       <WebView
         navigation={navigation}
+        route={route}
         source={{
           uri: sourceUrl,
           headers: {
@@ -29,4 +30,5 @@ export class Directory extends React.Component {
 Directory.propTypes = {
   accessToken: PropTypes.string,
   navigation: PropTypes.object.isRequired,
+  route: PropTypes.object.isRequired,
 }

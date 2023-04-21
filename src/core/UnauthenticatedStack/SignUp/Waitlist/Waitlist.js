@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Formik } from 'formik'
+import { StackActions } from '@react-navigation/native'
 
 import { WaitlistFields } from './WaitlistFields'
 import { validations } from './validations'
-import { createResetStackTo } from '@common/utils/navigation'
 
 export class Waitlist extends React.Component {
   state = {
@@ -16,7 +16,7 @@ export class Waitlist extends React.Component {
     actions.setSubmitting(true)
     setNewUserByKey(values)
     joinWaitlist(values)
-    navigation.dispatch(createResetStackTo('WaitlistSuccess'))
+    navigation.dispatch(StackActions.replace('WaitlistSuccess'))
     actions.setSubmitting(false)
   }
 
