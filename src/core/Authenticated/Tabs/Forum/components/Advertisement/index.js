@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 import IconEvil from 'react-native-vector-icons/EvilIcons'
 import { Button } from '@components/Button'
 import { SizedImage } from '@components/SizedImage'
-import { ImageWrapper } from './styledComponents'
 import { PostCategory } from '@components/PostCategory'
 import {
   Disclaimer,
@@ -17,16 +16,14 @@ export const Advertisement = ({ ad, navigateWithToken }) => (
   <Card>
     <CardContent>
       <Header>{ad.headline}</Header>
-      <ImageWrapper>
-        <TouchableOpacity onPress={() => Linking.openURL(ad.url)}>
-          <SizedImage uri={ad.image_url} maxHeight={100} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigateWithToken('/advertise-on-fpf/why-paid-ads')}
-        >
-          <PostCategory labelStyle={'dark_grey'}>Paid ad</PostCategory>
-        </TouchableOpacity>
-      </ImageWrapper>
+      <TouchableOpacity onPress={() => Linking.openURL(ad.url)}>
+        <SizedImage uri={ad.image_url} maxHeight={100} />
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigateWithToken('/advertise-on-fpf/why-paid-ads')}
+      >
+        <PostCategory labelStyle={'dark_grey'}>Paid ad</PostCategory>
+      </TouchableOpacity>
       <ContentText selectable={true}>{ad.body}</ContentText>
       {!!ad.disclaimer?.content_plain && (
         <Disclaimer selectable={true}>
