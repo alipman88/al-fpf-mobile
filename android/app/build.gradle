@@ -150,7 +150,10 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+
+            // FPF addition -- release signing properties are configured within AppCenter
+            // signingConfig signingConfigs.debug
+
             minifyEnabled enableProguardInReleaseBuilds
 
             // FPF addition -- Release signing properties are configured within AppCenter.
