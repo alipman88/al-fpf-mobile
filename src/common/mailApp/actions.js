@@ -126,53 +126,55 @@ function askAppChoice(
  *     subject: string
  * }} options
  */
-export const chooseMailApp = (options = {}) => async (dispatch, getState) => {
-  if (!options || typeof options !== 'object') {
-    throw new EmailException(
-      'First parameter of `chooseMailApp` should contain object with options.'
-    )
-  }
-
-  const { subject, toEmail } = options
-
-  // Get the current preferred app, and double check that it's available
-  let app = mailApp.selectors.getPreferredApp(getState())
-  if (app) {
-    const available = await isAppInstalled(app, subject, toEmail)
-    // preferred app is not available, so let's have the user choose again
-    if (!available) {
-      app = null
-    }
-  }
-
-  // If there's no current preferred app available and we're on iOS,
-  // ask the user which app they prefer
-  if (!app && Platform.OS === 'ios') {
-    const { title, message, cancelLabel } = options
-    let status
-    ;({ app, status } = await askAppChoice(
-      title,
-      message,
-      cancelLabel,
-      subject,
-      toEmail
-    ))
-
-    if (status === 'unavailable') {
-      // No application available to open mailto links - alert user
-      return dispatch(
-        appMessage.actions.setAppError(
-          'No application configured to handle email links'
-        )
+export const chooseMailApp =
+  (options = {}) =>
+  async (dispatch, getState) => {
+    if (!options || typeof options !== 'object') {
+      throw new EmailException(
+        'First parameter of `chooseMailApp` should contain object with options.'
       )
-    } else if (status === 'canceled') {
-      // User clicked cancel button when asked to select app - take no action
-      return
     }
 
-    // Use user-selected app to open mailto link
-    dispatch(mailApp.actions.setPreferredApp(app))
-  }
+    const { subject, toEmail } = options
 
-  return Linking.openURL(getComposeUrl(app, subject, toEmail))
-}
+    // Get the current preferred app, and double check that it's available
+    let app = mailApp.selectors.getPreferredApp(getState())
+    if (app) {
+      const available = await isAppInstalled(app, subject, toEmail)
+      // preferred app is not available, so let's have the user choose again
+      if (!available) {
+        app = null
+      }
+    }
+
+    // If there's no current preferred app available and we're on iOS,
+    // ask the user which app they prefer
+    if (!app && Platform.OS === 'ios') {
+      const { title, message, cancelLabel } = options
+      let status
+      ;({ app, status } = await askAppChoice(
+        title,
+        message,
+        cancelLabel,
+        subject,
+        toEmail
+      ))
+
+      if (status === 'unavailable') {
+        // No application available to open mailto links - alert user
+        return dispatch(
+          appMessage.actions.setAppError(
+            'No application configured to handle email links'
+          )
+        )
+      } else if (status === 'canceled') {
+        // User clicked cancel button when asked to select app - take no action
+        return
+      }
+
+      // Use user-selected app to open mailto link
+      dispatch(mailApp.actions.setPreferredApp(app))
+    }
+
+    return Linking.openURL(getComposeUrl(app, subject, toEmail))
+  }

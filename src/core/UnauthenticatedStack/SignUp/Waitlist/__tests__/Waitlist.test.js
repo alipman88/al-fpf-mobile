@@ -1,8 +1,8 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import { StackActions } from '@react-navigation/native'
 
 import { Waitlist } from '../Waitlist'
-import { createResetStackTo } from '@common/utils/navigation'
 
 describe('Waitlist', () => {
   const defaultProps = {
@@ -38,7 +38,7 @@ describe('Waitlist', () => {
       expect(defaultProps.setNewUserByKey).toHaveBeenCalledWith({ bar: 'foo' })
 
       expect(defaultProps.navigation.dispatch).toHaveBeenCalledWith(
-        createResetStackTo('WaitlistSuccess')
+        StackActions.replace('WaitlistSuccess')
       )
 
       expect(setSubmitting).toHaveBeenCalledWith(false)

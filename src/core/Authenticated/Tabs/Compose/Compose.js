@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 
 import { Config } from '@common/config'
 import { WebView } from '@components/WebView'
-import navigationService from '@common/utils/navigationService'
 
 import { Success } from './components/Success'
 
@@ -11,13 +10,15 @@ export class Compose extends React.Component {
   componentDidMount() {
     const { navigation } = this.props
 
-    this.blurListener = navigation.addListener('didBlur', () => {
+    this.unsubscribeBlurListener = navigation.addListener('blur', () => {
       this.blur()
     })
   }
 
   componentWillUnmount() {
-    this.blurListener.remove()
+    if (this.unsubscribeBlurListener) {
+      this.unsubscribeBlurListener()
+    }
   }
 
   blur() {
@@ -36,7 +37,7 @@ export class Compose extends React.Component {
   }
 
   render() {
-    const { navigation, navigateWithToken } = this.props
+    const { navigation, navigateWithToken, route } = this.props
     const accessToken = this.props.accessToken.toString()
     const {
       areaId,
@@ -45,7 +46,7 @@ export class Compose extends React.Component {
       referencedProfileId,
       submittedContentType,
       title,
-    } = navigation.state.params || {}
+    } = route.params || {}
     let params = []
     params.push(`area_id=${areaId || ''}`)
     params.push(`category_id=${categoryId || ''}`)
@@ -60,6 +61,7 @@ export class Compose extends React.Component {
       <React.Fragment>
         <WebView
           navigation={navigation}
+          route={route}
           source={{
             uri: sourceUrl,
             headers: {
@@ -73,7 +75,7 @@ export class Compose extends React.Component {
             contentType={submittedContentType || 'post'}
             navigateWithToken={navigateWithToken}
             onClose={() => {
-              navigationService.navigate('Forum')
+              navigation.navigate('Forum')
             }}
           />
         )}
@@ -88,13 +90,13 @@ export class Compose extends React.Component {
   // NOTE: It would be cleaner to trigger the WebView's built-in reset
   // function, if that function can be triggered externally.
   get resetToken() {
-    const { navigation } = this.props
-    return navigation.getParam('resetToken') || 0
+    const { route } = this.props
+    return route.params?.resetToken ?? 0
   }
 
   get modalVisible() {
-    const { navigation } = this.props
-    return !!navigation.getParam('submittedContentType')
+    const { route } = this.props
+    return !!route.params?.submittedContentType
   }
 }
 
@@ -102,4 +104,5 @@ Compose.propTypes = {
   accessToken: PropTypes.string,
   navigation: PropTypes.object.isRequired,
   navigateWithToken: PropTypes.func.isRequired,
+  route: PropTypes.object.isRequired,
 }

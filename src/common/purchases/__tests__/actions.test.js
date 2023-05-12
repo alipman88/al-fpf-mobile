@@ -123,7 +123,7 @@ describe('purchases - actions', () => {
         })
       )
 
-      expect(rniapSpy).toHaveBeenCalledWith('transaction-id')
+      expect(rniapSpy).toHaveBeenCalledWith(purchase)
 
       putSpy.mockRestore()
       rniapSpy.mockRestore()

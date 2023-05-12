@@ -1,10 +1,10 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { TouchableOpacity } from 'react-native'
+import { StackActions } from '@react-navigation/native'
 
 import { WaitlistSuccess } from '../WaitlistSuccess'
 import { Close } from '../styledComponents'
-import { createResetStackTo } from '@common/utils/navigation'
 
 describe('WaitlistSuccess', () => {
   const defaultProps = {
@@ -22,7 +22,7 @@ describe('WaitlistSuccess', () => {
     const wrapper = shallow(<WaitlistSuccess {...defaultProps} />)
     wrapper.find(Close).simulate('press')
     expect(defaultProps.navigation.dispatch).toHaveBeenCalledWith(
-      createResetStackTo('Login')
+      StackActions.replace('Login')
     )
   })
 
@@ -30,7 +30,7 @@ describe('WaitlistSuccess', () => {
     const wrapper = shallow(<WaitlistSuccess {...defaultProps} />)
     wrapper.find(TouchableOpacity).simulate('press')
     expect(defaultProps.navigation.dispatch).toHaveBeenCalledWith(
-      createResetStackTo('Login')
+      StackActions.replace('Login')
     )
   })
 

@@ -7,7 +7,6 @@ import get from 'lodash/get'
 import { KeyboardAwareScrollView } from '@components/KeyboardAwareScrollView'
 import { ScreenContainer } from '@components/ScreenContainer'
 
-import { BackButton } from '../components/BackButton'
 import { Description } from '../components/Description'
 import { Field } from '../components/Field'
 import { FieldLabel } from '../components/FieldLabel'
@@ -161,11 +160,6 @@ export class Profile extends React.Component {
     )
   }
 }
-
-Profile.navigationOptions = ({ navigation }) => ({
-  headerLeft: <BackButton navigation={navigation} />,
-  title: 'My profile',
-})
 
 Profile.propTypes = {
   areas: PropTypes.object.isRequired,

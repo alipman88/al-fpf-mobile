@@ -77,7 +77,7 @@ export const profile = createSlice({
 })
 
 const getNavigationProfileId = (state, props) =>
-  props.navigation.getParam('profileId', 0)
+  props.route.params?.profileId ?? 0
 
 const getCurrentProfileId = createSelector(
   ['main.profile'],

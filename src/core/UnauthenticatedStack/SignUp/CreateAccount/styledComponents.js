@@ -10,15 +10,15 @@ export const CheckboxWrapper = styled.View`
   ${({ last }) =>
     last
       ? `
-      borderBottomRightRadius: 10;
-      borderBottomLeftRadius: 10;
+      borderBottomRightRadius: 10px;
+      borderBottomLeftRadius: 10px;
     `
       : ''}
   ${({ first }) =>
     first
       ? `
-      borderTopRightRadius: 10;
-      borderTopLeftRadius: 10;
+      borderTopRightRadius: 10px;
+      borderTopLeftRadius: 10px;
     `
       : ''}
   justify-content: flex-start;

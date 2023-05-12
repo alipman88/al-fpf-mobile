@@ -8,16 +8,8 @@ describe('LoginComponent', () => {
   const defaultProps = {
     login: jest.fn(),
     resendEmail: jest.fn(),
-    navigation: {
-      dispatch: jest.fn(),
-      navigate: jest.fn(),
-    },
+    navigation: {},
   }
-
-  afterEach(() => {
-    defaultProps.navigation.dispatch.mockReset()
-    defaultProps.navigation.navigate.mockReset()
-  })
 
   describe('onSubmit', () => {
     test('calls login', async () => {
@@ -34,9 +26,6 @@ describe('LoginComponent', () => {
       expect(setSubmitting).toHaveBeenCalledWith(false)
       expect(defaultProps.login).toHaveBeenCalled()
       expect(setSubmitting).toHaveBeenCalledWith(true)
-      expect(defaultProps.navigation.navigate).toHaveBeenCalledWith(
-        'Authenticated'
-      )
     })
 
     test('login fails, sets error', async () => {

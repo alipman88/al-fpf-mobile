@@ -1,4 +1,4 @@
 module.exports = {
   get: jest.fn(),
-  set: jest.fn()
+  set: jest.fn(),
 }

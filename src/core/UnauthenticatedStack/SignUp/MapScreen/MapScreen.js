@@ -10,10 +10,6 @@ import { getStepCount } from '../getStepCount'
 import { ForumScrollView } from './styledComponents'
 
 export class MapScreen extends React.Component {
-  static navigationOptions = {
-    header: null,
-  }
-
   state = {
     areas: [],
     address: {},
@@ -28,8 +24,8 @@ export class MapScreen extends React.Component {
   }
 
   componentDidMount() {
-    const areas = this.props.navigation.getParam('areas', [])
-    const address = this.props.navigation.getParam('address', {})
+    const areas = this.props.route.params?.areas ?? []
+    const address = this.props.route.params?.address ?? {}
 
     let minLat = Number.MAX_SAFE_INTEGER
     let minLong = Number.MAX_SAFE_INTEGER
@@ -138,6 +134,7 @@ export class MapScreen extends React.Component {
           <MapView
             region={this.state.region}
             style={{ flex: 1 }}
+            testId='mapScreen'
             rotateEnabled={false}
             scrollEnabled={false}
             pitchEnabled={false}
@@ -210,5 +207,6 @@ MapScreen.propTypes = {
   navigation: PropTypes.object.isRequired,
   newUser: PropTypes.object.isRequired,
   profileType: PropTypes.string.isRequired,
+  route: PropTypes.object.isRequired,
   setNewUserByKey: PropTypes.func.isRequired,
 }

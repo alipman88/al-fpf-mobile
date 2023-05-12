@@ -3,5 +3,5 @@ module.exports = {
   getBuildNumber: () => '1',
   getBrand: () => 'Apple',
   getModel: () => 'iPhone X',
-  getUniqueId: () => '123abc'
+  getUniqueId: () => '123abc',
 }

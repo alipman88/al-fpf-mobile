@@ -1,20 +1,18 @@
 import React from 'react'
 import analytics from '@react-native-firebase/analytics'
-import { AppState, Linking, Platform } from 'react-native'
+import { AppState, Platform } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
-import SplashScreen from 'react-native-splash-screen'
 import NetInfo from '@react-native-community/netinfo'
 import Toast from 'react-native-easy-toast'
-import RNIap from 'react-native-iap'
+import * as RNIap from 'react-native-iap'
+import SplashScreen from 'react-native-splash-screen'
 
 import { Config } from '@common/config'
 import { store, persistor } from '@common/store'
 import { currentUser } from '@common/currentUser'
 import { AppMessage } from '@components/AppMessage'
-import { parseDeepLink } from '@common/utils/parseDeepLink'
-import navigationService from '@common/utils/navigationService'
 import { getProducts } from '@common/products'
 import { Container } from './Container'
 import { Offline } from './Offline'
@@ -36,9 +34,10 @@ export class App extends React.Component {
   }
 
   componentDidMount() {
-    Linking.addEventListener('url', this.handleOpenURL)
-    AppState.addEventListener('change', this.handleAppStateChange)
-    SplashScreen.hide()
+    this.appStateListener = AppState.addEventListener(
+      'change',
+      this.handleAppStateChange
+    )
     this.netInfoUnsubscribe = NetInfo.addEventListener(this.setConnectedStatus)
 
     this.updateConnectionStatus()
@@ -57,11 +56,14 @@ export class App extends React.Component {
         })
       })
     }
+
+    // Hide the splash screen on app load
+    SplashScreen.hide()
   }
 
   componentWillUnmount() {
-    Linking.removeEventListener('url', this.handleOpenURL)
-    AppState.removeEventListener('change', this.handleAppStateChange)
+    this.appStateListener?.remove()
+
     if (this.netInfoUnsubscribe) {
       this.netInfoUnsubscribe()
       this.netInfoUnsubscribe = null
@@ -71,6 +73,7 @@ export class App extends React.Component {
       this.purchaseUpdatedListener.remove()
       this.purchaseUpdatedListener = null
     }
+
     if (this.purchaseErrorListener) {
       this.purchaseErrorListener.remove()
       this.purchaseErrorListener = null
@@ -104,33 +107,8 @@ export class App extends React.Component {
     this.setState({ appState: nextAppState })
   }
 
-  handleOpenURL = (event) => {
-    if (currentUser.selectors.getAccessToken(store.getState())) {
-      const { route, params } = parseDeepLink(event.url)
-      navigationService.navigate(route, params)
-    }
-  }
-
-  getActiveRouteName = (navigationState) => {
-    if (!navigationState) {
-      return null
-    }
-    const route = navigationState.routes[navigationState.index]
-    // dive into nested navigators
-    if (route.routes) {
-      return this.getActiveRouteName(route)
-    }
-    return route.routeName
-  }
-
-  handleNavigationChange = (prevState, currentState, action) => {
-    const currentScreen = this.getActiveRouteName(currentState)
-    const prevScreen = this.getActiveRouteName(prevState)
-
-    if (prevScreen !== currentScreen) {
-      // trigger setting screen name for analytics based on react navigation
-      analytics().logScreenView({ screen_name: currentScreen })
-    }
+  handleNavigationChange = (currentRouteName) => {
+    analytics().logScreenView({ screen_name: currentRouteName })
   }
 
   setConnectedStatus = async ({ type, effectiveType }) => {

@@ -9,8 +9,9 @@ const Wrapper = styled.View`
   ${WrapperStyles}
   background-color: ${({ bgColor }) => bgColor || '#f29426'};
   ${({ borderColor }) =>
-    borderColor ? `border-width: 1; border-color: ${borderColor};` : ''}
-  width: ${({ width }) => width || 'auto'};
+    borderColor ? `border-width: 1px; border-color: ${borderColor};` : ''}
+  width: ${({ width }) =>
+    typeof width == 'number' ? `${width}px` : width || 'auto'}
   ${({ tall }) => tall && 'padding-vertical: 20px;'}
   ${({ fullWidth }) => fullWidth && 'width: 100%;'}
   ${({ disabled }) => disabled && 'opacity: 0.5;'}

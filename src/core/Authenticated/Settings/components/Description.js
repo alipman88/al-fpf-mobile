@@ -3,8 +3,8 @@ import styled from 'styled-components/native'
 import { Text } from '@components/Text'
 
 export const Description = styled(Text)`
-  font-size: 14;
+  font-size: 14px;
   color: #8d8d8d;
-  margin-horizontal: 20;
-  margin-top: 30;
+  margin-horizontal: 20px;
+  margin-top: 30px;
 `

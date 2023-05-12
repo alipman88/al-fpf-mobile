@@ -6,18 +6,18 @@ import { Text } from '@components/Text'
 export const Card = styled.View`
   flex: 1;
   border-color: #ebecf1;
-  border-width: 1;
-  border-radius: 5;
+  border-width: 1px;
+  border-radius: 5px;
   justify-content: space-between;
   background-color: #fff;
-  margin-bottom: 10;
+  margin-bottom: 10px;
 `
 
 export const Header = styled(Text)`
-  font-size: 22;
+  font-size: 22px;
   font-weight: bold;
   color: #355768;
-  margin-bottom: 10;
+  margin-bottom: 10px;
 `
 
 export const CardContent = styled.View`
@@ -25,7 +25,7 @@ export const CardContent = styled.View`
 `
 
 export const ContentText = styled(Text)`
-  font-size: 16;
+  font-size: 16px;
   padding-top: 14px;
 `
 

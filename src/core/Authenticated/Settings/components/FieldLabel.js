@@ -3,13 +3,13 @@ import styled from 'styled-components/native'
 import { Text } from '@components/Text'
 
 export const FieldLabel = styled(Text)`
-  font-size: 14;
+  font-size: 14px;
   color: #4a4a4a;
-  padding-left: 20;
+  padding-left: 20px;
   ${({ bottomMargin }) => `margin-bottom: ${bottomMargin};`}
-  margin-top: 20;
+  margin-top: 20px;
 `
 
 FieldLabel.defaultProps = {
-  bottomMargin: 4,
+  bottomMargin: '4px',
 }

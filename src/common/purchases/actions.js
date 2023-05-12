@@ -1,5 +1,4 @@
-import { Platform } from 'react-native'
-import RNIap from 'react-native-iap'
+import * as RNIap from 'react-native-iap'
 
 import * as api from '@common/api'
 import { appMessage } from '@components/AppMessage/slice'
@@ -18,26 +17,26 @@ import { rollbar } from '@common/utils/rollbar'
  * react-native-iap's purchaseUpdatedListener and purchaseErrorListener methods)
  * that call the purchaseUpdated and purchaseError actions.
  */
-export const requestSubscription = (productId, profileId) => async (
-  dispatch,
-  getState
-) => {
-  try {
-    dispatch(slice.actions.setPurchasing({ profileId }))
-    await RNIap.requestSubscription({ sku: productId })
-  } catch (e) {
-    rollbar.info('requestSubscription failed', e, {
-      productId,
-      profileId,
-    })
+export const requestSubscription =
+  (productId, profileId) => async (dispatch, getState) => {
+    try {
+      dispatch(slice.actions.setPurchasing({ profileId }))
+      await RNIap.requestSubscription({ sku: productId })
+    } catch (e) {
+      rollbar.info('requestSubscription failed', e, {
+        productId,
+        profileId,
+      })
 
-    const message =
-      (typeof e === 'string' && e) || (e && e.message) || 'The purchase failed'
+      const message =
+        (typeof e === 'string' && e) ||
+        (e && e.message) ||
+        'The purchase failed'
 
-    dispatch(appMessage.actions.setAppError(message))
-    dispatch(slice.actions.setPurchasing(false))
+      dispatch(appMessage.actions.setAppError(message))
+      dispatch(slice.actions.setPurchasing(false))
+    }
   }
-}
 
 /**
  * Respond to a purchase transaction success event from the native IAP queue.
@@ -79,9 +78,7 @@ export const purchaseUpdated = (purchase) => async (dispatch, getState) => {
 
       // Acknowledge the transaction via the native IAP API.  (Otherwise, the
       // API won't consider the purchase complete).
-      const identifier =
-        Platform.OS === 'ios' ? purchase.transactionId : purchase.purchaseToken
-      RNIap.finishTransaction(identifier)
+      RNIap.finishTransaction(purchase)
     }
   } catch (e) {
     rollbar.info('purchaseUpdated failed', e, {

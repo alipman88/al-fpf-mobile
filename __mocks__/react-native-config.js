@@ -1,9 +1,11 @@
-export default {
+const config = {
   ENVIRONMENT: 'test',
   API_HOST: 'http://localhost:8080',
   TEST_API_HOST: 'http://localhost:8080',
   DEVELOPMENT_API_HOST: 'http://localhost:8080',
   API_KEY: 'devkey',
   TEST_API_KEY: 'testkey',
-  WEBSITE_HOST: 'https://frontporchforum.com'
+  WEBSITE_HOST: 'https://frontporchforum.com',
 }
+
+export default config

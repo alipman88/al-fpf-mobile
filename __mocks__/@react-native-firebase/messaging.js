@@ -6,7 +6,7 @@ const methods = {
   onTokenRefresh: jest.fn(),
   onNotificationOpenedApp: jest.fn(),
   onMessage: jest.fn(),
-  getInitialNotification: jest.fn().mockResolvedValue(null)
+  getInitialNotification: jest.fn().mockResolvedValue(null),
 }
 
 const module_ = () => {
@@ -17,7 +17,7 @@ module_.AuthorizationStatus = {
   NOT_DETERMINED: -1,
   DENIED: 0,
   AUTHORIZED: 1,
-  PROVISIONAL: 2
+  PROVISIONAL: 2,
 }
 
 module.exports = module_

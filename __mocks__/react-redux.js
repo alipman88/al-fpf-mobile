@@ -7,14 +7,14 @@ import { securedReducer } from '@common/store/securedReducer'
 
 const reducer = combineReducers({
   main: mainReducer,
-  secured: securedReducer
+  secured: securedReducer,
 })
 
 const middlewares = compose(applyMiddleware(thunk))
 
 const store = createStore(reducer, undefined, middlewares)
 
-export const connect = (mapStateToProps, mapDispatch) => ReactComponent => {
+export const connect = (mapStateToProps, mapDispatch) => (ReactComponent) => {
   mapStateToProps = mapStateToProps || noop
   const NewComponent = () => {
     return (

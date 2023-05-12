@@ -2,8 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import { StackActions } from '@react-navigation/native'
+
 import { Modal } from '@components/Modal'
-import { createResetStackTo } from '@common/utils/navigation'
 
 import {
   BodyText,
@@ -18,7 +19,7 @@ export const WaitlistSuccess = ({ navigation, clearUserData }) => (
     <Container>
       <Close
         onPress={() => {
-          navigation.dispatch(createResetStackTo('Login'))
+          navigation.dispatch(StackActions.replace('Login'))
         }}
       >
         <Icon size={18} name='close' color='#c5c5c5' />
@@ -34,7 +35,7 @@ export const WaitlistSuccess = ({ navigation, clearUserData }) => (
         <TouchableOpacity
           onPress={() => {
             clearUserData()
-            navigation.dispatch(createResetStackTo('Login'))
+            navigation.dispatch(StackActions.replace('Login'))
           }}
         >
           <Link>Continue</Link>

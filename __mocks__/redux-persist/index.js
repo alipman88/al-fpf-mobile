@@ -1,2 +1,2 @@
-export const persistStore = () => ({});
-export const persistReducer = (_, reducer) => reducer;
+export const persistStore = () => ({})
+export const persistReducer = (_, reducer) => reducer

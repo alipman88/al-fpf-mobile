@@ -7,9 +7,8 @@ import { fetchSpecificIssue, issues } from '@common/issues'
 const mapStateToProps = (state) => {
   const currentIssueId = issues.selectors.getCurrentIssueId(state)
   return {
-    newsFromNeighboringNfs: posts.selectors.getNewsFromNeighboringNfsByIssue(
-      state
-    )[currentIssueId],
+    newsFromNeighboringNfs:
+      posts.selectors.getNewsFromNeighboringNfsByIssue(state)[currentIssueId],
   }
 }
 

@@ -2,40 +2,60 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import SideMenu from 'react-native-side-menu-updated'
+import {
+  NavigationContainer,
+  DefaultTheme,
+  useNavigationContainerRef,
+} from '@react-navigation/native'
 
 import { currentUser } from '@common/currentUser'
 import { DrawerContext } from './context'
 import { DrawerMenu } from '@components/DrawerMenu'
-import { SwitchNavigatorContainer } from '@core/switchNavigator'
+import { RootStack } from '@core/rootStack'
 import { Spinner } from './Spinner'
 import { getDimensions, isTabletWidth } from '@common/utils/size'
-import navigationService from '@common/utils/navigationService'
 
-class ContainerComponent extends React.Component {
-  constructor(props) {
-    super(props)
+const navTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: '#fff',
+  },
+}
 
-    // defined here so we can put it in inital state
-    this.setDrawerOpenState = (open) => {
-      this.setState(() => ({
-        open,
-      }))
-    }
+function ContainerComponent({ accessToken, handleNavigationChange }) {
+  const [drawerOpen, setDrawerOpen] = React.useState(false)
+  const navigationRef = useNavigationContainerRef()
+  const routeNameRef = React.useRef()
 
-    this.state = {
-      open: false,
-      setDrawerOpenState: this.setDrawerOpenState,
-    }
-  }
+  return (
+    <NavigationContainer
+      ref={navigationRef}
+      theme={navTheme}
+      // onReady and onStateChange are used for screen tracking:
+      // https://reactnavigation.org/docs/screen-tracking/
+      onReady={() => {
+        routeNameRef.current = navigationRef.getCurrentRoute().name
+      }}
+      onStateChange={async (state) => {
+        const previousRouteName = routeNameRef.current
+        const currentRouteName = navigationRef.getCurrentRoute().name
 
-  render() {
-    const { accessToken, handleNavigationChange } = this.props
-    return (
-      <DrawerContext.Provider value={this.state}>
+        if (previousRouteName !== currentRouteName) {
+          // Save the current route name for later comparison
+          routeNameRef.current = currentRouteName
+
+          handleNavigationChange(currentRouteName)
+        }
+      }}
+    >
+      <DrawerContext.Provider
+        value={{ open: drawerOpen, setDrawerOpenState: setDrawerOpen }}
+      >
         <SideMenu
           menu={<DrawerMenu />}
-          isOpen={this.state.open}
-          onChange={(open) => this.setDrawerOpenState(open)}
+          isOpen={drawerOpen}
+          onChange={(open) => setDrawerOpen(open)}
           openMenuOffset={
             isTabletWidth()
               ? (getDimensions().width * 1) / 3
@@ -45,16 +65,11 @@ class ContainerComponent extends React.Component {
           disableGestures={!accessToken}
         >
           <Spinner />
-          <SwitchNavigatorContainer
-            onNavigationStateChange={handleNavigationChange}
-            ref={(navigatorRef) => {
-              navigationService.setTopLevelNavigator(navigatorRef)
-            }}
-          />
+          <RootStack />
         </SideMenu>
       </DrawerContext.Provider>
-    )
-  }
+    </NavigationContainer>
+  )
 }
 
 ContainerComponent.propTypes = {

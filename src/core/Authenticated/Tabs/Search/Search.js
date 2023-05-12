@@ -7,13 +7,12 @@ import { WebView } from '@components/WebView'
 
 export class Search extends React.Component {
   render() {
-    const { navigation } = this.props
+    const { navigation, route } = this.props
     const accessToken = this.props.accessToken.toString()
 
-    let sourceUrl =
-      Config.WEBSITE_HOST + (navigation.getParam('sourceUrl') || '/search')
+    let sourceUrl = Config.WEBSITE_HOST + (route.params?.sourceUrl ?? '/search')
 
-    const searchParams = navigation.getParam('searchParams')
+    const searchParams = route.params?.searchParams
     if (searchParams) {
       sourceUrl = queryString.stringifyUrl({
         url: sourceUrl,
@@ -24,6 +23,7 @@ export class Search extends React.Component {
     return (
       <WebView
         navigation={navigation}
+        route={route}
         source={{
           uri: sourceUrl,
           headers: {
@@ -39,4 +39,5 @@ export class Search extends React.Component {
 Search.propTypes = {
   accessToken: PropTypes.string,
   navigation: PropTypes.object.isRequired,
+  route: PropTypes.object.isRequired,
 }

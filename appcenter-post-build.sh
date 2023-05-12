@@ -17,8 +17,8 @@ if [ "$AGENT_JOBSTATUS" == "Succeeded" ]; then
 
   curl https://api.rollbar.com/api/1/sourcemap \
     -F access_token=$ROLLBAR_SERVER_KEY \
-    -F version=$APPCENTER_BUILD_ID \
+    -F version="$APPCENTER_BUILD_ID.$BUILD_PLATFORM" \
     -F minified_url=$MINIFIED_URL \
     -F source_map="@sourcemap.$BUILD_PLATFORM.js" \
-    -F index.js="@index.js"
+    -F index.$BUILD_PLATFORM.js="@index.$BUILD_PLATFORM.js"
 fi

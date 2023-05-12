@@ -18,7 +18,7 @@ export const ForumMessage = ({ forumMessage }) => {
       <CardContent>
         {Boolean(forumMessage.title) && <Header>{forumMessage.title}</Header>}
         {Boolean(forumMessage.content) && (
-          <Text style={{ fontSize: 16 }}>
+          <Text style={{ fontSize: '16px' }}>
             <Autolink
               url
               email
@@ -28,18 +28,19 @@ export const ForumMessage = ({ forumMessage }) => {
           </Text>
         )}
       </CardContent>
-      {Boolean(forumMessage.button_text) && Boolean(forumMessage.button_url) && (
-        <Bottom>
-          <Button
-            color='#fff'
-            onPress={() => Linking.openURL(forumMessage.button_url)}
-            fullWidth
-          >
-            {forumMessage.button_text}{' '}
-            <IconEvil color='#fff' name='external-link' size={18} />
-          </Button>
-        </Bottom>
-      )}
+      {Boolean(forumMessage.button_text) &&
+        Boolean(forumMessage.button_url) && (
+          <Bottom>
+            <Button
+              color='#fff'
+              onPress={() => Linking.openURL(forumMessage.button_url)}
+              fullWidth
+            >
+              {forumMessage.button_text}{' '}
+              <IconEvil color='#fff' name='external-link' size={18} />
+            </Button>
+          </Bottom>
+        )}
     </Card>
   )
 }

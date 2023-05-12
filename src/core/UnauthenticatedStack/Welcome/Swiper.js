@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
+import { StackActions } from '@react-navigation/native'
 import Swiper from 'react-native-swiper'
-import { createResetStackTo } from '@common/utils/navigation'
 
 import {
   Image,
@@ -23,10 +22,6 @@ import greyBird from '@assets/images/onboarding/grey-bird.png'
 import greenBird from '@assets/images/bird-eating-birdseed/bird-eating-birdseed.png'
 
 export const SwiperComponent = ({ navigation }) => {
-  const handleLoginNavigation = () => {
-    navigation.navigate('Login')
-    navigation.dispatch(createResetStackTo('Login'))
-  }
   return (
     <Swiper
       dot={<InactiveDot />}
@@ -58,8 +53,8 @@ export const SwiperComponent = ({ navigation }) => {
       </Slide>
       <Slide>
         <SlideButton
-          onPress={handleLoginNavigation}
-          width={250}
+          onPress={() => navigation.dispatch(StackActions.replace('Login'))}
+          width='250px'
           tall
           borderColor='#f29426'
         >
@@ -68,7 +63,7 @@ export const SwiperComponent = ({ navigation }) => {
         <ButtonSpacer />
         <SlideButton
           onPress={() => navigation.navigate('ProfileTypes')}
-          width={250}
+          width='250px'
           color='#f29426'
           borderColor='#f29426'
           bgColor='#fff'

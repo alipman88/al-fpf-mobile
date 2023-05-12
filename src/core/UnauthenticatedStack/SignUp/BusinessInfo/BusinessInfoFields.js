@@ -155,6 +155,7 @@ export class BusinessInfoFields extends React.Component {
                 inputRef={this.descriptionInput}
                 numberOfLines={10}
                 multiline
+                required
               />
             </FieldWrapper>
           </FormFieldsWrapper>

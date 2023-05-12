@@ -112,10 +112,7 @@ describe('issues - slice', () => {
 
     expect(state.issuesByAreaId[1].length).toEqual(4)
     expect(state.issuesByAreaId[1].map((issue) => issue.id)).toEqual([
-      4,
-      3,
-      2,
-      1,
+      4, 3, 2, 1,
     ])
   })
 

@@ -1,1 +1,1 @@
-export const PersistGate = ({ children }) => children;
+export const PersistGate = ({ children }) => children

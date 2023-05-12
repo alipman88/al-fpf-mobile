@@ -21,7 +21,6 @@ const mapStateToProps = (state) => {
     posts: posts.selectors.getPostsByIssue(state),
     ads: posts.selectors.getAdsByIssue(state),
     sharedPosts: posts.selectors.getSharedPostsByIssue(state),
-    accessToken: currentUser.selectors.getAccessToken(state),
     fcmToken: currentUser.selectors.getFCMToken(state),
     loading:
       areas.selectors.getLoading(state) ||
@@ -34,7 +33,6 @@ export const Forum = connect(mapStateToProps, {
   fetchSpecificIssue,
   getIssues,
   getContents,
-  setAccessToken: currentUser.actions.setAccessToken,
   setupForumData,
   sendNewFCMToken,
   setCurrentIssueId: issues.actions.setCurrentIssueId,
