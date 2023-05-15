@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import DeviceInfo from 'react-native-device-info'
-import { Image, Linking, TouchableOpacity } from 'react-native'
+import { Image, TouchableOpacity } from 'react-native'
+import { openFpfUrl } from '@common/utils/openFpfUrl'
 import Spinner from 'react-native-loading-spinner-overlay'
 
 import { Config } from '@common/config'
@@ -88,9 +89,7 @@ export class SettingsIndex extends React.Component {
             </TouchableOpacity>
             <FieldHeading style={{ marginTop: 30 }}>Help</FieldHeading>
             <TouchableOpacity
-              onPress={() =>
-                Linking.openURL('https://help.frontporchforum.com')
-              }
+              onPress={() => openFpfUrl('https://help.frontporchforum.com')}
             >
               <ExternalLinkContainer>
                 <ViewPostings>Member Support</ViewPostings>
@@ -99,7 +98,7 @@ export class SettingsIndex extends React.Component {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() =>
-                Linking.openURL('https://frontporchforum.com/privacy-policy')
+                openFpfUrl(`${Config.WEBSITE_HOST}/privacy-policy`)
               }
             >
               <ExternalLinkContainer>
@@ -108,9 +107,7 @@ export class SettingsIndex extends React.Component {
               </ExternalLinkContainer>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() =>
-                Linking.openURL('https://frontporchforum.com/terms-of-use')
-              }
+              onPress={() => openFpfUrl(`${Config.WEBSITE_HOST}/terms-of-use`)}
             >
               <ExternalLinkContainer>
                 <ViewPostings>Terms of Use</ViewPostings>
@@ -118,9 +115,7 @@ export class SettingsIndex extends React.Component {
               </ExternalLinkContainer>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() =>
-                Linking.openURL('https://frontporchforum.com/about-us')
-              }
+              onPress={() => openFpfUrl(`${Config.WEBSITE_HOST}/about-us`)}
             >
               <ExternalLinkContainer>
                 <ViewPostings>About FPF</ViewPostings>

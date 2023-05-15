@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { TouchableOpacity, Linking } from 'react-native'
+import { TouchableOpacity } from 'react-native'
+import { openFpfUrl } from '@common/utils/openFpfUrl'
 
 import { Config } from '@common/config'
 import { Text } from '@components/Text'
@@ -28,9 +29,7 @@ export const CheckboxField = ({
       {type === 'termsOfUse' && (
         <LinkWrapper>
           <TouchableOpacity
-            onPress={() =>
-              Linking.openURL(`${Config.WEBSITE_HOST}/terms-of-use`)
-            }
+            onPress={() => openFpfUrl(`${Config.WEBSITE_HOST}/terms-of-use`)}
           >
             <LinkText>Terms of Use</LinkText>
           </TouchableOpacity>

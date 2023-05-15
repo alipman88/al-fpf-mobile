@@ -1,5 +1,5 @@
 import React from 'react'
-import { Linking } from 'react-native'
+import { openFpfUrl } from '@common/utils/openFpfUrl'
 import Autolink from 'react-native-autolink'
 import PropTypes from 'prop-types'
 import IconEvil from 'react-native-vector-icons/EvilIcons'
@@ -33,7 +33,7 @@ export const ForumMessage = ({ forumMessage }) => {
           <Bottom>
             <Button
               color='#fff'
-              onPress={() => Linking.openURL(forumMessage.button_url)}
+              onPress={() => openFpfUrl(forumMessage.button_url)}
               fullWidth
             >
               {forumMessage.button_text}{' '}

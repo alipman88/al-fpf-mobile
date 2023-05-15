@@ -16,6 +16,8 @@ describe('Advertisement', () => {
       image_url: 'https://cdn.frontporchforum.com/image.png',
     },
     navigateWithToken: jest.fn(),
+    fpf_url:
+      'https://frontporchforum.com/?app_info=FpfMobileApp%2F802.1.0&utm_medium=app',
   }
 
   test('onPress button opens ad URL', () => {
@@ -24,7 +26,7 @@ describe('Advertisement', () => {
       .mockImplementation(() => ({}))
     const wrapper = shallow(<Advertisement {...defaultProps} />)
     wrapper.find(Button).simulate('press')
-    expect(openURLSpy).toHaveBeenCalledWith(defaultProps.ad.url)
+    expect(openURLSpy).toHaveBeenCalledWith(defaultProps.fpf_url)
     openURLSpy.mockRestore()
   })
 
@@ -34,7 +36,7 @@ describe('Advertisement', () => {
       .mockImplementation(() => ({}))
     const wrapper = shallow(<Advertisement {...defaultProps} />)
     wrapper.find(TouchableOpacity).first().simulate('press')
-    expect(openURLSpy).toHaveBeenCalledWith(defaultProps.ad.url)
+    expect(openURLSpy).toHaveBeenCalledWith(defaultProps.fpf_url)
     openURLSpy.mockRestore()
   })
 

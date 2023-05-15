@@ -1,5 +1,5 @@
 import React from 'react'
-import { Linking, TouchableOpacity } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import DeviceInfo from 'react-native-device-info'
@@ -10,6 +10,8 @@ import { KeyboardAwareScrollView } from '@components/KeyboardAwareScrollView'
 import { responseError } from '@common/utils/responseError'
 import { Formik } from 'formik'
 import { login } from '@common/session'
+import { openFpfUrl } from '@common/utils/openFpfUrl'
+
 import { validations } from './validations'
 import { ScreenContainer } from '@components/ScreenContainer'
 import { LoginFields } from './LoginFields'
@@ -29,9 +31,7 @@ export const LoginComponent = ({ navigation, login, resendEmail }) => {
       <LinksContainer>
         <ResetPasswordContainer>
           <TouchableOpacity
-            onPress={() =>
-              Linking.openURL(`${Config.WEBSITE_HOST}/passwords/new`)
-            }
+            onPress={() => openFpfUrl(`${Config.WEBSITE_HOST}/passwords/new}`)}
           >
             <BottomText>Forgot Password</BottomText>
           </TouchableOpacity>
@@ -39,7 +39,7 @@ export const LoginComponent = ({ navigation, login, resendEmail }) => {
         <TroubleLoggingInContainer>
           <TouchableOpacity
             onPress={() =>
-              Linking.openURL(`${Config.WEBSITE_HOST}/isfpfforme/member-faq`)
+              openFpfUrl(`${Config.WEBSITE_HOST}/isfpfforme/member-faq`)
             }
           >
             <BottomText>Trouble logging in?</BottomText>

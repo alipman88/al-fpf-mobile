@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableOpacity, Linking, ScrollView } from 'react-native'
+import { TouchableOpacity, ScrollView } from 'react-native'
 import PropTypes from 'prop-types'
 import Spinner from 'react-native-loading-spinner-overlay'
 
@@ -7,6 +7,7 @@ import { Config } from '@common/config'
 import { ScreenContainer } from '@components/ScreenContainer'
 import { HeaderLogo } from '@components/HeaderLogo'
 import { profileTypes } from '@common/types/profileTypes'
+import { openFpfUrl } from '@common/utils/openFpfUrl'
 import {
   BottomContainer,
   BirdContainer,
@@ -62,9 +63,7 @@ export class EmailVerification extends React.Component {
                 Your government profile will be reviewed within 48 hours. Once
                 approved, you will have access to your FPF(s). Please{' '}
                 <TextLink
-                  onPress={() =>
-                    Linking.openURL(`${Config.WEBSITE_HOST}/contact`)
-                  }
+                  onPress={() => openFpfUrl(`${Config.WEBSITE_HOST}/contact`)}
                 >
                   contact us
                 </TextLink>{' '}
@@ -88,9 +87,7 @@ export class EmailVerification extends React.Component {
                   If you do not receive the confirmation email message, then
                   please{' '}
                   <TextLink
-                    onPress={() =>
-                      Linking.openURL(`${Config.WEBSITE_HOST}/contact`)
-                    }
+                    onPress={() => openFpfUrl(`${Config.WEBSITE_HOST}/contact`)}
                   >
                     contact us
                   </TextLink>{' '}

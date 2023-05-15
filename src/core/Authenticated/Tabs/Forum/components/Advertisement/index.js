@@ -1,6 +1,7 @@
 import React from 'react'
 import Autolink from 'react-native-autolink'
-import { Linking, TouchableOpacity } from 'react-native'
+import { TouchableOpacity } from 'react-native'
+import { openFpfUrl } from '@common/utils/openFpfUrl'
 import PropTypes from 'prop-types'
 import IconEvil from 'react-native-vector-icons/EvilIcons'
 import { Button } from '@components/Button'
@@ -16,7 +17,7 @@ export const Advertisement = ({ ad, navigateWithToken }) => (
   <Card>
     <CardContent>
       <Header>{ad.headline}</Header>
-      <TouchableOpacity onPress={() => Linking.openURL(ad.url)}>
+      <TouchableOpacity onPress={() => openFpfUrl(ad.url)}>
         <SizedImage uri={ad.image_url} maxHeight={100} />
       </TouchableOpacity>
       <TouchableOpacity
@@ -37,7 +38,7 @@ export const Advertisement = ({ ad, navigateWithToken }) => (
       )}
     </CardContent>
     <Bottom>
-      <Button color='#fff' onPress={() => Linking.openURL(ad.url)} fullWidth>
+      <Button color='#fff' onPress={() => openFpfUrl(ad.url)} fullWidth>
         {ad.link_text || 'Visit'}{' '}
         <IconEvil color='#fff' name='external-link' size={18} />
       </Button>
