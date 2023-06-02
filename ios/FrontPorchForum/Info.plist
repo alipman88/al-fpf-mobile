@@ -29,6 +29,7 @@
 		<string>airmail</string>
 		<string>ms-outlook</string>
 		<string>googlegmail</string>
+		<string>mailto</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
