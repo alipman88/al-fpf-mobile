@@ -9,7 +9,6 @@ import bird3 from '@assets/images/bird-eating-birdseed/bird-eating-birdseed.png'
 
 import { Grass } from '@components/Grass'
 
-import { DrawerContext } from '@app/context'
 import {
   Container,
   Header,
@@ -26,9 +25,9 @@ export const DrawerMenu = ({
   profiles,
   setCurrentAreaId,
   setCurrentProfileId,
+  setOpen,
 }) => {
   const navigation = useNavigation()
-  const { setDrawerOpenState } = React.useContext(DrawerContext)
 
   const birdies = (
     <Birds>
@@ -62,7 +61,7 @@ export const DrawerMenu = ({
                   }
 
                   setCurrentAreaId(area.id)
-                  setDrawerOpenState(false)
+                  setOpen(false)
                   navigation.navigate('Forum')
                 }}
               >
@@ -89,4 +88,5 @@ DrawerMenu.propTypes = {
   profiles: PropTypes.array.isRequired,
   setCurrentAreaId: PropTypes.func.isRequired,
   setCurrentProfileId: PropTypes.func.isRequired,
+  setOpen: PropTypes.func.isRequired,
 }

@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import SideMenu from 'react-native-side-menu-updated'
 import {
   NavigationContainer,
   DefaultTheme,
@@ -9,11 +8,8 @@ import {
 } from '@react-navigation/native'
 
 import { currentUser } from '@common/currentUser'
-import { DrawerContext } from './context'
-import { DrawerMenu } from '@components/DrawerMenu'
 import { RootStack } from '@core/rootStack'
 import { Spinner } from './Spinner'
-import { getDimensions, isTabletWidth } from '@common/utils/size'
 
 const navTheme = {
   ...DefaultTheme,
@@ -24,7 +20,6 @@ const navTheme = {
 }
 
 function ContainerComponent({ accessToken, handleNavigationChange }) {
-  const [drawerOpen, setDrawerOpen] = React.useState(false)
   const navigationRef = useNavigationContainerRef()
   const routeNameRef = React.useRef()
 
@@ -49,25 +44,8 @@ function ContainerComponent({ accessToken, handleNavigationChange }) {
         }
       }}
     >
-      <DrawerContext.Provider
-        value={{ open: drawerOpen, setDrawerOpenState: setDrawerOpen }}
-      >
-        <SideMenu
-          menu={<DrawerMenu />}
-          isOpen={drawerOpen}
-          onChange={(open) => setDrawerOpen(open)}
-          openMenuOffset={
-            isTabletWidth()
-              ? (getDimensions().width * 1) / 3
-              : (getDimensions().width * 2) / 3
-          }
-          bounceBackOnOverdraw={false}
-          disableGestures={!accessToken}
-        >
-          <Spinner />
-          <RootStack />
-        </SideMenu>
-      </DrawerContext.Provider>
+      <Spinner />
+      <RootStack />
     </NavigationContainer>
   )
 }

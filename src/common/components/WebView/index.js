@@ -78,15 +78,6 @@ export const WebView = (props) => {
     }
   }
 
-  // Hide the header left button if this WebView uses a back button.  The back
-  // button will be programmatically shown in the onLoadEnd callback when
-  // appropriate.
-  React.useEffect(() => {
-    if (useBackButton) {
-      navigation.setOptions({ headerLeft: null })
-    }
-  }, [navigation, useBackButton])
-
   if (source.uri !== stack[0]) {
     setStack([source.uri])
   }
