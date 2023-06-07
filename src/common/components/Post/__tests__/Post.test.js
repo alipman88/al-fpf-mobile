@@ -151,15 +151,12 @@ describe('Post', () => {
       post_id: defaultProps.post.id,
       issue_id: defaultProps.post.issue_id,
     })
-    expect(defaultProps.navigation.navigate).toHaveBeenCalledWith({
-      routeName: 'Compose',
-      params: {
-        areaId: defaultProps.post.area_id,
-        categoryId: null,
-        parentPostId: defaultProps.post.id,
-        referencedProfileId: null,
-        title: `Re: ${defaultProps.post.title}`,
-      },
+    expect(defaultProps.navigation.navigate).toHaveBeenCalledWith('Compose', {
+      areaId: defaultProps.post.area_id,
+      categoryId: null,
+      parentPostId: defaultProps.post.id,
+      referencedProfileId: null,
+      title: `Re: ${defaultProps.post.title}`,
     })
   })
 

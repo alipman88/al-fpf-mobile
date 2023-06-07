@@ -9,7 +9,7 @@ export const ForumPost = ({ post, postTruncateLength, navigation }) => {
       's[sent_at]': 'desc',
       'category_ids[]': categoryId,
     }
-    navigation.navigate({ routeName: 'Search', params: { searchParams } })
+    navigation.navigate('Search', { searchParams })
   }
 
   return (

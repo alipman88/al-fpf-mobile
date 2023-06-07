@@ -64,7 +64,7 @@ describe('mailApp - actions', () => {
       actionSheetSpy.mockRestore()
     })
 
-    test('does not open a mailto url with no apps installed (iOS)', async () => {
+    test('opens a mailto url with no apps installed (iOS)', async () => {
       Platform.OS = 'ios'
 
       const canOpenURLSpy = jest
@@ -79,7 +79,8 @@ describe('mailApp - actions', () => {
         () => ({})
       )
 
-      expect(openURLSpy).not.toHaveBeenCalled()
+      expect(openURLSpy).toHaveBeenCalledWith('mailto:?subject=')
+      expect(openURLSpy).toHaveBeenCalledWith('mailto:foo@bar.com?subject=bar')
 
       openURLSpy.mockRestore()
       canOpenURLSpy.mockRestore()

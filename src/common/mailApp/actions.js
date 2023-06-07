@@ -4,7 +4,6 @@
 
 import { ActionSheetIOS, Linking, Platform } from 'react-native'
 import { mailApp } from './slice'
-import { appMessage } from '@components/AppMessage/slice'
 
 class EmailException {
   constructor(message) {
@@ -160,16 +159,14 @@ export const chooseMailApp =
         toEmail
       ))
 
-      if (status === 'unavailable') {
-        // No application available to open mailto links - alert user
-        return dispatch(
-          appMessage.actions.setAppError(
-            'No application configured to handle email links'
-          )
-        )
-      } else if (status === 'canceled') {
-        // User clicked cancel button when asked to select app - take no action
+      // User clicked cancel button when asked to select app - take no action
+      if (status === 'canceled') {
         return
+      }
+
+      // No obvious mail app was available, but perhaps a mailto link will still work
+      if (status === 'unavailable') {
+        app = `mailto:${toEmail}?subject=${subject}`
       }
 
       // Use user-selected app to open mailto link
