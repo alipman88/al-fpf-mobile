@@ -18,7 +18,7 @@ export const ForumMessage = ({ forumMessage }) => {
       <CardContent>
         {Boolean(forumMessage.title) && <Header>{forumMessage.title}</Header>}
         {Boolean(forumMessage.content) && (
-          <Text style={{ fontSize: '16px' }}>
+          <Text style={{ fontSize: 16 }}>
             <Autolink
               url
               email
