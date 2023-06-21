@@ -266,12 +266,10 @@ to optionally connected to the production and staging2 stacks.
 App Center also needs to be configured to connect to Apple:
 https://appcenter.ms/settings/accounts.
 
-It's currently configured to use the tech-admin@frontporchforum.com account with
-an app-specific password (stored in 1Password under "Apple / AppCenter password
-for tech-admin@frontporchforum.com"):
+It's currently configured to use an App Store Connect API key (registered under
+the tech-admin@frontporchforum.com account):
 
-- https://appleid.apple.com/account/manage
-- https://support.apple.com/en-us/HT204397
+- https://appstoreconnect.apple.com/access/api
 
 Then the production App Store can be connected:
 https://appcenter.ms/orgs/Front-Porch-Forum/apps/Front-Porch-Forum-iOS/distribute/distribution-stores
