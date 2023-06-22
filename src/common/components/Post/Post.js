@@ -144,14 +144,14 @@ export class Post extends React.Component {
                   const subject = this.reTitle(post.title)
 
                   chooseMailApp({
-                    title: 'Email author',
+                    title: 'Email Author',
                     subject: subject,
                     toEmail: post.user_email,
                   })
                 }}
                 fullWidth
               >
-                Email author
+                Email Author
               </Button>
             </ButtonWrapper>
           )}
@@ -170,7 +170,7 @@ export class Post extends React.Component {
                     this.handleReplyPress(post)
                   }}
                 >
-                  Reply to forum
+                  Reply to Forum
                 </Button>
               </ButtonWrapper>
             </React.Fragment>

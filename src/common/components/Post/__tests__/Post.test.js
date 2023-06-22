@@ -172,7 +172,7 @@ describe('Post', () => {
     expect(defaultProps.chooseMailApp).toHaveBeenCalledWith({
       subject: `Re: ${defaultProps.post.title}`,
       toEmail: defaultProps.post.user_email,
-      title: 'Email author',
+      title: 'Email Author',
     })
   })
 
