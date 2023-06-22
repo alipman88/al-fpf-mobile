@@ -50,29 +50,6 @@ export const getIssues =
     }
   }
 
-// Async exceptions not caught here, so caller can handle instead
-export const getIssue = (areaId, issueNumber) => async (dispatch, getState) => {
-  dispatch(issues.actions.setLoading(true))
-  const response = await getAuthorized(
-    `/areas/${areaId}/issues/${issueNumber}`,
-    getState()
-  )
-
-  if (
-    issues.selectors.getFirstLoadIssues(getState()) &&
-    Object.keys(issues.selectors.getIssues(getState())).length
-  ) {
-    dispatch(issues.actions.setFirstLoadOfIssues(false))
-  }
-
-  dispatch(
-    issues.actions.setIssue({
-      issue: response.data.issue,
-      areaId,
-    })
-  )
-}
-
 export const fetchSpecificIssue =
   (areaId, issueId, issueNumber, navigation, resetForumAction) =>
   async (dispatch, getState) => {
