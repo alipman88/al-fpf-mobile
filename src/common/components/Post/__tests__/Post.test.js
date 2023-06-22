@@ -5,6 +5,7 @@ import { shallow } from 'enzyme'
 
 import { Post } from '@components/Post/Post'
 import { PostCategory } from '@components/PostCategory'
+import { BadgeText } from '@components/Badge'
 import { Button } from '@components/Button'
 import {
   PostDate,
@@ -171,7 +172,7 @@ describe('Post', () => {
     expect(defaultProps.chooseMailApp).toHaveBeenCalledWith({
       subject: `Re: ${defaultProps.post.title}`,
       toEmail: defaultProps.post.user_email,
-      title: 'Email author',
+      title: 'Email Author',
     })
   })
 
@@ -235,6 +236,35 @@ describe('Post', () => {
     expect(wrapper3.find(PostLocation).last().text()).toEqual(
       'Join online: https://zoom.us/j/0123456789'
     )
+  })
+
+  test('renders closed badge', () => {
+    const props = {
+      ...defaultProps,
+      post: {
+        ...defaultProps.post,
+        closed: true,
+        event: {},
+      },
+    }
+    const wrapper = shallow(<Post {...props} />)
+
+    expect(wrapper.find(BadgeText).children().text()).toEqual(
+      'Closed by Author'
+    )
+  })
+
+  test('renders closed event badge', () => {
+    const props = {
+      ...defaultProps,
+      post: {
+        ...defaultProps.post,
+        closed: true,
+      },
+    }
+    const wrapper = shallow(<Post {...props} />)
+
+    expect(wrapper.find(BadgeText).children().text()).toEqual('Canceled')
   })
 
   test('renders post disclaimer', () => {

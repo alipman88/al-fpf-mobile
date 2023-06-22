@@ -8,6 +8,7 @@ import truncate from 'lodash/truncate'
 
 import { PostCategory } from '@components/PostCategory'
 import { Button } from '@components/Button'
+import { Badge, BadgeText } from '@components/Badge'
 
 import {
   LinkText,
@@ -22,6 +23,7 @@ import {
   PostUrl,
   PostHeader,
   PostLink,
+  PostTitle,
   CategoryPosts,
   ShowMoreButton,
   Bottom,
@@ -142,14 +144,14 @@ export class Post extends React.Component {
                   const subject = this.reTitle(post.title)
 
                   chooseMailApp({
-                    title: 'Email author',
+                    title: 'Email Author',
                     subject: subject,
                     toEmail: post.user_email,
                   })
                 }}
                 fullWidth
               >
-                Email author
+                Email Author
               </Button>
             </ButtonWrapper>
           )}
@@ -168,7 +170,7 @@ export class Post extends React.Component {
                     this.handleReplyPress(post)
                   }}
                 >
-                  Reply to forum
+                  Reply to Forum
                 </Button>
               </ButtonWrapper>
             </React.Fragment>
@@ -177,10 +179,23 @@ export class Post extends React.Component {
       )
     }
 
+    const closedBadge = post.closed ? (
+      <Badge bg='warning'>
+        <BadgeText bg='warning' style={{ fontSize: 16 }}>
+          {Boolean(post.event.start_date) ? 'Canceled' : 'Closed by Author'}
+        </BadgeText>
+      </Badge>
+    ) : (
+      ''
+    )
+
     return (
       <Container key={post.id} isClosed={post.closed}>
         <PostBodyContainer hasBorder={hasBorder}>
-          <PostHeader selectable={true}>{post.title}</PostHeader>
+          <PostHeader selectable={true}>
+            <PostTitle>{post.title}</PostTitle>
+            {closedBadge}
+          </PostHeader>
           <PostAuthor selectable={true}>
             {postInfo}
             {showIssueData ? ' - ' : ''}

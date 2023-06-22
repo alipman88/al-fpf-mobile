@@ -21,11 +21,18 @@ export const PostBodyContainer = styled.View`
   padding-vertical: ${({ hasBorder }) => (hasBorder ? '16px' : '0')};
   padding-horizontal: ${({ hasBorder }) => (hasBorder ? '10px' : '0')};
 `
-export const PostHeader = styled(TextSemibold)`
+export const PostHeader = styled.View`
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+`
+
+export const PostTitle = styled(TextSemibold)`
   font-size: 22px;
   font-weight: bold;
   color: #355768;
-  margin-bottom: 10px;
 `
 
 export const PostAuthor = styled(TextSemibold)`

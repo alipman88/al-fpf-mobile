@@ -282,7 +282,14 @@ export class ForumComponent extends React.Component {
           refreshControl={
             <RefreshControl
               refreshing={loading}
-              onRefresh={() => this.props.getIssues(this.props.currentAreaId)}
+              onRefresh={() => {
+                this.props.getIssues(this.props.currentAreaId)
+                this.props.getContents(
+                  this.props.currentIssueId,
+                  this.props.navigation,
+                  { force: true }
+                )
+              }}
             />
           }
         >
