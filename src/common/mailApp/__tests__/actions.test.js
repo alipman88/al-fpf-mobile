@@ -23,13 +23,15 @@ describe('mailApp - actions', () => {
       const openURLSpy = jest.spyOn(Linking, 'openURL')
 
       await chooseMailApp()(dispatch, () => ({}))
-      await chooseMailApp({ toEmail: 'foo@bar.com', subject: 'bar' })(
+      await chooseMailApp({ toEmail: 'foo@bar.com', subject: 'foo bar' })(
         dispatch,
         () => ({})
       )
 
       expect(openURLSpy).toHaveBeenCalledWith('mailto:?subject=')
-      expect(openURLSpy).toHaveBeenCalledWith('mailto:foo@bar.com?subject=bar')
+      expect(openURLSpy).toHaveBeenCalledWith(
+        'mailto:foo@bar.com?subject=foo%20bar'
+      )
 
       openURLSpy.mockRestore()
       canOpenURLSpy.mockRestore()

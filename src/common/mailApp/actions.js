@@ -29,6 +29,8 @@ const titles = {
 }
 
 function getComposeUrl(app, subject = '', toEmail = '') {
+  subject = encodeURIComponent(subject)
+
   switch (app) {
     case 'gmail':
       return `${prefixes[app]}co?subject=${subject}&to=${toEmail}`
