@@ -11,7 +11,8 @@ import endOfWeek from 'date-fns/end_of_week'
 import endOfDay from 'date-fns/end_of_day'
 
 export const getContents =
-  (issueId, navigation) => async (dispatch, getState) => {
+  (issueId, navigation, { force = false } = {}) =>
+  async (dispatch, getState) => {
     // short circuit if in default state with no issue
     if (issueId === 0) {
       return
@@ -28,7 +29,7 @@ export const getContents =
 
     const postsByIssue = posts.selectors.getPostsByIssue(getState())
 
-    if (postsByIssue[issue.id]) {
+    if (!force && postsByIssue[issue.id]) {
       const placementDateByIssue = posts.selectors.getPlacementDateByIssue(
         getState()
       )

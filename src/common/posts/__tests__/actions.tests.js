@@ -107,6 +107,35 @@ describe('posts - actions', () => {
       getSpy.mockRestore()
     })
 
+    test('issue found, force refresh posts', async () => {
+      const getSpy = jest.spyOn(api, 'get').mockImplementation(() => ({
+        data: {
+          posts: [{ id: 1 }],
+          ads: [{ id: 2 }],
+          headlines: ['Headline'],
+          news_from_neighboring_nfs: [{ id: 3 }],
+        },
+      }))
+      await getContents(2, null, { force: true })(dispatch, getState())
+
+      expect(getSpy).toHaveBeenCalledWith('/areas/10/issues/2/contents', {
+        headers: {
+          Authorization: 'Bearer abc123',
+        },
+      })
+      expect(dispatch).toHaveBeenCalledWith(
+        posts.actions.setContentsForIssue({
+          issueId: 2,
+          posts: [{ id: 1 }],
+          ads: [{ id: 2 }],
+          placementDate: endOfDay(new Date()),
+          headlines: ['Headline'],
+          newsFromNeighboringNfs: [{ id: 3 }],
+        })
+      )
+      getSpy.mockRestore()
+    })
+
     test('issue found, old ads found, fetches ads', async () => {
       const getSpy = jest.spyOn(api, 'get').mockImplementation(() => ({
         data: {
