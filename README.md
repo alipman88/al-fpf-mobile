@@ -82,6 +82,8 @@ http://10.0.2.2:3000/api/v1.
 
 ## Run
 
+### Run on iOS
+
 To run on iOS, simply use:
 
 ```
@@ -94,6 +96,16 @@ Or to select a different emulator than the default:
 xcrun simctl list devices
 yarn ios --simulator="iPhone 5s (11.4)"
 ```
+
+Or to run on a connected (via USB cord) actual device (which might take 5 minutes
+to build and install the first time):
+
+```
+npm install -g ios-deploy # first time only
+yarn ios --device
+```
+
+### Run on Android
 
 To run on android, you need to start up an emulator first.
 
