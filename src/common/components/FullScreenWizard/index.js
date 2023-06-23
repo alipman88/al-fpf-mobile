@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Keyboard, ScrollView, StatusBar, View } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { HeaderLogo } from '@components/HeaderLogo'
 import { Button } from '@components/Button'
@@ -16,7 +17,6 @@ import {
   Divider,
   KeyboardAvoidingView,
   NavButtonWrapper,
-  SafeAreaViewContainer,
   ScreenWrapper,
   TopContainer,
   TopHeader,
@@ -111,7 +111,7 @@ export class FullScreenWizard extends React.Component {
         <KeyboardAvoidingView behavior='padding'>
           {/* Use JS-only version of React Native's SafeAreaView so that Grass
               can extend into iOS 12 footer space*/}
-          <SafeAreaViewContainer forceInset={{ bottom: 'never' }}>
+          <SafeAreaView style={{ flex: 1 }}>
             {topSection}
             <KeyboardOpen
               render={({ open }) => {
@@ -137,7 +137,7 @@ export class FullScreenWizard extends React.Component {
                 )
               }}
             />
-          </SafeAreaViewContainer>
+          </SafeAreaView>
         </KeyboardAvoidingView>
       </ScreenWrapper>
     )

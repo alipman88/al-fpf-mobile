@@ -45,7 +45,9 @@ describe('DrawerMenu', () => {
   }
 
   test('renders areas', () => {
-    const wrapper = TestRenderer.create(<DrawerMenu {...defaultProps} />).root
+    const wrapper = TestRenderer.create(
+      <DrawerMenu {...defaultProps} setOpen={jest.fn()} />
+    ).root
     expect(wrapper.findAllByType(ForumText).length).toEqual(3)
   })
 })
