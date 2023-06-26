@@ -278,8 +278,16 @@ to optionally connected to the production and staging2 stacks.
 App Center also needs to be configured to connect to Apple:
 https://appcenter.ms/settings/accounts.
 
-It's currently configured to use an App Store Connect API key (registered under
-the tech-admin@frontporchforum.com account):
+It's currently configured to use the tech-admin@frontporchforum.com account with
+an app-specific password (stored in 1Password under "Apple / AppCenter password
+for tech-admin@frontporchforum.com"):
+
+- https://appleid.apple.com/account/manage
+- https://support.apple.com/en-us/HT204397
+
+There is also an App Store Connect API key (registered under the
+tech-admin@frontporchforum.com account), but this failed when trying to distribute
+the build for release:
 
 - https://appstoreconnect.apple.com/access/api
 
