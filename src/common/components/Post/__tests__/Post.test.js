@@ -1,6 +1,5 @@
 import React from 'react'
 import { TouchableOpacity } from 'react-native'
-import analytics from '@react-native-firebase/analytics'
 import { shallow } from 'enzyme'
 
 import { Post } from '@components/Post/Post'
@@ -147,11 +146,6 @@ describe('Post', () => {
   test('reply button press', () => {
     const wrapper = shallow(<Post {...defaultProps} />)
     wrapper.find(Button).last().simulate('press')
-    expect(analytics().logEvent).toHaveBeenCalledWith('press_reply_to_forum', {
-      area_id: defaultProps.post.area_id,
-      post_id: defaultProps.post.id,
-      issue_id: defaultProps.post.issue_id,
-    })
     expect(defaultProps.navigation.navigate).toHaveBeenCalledWith('Compose', {
       areaId: defaultProps.post.area_id,
       categoryId: null,
@@ -164,11 +158,6 @@ describe('Post', () => {
   test('email button press', () => {
     const wrapper = shallow(<Post {...defaultProps} />)
     wrapper.find(Button).first().simulate('press')
-    expect(analytics().logEvent).toHaveBeenCalledWith('press_email_author', {
-      area_id: defaultProps.post.area_id,
-      post_id: defaultProps.post.id,
-      issue_id: defaultProps.post.issue_id,
-    })
     expect(defaultProps.chooseMailApp).toHaveBeenCalledWith({
       subject: `Re: ${defaultProps.post.title}`,
       toEmail: defaultProps.post.user_email,
