@@ -57,7 +57,6 @@
     "react-native-webview": "^13.2.2",
     "react-redux": "^7.2.9",
     "redux": "^4.2.1",
-    "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "redux-persist-sensitive-storage": "^1.0.0",
     "redux-starter-kit": "^0.6.3",

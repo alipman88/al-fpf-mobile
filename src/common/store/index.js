@@ -1,6 +1,5 @@
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk'
 import { persistStore, persistReducer } from 'redux-persist'
 // NOTE: this uses react-native-sensitive-info for the actual storage
@@ -8,10 +7,6 @@ import createSensitiveStorage from 'redux-persist-sensitive-storage'
 
 import { mainReducer } from './mainReducer'
 import { securedReducer } from './securedReducer'
-
-const loggerMiddleware = createLogger({
-  predicate: () => window.__DEV__ && !window.__TEST__,
-})
 
 const sensitiveStorage = createSensitiveStorage({
   keychainService: 'frontPorchForumKeychain',
@@ -34,7 +29,7 @@ const reducer = combineReducers({
   secured: persistReducer(securedPersistConfig, securedReducer),
 })
 
-const middlewares = compose(applyMiddleware(thunk, loggerMiddleware))
+const middlewares = compose(applyMiddleware(thunk))
 
 const composedMiddlewares =
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__DEV__

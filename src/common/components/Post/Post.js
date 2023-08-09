@@ -1,7 +1,6 @@
 import React from 'react'
 import { TouchableOpacity, Linking } from 'react-native'
 import Autolink from 'react-native-autolink'
-import analytics from '@react-native-firebase/analytics'
 import PropTypes from 'prop-types'
 import { Text, TextSemibold } from '@components/Text'
 import truncate from 'lodash/truncate'
