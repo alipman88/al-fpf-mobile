@@ -1,7 +1,6 @@
 import { ActionSheetIOS, Linking, Platform } from 'react-native'
 
 import { chooseMailApp } from '../actions'
-// import { mailApp } from '../slice'
 
 describe('mailApp - actions', () => {
   const dispatch = jest.fn()

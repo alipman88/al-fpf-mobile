@@ -4,4 +4,5 @@ module.exports = {
   getBrand: () => 'Apple',
   getModel: () => 'iPhone X',
   getUniqueId: () => '123abc',
+  getUserAgent: () => 'Safari',
 }

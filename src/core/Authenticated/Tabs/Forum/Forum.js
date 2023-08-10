@@ -10,6 +10,7 @@ import {
   hasMessagingPermission,
   requestMessagingPermission,
 } from '@common/notifications'
+import { plausible } from '@common/utils/plausible'
 import { ScreenContainer } from '@components/ScreenContainer'
 import { ExternalLink } from '@components/ExternalLink'
 import { ForumContainer } from './styledComponents'
@@ -192,6 +193,16 @@ export class ForumComponent extends React.Component {
     this.checkNavParams()
     this.fetchIssues(prevProps)
     this.fetchPosts(prevProps)
+
+    // If a new issue is being loaded, log the pageview to plausible, mimicking
+    // a web app url so that forum views from mobile and web are grouped together
+    const { currentIssueId, currentAreaId, issues } = this.props
+    const issue = issues.find((issue) => issue.id === currentIssueId)
+    if (issue && currentIssueId !== prevProps.currentIssueId) {
+      plausible.trackPageview({
+        path: `areas/${currentAreaId}/issues/${issue.number}`,
+      })
+    }
   }
 
   scrollPostsToTop() {

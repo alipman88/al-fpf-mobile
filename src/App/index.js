@@ -21,6 +21,8 @@ import { sendDeviceData } from '@common/session'
 import { getProfiles } from '@common/profile'
 import { subscriptionSkus } from '@common/types/subscriptionSkus'
 import { setApplicationIconBadgeNumber } from '@common/notifications'
+import { rollbar } from '@common/utils/rollbar'
+import { plausible } from '@common/utils/plausible'
 
 export class App extends React.Component {
   constructor(props) {
@@ -109,6 +111,44 @@ export class App extends React.Component {
 
   handleNavigationChange = (currentRouteName) => {
     analytics().logScreenView({ screen_name: currentRouteName })
+
+    // Convert navigation route names to plausible URLs (so their views are
+    // more or less integrated with matching web app page views)
+    const plausibleViewPaths = {
+      Account: 'user',
+      Address: 'registration/address',
+      BasicInfo: 'registration/basic_info',
+      BusinessInfo: 'registration/business_info',
+      Calendar: null, // skipped b/c webview
+      Compose: null, // skipped b/c webview
+      CreateAccount: 'user/new',
+      Directory: null, // skipped b/c webview
+      EmailVerification: 'registration/email_verification',
+      Forum: null, // skipped b/c logged within the view
+      GovernmentInfo: 'registration/government_info',
+      Login: 'login',
+      MapScreen: 'registration/map',
+      Profile: 'user/profiles',
+      ProfileTypes: 'registration/profile_types',
+      Search: null, // skipped b/c webview
+      SettingsIndex: 'settings',
+      Subscription: 'subscription',
+      Waitlist: 'waitlist-users/new',
+      WaitlistSuccess: 'waitlist-users/success',
+      Welcome: 'welcome',
+    }
+
+    // If the route name matches a plausible path, track the page view
+    const path = plausibleViewPaths[currentRouteName]
+    if (path) {
+      plausible.trackPageview({ path })
+    }
+    // Or if we forgot to configure the route name here, log a rollbar warning
+    else if (!(currentRouteName in plausibleViewPaths)) {
+      rollbar.warn('Unexpected navigation route name in Plausible config', {
+        currentRouteName,
+      })
+    }
   }
 
   setConnectedStatus = async ({ type, effectiveType }) => {

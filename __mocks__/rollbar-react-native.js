@@ -3,6 +3,7 @@ module.exports = {
     this.setPerson = jest.fn()
     this.clearPerson = jest.fn()
     this.info = jest.fn()
+    this.error = jest.fn()
   },
   Configuration: jest.fn(),
 }

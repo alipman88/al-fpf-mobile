@@ -7,6 +7,8 @@ import Adapter from '@wojtekmaj/enzyme-adapter-react-17'
 
 configure({ adapter: new Adapter() })
 
+require('jest-fetch-mock').enableMocks()
+
 global.window = global
 global.window.__TEST__ = true
 
