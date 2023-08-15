@@ -8,6 +8,7 @@ import truncate from 'lodash/truncate'
 import { PostCategory } from '@components/PostCategory'
 import { Button } from '@components/Button'
 import { Badge, BadgeText } from '@components/Badge'
+import { ImageSlider } from '@components/ImageSlider'
 
 import {
   LinkText,
@@ -296,6 +297,7 @@ export class Post extends React.Component {
               </ShowMoreButton>
             </TouchableOpacity>
           )}
+          <ImageSlider images={post.images} />
         </PostBodyContainer>
         {children}
         {includeBottomButtons && getBottomButtons(post)}
