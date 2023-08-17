@@ -5,9 +5,12 @@ import { Image } from 'react-native'
 /**
  * Uses an Image component to render a remote image 'as is' in its original size
  */
-export function SizedImage({ uri, maxHeight }) {
+export function SizedImage({ uri, maxHeight, maxWidth }) {
   const [width, setWidth] = useState()
   const [height, setHeight] = useState()
+
+  if (!maxHeight) maxHeight = height
+  if (!maxWidth) maxWidth = width
 
   useEffect(() => {
     if (uri) {
@@ -15,17 +18,19 @@ export function SizedImage({ uri, maxHeight }) {
         let h = height
         let w = width
 
-        // scale to aspect ratio if height exceeds 100px
-        if (maxHeight && h > maxHeight) {
+        if (maxHeight / height < maxWidth / width && h > maxHeight) {
           w = (width * maxHeight) / h
           h = maxHeight
+        } else if (w > maxWidth) {
+          h = (height * maxWidth) / w
+          w = maxWidth
         }
 
         setWidth(w)
         setHeight(h)
       })
     }
-  }, [uri, maxHeight])
+  }, [uri, maxHeight, maxWidth])
 
   if (width && height) {
     return (
@@ -33,10 +38,9 @@ export function SizedImage({ uri, maxHeight }) {
         source={{ uri: uri }}
         testID='image'
         style={{
+          backgroundColor: 'white', // in case of transparent PNG
           height: height,
           width: width,
-          marginRight: 6,
-          marginBottom: 6,
         }}
       />
     )
@@ -48,4 +52,5 @@ export function SizedImage({ uri, maxHeight }) {
 SizedImage.propTypes = {
   uri: PropTypes.string,
   maxHeight: PropTypes.number,
+  maxWidth: PropTypes.number,
 }
