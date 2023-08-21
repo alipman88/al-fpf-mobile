@@ -351,7 +351,7 @@ describe('Forum', () => {
       expect(wrapper.instance().scrollPostsToTop).toHaveBeenCalled()
     })
 
-    test("if nav param issue  is same as current issue, don't update currentIssueId", () => {
+    test("if nav param issue is same as current issue, don't update currentIssueId", () => {
       const wrapper = shallow(<Forum {...defaultProps} currentIssueId={1000} />)
 
       wrapper.setProps({

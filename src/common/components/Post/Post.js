@@ -1,7 +1,6 @@
 import React from 'react'
 import { TouchableOpacity, Linking } from 'react-native'
 import Autolink from 'react-native-autolink'
-import analytics from '@react-native-firebase/analytics'
 import PropTypes from 'prop-types'
 import { Text, TextSemibold } from '@components/Text'
 import truncate from 'lodash/truncate'
@@ -127,11 +126,6 @@ export class Post extends React.Component {
     const getBottomButtons = (post) => {
       const includeReplyButton =
         !post.is_shared_post && areasIdMap[post.area_id]
-      const postAnalyticsData = {
-        area_id: post.area_id,
-        post_id: post.id,
-        issue_id: post.issue_id,
-      }
       return (
         <BottomContainer>
           {post.show_user_email && (
@@ -139,8 +133,6 @@ export class Post extends React.Component {
               <Button
                 color={'#fff'}
                 onPress={async () => {
-                  analytics().logEvent('press_email_author', postAnalyticsData)
-
                   const subject = this.reTitle(post.title)
 
                   chooseMailApp({
@@ -163,10 +155,6 @@ export class Post extends React.Component {
                 <Button
                   color={'#fff'}
                   onPress={() => {
-                    analytics().logEvent(
-                      'press_reply_to_forum',
-                      postAnalyticsData
-                    )
                     this.handleReplyPress(post)
                   }}
                 >

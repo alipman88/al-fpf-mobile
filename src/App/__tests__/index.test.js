@@ -9,6 +9,10 @@ jest.mock('../Container.js', () => ({
 }))
 
 describe('App', () => {
+  beforeEach(() => {
+    fetch.resetMocks()
+  })
+
   test('renders Offline screen when state is offline', () => {
     const wrapper = shallow(<App />)
 
@@ -18,6 +22,9 @@ describe('App', () => {
 
   describe('setConnectedStatus', () => {
     test('sets connected state depending on variables', async () => {
+      // mock unreachable health_check endpoint
+      fetch.mockReject(new Error('fake error message'))
+
       const wrapper = shallow(<App />)
 
       let result = await wrapper
@@ -48,7 +55,6 @@ describe('App', () => {
 
     test('when connection is unknown, it tries the backend server', async () => {
       const wrapper = shallow(<App />)
-      global.fetch = jest.fn()
 
       await wrapper
         .instance()
