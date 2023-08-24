@@ -17,7 +17,10 @@ export const Advertisement = ({ ad, navigateWithToken }) => (
   <Card>
     <CardContent>
       <Header>{ad.headline}</Header>
-      <TouchableOpacity onPress={() => openFpfUrl(ad.url)}>
+      <TouchableOpacity
+        onPress={() => openFpfUrl(ad.url)}
+        style={{ marginRight: 6, marginBottom: 6 }}
+      >
         <SizedImage uri={ad.image_url} maxHeight={100} />
       </TouchableOpacity>
       <TouchableOpacity
