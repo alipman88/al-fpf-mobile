@@ -162,8 +162,7 @@ yarn android
   - Switch to the Build tab
   - Select the production branch
   - Click on the wrench icon, update the release notes, and click Save.
-  - If the build didn't start automatically (it should) or if it fails (it might),
-    click the Build Now button
+  - Click the Build Now button
   - Wait for both the iOS and Android builds to complete successfully
 5. If the build wasn't automatically sent to the app stores (it should be), click
   the Distribute button, then "Store", then the appropriate store, then Next
