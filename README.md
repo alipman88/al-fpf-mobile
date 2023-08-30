@@ -49,7 +49,7 @@ Install the following tools:
 
 ```
 brew install yarn
-brew install node
+brew install node@18
 brew install watchman
 sudo gem install cocoapods
 ```
