@@ -74,7 +74,12 @@ cd ios ; pod install ; cd ..
 
 ### Environment config
 
-Copy `.env.example` as `.env` and populate it with values.
+Copy `.env.example` as `.env` and populate it with values for:
+- `API_KEY`
+- `GOOGLE_MAPS_API_KEY`
+- `ROLLBAR_API_KEY`
+- `LOCAL_DEVICE_DEV_API_HOST` and `LOCAL_DEVICE_DEV_WEBSITE_HOST` for testing
+  with a device on your network
 
 Note that the Android emulator runs in its own network, which maps 10.0.2.2
 to the host.  So for Android testing, `API_HOST` should likely be
