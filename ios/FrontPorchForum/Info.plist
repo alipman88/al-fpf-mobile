@@ -46,6 +46,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera access is required to take photos through this app.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Your location is required to determine if you are in our service area.</string>
 	<key>UIAppFonts</key>
