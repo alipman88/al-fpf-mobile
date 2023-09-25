@@ -47,9 +47,9 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Camera access is required to take photos through this app.</string>
+	<string>If you want to take a photo this application requires camera access.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Your location is required to determine if you are in our service area.</string>
+	<string>To determine if you are in our service area this application requires your location.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>ProximaNova-Regular.otf</string>
