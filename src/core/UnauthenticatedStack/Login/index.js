@@ -39,7 +39,9 @@ export const LoginComponent = ({ navigation, login, resendEmail }) => {
         <TroubleLoggingInContainer>
           <TouchableOpacity
             onPress={() =>
-              openFpfUrl(`${Config.WEBSITE_HOST}/isfpfforme/member-faq`)
+              openFpfUrl(
+                'https://help.frontporchforum.com/how-do-i-log-into-my-fpf-account'
+              )
             }
           >
             <BottomText>Trouble logging in?</BottomText>
