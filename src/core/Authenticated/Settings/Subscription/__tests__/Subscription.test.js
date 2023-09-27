@@ -37,33 +37,17 @@ describe('Subscription', () => {
       {
         productId: 'standard_business_monthly',
         title: 'Standard Business (Monthly)',
-        localizedPrice: '$8.99',
+        localizedPrice: '$11.00',
         subscriptionPeriodUnitIOS: 'MONTH',
-        price: '8.99',
+        price: '11.00',
         currency: 'USD',
       },
       {
         productId: 'standard_business_yearly',
         title: 'Standard Business (Yearly)',
-        localizedPrice: '$95.99',
+        localizedPrice: '$119.99',
         subscriptionPeriodUnitIOS: 'YEAR',
-        price: '95.99',
-        currency: 'USD',
-      },
-      {
-        productId: 'standard_government_monthly',
-        title: 'Standard government (Monthly)',
-        localizedPrice: '$8.99',
-        subscriptionPeriodUnitIOS: 'MONTH',
-        price: '7.99',
-        currency: 'USD',
-      },
-      {
-        productId: 'standard_government_yearly',
-        title: 'Standard government (Yearly)',
-        localizedPrice: '$95.99',
-        subscriptionPeriodUnitIOS: 'YEAR',
-        price: '95.99',
+        price: '119.99',
         currency: 'USD',
       },
     ],
@@ -79,9 +63,9 @@ describe('Subscription', () => {
     const b1 = buttons.at(0)
     const b2 = buttons.at(1)
     expect(b1.key()).toEqual('standard_business_monthly')
-    expect(b1.children().text()).toEqual('$8.99 / Month')
+    expect(b1.children().text()).toEqual('$11.00 / Month')
     expect(b2.key()).toEqual('standard_business_yearly')
-    expect(b2.children().text()).toEqual('$95.99 / Year')
+    expect(b2.children().text()).toEqual('$119.99 / Year')
   })
 
   test('receives dynamic profile plan descriptions from api', () => {
