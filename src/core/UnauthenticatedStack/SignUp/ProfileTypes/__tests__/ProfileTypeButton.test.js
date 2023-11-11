@@ -9,7 +9,7 @@ describe('ProfileTypeButton', () => {
   const defaultProps = {
     onTapHandler: jest.fn(),
     buttonText: 'Business',
-    label: 'Business organization',
+    label: 'For-profit business',
     type: 'business',
     active: false,
   }
