@@ -219,6 +219,12 @@ export class ForumComponent extends React.Component {
   }
 
   setTitleFromArea() {
+    this.props.navigation.setOptions({
+      headerTitle: this.areaName,
+    })
+  }
+
+  get areaName() {
     const currentArea = this.props.areas.find(
       (a) => a.id === this.props.currentAreaId
     )
@@ -230,9 +236,7 @@ export class ForumComponent extends React.Component {
       name = this.props.neighboringAreas[this.props.currentAreaId]
     }
 
-    this.props.navigation.setOptions({
-      headerTitle: name,
-    })
+    return name
   }
 
   render() {
@@ -243,6 +247,7 @@ export class ForumComponent extends React.Component {
       this.props.sharedPosts[currentIssueId] || []
     )
     const ads = this.props.ads[currentIssueId] || []
+    const sponsorship = this.props.sponsorships[currentIssueId]
 
     const maxIndex = posts.length + Math.min(3, ads.length)
     const postRender = []
@@ -312,6 +317,14 @@ export class ForumComponent extends React.Component {
                 onPress={() => navigateWithToken('/user')}
               />
             )}
+            {sponsorship?.ad && (
+              <Advertisement
+                ad={sponsorship.ad}
+                areaName={this.areaName}
+                key={`ad-${sponsorship.ad.id}`}
+                navigateWithToken={navigateWithToken}
+              />
+            )}
             {Boolean(currentIssue) && (
               <InThisIssue
                 number={currentIssue.number}
@@ -356,6 +369,7 @@ ForumComponent.propTypes = {
   setCurrentIssueId: PropTypes.func.isRequired,
   setupForumData: PropTypes.func.isRequired,
   sharedPosts: PropTypes.object.isRequired,
+  sponsorships: PropTypes.object.isRequired,
   toggleIssueUnread: PropTypes.func.isRequired,
 }
 
