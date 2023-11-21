@@ -4,15 +4,9 @@ import PropTypes from 'prop-types'
 import { Ad } from './ad'
 import { SponsorshipAd } from './sponsorshipAd'
 
-export const Advertisement = ({ ad, areaName, navigateWithToken }) => {
+export const Advertisement = ({ ad, navigateWithToken }) => {
   if (ad.ad_type === 'sponsorship') {
-    return (
-      <SponsorshipAd
-        ad={ad}
-        areaName={areaName}
-        navigateWithToken={navigateWithToken}
-      />
-    )
+    return <SponsorshipAd ad={ad} navigateWithToken={navigateWithToken} />
   } else {
     return <Ad ad={ad} navigateWithToken={navigateWithToken} />
   }
@@ -20,7 +14,6 @@ export const Advertisement = ({ ad, areaName, navigateWithToken }) => {
 
 Advertisement.propTypes = {
   ad: PropTypes.object.isRequired,
-  areaName: PropTypes.string,
   navigateWithToken: PropTypes.func.isRequired,
 }
 

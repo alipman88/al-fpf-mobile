@@ -96,7 +96,6 @@ describe('Ad', () => {
 describe('SponsorshipAd', () => {
   const defaultProps = {
     ad: sponsorshipAd,
-    areaName: 'Default Area',
     navigateWithToken: jest.fn(),
     fpf_url:
       'https://frontporchforum.com/?app_info=FpfMobileApp%2F802.1.0&utm_medium=app',

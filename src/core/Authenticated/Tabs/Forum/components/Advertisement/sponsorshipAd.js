@@ -5,11 +5,11 @@ import PropTypes from 'prop-types'
 import { SizedImage } from '@components/SizedImage'
 import { Card, CardContent, Header, Link, Text } from '../sharedStyles'
 
-export const SponsorshipAd = ({ ad, areaName, navigateWithToken }) => (
+export const SponsorshipAd = ({ ad, navigateWithToken }) => (
   <Card>
     <CardContent>
       <Text style={{ marginBottom: 10 }}>
-        {`The ${areaName} Forum is sponsored this week by...`}
+        This forum is sponsored this week by...
       </Text>
 
       <TouchableOpacity
@@ -39,7 +39,6 @@ export const SponsorshipAd = ({ ad, areaName, navigateWithToken }) => (
 
 SponsorshipAd.propTypes = {
   ad: PropTypes.object.isRequired,
-  areaName: PropTypes.string,
   navigateWithToken: PropTypes.func.isRequired,
 }
 

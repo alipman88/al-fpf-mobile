@@ -320,7 +320,6 @@ export class ForumComponent extends React.Component {
             {sponsorship?.ad && (
               <Advertisement
                 ad={sponsorship.ad}
-                areaName={this.areaName}
                 key={`ad-${sponsorship.ad.id}`}
                 navigateWithToken={navigateWithToken}
               />
