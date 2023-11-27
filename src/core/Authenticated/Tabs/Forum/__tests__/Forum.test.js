@@ -93,6 +93,7 @@ describe('Forum', () => {
         },
       ],
     },
+    sponsorships: {},
     sharedPosts: {
       12: [],
     },
