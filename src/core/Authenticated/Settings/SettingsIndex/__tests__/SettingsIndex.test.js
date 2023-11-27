@@ -54,7 +54,7 @@ describe('SettingsIndex', () => {
     const wrapper = shallow(<SettingsIndex {...defaultProps} />)
     wrapper.find(TouchableOpacity).at(0).simulate('press')
     expect(defaultProps.navigateWithToken).toHaveBeenCalledWith(
-      '/user/posts',
+      '/user/submissions',
       expect.any(Function)
     )
   })

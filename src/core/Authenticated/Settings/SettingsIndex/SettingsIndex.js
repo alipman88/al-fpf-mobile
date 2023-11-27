@@ -79,13 +79,13 @@ export class SettingsIndex extends React.Component {
               ))}
               <TouchableOpacity
                 onPress={() =>
-                  navigateWithToken('/user/posts', (loading) =>
+                  navigateWithToken('/user/submissions', (loading) =>
                     this.setState({ loading })
                   )
                 }
               >
                 <ExternalLinkContainer style={{ marginTop: 18 }}>
-                  <ViewPostings>View my postings</ViewPostings>
+                  <ViewPostings>My Submissions</ViewPostings>
                   <Image source={linkIcon} />
                 </ExternalLinkContainer>
               </TouchableOpacity>
