@@ -144,10 +144,10 @@ export const WebView = (props) => {
   // ApplicationController#handle_mobile_app_request method.
   const whitelistedPaths = [
     '/calendar',
-    '/compose',
-    '/directory',
-    '/d/',
-    '/search',
+    '^/compose',
+    '^/directory',
+    '^/d/',
+    '^/search',
   ]
 
   return (
@@ -176,7 +176,7 @@ export const WebView = (props) => {
 
           // Open whitelisted requests in the WebView
           const whitelistedPath = whitelistedPaths.find((path) =>
-            requestPath.startsWith(path)
+            requestPath.match(path)
           )
           if (whitelistedPath) {
             // React Native WebViews only send headers on the initial page load
