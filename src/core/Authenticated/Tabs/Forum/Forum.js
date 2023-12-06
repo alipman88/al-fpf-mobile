@@ -130,13 +130,17 @@ export class ForumComponent extends React.Component {
     const { currentAreaId, issues, navigation, navigateWithToken, route } =
       this.props
 
-    if (prevProps.issues !== issues) {
-      //if we got here from a deeplink, find issue and set current ID
+    // Handle when the list of issues has changed
+    if (prevProps.issues !== issues && issues.length > 0) {
       const issueNum = parseInt(route.params?.issueNum ?? 0, 10)
 
-      if (!!issueNum && issues.length) {
+      // If an issue number is provided by routing, make use of it
+      if (issueNum) {
         navigation.setParams({ issueNum: undefined })
         const current = issues.find((i) => i.number === issueNum)
+
+        // If there's an issue available to show and it's different from the current
+        // issue being shown, set the current issue id and mark it as read.
         if (current && current.id !== this.props.currentIssueId) {
           this.props.setCurrentIssueId(current.id)
           this.props.toggleIssueUnread({
@@ -144,13 +148,16 @@ export class ForumComponent extends React.Component {
             isUnread: false,
             areaId: currentAreaId,
           })
-        } else if (!current) {
+        }
+        // Or, if the issue isn't available locally (e.g. because it's too old),
+        // show it in a web browser
+        else if (!current) {
           navigateWithToken(`/areas/${currentAreaId}/issues/${issueNum}`)
         }
       }
-      // if this list of issues doesn't have the current id, set a new one
-      if (
-        issues.length > 0 &&
+      // Otherwise, if the current issue id doesn't exist in the list of issues,
+      // reset to the latest issue in the list of issues (and mark that issue read)
+      else if (
         !issues.find((issue) => issue.id === this.props.currentIssueId)
       ) {
         this.scrollPostsToTop()
@@ -163,11 +170,11 @@ export class ForumComponent extends React.Component {
       }
     }
 
+    // Handle when the issue being viewed has changed
     if (
       prevProps.currentIssueId !== this.props.currentIssueId &&
       this.props.currentIssueId !== 0
     ) {
-      // scroll to top any time we're rendering a different issue
       this.scrollPostsToTop()
       this.props.getContents(this.props.currentIssueId, this.props.navigation)
       this.props.toggleIssueUnread({
