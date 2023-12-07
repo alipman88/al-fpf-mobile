@@ -3,6 +3,7 @@ import { uniqueId } from 'lodash'
 
 export const appSettings = createSlice({
   initialState: {
+    areaIdsBySlug: {},
     forumPostTruncateLength: 1000,
     searchPostTruncateLength: 1000,
     categories: [],
@@ -17,6 +18,7 @@ export const appSettings = createSlice({
   reducers: {
     setAppSettings: (state, { payload }) => ({
       ...state,
+      areaIdsBySlug: payload.area_ids_by_slug || {},
       forumPostTruncateLength: payload.forum_posting_truncate_length,
       searchPostTruncateLength: payload.search_posting_truncate_length,
       categories: payload.categories,
@@ -41,6 +43,11 @@ const path = 'main.appSettings'
 
 appSettings.selectors = {
   getAppSettings: createSelector([path], (appSettings) => appSettings),
+
+  getAreaIdsBySlug: createSelector(
+    [path],
+    (appSettings) => appSettings.areaIdsBySlug
+  ),
 
   getCategories: createSelector(
     [path],

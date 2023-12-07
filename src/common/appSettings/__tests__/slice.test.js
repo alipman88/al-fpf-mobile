@@ -4,6 +4,7 @@ describe('appSettings - slice', () => {
   test('initialState', () => {
     const state = appSettings.reducer(undefined, {})
     expect(state).toEqual({
+      areaIdsBySlug: {},
       forumPostTruncateLength: 1000,
       searchPostTruncateLength: 1000,
       categories: [],
@@ -51,6 +52,7 @@ describe('appSettings - slice', () => {
       })
 
       expect(data).toEqual({
+        areaIdsBySlug: {},
         forumPostTruncateLength: 450,
         searchPostTruncateLength: 550,
         categories: [
