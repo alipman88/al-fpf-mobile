@@ -278,6 +278,9 @@ export class Post extends React.Component {
               email
               text={postContent}
               linkStyle={AutoPostLinkStyle.link}
+              truncate='100'
+              truncateLocation='smart'
+              truncateChars='[...]'
             />
           </PostBody>
           {!!disclaimerContent && !truncated && (
