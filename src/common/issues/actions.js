@@ -9,6 +9,7 @@ import { responseError } from '@common/utils/responseError'
 import { areas } from '@common/areas'
 import { spinner } from '@app/Spinner/slice'
 import * as commonActions from '@common/actions/navigateWithToken'
+import get from 'lodash/get'
 
 export const getIssues =
   (areaId, navigation, resetForumAction) => async (dispatch, getState) => {
@@ -20,6 +21,17 @@ export const getIssues =
         `/areas/${areaId}/issues?page=1&count=${maxIssuesCount}`,
         getState()
       )
+
+      // Show a deprecation message for old app versions only
+      const eolInfo = get(response, 'data.eol_info')
+      if (eolInfo) {
+        dispatch(
+          appMessage.actions.setAppMessage({
+            message: eolInfo,
+            type: 'warning',
+          })
+        )
+      }
 
       if (!issues.selectors.getFirstLoadIssues(getState())) {
         dispatch(issues.actions.setFirstLoadOfIssues())

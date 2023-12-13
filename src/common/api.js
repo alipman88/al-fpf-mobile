@@ -2,11 +2,13 @@ import axios from 'axios'
 
 import { Config } from '@common/config'
 import { currentUser } from './currentUser'
+import DeviceInfo from 'react-native-device-info'
 
 const api = axios.create({
   baseURL: Config.API_HOST,
   headers: {
     'X-API-KEY': `Bearer ${Config.API_KEY}`,
+    'X-APP-INFO': `FpfMobileApp/802.${DeviceInfo.getVersion()}`,
   },
 })
 
