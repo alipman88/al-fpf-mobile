@@ -1,6 +1,11 @@
 import styled from 'styled-components/native'
 import { StyleSheet } from 'react-native'
 
+export const Text = styled.Text`
+  font-family: ProximaNova-Regular;
+  font-size: 16px;
+`
+
 export const Card = styled.View`
   flex: 1;
   border-color: #ebecf1;
@@ -11,27 +16,24 @@ export const Card = styled.View`
   margin-bottom: 10px;
 `
 
-export const Header = styled.Text`
+export const Header = styled(Text)`
   font-size: 22px;
   font-weight: bold;
   color: #355768;
   margin-bottom: 10px;
 `
 
-export const Link = styled.Text`
-  color: #d77400;
-`
-
 export const CardContent = styled.View`
   padding: 16px;
 `
 
-export const Text = styled.Text`
-  font-size: 16px;
+export const Link = styled.Text`
+  color: #d77400;
+  font-family: ProximaNova-Regular;
 `
 
-export const ContentText = styled.Text`
-  font-size: 16px;
+export const ContentText = styled(Text)`
+  color: #4a4a4a;
   padding-top: 14px;
 `
 
@@ -49,7 +51,7 @@ export const AutoPostLinkStyle = StyleSheet.create({
   },
 })
 
-export const Disclaimer = styled.Text`
+export const Disclaimer = styled(Text)`
   font-size: 16px;
   color: #6c757d;
   padding: 7px 14px;
