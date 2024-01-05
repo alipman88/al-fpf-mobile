@@ -106,7 +106,7 @@ describe('SponsorshipAd', () => {
       .spyOn(Linking, 'openURL')
       .mockImplementation(() => ({}))
     const wrapper = shallow(<SponsorshipAd {...defaultProps} />)
-    wrapper.find(TouchableOpacity).last().simulate('press')
+    wrapper.find(TouchableOpacity).first().simulate('press')
     expect(openURLSpy).toHaveBeenCalledWith(defaultProps.fpf_url)
     openURLSpy.mockRestore()
   })
