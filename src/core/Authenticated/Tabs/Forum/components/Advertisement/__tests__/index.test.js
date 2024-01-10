@@ -6,7 +6,7 @@ import { Button } from '@components/Button'
 import { Disclaimer } from '@core/Authenticated/Tabs/Forum/components/sharedStyles'
 import { Advertisement } from '../index'
 import { Ad } from '../ad'
-import { SponsorshipAd } from '../sponsorshipAd'
+import { FeaturedAd } from '../featuredAd'
 
 const ad = {
   url: 'https://frontporchforum.com',
@@ -16,13 +16,13 @@ const ad = {
   image_url: 'https://cdn.frontporchforum.com/image.png',
 }
 
-const sponsorshipAd = {
+const featuredAd = {
   url: 'https://frontporchforum.com',
   link_text: 'Website',
   headline: 'Advertisement',
   body: 'This is some ad copy',
   image_url: 'https://cdn.frontporchforum.com/image.png',
-  ad_type: 'sponsorship',
+  ad_type: 'featuredAdCampaign',
 }
 
 describe('Advertisement', () => {
@@ -41,13 +41,13 @@ describe('Advertisement', () => {
     expect(wrapper.find(Ad).length).toEqual(1)
   })
 
-  test('renders sponsorship ad', () => {
+  test('renders featuredAdCampaign ad', () => {
     const props = {
       ...defaultProps,
-      ad: sponsorshipAd,
+      ad: featuredAd,
     }
     const wrapper = shallow(<Advertisement {...props} />)
-    expect(wrapper.find(SponsorshipAd).length).toEqual(1)
+    expect(wrapper.find(FeaturedAd).length).toEqual(1)
   })
 })
 
@@ -93,9 +93,9 @@ describe('Ad', () => {
   })
 })
 
-describe('SponsorshipAd', () => {
+describe('FeaturedAd', () => {
   const defaultProps = {
-    ad: sponsorshipAd,
+    ad: featuredAd,
     navigateWithToken: jest.fn(),
     fpf_url:
       'https://frontporchforum.com/?app_info=FpfMobileApp%2F802.1.0&utm_medium=app',
@@ -105,7 +105,7 @@ describe('SponsorshipAd', () => {
     const openURLSpy = jest
       .spyOn(Linking, 'openURL')
       .mockImplementation(() => ({}))
-    const wrapper = shallow(<SponsorshipAd {...defaultProps} />)
+    const wrapper = shallow(<FeaturedAd {...defaultProps} />)
     wrapper.find(TouchableOpacity).first().simulate('press')
     expect(openURLSpy).toHaveBeenCalledWith(defaultProps.fpf_url)
     openURLSpy.mockRestore()
@@ -115,7 +115,7 @@ describe('SponsorshipAd', () => {
     const openURLSpy = jest
       .spyOn(Linking, 'openURL')
       .mockImplementation(() => ({}))
-    const wrapper = shallow(<SponsorshipAd {...defaultProps} />)
+    const wrapper = shallow(<FeaturedAd {...defaultProps} />)
     wrapper.find(TouchableOpacity).first().simulate('press')
     expect(openURLSpy).toHaveBeenCalledWith(defaultProps.fpf_url)
     openURLSpy.mockRestore()

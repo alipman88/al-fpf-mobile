@@ -254,7 +254,7 @@ export class ForumComponent extends React.Component {
       this.props.sharedPosts[currentIssueId] || []
     )
     const ads = this.props.ads[currentIssueId] || []
-    const sponsorship = this.props.sponsorships[currentIssueId]
+    const featuredAdCampaign = this.props.featuredAdCampaigns[currentIssueId]
 
     const maxIndex = posts.length + Math.min(3, ads.length)
     const postRender = []
@@ -324,10 +324,10 @@ export class ForumComponent extends React.Component {
                 onPress={() => navigateWithToken('/user')}
               />
             )}
-            {sponsorship?.ad && (
+            {featuredAdCampaign?.ad && (
               <Advertisement
-                ad={sponsorship.ad}
-                key={`ad-${sponsorship.ad.id}`}
+                ad={featuredAdCampaign.ad}
+                key={`ad-${featuredAdCampaign.ad.id}`}
                 navigateWithToken={navigateWithToken}
               />
             )}
@@ -375,7 +375,7 @@ ForumComponent.propTypes = {
   setCurrentIssueId: PropTypes.func.isRequired,
   setupForumData: PropTypes.func.isRequired,
   sharedPosts: PropTypes.object.isRequired,
-  sponsorships: PropTypes.object.isRequired,
+  featuredAdCampaigns: PropTypes.object.isRequired,
   toggleIssueUnread: PropTypes.func.isRequired,
 }
 

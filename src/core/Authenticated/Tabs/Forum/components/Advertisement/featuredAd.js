@@ -6,7 +6,7 @@ import { PostCategory } from '@components/PostCategory'
 import { SizedImage } from '@components/SizedImage'
 import { Card, CardContent, Header, Link, Text } from '../sharedStyles'
 
-export const SponsorshipAd = ({ ad, navigateWithToken }) => (
+export const FeaturedAd = ({ ad, navigateWithToken }) => (
   <Card>
     <CardContent>
       <TouchableOpacity
@@ -40,9 +40,9 @@ export const SponsorshipAd = ({ ad, navigateWithToken }) => (
   </Card>
 )
 
-SponsorshipAd.propTypes = {
+FeaturedAd.propTypes = {
   ad: PropTypes.object.isRequired,
   navigateWithToken: PropTypes.func.isRequired,
 }
 
-SponsorshipAd.displayName = 'SponsorshipAd'
+FeaturedAd.displayName = 'FeaturedAd'
