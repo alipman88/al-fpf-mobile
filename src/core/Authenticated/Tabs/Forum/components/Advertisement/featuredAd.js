@@ -2,7 +2,6 @@ import React from 'react'
 import { TouchableOpacity } from 'react-native'
 import { openFpfUrl } from '@common/utils/openFpfUrl'
 import PropTypes from 'prop-types'
-import { PostCategory } from '@components/PostCategory'
 import { SizedImage } from '@components/SizedImage'
 import { Card, CardContent, Header, Link, Text } from '../sharedStyles'
 
@@ -30,12 +29,6 @@ export const FeaturedAd = ({ ad, navigateWithToken }) => (
           {ad.body}
         </Text>
       )}
-
-      <TouchableOpacity
-        onPress={() => navigateWithToken('/advertise-on-fpf/why-paid-ads')}
-      >
-        <PostCategory labelStyle={'dark_grey'}>Featured ad</PostCategory>
-      </TouchableOpacity>
     </CardContent>
   </Card>
 )
