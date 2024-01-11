@@ -2,16 +2,13 @@ import React from 'react'
 import { TouchableOpacity } from 'react-native'
 import { openFpfUrl } from '@common/utils/openFpfUrl'
 import PropTypes from 'prop-types'
+import { PostCategory } from '@components/PostCategory'
 import { SizedImage } from '@components/SizedImage'
 import { Card, CardContent, Header, Link, Text } from '../sharedStyles'
 
-export const SponsorshipAd = ({ ad, navigateWithToken }) => (
+export const FeaturedAd = ({ ad, navigateWithToken }) => (
   <Card>
     <CardContent>
-      <Text style={{ marginBottom: 10 }}>
-        This forum is sponsored this week by...
-      </Text>
-
       <TouchableOpacity
         onPress={() => openFpfUrl(ad.url)}
         style={{ marginBottom: 6 }}
@@ -33,13 +30,19 @@ export const SponsorshipAd = ({ ad, navigateWithToken }) => (
           {ad.body}
         </Text>
       )}
+
+      <TouchableOpacity
+        onPress={() => navigateWithToken('/advertise-on-fpf/why-paid-ads')}
+      >
+        <PostCategory labelStyle={'dark_grey'}>Featured ad</PostCategory>
+      </TouchableOpacity>
     </CardContent>
   </Card>
 )
 
-SponsorshipAd.propTypes = {
+FeaturedAd.propTypes = {
   ad: PropTypes.object.isRequired,
   navigateWithToken: PropTypes.func.isRequired,
 }
 
-SponsorshipAd.displayName = 'SponsorshipAd'
+FeaturedAd.displayName = 'FeaturedAd'

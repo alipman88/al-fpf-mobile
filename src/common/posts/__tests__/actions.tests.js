@@ -45,7 +45,7 @@ describe('posts - actions', () => {
               },
             ],
           },
-          sponsorshipsByIssue: {},
+          featuredAdCampaignsByIssue: {},
           placementDateByIssue: placementDates,
         },
       },

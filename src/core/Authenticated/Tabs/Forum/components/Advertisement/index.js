@@ -2,11 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { Ad } from './ad'
-import { SponsorshipAd } from './sponsorshipAd'
+import { FeaturedAd } from './featuredAd'
 
 export const Advertisement = ({ ad, navigateWithToken }) => {
-  if (ad.ad_type === 'sponsorship') {
-    return <SponsorshipAd ad={ad} navigateWithToken={navigateWithToken} />
+  if (ad.ad_type === 'featuredAdCampaign') {
+    return <FeaturedAd ad={ad} navigateWithToken={navigateWithToken} />
   } else {
     return <Ad ad={ad} navigateWithToken={navigateWithToken} />
   }
