@@ -8,7 +8,7 @@ const initialState = {
   sharedPostsByIssue: {},
   headlinesByIssue: {},
   adsByIssue: {},
-  sponsorshipsByIssue: {},
+  featuredAdCampaignsByIssue: {},
   placementDateByIssue: {},
   newsFromNeighboringNfsByIssue: {},
   ocmMessageByIssue: {},
@@ -44,9 +44,9 @@ export const posts = createSlice({
         ...state.adsByIssue,
         [payload.issueId]: payload.ads,
       },
-      sponsorshipsByIssue: {
-        ...state.sponsorshipsByIssue,
-        [payload.issueId]: payload.sponsorship,
+      featuredAdCampaignsByIssue: {
+        ...state.featuredAdCampaignsByIssue,
+        [payload.issueId]: payload.featuredAdCampaign,
       },
       placementDateByIssue: {
         ...state.placementDateByIssue,
@@ -93,7 +93,9 @@ export const posts = createSlice({
         sharedPostsByIssue: omitExpiredIssues(state.sharedPostsByIssue),
         headlinesByIssue: omitExpiredIssues(state.headlinesByIssue),
         adsByIssue: omitExpiredIssues(state.adsByIssue),
-        sponsorshipsByIssue: omitExpiredIssues(state.sponsorshipsByIssue),
+        featuredAdCampaignsByIssue: omitExpiredIssues(
+          state.featuredAdCampaignsByIssue
+        ),
         placementDateByIssue: omitExpiredIssues(state.placementDateByIssue),
         newsFromNeighboringNfsByIssue: omitExpiredIssues(
           state.newsFromNeighboringNfsByIssue
@@ -124,9 +126,9 @@ posts.selectors = {
     (posts) => posts.headlinesByIssue
   ),
   getAdsByIssue: createSelector([path], (posts) => posts.adsByIssue),
-  getSponsorshipsByIssue: createSelector(
+  getFeaturedAdCampaignsByIssue: createSelector(
     [path],
-    (posts) => posts.sponsorshipsByIssue || {}
+    (posts) => posts.featuredAdCampaignsByIssue || {}
   ),
   getPlacementDateByIssue: createSelector(
     [path],
