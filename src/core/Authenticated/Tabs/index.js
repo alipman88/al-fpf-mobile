@@ -12,7 +12,6 @@ import profileIcon from '@assets/images/global-assets/top-nav-elements/profile-i
 import { DrawerNavIcon } from '../DrawerNavIcon'
 import { TopNavIcon } from '../TopNavIcon'
 import { NavIcon } from './NavIcon'
-import { NavLabel } from './NavLabel'
 import { SideDrawerMenu } from '@components/DrawerMenu'
 
 import composeActive from '@assets/images/global-assets/main-navigation/compose-active.png'
@@ -47,6 +46,11 @@ export function Tabs() {
       <Tab.Navigator
         initialRouteName='Forum'
         screenOptions={({ navigation }) => ({
+          tabBarActiveTintColor: '#D77400',
+          tabBarAllowFontScaling: false,
+          tabBarLabelStyle: {
+            fontSize: 13,
+          },
           headerRight: () => (
             <TopNavIcon
               source={profileIcon}
@@ -72,11 +76,7 @@ export function Tabs() {
           options={() => ({
             title: 'Forum',
             headerLeft: () => <DrawerNavIcon setOpen={setDrawerOpen} />,
-            tabBarLabel: ({ focused }) => (
-              <NavLabel allowFontScaling={false} focused={focused}>
-                Forum
-              </NavLabel>
-            ),
+            tabBarLabel: 'Forum',
             tabBarIcon: ({ focused }) => (
               <NavIcon source={focused ? homeActive : homeDefault} />
             ),
@@ -91,11 +91,7 @@ export function Tabs() {
           options={() => ({
             title: 'Compose',
             headerLeft: () => <DrawerNavIcon setOpen={setDrawerOpen} />,
-            tabBarLabel: ({ focused }) => (
-              <NavLabel allowFontScaling={false} focused={focused}>
-                Compose
-              </NavLabel>
-            ),
+            tabBarLabel: 'Compose',
             tabBarIcon: ({ focused }) => (
               <NavIcon source={focused ? composeActive : composeDefault} />
             ),
@@ -108,11 +104,7 @@ export function Tabs() {
             tabPress: () => setDrawerEnabled(false),
           }}
           options={() => ({
-            tabBarLabel: ({ focused }) => (
-              <NavLabel allowFontScaling={false} focused={focused}>
-                Search
-              </NavLabel>
-            ),
+            tabBarLabel: 'Search',
             tabBarIcon: ({ focused }) => (
               <NavIcon source={focused ? searchActive : searchDefault} />
             ),
@@ -125,11 +117,7 @@ export function Tabs() {
             tabPress: () => setDrawerEnabled(false),
           }}
           options={() => ({
-            tabBarLabel: ({ focused }) => (
-              <NavLabel allowFontScaling={false} focused={focused}>
-                Directory
-              </NavLabel>
-            ),
+            tabBarLabel: 'Directory',
             tabBarIcon: ({ focused }) => (
               <NavIcon source={focused ? directoryActive : directoryDefault} />
             ),
@@ -142,11 +130,7 @@ export function Tabs() {
             tabPress: () => setDrawerEnabled(false),
           }}
           options={() => ({
-            tabBarLabel: ({ focused }) => (
-              <NavLabel allowFontScaling={false} focused={focused}>
-                Calendar
-              </NavLabel>
-            ),
+            tabBarLabel: 'Calendar',
             tabBarIcon: ({ focused }) => (
               <NavIcon source={focused ? calendarActive : calendarDefault} />
             ),
