@@ -22,7 +22,7 @@ const featuredAd = {
   headline: 'Advertisement',
   body: 'This is some ad copy',
   image_url: 'https://cdn.frontporchforum.com/image.png',
-  ad_type: 'featuredAdCampaign',
+  ad_type: 'featured',
 }
 
 describe('Advertisement', () => {
@@ -41,7 +41,7 @@ describe('Advertisement', () => {
     expect(wrapper.find(Ad).length).toEqual(1)
   })
 
-  test('renders featuredAdCampaign ad', () => {
+  test('renders featured ad', () => {
     const props = {
       ...defaultProps,
       ad: featuredAd,

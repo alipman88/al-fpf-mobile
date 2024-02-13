@@ -5,7 +5,7 @@ import { Ad } from './ad'
 import { FeaturedAd } from './featuredAd'
 
 export const Advertisement = ({ ad, navigateWithToken }) => {
-  if (ad.ad_type === 'featuredAdCampaign') {
+  if (ad.ad_type === 'featured') {
     return <FeaturedAd ad={ad} navigateWithToken={navigateWithToken} />
   } else {
     return <Ad ad={ad} navigateWithToken={navigateWithToken} />
