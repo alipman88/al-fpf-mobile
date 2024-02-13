@@ -82,7 +82,7 @@ const getAllContents = (issue, navigation) => async (dispatch, getState) => {
     )
   } catch (e) {
     dispatch(appMessage.actions.setAppError(responseError(e)))
-    if (e.response.status === 401) {
+    if (e.response?.status === 401) {
       dispatch(resetAction())
       navigation.dispatch(StackActions.replace('Login'))
     }
@@ -107,7 +107,7 @@ const getAds = (issue, navigation) => async (dispatch, getState) => {
       })
     )
   } catch (e) {
-    if (e.response.status === 401) {
+    if (e.response?.status === 401) {
       dispatch(resetAction())
       navigation.dispatch(StackActions.replace('Login'))
     }

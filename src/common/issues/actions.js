@@ -50,10 +50,10 @@ export const getIssues =
       dispatch(posts.actions.expire({ exceptIssueIds: issueIds }))
     } catch (e) {
       dispatch(appMessage.actions.setAppError(responseError(e)))
-      if (e.response.status === 401) {
+      if (e.response?.status === 401) {
         dispatch(resetAction())
         navigation.dispatch(StackActions.replace('Login'))
-      } else if (e.response.status === 403 && resetForumAction) {
+      } else if (e.response?.status === 403 && resetForumAction) {
         dispatch(areas.actions.resetAreas())
         dispatch(resetForumAction(navigation))
       }
@@ -91,10 +91,10 @@ export const fetchSpecificIssue =
       }
     } catch (e) {
       dispatch(appMessage.actions.setAppError(responseError(e)))
-      if (e.response.status === 401) {
+      if (e.response?.status === 401) {
         dispatch(resetAction())
         navigation.dispatch(StackActions.replace('Login'))
-      } else if (e.response.status === 403 && resetForumAction) {
+      } else if (e.response?.status === 403 && resetForumAction) {
         resetForumAction(navigation)
       }
     } finally {
