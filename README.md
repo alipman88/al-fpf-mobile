@@ -2,7 +2,7 @@
 
 ## OS Support
 
-- iOS 12 - 16
+- iOS 13 - 17
 - Android 8 - 13 (API 26 - 33) -- see `android/build.gradle`
 
 (Last updated 4/20/23)
