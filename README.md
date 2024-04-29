@@ -3,7 +3,7 @@
 ## OS Support
 
 - iOS 13 - 17
-- Android 8 - 13 (API 26 - 33) -- see `android/build.gradle`
+- Android 8 - 14 (API 26 - 34) -- see `android/build.gradle`
 
 (Last updated 4/20/23)
 
@@ -23,17 +23,21 @@ For more information, see https://reactnative.dev/docs/environment-setup.
 
 Install [Android Studio](https://developer.android.com/studio).
 
-Install OpenJDK 11:
+Install OpenJDK 17:
 
 ```
 brew tap homebrew/cask-versions
-brew install --cask zulu11
+brew install --cask zulu17
 ```
 
-Launch Android studio, and install the latest SDK version & SDK Tools.  See
-`android/build.gradle` for the currently supported SDK versions.
+Launch Android studio. When asked to open a project, open fpf-mobile/android
+(not the project's root directory) – this enables Android Studio's built-in tools (like
+the Logcat debugger) to function.
 
-Ensure JDK 11 is used if running the app from within Android Studio:
+Install the latest SDK version & SDK Tools.  See `android/build.gradle` for the
+currently supported SDK versions.
+
+Ensure JDK 17 is used if running the app from within Android Studio:
 Android Studio > Preferences > Build, Execution, Deployment > Build Tools > Gradle > Gradle JDK
 
 Add to your `.bash_profile` or `.bashrc`:
@@ -42,6 +46,15 @@ export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
 export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
 ```
+
+#### Troubleshooting Android Java runtime errors
+
+Most Java errors will be encountered during compilation, and come with fairly
+descriptive messages. Runtime errors are trickier to trace – typically the app
+just crashes.
+
+To view Java logs, open Android studio, and from your operating system's menu
+bar, select "View" > "Tool Windows" > "Logcat".
 
 ### Tools
 

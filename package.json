@@ -39,6 +39,7 @@
     "react-native-device-info": "^10.13.2",
     "react-native-easy-toast": "^2.3.0",
     "react-native-flash-message": "^0.4.2",
+    "react-native-gradle-plugin": "^0.71.19",
     "react-native-iap": "^12.13.1",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-loading-spinner-overlay": "^3.0.1",
