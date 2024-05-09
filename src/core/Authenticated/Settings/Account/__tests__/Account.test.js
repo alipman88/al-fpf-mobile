@@ -41,7 +41,7 @@ describe('Account', () => {
 
     expect(defaultProps.navigateWithToken).toHaveBeenCalledWith('/user')
     expect(defaultProps.navigateWithToken).toHaveBeenCalledWith(
-      '/user/subscriptions'
+      '/user/subscriptions',
     )
   })
 

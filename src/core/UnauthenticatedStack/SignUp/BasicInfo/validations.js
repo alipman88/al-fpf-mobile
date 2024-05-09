@@ -3,13 +3,13 @@ import { api } from '@common/api'
 
 export const validateFirstName = (string) => {
   return /^(?=.*[a-zA-Z\u00C0-\u017F])[a-zA-Z\u00C0-\u017F.'"\-,/ ()&]*$/.test(
-    string
+    string,
   )
 }
 
 export const validateLastName = (string) => {
   return /^(?=.*[a-zA-Z\u00C0-\u017F]{2})[a-zA-Z\u00C0-\u017F.'"\-,/ ()&]*$/.test(
-    string
+    string,
   )
 }
 
@@ -68,7 +68,7 @@ export const validations = yup.object().shape({
     .test(
       'password',
       'Password must contain a number and a symbol',
-      passwordValidation
+      passwordValidation,
     )
     .required(),
   passwordConfirmation: yup
@@ -78,7 +78,7 @@ export const validations = yup.object().shape({
       'Password and confirm password must match',
       function (passConfirm) {
         return this.parent.password === passConfirm
-      }
+      },
     )
     .required('Confirm password is a required field'),
 })

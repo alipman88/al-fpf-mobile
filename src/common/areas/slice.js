@@ -74,14 +74,14 @@ areas.selectors = {
   getAreasIdMap: createSelector([getAreas], (areas) => keyBy(areas, 'id')),
   // returns home forums & neighboring forums
   getFullAreasIdMap: createSelector([getAreas], (areas) =>
-    keyBy(areas.concat(areas.flatMap((area) => area.neighboringAreas)), 'id')
+    keyBy(areas.concat(areas.flatMap((area) => area.neighboringAreas)), 'id'),
   ),
   getCurrentAreaId: createSelector([path], (areas) => areas.currentAreaId),
   getHasAreaAccess: createSelector([path], (areas) => areas.hasAreaAccess),
   getLoading: createSelector([path], (areas) => areas.loading),
   getNeighboringAreas: createSelector(
     [path],
-    (areas) => areas.neighboringAreas
+    (areas) => areas.neighboringAreas,
   ),
   // returns home forums & neighboring forums
   getFullAreasList: createSelector([path], (areas) => {
@@ -99,7 +99,7 @@ areas.selectors = {
             name: areas.neighboringAreas[id],
             access: 'neighbor',
           }
-        })
+        }),
       )
       .filter((area) => {
         // remove duplicates such as neighbor areas that the member also has primary access to

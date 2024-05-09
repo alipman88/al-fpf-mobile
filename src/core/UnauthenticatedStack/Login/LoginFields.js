@@ -49,7 +49,7 @@ export class LoginFields extends React.Component {
     // When a different settings group is selected, restart the app.
     let settingsGroupField
     const settingsGroups = getSettingsGroups().map(
-      (key) => key || Config.ORIGINAL_CONFIG.ENVIRONMENT
+      (key) => key || Config.ORIGINAL_CONFIG.ENVIRONMENT,
     )
     if (
       settingsGroups.length > 1 &&

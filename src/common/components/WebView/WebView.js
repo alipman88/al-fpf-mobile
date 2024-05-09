@@ -190,7 +190,7 @@ export const WebView = (props) => {
 
           // Open whitelisted requests in the WebView
           const whitelistedPath = whitelistedPaths.find((path) =>
-            requestPath.match(path)
+            requestPath.match(path),
           )
           if (whitelistedPath) {
             // React Native WebViews only send headers on the initial page load

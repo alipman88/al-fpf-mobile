@@ -40,7 +40,7 @@ export const LoginComponent = ({ navigation, login, resendEmail }) => {
           <TouchableOpacity
             onPress={() =>
               openFpfUrl(
-                'https://help.frontporchforum.com/how-do-i-log-into-my-fpf-account'
+                'https://help.frontporchforum.com/how-do-i-log-into-my-fpf-account',
               )
             }
           >

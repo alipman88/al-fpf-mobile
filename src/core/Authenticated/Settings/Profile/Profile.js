@@ -29,7 +29,7 @@ export class Profile extends React.Component {
     let subscriptionLink
 
     const canCreateProfile = !(user.permissions || []).includes(
-      'cannot_create_profile'
+      'cannot_create_profile',
     )
     const canManageProfile = profile.access === 'owner'
     const canUpdateProfilePlan =
@@ -136,7 +136,7 @@ export class Profile extends React.Component {
               hasBorder
               onPress={() =>
                 navigateWithToken(
-                  '/user/profiles/new?disable_plan_type_change=true&profile%5Bprofile_plan_id%5D=3'
+                  '/user/profiles/new?disable_plan_type_change=true&profile%5Bprofile_plan_id%5D=3',
                 )
               }
             >
@@ -148,7 +148,7 @@ export class Profile extends React.Component {
             <ExternalLink
               onPress={() =>
                 navigateWithToken(
-                  '/user/profiles/new?profile%5Bprofile_plan_id%5D=4'
+                  '/user/profiles/new?profile%5Bprofile_plan_id%5D=4',
                 )
               }
             >

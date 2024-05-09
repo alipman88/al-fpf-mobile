@@ -47,7 +47,7 @@ describe('GovernmentInfoFields', () => {
     expect(wrapper.find(TextInput).length).toEqual(2)
 
     const wrapperOther = shallow(
-      <GovernmentInfoFields {...defaultProps} values={{ title: 'Other' }} />
+      <GovernmentInfoFields {...defaultProps} values={{ title: 'Other' }} />,
     )
     expect(wrapperOther.find(TextInput).length).toEqual(3)
   })

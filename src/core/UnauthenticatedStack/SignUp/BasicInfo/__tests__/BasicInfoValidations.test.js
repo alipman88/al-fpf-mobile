@@ -149,11 +149,11 @@ describe('BasicInfo validations', () => {
       const thisArg = { options: { context: {} } }
 
       await expect(
-        validateEmailAvailability.call(thisArg, email)
+        validateEmailAvailability.call(thisArg, email),
       ).resolves.toBe(true)
       await expect(validateEmailAvailability.call(thisArg, email)).toBe(true)
       await expect(
-        validateEmailAvailability.call(thisArg, email2)
+        validateEmailAvailability.call(thisArg, email2),
       ).resolves.toBe(true)
       await expect(validateEmailAvailability.call(thisArg, email2)).toBe(true)
 
@@ -164,7 +164,7 @@ describe('BasicInfo validations', () => {
         '/check_user_email_availability',
         {
           params: { email: email },
-        }
+        },
       )
 
       expect(api.get).toHaveBeenNthCalledWith(
@@ -172,7 +172,7 @@ describe('BasicInfo validations', () => {
         '/check_user_email_availability',
         {
           params: { email: email2 },
-        }
+        },
       )
 
       getSpy.mockRestore()

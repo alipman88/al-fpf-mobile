@@ -16,7 +16,7 @@ describe('ProfileTypeButton', () => {
 
   test('it shows a checkbox when active', () => {
     const wrapper = shallow(
-      <ProfileTypeButton {...defaultProps} active={true} />
+      <ProfileTypeButton {...defaultProps} active={true} />,
     )
     expect(wrapper.find(ProfileTypePill).first().props().image).toBeTruthy()
   })

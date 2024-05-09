@@ -17,7 +17,7 @@ export const searchAddress =
             state: values.state,
           },
         },
-        getState()
+        getState(),
       )
       onSuccess(response.data.areas, response.data.address)
     } catch (e) {

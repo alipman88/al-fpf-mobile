@@ -123,7 +123,7 @@ export class MapScreen extends React.Component {
           !checkedAreaKeys.reduce(
             (atleastOneChecked, areaChecked) =>
               atleastOneChecked || checkedAreas[areaChecked],
-            false
+            false,
           )
         }
         contentContainerStyle={{

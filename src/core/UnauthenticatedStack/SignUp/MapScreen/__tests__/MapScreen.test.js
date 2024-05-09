@@ -116,12 +116,12 @@ describe('MapScreen', () => {
 
   test('submit navigates to GovernmentInfo for government profile', () => {
     const wrapper = shallow(
-      <MapScreen {...defaultProps} profileType='government' />
+      <MapScreen {...defaultProps} profileType='government' />,
     )
     wrapper.setState({ checkedAreas: { 1: true, 2: true } })
     wrapper.find(FullScreenWizard).props().onNextPress()
     expect(defaultProps.navigation.navigate).toHaveBeenCalledWith(
-      'GovernmentInfo'
+      'GovernmentInfo',
     )
     expect(defaultProps.setNewUserByKey).toHaveBeenCalled()
   })
@@ -134,7 +134,7 @@ describe('MapScreen', () => {
         newUser={{}}
         setNewUserByKey={jest.fn()}
         route={{ ...defaultProps.route, params: twoAreas }}
-      />
+      />,
     )
 
     wrapper.setState({ checkedAreas: { 1: false, 2: false } })
@@ -157,7 +157,7 @@ describe('MapScreen', () => {
         newUser={{}}
         setNewUserByKey={jest.fn()}
         route={{ ...defaultProps.route, params: twoAreas }}
-      />
+      />,
     )
 
     expect(wrapper.state().modalOpen).toEqual(true)
@@ -175,7 +175,7 @@ describe('MapScreen', () => {
         newUser={{}}
         setNewUserByKey={jest.fn()}
         route={{ ...defaultProps.route, params: twoAreas }}
-      />
+      />,
     )
 
     wrapper.find(ForumDetails).first().props().onPress(true)

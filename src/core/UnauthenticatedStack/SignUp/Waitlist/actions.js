@@ -24,7 +24,7 @@ export const joinWaitlist = (values) => async (dispatch) => {
             'lastName',
             'organizationName',
             'webAddress',
-          ])
+          ]),
         ),
       },
     })

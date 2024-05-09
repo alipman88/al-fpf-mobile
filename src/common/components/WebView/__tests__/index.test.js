@@ -81,7 +81,7 @@ describe('WebView', () => {
       <WebView
         {...defaultProps}
         route={{ ...defaultProps.route, name: 'Search' }}
-      />
+      />,
     )
     screen.getByTestId('webView').props.onShouldStartLoadWithRequest({
       url: 'https://frontporchforum.com/search?query=foo',
@@ -114,7 +114,7 @@ describe('WebView', () => {
       <WebView
         {...defaultProps}
         route={{ ...defaultProps.route, name: 'Directory' }}
-      />
+      />,
     )
     screen.getByTestId('webView').props.onShouldStartLoadWithRequest({
       url: 'https://frontporchforum.com/directory',

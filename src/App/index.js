@@ -38,7 +38,7 @@ export class App extends React.Component {
   componentDidMount() {
     this.appStateListener = AppState.addEventListener(
       'change',
-      this.handleAppStateChange
+      this.handleAppStateChange,
     )
     this.netInfoUnsubscribe = NetInfo.addEventListener(this.setConnectedStatus)
 
@@ -51,7 +51,7 @@ export class App extends React.Component {
         this.purchaseUpdatedListener = RNIap.purchaseUpdatedListener(
           (purchase) => {
             store.dispatch(purchaseUpdated(purchase))
-          }
+          },
         )
         this.purchaseErrorListener = RNIap.purchaseErrorListener((error) => {
           store.dispatch(purchaseError(error))

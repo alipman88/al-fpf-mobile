@@ -33,7 +33,7 @@ try {
     '',
     new Configuration({
       enabled: false,
-    })
+    }),
   )
 }
 

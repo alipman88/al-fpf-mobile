@@ -7,7 +7,7 @@ export const sendNewFCMToken = (fcmToken) => async (dispatch, getState) => {
     {
       fcm_token: fcmToken,
     },
-    getState()
+    getState(),
   )
 
   dispatch(currentUser.actions.setFCMToken(fcmToken))

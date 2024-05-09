@@ -22,7 +22,7 @@ describe('WaitlistSuccess', () => {
     const wrapper = shallow(<WaitlistSuccess {...defaultProps} />)
     wrapper.find(Close).simulate('press')
     expect(defaultProps.navigation.dispatch).toHaveBeenCalledWith(
-      StackActions.replace('Login')
+      StackActions.replace('Login'),
     )
   })
 
@@ -30,7 +30,7 @@ describe('WaitlistSuccess', () => {
     const wrapper = shallow(<WaitlistSuccess {...defaultProps} />)
     wrapper.find(TouchableOpacity).simulate('press')
     expect(defaultProps.navigation.dispatch).toHaveBeenCalledWith(
-      StackActions.replace('Login')
+      StackActions.replace('Login'),
     )
   })
 

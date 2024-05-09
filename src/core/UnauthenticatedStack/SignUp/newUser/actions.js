@@ -16,8 +16,8 @@ export const postSignUp = (navigation) => async (dispatch, getState) => {
   } catch (e) {
     dispatch(
       appMessage.actions.setAppError(
-        get(e, 'response.data.errors.email[0]', e.message)
-      )
+        get(e, 'response.data.errors.email[0]', e.message),
+      ),
     )
   } finally {
     dispatch(newUser.actions.setLoading(false))

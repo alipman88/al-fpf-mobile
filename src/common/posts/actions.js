@@ -30,9 +30,8 @@ export const getContents =
     const postsByIssue = posts.selectors.getPostsByIssue(getState())
 
     if (!force && postsByIssue[issue.id]) {
-      const placementDateByIssue = posts.selectors.getPlacementDateByIssue(
-        getState()
-      )
+      const placementDateByIssue =
+        posts.selectors.getPlacementDateByIssue(getState())
       // If issue contents are cached but ad placement date is from a previous week,
       // fetch new ads before returning issue contents.
       if (
@@ -52,7 +51,7 @@ const getAllContents = (issue, navigation) => async (dispatch, getState) => {
     dispatch(posts.actions.setLoading(true))
     const response = await getAuthorized(
       `/areas/${issue.area_id}/issues/${issue.number}/contents`,
-      getState()
+      getState(),
     )
 
     const {
@@ -78,7 +77,7 @@ const getAllContents = (issue, navigation) => async (dispatch, getState) => {
         newsFromNeighboringNfs: news_from_neighboring_nfs,
         ocmMessage: ocm_message,
         forumMessage: forum_message,
-      })
+      }),
     )
   } catch (e) {
     dispatch(appMessage.actions.setAppError(responseError(e)))
@@ -94,7 +93,7 @@ const getAds = (issue, navigation) => async (dispatch, getState) => {
     dispatch(posts.actions.setLoading(true))
     const response = await getAuthorized(
       `/areas/${issue.area_id}/issues/${issue.number}/ads`,
-      getState()
+      getState(),
     )
 
     const { ads: adsData } = response.data
@@ -104,7 +103,7 @@ const getAds = (issue, navigation) => async (dispatch, getState) => {
         issueId: issue.id,
         ads: adsData,
         placementDate: endOfDay(new Date()),
-      })
+      }),
     )
   } catch (e) {
     if (e.response?.status === 401) {

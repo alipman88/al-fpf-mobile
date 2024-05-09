@@ -39,7 +39,7 @@ export const NeighboringContent = ({
                   news.area_id,
                   news.issue_id,
                   news.issue_number,
-                  navigation
+                  navigation,
                 )
               }
             >

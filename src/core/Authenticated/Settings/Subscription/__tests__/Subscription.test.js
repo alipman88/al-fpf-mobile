@@ -80,12 +80,12 @@ describe('Subscription', () => {
 
   test('has subscription renders information only', () => {
     const wrapper = shallow(
-      <Subscription {...{ ...defaultProps, hasSubscription: true }} />
+      <Subscription {...{ ...defaultProps, hasSubscription: true }} />,
     )
 
     expect(wrapper.find(Button).length).toEqual(0)
     expect(wrapper.find(Description).text()).toEqual(
-      'You are subscribed to the FPF free business plan.'
+      'You are subscribed to the FPF free business plan.',
     )
   })
 })

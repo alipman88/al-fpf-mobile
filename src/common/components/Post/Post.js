@@ -114,7 +114,7 @@ export class Post extends React.Component {
             post.area_id,
             post.issue_id,
             post.issue_number,
-            navigation
+            navigation,
           )
         }
       >
@@ -204,7 +204,7 @@ export class Post extends React.Component {
                         post.area_id,
                         post.issue_id,
                         post.issue_number,
-                        navigation
+                        navigation,
                       )
                     }
                   >

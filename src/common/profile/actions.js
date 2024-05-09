@@ -25,7 +25,7 @@ export const updateUser = (values) => async (dispatch, getState) => {
     const response = await api.putAuthorized(
       '/users',
       { user: values },
-      getState()
+      getState(),
     )
     dispatch(profile.actions.setUserProfile(response.data.user))
   } catch (e) {

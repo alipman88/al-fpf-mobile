@@ -26,7 +26,7 @@ describe('Success', () => {
     wrapper.find(TouchableOpacity).simulate('press')
 
     expect(defaultProps.navigateWithToken).toHaveBeenCalledWith(
-      '/user/submissions'
+      '/user/submissions',
     )
   })
 })
