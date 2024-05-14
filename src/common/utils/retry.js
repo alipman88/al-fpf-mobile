@@ -33,7 +33,7 @@ export const retry = (fn, delay = 500, maxDelay = 10000) => {
         _pause(delay).then(() => {
           delay = Math.min(delay * 2, maxDelay)
           _retry(delay)
-        })
+        }),
       )
     }
   }

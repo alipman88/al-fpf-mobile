@@ -36,7 +36,7 @@ describe('responseError', () => {
       },
     }
     expect(responseError(error)).toEqual(
-      'Front Porch Forum is temporarily down for maintenance'
+      'Front Porch Forum is temporarily down for maintenance',
     )
   })
 
@@ -46,7 +46,7 @@ describe('responseError', () => {
       status: 503,
     }
     expect(responseError(error)).toEqual(
-      'Front Porch Forum is currently unavailable'
+      'Front Porch Forum is currently unavailable',
     )
   })
 

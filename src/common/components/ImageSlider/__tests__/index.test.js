@@ -41,13 +41,13 @@ describe('ImageSlider', () => {
 
     const thumbnails = flatList.findAllByType(Image)
     expect(thumbnails[0].props.source.uri).toEqual(
-      'https://example.com/100/abc.jpg'
+      'https://example.com/100/abc.jpg',
     )
     expect(thumbnails[1].props.source.uri).toEqual(
-      'https://example.com/100/def.jpg'
+      'https://example.com/100/def.jpg',
     )
     expect(thumbnails[2].props.source.uri).toEqual(
-      'https://example.com/100/xyz.jpg'
+      'https://example.com/100/xyz.jpg',
     )
   })
 

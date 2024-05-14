@@ -11,7 +11,7 @@ describe('NeighboringContent', () => {
       <NeighboringContent
         fetchSpecificIssue={() => ({})}
         newsFromNeighboringNfs={[]}
-      />
+      />,
     )
 
     expect(wrapper.type()).toEqual(null)
@@ -41,7 +41,7 @@ describe('NeighboringContent', () => {
             additional_posts_count: 0,
           },
         ]}
-      />
+      />,
     )
 
     expect(wrapper.find(Row).length).toEqual(2)

@@ -33,7 +33,7 @@ describe('session actions', () => {
     })
 
     expect(dispatch).toHaveBeenCalledWith(
-      currentUser.actions.setAccessToken('token abc')
+      currentUser.actions.setAccessToken('token abc'),
     )
 
     expect(analytics().setAnalyticsCollectionEnabled).toHaveBeenCalledWith(true)
@@ -61,7 +61,7 @@ describe('session actions', () => {
         secured: {
           currentUser: { accessToken: 'abc123', fcmToken: 'fcm-123' },
         },
-      }
+      },
     )
 
     postSpy.mockRestore()

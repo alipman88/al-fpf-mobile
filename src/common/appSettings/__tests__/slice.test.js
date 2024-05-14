@@ -42,7 +42,7 @@ describe('appSettings - slice', () => {
               background: '#000000',
             },
           },
-        })
+        }),
       )
 
       let data = appSettings.selectors.getAppSettings({
@@ -97,7 +97,7 @@ describe('appSettings - slice', () => {
     test('sets loading state', () => {
       const state = appSettings.reducer(
         undefined,
-        appSettings.actions.setLoading(true)
+        appSettings.actions.setLoading(true),
       )
 
       const loading = appSettings.selectors.getLoading({
@@ -114,7 +114,7 @@ describe('appSettings - slice', () => {
     test('sets loaded state', () => {
       const state = appSettings.reducer(
         undefined,
-        appSettings.actions.setLoaded(true)
+        appSettings.actions.setLoaded(true),
       )
 
       const loaded = appSettings.selectors.getLoaded({

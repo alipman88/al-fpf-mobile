@@ -35,14 +35,14 @@ export const appMessage = createSlice({
 appMessage.selectors = {
   getMessage: createSelector(
     ['main.appMessage'],
-    (appMessage) => appMessage.message
+    (appMessage) => appMessage.message,
   ),
   getMessageType: createSelector(
     ['main.appMessage'],
-    (appMessage) => appMessage.type
+    (appMessage) => appMessage.type,
   ),
   getAutoHide: createSelector(
     ['main.appMessage'],
-    (appMessage) => appMessage.autoHide
+    (appMessage) => appMessage.autoHide,
   ),
 }

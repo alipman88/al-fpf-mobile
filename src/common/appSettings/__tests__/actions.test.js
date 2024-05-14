@@ -29,16 +29,16 @@ describe('appSettings - actions', () => {
 
       expect(getSpy).toHaveBeenCalledWith('/settings')
       expect(dispatch).toHaveBeenCalledWith(
-        appSettings.actions.setLoading(true)
+        appSettings.actions.setLoading(true),
       )
       expect(dispatch).toHaveBeenCalledWith(
-        appSettings.actions.setLoading(false)
+        appSettings.actions.setLoading(false),
       )
       expect(dispatch).toHaveBeenCalledWith(
         appSettings.actions.setAppSettings({
           posting_truncate_length: 500,
           categories: [{ id: 1 }],
-        })
+        }),
       )
       getSpy.mockRestore()
     })
@@ -55,7 +55,7 @@ describe('appSettings - actions', () => {
       expect(getSpy).toHaveBeenCalledWith('/settings')
 
       expect(dispatch).toHaveBeenCalledWith(
-        appMessage.actions.setAppError('boom')
+        appMessage.actions.setAppError('boom'),
       )
 
       getSpy.mockRestore()

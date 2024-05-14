@@ -26,7 +26,7 @@ import searchActive from '@assets/images/global-assets/main-navigation/search-ac
 import searchDefault from '@assets/images/global-assets/main-navigation/search-default.png'
 
 let headerBackgroundForEnv = ['development', 'staging'].includes(
-  Config.ENVIRONMENT
+  Config.ENVIRONMENT,
 )
   ? '#ffff00'
   : null

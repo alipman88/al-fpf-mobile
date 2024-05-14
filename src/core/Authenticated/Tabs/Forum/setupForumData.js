@@ -36,7 +36,7 @@ export const setupForumData =
             'approved, you will have access to your FPF(s). Please contact us ' +
             'as needed.',
           type: 'warning',
-        })
+        }),
       )
       dispatch(areas.actions.setHasAreaAccess(true))
     } else {

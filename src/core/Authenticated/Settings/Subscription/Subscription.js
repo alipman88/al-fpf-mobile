@@ -97,7 +97,7 @@ export class Subscription extends React.Component {
 
           {products
             .filter((product) =>
-              product.productId.startsWith(`${plan.tier}_${plan.plan_type}_`)
+              product.productId.startsWith(`${plan.tier}_${plan.plan_type}_`),
             )
             .map((product) => this.subscriptionButton(product))}
         </React.Fragment>

@@ -10,7 +10,7 @@ export const resendEmail = (email) => async (dispatch) => {
         message: 'Verification resent',
         type: 'success',
         autoHide: true,
-      })
+      }),
     )
   } catch (e) {
     dispatch(appMessage.actions.setAppError(responseError(e)))

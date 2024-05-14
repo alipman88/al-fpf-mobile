@@ -28,7 +28,7 @@ describe('TextInput', () => {
 
   test('touched && error renders the error text', () => {
     const wrapper = shallow(
-      <TextInput {...defaultProps} touched error='Some error' />
+      <TextInput {...defaultProps} touched error='Some error' />,
     )
 
     expect(wrapper.find(FormError).length).toEqual(1)
@@ -36,14 +36,14 @@ describe('TextInput', () => {
 
   test('it shows an Icon if theres a tapIcon', () => {
     const wrapper = shallow(
-      <TextInput {...defaultProps} tapIcon={<TestIcon />} />
+      <TextInput {...defaultProps} tapIcon={<TestIcon />} />,
     )
     expect(wrapper.find(TestIcon).length).toEqual(1)
   })
 
   test('callback called on Icon tap', () => {
     const wrapper = shallow(
-      <TextInput {...defaultProps} tapIcon={<TestIcon />} />
+      <TextInput {...defaultProps} tapIcon={<TestIcon />} />,
     )
     wrapper.find(TouchableWithoutFeedback).first().simulate('press')
     expect(defaultProps.onTapIcon).toBeCalled()

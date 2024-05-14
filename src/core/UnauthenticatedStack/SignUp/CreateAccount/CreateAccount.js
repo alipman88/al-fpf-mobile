@@ -71,7 +71,7 @@ export class CreateAccount extends React.Component {
           type: 'showAddressOnBusinessDirectory',
           value: true,
           text: 'Show my street address in my Directory listing',
-        }
+        },
       )
       this.setState({ options })
     }
@@ -81,7 +81,7 @@ export class CreateAccount extends React.Component {
     const { navigation, profileType, loading } = this.props
 
     const nextDisabled = !this.state.options.find(
-      (option) => option.type === 'termsOfUse'
+      (option) => option.type === 'termsOfUse',
     ).value
 
     const toggles = this.state.options.map(({ type, value, text }) => {

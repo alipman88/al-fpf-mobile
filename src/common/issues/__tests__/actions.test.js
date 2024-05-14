@@ -60,11 +60,11 @@ describe('issues actions', () => {
     expect(dispatch).toHaveBeenCalledWith(issues.actions.setLoading(true))
 
     expect(dispatch).toHaveBeenCalledWith(
-      issues.actions.setIssues({ issues: [{ id: 1 }], areaId: 1 })
+      issues.actions.setIssues({ issues: [{ id: 1 }], areaId: 1 }),
     )
 
     expect(dispatch).toHaveBeenCalledWith(
-      posts.actions.expire({ exceptIssueIds: [1] })
+      posts.actions.expire({ exceptIssueIds: [1] }),
     )
 
     expect(dispatch).toHaveBeenCalledWith(issues.actions.setLoading(false))
@@ -96,7 +96,7 @@ describe('issues actions', () => {
 
     expect(dispatch).toHaveBeenNthCalledWith(
       2,
-      issues.actions.setFirstLoadOfIssues()
+      issues.actions.setFirstLoadOfIssues(),
     )
 
     getSpy.mockRestore()
@@ -120,12 +120,12 @@ describe('issues actions', () => {
     })
 
     expect(dispatch).toHaveBeenCalledWith(
-      appMessage.actions.setAppError('boom')
+      appMessage.actions.setAppError('boom'),
     )
     expect(dispatch).toHaveBeenCalledWith(issues.actions.setLoading(false))
 
     expect(navigation.dispatch).toHaveBeenCalledWith(
-      StackActions.replace('Login')
+      StackActions.replace('Login'),
     )
 
     getSpy.mockRestore()
@@ -163,11 +163,11 @@ describe('issues actions', () => {
       expect(dispatch).toHaveBeenCalledWith(spinner.actions.setVisibility(true))
       expect(dispatch).toHaveBeenCalledWith(areas.actions.setCurrentAreaId(50))
       expect(dispatch).toHaveBeenCalledWith(
-        issues.actions.setCurrentIssueId(26)
+        issues.actions.setCurrentIssueId(26),
       )
       expect(navigate).toHaveBeenCalledWith('Forum')
       expect(dispatch).toHaveBeenCalledWith(
-        spinner.actions.setVisibility(false)
+        spinner.actions.setVisibility(false),
       )
 
       getSpy.mockRestore()
@@ -200,7 +200,7 @@ describe('issues actions', () => {
 
       const navigateWithTokenSpy = jest.spyOn(
         commonActions,
-        'navigateWithToken'
+        'navigateWithToken',
       )
 
       const navigate = jest.fn()
@@ -211,11 +211,11 @@ describe('issues actions', () => {
       expect(navigateWithTokenSpy).toHaveBeenCalledWith('/areas/50/issues/502')
       expect(dispatch).toHaveBeenCalledWith(areas.actions.setCurrentAreaId(35))
       expect(dispatch).not.toHaveBeenCalledWith(
-        issues.actions.setCurrentIssueId(26)
+        issues.actions.setCurrentIssueId(26),
       )
       expect(navigate).not.toHaveBeenCalledWith('Forum')
       expect(dispatch).toHaveBeenCalledWith(
-        spinner.actions.setVisibility(false)
+        spinner.actions.setVisibility(false),
       )
 
       getSpy.mockRestore()

@@ -1,9 +1,60 @@
 {
+  "identifier" : "6515E764",
+  "nonRenewingSubscriptions" : [
+
+  ],
   "products" : [
 
   ],
   "settings" : {
-
+    "_failTransactionsEnabled" : false,
+    "_storeKitErrors" : [
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ]
   },
   "subscriptionGroups" : [
     {
@@ -15,6 +66,9 @@
       "subscriptions" : [
         {
           "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
 
           ],
           "displayPrice" : "11.00",
@@ -39,6 +93,9 @@
           "adHocOffers" : [
 
           ],
+          "codeOffers" : [
+
+          ],
           "displayPrice" : "119.99",
           "familyShareable" : false,
           "groupNumber" : 1,
@@ -59,6 +116,9 @@
         },
         {
           "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
 
           ],
           "displayPrice" : "10.00",
@@ -83,6 +143,9 @@
           "adHocOffers" : [
 
           ],
+          "codeOffers" : [
+
+          ],
           "displayPrice" : "107.99",
           "familyShareable" : false,
           "groupNumber" : 1,
@@ -105,7 +168,7 @@
     }
   ],
   "version" : {
-    "major" : 1,
+    "major" : 3,
     "minor" : 0
   }
 }

@@ -31,7 +31,7 @@ describe('Address', () => {
       expect(setSubmitting).toHaveBeenCalledWith(true)
       expect(defaultProps.searchAddress).toHaveBeenCalledWith(
         { streetName: 'Main' },
-        expect.any(Function)
+        expect.any(Function),
       )
 
       const callback = defaultProps.searchAddress.mock.calls[0][1]
@@ -47,7 +47,7 @@ describe('Address', () => {
 
       expect(defaultProps.navigation.navigate).toHaveBeenCalledWith(
         'MapScreen',
-        { areas: [{ id: 1 }], address: { lat: '1', lng: '-1' } }
+        { areas: [{ id: 1 }], address: { lat: '1', lng: '-1' } },
       )
 
       expect(setSubmitting).toHaveBeenCalledWith(false)
@@ -63,7 +63,7 @@ describe('Address', () => {
 
       expect(defaultProps.searchAddress).toHaveBeenCalledWith(
         { streetName: 'Main' },
-        expect.any(Function)
+        expect.any(Function),
       )
 
       const callback = defaultProps.searchAddress.mock.calls[0][1]
@@ -88,7 +88,7 @@ describe('Address', () => {
 
       expect(defaultProps.searchAddress).toHaveBeenCalledWith(
         { streetName: 'Main' },
-        expect.any(Function)
+        expect.any(Function),
       )
 
       const callback = defaultProps.searchAddress.mock.calls[0][1]

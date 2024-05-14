@@ -16,11 +16,11 @@ describe('KeyboardOpen', () => {
     wrapper.instance().componentDidMount()
     expect(Keyboard.addListener).toHaveBeenCalledWith(
       'keyboardDidShow',
-      expect.any(Function)
+      expect.any(Function),
     )
     expect(Keyboard.addListener).toHaveBeenCalledWith(
       'keyboardDidHide',
-      expect.any(Function)
+      expect.any(Function),
     )
   })
 

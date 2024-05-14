@@ -117,7 +117,7 @@ issues.selectors = {
   ...issues.selectors,
   getFirstLoadIssues: createSelector(
     [path],
-    (issues) => issues.firstLoadOfIssues
+    (issues) => issues.firstLoadOfIssues,
   ),
   /**
    * Returns a hash of area ids to arrays of issue hashes.
@@ -128,8 +128,8 @@ issues.selectors = {
    */
   getIssueIds: createSelector([path], (issues) =>
     Object.values(issues.issuesByAreaId).flatMap((issuesForArea) =>
-      issuesForArea.map((issue) => issue.id)
-    )
+      issuesForArea.map((issue) => issue.id),
+    ),
   ),
   getCurrentIssueId: createSelector([path], (issues) => issues.currentIssueId),
   getLoading: createSelector([path], (issues) => issues.loading),

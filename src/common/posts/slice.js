@@ -94,11 +94,11 @@ export const posts = createSlice({
         headlinesByIssue: omitExpiredIssues(state.headlinesByIssue),
         adsByIssue: omitExpiredIssues(state.adsByIssue),
         featuredAdCampaignsByIssue: omitExpiredIssues(
-          state.featuredAdCampaignsByIssue
+          state.featuredAdCampaignsByIssue,
         ),
         placementDateByIssue: omitExpiredIssues(state.placementDateByIssue),
         newsFromNeighboringNfsByIssue: omitExpiredIssues(
-          state.newsFromNeighboringNfsByIssue
+          state.newsFromNeighboringNfsByIssue,
         ),
         ocmMessageByIssue: omitExpiredIssues(state.ocmMessageByIssue),
         forumMessageByIssue: omitExpiredIssues(state.forumMessageByIssue),
@@ -119,32 +119,32 @@ posts.selectors = {
   getPostsByIssue: createSelector([path], (posts) => posts.postsByIssue),
   getSharedPostsByIssue: createSelector(
     [path],
-    (posts) => posts.sharedPostsByIssue
+    (posts) => posts.sharedPostsByIssue,
   ),
   getHeadlinesByIssue: createSelector(
     [path],
-    (posts) => posts.headlinesByIssue
+    (posts) => posts.headlinesByIssue,
   ),
   getAdsByIssue: createSelector([path], (posts) => posts.adsByIssue),
   getFeaturedAdCampaignsByIssue: createSelector(
     [path],
-    (posts) => posts.featuredAdCampaignsByIssue || {}
+    (posts) => posts.featuredAdCampaignsByIssue || {},
   ),
   getPlacementDateByIssue: createSelector(
     [path],
-    (posts) => posts.placementDateByIssue
+    (posts) => posts.placementDateByIssue,
   ),
   getLoading: createSelector([path], (posts) => posts.loading),
   getNewsFromNeighboringNfsByIssue: createSelector(
     [path],
-    (posts) => posts.newsFromNeighboringNfsByIssue || {}
+    (posts) => posts.newsFromNeighboringNfsByIssue || {},
   ),
   getOcmMessageByIssue: createSelector(
     [path],
-    (posts) => posts.ocmMessageByIssue || {}
+    (posts) => posts.ocmMessageByIssue || {},
   ),
   getForumMessageByIssue: createSelector(
     [path],
-    (posts) => posts.forumMessageByIssue || {}
+    (posts) => posts.forumMessageByIssue || {},
   ),
 }

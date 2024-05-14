@@ -26,7 +26,7 @@ describe('posts - slice', () => {
           main: {
             posts: state,
           },
-        })
+        }),
       ).toEqual(true)
     })
 
@@ -51,7 +51,7 @@ describe('posts - slice', () => {
               area_name: 'Other Area',
             },
           ],
-        })
+        }),
       )
 
       let data = posts.selectors.getPostsByIssue({
@@ -100,7 +100,7 @@ describe('posts - slice', () => {
           main: {
             posts: state,
           },
-        })
+        }),
       ).toEqual(false)
     })
   })
@@ -114,7 +114,7 @@ describe('posts - slice', () => {
           main: {
             posts: state,
           },
-        })
+        }),
       ).toEqual(true)
     })
 
@@ -133,7 +133,7 @@ describe('posts - slice', () => {
               id: 2,
             },
           ],
-        })
+        }),
       )
 
       let data = posts.selectors.getAdsByIssue({
@@ -158,7 +158,7 @@ describe('posts - slice', () => {
           main: {
             posts: state,
           },
-        })
+        }),
       ).toEqual(false)
     })
   })
@@ -180,7 +180,7 @@ describe('posts - slice', () => {
 
       state = posts.reducer(
         state,
-        posts.actions.expire({ exceptIssueIds: [2] })
+        posts.actions.expire({ exceptIssueIds: [2] }),
       )
 
       expect(state).toEqual({

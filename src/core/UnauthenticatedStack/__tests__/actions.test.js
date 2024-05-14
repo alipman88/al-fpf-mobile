@@ -19,7 +19,7 @@ describe('EmailVerification - actions', () => {
           type: 'success',
           message: 'Verification resent',
           autoHide: true,
-        })
+        }),
       )
 
       post.mockRestore()
@@ -38,7 +38,7 @@ describe('EmailVerification - actions', () => {
       })
 
       expect(dispatch).toHaveBeenCalledWith(
-        appMessage.actions.setAppError('boom')
+        appMessage.actions.setAppError('boom'),
       )
 
       post.mockRestore()

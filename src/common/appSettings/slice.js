@@ -46,12 +46,12 @@ appSettings.selectors = {
 
   getAreaIdsBySlug: createSelector(
     [path],
-    (appSettings) => appSettings.areaIdsBySlug
+    (appSettings) => appSettings.areaIdsBySlug,
   ),
 
   getCategories: createSelector(
     [path],
-    (appSettings) => appSettings.categories
+    (appSettings) => appSettings.categories,
   ),
 
   getBusinessCategories: createSelector([path], (appSettings) =>
@@ -63,32 +63,32 @@ appSettings.selectors = {
           return { name: item[0], id: item[1] }
         }),
       }
-    })
+    }),
   ),
 
   getLabelStyles: createSelector(
     [path],
-    (appSettings) => appSettings.labelStyles
+    (appSettings) => appSettings.labelStyles,
   ),
 
   getGovernmentTitles: createSelector(
     [path],
-    (appSettings) => appSettings.governmentTitles
+    (appSettings) => appSettings.governmentTitles,
   ),
 
   getProfilePlans: createSelector(
     [path],
-    (appSettings) => appSettings.onboardingProfilePlans
+    (appSettings) => appSettings.onboardingProfilePlans,
   ),
 
   getForumPostTruncateLength: createSelector(
     [path],
-    (appSettings) => appSettings.forumPostTruncateLength
+    (appSettings) => appSettings.forumPostTruncateLength,
   ),
 
   getSearchPostTruncateLength: createSelector(
     [path],
-    (appSettings) => appSettings.searchPostTruncateLength
+    (appSettings) => appSettings.searchPostTruncateLength,
   ),
 
   getLoading: createSelector(['main.appSettings'], ({ loading }) => loading),

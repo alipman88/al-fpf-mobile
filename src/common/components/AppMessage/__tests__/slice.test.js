@@ -17,7 +17,7 @@ describe('appMessage slice', () => {
       main: {
         appMessage: appMessage.reducer(
           undefined,
-          appMessage.actions.setAppError('Boom')
+          appMessage.actions.setAppError('Boom'),
         ),
       },
     }
@@ -34,12 +34,12 @@ describe('appMessage slice', () => {
           appMessage.actions.setAppError({
             title: 'Needs a title',
             content: 'needs content',
-          })
+          }),
         ),
       },
     }
     expect(appMessage.selectors.getMessage(state)).toEqual(
-      'Needs a title, needs content'
+      'Needs a title, needs content',
     )
     expect(appMessage.selectors.getMessageType(state)).toEqual('danger')
     expect(appMessage.selectors.getAutoHide(state)).toEqual(undefined)
@@ -53,12 +53,12 @@ describe('appMessage slice', () => {
         main: {
           appMessage: appMessage.reducer(
             message,
-            appMessage.actions.setAppError(null)
+            appMessage.actions.setAppError(null),
           ),
         },
       }
       expect(appMessage.selectors.getMessage(state)).toEqual(
-        'An error occurred'
+        'An error occurred',
       )
       expect(appMessage.selectors.getMessageType(state)).toEqual('danger')
       expect(appMessage.selectors.getAutoHide(state)).toEqual(undefined)
@@ -74,7 +74,7 @@ describe('appMessage slice', () => {
             message: 'Done!',
             type: 'success',
             autoHide: true,
-          })
+          }),
         ),
       },
     }
