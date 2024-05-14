@@ -5,7 +5,7 @@
 - iOS 13 - 17
 - Android 8 - 14 (API 26 - 34) -- see `android/build.gradle`
 
-(Last updated 4/20/23)
+(Last updated 5/14/24)
 
 ## Setup
 
