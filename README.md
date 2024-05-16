@@ -214,9 +214,11 @@ yarn android
         git tag -a v1.2.3 -m "1.2.3 release"
         git push --tags
 
-10. Update the Pivotal Tracker release story's release date and finish the release
-11. Add the `released` label to stories in Pivotal Tracker that have the released version's label
-12. Post release notes to Slack
+10. Move all the issues with the current version tag into the `Released` status
+11. Update the [release notes google doc](https://docs.google.com/document/d/1lPN1-SK39X_PIaMrJmF0BbjYv6cCirBEdBiwAa2fcfg/edit)
+    to set the current date and move the "Releases" header above the now-released notes,
+    then create a new subheader for the next release under the "Upcoming" header
+12. Post the release notes doc link the Slack #general channel
 
 Stores:
 - [iOS App Store](https://apps.apple.com/us/app/front-porch-forum/id1458651656)
