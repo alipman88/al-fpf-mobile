@@ -1,5 +1,3 @@
-import analytics from '@react-native-firebase/analytics'
-
 import * as api from '@common/api'
 import { currentUser } from '@common/currentUser'
 import { login, sendDeviceData } from '../actions'
@@ -35,8 +33,6 @@ describe('session actions', () => {
     expect(dispatch).toHaveBeenCalledWith(
       currentUser.actions.setAccessToken('token abc'),
     )
-
-    expect(analytics().setAnalyticsCollectionEnabled).toHaveBeenCalledWith(true)
 
     postSpy.mockRestore()
   })

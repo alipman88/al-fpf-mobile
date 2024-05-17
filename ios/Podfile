@@ -28,12 +28,6 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
-# FPF addition -- Firebase
-$RNFirebaseAsStaticFramework = true
-# Use analytics without ad ids to avoid App Tracking Transparency issue
-$RNFirebaseAnalyticsWithoutAdIdSupport=true
-pod 'Firebase/AnalyticsWithoutAdIdSupport'
-
 target 'FrontPorchForum' do
   config = use_native_modules!
 
