@@ -266,7 +266,7 @@ export class Post extends React.Component {
           )}
           {Boolean(post.event.url) && (
             <PostLocation>
-              <TextSemibold>Join online:</TextSemibold>{' '}
+              <TextSemibold>URL:</TextSemibold>{' '}
               <PostUrl onPress={() => Linking.openURL(post.event.url)}>
                 {post.event.url}
               </PostUrl>

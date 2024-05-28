@@ -205,7 +205,7 @@ describe('Post', () => {
     }
     const wrapper2 = shallow(<Post {...props2} />)
     expect(wrapper2.find(PostLocation).text()).toEqual(
-      'Join online: https://zoom.us/j/0123456789',
+      'URL: https://zoom.us/j/0123456789',
     )
 
     const props3 = {
@@ -223,7 +223,7 @@ describe('Post', () => {
       'Where: 8 Main Street',
     )
     expect(wrapper3.find(PostLocation).last().text()).toEqual(
-      'Join online: https://zoom.us/j/0123456789',
+      'URL: https://zoom.us/j/0123456789',
     )
   })
 
