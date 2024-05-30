@@ -31,7 +31,7 @@ export const LoginComponent = ({ navigation, login, resendEmail }) => {
       <LinksContainer>
         <ResetPasswordContainer>
           <TouchableOpacity
-            onPress={() => openFpfUrl(`${Config.WEBSITE_HOST}/passwords/new}`)}
+            onPress={() => openFpfUrl(`${Config.WEBSITE_HOST}/passwords/new`)}
           >
             <BottomText>Forgot Password</BottomText>
           </TouchableOpacity>
