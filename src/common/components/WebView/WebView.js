@@ -175,6 +175,10 @@ export const WebView = (props) => {
         applicationNameForUserAgent={`FpfMobileApp/802.${DeviceInfo.getVersion()}`}
         startInLoadingState={true}
         scalesPageToFit={false}
+        basicAuthCredential={{
+          username: 'staging',
+          password: Config.BASIC_AUTH_PASSWORD,
+        }}
         setBuiltInZoomControls={false}
         renderLoading={() => <Spinner visible={true} />}
         onError={() => setShowError(true)}
