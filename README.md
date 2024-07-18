@@ -89,6 +89,7 @@ cd ios ; pod install ; cd ..
 
 Copy `.env.example` as `.env` and populate it with values for:
 - `API_KEY`
+- `BASIC_AUTH_PASSWORD`
 - `GOOGLE_MAPS_API_KEY`
 - `ROLLBAR_API_KEY`
 - `LOCAL_DEVICE_DEV_API_HOST` and `LOCAL_DEVICE_DEV_WEBSITE_HOST` for testing
@@ -264,6 +265,7 @@ sure to lock any variables that store sensitive data.
 
 - `API_HOST`: URL for FPF API, e.g. https://frontporchforum.com/api/v1
 - `API_KEY`: FPF key, currently stored in `FPF_API_KEY` env var
+- `BASIC_AUTH_PASSWORD`: staging-only basic auth password (see 1Password)
 - `BUILD_PLATFORM`: React platform, e.g. "ios" or "android"
 - `ENVIRONMENT`: Rails environment name, e.g. "production"
 - `GOOGLE_MAPS_API_KEY`: "mobile embed maps API key" credential configured for the
@@ -287,6 +289,7 @@ to optionally connected to the production and staging2 stacks.
 - `PRODUCTION_WEBSITE_HOST`
 - `STAGING2_API_HOST`
 - `STAGING2_API_KEY`
+- `STAGING2_BASIC_AUTH_PASSWORD`
 - `STAGING2_ENVIRONMENT`
 - `STAGING2_GOOGLE_MAPS_API_KEY`
 - `STAGING2_ROLLBAR_API_KEY`

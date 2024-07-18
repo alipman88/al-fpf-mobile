@@ -2,6 +2,7 @@
 
 echo "API_HOST=$API_HOST" > .env
 echo "API_KEY=$API_KEY" >> .env
+echo "BASIC_AUTH_PASSWORD=$BASIC_AUTH_PASSWORD" >> .env
 echo "ENVIRONMENT=$ENVIRONMENT" >> .env
 echo "GOOGLE_MAPS_API_KEY=$GOOGLE_MAPS_API_KEY" >> .env
 echo "ROLLBAR_API_KEY=$ROLLBAR_API_KEY" >> .env
@@ -37,6 +38,10 @@ fi
 
 if [[ -n $STAGING2_API_KEY ]] ; then
   echo "STAGING2_API_KEY=$STAGING2_API_KEY" >> .env
+fi
+
+if [[ -n $STAGING2_BASIC_AUTH_PASSWORD ]] ; then
+  echo "STAGING2_BASIC_AUTH_PASSWORD=$STAGING2_BASIC_AUTH_PASSWORD" >> .env
 fi
 
 if [[ -n $STAGING2_ENVIRONMENT ]] ; then
