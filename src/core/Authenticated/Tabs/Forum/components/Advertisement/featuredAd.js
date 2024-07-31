@@ -33,7 +33,9 @@ export const FeaturedAd = ({ ad, navigateWithToken }) => (
           </Text>
         )}
 
-        <PostCategory labelStyle={'dark_grey'}>Featured Ad</PostCategory>
+        <TouchableOpacity onPress={() => openFpfUrl(ad.url)}>
+          <PostCategory labelStyle={'primary'}>Learn More</PostCategory>
+        </TouchableOpacity>
       </View>
     </CardContent>
   </Card>
