@@ -114,6 +114,7 @@ export class BasicInfoFields extends React.Component {
               <PasswordInput
                 inputRef={this.passwordInput}
                 error={errors.password}
+                autoComplete='new-password'
                 label='Password'
                 touched={!!touched.password}
                 onBlur={() => setFieldTouched('password')}
@@ -134,6 +135,7 @@ export class BasicInfoFields extends React.Component {
               <PasswordInput
                 inputRef={this.passwordConfirmationInput}
                 error={errors.passwordConfirmation}
+                autoComplete='new-password'
                 label='Confirm password'
                 touched={!!touched.passwordConfirmation}
                 onBlur={() => setFieldTouched('passwordConfirmation')}

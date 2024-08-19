@@ -19,11 +19,12 @@ export class PasswordInput extends React.Component {
     })
   }
   render() {
-    const { label, ...other } = this.props
+    const { autoComplete, label, ...other } = this.props
 
     return (
       <TextInput
         {...other}
+        autoComplete={autoComplete || 'current-password'}
         label={label || 'Password'}
         tapIcon={
           <Icon
@@ -35,14 +36,13 @@ export class PasswordInput extends React.Component {
         secureTextEntry={!this.state.showPassword}
         onTapIcon={() => this.toggleShowPassword()}
         autoCapitalize='none'
-        autoCompleteType='password'
         autoCorrect={false}
-        textContentType='newPassword'
       />
     )
   }
 }
 
 PasswordInput.propTypes = {
+  autoComplete: PropTypes.string,
   label: PropTypes.string,
 }
