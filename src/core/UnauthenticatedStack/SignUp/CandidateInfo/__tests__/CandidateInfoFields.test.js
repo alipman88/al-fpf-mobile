@@ -16,7 +16,6 @@ describe('CandidateInfoFields', () => {
       name: '',
       title: '',
       jurisdiction: '',
-      notes: '',
     },
   }
 
@@ -45,13 +44,5 @@ describe('CandidateInfoFields', () => {
 
     wrapper.find(TextInput).at(2).simulate('changeText', 'hi')
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('jurisdiction')
-  })
-
-  test('changing tell us more calls handlers', () => {
-    const wrapper = shallow(<CandidateInfoFields {...defaultProps} />)
-
-    wrapper.find(TextInput).at(3).simulate('changeText', 'hi')
-    expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('notes')
-    expect(defaultProps.setFieldValue).toHaveBeenCalledWith('notes', 'hi')
   })
 })

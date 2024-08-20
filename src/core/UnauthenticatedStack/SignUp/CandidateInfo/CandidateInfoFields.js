@@ -75,19 +75,6 @@ export const CandidateInfoFields = ({
           placeholder='Town(s), district, county, etc. covered by this office'
         />
       </FieldWrapper>
-      <FieldWrapper>
-        <TextInput
-          error={errors.notes}
-          label='Tell us more'
-          onChangeText={(value) => {
-            setFieldTouched('notes')
-            setFieldValue('notes', value)
-          }}
-          multiline
-          touched={!!touched.notes}
-          value={values.notes}
-        />
-      </FieldWrapper>
     </Container>
   </FullScreenWizard>
 )

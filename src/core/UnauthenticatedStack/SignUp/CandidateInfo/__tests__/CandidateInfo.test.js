@@ -15,7 +15,6 @@ describe('CandidateInfo', () => {
         name: 'Someone for Mayor',
         title: 'Mayor',
         jurisdiction: 'Somewhere',
-        notes: '',
       },
     },
     profileType: 'candidate',
