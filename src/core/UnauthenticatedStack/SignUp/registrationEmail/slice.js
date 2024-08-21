@@ -26,6 +26,6 @@ registrationEmail.selectors = {
   ...registrationEmail.selectors,
   getRegistrationEmail: createSelector(
     [path],
-    (registrationEmail) => registrationEmail.email
+    (registrationEmail) => registrationEmail.email,
   ),
 }

@@ -2,10 +2,10 @@
 
 ## OS Support
 
-- iOS 12 - 16
-- Android 8 - 13 (API 26 - 33) -- see `android/build.gradle`
+- iOS 13 - 17
+- Android 8 - 14 (API 26 - 34) -- see `android/build.gradle`
 
-(Last updated 4/20/23)
+(Last updated 5/14/24)
 
 ## Setup
 
@@ -23,17 +23,21 @@ For more information, see https://reactnative.dev/docs/environment-setup.
 
 Install [Android Studio](https://developer.android.com/studio).
 
-Install OpenJDK 11:
+Install OpenJDK 17:
 
 ```
 brew tap homebrew/cask-versions
-brew install --cask zulu11
+brew install --cask zulu17
 ```
 
-Launch Android studio, and install the latest SDK version & SDK Tools.  See
-`android/build.gradle` for the currently supported SDK versions.
+Launch Android studio. When asked to open a project, open fpf-mobile/android
+(not the project's root directory) – this enables Android Studio's built-in tools (like
+the Logcat debugger) to function.
 
-Ensure JDK 11 is used if running the app from within Android Studio:
+Install the latest SDK version & SDK Tools.  See `android/build.gradle` for the
+currently supported SDK versions.
+
+Ensure JDK 17 is used if running the app from within Android Studio:
 Android Studio > Preferences > Build, Execution, Deployment > Build Tools > Gradle > Gradle JDK
 
 Add to your `.bash_profile` or `.bashrc`:
@@ -42,6 +46,15 @@ export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
 export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
 ```
+
+#### Troubleshooting Android Java runtime errors
+
+Most Java errors will be encountered during compilation, and come with fairly
+descriptive messages. Runtime errors are trickier to trace – typically the app
+just crashes.
+
+To view Java logs, open Android studio, and from your operating system's menu
+bar, select "View" > "Tool Windows" > "Logcat".
 
 ### Tools
 
@@ -76,6 +89,7 @@ cd ios ; pod install ; cd ..
 
 Copy `.env.example` as `.env` and populate it with values for:
 - `API_KEY`
+- `BASIC_AUTH_PASSWORD`
 - `GOOGLE_MAPS_API_KEY`
 - `ROLLBAR_API_KEY`
 - `LOCAL_DEVICE_DEV_API_HOST` and `LOCAL_DEVICE_DEV_WEBSITE_HOST` for testing
@@ -201,9 +215,11 @@ yarn android
         git tag -a v1.2.3 -m "1.2.3 release"
         git push --tags
 
-10. Update the Pivotal Tracker release story's release date and finish the release
-11. Add the `released` label to stories in Pivotal Tracker that have the released version's label
-12. Post release notes to Slack
+10. Move all the issues with the current version tag into the `Released` status
+11. Update the [release notes google doc](https://docs.google.com/document/d/1lPN1-SK39X_PIaMrJmF0BbjYv6cCirBEdBiwAa2fcfg/edit)
+    to set the current date and move the "Releases" header above the now-released notes,
+    then create a new subheader for the next release under the "Upcoming" header
+12. Post the release notes doc link the Slack #general channel
 
 Stores:
 - [iOS App Store](https://apps.apple.com/us/app/front-porch-forum/id1458651656)
@@ -249,6 +265,7 @@ sure to lock any variables that store sensitive data.
 
 - `API_HOST`: URL for FPF API, e.g. https://frontporchforum.com/api/v1
 - `API_KEY`: FPF key, currently stored in `FPF_API_KEY` env var
+- `BASIC_AUTH_PASSWORD`: staging-only basic auth password (see 1Password)
 - `BUILD_PLATFORM`: React platform, e.g. "ios" or "android"
 - `ENVIRONMENT`: Rails environment name, e.g. "production"
 - `GOOGLE_MAPS_API_KEY`: "mobile embed maps API key" credential configured for the
@@ -272,6 +289,7 @@ to optionally connected to the production and staging2 stacks.
 - `PRODUCTION_WEBSITE_HOST`
 - `STAGING2_API_HOST`
 - `STAGING2_API_KEY`
+- `STAGING2_BASIC_AUTH_PASSWORD`
 - `STAGING2_ENVIRONMENT`
 - `STAGING2_GOOGLE_MAPS_API_KEY`
 - `STAGING2_ROLLBAR_API_KEY`

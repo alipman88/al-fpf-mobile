@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react-native'
 
-import { WebView } from '@components/WebView'
+import { WebView } from '../WebView'
 
 describe('WebView', () => {
   const setState = jest.fn()
@@ -12,6 +12,7 @@ describe('WebView', () => {
   const setOptions = jest.fn()
 
   const defaultProps = {
+    areaIdsBySlug: {},
     navigation: { navigate, setOptions },
     route: { name: 'foo' },
     source: {
@@ -22,6 +23,32 @@ describe('WebView', () => {
   afterEach(() => {
     navigate.mockReset()
     setOptions.mockReset()
+  })
+
+  test('WebView forum requests are intercepted', () => {
+    render(<WebView {...defaultProps} />)
+    screen.getByTestId('webView').props.onShouldStartLoadWithRequest({
+      url: 'https://frontporchforum.com/1/forum/archive/123',
+    })
+
+    expect(navigate).toHaveBeenCalledWith('Forum', {
+      areaId: 1,
+      issueNum: 123,
+    })
+  })
+
+  test('WebView forum requests with area slugs are intercepted', () => {
+    const props = { ...defaultProps, areaIdsBySlug: { foo: 5 } }
+    render(<WebView {...props} />)
+    screen.getByTestId('webView').props.onShouldStartLoadWithRequest({
+      url: 'https://frontporchforum.com/foo/forum/archive/123',
+    })
+
+    expect(navigate).toHaveBeenCalledWith('Forum', {
+      areaId: 5,
+      areaSlug: 'foo',
+      issueNum: 123,
+    })
   })
 
   test('WebView compose post requests are intercepted', () => {
@@ -54,7 +81,7 @@ describe('WebView', () => {
       <WebView
         {...defaultProps}
         route={{ ...defaultProps.route, name: 'Search' }}
-      />
+      />,
     )
     screen.getByTestId('webView').props.onShouldStartLoadWithRequest({
       url: 'https://frontporchforum.com/search?query=foo',
@@ -87,7 +114,7 @@ describe('WebView', () => {
       <WebView
         {...defaultProps}
         route={{ ...defaultProps.route, name: 'Directory' }}
-      />
+      />,
     )
     screen.getByTestId('webView').props.onShouldStartLoadWithRequest({
       url: 'https://frontporchforum.com/directory',

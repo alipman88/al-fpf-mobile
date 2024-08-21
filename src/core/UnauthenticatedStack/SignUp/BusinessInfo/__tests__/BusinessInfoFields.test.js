@@ -53,7 +53,7 @@ describe('BusinessInfoFields', () => {
 
     expect(defaultProps.setFieldValue).toHaveBeenCalledWith(
       'name',
-      'Legitimate Business'
+      'Legitimate Business',
     )
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('name')
   })
@@ -72,7 +72,7 @@ describe('BusinessInfoFields', () => {
         {...defaultProps}
         values={inputValues}
         touched={{ name: true }}
-      />
+      />,
     )
 
     wrapper.find(FullScreenWizard).first().props().onNextPress()
@@ -86,7 +86,7 @@ describe('BusinessInfoFields', () => {
   test('Continue button is disabled unless required fields are filled', () => {
     const wrapper = shallow(<BusinessInfoFields {...defaultProps} />)
     expect(wrapper.find(FullScreenWizard).first().props().nextDisabled).toEqual(
-      true
+      true,
     )
   })
 
@@ -97,10 +97,10 @@ describe('BusinessInfoFields', () => {
     }
 
     const wrapper = shallow(
-      <BusinessInfoFields {...defaultProps} touched={touched} />
+      <BusinessInfoFields {...defaultProps} touched={touched} />,
     )
     expect(wrapper.find(FullScreenWizard).first().props().nextDisabled).toEqual(
-      false
+      false,
     )
   })
 
@@ -110,11 +110,11 @@ describe('BusinessInfoFields', () => {
     }
 
     const wrapper = shallow(
-      <BusinessInfoFields {...defaultProps} errors={errors} />
+      <BusinessInfoFields {...defaultProps} errors={errors} />,
     )
 
     expect(wrapper.find(FullScreenWizard).first().props().nextDisabled).toEqual(
-      true
+      true,
     )
   })
 })

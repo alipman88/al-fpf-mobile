@@ -61,7 +61,7 @@ describe('ProfileTypes', () => {
       <ProfileTypes
         {...defaultProps}
         newUser={{ profileType: profileTypes.NEIGHBOR }}
-      />
+      />,
     )
     wrapper.find(FullScreenWizard).props().onNextPress()
     expect(defaultProps.navigation.navigate).toHaveBeenCalledWith('BasicInfo')
@@ -72,7 +72,7 @@ describe('ProfileTypes', () => {
       <ProfileTypes
         {...defaultProps}
         newUser={{ profileType: profileTypes.BUSINESS }}
-      />
+      />,
     )
     wrapper.find(FullScreenWizard).props().onNextPress()
     expect(defaultProps.navigation.navigate).toHaveBeenCalledWith('BasicInfo')
@@ -83,7 +83,7 @@ describe('ProfileTypes', () => {
       <ProfileTypes
         {...defaultProps}
         newUser={{ profileType: profileTypes.NONPROFIT }}
-      />
+      />,
     )
     wrapper.find(FullScreenWizard).props().onNextPress()
     expect(defaultProps.navigation.navigate).toHaveBeenCalledWith('BasicInfo')
@@ -94,7 +94,7 @@ describe('ProfileTypes', () => {
       <ProfileTypes
         {...defaultProps}
         newUser={{ profileType: profileTypes.GOVERNMENT }}
-      />
+      />,
     )
     wrapper.find(FullScreenWizard).props().onNextPress()
     expect(defaultProps.navigation.navigate).toHaveBeenCalledWith('BasicInfo')

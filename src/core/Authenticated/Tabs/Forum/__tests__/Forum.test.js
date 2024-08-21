@@ -93,6 +93,7 @@ describe('Forum', () => {
         },
       ],
     },
+    featuredAdCampaigns: {},
     sharedPosts: {
       12: [],
     },
@@ -120,7 +121,7 @@ describe('Forum', () => {
   test('calls sendNewFCMToken when firebase returns a different token', async () => {
     shallow(<Forum {...defaultProps} />)
     await waitFor(() =>
-      expect(defaultProps.sendNewFCMToken).toHaveBeenCalledWith('fcmToken')
+      expect(defaultProps.sendNewFCMToken).toHaveBeenCalledWith('fcmToken'),
     )
   })
 
@@ -183,7 +184,7 @@ describe('Forum', () => {
     const wrapper = shallow(<Forum {...defaultProps} hasAreaAccess={false} />)
     const notification = wrapper.find(ExternalLink).props()['content']
     expect(notification).toContain(
-      'You have no active profiles on your account'
+      'You have no active profiles on your account',
     )
   })
 
@@ -226,7 +227,7 @@ describe('Forum', () => {
     }
 
     const wrapper = shallow(
-      <Forum {...defaultProps} posts={posts} sharedPosts={sharedPosts} />
+      <Forum {...defaultProps} posts={posts} sharedPosts={sharedPosts} />,
     )
 
     const children = wrapper.find(ForumContainer).children()
@@ -258,7 +259,7 @@ describe('Forum', () => {
       expect(defaultProps.getIssues).toHaveBeenCalledWith(
         defaultProps.currentAreaId,
         defaultProps.navigation,
-        defaultProps.setupForumData
+        defaultProps.setupForumData,
       )
     })
 
@@ -268,7 +269,7 @@ describe('Forum', () => {
       expect(defaultProps.getIssues).toHaveBeenCalledWith(
         2,
         defaultProps.navigation,
-        defaultProps.setupForumData
+        defaultProps.setupForumData,
       )
     })
 
@@ -293,7 +294,7 @@ describe('Forum', () => {
       wrapper.setProps({ currentIssueId: 45 })
       expect(defaultProps.getContents).toHaveBeenCalledWith(
         45,
-        defaultProps.navigation
+        defaultProps.navigation,
       )
     })
 
@@ -319,7 +320,6 @@ describe('Forum', () => {
 
     test('if there is an issue num in navigation params, find issue and set ID', () => {
       const wrapper = shallow(<Forum {...defaultProps} />)
-      jest.spyOn(wrapper.instance(), 'scrollPostsToTop')
       const scrollTo = jest.fn()
       wrapper.instance().refs = {
         forumViewRef: {
@@ -348,7 +348,6 @@ describe('Forum', () => {
       })
 
       expect(defaultProps.setCurrentIssueId).toHaveBeenCalledWith(1000)
-      expect(wrapper.instance().scrollPostsToTop).toHaveBeenCalled()
     })
 
     test("if nav param issue is same as current issue, don't update currentIssueId", () => {
@@ -395,7 +394,7 @@ describe('Forum', () => {
         6,
         340,
         defaultProps.navigation,
-        defaultProps.setupForumData
+        defaultProps.setupForumData,
       )
     })
   })

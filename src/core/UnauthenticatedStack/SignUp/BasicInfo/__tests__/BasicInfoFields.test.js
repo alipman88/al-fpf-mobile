@@ -57,7 +57,7 @@ describe('BasicInfoFields', () => {
         {...defaultProps}
         values={userValues}
         touched={{ firstName: true }}
-      />
+      />,
     )
     wrapper.find(FullScreenWizard).first().props().onNextPress()
 
@@ -68,7 +68,7 @@ describe('BasicInfoFields', () => {
   test('Continue button is disabled unless fields are full', () => {
     const wrapper = shallow(<BasicInfoFields {...defaultProps} />)
     expect(wrapper.find(FullScreenWizard).first().props().nextDisabled).toEqual(
-      true
+      true,
     )
   })
 
@@ -78,11 +78,11 @@ describe('BasicInfoFields', () => {
     }
 
     const wrapper = shallow(
-      <BasicInfoFields {...defaultProps} errors={errors} />
+      <BasicInfoFields {...defaultProps} errors={errors} />,
     )
 
     expect(wrapper.find(FullScreenWizard).first().props().nextDisabled).toEqual(
-      true
+      true,
     )
   })
 

@@ -9,14 +9,14 @@ describe('ProfileTypeButton', () => {
   const defaultProps = {
     onTapHandler: jest.fn(),
     buttonText: 'Business',
-    label: 'Business organization',
+    label: 'For-profit business',
     type: 'business',
     active: false,
   }
 
   test('it shows a checkbox when active', () => {
     const wrapper = shallow(
-      <ProfileTypeButton {...defaultProps} active={true} />
+      <ProfileTypeButton {...defaultProps} active={true} />,
     )
     expect(wrapper.find(ProfileTypePill).first().props().image).toBeTruthy()
   })

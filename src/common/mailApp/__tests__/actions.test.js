@@ -24,12 +24,12 @@ describe('mailApp - actions', () => {
       await chooseMailApp()(dispatch, () => ({}))
       await chooseMailApp({ toEmail: 'foo@bar.com', subject: 'foo bar' })(
         dispatch,
-        () => ({})
+        () => ({}),
       )
 
       expect(openURLSpy).toHaveBeenCalledWith('mailto:?subject=')
       expect(openURLSpy).toHaveBeenCalledWith(
-        'mailto:foo@bar.com?subject=foo%20bar'
+        'mailto:foo@bar.com?subject=foo%20bar',
       )
 
       openURLSpy.mockRestore()
@@ -54,7 +54,7 @@ describe('mailApp - actions', () => {
       await chooseMailApp()(dispatch, () => ({}))
       await chooseMailApp({ toEmail: 'foo@bar.com', subject: 'bar' })(
         dispatch,
-        () => ({})
+        () => ({}),
       )
 
       expect(openURLSpy).toHaveBeenCalledWith('mailto:?subject=')
@@ -77,7 +77,7 @@ describe('mailApp - actions', () => {
       await chooseMailApp()(dispatch, () => ({}))
       await chooseMailApp({ toEmail: 'foo@bar.com', subject: 'bar' })(
         dispatch,
-        () => ({})
+        () => ({}),
       )
 
       expect(openURLSpy).toHaveBeenCalledWith('mailto:?subject=')
@@ -99,12 +99,12 @@ describe('mailApp - actions', () => {
       await chooseMailApp()(dispatch, getState)
       await chooseMailApp({ toEmail: 'foo@bar.com', subject: 'bar' })(
         dispatch,
-        getState
+        getState,
       )
 
       expect(openURLSpy).toHaveBeenCalledWith('googlegmail://co?subject=&to=')
       expect(openURLSpy).toHaveBeenCalledWith(
-        'googlegmail://co?subject=bar&to=foo@bar.com'
+        'googlegmail://co?subject=bar&to=foo@bar.com',
       )
 
       openURLSpy.mockRestore()

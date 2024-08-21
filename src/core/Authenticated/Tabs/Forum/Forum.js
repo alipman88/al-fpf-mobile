@@ -81,14 +81,14 @@ export class ForumComponent extends React.Component {
     this.unsubscribeTokenRefresh = messaging().onTokenRefresh(
       async (fcmToken) => {
         this.props.sendNewFCMToken(fcmToken)
-      }
+      },
     )
 
     // Listen for app background notification, and handle the notification
     this.unsubscribeNotificationOpenedApp = messaging().onNotificationOpenedApp(
       (remoteMessage) => {
         this.handleNotificationOpen(remoteMessage)
-      }
+      },
     )
   }
 
@@ -106,7 +106,7 @@ export class ForumComponent extends React.Component {
       parseInt(issue_id, 10),
       parseInt(issue_number, 10),
       this.props.navigation,
-      this.props.setupForumData
+      this.props.setupForumData,
     )
   }
 
@@ -130,13 +130,17 @@ export class ForumComponent extends React.Component {
     const { currentAreaId, issues, navigation, navigateWithToken, route } =
       this.props
 
-    if (prevProps.issues !== issues) {
-      //if we got here from a deeplink, find issue and set current ID
+    // Handle when the list of issues has changed
+    if (prevProps.issues !== issues && issues.length > 0) {
       const issueNum = parseInt(route.params?.issueNum ?? 0, 10)
 
-      if (!!issueNum && issues.length) {
+      // If an issue number is provided by routing, make use of it
+      if (issueNum) {
         navigation.setParams({ issueNum: undefined })
         const current = issues.find((i) => i.number === issueNum)
+
+        // If there's an issue available to show and it's different from the current
+        // issue being shown, set the current issue id and mark it as read.
         if (current && current.id !== this.props.currentIssueId) {
           this.props.setCurrentIssueId(current.id)
           this.props.toggleIssueUnread({
@@ -144,13 +148,16 @@ export class ForumComponent extends React.Component {
             isUnread: false,
             areaId: currentAreaId,
           })
-        } else if (!current) {
+        }
+        // Or, if the issue isn't available locally (e.g. because it's too old),
+        // show it in a web browser
+        else if (!current) {
           navigateWithToken(`/areas/${currentAreaId}/issues/${issueNum}`)
         }
       }
-      // if this list of issues doesn't have the current id, set a new one
-      if (
-        issues.length > 0 &&
+      // Otherwise, if the current issue id doesn't exist in the list of issues,
+      // reset to the latest issue in the list of issues (and mark that issue read)
+      else if (
         !issues.find((issue) => issue.id === this.props.currentIssueId)
       ) {
         this.scrollPostsToTop()
@@ -163,11 +170,11 @@ export class ForumComponent extends React.Component {
       }
     }
 
+    // Handle when the issue being viewed has changed
     if (
       prevProps.currentIssueId !== this.props.currentIssueId &&
       this.props.currentIssueId !== 0
     ) {
-      // scroll to top any time we're rendering a different issue
       this.scrollPostsToTop()
       this.props.getContents(this.props.currentIssueId, this.props.navigation)
       this.props.toggleIssueUnread({
@@ -219,8 +226,14 @@ export class ForumComponent extends React.Component {
   }
 
   setTitleFromArea() {
+    this.props.navigation.setOptions({
+      headerTitle: this.areaName,
+    })
+  }
+
+  get areaName() {
     const currentArea = this.props.areas.find(
-      (a) => a.id === this.props.currentAreaId
+      (a) => a.id === this.props.currentAreaId,
     )
 
     let name = ''
@@ -230,9 +243,7 @@ export class ForumComponent extends React.Component {
       name = this.props.neighboringAreas[this.props.currentAreaId]
     }
 
-    this.props.navigation.setOptions({
-      headerTitle: name,
-    })
+    return name
   }
 
   render() {
@@ -240,9 +251,10 @@ export class ForumComponent extends React.Component {
       this.props
 
     const posts = (this.props.posts[currentIssueId] || []).concat(
-      this.props.sharedPosts[currentIssueId] || []
+      this.props.sharedPosts[currentIssueId] || [],
     )
     const ads = this.props.ads[currentIssueId] || []
+    const featuredAdCampaign = this.props.featuredAdCampaigns[currentIssueId]
 
     const maxIndex = posts.length + Math.min(3, ads.length)
     const postRender = []
@@ -257,7 +269,7 @@ export class ForumComponent extends React.Component {
             ad={ad}
             key={`ad-${ad.id}`}
             navigateWithToken={navigateWithToken}
-          />
+          />,
         )
         adOffset++
         // were in the middle of posts, and were on an even count
@@ -270,7 +282,7 @@ export class ForumComponent extends React.Component {
             ad={ad}
             key={`ad-${ad.id}`}
             navigateWithToken={navigateWithToken}
-          />
+          />,
         )
       } else if (posts[index - adOffset]) {
         const post = posts[index - adOffset]
@@ -279,7 +291,7 @@ export class ForumComponent extends React.Component {
             post={post}
             navigation={this.props.navigation}
             key={`post-${post.id}`}
-          />
+          />,
         )
       }
     }
@@ -298,7 +310,7 @@ export class ForumComponent extends React.Component {
                 this.props.getContents(
                   this.props.currentIssueId,
                   this.props.navigation,
-                  { force: true }
+                  { force: true },
                 )
               }}
             />
@@ -310,6 +322,13 @@ export class ForumComponent extends React.Component {
               <ExternalLink
                 content='You have no active profiles on your account! Create a new one at frontporchforum.com'
                 onPress={() => navigateWithToken('/user')}
+              />
+            )}
+            {featuredAdCampaign?.ad && (
+              <Advertisement
+                ad={featuredAdCampaign.ad}
+                key={`ad-${featuredAdCampaign.ad.id}`}
+                navigateWithToken={navigateWithToken}
               />
             )}
             {Boolean(currentIssue) && (
@@ -356,6 +375,7 @@ ForumComponent.propTypes = {
   setCurrentIssueId: PropTypes.func.isRequired,
   setupForumData: PropTypes.func.isRequired,
   sharedPosts: PropTypes.object.isRequired,
+  featuredAdCampaigns: PropTypes.object.isRequired,
   toggleIssueUnread: PropTypes.func.isRequired,
 }
 

@@ -39,7 +39,7 @@ describe('Address - actions', () => {
             state: 'ON',
           },
         },
-        'getState'
+        'getState',
       )
 
       expect(onSuccess).toHaveBeenCalledWith([], {})
@@ -69,11 +69,11 @@ describe('Address - actions', () => {
             state: 'ON',
           },
         },
-        'getState'
+        'getState',
       )
 
       expect(dispatch).toHaveBeenCalledWith(
-        appMessage.actions.setAppError(responseError(new Error('boom')))
+        appMessage.actions.setAppError(responseError(new Error('boom'))),
       )
 
       expect(onSuccess).not.toHaveBeenCalled()

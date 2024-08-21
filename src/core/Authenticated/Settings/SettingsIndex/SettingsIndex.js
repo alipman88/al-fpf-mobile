@@ -43,7 +43,7 @@ export class SettingsIndex extends React.Component {
     this.props.logoutUser(
       this.props.navigation,
       { fcm_token: this.props.fcmToken },
-      this.setLoading
+      this.setLoading,
     )
   }
 
@@ -79,13 +79,13 @@ export class SettingsIndex extends React.Component {
               ))}
               <TouchableOpacity
                 onPress={() =>
-                  navigateWithToken('/user/posts', (loading) =>
-                    this.setState({ loading })
+                  navigateWithToken('/user/submissions', (loading) =>
+                    this.setState({ loading }),
                   )
                 }
               >
                 <ExternalLinkContainer style={{ marginTop: 18 }}>
-                  <ViewPostings>View my postings</ViewPostings>
+                  <ViewPostings>My Submissions</ViewPostings>
                   <Image source={linkIcon} />
                 </ExternalLinkContainer>
               </TouchableOpacity>

@@ -114,7 +114,7 @@ export class Post extends React.Component {
             post.area_id,
             post.issue_id,
             post.issue_number,
-            navigation
+            navigation,
           )
         }
       >
@@ -204,7 +204,7 @@ export class Post extends React.Component {
                         post.area_id,
                         post.issue_id,
                         post.issue_number,
-                        navigation
+                        navigation,
                       )
                     }
                   >
@@ -266,7 +266,7 @@ export class Post extends React.Component {
           )}
           {Boolean(post.event.url) && (
             <PostLocation>
-              <TextSemibold>Join online:</TextSemibold>{' '}
+              <TextSemibold>URL:</TextSemibold>{' '}
               <PostUrl onPress={() => Linking.openURL(post.event.url)}>
                 {post.event.url}
               </PostUrl>
@@ -278,6 +278,9 @@ export class Post extends React.Component {
               email
               text={postContent}
               linkStyle={AutoPostLinkStyle.link}
+              truncate='100'
+              truncateLocation='smart'
+              truncateChars='[...]'
             />
           </PostBody>
           {!!disclaimerContent && !truncated && (

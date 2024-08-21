@@ -17,7 +17,7 @@ describe('products - actions', () => {
       expect(dispatch).toHaveBeenCalledWith(products.actions.setLoading(true))
       expect(dispatch).toHaveBeenCalledWith(products.actions.setLoading(false))
       expect(dispatch).toHaveBeenCalledWith(
-        products.actions.setProducts(productIds)
+        products.actions.setProducts(productIds),
       )
     })
   })

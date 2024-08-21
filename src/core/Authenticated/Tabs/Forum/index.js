@@ -20,6 +20,7 @@ const mapStateToProps = (state) => {
     issues: issues.selectors.getIssuesForArea(state, areaId),
     posts: posts.selectors.getPostsByIssue(state),
     ads: posts.selectors.getAdsByIssue(state),
+    featuredAdCampaigns: posts.selectors.getFeaturedAdCampaignsByIssue(state),
     sharedPosts: posts.selectors.getSharedPostsByIssue(state),
     fcmToken: currentUser.selectors.getFCMToken(state),
     loading:

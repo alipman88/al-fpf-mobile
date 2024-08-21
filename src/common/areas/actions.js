@@ -21,7 +21,7 @@ export const getAreas = (navigation) => async (dispatch, getState) => {
     dispatch(slice.actions.setAreas(areas))
   } catch (e) {
     dispatch(appMessage.actions.setAppError(responseError(e)))
-    if (e.response.status === 401) {
+    if (e.response?.status === 401) {
       dispatch(resetAction())
       navigation.dispatch(StackActions.replace('Login'))
     }

@@ -9,7 +9,7 @@ describe('registrationEmail - slice', () => {
     const payload = 'bar@foo.com'
     const state = registrationEmail.reducer(
       initialState,
-      registrationEmail.actions.setRegistrationEmail(payload)
+      registrationEmail.actions.setRegistrationEmail(payload),
     )
 
     const data = registrationEmail.selectors.getRegistrationEmail({

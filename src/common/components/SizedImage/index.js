@@ -9,21 +9,23 @@ export function SizedImage({ uri, maxHeight, maxWidth }) {
   const [width, setWidth] = useState()
   const [height, setHeight] = useState()
 
-  if (!maxHeight) maxHeight = height
-  if (!maxWidth) maxWidth = width
-
   useEffect(() => {
     if (uri) {
       Image.getSize(uri, (width, height) => {
+        const maxHeight_ = maxHeight || height
+        const maxWidth_ = maxWidth || width
+
         let h = height
         let w = width
 
-        if (maxHeight / height < maxWidth / width && h > maxHeight) {
-          w = (width * maxHeight) / h
-          h = maxHeight
-        } else if (w > maxWidth) {
-          h = (height * maxWidth) / w
-          w = maxWidth
+        if (height > maxHeight_ || width > maxWidth_) {
+          if (maxHeight_ / height < maxWidth_ / width) {
+            w = (width * maxHeight_) / height
+            h = maxHeight_
+          } else {
+            h = (height * maxWidth_) / width
+            w = maxWidth_
+          }
         }
 
         setWidth(w)

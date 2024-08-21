@@ -60,12 +60,12 @@ export const purchaseUpdated = (purchase) => async (dispatch, getState) => {
       const response = await api.putAuthorized(
         `/profiles/${profileId}/apple_subscription`,
         { receipt },
-        getState()
+        getState(),
       )
 
       // The verify receipt API returns an updated user profile.  Store it.
       dispatch(
-        profile.actions.setUserProfile({ profiles: [response.data.profile] })
+        profile.actions.setUserProfile({ profiles: [response.data.profile] }),
       )
 
       dispatch(
@@ -73,7 +73,7 @@ export const purchaseUpdated = (purchase) => async (dispatch, getState) => {
           message: 'FPF plan upgrade successful!',
           type: 'success',
           autoHide: true,
-        })
+        }),
       )
 
       // Acknowledge the transaction via the native IAP API.  (Otherwise, the
@@ -120,7 +120,7 @@ export const purchaseError = (error) => (dispatch, getState) => {
     rollbar.info(
       'purchaseError',
       new Error(error.message),
-      Object.assign({}, error, { profileId })
+      Object.assign({}, error, { profileId }),
     )
 
     dispatch(appMessage.actions.setAppError(error.message))

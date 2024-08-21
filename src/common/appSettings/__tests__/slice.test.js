@@ -4,6 +4,7 @@ describe('appSettings - slice', () => {
   test('initialState', () => {
     const state = appSettings.reducer(undefined, {})
     expect(state).toEqual({
+      areaIdsBySlug: {},
       forumPostTruncateLength: 1000,
       searchPostTruncateLength: 1000,
       categories: [],
@@ -41,7 +42,7 @@ describe('appSettings - slice', () => {
               background: '#000000',
             },
           },
-        })
+        }),
       )
 
       let data = appSettings.selectors.getAppSettings({
@@ -51,6 +52,7 @@ describe('appSettings - slice', () => {
       })
 
       expect(data).toEqual({
+        areaIdsBySlug: {},
         forumPostTruncateLength: 450,
         searchPostTruncateLength: 550,
         categories: [
@@ -95,7 +97,7 @@ describe('appSettings - slice', () => {
     test('sets loading state', () => {
       const state = appSettings.reducer(
         undefined,
-        appSettings.actions.setLoading(true)
+        appSettings.actions.setLoading(true),
       )
 
       const loading = appSettings.selectors.getLoading({
@@ -112,7 +114,7 @@ describe('appSettings - slice', () => {
     test('sets loaded state', () => {
       const state = appSettings.reducer(
         undefined,
-        appSettings.actions.setLoaded(true)
+        appSettings.actions.setLoaded(true),
       )
 
       const loaded = appSettings.selectors.getLoaded({

@@ -12,7 +12,7 @@ describe('purchases - slice', () => {
   test('set and get purchasing and profile id state', () => {
     let state = purchases.reducer(
       undefined,
-      purchases.actions.setPurchasing({ profileId: 1 })
+      purchases.actions.setPurchasing({ profileId: 1 }),
     )
 
     let appState = { main: { purchases: state } }

@@ -90,7 +90,7 @@ describe('newUser actions', () => {
         },
       })
       expect(dispatch).toHaveBeenCalledWith(
-        appMessage.actions.setAppError('boom')
+        appMessage.actions.setAppError('boom'),
       )
       errorPostSpy.mockRestore()
     })

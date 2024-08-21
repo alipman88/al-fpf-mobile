@@ -1,26 +1,42 @@
-/**
- * Regexp to match the issue URL
- */
-const issueRegex = /^\/areas\/(?<areaId>[0-9]+)\/issues\/(?<issueNum>[0-9]+)/
+const issueRegex =
+  /^\/(?<areaSlugOrId>[\w.-]+)\/forum\/archive\/(?<issueNum>[0-9]+)/
+const issueRegexDeprecated =
+  /^\/areas\/(?<areaSlugOrId>[0-9]+)\/issues\/(?<issueNum>[0-9]+)/
 
 /**
  * Given a path, returns an object with Forum navigation params based on the
  * params in the URL.  If the path is not a valid issue URL, returns null.
  *
- * @param {string} path, e.g. "/areas/1/issues/1"
- * @returns { Object | null }
+ * Note that the response object may contain either an areaId or an areaSlug.
+ *
+ * @param {string | null} path, e.g. "/fivesisters/issues/1" or "/areas/1/issues/1"
+ * @returns {Object | null}
  */
 const issuePathParams = (path) => {
-  const matches = path.match(issueRegex)
+  const matches = path?.match(issueRegex) || path?.match(issueRegexDeprecated)
 
-  if (!matches) {
+  if (!matches || !matches.groups.areaSlugOrId) {
     return null
   }
 
-  const areaId = Number(matches.groups.areaId)
+  let areaId, areaSlug
+  if (/\d+/.test(matches.groups.areaSlugOrId)) {
+    areaId = Number(matches.groups.areaSlugOrId)
+  } else {
+    areaSlug = matches.groups.areaSlugOrId
+  }
+
   const issueNum = Number(matches.groups.issueNum)
 
-  return { areaId, issueNum }
+  return { areaId, areaSlug, issueNum }
 }
 
-export { issueRegex, issuePathParams }
+/**
+ * Returns true if the given path is for an issue.
+ *
+ * @param {string} path, e.g. "/fivesisters/issues/1" or "/areas/1/issues/1"
+ * @returns {Boolean}
+ */
+const isIssuePath = (path) => !!issuePathParams(path)
+
+export { issueRegex, issuePathParams, isIssuePath }

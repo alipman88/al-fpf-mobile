@@ -18,13 +18,13 @@ export class ProfileTypes extends React.Component {
       },
       {
         buttonText: 'Business',
-        label: 'Business organization',
+        label: 'For-profit business',
         type: profileTypes.BUSINESS,
         active: this.props.profileType === profileTypes.BUSINESS,
       },
       {
         buttonText: 'Nonprofit',
-        label: 'Nonprofit organization',
+        label: 'Nonprofit organization, club, or community group',
         type: profileTypes.NONPROFIT,
         active: this.props.profileType === profileTypes.NONPROFIT,
       },
@@ -50,7 +50,7 @@ export class ProfileTypes extends React.Component {
 
   onTapProfileButton = (type) => {
     const profilePlan = this.props.profilePlans.find(
-      (p) => p.plan_type === type
+      (p) => p.plan_type === type,
     )
 
     this.props.setNewUserByKey({ profilePlan })

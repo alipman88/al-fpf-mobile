@@ -23,14 +23,14 @@ describe('issues - slice', () => {
 
     const expectedIds = [1, 2, 10]
     expect(issues.selectors.getIssueIds({ main: { issues: state } })).toEqual(
-      expectedIds
+      expectedIds,
     )
   })
 
   test('setLoading sets loading state', () => {
     const state = issues.reducer(
       { firstLoadOfIssues: new Date() },
-      issues.actions.setLoading(true)
+      issues.actions.setLoading(true),
     )
 
     expect(
@@ -38,7 +38,7 @@ describe('issues - slice', () => {
         main: {
           issues: state,
         },
-      })
+      }),
     ).toEqual(true)
   })
 
@@ -56,7 +56,7 @@ describe('issues - slice', () => {
       issues.actions.setIssues({
         issues: [{ id: 1, number: 32, sent_at: date }],
         areaId: 5,
-      })
+      }),
     )
 
     const data = issues.selectors.getIssues({
@@ -74,7 +74,7 @@ describe('issues - slice', () => {
         main: {
           issues: state,
         },
-      })
+      }),
     ).toEqual(1)
 
     expect(
@@ -82,7 +82,7 @@ describe('issues - slice', () => {
         main: {
           issues: state,
         },
-      })
+      }),
     ).toEqual(false)
   })
 
@@ -96,7 +96,7 @@ describe('issues - slice', () => {
           { id: 2, number: 5 },
           { id: 3, number: 6 },
         ],
-      })
+      }),
     )
 
     state = issues.reducer(
@@ -107,7 +107,7 @@ describe('issues - slice', () => {
           { id: 1, number: 4 },
           { id: 4, number: 7 },
         ],
-      })
+      }),
     )
 
     expect(state.issuesByAreaId[1].length).toEqual(4)
@@ -264,7 +264,7 @@ describe('issues - slice', () => {
           ],
           areaId: 462,
         },
-      }
+      },
     )
 
     expect(state.issuesByAreaId[462].length).toEqual(10)
@@ -280,7 +280,7 @@ describe('issues - slice', () => {
           { id: 3, number: 33, sent_at: subDays(endOfToday(), 16) },
         ],
         areaId: 9,
-      })
+      }),
     )
 
     const data = issues.selectors.getIssuesForArea(
@@ -291,7 +291,7 @@ describe('issues - slice', () => {
           },
         },
       },
-      9
+      9,
     )
 
     for (let issue in data) {
@@ -315,7 +315,7 @@ describe('issues - slice', () => {
       issues.actions.setIssues({
         issues: [{ id: 4, number: 9, sent_at: addDays(endOfToday(), 1) }],
         areaId: 3,
-      })
+      }),
     )
 
     const data = issues.selectors.getIssuesForArea(
@@ -326,7 +326,7 @@ describe('issues - slice', () => {
           },
         },
       },
-      3
+      3,
     )
     const newestIssue = data.find((i) => i.id === 4)
     const previouslyUnread = data.find((i) => i.id === 3)
@@ -350,7 +350,7 @@ describe('issues - slice', () => {
       issues.actions.setIssues({
         issues: range(1, 31).map((id) => ({ id, number: id + 32 })),
         areaId: 5,
-      })
+      }),
     )
 
     const data = issues.selectors.getIssuesForArea(
@@ -359,7 +359,7 @@ describe('issues - slice', () => {
           issues: state,
         },
       },
-      5
+      5,
     )
 
     // cant find the 31st issue

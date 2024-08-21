@@ -1,7 +1,10 @@
 import styled from 'styled-components/native'
 import { StyleSheet } from 'react-native'
 
-import { Text } from '@components/Text'
+export const Text = styled.Text`
+  font-family: ProximaNova-Regular;
+  font-size: 16px;
+`
 
 export const Card = styled.View`
   flex: 1;
@@ -24,8 +27,13 @@ export const CardContent = styled.View`
   padding: 16px;
 `
 
+export const Link = styled.Text`
+  color: #d77400;
+  font-family: ProximaNova-Regular;
+`
+
 export const ContentText = styled(Text)`
-  font-size: 16px;
+  color: #4a4a4a;
   padding-top: 14px;
 `
 

@@ -24,7 +24,7 @@ describe('products - slice', () => {
   test('set and get the products object', () => {
     const state = products.reducer(
       undefined,
-      products.actions.setProducts([1, 2])
+      products.actions.setProducts([1, 2]),
     )
 
     const data = products.selectors.getProducts({

@@ -7,6 +7,7 @@ describe('posts - slice', () => {
       headlinesByIssue: {},
       postsByIssue: {},
       adsByIssue: {},
+      featuredAdCampaignsByIssue: {},
       placementDateByIssue: {},
       sharedPostsByIssue: {},
       loading: false,
@@ -25,7 +26,7 @@ describe('posts - slice', () => {
           main: {
             posts: state,
           },
-        })
+        }),
       ).toEqual(true)
     })
 
@@ -50,7 +51,7 @@ describe('posts - slice', () => {
               area_name: 'Other Area',
             },
           ],
-        })
+        }),
       )
 
       let data = posts.selectors.getPostsByIssue({
@@ -99,7 +100,7 @@ describe('posts - slice', () => {
           main: {
             posts: state,
           },
-        })
+        }),
       ).toEqual(false)
     })
   })
@@ -113,7 +114,7 @@ describe('posts - slice', () => {
           main: {
             posts: state,
           },
-        })
+        }),
       ).toEqual(true)
     })
 
@@ -132,7 +133,7 @@ describe('posts - slice', () => {
               id: 2,
             },
           ],
-        })
+        }),
       )
 
       let data = posts.selectors.getAdsByIssue({
@@ -157,7 +158,7 @@ describe('posts - slice', () => {
           main: {
             posts: state,
           },
-        })
+        }),
       ).toEqual(false)
     })
   })
@@ -168,6 +169,7 @@ describe('posts - slice', () => {
         headlinesByIssue: { 1: [], 2: [] },
         postsByIssue: { 1: [], 2: [] },
         adsByIssue: { 1: [], 2: [] },
+        featuredAdCampaignsByIssue: {},
         placementDateByIssue: { 1: [], 2: [] },
         sharedPostsByIssue: { 1: [], 2: [] },
         loading: false,
@@ -178,13 +180,14 @@ describe('posts - slice', () => {
 
       state = posts.reducer(
         state,
-        posts.actions.expire({ exceptIssueIds: [2] })
+        posts.actions.expire({ exceptIssueIds: [2] }),
       )
 
       expect(state).toEqual({
         headlinesByIssue: { 2: [] },
         postsByIssue: { 2: [] },
         adsByIssue: { 2: [] },
+        featuredAdCampaignsByIssue: {},
         placementDateByIssue: { 2: [] },
         sharedPostsByIssue: { 2: [] },
         loading: false,
@@ -199,6 +202,7 @@ describe('posts - slice', () => {
         headlinesByIssue: {},
         postsByIssue: {},
         adsByIssue: {},
+        featuredAdCampaignsByIssue: {},
         placementDateByIssue: {},
         sharedPostsByIssue: {},
         loading: false,

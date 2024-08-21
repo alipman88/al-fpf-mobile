@@ -11,7 +11,7 @@ describe('mailApp - slice', () => {
   test('setPreferredApp sets the app string', () => {
     const state = mailApp.reducer(
       undefined,
-      mailApp.actions.setPreferredApp('mail')
+      mailApp.actions.setPreferredApp('mail'),
     )
 
     expect(
@@ -19,7 +19,7 @@ describe('mailApp - slice', () => {
         main: {
           mailApp: state,
         },
-      })
+      }),
     ).toEqual('mail')
   })
 })
