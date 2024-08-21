@@ -13,7 +13,7 @@ describe('newUser - slice', () => {
 
     const state = newUser.reducer(
       initialState,
-      newUser.actions.setNewUserByKey(payload)
+      newUser.actions.setNewUserByKey(payload),
     )
 
     const data = newUser.selectors.getNewUser({ main: { newUser: state } })

@@ -55,7 +55,7 @@ describe('SettingsIndex', () => {
     wrapper.find(TouchableOpacity).at(0).simulate('press')
     expect(defaultProps.navigateWithToken).toHaveBeenCalledWith(
       '/user/submissions',
-      expect.any(Function)
+      expect.any(Function),
     )
   })
 

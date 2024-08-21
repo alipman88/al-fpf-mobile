@@ -108,7 +108,7 @@ Multiselect.propTypes = {
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
-    })
+    }),
   ).isRequired,
   label: PropTypes.string,
   onConfirm: PropTypes.func,

@@ -1,5 +1,4 @@
 import React from 'react'
-import analytics from '@react-native-firebase/analytics'
 import { AppState, Platform } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { Provider } from 'react-redux'
@@ -38,7 +37,7 @@ export class App extends React.Component {
   componentDidMount() {
     this.appStateListener = AppState.addEventListener(
       'change',
-      this.handleAppStateChange
+      this.handleAppStateChange,
     )
     this.netInfoUnsubscribe = NetInfo.addEventListener(this.setConnectedStatus)
 
@@ -51,7 +50,7 @@ export class App extends React.Component {
         this.purchaseUpdatedListener = RNIap.purchaseUpdatedListener(
           (purchase) => {
             store.dispatch(purchaseUpdated(purchase))
-          }
+          },
         )
         this.purchaseErrorListener = RNIap.purchaseErrorListener((error) => {
           store.dispatch(purchaseError(error))
@@ -110,8 +109,6 @@ export class App extends React.Component {
   }
 
   handleNavigationChange = (currentRouteName) => {
-    analytics().logScreenView({ screen_name: currentRouteName })
-
     // Convert navigation route names to plausible URLs (so their views are
     // more or less integrated with matching web app page views)
     const plausibleViewPaths = {

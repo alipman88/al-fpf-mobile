@@ -14,7 +14,7 @@ export const validations = yup.object().shape({
       .test(
         'name',
         'Name must contain at least two characters',
-        validateGovernmentFieldPresence
+        validateGovernmentFieldPresence,
       )
       .required('Please enter a title.'),
   }),
@@ -24,7 +24,16 @@ export const validations = yup.object().shape({
     .test(
       'jurisdiction',
       'Jurisdiction must contain at least two characters',
-      validateGovernmentFieldPresence
+      validateGovernmentFieldPresence,
+    )
+    .required(),
+  organization: yup
+    .string()
+    .trim()
+    .test(
+      'organization',
+      'Organization must contain at least two characters',
+      validateGovernmentFieldPresence,
     )
     .required(),
   notes: yup.string(),

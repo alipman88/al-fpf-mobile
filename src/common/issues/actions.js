@@ -19,7 +19,7 @@ export const getIssues =
       dispatch(issues.actions.setLoading(true))
       const response = await getAuthorized(
         `/areas/${areaId}/issues?page=1&count=${maxIssuesCount}`,
-        getState()
+        getState(),
       )
 
       // Show a deprecation message for old app versions only
@@ -29,7 +29,7 @@ export const getIssues =
           appMessage.actions.setAppMessage({
             message: eolInfo,
             type: 'warning',
-          })
+          }),
         )
       }
 
@@ -41,7 +41,7 @@ export const getIssues =
         issues.actions.setIssues({
           issues: response.data.issues,
           areaId,
-        })
+        }),
       )
 
       // After fetching new issues, old ones may have been removed.  Expire
@@ -50,10 +50,10 @@ export const getIssues =
       dispatch(posts.actions.expire({ exceptIssueIds: issueIds }))
     } catch (e) {
       dispatch(appMessage.actions.setAppError(responseError(e)))
-      if (e.response.status === 401) {
+      if (e.response?.status === 401) {
         dispatch(resetAction())
         navigation.dispatch(StackActions.replace('Login'))
-      } else if (e.response.status === 403 && resetForumAction) {
+      } else if (e.response?.status === 403 && resetForumAction) {
         dispatch(areas.actions.resetAreas())
         dispatch(resetForumAction(navigation))
       }
@@ -75,13 +75,13 @@ export const fetchSpecificIssue =
       // if the desired issue is not in the persisted issues for that forum
       const issuesForArea = issues.selectors.getIssuesForArea(
         getState(),
-        areaId
+        areaId,
       )
       if (!issuesForArea.find((issue) => issue.id === issueId)) {
         await dispatch(
           commonActions.navigateWithToken(
-            `/areas/${areaId}/issues/${issueNumber}`
-          )
+            `/areas/${areaId}/issues/${issueNumber}`,
+          ),
         )
         // go back to previous forum
         dispatch(areas.actions.setCurrentAreaId(previousAreaId))
@@ -91,10 +91,10 @@ export const fetchSpecificIssue =
       }
     } catch (e) {
       dispatch(appMessage.actions.setAppError(responseError(e)))
-      if (e.response.status === 401) {
+      if (e.response?.status === 401) {
         dispatch(resetAction())
         navigation.dispatch(StackActions.replace('Login'))
-      } else if (e.response.status === 403 && resetForumAction) {
+      } else if (e.response?.status === 403 && resetForumAction) {
         resetForumAction(navigation)
       }
     } finally {

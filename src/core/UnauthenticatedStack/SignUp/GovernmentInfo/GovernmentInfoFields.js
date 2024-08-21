@@ -64,6 +64,7 @@ export const GovernmentInfoFields = ({
             required
             touched={!!touched.name}
             value={values.name}
+            placeholder='Name of your official position'
           />
         </FieldWrapper>
       )}
@@ -78,7 +79,21 @@ export const GovernmentInfoFields = ({
           required
           touched={!!touched.jurisdiction}
           value={values.jurisdiction}
-          placeholder='Winooski School District'
+          placeholder='Town(s), district, county, etc. covered by your role'
+        />
+      </FieldWrapper>
+      <FieldWrapper>
+        <TextInput
+          error={errors.organization}
+          label='Organization'
+          onChangeText={(value) => {
+            setFieldTouched('organization')
+            setFieldValue('organization', value)
+          }}
+          required
+          touched={!!touched.organization}
+          value={values.organization}
+          placeholder='Name of commission, board, school, library, etc.'
         />
       </FieldWrapper>
       <FieldWrapper>

@@ -56,7 +56,7 @@ describe('LoginFields', () => {
       button: { text: 'fix it', url: 'some url' },
     }
     const wrapperWithError = shallow(
-      <LoginFields {...defaultProps} errors={error} />
+      <LoginFields {...defaultProps} errors={error} />,
     )
     wrapperWithError.find(Button).simulate('press')
 
@@ -76,7 +76,7 @@ describe('LoginFields', () => {
       button: { text: 'fix it', action: 'resend_email' },
     }
     const wrapperWithError = shallow(
-      <LoginFields {...defaultProps} errors={error} />
+      <LoginFields {...defaultProps} errors={error} />,
     )
     wrapperWithError.find(Button).simulate('press')
 

@@ -1,7 +1,7 @@
 import { NativeModules } from 'react-native'
 
-const NativeSettingsManager = NativeModules.SettingsManager
-const _settings = NativeSettingsManager.getConstants().settings || {}
+const { SharedPreferences } = NativeModules
+const _memo = SharedPreferences.getConstants()
 
 /**
  * Android implementation of React Native's Settings js module.
@@ -9,21 +9,15 @@ const _settings = NativeSettingsManager.getConstants().settings || {}
  * NOTE: watch (watchKeys and clearWatch) is not supported.
  *
  * https://facebook.github.io/react-native/docs/settings
- * https://github.com/facebook/react-native/tree/master/Libraries/Settings
  */
 const Settings = {
-  _settings,
-
   get(key) {
-    return this._settings[key]
+    return _memo[key]
   },
 
-  set(settings) {
-    Object.assign(this._settings, settings)
-
-    if (NativeSettingsManager) {
-      NativeSettingsManager.setValues(settings)
-    }
+  set(hash) {
+    SharedPreferences.set(hash)
+    Object.assign(_memo, hash)
   },
 
   watchKeys(keys, callback) {

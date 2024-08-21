@@ -20,7 +20,7 @@ describe('purchases - actions', () => {
       await requestSubscription('some-sku', 1)(dispatch, () => ({}))
 
       expect(dispatch).toHaveBeenCalledWith(
-        purchases.actions.setPurchasing({ profileId: 1 })
+        purchases.actions.setPurchasing({ profileId: 1 }),
       )
 
       expect(rniapSpy).toHaveBeenCalledWith({ sku: 'some-sku' })
@@ -38,11 +38,11 @@ describe('purchases - actions', () => {
       await requestSubscription('some-sku', 1)(dispatch, () => ({}))
 
       expect(dispatch).toHaveBeenCalledWith(
-        appMessage.actions.setAppError('boom')
+        appMessage.actions.setAppError('boom'),
       )
 
       expect(dispatch).toHaveBeenCalledWith(
-        purchases.actions.setPurchasing(false)
+        purchases.actions.setPurchasing(false),
       )
 
       rniapSpy.mockRestore()
@@ -58,11 +58,11 @@ describe('purchases - actions', () => {
       await requestSubscription('some-sku', 1)(dispatch, () => ({}))
 
       expect(dispatch).toHaveBeenCalledWith(
-        appMessage.actions.setAppError('The purchase failed')
+        appMessage.actions.setAppError('The purchase failed'),
       )
 
       expect(dispatch).toHaveBeenCalledWith(
-        purchases.actions.setPurchasing(false)
+        purchases.actions.setPurchasing(false),
       )
 
       rniapSpy.mockRestore()
@@ -104,15 +104,15 @@ describe('purchases - actions', () => {
         {
           receipt: 'receipt-data',
         },
-        getState()
+        getState(),
       )
 
       expect(dispatch).toHaveBeenCalledWith(
-        profile.actions.setUserProfile({ profiles: [updatedProfile] })
+        profile.actions.setUserProfile({ profiles: [updatedProfile] }),
       )
 
       expect(dispatch).toHaveBeenCalledWith(
-        purchases.actions.setPurchasing(false)
+        purchases.actions.setPurchasing(false),
       )
 
       expect(dispatch).toHaveBeenCalledWith(
@@ -120,7 +120,7 @@ describe('purchases - actions', () => {
           message: 'FPF plan upgrade successful!',
           type: 'success',
           autoHide: true,
-        })
+        }),
       )
 
       expect(rniapSpy).toHaveBeenCalledWith(purchase)
@@ -153,11 +153,11 @@ describe('purchases - actions', () => {
       await purchaseUpdated(purchase)(dispatch, getState)
 
       expect(dispatch).toHaveBeenCalledWith(
-        appMessage.actions.setAppError('boom')
+        appMessage.actions.setAppError('boom'),
       )
 
       expect(dispatch).toHaveBeenCalledWith(
-        purchases.actions.setPurchasing(false)
+        purchases.actions.setPurchasing(false),
       )
 
       putSpy.mockRestore()
@@ -178,11 +178,11 @@ describe('purchases - actions', () => {
       await purchaseError(new Error('boom'))(dispatch, getState)
 
       expect(dispatch).toHaveBeenCalledWith(
-        appMessage.actions.setAppError('boom')
+        appMessage.actions.setAppError('boom'),
       )
 
       expect(dispatch).toHaveBeenCalledWith(
-        purchases.actions.setPurchasing(false)
+        purchases.actions.setPurchasing(false),
       )
     })
   })

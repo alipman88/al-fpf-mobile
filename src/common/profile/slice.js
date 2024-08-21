@@ -26,7 +26,7 @@ export const profile = createSlice({
       rollbar.setPerson(
         '' + payload.id, // rollbar-react-native expects a string id
         `${payload.first_name} ${payload.last_name}`,
-        payload.email
+        payload.email,
       )
 
       const availableProfiles = filter(payload.profiles, { approved: true })
@@ -81,30 +81,30 @@ const getNavigationProfileId = (state, props) =>
 
 const getCurrentProfileId = createSelector(
   ['main.profile'],
-  (profile) => profile.currentProfileId
+  (profile) => profile.currentProfileId,
 )
 
 const getProfiles = createSelector(
   ['main.profile'],
-  (profile) => profile.user.profiles || []
+  (profile) => profile.user.profiles || [],
 )
 
 const getAvailableProfiles = createSelector(['main.profile'], (profile) =>
-  filter(profile.user.profiles, { approved: true })
+  filter(profile.user.profiles, { approved: true }),
 )
 
 const getCurrentProfile = createSelector(
   [getAvailableProfiles, getCurrentProfileId],
-  (profiles, id) => find(profiles, { id })
+  (profiles, id) => find(profiles, { id }),
 )
 
 const getNavigationProfile = createSelector(
   [getProfiles, getNavigationProfileId],
-  (profiles, id) => find(profiles, { id })
+  (profiles, id) => find(profiles, { id }),
 )
 
 const hasUnapprovedProfile = createSelector([getProfiles], (profiles) =>
-  profiles.some((profile) => !profile.approved)
+  profiles.some((profile) => !profile.approved),
 )
 
 /**
@@ -114,8 +114,8 @@ const getUserHasAppleSubscription = createSelector([getProfiles], (profiles) =>
   profiles.some(
     (profile) =>
       profile.active_subscription &&
-      profile.active_subscription.service === 'apple'
-  )
+      profile.active_subscription.service === 'apple',
+  ),
 )
 
 /**
@@ -145,12 +145,12 @@ const getSubscriptionState = createSelector(
 
       return data
     }, {})
-  }
+  },
 )
 
 const getNavigationProfileSubscriptionState = createSelector(
   [getSubscriptionState, getNavigationProfileId],
-  (state, id) => state[id] || {}
+  (state, id) => state[id] || {},
 )
 
 profile.selectors = {

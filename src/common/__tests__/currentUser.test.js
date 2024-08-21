@@ -14,7 +14,7 @@ describe('currentUser reducer', () => {
       secured: {
         currentUser: currentUser.reducer(
           undefined,
-          currentUser.actions.setAccessToken('token')
+          currentUser.actions.setAccessToken('token'),
         ),
       },
     }
@@ -27,7 +27,7 @@ describe('currentUser reducer', () => {
       secured: {
         currentUser: currentUser.reducer(
           undefined,
-          currentUser.actions.setFCMToken('token')
+          currentUser.actions.setFCMToken('token'),
         ),
       },
     }

@@ -43,7 +43,7 @@ export class SettingsIndex extends React.Component {
     this.props.logoutUser(
       this.props.navigation,
       { fcm_token: this.props.fcmToken },
-      this.setLoading
+      this.setLoading,
     )
   }
 
@@ -80,7 +80,7 @@ export class SettingsIndex extends React.Component {
               <TouchableOpacity
                 onPress={() =>
                   navigateWithToken('/user/submissions', (loading) =>
-                    this.setState({ loading })
+                    this.setState({ loading }),
                   )
                 }
               >

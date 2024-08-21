@@ -14,5 +14,5 @@ const mapStateToProps = (state, props) => ({
 })
 
 export const Profile = connect(mapStateToProps, { navigateWithToken })(
-  ProfileComponent
+  ProfileComponent,
 )

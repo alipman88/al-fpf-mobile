@@ -14,7 +14,7 @@ export const navigateWithToken = (url) => async (dispatch, getState) => {
     const response = await api.postAuthorized(
       '/get_login_token',
       {},
-      getState()
+      getState(),
     )
 
     urlObj.query.temporary_login_token = response.data.token

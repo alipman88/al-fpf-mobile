@@ -31,7 +31,7 @@ describe('areas - slice', () => {
       state,
       areas.actions.setAreas([
         { id: 1, neighbor_areas: [{ id: 2, name: 'neighbor' }] },
-      ])
+      ]),
     )
     let data = areas.selectors.getAreas({
       main: {
@@ -69,7 +69,7 @@ describe('areas - slice', () => {
         main: {
           areas: state,
         },
-      })
+      }),
     ).toEqual(3)
   })
 
@@ -86,7 +86,7 @@ describe('areas - slice', () => {
             { id: 1, name: 'zzzz' },
           ],
         },
-      ])
+      ]),
     )
 
     const data = areas.selectors.getFullAreasList({

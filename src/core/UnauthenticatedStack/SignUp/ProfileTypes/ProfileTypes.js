@@ -50,7 +50,7 @@ export class ProfileTypes extends React.Component {
 
   onTapProfileButton = (type) => {
     const profilePlan = this.props.profilePlans.find(
-      (p) => p.plan_type === type
+      (p) => p.plan_type === type,
     )
 
     this.props.setNewUserByKey({ profilePlan })

@@ -67,7 +67,7 @@ describe('Address - actions', () => {
       })
 
       expect(dispatch).toHaveBeenCalledWith(
-        appMessage.actions.setAppError('boom')
+        appMessage.actions.setAppError('boom'),
       )
 
       post.mockRestore()

@@ -45,7 +45,7 @@ describe('posts - actions', () => {
               },
             ],
           },
-          sponsorshipsByIssue: {},
+          featuredAdCampaignsByIssue: {},
           placementDateByIssue: placementDates,
         },
       },
@@ -103,7 +103,7 @@ describe('posts - actions', () => {
           placementDate: endOfDay(new Date()),
           headlines: ['Headline'],
           newsFromNeighboringNfs: [{ id: 3 }],
-        })
+        }),
       )
       getSpy.mockRestore()
     })
@@ -132,7 +132,7 @@ describe('posts - actions', () => {
           placementDate: endOfDay(new Date()),
           headlines: ['Headline'],
           newsFromNeighboringNfs: [{ id: 3 }],
-        })
+        }),
       )
       getSpy.mockRestore()
     })
@@ -147,7 +147,7 @@ describe('posts - actions', () => {
         dispatch,
         getState({
           2: new Date(2020, 1, 1),
-        })
+        }),
       )
 
       expect(getSpy).toHaveBeenCalledWith('/areas/10/issues/2/ads', {
@@ -160,7 +160,7 @@ describe('posts - actions', () => {
           issueId: 2,
           ads: [{ id: 2 }],
           placementDate: endOfDay(new Date()),
-        })
+        }),
       )
       getSpy.mockRestore()
     })

@@ -38,7 +38,7 @@ describe('Waitlist', () => {
       expect(defaultProps.setNewUserByKey).toHaveBeenCalledWith({ bar: 'foo' })
 
       expect(defaultProps.navigation.dispatch).toHaveBeenCalledWith(
-        StackActions.replace('WaitlistSuccess')
+        StackActions.replace('WaitlistSuccess'),
       )
 
       expect(setSubmitting).toHaveBeenCalledWith(false)

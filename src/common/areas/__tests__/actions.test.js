@@ -80,7 +80,7 @@ describe('areas actions', () => {
 
     expect(getSpy).toHaveBeenCalledTimes(2)
     expect(dispatch).toHaveBeenCalledWith(
-      areas.actions.setAreas([{ id: 1 }, { id: 2 }])
+      areas.actions.setAreas([{ id: 1 }, { id: 2 }]),
     )
     getSpy.mockRestore()
   })
@@ -103,11 +103,11 @@ describe('areas actions', () => {
     })
 
     expect(dispatch).toHaveBeenCalledWith(
-      appMessage.actions.setAppError('boom')
+      appMessage.actions.setAppError('boom'),
     )
 
     expect(navigation.dispatch).toHaveBeenCalledWith(
-      StackActions.replace('Login')
+      StackActions.replace('Login'),
     )
 
     getSpy.mockRestore()

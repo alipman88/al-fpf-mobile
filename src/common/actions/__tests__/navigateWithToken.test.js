@@ -27,7 +27,7 @@ describe('navigateWithToken', () => {
     expect(getState).toHaveBeenCalled()
 
     expect(openUrlSpy).toHaveBeenCalledWith(
-      'https://frontporchforum.com/path?test=true&temporary_login_token=abc123'
+      'https://frontporchforum.com/path?test=true&temporary_login_token=abc123',
     )
     expect(dispatch).toHaveBeenCalledWith(spinner.actions.setVisibility(false))
 
@@ -44,7 +44,7 @@ describe('navigateWithToken', () => {
     const getState = jest.fn().mockReturnValue({})
     await navigateWithToken('https://something.com?test=true')(
       dispatch,
-      getState
+      getState,
     )
 
     expect(dispatch).toHaveBeenCalledWith(spinner.actions.setVisibility(true))
@@ -52,7 +52,7 @@ describe('navigateWithToken', () => {
     expect(dispatch).toHaveBeenCalledWith(spinner.actions.setVisibility(false))
 
     expect(dispatch).toHaveBeenCalledWith(
-      appMessage.actions.setAppError('boom')
+      appMessage.actions.setAppError('boom'),
     )
 
     apiSpy.mockRestore()

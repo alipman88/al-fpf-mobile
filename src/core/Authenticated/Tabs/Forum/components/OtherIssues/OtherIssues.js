@@ -40,7 +40,7 @@ export class OtherIssues extends React.Component {
                 animated: true,
               })
             }
-          }
+          },
         )
       } else if (this.scrollViewRef) {
         this.scrollViewRef.scrollToEnd({ animated: true })

@@ -31,7 +31,7 @@ export const LoginComponent = ({ navigation, login, resendEmail }) => {
       <LinksContainer>
         <ResetPasswordContainer>
           <TouchableOpacity
-            onPress={() => openFpfUrl(`${Config.WEBSITE_HOST}/passwords/new}`)}
+            onPress={() => openFpfUrl(`${Config.WEBSITE_HOST}/passwords/new`)}
           >
             <BottomText>Forgot Password</BottomText>
           </TouchableOpacity>
@@ -40,7 +40,7 @@ export const LoginComponent = ({ navigation, login, resendEmail }) => {
           <TouchableOpacity
             onPress={() =>
               openFpfUrl(
-                'https://help.frontporchforum.com/how-do-i-log-into-my-fpf-account'
+                'https://help.frontporchforum.com/how-do-i-log-into-my-fpf-account',
               )
             }
           >

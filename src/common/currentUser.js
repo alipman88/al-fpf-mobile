@@ -29,10 +29,10 @@ currentUser.selectors = {
   ...currentUser.selectors,
   getAccessToken: createSelector(
     ['secured.currentUser'],
-    (currentUser) => currentUser.accessToken
+    (currentUser) => currentUser.accessToken,
   ),
   getFCMToken: createSelector(
     ['secured.currentUser'],
-    (currentUser) => currentUser.fcmToken
+    (currentUser) => currentUser.fcmToken,
   ),
 }

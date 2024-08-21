@@ -39,7 +39,7 @@ describe('profile - actions', () => {
               id: 33,
             },
           ],
-        })
+        }),
       )
       getSpy.mockRestore()
     })
@@ -56,7 +56,7 @@ describe('profile - actions', () => {
       expect(getSpy).toHaveBeenCalledWith('/users', {})
 
       expect(dispatch).toHaveBeenCalledWith(
-        appMessage.actions.setAppError('boom')
+        appMessage.actions.setAppError('boom'),
       )
 
       getSpy.mockRestore()
@@ -95,13 +95,13 @@ describe('profile - actions', () => {
         profile.actions.setValueInUserData({
           key: 'receive_issue_emails',
           value: false,
-        })
+        }),
       )
       expect(dispatch).toHaveBeenCalledWith(
         profile.actions.setValueInUserData({
           key: 'receive_issue_push_notifications',
           value: true,
-        })
+        }),
       )
       expect(dispatch).toHaveBeenCalledWith(
         profile.actions.setUserProfile({
@@ -113,7 +113,7 @@ describe('profile - actions', () => {
           ],
           receive_issue_emails: false,
           receive_issue_push_notifications: true,
-        })
+        }),
       )
       putSpy.mockRestore()
     })
@@ -133,7 +133,7 @@ describe('profile - actions', () => {
       expect(putSpy).toHaveBeenCalledWith('/users', { user: values }, {})
 
       expect(dispatch).toHaveBeenCalledWith(
-        appMessage.actions.setAppError('boom')
+        appMessage.actions.setAppError('boom'),
       )
 
       putSpy.mockRestore()

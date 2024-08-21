@@ -10,7 +10,7 @@ describe('getProfileDisplayName', () => {
         street_number: 100,
         street_name: 'Yonge St',
         city: 'Toronto',
-      })
+      }),
     ).toEqual('Neighbor: 100 Yonge St Toronto')
   })
 
@@ -21,7 +21,7 @@ describe('getProfileDisplayName', () => {
           plan_type: 'business',
         },
         name: 'Front Porch Forum',
-      })
+      }),
     ).toEqual('Business: Front Porch Forum')
   })
 
@@ -32,7 +32,7 @@ describe('getProfileDisplayName', () => {
           plan_type: 'nonprofit',
         },
         name: 'Front Porch Forum',
-      })
+      }),
     ).toEqual('Nonprofit: Front Porch Forum')
   })
 
@@ -44,7 +44,7 @@ describe('getProfileDisplayName', () => {
         },
         name: 'City Hall',
         jurisdiction: 'Newport',
-      })
+      }),
     ).toEqual('Government: City Hall Newport')
   })
 
@@ -52,7 +52,7 @@ describe('getProfileDisplayName', () => {
     expect(
       getProfileDisplayName({
         name: 'Front Porch Forum',
-      })
+      }),
     ).toEqual('Front Porch Forum')
   })
 
@@ -66,8 +66,8 @@ describe('getProfileDisplayName', () => {
           name: 'City Hall',
           jurisdiction: 'Newport',
         },
-        false
-      )
+        false,
+      ),
     ).toEqual('City Hall Newport')
   })
 })

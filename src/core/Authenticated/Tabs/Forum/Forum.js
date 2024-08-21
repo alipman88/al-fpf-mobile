@@ -81,14 +81,14 @@ export class ForumComponent extends React.Component {
     this.unsubscribeTokenRefresh = messaging().onTokenRefresh(
       async (fcmToken) => {
         this.props.sendNewFCMToken(fcmToken)
-      }
+      },
     )
 
     // Listen for app background notification, and handle the notification
     this.unsubscribeNotificationOpenedApp = messaging().onNotificationOpenedApp(
       (remoteMessage) => {
         this.handleNotificationOpen(remoteMessage)
-      }
+      },
     )
   }
 
@@ -106,7 +106,7 @@ export class ForumComponent extends React.Component {
       parseInt(issue_id, 10),
       parseInt(issue_number, 10),
       this.props.navigation,
-      this.props.setupForumData
+      this.props.setupForumData,
     )
   }
 
@@ -233,7 +233,7 @@ export class ForumComponent extends React.Component {
 
   get areaName() {
     const currentArea = this.props.areas.find(
-      (a) => a.id === this.props.currentAreaId
+      (a) => a.id === this.props.currentAreaId,
     )
 
     let name = ''
@@ -251,10 +251,10 @@ export class ForumComponent extends React.Component {
       this.props
 
     const posts = (this.props.posts[currentIssueId] || []).concat(
-      this.props.sharedPosts[currentIssueId] || []
+      this.props.sharedPosts[currentIssueId] || [],
     )
     const ads = this.props.ads[currentIssueId] || []
-    const sponsorship = this.props.sponsorships[currentIssueId]
+    const featuredAdCampaign = this.props.featuredAdCampaigns[currentIssueId]
 
     const maxIndex = posts.length + Math.min(3, ads.length)
     const postRender = []
@@ -269,7 +269,7 @@ export class ForumComponent extends React.Component {
             ad={ad}
             key={`ad-${ad.id}`}
             navigateWithToken={navigateWithToken}
-          />
+          />,
         )
         adOffset++
         // were in the middle of posts, and were on an even count
@@ -282,7 +282,7 @@ export class ForumComponent extends React.Component {
             ad={ad}
             key={`ad-${ad.id}`}
             navigateWithToken={navigateWithToken}
-          />
+          />,
         )
       } else if (posts[index - adOffset]) {
         const post = posts[index - adOffset]
@@ -291,7 +291,7 @@ export class ForumComponent extends React.Component {
             post={post}
             navigation={this.props.navigation}
             key={`post-${post.id}`}
-          />
+          />,
         )
       }
     }
@@ -310,7 +310,7 @@ export class ForumComponent extends React.Component {
                 this.props.getContents(
                   this.props.currentIssueId,
                   this.props.navigation,
-                  { force: true }
+                  { force: true },
                 )
               }}
             />
@@ -324,10 +324,10 @@ export class ForumComponent extends React.Component {
                 onPress={() => navigateWithToken('/user')}
               />
             )}
-            {sponsorship?.ad && (
+            {featuredAdCampaign?.ad && (
               <Advertisement
-                ad={sponsorship.ad}
-                key={`ad-${sponsorship.ad.id}`}
+                ad={featuredAdCampaign.ad}
+                key={`ad-${featuredAdCampaign.ad.id}`}
                 navigateWithToken={navigateWithToken}
               />
             )}
@@ -375,7 +375,7 @@ ForumComponent.propTypes = {
   setCurrentIssueId: PropTypes.func.isRequired,
   setupForumData: PropTypes.func.isRequired,
   sharedPosts: PropTypes.object.isRequired,
-  sponsorships: PropTypes.object.isRequired,
+  featuredAdCampaigns: PropTypes.object.isRequired,
   toggleIssueUnread: PropTypes.func.isRequired,
 }
 

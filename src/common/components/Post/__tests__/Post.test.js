@@ -116,7 +116,7 @@ describe('Post', () => {
         navigation={{}}
         areasIdMap={{ 2: { id: 2 } }}
         fullAreasIdMap={{ 2: { id: 2 } }}
-      />
+      />,
     )
     expect(wrapper.find(Autolink).props().text).toEqual('Lor...')
 
@@ -125,7 +125,7 @@ describe('Post', () => {
     }
 
     expect(getButton(wrapper).find(ShowMoreButton).last().text()).toEqual(
-      'Read more'
+      'Read more',
     )
 
     getButton(wrapper).simulate('press')
@@ -133,7 +133,7 @@ describe('Post', () => {
     expect(wrapper.find(Autolink).props().text).toEqual(post.content)
 
     expect(getButton(wrapper).find(ShowMoreButton).last().text()).toEqual(
-      'Read less'
+      'Read less',
     )
   })
 
@@ -173,7 +173,7 @@ describe('Post', () => {
       defaultProps.post.area_id,
       defaultProps.post.issue_id,
       defaultProps.post.issue_number,
-      defaultProps.navigation
+      defaultProps.navigation,
     )
   })
 
@@ -193,7 +193,7 @@ describe('Post', () => {
     }
     const wrapper = shallow(<Post {...props} />)
     expect(wrapper.find(PostLocation).text()).toEqual(
-      'Where: 14 Decatur Street'
+      'Where: 14 Decatur Street',
     )
 
     const props2 = {
@@ -205,7 +205,7 @@ describe('Post', () => {
     }
     const wrapper2 = shallow(<Post {...props2} />)
     expect(wrapper2.find(PostLocation).text()).toEqual(
-      'Join online: https://zoom.us/j/0123456789'
+      'URL: https://zoom.us/j/0123456789',
     )
 
     const props3 = {
@@ -220,10 +220,10 @@ describe('Post', () => {
     }
     const wrapper3 = shallow(<Post {...props3} />)
     expect(wrapper3.find(PostLocation).first().text()).toEqual(
-      'Where: 8 Main Street'
+      'Where: 8 Main Street',
     )
     expect(wrapper3.find(PostLocation).last().text()).toEqual(
-      'Join online: https://zoom.us/j/0123456789'
+      'URL: https://zoom.us/j/0123456789',
     )
   })
 
@@ -239,7 +239,7 @@ describe('Post', () => {
     const wrapper = shallow(<Post {...props} />)
 
     expect(wrapper.find(BadgeText).children().text()).toEqual(
-      'Closed by Author'
+      'Closed by Author',
     )
   })
 

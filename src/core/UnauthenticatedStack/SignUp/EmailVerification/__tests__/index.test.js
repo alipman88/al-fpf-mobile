@@ -37,7 +37,7 @@ describe('EmailVerification', () => {
   test('it sets registration email on mount', () => {
     shallow(<EmailVerification {...defaultProps} />)
     expect(defaultProps.setRegistrationEmail).toHaveBeenCalledWith(
-      'bob@ross.com'
+      'bob@ross.com',
     )
   })
 

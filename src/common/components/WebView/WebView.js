@@ -175,6 +175,10 @@ export const WebView = (props) => {
         applicationNameForUserAgent={`FpfMobileApp/802.${DeviceInfo.getVersion()}`}
         startInLoadingState={true}
         scalesPageToFit={false}
+        basicAuthCredential={{
+          username: 'staging',
+          password: Config.BASIC_AUTH_PASSWORD,
+        }}
         setBuiltInZoomControls={false}
         renderLoading={() => <Spinner visible={true} />}
         onError={() => setShowError(true)}
@@ -190,7 +194,7 @@ export const WebView = (props) => {
 
           // Open whitelisted requests in the WebView
           const whitelistedPath = whitelistedPaths.find((path) =>
-            requestPath.match(path)
+            requestPath.match(path),
           )
           if (whitelistedPath) {
             // React Native WebViews only send headers on the initial page load

@@ -20,7 +20,7 @@ describe('LoginComponent', () => {
         .props()
         .onSubmit(
           { email: 'test@example.com', password: 'passpass' },
-          { setSubmitting }
+          { setSubmitting },
         )
 
       expect(setSubmitting).toHaveBeenCalledWith(false)
@@ -33,7 +33,7 @@ describe('LoginComponent', () => {
         throw new Error('boom')
       }
       const wrapper = shallow(
-        <LoginComponent {...defaultProps} login={login} />
+        <LoginComponent {...defaultProps} login={login} />,
       )
       const setSubmitting = jest.fn()
       const setFieldError = jest.fn()
@@ -42,7 +42,7 @@ describe('LoginComponent', () => {
         .props()
         .onSubmit(
           { email: 'test@example.com', password: 'passpass' },
-          { setSubmitting, setFieldError }
+          { setSubmitting, setFieldError },
         )
 
       expect(setSubmitting).toHaveBeenCalledWith(false)

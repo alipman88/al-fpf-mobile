@@ -42,7 +42,7 @@ describe('profile - slice', () => {
               approved: false,
             },
           ],
-        })
+        }),
       )
 
       let data = profile.selectors.getUser({
@@ -94,7 +94,7 @@ describe('profile - slice', () => {
           id: 1,
           profiles: [],
           name: 'test',
-        })
+        }),
       )
 
       state = profile.reducer(
@@ -102,7 +102,7 @@ describe('profile - slice', () => {
         profile.actions.setValueInUserData({
           key: 'email',
           value: 'test@example.com',
-        })
+        }),
       )
 
       expect(state).toEqual({
@@ -130,7 +130,7 @@ describe('profile - slice', () => {
             },
           ],
           name: 'test',
-        })
+        }),
       )
 
       state = profile.reducer(
@@ -139,7 +139,7 @@ describe('profile - slice', () => {
           1: {
             foo: 'bar',
           },
-        })
+        }),
       )
 
       expect(state).toEqual({
@@ -165,7 +165,7 @@ describe('profile - slice', () => {
         undefined,
         profile.actions.setUserProfile({
           id: 1,
-        })
+        }),
       )
 
       const data = profile.selectors.getProfiles({
@@ -189,7 +189,7 @@ describe('profile - slice', () => {
             { id: 6, approved: false },
             { id: 7 },
           ],
-        })
+        }),
       )
 
       const data = profile.selectors.getAvailableProfiles({
@@ -215,7 +215,7 @@ describe('profile - slice', () => {
               approved: true,
             },
           ],
-        })
+        }),
       )
 
       expect(
@@ -223,7 +223,7 @@ describe('profile - slice', () => {
           main: {
             profile: state,
           },
-        })
+        }),
       ).toEqual(3)
 
       expect(
@@ -231,7 +231,7 @@ describe('profile - slice', () => {
           main: {
             profile: state,
           },
-        })
+        }),
       ).toEqual({ id: 3, approved: true })
     })
   })
@@ -240,14 +240,14 @@ describe('profile - slice', () => {
     test('overrides the currentProfileId', () => {
       const state = profile.reducer(
         undefined,
-        profile.actions.setCurrentProfileId(105)
+        profile.actions.setCurrentProfileId(105),
       )
       expect(
         profile.selectors.getCurrentProfileId({
           main: {
             profile: state,
           },
-        })
+        }),
       ).toEqual(105)
     })
   })
@@ -259,13 +259,13 @@ describe('profile - slice', () => {
         profile.actions.setUserProfile({
           id: 1,
           profiles: [{ id: 5, approved: true }],
-        })
+        }),
       )
 
       expect(
         profile.selectors.getUserHasAppleSubscription({
           main: { profile: state },
-        })
+        }),
       ).toEqual(false)
     })
 
@@ -281,13 +281,13 @@ describe('profile - slice', () => {
               active_subscription: { service: 'stripe' },
             },
           ],
-        })
+        }),
       )
 
       expect(
         profile.selectors.getUserHasAppleSubscription({
           main: { profile: state },
-        })
+        }),
       ).toEqual(false)
     })
 
@@ -304,13 +304,13 @@ describe('profile - slice', () => {
               active_subscription: { service: 'apple' },
             },
           ],
-        })
+        }),
       )
 
       expect(
         profile.selectors.getUserHasAppleSubscription({
           main: { profile: state },
-        })
+        }),
       ).toEqual(true)
     })
   })
@@ -347,13 +347,13 @@ describe('profile - slice', () => {
               active_subscription: { service: 'stripe' },
             },
           ],
-        })
+        }),
       )
 
       expect(
         profile.selectors.getSubscriptionState({
           main: { profile: state },
-        })
+        }),
       ).toEqual({
         5: {
           canSubscribe: false,
@@ -387,13 +387,13 @@ describe('profile - slice', () => {
               active_subscription: { service: 'apple' },
             },
           ],
-        })
+        }),
       )
 
       expect(
         profile.selectors.getSubscriptionState({
           main: { profile: state },
-        })
+        }),
       ).toEqual({
         5: {
           canSubscribe: false,

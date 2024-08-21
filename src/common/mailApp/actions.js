@@ -76,7 +76,7 @@ function askAppChoice(
   message = 'Which app would you like to open?',
   cancelLabel = 'Cancel',
   subject = '',
-  toEmail = ''
+  toEmail = '',
 ) {
   return new Promise(async (resolve) => {
     const availableApps = []
@@ -107,7 +107,7 @@ function askAppChoice(
           return resolve({ app: null, status: 'canceled' })
         }
         return resolve({ app: availableApps[buttonIndex], status: 'selected' })
-      }
+      },
     )
 
     return
@@ -132,7 +132,7 @@ export const chooseMailApp =
   async (dispatch, getState) => {
     if (!options || typeof options !== 'object') {
       throw new EmailException(
-        'First parameter of `chooseMailApp` should contain object with options.'
+        'First parameter of `chooseMailApp` should contain object with options.',
       )
     }
 
@@ -158,7 +158,7 @@ export const chooseMailApp =
         message,
         cancelLabel,
         subject,
-        toEmail
+        toEmail,
       ))
 
       // User clicked cancel button when asked to select app - take no action

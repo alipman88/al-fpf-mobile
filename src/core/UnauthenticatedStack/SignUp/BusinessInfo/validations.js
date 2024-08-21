@@ -12,7 +12,7 @@ export const validations = yup.object().shape({
     .test(
       'name',
       'Name must contain at least two characters',
-      validateBusinessName
+      validateBusinessName,
     )
     .required('Name is a required field'),
   description: yup.string().trim().min(1).max(2000),

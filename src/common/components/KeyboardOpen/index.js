@@ -10,11 +10,11 @@ export class KeyboardOpen extends React.Component {
   componentDidMount() {
     this.keyboardDidShowSub = Keyboard.addListener(
       'keyboardDidShow',
-      this.keyboardDidShow.bind(this)
+      this.keyboardDidShow.bind(this),
     )
     this.keyboardDidHideSub = Keyboard.addListener(
       'keyboardDidHide',
-      this.keyboardDidHide.bind(this)
+      this.keyboardDidHide.bind(this),
     )
   }
 

@@ -81,7 +81,7 @@ newUser.selectors = {
 
   getProfileType: createSelector(
     [path],
-    (newUser) => newUser.user.profilePlan.plan_type
+    (newUser) => newUser.user.profilePlan.plan_type,
   ),
 
   getLoading: createSelector([path], (newUser) => newUser.loading),
