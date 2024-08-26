@@ -8,15 +8,16 @@ export const validations = yup.object().shape({
   title: yup.string().required(),
   name: yup.string().when('title', {
     is: 'Other',
-    then: yup
-      .string()
-      .trim()
-      .test(
-        'name',
-        'Name must contain at least two characters',
-        validateGovernmentFieldPresence,
-      )
-      .required('Please enter a title.'),
+    then: () =>
+      yup
+        .string()
+        .trim()
+        .test(
+          'name',
+          'Name must contain at least two characters',
+          validateGovernmentFieldPresence,
+        )
+        .required('Please enter a title.'),
   }),
   jurisdiction: yup
     .string()
