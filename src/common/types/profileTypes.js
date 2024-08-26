@@ -3,4 +3,5 @@ export const profileTypes = {
   NEIGHBOR: 'neighbor',
   BUSINESS: 'business',
   NONPROFIT: 'nonprofit',
+  CANDIDATE: 'candidate',
 }

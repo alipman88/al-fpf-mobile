@@ -58,10 +58,11 @@ export class EmailVerification extends React.Component {
         <HeaderLogo />
         <ScrollView>
           <MessageContainer>
-            {profileType === profileTypes.GOVERNMENT ? (
+            {profileType === profileTypes.GOVERNMENT ||
+            profileType === profileTypes.CANDIDATE ? (
               <HelpMessage>
-                Your government profile will be reviewed within 48 hours. Once
-                approved, you will have access to your FPF(s). Please{' '}
+                Your {profileType} profile will be reviewed within 48 hours.
+                Once approved, you will have access to your FPF(s). Please{' '}
                 <TextLink
                   onPress={() => openFpfUrl(`${Config.WEBSITE_HOST}/contact`)}
                 >

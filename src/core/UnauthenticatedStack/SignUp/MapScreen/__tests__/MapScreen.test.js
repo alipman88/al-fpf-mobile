@@ -126,6 +126,18 @@ describe('MapScreen', () => {
     expect(defaultProps.setNewUserByKey).toHaveBeenCalled()
   })
 
+  test('submit navigates to CandidateInfo for candidate profile', () => {
+    const wrapper = shallow(
+      <MapScreen {...defaultProps} profileType='candidate' />,
+    )
+    wrapper.setState({ checkedAreas: { 1: true, 2: true } })
+    wrapper.find(FullScreenWizard).props().onNextPress()
+    expect(defaultProps.navigation.navigate).toHaveBeenCalledWith(
+      'CandidateInfo',
+    )
+    expect(defaultProps.setNewUserByKey).toHaveBeenCalled()
+  })
+
   test('no checked areas, nextButton should be disabled', () => {
     const wrapper = shallow(
       <MapScreen

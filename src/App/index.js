@@ -123,6 +123,7 @@ export class App extends React.Component {
       EmailVerification: 'registration/email_verification',
       Forum: null, // skipped b/c logged within the view
       GovernmentInfo: 'registration/government_info',
+      CandidateInfo: 'registration/candidate_info',
       Login: 'login',
       MapScreen: 'registration/map',
       Profile: 'user/profiles',

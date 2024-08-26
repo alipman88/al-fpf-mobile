@@ -19,6 +19,7 @@ describe('ProfileTypes', () => {
       { id: 2, plan_type: 'business' },
       { id: 3, plan_type: 'nonprofit' },
       { id: 4, plan_type: 'government' },
+      { id: 5, plan_type: 'candidate' },
     ],
   }
 
@@ -26,9 +27,9 @@ describe('ProfileTypes', () => {
     defaultProps.navigation.navigate.mockReset()
   })
 
-  test('it creates four profile options from which to choose', () => {
+  test('it creates five profile options from which to choose', () => {
     const wrapper = shallow(<ProfileTypes {...defaultProps} />)
-    expect(wrapper.find(ProfileTypeButton).length).toBe(4)
+    expect(wrapper.find(ProfileTypeButton).length).toBe(5)
   })
 
   test('it sets no profiles as active by default', () => {
@@ -54,6 +55,7 @@ describe('ProfileTypes', () => {
     expect(wrapper.state().profileOptions[1].active).toBe(false)
     expect(wrapper.state().profileOptions[2].active).toBe(false)
     expect(wrapper.state().profileOptions[3].active).toBe(false)
+    expect(wrapper.state().profileOptions[4].active).toBe(false)
   })
 
   test('selecing neighbor navigates the user to the BasicInfo screen', () => {
@@ -94,6 +96,17 @@ describe('ProfileTypes', () => {
       <ProfileTypes
         {...defaultProps}
         newUser={{ profileType: profileTypes.GOVERNMENT }}
+      />,
+    )
+    wrapper.find(FullScreenWizard).props().onNextPress()
+    expect(defaultProps.navigation.navigate).toHaveBeenCalledWith('BasicInfo')
+  })
+
+  test('selecing candidate navigates the user to the BasicInfo screen', () => {
+    const wrapper = shallow(
+      <ProfileTypes
+        {...defaultProps}
+        newUser={{ profileType: profileTypes.CANDIDATE }}
       />,
     )
     wrapper.find(FullScreenWizard).props().onNextPress()

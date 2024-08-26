@@ -36,16 +36,40 @@ describe('getProfileDisplayName', () => {
     ).toEqual('Nonprofit: Front Porch Forum')
   })
 
-  test('government returns name + jurisdiction', () => {
+  test('government returns title + jurisdiction', () => {
     expect(
       getProfileDisplayName({
         profile_plan: {
           plan_type: 'government',
         },
-        name: 'City Hall',
+        title: 'City Hall',
         jurisdiction: 'Newport',
       }),
-    ).toEqual('Government: City Hall Newport')
+    ).toEqual('Government: City Hall, Newport')
+  })
+
+  test('candidate returns prefixed title + jurisdiction', () => {
+    expect(
+      getProfileDisplayName({
+        profile_plan: {
+          plan_type: 'candidate',
+        },
+        title: 'Mayor',
+        jurisdiction: 'Newport',
+      }),
+    ).toEqual('Candidate: Mayor, Newport')
+  })
+
+  test('candidate without prefix still returns prefixed title + jurisdiction', () => {
+    expect(
+      getProfileDisplayName({
+        profile_plan: {
+          plan_type: 'candidate',
+        },
+        title: 'Mayor',
+        jurisdiction: 'Newport',
+      }),
+    ).toEqual('Candidate: Mayor, Newport')
   })
 
   test('no plan type returns name', () => {
@@ -56,18 +80,18 @@ describe('getProfileDisplayName', () => {
     ).toEqual('Front Porch Forum')
   })
 
-  test('government with no prefix returns name + jurisdiction', () => {
+  test('government with no prefix returns title + jurisdiction', () => {
     expect(
       getProfileDisplayName(
         {
           profile_plan: {
             plan_type: 'government',
           },
-          name: 'City Hall',
+          title: 'City Hall',
           jurisdiction: 'Newport',
         },
         false,
       ),
-    ).toEqual('City Hall Newport')
+    ).toEqual('City Hall, Newport')
   })
 })

@@ -8,6 +8,7 @@ import { Address } from './SignUp/Address'
 import { EmailVerification } from './SignUp/EmailVerification'
 import { BasicInfo } from './SignUp/BasicInfo'
 import { GovernmentInfo } from './SignUp/GovernmentInfo'
+import { CandidateInfo } from './SignUp/CandidateInfo'
 import { Waitlist } from './SignUp/Waitlist'
 import { WaitlistSuccess } from './SignUp/WaitlistSuccess'
 import { BusinessInfo } from './SignUp/BusinessInfo'
@@ -35,6 +36,7 @@ export function UnauthenticatedStack() {
       <Stack.Screen name='EmailVerification' component={EmailVerification} />
       <Stack.Screen name='BasicInfo' component={BasicInfo} />
       <Stack.Screen name='GovernmentInfo' component={GovernmentInfo} />
+      <Stack.Screen name='CandidateInfo' component={CandidateInfo} />
       <Stack.Screen name='Waitlist' component={Waitlist} />
       <Stack.Screen name='WaitlistSuccess' component={WaitlistSuccess} />
       <Stack.Screen name='BusinessInfo' component={BusinessInfo} />

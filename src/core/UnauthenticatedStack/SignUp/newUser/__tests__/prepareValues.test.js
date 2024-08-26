@@ -12,6 +12,9 @@ describe('prepareValues', () => {
       government: {
         notes: 'some text',
       },
+      candidate: {
+        notes: 'some other text',
+      },
       address: {
         streetName: 'Test St',
       },
@@ -25,6 +28,7 @@ describe('prepareValues', () => {
     const business = values('business')
     const nonprofit = values('nonprofit')
     const government = values('government')
+    const candidate = values('candidate')
 
     expect(prepareValues(neighbor)).toEqual({
       user: {
@@ -67,6 +71,18 @@ describe('prepareValues', () => {
         profile: {
           profile_plan_id: 4,
           notes: 'some text',
+          street_name: 'Test St',
+          show_in_business_directory: true,
+        },
+      },
+    })
+
+    expect(prepareValues(candidate)).toEqual({
+      user: {
+        terms_of_use: true,
+        profile: {
+          profile_plan_id: 4,
+          notes: 'some other text',
           street_name: 'Test St',
           show_in_business_directory: true,
         },

@@ -19,6 +19,8 @@ export const prepareValues = (values) => {
     newValues.profile = values[profileTypes.BUSINESS]
   } else if (values.profilePlan.plan_type === profileTypes.GOVERNMENT) {
     newValues.profile = values[profileTypes.GOVERNMENT]
+  } else if (values.profilePlan.plan_type === profileTypes.CANDIDATE) {
+    newValues.profile = values[profileTypes.CANDIDATE]
   }
 
   // set address and profile plan values in profile object
@@ -33,6 +35,7 @@ export const prepareValues = (values) => {
   newValues = omit(newValues, [
     profileTypes.BUSINESS,
     profileTypes.GOVERNMENT,
+    profileTypes.CANDIDATE,
     'address',
     'profilePlan',
     'waitlist',

@@ -31,9 +31,15 @@ export class ProfileTypes extends React.Component {
       {
         buttonText: 'Government',
         label:
-          'Public official, muncipal department, public school, town library, etc.',
+          'Public official, municipal department, public school, town library, etc.',
         type: profileTypes.GOVERNMENT,
         active: this.props.profileType === profileTypes.GOVERNMENT,
+      },
+      {
+        buttonText: 'Candidate',
+        label: 'Registered candidate for a public office',
+        type: profileTypes.CANDIDATE,
+        active: this.props.profileType === profileTypes.CANDIDATE,
       },
     ],
   }
@@ -92,7 +98,7 @@ export class ProfileTypes extends React.Component {
           <ProfileTypeText isHeader>
             How will you use this account?
           </ProfileTypeText>
-          <ProfileTypeContainer>{profileTypeButtons}</ProfileTypeContainer>
+          {profileTypeButtons}
         </ProfileTypeContainer>
       </FullScreenWizard>
     )

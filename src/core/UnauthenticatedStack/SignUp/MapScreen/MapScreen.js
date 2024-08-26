@@ -91,6 +91,8 @@ export class MapScreen extends React.Component {
     let route
     if (profileType === profileTypes.GOVERNMENT) {
       route = 'GovernmentInfo'
+    } else if (profileType === profileTypes.CANDIDATE) {
+      route = 'CandidateInfo'
     } else if (
       profileType === profileTypes.BUSINESS ||
       profileType === profileTypes.NONPROFIT

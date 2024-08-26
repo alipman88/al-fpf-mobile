@@ -97,5 +97,6 @@ describe('BasicInfoFields', () => {
     expect(wrapper('neighbor')).toEqual(4)
     expect(wrapper('business')).toEqual(5)
     expect(wrapper('government')).toEqual(5)
+    expect(wrapper('candidate')).toEqual(5)
   })
 })
