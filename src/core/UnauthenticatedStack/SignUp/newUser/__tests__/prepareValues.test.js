@@ -9,12 +9,8 @@ describe('prepareValues', () => {
       business: {
         businessCategoryId: 3,
       },
-      government: {
-        notes: 'some text',
-      },
-      candidate: {
-        notes: 'some other text',
-      },
+      government: {},
+      candidate: {},
       address: {
         streetName: 'Test St',
       },
@@ -70,7 +66,6 @@ describe('prepareValues', () => {
         terms_of_use: true,
         profile: {
           profile_plan_id: 4,
-          notes: 'some text',
           street_name: 'Test St',
           show_in_business_directory: true,
         },
@@ -82,7 +77,6 @@ describe('prepareValues', () => {
         terms_of_use: true,
         profile: {
           profile_plan_id: 4,
-          notes: 'some other text',
           street_name: 'Test St',
           show_in_business_directory: true,
         },

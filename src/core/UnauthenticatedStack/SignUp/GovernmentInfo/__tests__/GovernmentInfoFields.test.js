@@ -16,7 +16,6 @@ describe('GovernmentInfoFields', () => {
     values: {
       title: '',
       jurisdiction: '',
-      notes: '',
     },
     governmentTitles: [
       'Mayor',
@@ -44,12 +43,12 @@ describe('GovernmentInfoFields', () => {
 
   test('changing title to Other displays text input', () => {
     const wrapper = shallow(<GovernmentInfoFields {...defaultProps} />)
-    expect(wrapper.find(TextInput).length).toEqual(3)
+    expect(wrapper.find(TextInput).length).toEqual(2)
 
     const wrapperOther = shallow(
       <GovernmentInfoFields {...defaultProps} values={{ title: 'Other' }} />,
     )
-    expect(wrapperOther.find(TextInput).length).toEqual(4)
+    expect(wrapperOther.find(TextInput).length).toEqual(3)
   })
 
   test('changing jurisdiction calls handlers', () => {
@@ -64,13 +63,5 @@ describe('GovernmentInfoFields', () => {
 
     wrapper.find(TextInput).at(1).simulate('changeText', 'hi')
     expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('organization')
-  })
-
-  test('changing tell us more calls handlers', () => {
-    const wrapper = shallow(<GovernmentInfoFields {...defaultProps} />)
-
-    wrapper.find(TextInput).at(2).simulate('changeText', 'hi')
-    expect(defaultProps.setFieldTouched).toHaveBeenCalledWith('notes')
-    expect(defaultProps.setFieldValue).toHaveBeenCalledWith('notes', 'hi')
   })
 })

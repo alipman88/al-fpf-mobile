@@ -32,5 +32,4 @@ export const validations = yup.object().shape({
       validateCandidateFieldPresence,
     )
     .required(),
-  notes: yup.string(),
 })

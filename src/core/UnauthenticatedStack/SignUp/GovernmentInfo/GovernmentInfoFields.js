@@ -96,19 +96,6 @@ export const GovernmentInfoFields = ({
           placeholder='Name of commission, board, school, library, etc.'
         />
       </FieldWrapper>
-      <FieldWrapper>
-        <TextInput
-          error={errors.notes}
-          label='Tell us more'
-          onChangeText={(value) => {
-            setFieldTouched('notes')
-            setFieldValue('notes', value)
-          }}
-          multiline
-          touched={!!touched.notes}
-          value={values.notes}
-        />
-      </FieldWrapper>
     </Container>
   </FullScreenWizard>
 )

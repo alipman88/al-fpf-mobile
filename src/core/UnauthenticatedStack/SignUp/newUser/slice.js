@@ -37,14 +37,12 @@ const initialState = {
     government: {
       title: '',
       jurisdiction: '',
-      notes: '',
     },
     // CandidateInfo
     candidate: {
       name: '',
       title: '',
       jurisdiction: '',
-      notes: '',
     },
     // BusinessInfo
     business: {
