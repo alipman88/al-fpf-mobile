@@ -75,6 +75,14 @@ export class CreateAccount extends React.Component {
       )
       this.setState({ options })
     }
+
+    if (this.props.profileType === profileTypes.CANDIDATE) {
+      let options = [...this.state.options]
+
+      options = options.filter((option) => option.type !== 'postIntro')
+
+      this.setState({ options })
+    }
   }
 
   render() {
