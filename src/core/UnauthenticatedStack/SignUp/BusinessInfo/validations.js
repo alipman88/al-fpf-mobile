@@ -15,7 +15,12 @@ export const validations = yup.object().shape({
       validateBusinessName,
     )
     .required('Name is a required field'),
-  description: yup.string().trim().min(1).max(2000),
+  description: yup
+    .string()
+    .trim()
+    .min(1)
+    .max(2000)
+    .required('Description is a required field'),
   businessCategoryId: yup.number().required(),
   url: yup.string(),
   phone: yup.string().min(10).max(20),
