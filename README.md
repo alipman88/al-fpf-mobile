@@ -363,9 +363,30 @@ If the app errors during build when running `yarn android`, first try increasing
 
 ### Notifications
 
-iOS Notifications may be pushed from the command line using the xcrun utility.
+To send push notifications to a simulated development device through Firebase, log into the mobile app and connect to staging.
 
-Save the following JSON to an `alert.json` file in the project's root directory:
+Connect to a staging ECS container, boot the rails console, and run the following script, adjusting the user email and device per your login account and device.
+
+```ruby
+# initialize a Firebase connection 
+fcm = PushNotifier.initialize_fcm_connection
+
+# find the Firebase token for your app session
+user = User.find_by(email: 'email@example.com')
+app_session = user.app_sessions.find_by(device_name: 'Apple iPhone 15')
+token = app_session.fcm_token
+
+# pick some sent issue
+issue = Area.find_by(name: 'New Trial').issues.sent.last
+
+# build the notification content
+payload = PushNotifier.params_for_issue(issue).merge(token:)
+
+# send the notification to your device
+fcm.send_v1(payload)
+```
+
+Additionally, iOS Notifications may be pushed directly from the command line using the xcrun utility (bypassing Firebase) – Save the following JSON to an `alert.json` file in the project's root directory:
 
 ```
 {
