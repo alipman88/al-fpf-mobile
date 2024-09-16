@@ -100,7 +100,9 @@ export class ForumComponent extends React.Component {
    * @param remoteMessage {RemoteMessage} Firebase message
    */
   handleNotificationOpen(remoteMessage) {
-    const { area_id, issue_id, issue_number } = remoteMessage.data
+    const { area_id, issue_id, issue_number } = JSON.parse(
+      remoteMessage.data.payload,
+    )
     this.props.fetchSpecificIssue(
       parseInt(area_id, 10),
       parseInt(issue_id, 10),

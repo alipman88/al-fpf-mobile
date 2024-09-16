@@ -381,11 +381,10 @@ describe('Forum', () => {
   describe('handleNotificationOpen', () => {
     test('calls to fetch for the issue from the notificationOpen event', () => {
       const wrapper = shallow(<Forum {...defaultProps} />)
+      const payload = { area_id: '5', issue_id: '6', issue_number: '340' }
       wrapper.instance().handleNotificationOpen({
         data: {
-          area_id: '5',
-          issue_id: '6',
-          issue_number: '340',
+          payload: JSON.stringify(payload),
         },
       })
 
