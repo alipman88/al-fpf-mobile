@@ -363,7 +363,7 @@ If the app errors during build when running `yarn android`, first try increasing
 
 ### Notifications
 
-To send push notifications to a simulated development device through Firebase, log into the mobile app and connect to staging.
+To send push notifications to a simulated development device through Firebase, log in to the mobile app and connect to staging.
 
 Connect to a staging ECS container, boot the rails console, and run the following script, adjusting the user email and device per your login account and device.
 

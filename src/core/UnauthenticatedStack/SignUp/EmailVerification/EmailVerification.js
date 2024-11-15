@@ -78,7 +78,7 @@ export class EmailVerification extends React.Component {
                 </SuccessMessage>
                 <HelpMessage>
                   To complete your registration, please click on the link in
-                  that email. Then log into your FPF account.
+                  that email. Then log in to your FPF account.
                 </HelpMessage>
                 <HelpMessage>
                   Don't see the email message? It might take awhile. Please
