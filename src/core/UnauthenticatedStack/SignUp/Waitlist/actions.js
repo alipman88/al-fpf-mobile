@@ -13,7 +13,6 @@ export const joinWaitlist = (values) => async (dispatch) => {
           pick(values, [
             'email',
             'city',
-            'zip',
             'state',
             'comment',
             'reference',
