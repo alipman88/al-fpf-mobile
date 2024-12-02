@@ -2,6 +2,7 @@ import React from 'react'
 import { TouchableOpacity, ScrollView } from 'react-native'
 import PropTypes from 'prop-types'
 import Spinner from 'react-native-loading-spinner-overlay'
+import startCase from 'lodash/startCase'
 
 import { Config } from '@common/config'
 import { ScreenContainer } from '@components/ScreenContainer'
@@ -61,8 +62,8 @@ export class EmailVerification extends React.Component {
             {profileType === profileTypes.GOVERNMENT ||
             profileType === profileTypes.CANDIDATE ? (
               <HelpMessage>
-                Your {profileType} profile will be reviewed within 48 hours.
-                Once approved, you will have access to your FPF(s). Please{' '}
+                Your {startCase(profileType)} profile will be reviewed within 48
+                hours. You will be notified once approved. Please{' '}
                 <TextLink
                   onPress={() => openFpfUrl(`${Config.WEBSITE_HOST}/contact`)}
                 >
