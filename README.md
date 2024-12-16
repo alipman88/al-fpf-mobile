@@ -229,7 +229,27 @@ Installed version reports:
 - [iOS active devices by app version](https://appstoreconnect.apple.com/analytics/app/d90/1458651656/metrics?annotationsVisible=true&chartType=singleaxis&groupDimensionKey=appVersion&measureKey=activeDevices&zoomType=week)
 - [Android active devices by app version](https://play.google.com/console/u/0/developers/7669883795652962257/app/4973842490929321153/statistics?metrics=ACTIVE_DEVICES-ALL-UNIQUE-PER_INTERVAL-DAY&dimension=APP_VERSION&dimensionValues=239%2C232%2C156%2C198%2C181%2C116%2C151%2C145&dateRange=2022_9_24-2023_3_22&tab=APP_STATISTICS&ctpMetric=DAU_MAU-ACQUISITION_UNSPECIFIED-COUNT_UNSPECIFIED-CALCULATION_UNSPECIFIED-DAY&ctpDateRange=2023_2_21-2023_3_22&ctpDimension=COUNTRY&ctpDimensionValue=OVERALL&ctpPeersetKey=3%3A2689e48fc22c04ea)
 
-### App Center configuration
+### Distribution build configuration
+
+#### iOS certificate and profile
+
+- List of certificates: https://developer.apple.com/account/resources/certificates/list
+- List of profiles: https://developer.apple.com/account/resources/profiles/list
+
+To generate a new iOS distribution certificate .p12 file:
+1. Open Xcode
+2. Go to Xcode > Settings and then the Accounts tab.
+3. In the Team list, select Front Porch Forum and click "Manage Certificates".
+4. In the popup, click the + icon and select the certificate type, either Development or Distribution.
+   Use Distribution for staging and production builds.
+5. Once the certificate has been generated, right click and select "Export Certificate".
+6. Save the certificate with the password stored in 1Password at "Apple iOS distribution certificate p12".
+7. Upload the .p12 certificate to 1Password at "Apple iOS distribution certificate p12 Certificates.p12".
+
+To update a provisioning profile:
+1. Go to https://developer.apple.com/account/resources/profiles/list
+2. Click on an existing App Store (not ad hoc) profile and click edit or add a new one
+3. Select the latest distribution certificate and all relevant devices and save
 
 #### Build configuration
 
@@ -246,8 +266,8 @@ setting details:
     - `Provisioning profile`: upload the "App Store" provisioning file,
       downloaded from https://developer.apple.com/account/resources/profiles/list
     - `Certificate`: upload the .p12 signing certificate file, downloaded from
-      the 1Password Tech Team vault item "Apple iOS p12 Certificate"
-    - `Certificate password`: see 1Password item "Apple iOS p12 Certificate Password"
+      the 1Password Tech Team vault item "Apple iOS distribution certificate p12"
+    - `Certificate password`: see 1Password item "Apple iOS distribution certificate p12"
   - For Android, configure:
     - `Keystore file`: upload the .keystore file, downloaded from the 1Password
       Tech Team vault item "fpf_android.keystore"
