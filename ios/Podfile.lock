@@ -1164,10 +1164,17 @@ PODS:
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
-  - Rollbar (1.12.14)
-  - RollbarReactNative (0.9.3):
+  - RollbarCommon (3.3.3)
+  - RollbarCrash (3.3.3)
+  - RollbarNotifier (3.3.3):
+    - RollbarCommon (~> 3.3.3)
+    - RollbarCrash (~> 3.3.3)
+    - RollbarReport (~> 3.3.3)
+  - RollbarReactNative (1.0.0-beta.5):
     - React-Core
-    - Rollbar (~> 1.12.8)
+    - RollbarNotifier (= 3.3.3)
+  - RollbarReport (3.3.3):
+    - RollbarCrash (~> 3.3.3)
   - SocketRocket (0.6.1)
   - Yoga (1.14.0)
 
@@ -1257,7 +1264,10 @@ SPEC REPOS:
     - libevent
     - nanopb
     - PromisesObjC
-    - Rollbar
+    - RollbarCommon
+    - RollbarCrash
+    - RollbarNotifier
+    - RollbarReport
     - SocketRocket
 
 EXTERNAL SOURCES:
@@ -1475,11 +1485,14 @@ SPEC CHECKSUMS:
   RNIap: c76f9a941a212d5f5ef2c04f608287b9f73ee1ad
   RNScreens: 35f3344904f6bba888c0e61532278436e275de3c
   RNVectorIcons: 9282eb0aef2f7d4747f621aa6c586ce910de23b1
-  Rollbar: 58f315609433558a82af5a54d7888bb020bec561
-  RollbarReactNative: 11595d077e6e53c3dff7846f6bd53f23f68be338
+  RollbarCommon: cb87be0f694a09c138f7d51d6f3b48151ca965ab
+  RollbarCrash: 0272cf44b05ebc0f69c17acbd0cffbdaf35b2893
+  RollbarNotifier: 8f57eb355f0fe8a6832d8dff615f2118d78047be
+  RollbarReactNative: 583fd234f0b37d7a0b36fcf21fac5ad7906f7677
+  RollbarReport: 0e57a3ac73c66dd6d5add5e999a967210753c4c3
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 1b901a6d6eeba4e8a2e8f308f708691cdb5db312
 
-PODFILE CHECKSUM: c23d312ba55c843fd57fd17ca1960dec57666a0e
+PODFILE CHECKSUM: 2ee1101d0f761c73dbc2f2a37e1e7856ae5b1a23
 
 COCOAPODS: 1.15.2

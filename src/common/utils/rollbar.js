@@ -1,4 +1,4 @@
-import { Client, Configuration } from 'rollbar-react-native'
+import { Client } from 'rollbar-react-native'
 import DeviceInfo from 'react-native-device-info'
 
 import { Config } from '@common/config'
@@ -8,7 +8,8 @@ let rollbar
 try {
   const version = DeviceInfo.getBuildNumber()
 
-  const rollbarConfig = new Configuration(Config.ROLLBAR_API_KEY, {
+  rollbar = new Client({
+    accessToken: Config.ROLLBAR_API_KEY,
     enabled: !['development', 'test'].includes(Config.ENVIRONMENT),
     environment: Config.ENVIRONMENT,
     appVersion: version,
@@ -24,17 +25,13 @@ try {
       },
     },
   })
-
-  rollbar = new Client(rollbarConfig)
 } catch (err) {
   console.warn('Rollbar config failed', err)
 
-  rollbar = new Client(
-    '',
-    new Configuration({
-      enabled: false,
-    }),
-  )
+  rollbar = new Client({
+    accessToken: '',
+    enabled: false,
+  })
 }
 
 module.exports = { rollbar }
