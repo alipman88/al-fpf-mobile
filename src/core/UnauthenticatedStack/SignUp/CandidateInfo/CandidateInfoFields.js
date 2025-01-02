@@ -58,7 +58,7 @@ export const CandidateInfoFields = ({
           required
           touched={!!touched.title}
           value={values.title}
-          placeholder='Officr you are registered to run for'
+          placeholder='Office you are registered to run for'
         />
       </FieldWrapper>
       <FieldWrapper>
