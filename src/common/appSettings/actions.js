@@ -1,7 +1,7 @@
 import { appSettings } from './slice'
-import { api } from '@common/api'
-import { appMessage } from '@components/AppMessage/slice'
-import { responseError } from '@common/utils/responseError'
+import { api } from '@fpf/common/api'
+import { appMessage } from '@fpf/components/AppMessage/slice'
+import { responseError } from '@fpf/common/utils/responseError'
 
 export const getAppSettings = () => async (dispatch, getState) => {
   try {

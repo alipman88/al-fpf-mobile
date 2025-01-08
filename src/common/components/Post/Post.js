@@ -2,13 +2,13 @@ import React from 'react'
 import { TouchableOpacity, Linking } from 'react-native'
 import Autolink from 'react-native-autolink'
 import PropTypes from 'prop-types'
-import { Text, TextSemibold } from '@components/Text'
+import { Text, TextSemibold } from '@fpf/components/Text'
 import truncate from 'lodash/truncate'
 
-import { PostCategory } from '@components/PostCategory'
-import { Button } from '@components/Button'
-import { Badge, BadgeText } from '@components/Badge'
-import { ImageSlider } from '@components/ImageSlider'
+import { PostCategory } from '@fpf/components/PostCategory'
+import { Button } from '@fpf/components/Button'
+import { Badge, BadgeText } from '@fpf/components/Badge'
+import { ImageSlider } from '@fpf/components/ImageSlider'
 
 import {
   LinkText,
@@ -37,7 +37,7 @@ import {
 import {
   Disclaimer,
   AutoPostLinkStyle,
-} from '@core/Authenticated/Tabs/Forum/components/sharedStyles'
+} from '@fpf/core/Authenticated/Tabs/Forum/components/sharedStyles'
 
 export class Post extends React.Component {
   state = {

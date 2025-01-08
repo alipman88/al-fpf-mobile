@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
-import { Text } from '@components/Text'
-import { Button } from '@components/Button'
+import { Text } from '@fpf/components/Text'
+import { Button } from '@fpf/components/Button'
 
 export const Image = styled.Image`
   ${({ width }) => width && `width: ${width}px;`}

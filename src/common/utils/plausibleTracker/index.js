@@ -1,7 +1,7 @@
 import { Dimensions } from 'react-native'
 import DeviceInfo from 'react-native-device-info'
 
-import { rollbar } from '@common/utils/rollbar'
+import { rollbar } from '@fpf/common/utils/rollbar'
 
 // This code is based partly on:
 // https://github.com/plausible/plausible-tracker

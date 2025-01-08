@@ -1,6 +1,6 @@
-import { api } from '@common/api'
+import { api } from '@fpf/common/api'
 
-import { appMessage } from '@components/AppMessage/slice'
+import { appMessage } from '@fpf/components/AppMessage/slice'
 import { resendEmail } from '../actions'
 
 describe('EmailVerification - actions', () => {

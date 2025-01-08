@@ -1,5 +1,5 @@
-import * as api from '@common/api'
-import { currentUser } from '@common/currentUser'
+import * as api from '@fpf/common/api'
+import { currentUser } from '@fpf/common/currentUser'
 import { login, sendDeviceData } from '../actions'
 
 describe('session actions', () => {

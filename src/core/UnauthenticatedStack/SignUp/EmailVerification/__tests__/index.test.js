@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { TouchableOpacity } from 'react-native'
 
-import { api } from '@common/api'
+import { api } from '@fpf/common/api'
 import { EmailVerification } from '../EmailVerification'
 import { HelpMessage } from '../styledComponents'
 

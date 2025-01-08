@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
-import { Pill } from '@components/Pill'
-import { Text, TextSemibold } from '@components/Text'
+import { Pill } from '@fpf/components/Pill'
+import { Text, TextSemibold } from '@fpf/components/Text'
 
 export const ProfileTypeContainer = styled.View`
   padding: 25px;

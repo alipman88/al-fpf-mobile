@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Button, Icon, Label, Wrapper } from './styledComponents'
-import checkboxTick from '@assets/images/global-assets/form-elements/checkbox-tick.png'
+import checkboxTick from '@fpf/assets/images/global-assets/form-elements/checkbox-tick.png'
 
 export const Checkbox = ({ children, onPress, value }) => (
   <Wrapper onPress={() => onPress(!value)}>

@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { SwiperComponent } from './Swiper'
-import { ScreenContainer } from '@components/ScreenContainer'
-import { HeaderLogo } from '@components/HeaderLogo'
+import { ScreenContainer } from '@fpf/components/ScreenContainer'
+import { HeaderLogo } from '@fpf/components/HeaderLogo'
 
 export class Welcome extends React.Component {
   render() {

@@ -1,12 +1,12 @@
 import { StackActions } from '@react-navigation/native'
 
-import { issues } from '@common/issues'
-import { areas } from '@common/areas'
+import { issues } from '@fpf/common/issues'
+import { areas } from '@fpf/common/areas'
 import { posts } from './slice'
-import { getAuthorized } from '@common/api'
-import { appMessage } from '@components/AppMessage/slice'
-import { resetAction } from '@common/resetAction'
-import { responseError } from '@common/utils/responseError'
+import { getAuthorized } from '@fpf/common/api'
+import { appMessage } from '@fpf/components/AppMessage/slice'
+import { resetAction } from '@fpf/common/resetAction'
+import { responseError } from '@fpf/common/utils/responseError'
 import endOfWeek from 'date-fns/end_of_week'
 import endOfDay from 'date-fns/end_of_day'
 

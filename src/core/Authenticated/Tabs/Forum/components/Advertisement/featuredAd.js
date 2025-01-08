@@ -1,9 +1,9 @@
 import React from 'react'
 import { TouchableOpacity, View } from 'react-native'
-import { openFpfUrl } from '@common/utils/openFpfUrl'
+import { openFpfUrl } from '@fpf/common/utils/openFpfUrl'
 import PropTypes from 'prop-types'
-import { PostCategory } from '@components/PostCategory'
-import { SizedImage } from '@components/SizedImage'
+import { PostCategory } from '@fpf/components/PostCategory'
+import { SizedImage } from '@fpf/components/SizedImage'
 import { Card, CardContent, Header, Link, Text } from '../sharedStyles'
 
 export const FeaturedAd = ({ ad, navigateWithToken }) => (

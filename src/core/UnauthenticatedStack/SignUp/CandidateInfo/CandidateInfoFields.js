@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import isEmpty from 'lodash/isEmpty'
 
-import { FullScreenWizard } from '@components/FullScreenWizard'
-import { TextInput } from '@components/TextInput'
+import { FullScreenWizard } from '@fpf/components/FullScreenWizard'
+import { TextInput } from '@fpf/components/TextInput'
 
 import { Container, Description, FieldWrapper } from './styledComponents'
 

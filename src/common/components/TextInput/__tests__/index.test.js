@@ -3,8 +3,8 @@ import { shallow } from 'enzyme'
 import { TouchableWithoutFeedback } from 'react-native'
 
 import { TextInput } from '../index'
-import { FormError } from '@components/FormError'
-import { FormFieldLabel } from '@components/FormFieldLabel'
+import { FormError } from '@fpf/components/FormError'
+import { FormFieldLabel } from '@fpf/components/FormFieldLabel'
 import { StyledTextInput } from '../styledComponents'
 
 const TestIcon = () => null

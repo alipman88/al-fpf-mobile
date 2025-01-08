@@ -2,13 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import DeviceInfo from 'react-native-device-info'
 import { Image, TouchableOpacity } from 'react-native'
-import { openFpfUrl } from '@common/utils/openFpfUrl'
+import { openFpfUrl } from '@fpf/common/utils/openFpfUrl'
 import Spinner from 'react-native-loading-spinner-overlay'
 
-import { Config } from '@common/config'
-import { ScreenContainer } from '@components/ScreenContainer'
-import { KeyboardAwareScrollView } from '@components/KeyboardAwareScrollView'
-import { getProfileDisplayName } from '@common/utils/getProfileDisplayName'
+import { Config } from '@fpf/common/config'
+import { ScreenContainer } from '@fpf/components/ScreenContainer'
+import { KeyboardAwareScrollView } from '@fpf/components/KeyboardAwareScrollView'
+import { getProfileDisplayName } from '@fpf/common/utils/getProfileDisplayName'
 import { NavLink } from '../components/NavLink'
 import { FieldLabel } from '../components/FieldLabel'
 import { FieldHeading } from '../components/FieldHeading'
@@ -22,7 +22,7 @@ import {
   ExternalLinkContainer,
 } from './styledComponents'
 
-import linkIcon from '@assets/images/global-assets/external-link-icons/external-link-icon-blue.png'
+import linkIcon from '@fpf/assets/images/global-assets/external-link-icons/external-link-icon-blue.png'
 
 let envDisplay = ['development', 'staging'].includes(Config.ENVIRONMENT)
   ? ` : ${Config.ENVIRONMENT}`

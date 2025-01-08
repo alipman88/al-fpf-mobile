@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import { currentUser } from '@common/currentUser'
+import { currentUser } from '@fpf/common/currentUser'
 import { Search as SearchScreen } from './Search'
 
 const mapStateToProps = (state) => ({

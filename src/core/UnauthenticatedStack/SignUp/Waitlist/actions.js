@@ -1,9 +1,9 @@
 import pick from 'lodash/pick'
-import { api } from '@common/api'
-import { snakeCaseData } from '@common/utils/snakeCaseData'
-import { responseError } from '@common/utils/responseError'
+import { api } from '@fpf/common/api'
+import { snakeCaseData } from '@fpf/common/utils/snakeCaseData'
+import { responseError } from '@fpf/common/utils/responseError'
 
-import { appMessage } from '@components/AppMessage/slice'
+import { appMessage } from '@fpf/components/AppMessage/slice'
 
 export const joinWaitlist = (values) => async (dispatch) => {
   try {

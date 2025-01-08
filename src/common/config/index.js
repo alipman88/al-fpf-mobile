@@ -1,7 +1,7 @@
 import { default as ReactNativeConfig } from 'react-native-config'
 import { chain } from 'lodash'
 
-import Settings from '@common/settings'
+import Settings from '@fpf/common/settings'
 
 const SETTINGS_GROUP_KEY = 'CONFIG_SETTINGS_GROUP'
 

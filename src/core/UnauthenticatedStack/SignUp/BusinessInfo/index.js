@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { BusinessInfo as BusinessInfoComponent } from './BusinessInfo'
 import { newUser } from '../newUser'
-import { appSettings } from '@common/appSettings'
+import { appSettings } from '@fpf/common/appSettings'
 
 const mapStateToProps = (state) => {
   return {

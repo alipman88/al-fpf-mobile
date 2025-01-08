@@ -1,8 +1,8 @@
-import * as api from '@common/api'
+import * as api from '@fpf/common/api'
 import { Linking } from 'react-native'
 import { navigateWithToken } from '../navigateWithToken'
-import { appMessage } from '@components/AppMessage/slice'
-import { spinner } from '@app/Spinner/slice'
+import { appMessage } from '@fpf/components/AppMessage/slice'
+import { spinner } from '@fpf/app/Spinner/slice'
 
 describe('navigateWithToken', () => {
   test('gets the token, and directs the user', async () => {

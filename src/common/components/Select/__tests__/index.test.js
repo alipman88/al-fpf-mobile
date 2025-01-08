@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import { Select } from '../index'
-import { FormFieldLabel } from '@components/FormFieldLabel'
+import { FormFieldLabel } from '@fpf/components/FormFieldLabel'
 
 describe('Select', () => {
   const defaultProps = {

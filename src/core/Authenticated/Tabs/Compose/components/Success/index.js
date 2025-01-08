@@ -4,11 +4,11 @@ import { TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import IconEvil from 'react-native-vector-icons/EvilIcons'
 
-import { Modal } from '@components/Modal'
-import grassImage from '@assets/images/fpf-grass.png'
-import greyBird from '@assets/images/global-assets/grey-bird/grey-bird.png'
-import birdLetterbox from '@assets/images/bird-letterbox/bird-letterbox.png'
-import birdEatingBirdseed from '@assets/images/bird-eating-birdseed/bird-eating-birdseed.png'
+import { Modal } from '@fpf/components/Modal'
+import grassImage from '@fpf/assets/images/fpf-grass.png'
+import greyBird from '@fpf/assets/images/global-assets/grey-bird/grey-bird.png'
+import birdLetterbox from '@fpf/assets/images/bird-letterbox/bird-letterbox.png'
+import birdEatingBirdseed from '@fpf/assets/images/bird-eating-birdseed/bird-eating-birdseed.png'
 
 import {
   BirdEatingBirdseed,

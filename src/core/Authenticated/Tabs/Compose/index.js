@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
-import { currentUser } from '@common/currentUser'
-import { profile } from '@common/profile'
+import { currentUser } from '@fpf/common/currentUser'
+import { profile } from '@fpf/common/profile'
 import { Compose as ComposeScreen } from './Compose'
-import { navigateWithToken } from '@common/actions/navigateWithToken'
+import { navigateWithToken } from '@fpf/common/actions/navigateWithToken'
 
 const mapStateToProps = (state) => ({
   accessToken: currentUser.selectors.getAccessToken(state),

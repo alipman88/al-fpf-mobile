@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import { Button } from '@components/Button'
+import { Button } from '@fpf/components/Button'
 import { Description } from '../styledComponents'
 import { Subscription } from '../Subscription'
 

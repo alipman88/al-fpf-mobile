@@ -1,8 +1,8 @@
 import { StackActions } from '@react-navigation/native'
 
-import { rollbar } from '@common/utils/rollbar'
-import { postAuthorized } from '@common/api'
-import { resetAction } from '@common/resetAction'
+import { rollbar } from '@fpf/common/utils/rollbar'
+import { postAuthorized } from '@fpf/common/api'
+import { resetAction } from '@fpf/common/resetAction'
 import CookieManager from '@react-native-cookies/cookies'
 
 export const logoutUser =

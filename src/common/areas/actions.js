@@ -1,10 +1,10 @@
 import { StackActions } from '@react-navigation/native'
 
 import { areas as slice } from './slice'
-import { getAuthorized } from '@common/api'
-import { appMessage } from '@components/AppMessage/slice'
-import { resetAction } from '@common/resetAction'
-import { responseError } from '@common/utils/responseError'
+import { getAuthorized } from '@fpf/common/api'
+import { appMessage } from '@fpf/components/AppMessage/slice'
+import { resetAction } from '@fpf/common/resetAction'
+import { responseError } from '@fpf/common/utils/responseError'
 
 export const getAreas = (navigation) => async (dispatch, getState) => {
   try {

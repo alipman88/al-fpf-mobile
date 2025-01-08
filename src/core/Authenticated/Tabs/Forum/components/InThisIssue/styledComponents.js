@@ -1,5 +1,5 @@
 import styled from 'styled-components/native'
-import { TextSemibold } from '@components/Text'
+import { TextSemibold } from '@fpf/components/Text'
 
 export const Container = styled.View`
   border-width: 1px;

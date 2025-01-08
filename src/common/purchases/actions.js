@@ -1,11 +1,11 @@
 import * as RNIap from 'react-native-iap'
 
-import * as api from '@common/api'
-import { appMessage } from '@components/AppMessage/slice'
-import { profile } from '@common/profile'
+import * as api from '@fpf/common/api'
+import { appMessage } from '@fpf/components/AppMessage/slice'
+import { profile } from '@fpf/common/profile'
 import { purchases as slice } from './slice'
-import { responseError } from '@common/utils/responseError'
-import { rollbar } from '@common/utils/rollbar'
+import { responseError } from '@fpf/common/utils/responseError'
+import { rollbar } from '@fpf/common/utils/rollbar'
 
 /**
  * Request the purchase of a subscription for the given IAP product SKU for the

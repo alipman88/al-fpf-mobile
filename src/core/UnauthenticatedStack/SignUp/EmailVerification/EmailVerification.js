@@ -4,11 +4,11 @@ import PropTypes from 'prop-types'
 import Spinner from 'react-native-loading-spinner-overlay'
 import startCase from 'lodash/startCase'
 
-import { Config } from '@common/config'
-import { ScreenContainer } from '@components/ScreenContainer'
-import { HeaderLogo } from '@components/HeaderLogo'
-import { profileTypes } from '@common/types/profileTypes'
-import { openFpfUrl } from '@common/utils/openFpfUrl'
+import { Config } from '@fpf/common/config'
+import { ScreenContainer } from '@fpf/components/ScreenContainer'
+import { HeaderLogo } from '@fpf/components/HeaderLogo'
+import { profileTypes } from '@fpf/common/types/profileTypes'
+import { openFpfUrl } from '@fpf/common/utils/openFpfUrl'
 import {
   BottomContainer,
   BirdContainer,
@@ -20,9 +20,9 @@ import {
   TextLink,
 } from './styledComponents'
 
-import yellowBird from '@assets/images/onboarding/yellow-bird.png'
-import greyBird from '@assets/images/onboarding/grey-bird.png'
-import LetterBird from '@assets/images/bird-letterbox/envelope-bird.png'
+import yellowBird from '@fpf/assets/images/onboarding/yellow-bird.png'
+import greyBird from '@fpf/assets/images/onboarding/grey-bird.png'
+import LetterBird from '@fpf/assets/images/bird-letterbox/envelope-bird.png'
 
 export class EmailVerification extends React.Component {
   componentDidMount() {

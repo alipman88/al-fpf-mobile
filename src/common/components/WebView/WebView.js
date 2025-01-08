@@ -1,21 +1,21 @@
 import React from 'react'
-import { Config } from '@common/config'
+import { Config } from '@fpf/common/config'
 import { Linking } from 'react-native'
 import { WebView as BaseWebView } from 'react-native-webview'
 import PropTypes from 'prop-types'
 import DeviceInfo from 'react-native-device-info'
 import Spinner from 'react-native-loading-spinner-overlay'
 
-import { BackButton } from '@core/Authenticated/Settings/components/BackButton'
-import { Button } from '@components/Button'
+import { BackButton } from '@fpf/core/Authenticated/Settings/components/BackButton'
+import { Button } from '@fpf/components/Button'
 import {
   composeRegex,
   composePathParams,
-} from '@core/Authenticated/Tabs/Compose/parseUrl'
+} from '@fpf/core/Authenticated/Tabs/Compose/parseUrl'
 import {
   isIssuePath,
   issuePathParams,
-} from '@core/Authenticated/Tabs/Forum/parseUrl'
+} from '@fpf/core/Authenticated/Tabs/Forum/parseUrl'
 import { ErrorContainer, ErrorText } from './styledComponents'
 
 // Directory URL regex

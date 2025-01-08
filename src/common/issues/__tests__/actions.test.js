@@ -1,13 +1,13 @@
 import { StackActions } from '@react-navigation/native'
 
-import { api } from '@common/api'
+import { api } from '@fpf/common/api'
 import { getIssues, fetchSpecificIssue } from '../actions'
 import { issues } from '../slice'
-import { posts } from '@common/posts/slice'
-import { appMessage } from '@components/AppMessage/slice'
-import { areas } from '@common/areas'
-import { spinner } from '@app/Spinner/slice'
-import * as commonActions from '@common/actions/navigateWithToken'
+import { posts } from '@fpf/common/posts/slice'
+import { appMessage } from '@fpf/components/AppMessage/slice'
+import { areas } from '@fpf/common/areas'
+import { spinner } from '@fpf/app/Spinner/slice'
+import * as commonActions from '@fpf/common/actions/navigateWithToken'
 
 describe('issues actions', () => {
   const getState = () => ({

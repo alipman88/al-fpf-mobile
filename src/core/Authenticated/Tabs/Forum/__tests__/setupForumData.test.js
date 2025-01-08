@@ -1,26 +1,26 @@
 import { setupForumData } from '../setupForumData'
-import { areas } from '@common/areas/slice'
-import { issues } from '@common/issues/slice'
+import { areas } from '@fpf/common/areas/slice'
+import { issues } from '@fpf/common/issues/slice'
 
-jest.mock('@common/issues', () => ({
+jest.mock('@fpf/common/issues', () => ({
   getIssues: jest.fn().mockReturnValue('getIssues'),
-  issues: require('@common/issues/slice').issues,
+  issues: require('@fpf/common/issues/slice').issues,
 }))
 
-jest.mock('@common/posts', () => ({
+jest.mock('@fpf/common/posts', () => ({
   getContents: jest.fn().mockReturnValue('getContents'),
 }))
 
-jest.mock('@common/profile', () => ({
+jest.mock('@fpf/common/profile', () => ({
   getProfiles: jest.fn().mockReturnValue('getProfiles'),
   profile: require('../../../../../common/profile/slice').profile,
 }))
 
-jest.mock('@common/appSettings', () => ({
+jest.mock('@fpf/common/appSettings', () => ({
   getAppSettings: jest.fn().mockReturnValue('getAppSettings'),
 }))
 
-jest.mock('@common/areas', () => ({
+jest.mock('@fpf/common/areas', () => ({
   getAreas: jest.fn().mockReturnValue('getAreas'),
   areas: require('../../../../../common/areas/slice').areas,
 }))

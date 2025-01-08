@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 
-import { TextSemibold, Text } from '@components/Text'
+import { TextSemibold, Text } from '@fpf/components/Text'
 
 export const View = styled.View`
   flex: 1;

@@ -1,8 +1,8 @@
 import DeviceInfo from 'react-native-device-info'
 import { Platform } from 'react-native'
 
-import { api, postAuthorized } from '@common/api'
-import { currentUser } from '@common/currentUser'
+import { api, postAuthorized } from '@fpf/common/api'
+import { currentUser } from '@fpf/common/currentUser'
 
 const deviceParams = {
   os: Platform.OS,

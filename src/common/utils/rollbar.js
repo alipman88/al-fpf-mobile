@@ -1,7 +1,7 @@
 import { Client } from 'rollbar-react-native'
 import DeviceInfo from 'react-native-device-info'
 
-import { Config } from '@common/config'
+import { Config } from '@fpf/common/config'
 
 let rollbar
 

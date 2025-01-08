@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Post } from '@components/Post'
+import { Post } from '@fpf/components/Post'
 
 export const ForumPost = ({ post, postTruncateLength, navigation }) => {
   const onTapCategory = (categoryId) => {

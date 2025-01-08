@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
 
-import { Text } from '@components/Text'
-import { paddingTop, paddingHorizontal } from '@common/styles/screenPadding'
+import { Text } from '@fpf/components/Text'
+import { paddingTop, paddingHorizontal } from '@fpf/common/styles/screenPadding'
 
 export const FormContainer = styled.View`
   padding-top: ${paddingTop}px;

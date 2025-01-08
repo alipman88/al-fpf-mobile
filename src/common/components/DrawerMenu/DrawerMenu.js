@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import { ScrollView, TouchableOpacity, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
-import bird1 from '@assets/images/onboarding/yellow-bird.png'
-import bird2 from '@assets/images/onboarding/grey-bird.png'
-import bird3 from '@assets/images/bird-eating-birdseed/bird-eating-birdseed.png'
+import bird1 from '@fpf/assets/images/onboarding/yellow-bird.png'
+import bird2 from '@fpf/assets/images/onboarding/grey-bird.png'
+import bird3 from '@fpf/assets/images/bird-eating-birdseed/bird-eating-birdseed.png'
 
-import { Grass } from '@components/Grass'
+import { Grass } from '@fpf/components/Grass'
 
 import {
   Container,

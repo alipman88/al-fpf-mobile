@@ -2,8 +2,8 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { LoginFields } from '../LoginFields'
 import { BottomText } from '../styledComponents'
-import { TextInput } from '@components/TextInput'
-import { Button } from '@components/Button'
+import { TextInput } from '@fpf/components/TextInput'
+import { Button } from '@fpf/components/Button'
 
 describe('LoginFields', () => {
   const defaultProps = {

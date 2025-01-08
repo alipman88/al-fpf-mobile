@@ -1,6 +1,6 @@
-import { api } from '@common/api'
-import { appMessage } from '@components/AppMessage/slice'
-import { responseError } from '@common/utils/responseError'
+import { api } from '@fpf/common/api'
+import { appMessage } from '@fpf/components/AppMessage/slice'
+import { responseError } from '@fpf/common/utils/responseError'
 
 export const resendEmail = (email) => async (dispatch) => {
   try {

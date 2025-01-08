@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { CandidateInfoFields } from '../CandidateInfoFields'
 
-import { TextInput } from '@components/TextInput'
+import { TextInput } from '@fpf/components/TextInput'
 
 describe('CandidateInfoFields', () => {
   const defaultProps = {

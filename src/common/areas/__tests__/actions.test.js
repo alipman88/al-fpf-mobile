@@ -1,9 +1,9 @@
 import { StackActions } from '@react-navigation/native'
 
-import { api } from '@common/api'
+import { api } from '@fpf/common/api'
 import { getAreas } from '../actions'
 import { areas } from '../slice'
-import { appMessage } from '@components/AppMessage/slice'
+import { appMessage } from '@fpf/components/AppMessage/slice'
 
 describe('areas actions', () => {
   const getState = () => ({

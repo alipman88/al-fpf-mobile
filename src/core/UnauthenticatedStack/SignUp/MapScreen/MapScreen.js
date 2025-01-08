@@ -2,10 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import MapView, { Marker, Polygon } from 'react-native-maps'
 
-import { FullScreenWizard } from '@components/FullScreenWizard'
-import { SimpleModal } from '@components/SimpleModal'
+import { FullScreenWizard } from '@fpf/components/FullScreenWizard'
+import { SimpleModal } from '@fpf/components/SimpleModal'
 import { ForumDetails } from './ForumDetails'
-import { profileTypes } from '@common/types/profileTypes'
+import { profileTypes } from '@fpf/common/types/profileTypes'
 import { getStepCount } from '../getStepCount'
 import { ForumScrollView } from './styledComponents'
 

@@ -10,6 +10,13 @@
     "test": "TZ=utc jest",
     "posttest": "./node_modules/.bin/eslint --ext .js src/"
   },
+  "workspaces": [
+    "src/App",
+    "src/assets",
+    "src/common",
+    "src/common/components",
+    "src/core"
+  ],
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.23.1",
     "@react-native-community/cli": "^12.3.6",

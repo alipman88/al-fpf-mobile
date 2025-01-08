@@ -9,12 +9,12 @@ import {
   getSettingsGroup,
   setSettingsGroup,
   getSettingsGroups,
-} from '@common/config'
-import { TextInput } from '@components/TextInput'
-import { PasswordInput } from '@components/PasswordInput'
-import { Button } from '@components/Button'
-import { Select } from '@components/Select'
-import logoImage from '@assets/images/fpf-logo.png'
+} from '@fpf/common/config'
+import { TextInput } from '@fpf/components/TextInput'
+import { PasswordInput } from '@fpf/components/PasswordInput'
+import { Button } from '@fpf/components/Button'
+import { Select } from '@fpf/components/Select'
+import logoImage from '@fpf/assets/images/fpf-logo.png'
 
 import {
   Container,

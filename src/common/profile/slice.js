@@ -1,8 +1,8 @@
 import { filter, find, get } from 'lodash'
 import { createSlice, createSelector } from 'redux-starter-kit'
 
-import { rollbar } from '@common/utils/rollbar'
-import { resetAction } from '@common/resetAction'
+import { rollbar } from '@fpf/common/utils/rollbar'
+import { resetAction } from '@fpf/common/resetAction'
 
 const initialState = {
   user: {

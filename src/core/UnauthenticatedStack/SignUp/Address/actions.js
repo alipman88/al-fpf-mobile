@@ -1,7 +1,7 @@
-import * as api from '@common/api'
-import { responseError } from '@common/utils/responseError'
+import * as api from '@fpf/common/api'
+import { responseError } from '@fpf/common/utils/responseError'
 
-import { appMessage } from '@components/AppMessage/slice'
+import { appMessage } from '@fpf/components/AppMessage/slice'
 
 export const searchAddress =
   (values, onSuccess) => async (dispatch, getState) => {

@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 
-import { Text } from '@components/Text'
+import { Text } from '@fpf/components/Text'
 
 export const FieldLabel = styled(Text)`
   font-size: 14px;

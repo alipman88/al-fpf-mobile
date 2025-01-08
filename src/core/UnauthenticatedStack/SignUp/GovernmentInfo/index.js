@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { newUser } from '../newUser'
-import { appSettings } from '@common/appSettings'
+import { appSettings } from '@fpf/common/appSettings'
 import { GovernmentInfo as GovernmentInfoComponent } from './GovernmentInfo'
 
 const mapStateToProps = (state) => {

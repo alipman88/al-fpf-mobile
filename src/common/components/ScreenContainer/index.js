@@ -1,7 +1,7 @@
 import React from 'react'
 import { StatusBar } from 'react-native'
 import PropTypes from 'prop-types'
-import { Grass } from '@components/Grass'
+import { Grass } from '@fpf/components/Grass'
 import {
   ContentWrapper,
   SafeAreaViewContainer,

@@ -1,6 +1,6 @@
-import * as api from '@common/api'
-import { responseError } from '@common/utils/responseError'
-import { appMessage } from '@components/AppMessage/slice'
+import * as api from '@fpf/common/api'
+import { responseError } from '@fpf/common/utils/responseError'
+import { appMessage } from '@fpf/components/AppMessage/slice'
 import { searchAddress } from '../actions'
 
 describe('Address - actions', () => {

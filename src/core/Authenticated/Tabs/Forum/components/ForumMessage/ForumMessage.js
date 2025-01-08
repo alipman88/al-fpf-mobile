@@ -1,11 +1,11 @@
 import React from 'react'
-import { openFpfUrl } from '@common/utils/openFpfUrl'
+import { openFpfUrl } from '@fpf/common/utils/openFpfUrl'
 import Autolink from 'react-native-autolink'
 import PropTypes from 'prop-types'
 import IconEvil from 'react-native-vector-icons/EvilIcons'
 
-import { Button } from '@components/Button'
-import { Text } from '@components/Text'
+import { Button } from '@fpf/components/Button'
+import { Text } from '@fpf/components/Text'
 import { Card, CardContent, Header, Bottom } from '../sharedStyles'
 import { AutoMessageLinkStyle } from './styledComponents'
 

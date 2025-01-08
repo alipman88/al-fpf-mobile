@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import ReactNativePickerModule from 'react-native-picker-module'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
-import { FormError } from '@components/FormError'
+import { FormError } from '@fpf/components/FormError'
 import {
   FormFieldLabel,
   FormFieldLabelWrapper,
   FormFieldRequired,
-} from '@components/FormFieldLabel'
+} from '@fpf/components/FormFieldLabel'
 
 import {
   Container,

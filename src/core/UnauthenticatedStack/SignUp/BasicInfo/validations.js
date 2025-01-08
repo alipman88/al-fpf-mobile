@@ -1,5 +1,5 @@
 import * as yup from 'yup'
-import { api } from '@common/api'
+import { api } from '@fpf/common/api'
 
 export const validateFirstName = (string) => {
   return /^(?=.*[a-zA-Z\u00C0-\u017F])[a-zA-Z\u00C0-\u017F.'"\-,/ ()&]*$/.test(

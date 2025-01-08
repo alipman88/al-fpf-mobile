@@ -1,11 +1,11 @@
 import { Linking } from 'react-native'
 import parse from 'url-parse'
-import * as api from '@common/api'
+import * as api from '@fpf/common/api'
 
-import { Config } from '@common/config'
-import { appMessage } from '@components/AppMessage/slice'
-import { spinner } from '@app/Spinner/slice'
-import { responseError } from '@common/utils/responseError'
+import { Config } from '@fpf/common/config'
+import { appMessage } from '@fpf/components/AppMessage/slice'
+import { spinner } from '@fpf/app/Spinner/slice'
+import { responseError } from '@fpf/common/utils/responseError'
 
 export const navigateWithToken = (url) => async (dispatch, getState) => {
   try {

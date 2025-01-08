@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import format from 'date-fns/format'
 
-import { Checkbox } from '@components/Checkbox'
+import { Checkbox } from '@fpf/components/Checkbox'
 
 import {
   Container,

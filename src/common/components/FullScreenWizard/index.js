@@ -3,15 +3,15 @@ import PropTypes from 'prop-types'
 import { Keyboard, ScrollView, StatusBar, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-import { HeaderLogo } from '@components/HeaderLogo'
-import { Button } from '@components/Button'
-import { FormSteps } from '@components/FormSteps'
-import { Grass } from '@components/Grass'
-import { IconButton } from '@components/IconButton'
-import { KeyboardOpen } from '@components/KeyboardOpen'
-import { screenSize } from '@common/styles/screenSizeHelper'
+import { HeaderLogo } from '@fpf/components/HeaderLogo'
+import { Button } from '@fpf/components/Button'
+import { FormSteps } from '@fpf/components/FormSteps'
+import { Grass } from '@fpf/components/Grass'
+import { IconButton } from '@fpf/components/IconButton'
+import { KeyboardOpen } from '@fpf/components/KeyboardOpen'
+import { screenSize } from '@fpf/common/styles/screenSizeHelper'
 
-import lineDivider from '@assets/images/createAccount/line-divider/accountsetup-line-divider.png'
+import lineDivider from '@fpf/assets/images/createAccount/line-divider/accountsetup-line-divider.png'
 
 import {
   Divider,

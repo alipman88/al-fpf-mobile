@@ -1,3 +1,4 @@
 {
-  "name": "@app"
+  "name": "@fpf/app",
+  "version": "1.0.0"
 }

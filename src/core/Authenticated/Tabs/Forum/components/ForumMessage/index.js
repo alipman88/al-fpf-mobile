@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 
 import { ForumMessage as ForumMessageComponent } from './ForumMessage'
-import { posts } from '@common/posts'
-import { issues } from '@common/issues'
+import { posts } from '@fpf/common/posts'
+import { issues } from '@fpf/common/issues'
 
 const mapStateToProps = (state) => {
   const currentIssueId = issues.selectors.getCurrentIssueId(state)

@@ -1,5 +1,5 @@
 import styled from 'styled-components/native'
-import { screenSize } from '@common/styles/screenSizeHelper'
+import { screenSize } from '@fpf/common/styles/screenSizeHelper'
 
 export const GrassContainer = styled.View`
   background-color: #e3eddd;

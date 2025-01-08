@@ -8,7 +8,7 @@ import {
   Pressable,
   TouchableOpacity,
 } from 'react-native'
-import { SizedImage } from '@components/SizedImage'
+import { SizedImage } from '@fpf/components/SizedImage'
 
 export function ImageSlider({ images }) {
   const [modalVisible, setModalVisible] = useState(false)

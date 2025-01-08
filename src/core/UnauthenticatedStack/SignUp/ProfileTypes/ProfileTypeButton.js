@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { TouchableOpacity, View } from 'react-native'
 
-import checkBox from '@assets/images/global-assets/form-elements/checkbox-tick.png'
+import checkBox from '@fpf/assets/images/global-assets/form-elements/checkbox-tick.png'
 import {
   ProfileTypePill,
   PillText,

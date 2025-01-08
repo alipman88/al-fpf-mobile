@@ -1,7 +1,7 @@
 import { createSlice, createSelector } from 'redux-starter-kit'
 import { omit, without } from 'lodash'
 
-import { resetAction } from '@common/resetAction'
+import { resetAction } from '@fpf/common/resetAction'
 
 const initialState = {
   postsByIssue: {},

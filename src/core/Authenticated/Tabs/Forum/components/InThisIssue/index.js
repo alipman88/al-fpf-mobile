@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import { posts } from '@common/posts'
-import { issues } from '@common/issues'
+import { posts } from '@fpf/common/posts'
+import { issues } from '@fpf/common/issues'
 
 import { InThisIssue as InThisIssueComponent } from './InThisIssue'
 

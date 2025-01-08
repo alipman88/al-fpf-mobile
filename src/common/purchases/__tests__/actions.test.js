@@ -1,9 +1,9 @@
 import RNIap from 'react-native-iap'
 
-import * as api from '@common/api'
-import { appMessage } from '@components/AppMessage/slice'
+import * as api from '@fpf/common/api'
+import { appMessage } from '@fpf/components/AppMessage/slice'
 import { requestSubscription, purchaseUpdated, purchaseError } from '../actions'
-import { profile } from '@common/profile'
+import { profile } from '@fpf/common/profile'
 import { purchases } from '../slice'
 
 describe('purchases - actions', () => {

@@ -4,16 +4,16 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import DeviceInfo from 'react-native-device-info'
 
-import { Config } from '@common/config'
+import { Config } from '@fpf/common/config'
 import { resendEmail } from '../actions'
-import { KeyboardAwareScrollView } from '@components/KeyboardAwareScrollView'
-import { responseError } from '@common/utils/responseError'
+import { KeyboardAwareScrollView } from '@fpf/components/KeyboardAwareScrollView'
+import { responseError } from '@fpf/common/utils/responseError'
 import { Formik } from 'formik'
-import { login } from '@common/session'
-import { openFpfUrl } from '@common/utils/openFpfUrl'
+import { login } from '@fpf/common/session'
+import { openFpfUrl } from '@fpf/common/utils/openFpfUrl'
 
 import { validations } from './validations'
-import { ScreenContainer } from '@components/ScreenContainer'
+import { ScreenContainer } from '@fpf/components/ScreenContainer'
 import { LoginFields } from './LoginFields'
 
 import {

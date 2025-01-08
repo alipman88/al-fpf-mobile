@@ -2,8 +2,8 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import { ForumMessage } from '../ForumMessage'
-import { Button } from '@components/Button'
-import { Text } from '@components/Text'
+import { Button } from '@fpf/components/Button'
+import { Text } from '@fpf/components/Text'
 import { Header } from '../../sharedStyles'
 
 describe('ForumMessage', () => {
