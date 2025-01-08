@@ -45,16 +45,15 @@ ErrorView.propTypes = {
 /**
  * Render a native web view.
  */
-export const WebView = (props) => {
+export const WebView = ({
+  source,
+  navigation,
+  route,
+  useBackButton = true,
+  areaIdsBySlug,
+  ...restProps
+}) => {
   const webViewRef = React.useRef(null)
-  const {
-    source,
-    navigation,
-    route,
-    useBackButton,
-    areaIdsBySlug,
-    ...restProps
-  } = props
   let [stack, setStack] = React.useState([source.uri])
   let [showError, setShowError] = React.useState(false)
 
@@ -243,8 +242,4 @@ WebView.propTypes = {
   source: PropTypes.object,
   useBackButton: PropTypes.bool,
   areaIdsBySlug: PropTypes.object.isRequired,
-}
-
-WebView.defaultProps = {
-  useBackButton: true,
 }

@@ -13,7 +13,7 @@ export const ScreenContainer = ({
   grassBackground,
   grassContent,
   grey,
-  withPadding,
+  withPadding = true,
 }) => {
   return (
     <ScreenWrapper grey={grey}>
@@ -32,8 +32,4 @@ ScreenContainer.propTypes = {
   grassContent: PropTypes.node,
   grey: PropTypes.bool,
   withPadding: PropTypes.bool,
-}
-
-ScreenContainer.defaultProps = {
-  withPadding: true,
 }

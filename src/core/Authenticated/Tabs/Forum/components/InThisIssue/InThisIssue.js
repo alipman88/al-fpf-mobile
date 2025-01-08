@@ -9,7 +9,7 @@ import {
   ListItemText,
 } from './styledComponents'
 
-export const InThisIssue = ({ headlines, number, posts }) => (
+export const InThisIssue = ({ headlines = [], number, posts = [] }) => (
   <Container>
     <Heading>In this issue #{number}</Heading>
     {headlines.map((headline, i) => (
@@ -32,9 +32,4 @@ InThisIssue.propTypes = {
   headlines: PropTypes.array,
   number: PropTypes.number,
   posts: PropTypes.array,
-}
-
-InThisIssue.defaultProps = {
-  headlines: [],
-  posts: [],
 }

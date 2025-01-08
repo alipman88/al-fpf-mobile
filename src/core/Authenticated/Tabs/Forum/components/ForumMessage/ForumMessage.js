@@ -9,7 +9,14 @@ import { Text } from '@components/Text'
 import { Card, CardContent, Header, Bottom } from '../sharedStyles'
 import { AutoMessageLinkStyle } from './styledComponents'
 
-export const ForumMessage = ({ forumMessage }) => {
+export const ForumMessage = ({
+  forumMessage = {
+    title: '',
+    content: '',
+    button_text: '',
+    button_url: '',
+  },
+}) => {
   if (forumMessageEmpty(forumMessage)) {
     return null
   }
@@ -59,13 +66,4 @@ const forumMessageEmpty = (forumMessage) => {
 
 ForumMessage.propTypes = {
   forumMessage: PropTypes.object,
-}
-
-ForumMessage.defaultProps = {
-  forumMessage: {
-    title: '',
-    content: '',
-    button_text: '',
-    button_url: '',
-  },
 }
