@@ -5,7 +5,7 @@ export const LinkText = styled(Text)`
   color: blue;
   text-align: center;
   margin-vertical: 10px;
-  margin-right; 5;
+  margin-right: 5px;
   font-size: 18px;
 `
 

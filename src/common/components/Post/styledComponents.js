@@ -107,7 +107,7 @@ export const BottomBordered = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 10px 10px 10px
+  padding: 0px 10px 10px 10px;
   align-items: stretch;
 `
 
@@ -115,7 +115,7 @@ export const Bottom = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0px 10px 0px
+  padding: 10px 0px 10px 0px;
   align-items: stretch;
 `
 

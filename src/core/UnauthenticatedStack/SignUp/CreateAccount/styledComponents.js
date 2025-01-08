@@ -32,8 +32,8 @@ export const CreateAccountWrapper = styled.View`
   align-self: center;
 `
 export const LinkWrapper = styled.View`
-  justify-content: flex-start
-  align-items: flex-start
+  justify-content: flex-start;
+  align-items: flex-start;
   width: 80%;
 `
 

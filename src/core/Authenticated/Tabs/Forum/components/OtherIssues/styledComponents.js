@@ -10,7 +10,7 @@ export const IssueText = styled(Text)`
 `
 
 export const IssueScrollView = styled.ScrollView`
-  flex:1
+  flex: 1;
   flex-direction: row;
   margin-bottom: 10px;
 `
