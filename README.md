@@ -2,10 +2,10 @@
 
 ## OS Support
 
-- iOS 14 - 18
-- Android 8 - 14 (API 26 - 34) -- see `android/build.gradle`
+- iOS 15.1 - 18 -- see `ios/Podfile` and `ios/FrontPorchForum.xcodeproj/project.pbxproj`
+- Android 9 - 15 (API 28 - 35) -- see `android/build.gradle`
 
-(Last updated 5/14/24)
+(Last updated 1/7/25)
 
 ## Setup
 
