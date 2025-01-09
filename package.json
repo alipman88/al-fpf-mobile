@@ -7,8 +7,7 @@
     "startdebug": "REACT_DEBUGGER=\"open -g 'rndebugger://set-debugger-loc?port=8081' ||\" yarn start",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "test": "TZ=utc jest",
-    "posttest": "./node_modules/.bin/eslint --ext .js src/"
+    "test": "TZ=utc jest && ./node_modules/.bin/eslint --ext .js src/"
   },
   "workspaces": [
     "src/App",
@@ -117,5 +116,6 @@
     "transformIgnorePatterns": [
       "node_modules/(?!(jest-)?@?react-native|react-navigation|@react-native-community|@react-native-picker|react-native-autolink|autolinker|query-string|decode-uri-component|split-on-first|filter-obj)"
     ]
-  }
+  },
+  "packageManager": "yarn@4.6.0"
 }

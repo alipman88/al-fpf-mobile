@@ -76,7 +76,7 @@ highly recommended you install it for better performance.
 Install npm packages:
 
 ```
-yarn install --frozen-lockfile
+yarn install --immutable
 ```
 
 Install pods (which are specified in `ios/Podfile`):
