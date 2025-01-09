@@ -23,6 +23,10 @@ export const logoutUser =
     } finally {
       dispatch(resetAction())
       setLoading(false)
-      navigation.dispatch(StackActions.replace('Login'))
+
+      // using set timeout to ensure the code doesn't run until the Unauthenticated
+      // (which has the "Login" screen) has become active; otherwise, react navigation
+      // won't be able to find the Login screen
+      setTimeout(() => navigation.dispatch(StackActions.replace('Login')))
     }
   }
