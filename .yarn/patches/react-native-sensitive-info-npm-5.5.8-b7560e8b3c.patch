@@ -1,0 +1,56 @@
+diff --git a/RNSensitiveInfo.js b/RNSensitiveInfo.js
+index b3e164c6bb00e1bb885e796f6f402909ecfb6071..b7e2ca6e39c972cdaa81b2780580a7b500fc2912 100644
+--- a/RNSensitiveInfo.js
++++ b/RNSensitiveInfo.js
+@@ -1,23 +1,34 @@
+-import {NativeModules} from 'react-native';
++// Patched according to:
++// https://github.com/mCodex/react-native-sensitive-info/issues/424#issuecomment-2511187606
++//
++// Fixes the following error:
++// > Error storing data [TypeError: _reactNativeSensitiveInfo.default.setItem is not a function (it is undefined)]
++//
++// This error is due to this library using an outdated method for importing
++// native code:
++// https://github.com/mCodex/react-native-sensitive-info/issues/424#issuecomment-2500764917
++
++import { NativeModules } from 'react-native';
+ 
+ const RNSensitiveInfo = NativeModules.RNSensitiveInfo;
+ 
+-module.exports = {
+-  ...RNSensitiveInfo,
+-  setInvalidatedByBiometricEnrollment(invalidatedByBiometricEnrollment) {
+-    if (RNSensitiveInfo.setInvalidatedByBiometricEnrollment == null) {
+-      return;
+-    }
++RNSensitiveInfo.setInvalidatedByBiometricEnrollment = (
++  invalidatedByBiometricEnrollment,
++) => {
++  if (RNSensitiveInfo.setInvalidatedByBiometricEnrollment == null) {
++    return undefined;
++  }
+ 
+-    return RNSensitiveInfo.setInvalidatedByBiometricEnrollment(
+-      invalidatedByBiometricEnrollment,
+-    );
+-  },
+-  cancelFingerprintAuth() {
+-    if (RNSensitiveInfo.cancelFingerprintAuth == null) {
+-      return;
+-    }
++  return RNSensitiveInfo.setInvalidatedByBiometricEnrollment(
++    invalidatedByBiometricEnrollment,
++  );
++};
++RNSensitiveInfo.cancelFingerprintAuth = () => {
++  if (RNSensitiveInfo.cancelFingerprintAuth == null) {
++    return undefined;
++  }
+ 
+-    return RNSensitiveInfo.cancelFingerprintAuth();
+-  },
++  return RNSensitiveInfo.cancelFingerprintAuth();
+ };
++
++export default RNSensitiveInfo;
