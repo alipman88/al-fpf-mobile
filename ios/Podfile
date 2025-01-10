@@ -34,12 +34,5 @@ target 'FrontPorchForum' do
       :mac_catalyst_enabled => false,
       # :ccache_enabled => true
     )
-
-    # Fix "Undefined symbols for architecture arm64" when building project
-    # https://github.com/facebook/react-native/issues/31118#issuecomment-811881922
-    # https://stackoverflow.com/a/63955114/154764
-    installer.pods_project.build_configurations.each do |installer_config|
-      installer_config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
-    end
   end
 end
