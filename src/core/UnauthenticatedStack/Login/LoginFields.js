@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Linking, TouchableOpacity, Text } from 'react-native'
+import { Linking, TouchableOpacity } from 'react-native'
 import Spinner from 'react-native-loading-spinner-overlay'
 import RNRestart from 'react-native-restart'
 
@@ -57,16 +57,14 @@ export class LoginFields extends React.Component {
     ) {
       settingsGroupField = (
         <FieldContainer>
-          <Text style={{ marginTop: 20 }}>Connect to:</Text>
           <Select
-            placeholder={getSettingsGroup()}
             items={settingsGroups}
             onValueChange={(settingsGroup) => {
               setSettingsGroup(settingsGroup)
               RNRestart.Restart()
             }}
-            title='Connect to'
             value={getSettingsGroup()}
+            label='Connect to'
           />
         </FieldContainer>
       )
@@ -119,9 +117,13 @@ export class LoginFields extends React.Component {
             Log in
           </Button>
           <ButtonSpacer />
-          <TouchableOpacity onPress={() => navigation.navigate('ProfileTypes')}>
-            <BottomText>Don't have an account? Sign Up</BottomText>
-          </TouchableOpacity>
+          <FieldContainer>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('ProfileTypes')}
+            >
+              <BottomText>Don't have an account? Sign Up</BottomText>
+            </TouchableOpacity>
+          </FieldContainer>
           {settingsGroupField}
         </FormContainer>
       </Container>

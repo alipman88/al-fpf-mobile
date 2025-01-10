@@ -3061,16 +3061,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-picker/picker@npm:^2.10.2":
-  version: 2.11.0
-  resolution: "@react-native-picker/picker@npm:2.11.0"
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-  checksum: 10c0/39c970f123162cbdc5d580418a99332c3269e638c641eeb2cfd147056d0635905cff815eb0bcdcc10f20e2f4de711a24f5d837af71055b928b2182d8be395fd0
-  languageName: node
-  linkType: hard
-
 "@react-native/assets-registry@npm:0.76.5":
   version: 0.76.5
   resolution: "@react-native/assets-registry@npm:0.76.5"
@@ -3851,7 +3841,6 @@ __metadata:
     "@react-native-cookies/cookies": "npm:^6.2.1"
     "@react-native-firebase/app": "npm:^21.6.2"
     "@react-native-firebase/messaging": "npm:^21.6.2"
-    "@react-native-picker/picker": "npm:^2.10.2"
     "@react-native/babel-preset": "npm:0.76.5"
     "@react-native/metro-config": "npm:0.76.5"
     "@react-navigation/bottom-tabs": "npm:^6.6.1"
@@ -3891,6 +3880,7 @@ __metadata:
     react-native-config: "npm:^1.5.3"
     react-native-device-info: "npm:^14.0.2"
     react-native-easy-toast: "npm:^2.3.0"
+    react-native-element-dropdown: "npm:^2.12.3"
     react-native-flash-message: "npm:^0.4.2"
     react-native-gradle-plugin: "npm:^0.71.19"
     react-native-iap: "npm:^12.16.0"
@@ -3898,7 +3888,6 @@ __metadata:
     react-native-loading-spinner-overlay: "npm:^3.0.1"
     react-native-maps: "npm:^1.20.1"
     react-native-modal: "npm:^13.0.1"
-    react-native-picker-module: "npm:^2.0.7"
     react-native-restart: "npm:^0.0.27"
     react-native-safe-area-context: "npm:^5.0.0"
     react-native-screens: "npm:^4.4.0"
@@ -10156,6 +10145,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-element-dropdown@npm:^2.12.3":
+  version: 2.12.3
+  resolution: "react-native-element-dropdown@npm:2.12.3"
+  dependencies:
+    lodash: "npm:^4.17.21"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/588d0cb339a87003cb23843c0351eb69102f6ea7074dd8848056ca575946c8499c0ff8c2fecf1c51585ea88fefd84ac272b1631d48f0dfd625b698e3a6c6b0e8
+  languageName: node
+  linkType: hard
+
 "react-native-flash-message@npm:^0.4.2":
   version: 0.4.2
   resolution: "react-native-flash-message@npm:0.4.2"
@@ -10257,17 +10258,6 @@ __metadata:
     react: "*"
     react-native: ">=0.65.0"
   checksum: 10c0/8ec5728c2a27eb31c97451968b4ecefdf005afda51fab2fc864fc442122573c70f7bf3fa0c6e3bd1d6aab3565c684104d1d30df916c3f9a6c7c3223e4d3b9249
-  languageName: node
-  linkType: hard
-
-"react-native-picker-module@npm:^2.0.7":
-  version: 2.0.31
-  resolution: "react-native-picker-module@npm:2.0.31"
-  peerDependencies:
-    "@react-native-community/picker": ^1.8.1
-    react-native: ^0.63.4
-    react-native-modal: ^11.6.1
-  checksum: 10c0/a2eb3175f243ed94e82a40e9469ed0f0abfeb753e4339c623efd8bb7c28cb7f0e580b9917999bd965f37959b0140942304025cab49fe6c5933ddc12b55749ff1
   languageName: node
   linkType: hard
 
