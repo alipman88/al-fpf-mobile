@@ -1,6 +1,5 @@
 import React from 'react'
 import { AppState, Platform } from 'react-native'
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import NetInfo from '@react-native-community/netinfo'
@@ -172,26 +171,18 @@ export class App extends React.Component {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <SafeAreaProvider>
-            <SafeAreaView style={{ flex: 1 }}>
-              <React.Fragment>
-                <Container
-                  handleNavigationChange={this.handleNavigationChange}
-                />
-                {!this.state.connected && (
-                  <Offline
-                    updateConnectionStatus={this.updateConnectionStatus}
-                  />
-                )}
-                <AppMessage />
-                <Toast
-                  ref={this.toastRef}
-                  position='top'
-                  style={{ zIndex: 1000 }}
-                />
-              </React.Fragment>
-            </SafeAreaView>
-          </SafeAreaProvider>
+          <React.Fragment>
+            <Container handleNavigationChange={this.handleNavigationChange} />
+            {!this.state.connected && (
+              <Offline updateConnectionStatus={this.updateConnectionStatus} />
+            )}
+            <AppMessage />
+            <Toast
+              ref={this.toastRef}
+              position='top'
+              style={{ zIndex: 1000 }}
+            />
+          </React.Fragment>
         </PersistGate>
       </Provider>
     )
