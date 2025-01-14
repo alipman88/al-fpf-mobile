@@ -2,9 +2,16 @@ language: node_js
 node_js:
 - 18
 dist: jammy
+
 cache:
-  directories:
-  - node_modules
+  yarn: false
+
+before_install:
+  - corepack enable
+  - yarn set version 4
+  - yarn -v
+
+install: yarn install --immutable
 
 notifications:
   email:
