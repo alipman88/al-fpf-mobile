@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Image, TouchableOpacity } from 'react-native'
 
-import linkIcon from '@assets/images/global-assets/external-link-icons/external-link-icon-blue.png'
+import linkIcon from '@fpf/assets/images/global-assets/external-link-icons/external-link-icon-blue.png'
 
 import { Container, Text } from './styledComponents'
 

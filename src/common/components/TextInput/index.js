@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { TouchableWithoutFeedback, View } from 'react-native'
-import { FormError } from '@components/FormError'
+import { FormError } from '@fpf/components/FormError'
 import {
   Container,
   ForwardIcon,
@@ -12,7 +12,7 @@ import {
   FormFieldLabel,
   FormFieldLabelWrapper,
   FormFieldRequired,
-} from '@components/FormFieldLabel'
+} from '@fpf/components/FormFieldLabel'
 
 export class TextInput extends React.Component {
   render() {

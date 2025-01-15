@@ -8,7 +8,7 @@ import {
   Pressable,
   TouchableOpacity,
 } from 'react-native'
-import { SizedImage } from '@components/SizedImage'
+import { SizedImage } from '@fpf/components/SizedImage'
 
 import { ImageSlider } from '../index'
 

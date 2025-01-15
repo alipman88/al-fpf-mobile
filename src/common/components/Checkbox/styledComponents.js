@@ -1,5 +1,5 @@
 import styled from 'styled-components/native'
-import { Text } from '@components/Text'
+import { Text } from '@fpf/components/Text'
 
 export const Button = styled.View`
   border-radius: 4px;

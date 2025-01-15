@@ -1,5 +1,5 @@
 import { createSlice, createSelector } from 'redux-starter-kit'
-import { resetAction } from '@common/resetAction'
+import { resetAction } from '@fpf/common/resetAction'
 
 export const currentUser = createSlice({
   slice: 'currentUser',

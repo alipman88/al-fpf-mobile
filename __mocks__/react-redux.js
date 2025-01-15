@@ -2,8 +2,8 @@ import React from 'react'
 import noop from 'lodash/noop'
 import { applyMiddleware, compose, combineReducers, createStore } from 'redux'
 import thunk from 'redux-thunk'
-import { mainReducer } from '@common/store/mainReducer'
-import { securedReducer } from '@common/store/securedReducer'
+import { mainReducer } from '@fpf/common/store/mainReducer'
+import { securedReducer } from '@fpf/common/store/securedReducer'
 
 const reducer = combineReducers({
   main: mainReducer,

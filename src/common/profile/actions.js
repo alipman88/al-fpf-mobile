@@ -1,7 +1,7 @@
 import { profile } from './slice'
-import * as api from '@common/api'
-import { appMessage } from '@components/AppMessage/slice'
-import { responseError } from '@common/utils/responseError'
+import * as api from '@fpf/common/api'
+import { appMessage } from '@fpf/components/AppMessage/slice'
+import { responseError } from '@fpf/common/utils/responseError'
 
 export const getProfiles = () => async (dispatch, getState) => {
   try {

@@ -1,5 +1,5 @@
 // This mock is not loaded automatically.  To make use of it, call:
-// jest.mock('@common/utils/plausibleTracker')
+// jest.mock('@fpf/common/utils/plausibleTracker')
 //
 // https://jestjs.io/docs/manual-mocks#mocking-user-modules
 

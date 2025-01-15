@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { StackActions } from '@react-navigation/native'
 
-import { Modal } from '@components/Modal'
+import { Modal } from '@fpf/components/Modal'
 
 import {
   BodyText,

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Linking, TouchableOpacity, Text } from 'react-native'
+import { Linking, TouchableOpacity } from 'react-native'
 import Spinner from 'react-native-loading-spinner-overlay'
 import RNRestart from 'react-native-restart'
 
@@ -9,12 +9,12 @@ import {
   getSettingsGroup,
   setSettingsGroup,
   getSettingsGroups,
-} from '@common/config'
-import { TextInput } from '@components/TextInput'
-import { PasswordInput } from '@components/PasswordInput'
-import { Button } from '@components/Button'
-import { Select } from '@components/Select'
-import logoImage from '@assets/images/fpf-logo.png'
+} from '@fpf/common/config'
+import { TextInput } from '@fpf/components/TextInput'
+import { PasswordInput } from '@fpf/components/PasswordInput'
+import { Button } from '@fpf/components/Button'
+import { Select } from '@fpf/components/Select'
+import logoImage from '@fpf/assets/images/fpf-logo.png'
 
 import {
   Container,
@@ -57,16 +57,14 @@ export class LoginFields extends React.Component {
     ) {
       settingsGroupField = (
         <FieldContainer>
-          <Text style={{ marginTop: 20 }}>Connect to:</Text>
           <Select
-            placeholder={getSettingsGroup()}
             items={settingsGroups}
             onValueChange={(settingsGroup) => {
               setSettingsGroup(settingsGroup)
               RNRestart.Restart()
             }}
-            title='Connect to'
             value={getSettingsGroup()}
+            label='Connect to'
           />
         </FieldContainer>
       )
@@ -119,9 +117,13 @@ export class LoginFields extends React.Component {
             Log in
           </Button>
           <ButtonSpacer />
-          <TouchableOpacity onPress={() => navigation.navigate('ProfileTypes')}>
-            <BottomText>Don't have an account? Sign Up</BottomText>
-          </TouchableOpacity>
+          <FieldContainer>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('ProfileTypes')}
+            >
+              <BottomText>Don't have an account? Sign Up</BottomText>
+            </TouchableOpacity>
+          </FieldContainer>
           {settingsGroupField}
         </FormContainer>
       </Container>

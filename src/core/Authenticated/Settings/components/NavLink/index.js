@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Image } from 'react-native'
 
-import chevron from '@assets/images/global-assets/settings-chevron.png'
+import chevron from '@fpf/assets/images/global-assets/settings-chevron.png'
 
 import { LinkContainer, LinkText } from './styledComponents'
 

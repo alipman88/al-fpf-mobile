@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Config } from '@common/config'
-import { WebView } from '@components/WebView'
+import { Config } from '@fpf/common/config'
+import { WebView } from '@fpf/components/WebView'
 
 export class Calendar extends React.Component {
   render() {

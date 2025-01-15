@@ -1,16 +1,16 @@
 import React from 'react'
 import Autolink from 'react-native-autolink'
 import { TouchableOpacity } from 'react-native'
-import { openFpfUrl } from '@common/utils/openFpfUrl'
+import { openFpfUrl } from '@fpf/common/utils/openFpfUrl'
 import PropTypes from 'prop-types'
 import IconEvil from 'react-native-vector-icons/EvilIcons'
-import { Button } from '@components/Button'
-import { SizedImage } from '@components/SizedImage'
-import { PostCategory } from '@components/PostCategory'
+import { Button } from '@fpf/components/Button'
+import { SizedImage } from '@fpf/components/SizedImage'
+import { PostCategory } from '@fpf/components/PostCategory'
 import {
   Disclaimer,
   AutoPostLinkStyle,
-} from '@core/Authenticated/Tabs/Forum/components/sharedStyles'
+} from '@fpf/core/Authenticated/Tabs/Forum/components/sharedStyles'
 import { Card, CardContent, ContentText, Header, Bottom } from '../sharedStyles'
 
 export const Ad = ({ ad, navigateWithToken }) => (

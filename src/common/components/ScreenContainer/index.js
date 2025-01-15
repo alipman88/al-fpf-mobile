@@ -1,7 +1,7 @@
 import React from 'react'
 import { StatusBar } from 'react-native'
 import PropTypes from 'prop-types'
-import { Grass } from '@components/Grass'
+import { Grass } from '@fpf/components/Grass'
 import {
   ContentWrapper,
   SafeAreaViewContainer,
@@ -13,7 +13,7 @@ export const ScreenContainer = ({
   grassBackground,
   grassContent,
   grey,
-  withPadding,
+  withPadding = true,
 }) => {
   return (
     <ScreenWrapper grey={grey}>
@@ -32,8 +32,4 @@ ScreenContainer.propTypes = {
   grassContent: PropTypes.node,
   grey: PropTypes.bool,
   withPadding: PropTypes.bool,
-}
-
-ScreenContainer.defaultProps = {
-  withPadding: true,
 }

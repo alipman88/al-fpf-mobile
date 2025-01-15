@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Button } from '@components/Button'
+import { Button } from '@fpf/components/Button'
 
 export const IconButton = ({ disabled, width, onPress, color, iconName }) => {
   return (

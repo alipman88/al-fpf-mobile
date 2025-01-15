@@ -1,8 +1,8 @@
 import { StackActions } from '@react-navigation/native'
 
-import { rollbar } from '@common/utils/rollbar'
-import { postAuthorized } from '@common/api'
-import { resetAction } from '@common/resetAction'
+import { rollbar } from '@fpf/common/utils/rollbar'
+import { postAuthorized } from '@fpf/common/api'
+import { resetAction } from '@fpf/common/resetAction'
 import CookieManager from '@react-native-cookies/cookies'
 
 export const logoutUser =
@@ -23,6 +23,10 @@ export const logoutUser =
     } finally {
       dispatch(resetAction())
       setLoading(false)
-      navigation.dispatch(StackActions.replace('Login'))
+
+      // using set timeout to ensure the code doesn't run until the Unauthenticated
+      // (which has the "Login" screen) has become active; otherwise, react navigation
+      // won't be able to find the Login screen
+      setTimeout(() => navigation.dispatch(StackActions.replace('Login')))
     }
   }

@@ -14,12 +14,12 @@ import {
   ButtonSpacer,
 } from './styledComponents'
 
-import speechBubble from '@assets/images/onboarding/speech-bubble.png'
-import hand from '@assets/images/onboarding/hand.png'
-import logIn from '@assets/images/onboarding/log-in.png'
-import yellowBird from '@assets/images/onboarding/yellow-bird.png'
-import greyBird from '@assets/images/onboarding/grey-bird.png'
-import greenBird from '@assets/images/bird-eating-birdseed/bird-eating-birdseed.png'
+import speechBubble from '@fpf/assets/images/onboarding/speech-bubble.png'
+import hand from '@fpf/assets/images/onboarding/hand.png'
+import logIn from '@fpf/assets/images/onboarding/log-in.png'
+import yellowBird from '@fpf/assets/images/onboarding/yellow-bird.png'
+import greyBird from '@fpf/assets/images/onboarding/grey-bird.png'
+import greenBird from '@fpf/assets/images/bird-eating-birdseed/bird-eating-birdseed.png'
 
 export const SwiperComponent = ({ navigation }) => {
   return (

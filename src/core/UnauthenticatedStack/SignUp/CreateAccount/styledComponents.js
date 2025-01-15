@@ -1,5 +1,5 @@
 import styled from 'styled-components/native'
-import { Text } from '@components/Text'
+import { Text } from '@fpf/components/Text'
 
 export const CheckboxWrapper = styled.View`
   min-height: 80px;
@@ -32,8 +32,8 @@ export const CreateAccountWrapper = styled.View`
   align-self: center;
 `
 export const LinkWrapper = styled.View`
-  justify-content: flex-start
-  align-items: flex-start
+  justify-content: flex-start;
+  align-items: flex-start;
   width: 80%;
 `
 

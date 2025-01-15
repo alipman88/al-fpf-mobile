@@ -4,11 +4,11 @@ import { capitalize, isEmpty } from 'lodash'
 
 import Spinner from 'react-native-loading-spinner-overlay'
 
-import { formatPhoneNumber } from '@common/utils/formatPhoneNumber'
+import { formatPhoneNumber } from '@fpf/common/utils/formatPhoneNumber'
 
-import { TextInput } from '@components/TextInput'
-import { Multiselect } from '@components/Multiselect'
-import { FullScreenWizard } from '@components/FullScreenWizard'
+import { TextInput } from '@fpf/components/TextInput'
+import { Multiselect } from '@fpf/components/Multiselect'
+import { FullScreenWizard } from '@fpf/components/FullScreenWizard'
 
 import {
   Container,

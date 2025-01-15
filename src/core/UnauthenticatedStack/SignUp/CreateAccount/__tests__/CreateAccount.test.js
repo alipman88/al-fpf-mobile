@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { FullScreenWizard } from '@components/FullScreenWizard'
+import { FullScreenWizard } from '@fpf/components/FullScreenWizard'
 import { CreateAccount } from '../CreateAccount'
 import { CheckboxField } from '../CheckboxField'
 

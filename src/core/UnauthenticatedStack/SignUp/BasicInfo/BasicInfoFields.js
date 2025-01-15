@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import isEmpty from 'lodash/isEmpty'
 
-import { TextInput } from '@components/TextInput'
-import { PasswordInput } from '@components/PasswordInput'
-import { FullScreenWizard } from '@components/FullScreenWizard'
+import { TextInput } from '@fpf/components/TextInput'
+import { PasswordInput } from '@fpf/components/PasswordInput'
+import { FullScreenWizard } from '@fpf/components/FullScreenWizard'
 
 import { getStepCount } from '../getStepCount'
 

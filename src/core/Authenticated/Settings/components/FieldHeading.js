@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 
-import { TextSemibold } from '@components/Text'
+import { TextSemibold } from '@fpf/components/Text'
 
 export const FieldHeading = styled(TextSemibold)`
   font-size: 18px;

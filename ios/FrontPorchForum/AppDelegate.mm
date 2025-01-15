@@ -19,7 +19,10 @@
   [FIRApp configure];
 
   // FPF addition -- Rollbar
-  [RollbarReactNative initWithAccessToken:[RNCConfig envFor:@"ROLLBAR_API_KEY"]];
+  NSDictionary *rollbarOptions = @{
+    @"accessToken": [RNCConfig envFor:@"ROLLBAR_API_KEY"]
+  };
+  [RollbarReactNative initWithConfiguration:rollbarOptions];
 
   // FPF addition -- react-native-push-notification
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
@@ -39,6 +42,11 @@
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
+{
+  return [self bundleURL];
+}
+
+- (NSURL *)bundleURL
 {
 #if DEBUG
   return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index"];

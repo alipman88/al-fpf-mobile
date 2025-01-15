@@ -8,7 +8,7 @@ import { ForumComponent as Forum } from '../Forum'
 import { ForumPost } from '../components/ForumPost'
 import { ForumMessage } from '../components/ForumMessage'
 import { NeighboringContent } from '../components/NeighboringContent'
-import { ExternalLink } from '@components/ExternalLink'
+import { ExternalLink } from '@fpf/components/ExternalLink'
 
 jest.mock('@react-navigation/native', () => ({
   useScrollToTop: jest.fn(),

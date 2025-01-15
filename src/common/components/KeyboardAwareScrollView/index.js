@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { KeyboardAwareScrollView as Base } from 'react-native-keyboard-aware-scroll-view'
 
-import { KeyboardOpen } from '@components/KeyboardOpen'
+import { KeyboardOpen } from '@fpf/components/KeyboardOpen'
 
 export const KeyboardAwareScrollView = ({
   children,

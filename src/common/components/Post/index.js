@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 
 import { Post as PostComponent } from './Post'
-import { areas } from '@common/areas'
-import { fetchSpecificIssue } from '@common/issues'
-import { chooseMailApp } from '@common/mailApp'
-import { appSettings } from '@common/appSettings'
+import { areas } from '@fpf/common/areas'
+import { fetchSpecificIssue } from '@fpf/common/issues'
+import { chooseMailApp } from '@fpf/common/mailApp'
+import { appSettings } from '@fpf/common/appSettings'
 
 const mapStateToProps = (state) => ({
   areasIdMap: areas.selectors.getAreasIdMap(state),

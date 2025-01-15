@@ -1,4 +1,4 @@
-import { api } from '@common/api'
+import { api } from '@fpf/common/api'
 import { getContents } from '../actions'
 import { posts } from '../slice'
 import endOfDay from 'date-fns/end_of_day'

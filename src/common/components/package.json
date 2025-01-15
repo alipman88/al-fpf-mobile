@@ -1,3 +1,4 @@
 {
-  "name": "@components"
+  "name": "@fpf/components",
+  "version": "1.0.0"
 }

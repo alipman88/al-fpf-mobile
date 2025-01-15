@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
-import { Text } from '@components/Text'
-import { Pill as BasePill } from '@components/Post/styledComponents'
+import { Text } from '@fpf/components/Text'
+import { Pill as BasePill } from '@fpf/components/Post/styledComponents'
 
 export const Pill = styled(BasePill)`
   background-color: ${({ labelStyle }) => labelStyle.background};

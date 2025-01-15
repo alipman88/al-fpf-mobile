@@ -1,6 +1,5 @@
 import React from 'react'
 import { AppState, Platform } from 'react-native'
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import NetInfo from '@react-native-community/netinfo'
@@ -8,20 +7,20 @@ import Toast from 'react-native-easy-toast'
 import * as RNIap from 'react-native-iap'
 import SplashScreen from 'react-native-splash-screen'
 
-import { Config } from '@common/config'
-import { store, persistor } from '@common/store'
-import { currentUser } from '@common/currentUser'
-import { AppMessage } from '@components/AppMessage'
-import { getProducts } from '@common/products'
+import { Config } from '@fpf/common/config'
+import { store, persistor } from '@fpf/common/store'
+import { currentUser } from '@fpf/common/currentUser'
+import { AppMessage } from '@fpf/components/AppMessage'
+import { getProducts } from '@fpf/common/products'
 import { Container } from './Container'
 import { Offline } from './Offline'
-import { purchaseUpdated, purchaseError } from '@common/purchases'
-import { sendDeviceData } from '@common/session'
-import { getProfiles } from '@common/profile'
-import { subscriptionSkus } from '@common/types/subscriptionSkus'
-import { setApplicationIconBadgeNumber } from '@common/notifications'
-import { rollbar } from '@common/utils/rollbar'
-import { plausible } from '@common/utils/plausible'
+import { purchaseUpdated, purchaseError } from '@fpf/common/purchases'
+import { sendDeviceData } from '@fpf/common/session'
+import { getProfiles } from '@fpf/common/profile'
+import { subscriptionSkus } from '@fpf/common/types/subscriptionSkus'
+import { setApplicationIconBadgeNumber } from '@fpf/common/notifications'
+import { rollbar } from '@fpf/common/utils/rollbar'
+import { plausible } from '@fpf/common/utils/plausible'
 
 export class App extends React.Component {
   constructor(props) {
@@ -172,26 +171,18 @@ export class App extends React.Component {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <SafeAreaProvider>
-            <SafeAreaView style={{ flex: 1 }}>
-              <React.Fragment>
-                <Container
-                  handleNavigationChange={this.handleNavigationChange}
-                />
-                {!this.state.connected && (
-                  <Offline
-                    updateConnectionStatus={this.updateConnectionStatus}
-                  />
-                )}
-                <AppMessage />
-                <Toast
-                  ref={this.toastRef}
-                  position='top'
-                  style={{ zIndex: 1000 }}
-                />
-              </React.Fragment>
-            </SafeAreaView>
-          </SafeAreaProvider>
+          <React.Fragment>
+            <Container handleNavigationChange={this.handleNavigationChange} />
+            {!this.state.connected && (
+              <Offline updateConnectionStatus={this.updateConnectionStatus} />
+            )}
+            <AppMessage />
+            <Toast
+              ref={this.toastRef}
+              position='top'
+              style={{ zIndex: 1000 }}
+            />
+          </React.Fragment>
         </PersistGate>
       </Provider>
     )

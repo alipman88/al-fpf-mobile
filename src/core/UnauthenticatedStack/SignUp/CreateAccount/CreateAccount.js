@@ -2,10 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Spinner from 'react-native-loading-spinner-overlay'
 
-import { profileTypes } from '@common/types/profileTypes'
+import { profileTypes } from '@fpf/common/types/profileTypes'
 import { getStepCount } from '../getStepCount'
 
-import { FullScreenWizard } from '@components/FullScreenWizard'
+import { FullScreenWizard } from '@fpf/components/FullScreenWizard'
 
 import { CheckboxField } from './CheckboxField'
 

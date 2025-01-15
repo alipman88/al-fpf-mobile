@@ -7,8 +7,8 @@ import {
   useNavigationContainerRef,
 } from '@react-navigation/native'
 
-import { currentUser } from '@common/currentUser'
-import { RootStack } from '@core/rootStack'
+import { currentUser } from '@fpf/common/currentUser'
+import { RootStack } from '@fpf/core/rootStack'
 import { Spinner } from './Spinner'
 
 const navTheme = {

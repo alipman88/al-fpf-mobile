@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
 
-import { paddingHorizontal } from '@common/styles/screenPadding'
-import { Text, TextSemibold } from '@components/Text'
+import { paddingHorizontal } from '@fpf/common/styles/screenPadding'
+import { Text, TextSemibold } from '@fpf/components/Text'
 
 export const Container = styled.View`
   padding-horizontal: ${paddingHorizontal}px;

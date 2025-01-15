@@ -2,10 +2,10 @@ import React from 'react'
 import { TouchableOpacity } from 'react-native'
 import { shallow } from 'enzyme'
 
-import { Post } from '@components/Post/Post'
-import { PostCategory } from '@components/PostCategory'
-import { BadgeText } from '@components/Badge'
-import { Button } from '@components/Button'
+import { Post } from '@fpf/components/Post/Post'
+import { PostCategory } from '@fpf/components/PostCategory'
+import { BadgeText } from '@fpf/components/Badge'
+import { Button } from '@fpf/components/Button'
 import {
   PostDate,
   PostContainerBordered,
@@ -13,7 +13,7 @@ import {
   PostLocation,
   ShowMoreButton,
 } from '../styledComponents'
-import { Disclaimer } from '@core/Authenticated/Tabs/Forum/components/sharedStyles'
+import { Disclaimer } from '@fpf/core/Authenticated/Tabs/Forum/components/sharedStyles'
 import Autolink from 'react-native-autolink'
 
 describe('Post', () => {

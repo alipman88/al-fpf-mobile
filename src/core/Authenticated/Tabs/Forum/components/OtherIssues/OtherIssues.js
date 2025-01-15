@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Dimensions, View, findNodeHandle } from 'react-native'
+import { Dimensions, View } from 'react-native'
 import Toast from 'react-native-easy-toast'
 
 import { IssueTab } from './IssueTab'
@@ -10,6 +10,12 @@ export class OtherIssues extends React.Component {
   state = {
     x: 0,
     scrollWidth: Number.MAX_VALUE,
+  }
+
+  constructor(props) {
+    super(props)
+    this.focusedIssueRef = React.createRef()
+    this.scrollViewRef = React.createRef()
   }
 
   componentDidUpdate() {
@@ -30,20 +36,20 @@ export class OtherIssues extends React.Component {
   scrollToFocusedIssue() {
     // using set timeout to ensure the code doesn't run until rendering is finished
     setTimeout(() => {
-      if (this.focusedIssueRef && this.scrollViewRef) {
-        this.focusedIssueRef.measureLayout(
-          findNodeHandle(this.scrollViewRef),
+      if (this.focusedIssueRef?.current && this.scrollViewRef?.current) {
+        this.focusedIssueRef.current.measureLayout(
+          this.scrollViewRef.current,
           (x) => {
-            if (this.scrollViewRef) {
-              this.scrollViewRef.scrollTo({
+            if (this.scrollViewRef.current) {
+              this.scrollViewRef.current.scrollTo({
                 x: Math.min(this.state.scrollWidth, x),
                 animated: true,
               })
             }
           },
         )
-      } else if (this.scrollViewRef) {
-        this.scrollViewRef.scrollToEnd({ animated: true })
+      } else if (this.scrollViewRef?.current) {
+        this.scrollViewRef.current.scrollToEnd({ animated: true })
       }
     })
   }
@@ -58,14 +64,7 @@ export class OtherIssues extends React.Component {
       .map((i) => {
         const focused = currentIssueId === i.id
         return (
-          <View
-            key={i.id}
-            ref={(ref) => {
-              if (ref && focused) {
-                this.focusedIssueRef = ref
-              }
-            }}
-          >
+          <View key={i.id} ref={focused ? this.focusedIssueRef : null}>
             <IssueTab
               issue={i}
               key={i.id}
@@ -88,9 +87,7 @@ export class OtherIssues extends React.Component {
         horizontal
         showsHorizontalScrollIndicator={false}
         onContentSizeChange={this.sizeChange}
-        ref={(ref) => {
-          this.scrollViewRef = ref
-        }}
+        ref={this.scrollViewRef}
       >
         {issuesRender}
       </IssueScrollView>

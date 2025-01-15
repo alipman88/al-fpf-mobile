@@ -1,17 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Keyboard, ScrollView, StatusBar, View } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context'
 
-import { HeaderLogo } from '@components/HeaderLogo'
-import { Button } from '@components/Button'
-import { FormSteps } from '@components/FormSteps'
-import { Grass } from '@components/Grass'
-import { IconButton } from '@components/IconButton'
-import { KeyboardOpen } from '@components/KeyboardOpen'
-import { screenSize } from '@common/styles/screenSizeHelper'
+import { HeaderLogo } from '@fpf/components/HeaderLogo'
+import { Button } from '@fpf/components/Button'
+import { FormSteps } from '@fpf/components/FormSteps'
+import { Grass } from '@fpf/components/Grass'
+import { IconButton } from '@fpf/components/IconButton'
+import { KeyboardOpen } from '@fpf/components/KeyboardOpen'
+import { screenSize } from '@fpf/common/styles/screenSizeHelper'
 
-import lineDivider from '@assets/images/createAccount/line-divider/accountsetup-line-divider.png'
+import lineDivider from '@fpf/assets/images/createAccount/line-divider/accountsetup-line-divider.png'
 
 import {
   Divider,
@@ -21,6 +24,27 @@ import {
   TopContainer,
   TopHeader,
 } from './styledComponents'
+
+function SafeAreaView({ children }) {
+  const insets = useSafeAreaInsets()
+
+  return (
+    <View
+      style={{
+        flex: 1,
+
+        // Paddings to handle safe area
+        paddingTop: insets.top,
+      }}
+    >
+      {children}
+    </View>
+  )
+}
+
+SafeAreaView.propTypes = {
+  children: PropTypes.node,
+}
 
 export class FullScreenWizard extends React.Component {
   render() {
@@ -106,40 +130,40 @@ export class FullScreenWizard extends React.Component {
       )
 
     return (
-      <ScreenWrapper>
-        <StatusBar barStyle='dark-content' />
-        <KeyboardAvoidingView behavior='padding'>
-          {/* Use JS-only version of React Native's SafeAreaView so that Grass
-              can extend into iOS 12 footer space*/}
-          <SafeAreaView style={{ flex: 1 }}>
-            {topSection}
-            <KeyboardOpen
-              render={({ open }) => {
-                return (
-                  // LATER: use KeyboardAwareScrollView here, but it's not working well:
-                  // - it's not actually scrolling inputs into view
-                  // - it's adding extra space below the bottom of the scroll content
-                  <ScrollView
-                    contentContainerStyle={{
-                      // https://medium.com/@peterpme/taming-react-natives-scrollview-with-flex-144e6ff76c08
-                      flexGrow: 1,
-                      justifyContent: 'space-between',
-                      ...contentContainerStyle,
-                    }}
-                  >
-                    {children}
-                    <Grass
-                      height={screenSize({ sm: 80 }, 100)}
-                      content={navButtons}
-                      resizeMode='repeat'
-                    />
-                  </ScrollView>
-                )
-              }}
-            />
-          </SafeAreaView>
-        </KeyboardAvoidingView>
-      </ScreenWrapper>
+      <SafeAreaProvider>
+        <SafeAreaView>
+          <ScreenWrapper>
+            <StatusBar barStyle='dark-content' />
+            <KeyboardAvoidingView behavior='padding'>
+              {topSection}
+              <KeyboardOpen
+                render={({ open }) => {
+                  return (
+                    // LATER: use KeyboardAwareScrollView here, but it's not working well:
+                    // - it's not actually scrolling inputs into view
+                    // - it's adding extra space below the bottom of the scroll content
+                    <ScrollView
+                      contentContainerStyle={{
+                        // https://medium.com/@peterpme/taming-react-natives-scrollview-with-flex-144e6ff76c08
+                        flexGrow: 1,
+                        justifyContent: 'space-between',
+                        ...contentContainerStyle,
+                      }}
+                    >
+                      {children}
+                      <Grass
+                        height={screenSize({ sm: 80 }, 100)}
+                        content={navButtons}
+                        resizeMode='repeat'
+                      />
+                    </ScrollView>
+                  )
+                }}
+              />
+            </KeyboardAvoidingView>
+          </ScreenWrapper>
+        </SafeAreaView>
+      </SafeAreaProvider>
     )
   }
 }

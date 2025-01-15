@@ -1,9 +1,8 @@
 import { configure } from 'enzyme'
 
-// There's no official enzyme adapter for React 17 as of 2021-06-30.
-// This package is recommended as an interim solution:
+// Enzyme is dead and does not support React 17 or 18. Use an unofficial adapater.
 // https://github.com/enzymejs/enzyme/issues/2429
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17'
+import Adapter from '@cfaester/enzyme-adapter-react-18'
 
 configure({ adapter: new Adapter() })
 

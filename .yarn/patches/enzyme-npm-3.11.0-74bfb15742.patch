@@ -1,0 +1,34 @@
+diff --git a/build/Utils.js b/build/Utils.js
+index 59f18505bcd03c28570e42d301254203474745db..fa26468d5be2d5969e4cd6afaa6b39d59a039539 100644
+--- a/build/Utils.js
++++ b/build/Utils.js
+@@ -81,7 +81,28 @@ var _cheerio = require('cheerio');
+ 
+ var _cheerio2 = _interopRequireDefault(_cheerio);
+ 
+-var _utils = require('cheerio/lib/utils');
++
++// this import isn't working:
++// var _utils = require('cheerio/lib/utils');
++
++// it's causing this error:
++// >  Cannot find module 'cheerio/lib/utils' from 'node_modules/enzyme/build/Utils.js'
++
++// To fix this error, don't import the cheerio utils, and instead copy the isHtml method
++// directly from cheerio source code:
++// https://github.com/cheeriojs/cheerio/blob/1.0.0-rc.3/lib/utils.js#L79C9-L86C3
++const isHtml = function(str) {
++  // Faster than running regex, if str starts with `<` and ends with `>`, assume it's HTML
++  if (str.charAt(0) === '<' && str.charAt(str.length - 1) === '>' && str.length >= 3) return true;
++
++  // Run the regex
++  var match = quickExpr.exec(str);
++  return !!(match && match[1]);
++};
++
++const _utils = { isHtml }
++
++
+ 
+ var _configuration = require('./configuration');
+ 

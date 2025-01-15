@@ -1,7 +1,7 @@
-import { api } from '@common/api'
+import { api } from '@fpf/common/api'
 import { getAppSettings } from '../actions'
 import { appSettings } from '../slice'
-import { appMessage } from '@components/AppMessage/slice'
+import { appMessage } from '@fpf/components/AppMessage/slice'
 
 describe('appSettings - actions', () => {
   const dispatch = jest.fn()

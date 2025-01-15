@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { currentUser } from '@common/currentUser'
+import { currentUser } from '@fpf/common/currentUser'
 import { AuthenticatedStack } from './Authenticated'
 import { UnauthenticatedStack } from './UnauthenticatedStack'
 

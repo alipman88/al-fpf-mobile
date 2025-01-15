@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import grassImage from '@assets/images/fpf-grass.png'
+import grassImage from '@fpf/assets/images/fpf-grass.png'
 
 import { GrassContainer, GrassBorder } from './styledComponents'
 

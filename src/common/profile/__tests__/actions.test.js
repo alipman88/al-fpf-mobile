@@ -1,7 +1,7 @@
-import * as api from '@common/api'
+import * as api from '@fpf/common/api'
 import { getProfiles, updateUser } from '../actions'
 import { profile } from '../slice'
-import { appMessage } from '@components/AppMessage/slice'
+import { appMessage } from '@fpf/components/AppMessage/slice'
 
 describe('profile - actions', () => {
   const dispatch = jest.fn()

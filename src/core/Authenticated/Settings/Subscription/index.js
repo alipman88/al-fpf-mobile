@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
 
-import { navigateWithToken } from '@common/actions/navigateWithToken'
+import { navigateWithToken } from '@fpf/common/actions/navigateWithToken'
 import { Subscription as SubscriptionComponent } from './Subscription'
-import { products } from '@common/products'
-import { purchases } from '@common/purchases'
-import { profile } from '@common/profile'
-import { requestSubscription } from '@common/purchases'
+import { products } from '@fpf/common/products'
+import { purchases } from '@fpf/common/purchases'
+import { profile } from '@fpf/common/profile'
+import { requestSubscription } from '@fpf/common/purchases'
 
 const mapStateToProps = (state, props) => ({
   products: products.selectors.getProducts(state),

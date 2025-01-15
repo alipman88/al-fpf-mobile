@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { Config } from '@common/config'
+import { Config } from '@fpf/common/config'
 import { currentUser } from './currentUser'
 import DeviceInfo from 'react-native-device-info'
 

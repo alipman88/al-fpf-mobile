@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { currentUser } from '@common/currentUser'
+import { currentUser } from '@fpf/common/currentUser'
 import { Directory as DirectoryScreen } from './Directory'
 
 const mapStateToProps = (state) => ({

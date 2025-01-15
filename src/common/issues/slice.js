@@ -2,7 +2,7 @@ import { createSlice, createSelector } from 'redux-starter-kit'
 import { getTime } from 'date-fns'
 import keyBy from 'lodash/keyBy'
 
-import { resetAction } from '@common/resetAction'
+import { resetAction } from '@fpf/common/resetAction'
 
 const initialState = {
   currentIssueId: 0,

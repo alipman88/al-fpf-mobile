@@ -11,7 +11,7 @@ const Wrapper = styled.View`
   ${({ borderColor }) =>
     borderColor ? `border-width: 1px; border-color: ${borderColor};` : ''}
   width: ${({ width }) =>
-    typeof width == 'number' ? `${width}px` : width || 'auto'}
+    typeof width == 'number' ? `${width}px` : width || 'auto'};
   ${({ tall }) => tall && 'padding-vertical: 20px;'}
   ${({ fullWidth }) => fullWidth && 'width: 100%;'}
   ${({ disabled }) => disabled && 'opacity: 0.5;'}

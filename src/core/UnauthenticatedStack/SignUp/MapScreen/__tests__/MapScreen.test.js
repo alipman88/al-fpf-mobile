@@ -4,7 +4,7 @@ import MapView, { Polygon, Marker } from 'react-native-maps'
 
 import { MapScreen } from '../MapScreen'
 import { ForumDetails } from '../ForumDetails'
-import { FullScreenWizard } from '@components/FullScreenWizard'
+import { FullScreenWizard } from '@fpf/components/FullScreenWizard'
 
 describe('MapScreen', () => {
   const defaultProps = {

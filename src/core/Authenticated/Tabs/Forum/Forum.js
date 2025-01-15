@@ -9,10 +9,10 @@ import { useScrollToTop } from '@react-navigation/native'
 import {
   hasMessagingPermission,
   requestMessagingPermission,
-} from '@common/notifications'
-import { plausible } from '@common/utils/plausible'
-import { ScreenContainer } from '@components/ScreenContainer'
-import { ExternalLink } from '@components/ExternalLink'
+} from '@fpf/common/notifications'
+import { plausible } from '@fpf/common/utils/plausible'
+import { ScreenContainer } from '@fpf/components/ScreenContainer'
+import { ExternalLink } from '@fpf/components/ExternalLink'
 import { ForumContainer } from './styledComponents'
 import { ForumPost } from './components/ForumPost'
 import { Advertisement } from './components/Advertisement'

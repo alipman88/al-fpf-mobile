@@ -1,7 +1,7 @@
 import DeviceInfo from 'react-native-device-info'
 
 import Plausible from './plausibleTracker'
-import { Config } from '@common/config'
+import { Config } from '@fpf/common/config'
 
 let domain
 

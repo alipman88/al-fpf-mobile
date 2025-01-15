@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { ScreenContainer } from '@components/ScreenContainer'
-import { Button } from '@components/Button'
+import { ScreenContainer } from '@fpf/components/ScreenContainer'
+import { Button } from '@fpf/components/Button'
 
-import offline from '@assets/images/offline/offline.png'
+import offline from '@fpf/assets/images/offline/offline.png'
 
 import {
   Body,

@@ -2,8 +2,8 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { GovernmentInfoFields } from '../GovernmentInfoFields'
 
-import { TextInput } from '@components/TextInput'
-import { Select } from '@components/Select'
+import { TextInput } from '@fpf/components/TextInput'
+import { Select } from '@fpf/components/Select'
 
 describe('GovernmentInfoFields', () => {
   const defaultProps = {

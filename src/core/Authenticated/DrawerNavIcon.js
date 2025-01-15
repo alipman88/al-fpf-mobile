@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import trioBirds from '@assets/images/global-assets/trio-birds.png'
+import trioBirds from '@fpf/assets/images/global-assets/trio-birds.png'
 import { TopNavIcon } from './TopNavIcon'
 
 export const DrawerNavIcon = ({ setOpen }) => {

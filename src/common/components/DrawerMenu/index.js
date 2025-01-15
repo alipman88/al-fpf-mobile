@@ -2,9 +2,9 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import SideMenu from 'react-native-side-menu-updated'
 
-import { getDimensions, isTabletWidth } from '@common/utils/size'
-import { areas } from '@common/areas'
-import { profile } from '@common/profile'
+import { getDimensions, isTabletWidth } from '@fpf/common/utils/size'
+import { areas } from '@fpf/common/areas'
+import { profile } from '@fpf/common/profile'
 import { DrawerMenu as DrawerMenuComponent } from './DrawerMenu'
 
 const mapStateToProps = (state) => ({

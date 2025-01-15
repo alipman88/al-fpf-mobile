@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
-import { screenSize } from '@common/styles/screenSizeHelper'
-import { Text, TextSemibold } from '@components/Text'
+import { screenSize } from '@fpf/common/styles/screenSizeHelper'
+import { Text, TextSemibold } from '@fpf/components/Text'
 
 export const Container = styled.View`
   flex: 1;

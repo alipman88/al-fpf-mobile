@@ -1,6 +1,6 @@
 import { omit, pick } from 'lodash'
-import { snakeCaseData } from '@common/utils/snakeCaseData'
-import { profileTypes } from '@common/types/profileTypes'
+import { snakeCaseData } from '@fpf/common/utils/snakeCaseData'
+import { profileTypes } from '@fpf/common/types/profileTypes'
 
 // move additional profile fields into profile object
 const additionalProfileFields = [

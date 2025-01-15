@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 
-import { TextSemibold } from '@components/Text'
+import { TextSemibold } from '@fpf/components/Text'
 
 export const CloseText = styled(TextSemibold)`
   color: #d77400;

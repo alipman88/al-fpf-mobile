@@ -1,21 +1,21 @@
 import React from 'react'
-import { Config } from '@common/config'
+import { Config } from '@fpf/common/config'
 import { Linking } from 'react-native'
 import { WebView as BaseWebView } from 'react-native-webview'
 import PropTypes from 'prop-types'
 import DeviceInfo from 'react-native-device-info'
 import Spinner from 'react-native-loading-spinner-overlay'
 
-import { BackButton } from '@core/Authenticated/Settings/components/BackButton'
-import { Button } from '@components/Button'
+import { BackButton } from '@fpf/core/Authenticated/Settings/components/BackButton'
+import { Button } from '@fpf/components/Button'
 import {
   composeRegex,
   composePathParams,
-} from '@core/Authenticated/Tabs/Compose/parseUrl'
+} from '@fpf/core/Authenticated/Tabs/Compose/parseUrl'
 import {
   isIssuePath,
   issuePathParams,
-} from '@core/Authenticated/Tabs/Forum/parseUrl'
+} from '@fpf/core/Authenticated/Tabs/Forum/parseUrl'
 import { ErrorContainer, ErrorText } from './styledComponents'
 
 // Directory URL regex
@@ -45,16 +45,15 @@ ErrorView.propTypes = {
 /**
  * Render a native web view.
  */
-export const WebView = (props) => {
+export const WebView = ({
+  source,
+  navigation,
+  route,
+  useBackButton = true,
+  areaIdsBySlug,
+  ...restProps
+}) => {
   const webViewRef = React.useRef(null)
-  const {
-    source,
-    navigation,
-    route,
-    useBackButton,
-    areaIdsBySlug,
-    ...restProps
-  } = props
   let [stack, setStack] = React.useState([source.uri])
   let [showError, setShowError] = React.useState(false)
 
@@ -243,8 +242,4 @@ WebView.propTypes = {
   source: PropTypes.object,
   useBackButton: PropTypes.bool,
   areaIdsBySlug: PropTypes.object.isRequired,
-}
-
-WebView.defaultProps = {
-  useBackButton: true,
 }

@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 
-import { Text, TextSemibold } from '@components/Text'
+import { Text, TextSemibold } from '@fpf/components/Text'
 
 export const Description = styled(Text)`
   font-size: 14px;

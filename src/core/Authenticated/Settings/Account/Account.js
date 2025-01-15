@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { Switch, TouchableOpacity } from 'react-native'
 import Spinner from 'react-native-loading-spinner-overlay'
 
-import { ScreenContainer } from '@components/ScreenContainer'
-import { KeyboardAwareScrollView } from '@components/KeyboardAwareScrollView'
+import { ScreenContainer } from '@fpf/components/ScreenContainer'
+import { KeyboardAwareScrollView } from '@fpf/components/KeyboardAwareScrollView'
 
 import { Description } from '../components/Description'
 import { Field } from '../components/Field'

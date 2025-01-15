@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import { PostCategory as PostCategoryComponent } from './PostCategory'
-import { appSettings } from '@common/appSettings'
+import { appSettings } from '@fpf/common/appSettings'
 
 const mapStateToProps = (state) => ({
   labelStyles: appSettings.selectors.getLabelStyles(state),

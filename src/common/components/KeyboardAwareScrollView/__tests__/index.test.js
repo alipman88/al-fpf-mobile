@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import { KeyboardOpen } from '@components/KeyboardOpen'
+import { KeyboardOpen } from '@fpf/components/KeyboardOpen'
 import { KeyboardAwareScrollView } from '../index'
 
 describe('KeyboardAwareScrollView', () => {

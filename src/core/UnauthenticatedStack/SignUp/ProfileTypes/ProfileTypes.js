@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import isEmpty from 'lodash/isEmpty'
-import { profileTypes } from '@common/types/profileTypes'
-import { FullScreenWizard } from '@components/FullScreenWizard'
+import { profileTypes } from '@fpf/common/types/profileTypes'
+import { FullScreenWizard } from '@fpf/components/FullScreenWizard'
 import { ProfileTypeContainer, ProfileTypeText } from './styledComponents'
 import { ProfileTypeButton } from './ProfileTypeButton'
-import { retry } from '@common/utils/retry'
+import { retry } from '@fpf/common/utils/retry'
 
 export class ProfileTypes extends React.Component {
   state = {

@@ -1,5 +1,5 @@
 import styled from 'styled-components/native'
-import { Text, TextSemibold } from '@components/Text'
+import { Text, TextSemibold } from '@fpf/components/Text'
 
 export const IssueTextBold = styled(TextSemibold)`
   color: #fff;
@@ -10,7 +10,7 @@ export const IssueText = styled(Text)`
 `
 
 export const IssueScrollView = styled.ScrollView`
-  flex:1
+  flex: 1;
   flex-direction: row;
   margin-bottom: 10px;
 `

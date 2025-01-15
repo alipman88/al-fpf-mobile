@@ -1,21 +1,19 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import { Dropdown } from 'react-native-element-dropdown'
 
 import { Select } from '../index'
-import { FormFieldLabel } from '@components/FormFieldLabel'
 
 describe('Select', () => {
   const defaultProps = {
     items: [],
     label: 'Label',
     onValueChange: jest.fn(),
-    placeholder: 'select',
-    title: 'Select Things',
     value: 0,
   }
 
-  test('no FormFieldLabel if theres no label', () => {
+  test('renders', () => {
     const wrapper = shallow(<Select {...defaultProps} label='' />)
-    expect(wrapper.find(FormFieldLabel).length).toEqual(0)
+    expect(wrapper.find(Dropdown).length).toEqual(1)
   })
 })

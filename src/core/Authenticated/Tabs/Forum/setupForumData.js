@@ -1,8 +1,8 @@
-import { getAreas, areas } from '@common/areas'
-import { getProfiles, profile } from '@common/profile'
-import { issues } from '@common/issues'
-import { getAppSettings } from '@common/appSettings'
-import { appMessage } from '@components/AppMessage/slice'
+import { getAreas, areas } from '@fpf/common/areas'
+import { getProfiles, profile } from '@fpf/common/profile'
+import { issues } from '@fpf/common/issues'
+import { getAppSettings } from '@fpf/common/appSettings'
+import { appMessage } from '@fpf/components/AppMessage/slice'
 
 export const setupForumData =
   (navigation, resetCurrentIssueState = false) =>

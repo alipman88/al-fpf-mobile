@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { appSettings } from '@common/appSettings'
+import { appSettings } from '@fpf/common/appSettings'
 import { ForumPost as ForumPostComponent } from './ForumPost'
 
 const mapStateToProps = (state) => ({

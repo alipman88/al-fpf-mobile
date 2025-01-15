@@ -2,8 +2,8 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { ProfileTypes } from '../ProfileTypes'
 import { ProfileTypeButton } from '../ProfileTypeButton'
-import { profileTypes } from '@common/types/profileTypes'
-import { FullScreenWizard } from '@components/FullScreenWizard'
+import { profileTypes } from '@fpf/common/types/profileTypes'
+import { FullScreenWizard } from '@fpf/components/FullScreenWizard'
 
 describe('ProfileTypes', () => {
   const defaultProps = {

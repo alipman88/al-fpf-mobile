@@ -1,8 +1,8 @@
 import React from 'react'
 import { BusinessInfoFields } from '../BusinessInfoFields'
 import { shallow } from 'enzyme'
-import { TextInput } from '@components/TextInput'
-import { FullScreenWizard } from '@components/FullScreenWizard'
+import { TextInput } from '@fpf/components/TextInput'
+import { FullScreenWizard } from '@fpf/components/FullScreenWizard'
 
 describe('BusinessInfoFields', () => {
   const defaultProps = {

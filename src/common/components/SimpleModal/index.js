@@ -6,7 +6,7 @@ import React from 'react'
 import { TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
 
-import { Modal } from '@components/Modal'
+import { Modal } from '@fpf/components/Modal'
 import { ModalContent, ModalContinue, ModalText } from './styledComponents'
 
 export const SimpleModal = ({ children, dark, onClose, open }) => {

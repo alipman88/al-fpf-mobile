@@ -1,7 +1,7 @@
-import { api } from '@common/api'
+import { api } from '@fpf/common/api'
 import { postSignUp } from '../actions'
 import { newUser } from '../slice'
-import { appMessage } from '@components/AppMessage/slice'
+import { appMessage } from '@fpf/components/AppMessage/slice'
 
 describe('newUser actions', () => {
   const getState = jest.fn(() => ({

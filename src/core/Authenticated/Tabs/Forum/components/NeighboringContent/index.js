@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 
 import { NeighboringContent as NeighboringContentComponent } from './NeighboringContent'
-import { posts } from '@common/posts'
-import { fetchSpecificIssue, issues } from '@common/issues'
+import { posts } from '@fpf/common/posts'
+import { fetchSpecificIssue, issues } from '@fpf/common/issues'
 
 const mapStateToProps = (state) => {
   const currentIssueId = issues.selectors.getCurrentIssueId(state)

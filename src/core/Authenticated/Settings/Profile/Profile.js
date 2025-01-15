@@ -4,8 +4,8 @@ import PropTypes from 'prop-types'
 import capitalize from 'lodash/capitalize'
 import get from 'lodash/get'
 
-import { KeyboardAwareScrollView } from '@components/KeyboardAwareScrollView'
-import { ScreenContainer } from '@components/ScreenContainer'
+import { KeyboardAwareScrollView } from '@fpf/components/KeyboardAwareScrollView'
+import { ScreenContainer } from '@fpf/components/ScreenContainer'
 
 import { Description } from '../components/Description'
 import { Field } from '../components/Field'

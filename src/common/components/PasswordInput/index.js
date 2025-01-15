@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { TextInput } from '@components/TextInput'
+import { TextInput } from '@fpf/components/TextInput'
 import { Icon } from './styledComponents'
-import passwordEyeActive from '@assets/images/createAccount/password-eyes/active.png'
-import passwordEyeInactive from '@assets/images/createAccount/password-eyes/inActive.png'
+import passwordEyeActive from '@fpf/assets/images/createAccount/password-eyes/active.png'
+import passwordEyeInactive from '@fpf/assets/images/createAccount/password-eyes/inActive.png'
 
 export class PasswordInput extends React.Component {
   state = {

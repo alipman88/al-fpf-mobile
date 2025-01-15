@@ -1,8 +1,8 @@
 import styled from 'styled-components/native'
-import { Text } from '@components/Text'
+import { Text } from '@fpf/components/Text'
 
-import { screenPadding } from '@common/styles/screenPadding'
-import { screenSize } from '@common/styles/screenSizeHelper'
+import { screenPadding } from '@fpf/common/styles/screenPadding'
+import { screenSize } from '@fpf/common/styles/screenSizeHelper'
 
 export const FormHeader = styled(Text)`
   font-size: 16px;

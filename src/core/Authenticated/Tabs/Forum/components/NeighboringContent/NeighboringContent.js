@@ -15,7 +15,7 @@ import {
 
 export const NeighboringContent = ({
   fetchSpecificIssue,
-  newsFromNeighboringNfs,
+  newsFromNeighboringNfs = [],
   navigation,
 }) => {
   if (newsFromNeighboringNfs.length === 0) {
@@ -62,8 +62,4 @@ NeighboringContent.propTypes = {
   fetchSpecificIssue: PropTypes.func.isRequired,
   newsFromNeighboringNfs: PropTypes.array,
   navigation: PropTypes.object,
-}
-
-NeighboringContent.defaultProps = {
-  newsFromNeighboringNfs: [],
 }

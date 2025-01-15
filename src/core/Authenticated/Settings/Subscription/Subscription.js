@@ -3,9 +3,9 @@ import { ScrollView } from 'react-native'
 import PropTypes from 'prop-types'
 import Spinner from 'react-native-loading-spinner-overlay'
 
-import { Button } from '@components/Button'
-import { ExternalLink } from '@components/ExternalLink'
-import { ScreenContainer } from '@components/ScreenContainer'
+import { Button } from '@fpf/components/Button'
+import { ExternalLink } from '@fpf/components/ExternalLink'
+import { ScreenContainer } from '@fpf/components/ScreenContainer'
 
 import {
   PageWrapper,

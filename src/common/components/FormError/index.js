@@ -5,14 +5,10 @@ import capitalize from 'lodash/capitalize'
 
 import { FormErrorText } from './styledComponents'
 
-export const FormError = ({ children }) => (
+export const FormError = ({ children = '' }) => (
   <FormErrorText>{`${capitalize(children)}`}</FormErrorText>
 )
 
 FormError.propTypes = {
   children: PropTypes.string,
-}
-
-FormError.defaultProps = {
-  children: '',
 }

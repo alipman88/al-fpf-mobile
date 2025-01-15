@@ -1,8 +1,8 @@
 import get from 'lodash/get'
 
 import { newUser } from './slice'
-import { api } from '@common/api'
-import { appMessage } from '@components/AppMessage/slice'
+import { api } from '@fpf/common/api'
+import { appMessage } from '@fpf/components/AppMessage/slice'
 import { prepareValues } from './prepareValues'
 
 export const postSignUp = (navigation) => async (dispatch, getState) => {

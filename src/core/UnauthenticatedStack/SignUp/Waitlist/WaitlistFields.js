@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import Spinner from 'react-native-loading-spinner-overlay'
 import isEmpty from 'lodash/isEmpty'
 
-import { FullScreenWizard } from '@components/FullScreenWizard'
-import { profileTypes } from '@common/types/profileTypes'
-import { Multiselect } from '@components/Multiselect'
-import { TextInput } from '@components/TextInput'
-import { provinces } from '@common/types/provinces'
-import { states } from '@common/types/states'
+import { FullScreenWizard } from '@fpf/components/FullScreenWizard'
+import { profileTypes } from '@fpf/common/types/profileTypes'
+import { Multiselect } from '@fpf/components/Multiselect'
+import { TextInput } from '@fpf/components/TextInput'
+import { provinces } from '@fpf/common/types/provinces'
+import { states } from '@fpf/common/types/states'
 import {
   Container,
   Divider,
@@ -20,8 +20,8 @@ import {
   TrioBird,
 } from './styledComponents'
 
-import lineDivider from '@assets/images/createAccount/line-divider/accountsetup-line-divider.png'
-import trioBird from '@assets/images/global-assets/trio-birds.png'
+import lineDivider from '@fpf/assets/images/createAccount/line-divider/accountsetup-line-divider.png'
+import trioBird from '@fpf/assets/images/global-assets/trio-birds.png'
 export class WaitlistFields extends React.Component {
   render() {
     const {

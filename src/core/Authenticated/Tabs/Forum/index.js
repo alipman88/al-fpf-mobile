@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
 import { Forum as ForumComponent } from './Forum'
-import { currentUser } from '@common/currentUser'
-import { areas } from '@common/areas'
-import { getIssues, issues, fetchSpecificIssue } from '@common/issues'
-import { getContents, posts } from '@common/posts'
+import { currentUser } from '@fpf/common/currentUser'
+import { areas } from '@fpf/common/areas'
+import { getIssues, issues, fetchSpecificIssue } from '@fpf/common/issues'
+import { getContents, posts } from '@fpf/common/posts'
 import { setupForumData } from './setupForumData.js'
-import { navigateWithToken } from '@common/actions/navigateWithToken'
+import { navigateWithToken } from '@fpf/common/actions/navigateWithToken'
 
 import { sendNewFCMToken } from './actions'
 

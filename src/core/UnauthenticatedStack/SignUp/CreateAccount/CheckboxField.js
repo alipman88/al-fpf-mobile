@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { TouchableOpacity } from 'react-native'
-import { openFpfUrl } from '@common/utils/openFpfUrl'
+import { openFpfUrl } from '@fpf/common/utils/openFpfUrl'
 
-import { Config } from '@common/config'
-import { Text } from '@components/Text'
-import { Checkbox } from '@components/Checkbox'
+import { Config } from '@fpf/common/config'
+import { Text } from '@fpf/components/Text'
+import { Checkbox } from '@fpf/components/Checkbox'
 import {
   CheckboxWrapper,
   LinkWrapper,

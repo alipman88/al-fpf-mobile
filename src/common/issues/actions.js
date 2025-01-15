@@ -1,14 +1,14 @@
 import { StackActions } from '@react-navigation/native'
 
 import { issues, maxIssuesCount } from './slice'
-import { posts } from '@common/posts/slice'
-import { getAuthorized } from '@common/api'
-import { appMessage } from '@components/AppMessage/slice'
-import { resetAction } from '@common/resetAction'
-import { responseError } from '@common/utils/responseError'
-import { areas } from '@common/areas'
-import { spinner } from '@app/Spinner/slice'
-import * as commonActions from '@common/actions/navigateWithToken'
+import { posts } from '@fpf/common/posts/slice'
+import { getAuthorized } from '@fpf/common/api'
+import { appMessage } from '@fpf/components/AppMessage/slice'
+import { resetAction } from '@fpf/common/resetAction'
+import { responseError } from '@fpf/common/utils/responseError'
+import { areas } from '@fpf/common/areas'
+import { spinner } from '@fpf/app/Spinner/slice'
+import * as commonActions from '@fpf/common/actions/navigateWithToken'
 import get from 'lodash/get'
 
 export const getIssues =
