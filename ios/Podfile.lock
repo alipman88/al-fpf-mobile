@@ -1711,7 +1711,7 @@ PODS:
     - RCTTypeSafety
     - React-Core
     - ReactCommon/turbomodule/core
-  - RNScreens (4.5.0):
+  - RNScreens (4.6.0-beta.0):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1732,9 +1732,9 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNScreens/common (= 4.5.0)
+    - RNScreens/common (= 4.6.0-beta.0)
     - Yoga
-  - RNScreens/common (4.5.0):
+  - RNScreens/common (4.6.0-beta.0):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -2147,7 +2147,7 @@ SPEC CHECKSUMS:
   RNFBApp: c0543476dee81ed5fc34d06db2f37b8e7e353cf3
   RNFBMessaging: aab4dcf6d121cfe338c9ac45631d90e125b3a5ef
   RNIap: 2c3c65e445757dde21e566faa13984786d23fab1
-  RNScreens: c5be23653cbe82a7e44c7719af3465e2f152c791
+  RNScreens: e722b2d6bf97e1315ea075e3345e60683a7a2c0d
   RNVectorIcons: 8c7af262a73890caabbac2bb081ddbaa1b8a768c
   RollbarCommon: cb87be0f694a09c138f7d51d6f3b48151ca965ab
   RollbarCrash: 0272cf44b05ebc0f69c17acbd0cffbdaf35b2893

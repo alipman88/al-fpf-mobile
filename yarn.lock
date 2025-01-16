@@ -3889,7 +3889,7 @@ __metadata:
     react-native-modal: "npm:^13.0.1"
     react-native-restart: "npm:^0.0.27"
     react-native-safe-area-context: "npm:^5.1.0"
-    react-native-screens: "npm:^4.5.0"
+    react-native-screens: "npm:4.6.0-beta.0"
     react-native-sectioned-multi-select: "npm:^0.10.0"
     react-native-sensitive-info: "patch:react-native-sensitive-info@npm%3A5.5.8#~/.yarn/patches/react-native-sensitive-info-npm-5.5.8-b7560e8b3c.patch"
     react-native-side-menu-updated: "npm:^1.3.2"
@@ -10310,16 +10310,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-screens@npm:^4.5.0":
-  version: 4.5.0
-  resolution: "react-native-screens@npm:4.5.0"
+"react-native-screens@npm:4.6.0-beta.0":
+  version: 4.6.0-beta.0
+  resolution: "react-native-screens@npm:4.6.0-beta.0"
   dependencies:
     react-freeze: "npm:^1.0.0"
     warn-once: "npm:^0.1.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/948b5bf0eb2fe250f9bbc0de011bf7ed14456924a0fb08ce66660913362c89849b5f4355fc8eb6577ab25cd74dbaa1492ea923b4ec173686c5e05ad0c3a699b3
+  checksum: 10c0/90f72d8af46404ee8e8245921f613c8285cb15655d86bab049f18f802ba6d6af0d1a891febd8c6bac2ad25ecf5f80b4184d6897692911d0ba06a3b76d969fe44
   languageName: node
   linkType: hard
 
