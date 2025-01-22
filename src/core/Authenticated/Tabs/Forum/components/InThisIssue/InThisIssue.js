@@ -15,9 +15,7 @@ export const InThisIssue = ({ headlines = [], number, posts = [] }) => (
     {headlines.map((headline, i) => (
       <ListItem key={`headline_${i}`}>
         <ListItemBullet>{'\u2022'}</ListItemBullet>
-        <ListItemText numberOfLines={1} selectable={true}>
-          {headline}
-        </ListItemText>
+        <ListItemText numberOfLines={1}>{headline}</ListItemText>
       </ListItem>
     ))}
     {posts.length > headlines.length && (
