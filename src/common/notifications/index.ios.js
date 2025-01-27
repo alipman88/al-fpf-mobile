@@ -1,4 +1,3 @@
-import { Platform } from 'react-native'
 import messaging from '@react-native-firebase/messaging'
 import PushNotificationIOS from '@react-native-community/push-notification-ios'
 
@@ -32,17 +31,14 @@ export async function requestMessagingPermission() {
 }
 
 /**
- * Sets the app badge number to the given value.  Only relevant to iOS, but safe
- * to call on Android.  Async function.
+ * Sets the app badge number to the given value. Only relevant to iOS. Async function.
  *
  * @param value {number}
  */
 export async function setApplicationIconBadgeNumber(value) {
-  if (Platform.OS === 'ios') {
-    PushNotificationIOS.getApplicationIconBadgeNumber((badgeNumber) => {
-      if (badgeNumber !== value) {
-        PushNotificationIOS.setApplicationIconBadgeNumber(value)
-      }
-    })
-  }
+  PushNotificationIOS.getApplicationIconBadgeNumber((badgeNumber) => {
+    if (badgeNumber !== value) {
+      PushNotificationIOS.setApplicationIconBadgeNumber(value)
+    }
+  })
 }
