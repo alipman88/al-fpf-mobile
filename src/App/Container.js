@@ -25,6 +25,7 @@ function ContainerComponent({ accessToken, handleNavigationChange }) {
 
   return (
     <NavigationContainer
+      navigationInChildEnabled
       ref={navigationRef}
       theme={navTheme}
       // onReady and onStateChange are used for screen tracking:
