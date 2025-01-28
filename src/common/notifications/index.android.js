@@ -1,4 +1,4 @@
-import { PermissionsAndroid } from 'react-native'
+import { PermissionsAndroid, Platform } from 'react-native'
 
 /**
  * Returns true if the messaging permission is enabled.  Async function.
@@ -6,6 +6,11 @@ import { PermissionsAndroid } from 'react-native'
  * @returns {boolean}
  */
 export async function hasMessagingPermission() {
+  // this permission was added in Android API 33
+  if (Platform.Version < 33) {
+    return true
+  }
+
   const check = await PermissionsAndroid.check(
     PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
   )
@@ -19,6 +24,11 @@ export async function hasMessagingPermission() {
  * @returns {boolean}
  */
 export async function requestMessagingPermission() {
+  // this permission was added in Android API 33
+  if (Platform.Version < 33) {
+    return true
+  }
+
   const request = await PermissionsAndroid.request(
     PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
   )
