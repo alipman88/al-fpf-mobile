@@ -40,7 +40,9 @@ class MainApplication : Application(), ReactApplication {
     super.onCreate()
 
     // FPF addition -- Rollbar
-    RollbarReactNative.init(this, BuildConfig.ROLLBAR_API_KEY, BuildConfig.ENVIRONMENT)
+    if (BuildConfig.ROLLBAR_API_KEY) {
+      RollbarReactNative.init(this, BuildConfig.ROLLBAR_API_KEY, BuildConfig.ENVIRONMENT)
+    }
 
     SoLoader.init(this, OpenSourceMergedSoMapping)
     if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {

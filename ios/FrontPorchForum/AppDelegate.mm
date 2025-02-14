@@ -19,10 +19,15 @@
   [FIRApp configure];
 
   // FPF addition -- Rollbar
-  NSDictionary *rollbarOptions = @{
-    @"accessToken": [RNCConfig envFor:@"ROLLBAR_API_KEY"]
-  };
-  [RollbarReactNative initWithConfiguration:rollbarOptions];
+  NSString *rollbarKey = [RNCConfig envFor:@"ROLLBAR_API_KEY"];
+  if (rollbarKey) {
+    NSDictionary *rollbarOptions = @{
+      @"accessToken": rollbarKey
+    };
+    [RollbarReactNative initWithConfiguration:rollbarOptions];
+  } else {
+    NSLog(@"No Rollbar API key configured");
+  }
 
   // FPF addition -- react-native-push-notification
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
