@@ -40,7 +40,7 @@ class MainApplication : Application(), ReactApplication {
     super.onCreate()
 
     // FPF addition -- Rollbar
-    if (BuildConfig.ROLLBAR_API_KEY) {
+    if (BuildConfig.ROLLBAR_API_KEY != null) {
       RollbarReactNative.init(this, BuildConfig.ROLLBAR_API_KEY, BuildConfig.ENVIRONMENT)
     }
 
