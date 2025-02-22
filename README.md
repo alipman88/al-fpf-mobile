@@ -17,6 +17,14 @@ Install [XCode](https://itunes.apple.com/ca/app/xcode/id497799835?mt=12).
 
 Once XCode is installed, be sure to install xcode command line tools `xcode-select --install`.
 
+#### Cleaning Xcode derived data
+
+Xcode caches various files to speed up the build process. Over time, these cached files can accumulate and lead to build errors. When encountering an iOS build error, try the following:
+
+1. Close Xcode (if open)
+2. Delete the contents of `~/Developer/Library/Xcode/DerivedData`.
+3. Delete and reinstall pods (`cd ios; rm -rf Pods; pod install; cd ..`)
+
 ### Android Studio
 
 For more information, see https://reactnative.dev/docs/environment-setup.
