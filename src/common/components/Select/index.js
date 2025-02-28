@@ -14,6 +14,8 @@ import { Container, dropdownStyles } from './styledComponents'
 export const Select = (props) => {
   const {
     placeholder,
+    placeholderStyle,
+    style,
     value,
     label,
     items,
@@ -42,8 +44,11 @@ export const Select = (props) => {
         valueField='value'
         placeholder={placeholder}
         onChange={(item) => onValueChange(item.value)}
-        style={dropdownStyles.dropdown}
-        placeholderStyle={dropdownStyles.placeholderStyle}
+        style={{ ...dropdownStyles.dropdown, ...style }}
+        placeholderStyle={{
+          ...dropdownStyles.placeholderStyle,
+          ...placeholderStyle,
+        }}
         selectedTextStyle={dropdownStyles.selectedTextStyle}
       />
       {hasError && <FormError>{error}</FormError>}
@@ -57,6 +62,8 @@ Select.propTypes = {
   label: PropTypes.string,
   onValueChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
+  placeholderStyle: PropTypes.object,
+  style: PropTypes.object,
   touched: PropTypes.bool,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   required: PropTypes.bool,

@@ -5,6 +5,8 @@ import queryString from 'query-string'
 import { Config } from '@fpf/common/config'
 import { WebView } from '@fpf/components/WebView'
 
+import { SearchPlaceholder } from './SearchPlaceholder'
+
 export class Search extends React.Component {
   render() {
     const { navigation, route } = this.props
@@ -31,6 +33,7 @@ export class Search extends React.Component {
           },
         }}
         useBackButton={false}
+        placeholder=<SearchPlaceholder />
       />
     )
   }

@@ -47,6 +47,7 @@ ErrorView.propTypes = {
  */
 export const WebView = ({
   source,
+  placeholder,
   navigation,
   route,
   useBackButton = true,
@@ -56,6 +57,7 @@ export const WebView = ({
   const webViewRef = React.useRef(null)
   let [stack, setStack] = React.useState([source.uri])
   let [showError, setShowError] = React.useState(false)
+  let [webViewLoading, setWebViewLoading] = React.useState(true)
 
   const currentURI = stack[stack.length - 1]
   const newSource = { ...source, uri: currentURI }
@@ -165,6 +167,7 @@ export const WebView = ({
 
   return (
     <>
+      {webViewLoading && placeholder}
       <BaseWebView
         {...restProps}
         ref={webViewRef}
@@ -221,6 +224,8 @@ export const WebView = ({
           return false
         }}
         onLoadEnd={() => {
+          setWebViewLoading(false)
+
           // Show the back button when appropriate
           if (useBackButton) {
             const backButton =
@@ -242,4 +247,5 @@ WebView.propTypes = {
   source: PropTypes.object,
   useBackButton: PropTypes.bool,
   areaIdsBySlug: PropTypes.object.isRequired,
+  placeholder: PropTypes.node,
 }
