@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { Config } from '@fpf/common/config'
 import { WebView } from '@fpf/components/WebView'
 
+import { ComposePlaceholder } from './ComposePlaceholder'
 import { Success } from './components/Success'
 
 export class Compose extends React.Component {
@@ -68,6 +69,7 @@ export class Compose extends React.Component {
               authorization: accessToken,
             },
           }}
+          placeholder=<ComposePlaceholder />
           useBackButton={false}
         />
         {this.modalVisible && (

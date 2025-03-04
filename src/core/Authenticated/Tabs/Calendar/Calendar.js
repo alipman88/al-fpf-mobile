@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import { Config } from '@fpf/common/config'
 import { WebView } from '@fpf/components/WebView'
+import { CalendarPlaceholder } from './CalendarPlaceholder'
 
 export class Calendar extends React.Component {
   render() {
@@ -22,6 +23,7 @@ export class Calendar extends React.Component {
             authorization: accessToken,
           },
         }}
+        placeholder=<CalendarPlaceholder />
       />
     )
   }
