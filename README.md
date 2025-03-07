@@ -70,7 +70,7 @@ Install the following tools:
 
 ```
 brew install yarn
-brew install node@18
+brew install node@22
 brew install watchman
 sudo gem install cocoapods
 ```
