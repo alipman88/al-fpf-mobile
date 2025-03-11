@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo "Running prebuild.sh"
+
 echo "API_HOST=$API_HOST" > .env
 echo "API_KEY=$API_KEY" >> .env
 echo "BASIC_AUTH_PASSWORD=$BASIC_AUTH_PASSWORD" >> .env
@@ -59,3 +61,5 @@ fi
 if [[ -n $STAGING2_WEBSITE_HOST ]] ; then
   echo "STAGING2_WEBSITE_HOST=$STAGING2_WEBSITE_HOST" >> .env
 fi
+
+echo "Finished prebuild.sh, wrote `readlink -f .env`"

@@ -81,6 +81,12 @@ def enableProguardInReleaseBuilds = false
  */
 def jscFlavor = 'org.webkit:android-jsc:+'
 
+// FPF addition -- get version code from the specified property argument
+// `-PversionCode` during the Codemagic build call
+def getMyVersionCode = { ->
+    return Integer.valueOf(System.getenv('UPDATED_BUILD_NUMBER') ?: 0)
+}
+
 android {
     ndkVersion rootProject.ext.ndkVersion
 
@@ -92,21 +98,21 @@ android {
         applicationId "com.frontporchforum"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
+        versionCode getMyVersionCode() // FPF addition
         versionName "1.26.0"
 
         // FPF addition -- react-native-iap
         missingDimensionStrategy "store", "play"
     }
 
-    // FPF addition -- Release signing properties are configured within AppCenter.
-    if (project.hasProperty('FPF_RELEASE_STORE_FILE')) {
+    // FPF addition -- Release signing properties are configured within Codemagic.
+    if (System.getenv()["CI"]) { // CI=true is exported by Codemagic
         signingConfigs {
             release {
-                storeFile file(FPF_RELEASE_STORE_FILE)
-                storePassword FPF_RELEASE_STORE_PASSWORD
-                keyAlias FPF_RELEASE_KEY_ALIAS
-                keyPassword FPF_RELEASE_KEY_PASSWORD
+                storeFile file(System.getenv()["CM_KEYSTORE_PATH"])
+                storePassword System.getenv()["CM_KEYSTORE_PASSWORD"]
+                keyAlias System.getenv()["CM_KEY_ALIAS"]
+                keyPassword System.getenv()["CM_KEY_PASSWORD"]
             }
         }
     }
@@ -127,15 +133,15 @@ android {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
 
-            // FPF addition -- release signing properties are configured within AppCenter
+            // FPF addition -- release signing properties are configured within Codemagic
             // signingConfig signingConfigs.debug
 
             minifyEnabled enableProguardInReleaseBuilds
 
-            // FPF addition -- Release signing properties are configured within AppCenter.
+            // FPF addition -- Release signing properties are configured within Codemagic.
             // signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-            if (project.hasProperty('FPF_RELEASE_STORE_FILE')) {
+            if (System.getenv()["CI"]) {
                 signingConfig signingConfigs.release
             }
         }
