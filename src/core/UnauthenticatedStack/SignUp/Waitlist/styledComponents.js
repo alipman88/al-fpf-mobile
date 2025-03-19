@@ -12,7 +12,8 @@ export const SubTitle = styled(Text)`
   font-size: 15px;
   color: #4a4a4a;
   text-align: center;
-  padding-horizontal: 100px;
+  padding-bottom: 10px;
+  padding-horizontal: 20px;
 `
 
 export const FieldWrapper = styled.View`

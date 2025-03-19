@@ -130,8 +130,8 @@ export class App extends React.Component {
       Search: null, // skipped b/c webview
       SettingsIndex: 'settings',
       Subscription: 'subscription',
-      Waitlist: 'waitlist-users/new',
-      WaitlistSuccess: 'waitlist-users/success',
+      Waitlist: 'interest-form/new',
+      WaitlistSuccess: 'interest-form/success',
       Welcome: 'welcome',
     }
 

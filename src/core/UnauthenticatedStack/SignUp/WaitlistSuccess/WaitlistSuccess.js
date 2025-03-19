@@ -25,11 +25,7 @@ export const WaitlistSuccess = ({ navigation, clearUserData }) => (
         <Icon size={18} name='close' color='#c5c5c5' />
       </Close>
       <TextContainer>
-        <BodyText>
-          Thank you! Your request to join our waitlist has been submitted, we
-          hope to see you engaging with your community on FPF in the near
-          future.
-        </BodyText>
+        <BodyText>Thanks for your interest in Front Porch Forum!</BodyText>
       </TextContainer>
       <TextContainer>
         <TouchableOpacity
