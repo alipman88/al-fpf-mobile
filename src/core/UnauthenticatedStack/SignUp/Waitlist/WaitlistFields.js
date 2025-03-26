@@ -38,8 +38,13 @@ export class WaitlistFields extends React.Component {
 
     const CustomHeader = () => (
       <TopContainer>
-        <Header centered>Join Our Waitlist</Header>
-        <SubTitle>Help bring Front Porch Forum to your area!</SubTitle>
+        <Header centered>Thanks for your interest</Header>
+        <SubTitle>
+          We could not find your street address in our current service area.
+          Please fill out the form below so we can investigate further. If you
+          in fact live in our service area, our team will reach out. If not,
+          your name will be added to our waitlist.
+        </SubTitle>
         <Divider source={lineDivider} resizeMode='stretch' />
         <TrioBird source={trioBird} />
       </TopContainer>
@@ -51,7 +56,7 @@ export class WaitlistFields extends React.Component {
         onNextPress={handleSubmit}
         withPadding={false}
         customHeader={<CustomHeader />}
-        nextLabel='    Join waitlist'
+        nextLabel='    Submit'
         // empty spaces required to center the button, this is an issue of the icon we use
         nextWidth={141}
         nextDisabled={!isEmpty(errors)}
@@ -228,7 +233,7 @@ export class WaitlistFields extends React.Component {
           <FieldWrapper>
             <TextInput
               error={errors.comment}
-              label='If you want to help bring Front Porch Forum to your town, please tell us how you propose to pitch in (plus any other comments you would like to share):'
+              label='Tell us a little bit more about your community, and about your interest in helping neighbors connect.'
               touched={!!touched.comment}
               onChangeText={(value) => {
                 setFieldValue('comment', value)

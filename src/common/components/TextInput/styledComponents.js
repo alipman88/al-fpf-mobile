@@ -12,7 +12,7 @@ export const StyledTextInput = styled.TextInput`
   padding-right: 4px;
   padding-left: ${({ hasForwardIcon }) => (hasForwardIcon ? 30 : 4)}px;
   ${({ multiline }) =>
-    multiline ? 'height: 160px; textAlignVertical: top' : 'height: 40px;'}
+    multiline ? 'height: 160px; textAlignVertical: top;' : 'height: 40px;'}
   font-family: ProximaNova-Regular;
   color: #000;
 `
