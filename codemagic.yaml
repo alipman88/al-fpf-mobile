@@ -1,0 +1,307 @@
+
+# == Common Anchors ==========================================================
+
+# Functionality common to iOS and Android. These YAML anchors are used in the
+# workflows dictionary below.
+common:
+  base: &base
+    max_build_duration: 45
+    instance_type: mac_mini_m2
+
+  environment:
+    common: &environment_common
+      node: v22.9.0
+
+    staging_vars: &staging_vars
+      ENVIRONMENT: staging
+      NO_FLIPPER: 1
+      API_HOST: https://staging.frontporchforum.com/api/v1
+      WEBSITE_HOST: https://staging.frontporchforum.com
+      STAGING2_API_HOST: https://staging2.frontporchforum.com/api/v1
+      STAGING2_ENVIRONMENT: staging
+      STAGING2_WEBSITE_HOST: https://staging2.frontporchforum.com
+      PRODUCTION_API_HOST: https://frontporchforum.com/api/v1
+      PRODUCTION_ENVIRONMENT: production
+      PRODUCTION_WEBSITE_HOST: https://frontporchforum.com
+
+    production_vars: &production_vars
+      ENVIRONMENT: production
+      NO_FLIPPER: 1
+      API_HOST: https://frontporchforum.com/api/v1
+      WEBSITE_HOST: https://frontporchforum.com
+
+    ios_vars: &ios_vars
+      BUILD_PLATFORM: ios
+      BUNDLE_ID: com.FrontPorchForum.FrontPorchForum
+      XCODE_WORKSPACE: "FrontPorchForum.xcworkspace"
+      XCODE_SCHEME: "FrontPorchForum"
+      APP_ID: 1458651656
+
+    android_vars: &android_vars
+      BUILD_PLATFORM: adnroid
+      PACKAGE_NAME: com.frontporchforum
+
+    ios_environment: &ios_environment
+      <<: *environment_common
+      xcode: latest
+      cocoapods: default
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.FrontPorchForum.FrontPorchForum
+
+    android_environment: &android_environment
+      <<: *environment_common
+      android_signing:
+        - keystore_reference
+
+  scripts:
+    - &yarn_install
+      name: Install node dependencies
+      script: |
+        corepack enable
+        corepack prepare
+        corepack yarn --version
+        corepack yarn install --immutable
+    - &create_dot_env
+      name: Create .env with environment variables
+      script: |
+        $CM_BUILD_DIR/ci/pre-build.sh
+
+  triggering:
+    triggering_staging: &triggering_staging
+      events:
+        - push
+      branch_patterns:
+        - pattern: staging
+          include: true
+    triggering_production: &triggering_production
+      events:
+        - push
+      branch_patterns:
+        - pattern: production
+          include: true
+
+  publishing:
+    email: &publishing_email
+      recipients:
+        - tech@frontporchforum.com
+      notify:
+        success: false
+        failure: true
+
+# == Workflows ===============================================================
+
+workflows:
+
+  # == iOS staging ===========================================================
+
+  # iOS staging, with anchors that can be used in iOS production
+  ios-staging-app:
+    <<: *base
+    name: iOS Staging App
+    integrations:
+      app_store_connect: codemagic # Codemagic name for App Store API key
+
+    environment:
+      <<: *ios_environment
+      groups:
+        - staging
+      vars:
+        <<: *ios_vars
+        <<: *staging_vars
+
+    cache: &ios_cache
+      cache_paths:
+        - $CM_BUILD_DIR/.yarn/cache
+        - $CM_BUILD_DIR/node_modules
+        - $HOME/Library/Caches/CocoaPods
+
+    scripts: &ios_scripts
+      - *yarn_install
+      - *create_dot_env
+
+      - name: Install CocoaPods dependencies
+        script: |
+          cd ios && pod install
+
+      - name: Set up code signing settings on Xcode project
+        script: |
+          xcode-project use-profiles --warn-only
+
+      - name: Increment build number
+        script: |
+          cd $CM_BUILD_DIR/ios
+          # app-store-connect is a Codemagic-supplied bin
+          AS_NUM=$(app-store-connect get-latest-app-store-build-number "$APP_ID")
+          TF_NUM=$(app-store-connect get-latest-testflight-build-number "$APP_ID")
+          LATEST_BUILD_NUMBER=$(( AS_NUM > TF_NUM ? AS_NUM : TF_NUM ))
+          if [ -z LATEST_BUILD_NUMBER ]; then
+            >&2 echo "Could not get latest App Store build number"
+            exit 1
+          else
+            UPDATED_BUILD_NUMBER=$(($LATEST_BUILD_NUMBER + 1))
+          fi
+          echo "Build number: $UPDATED_BUILD_NUMBER"
+          agvtool new-version -all $UPDATED_BUILD_NUMBER
+
+      - name: Build iOS release
+        script: |
+          xcode-project build-ipa \
+            --workspace "$CM_BUILD_DIR/ios/$XCODE_WORKSPACE" \
+            --scheme "$XCODE_SCHEME"
+
+    artifacts: &ios_artifacts
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
+
+    triggering: *triggering_staging
+
+    publishing:
+      email: *publishing_email
+
+      app_store_connect:
+        # Use referenced App Store Connect API key to authenticate binary upload
+        auth: integration
+
+        # Optional boolean, defaults to false. Whether or not to submit the uploaded
+        # build to TestFlight beta review. Required for distributing to beta groups.
+        # Note: This action is performed during post-processing.
+        submit_to_testflight: true
+
+        # Optional boolean, defaults to false. Set to true to automatically expire
+        # previous build in review or waiting for review in Testflight before
+        # submitting a new build to beta review. Expired builds will no longer be available for testers.
+        # Note: This action is performed during post-processing.
+        expire_build_submitted_for_review: true
+
+        submit_to_app_store: false
+
+  # == iOS production ========================================================
+
+  ios-production-app:
+    <<: *base
+    name: iOS Production App
+    integrations:
+      app_store_connect: codemagic # Codemagic name for App Store API key
+
+    environment:
+      <<: *ios_environment
+      groups:
+        - production
+      vars:
+        <<: *ios_vars
+        <<: *production_vars
+
+    cache: *ios_cache
+    scripts: *ios_scripts
+    artifacts: *ios_artifacts
+    triggering: *triggering_production
+
+    publishing:
+      email: *publishing_email
+
+      app_store_connect:
+        auth: integration
+
+        submit_to_app_store: true
+
+        # Optional boolean, defaults to false. Set to true to cancel the previous
+        # submission (if applicable) when submitting a new build to App Store review.
+        # This allows automatically submitting a new build for review if a previous submission exists.
+        # Note: This action is performed during post-processing.
+        cancel_previous_submissions: true
+
+        release_type: AFTER_APPROVAL
+
+  # == Android staging =======================================================
+
+  # Android staging, with anchors that can be used in Android production
+  android-staging-app:
+    <<: *base
+    name: Android Staging App
+
+    environment:
+      <<: *android_environment
+      groups:
+        - staging
+        - google_credentials
+      vars:
+        <<: *android_vars
+        <<: *staging_vars
+
+    cache: &android_cache
+      cache_paths:
+        - $CM_BUILD_DIR/.yarn/cache
+        - $CM_BUILD_DIR/node_modules
+        - ~/.gradle/caches
+
+    scripts: &android_scripts
+      - *yarn_install
+      - *create_dot_env
+
+      - name: Set Android SDK location
+        script: |
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/android/local.properties"
+
+      - name: Build Android release
+        script: |
+          # google-play is a Codemagic-supplied bin
+          LATEST_BUILD_NUMBER=$(google-play get-latest-build-number --package-name "$PACKAGE_NAME")
+          if [ -z LATEST_BUILD_NUMBER ]; then
+            >&2 echo "Could not get latest Google Play build number"
+            exit 1
+          else
+            export UPDATED_BUILD_NUMBER=$(($LATEST_BUILD_NUMBER + 1))
+          fi
+          echo "Build number: $UPDATED_BUILD_NUMBER"
+
+          cd android
+          ./gradlew bundleRelease
+
+    artifacts: &android_artifacts
+      - android/app/build/outputs/**/*.aab
+      - android/app/build/outputs/**/*.apk
+
+    triggering: *triggering_staging
+
+    publishing:
+      email: *publishing_email
+
+      google_play:
+        # Contents of the JSON key file for Google Play service account saved
+        # as a secure environment variable
+        credentials: $GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS
+
+        # Name of the track internal, alpha, beta, production, internal app sharing,
+        # or your custom track name
+        track: internal
+
+  # == Android production ====================================================
+
+  android-production-app:
+    <<: *base
+    name: Android Production App
+
+    environment:
+      <<: *android_environment
+      groups:
+        - production
+        - google_credentials
+      vars:
+        <<: *android_vars
+        <<: *production_vars
+
+    cache: *android_cache
+    scripts: *android_scripts
+    artifacts: *android_artifacts
+
+    triggering: *triggering_production
+
+    publishing:
+      email: *publishing_email
+
+      google_play:
+        credentials: $GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS
+        track: production
