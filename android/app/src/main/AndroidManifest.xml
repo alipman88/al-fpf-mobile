@@ -44,6 +44,7 @@
           <data android:scheme="https" />
           <data android:host="frontporchforum.com" />
           <data android:host="staging.frontporchforum.com" />
+          <data android:host="staging2.frontporchforum.com" />
           <data android:host="t.frontporchforum.com" />
           <data android:host="sp.frontporchforum.com" />
           <data android:pathPattern="/l/.*/.*@.*/-/frontporchforum.com/areas/.*/issues/.*/shared" />
@@ -56,6 +57,7 @@
           <data android:scheme="https" />
           <data android:host="frontporchforum.com" />
           <data android:host="staging.frontporchforum.com" />
+          <data android:host="staging2.frontporchforum.com" />
           <data android:host="t.frontporchforum.com" />
           <data android:host="sp.frontporchforum.com" />
           <data android:pathPattern="/l/.*/.*@.*/-/frontporchforum.com/areas/.*/posts/new" />
