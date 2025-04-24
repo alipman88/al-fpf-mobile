@@ -44,9 +44,10 @@
           <data android:scheme="https" />
           <data android:host="frontporchforum.com" />
           <data android:host="staging.frontporchforum.com" />
+          <data android:host="staging2.frontporchforum.com" />
           <data android:host="t.frontporchforum.com" />
           <data android:host="sp.frontporchforum.com" />
-          <data android:pathPattern="/l/.*/.*@.*/-/frontporchforum.com/areas/.*/issues/.*/shared" />
+          <data android:pathPattern="/l/.*/.*@.*/-/frontporchforum.com/.*/forum" />
         </intent-filter>
         <intent-filter android:label="@string/app_name">
           <action android:name="android.intent.action.VIEW" />
@@ -56,9 +57,10 @@
           <data android:scheme="https" />
           <data android:host="frontporchforum.com" />
           <data android:host="staging.frontporchforum.com" />
+          <data android:host="staging2.frontporchforum.com" />
           <data android:host="t.frontporchforum.com" />
           <data android:host="sp.frontporchforum.com" />
-          <data android:pathPattern="/l/.*/.*@.*/-/frontporchforum.com/areas/.*/posts/new" />
+          <data android:pathPattern="/l/.*/.*@.*/-/frontporchforum.com/compose" />
           </intent-filter>
         </activity>
     </application>
