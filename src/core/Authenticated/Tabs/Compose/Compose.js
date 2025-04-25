@@ -41,7 +41,8 @@ export class Compose extends React.Component {
     const { navigation, navigateWithToken, route } = this.props
     const accessToken = this.props.accessToken.toString()
     const sourceUrl =
-      Config.WEBSITE_HOST + (route.params?.sourceUrl ?? '/compose')
+      Config.WEBSITE_HOST +
+      (route.params?.sourceUrl ?? route.path ?? '/compose')
 
     const submittedContentType = route.params?.submittedContentType || 'post'
 

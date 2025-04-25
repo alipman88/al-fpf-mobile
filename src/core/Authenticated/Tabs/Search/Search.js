@@ -12,7 +12,7 @@ export class Search extends React.Component {
     const accessToken = this.props.accessToken.toString()
 
     const sourceUrl =
-      Config.WEBSITE_HOST + (route.params?.sourceUrl ?? '/search')
+      Config.WEBSITE_HOST + (route.params?.sourceUrl ?? route.path ?? '/search')
 
     return (
       <WebView

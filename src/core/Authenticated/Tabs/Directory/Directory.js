@@ -12,7 +12,8 @@ export class Directory extends React.Component {
     const accessToken = this.props.accessToken.toString()
 
     const sourceUrl =
-      Config.WEBSITE_HOST + (route.params?.sourceUrl ?? '/directory')
+      Config.WEBSITE_HOST +
+      (route.params?.sourceUrl ?? route.path ?? '/directory')
 
     return (
       <WebView

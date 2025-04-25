@@ -23,9 +23,55 @@ function ContainerComponent({ accessToken, handleNavigationChange }) {
   const navigationRef = useNavigationContainerRef()
   const routeNameRef = React.useRef()
 
+  const linking = {
+    prefixes: [
+      'https://frontporchforum.com',
+      'https://staging.frontporchforum.com',
+      'https://staging2.frontporchforum.com',
+    ],
+    config: {
+      screens: {
+        Tabs: {
+          screens: {
+            Calendar: {
+              path: 'calendar',
+              alias: [':area/calendar', 'calendar/events/:event_id'],
+            },
+            Compose: {
+              path: 'compose',
+              alias: ['compose/:area_slug'],
+            },
+            Directory: {
+              path: 'directory',
+              alias: [
+                'directory/categories/:category_slug?',
+                'directory/favorites',
+                'd/:profile_slug',
+              ],
+            },
+            Forum: {
+              path: 'forum',
+              alias: [
+                // LATER[TECH-6434]: Expand forum routes once forum is ported to webview:
+                // ':area_slug/forum/:archive?/:issue_id?',
+                //
+                // (Remember to also update fpf-mobile/android/app/src/main/AndroidManifest.xml and
+                // fpf/public/.well-known/apple-app-site-association.)
+              ],
+            },
+            Search: {
+              path: 'search',
+            },
+          },
+        },
+      },
+    },
+  }
+
   return (
     <NavigationContainer
       navigationInChildEnabled
+      linking={linking}
       ref={navigationRef}
       theme={navTheme}
       // onReady and onStateChange are used for screen tracking:
