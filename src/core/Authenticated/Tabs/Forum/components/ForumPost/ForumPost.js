@@ -4,12 +4,9 @@ import { Post } from '@fpf/components/Post'
 
 export const ForumPost = ({ post, postTruncateLength, navigation }) => {
   const onTapCategory = (categoryId) => {
-    const searchParams = {
-      index: 'posts',
-      's[sent_at]': 'desc',
-      'category_ids[]': categoryId,
-    }
-    navigation.navigate('Search', { searchParams })
+    navigation.navigate('Search', {
+      sourceUrl: `/search?index=posts&s[sent_at]=desc&category_ids[]=${categoryId}`,
+    })
   }
 
   return (
