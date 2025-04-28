@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import queryString from 'query-string'
 
 import { Config } from '@fpf/common/config'
 import { WebView } from '@fpf/components/WebView'
@@ -12,15 +11,8 @@ export class Search extends React.Component {
     const { navigation, route } = this.props
     const accessToken = this.props.accessToken.toString()
 
-    let sourceUrl = Config.WEBSITE_HOST + (route.params?.sourceUrl ?? '/search')
-
-    const searchParams = route.params?.searchParams
-    if (searchParams) {
-      sourceUrl = queryString.stringifyUrl({
-        url: sourceUrl,
-        query: searchParams,
-      })
-    }
+    const sourceUrl =
+      Config.WEBSITE_HOST + (route.params?.sourceUrl ?? route.path ?? '/search')
 
     return (
       <WebView

@@ -40,23 +40,11 @@ export class Compose extends React.Component {
   render() {
     const { navigation, navigateWithToken, route } = this.props
     const accessToken = this.props.accessToken.toString()
-    const {
-      areaId,
-      categoryId,
-      parentPostId,
-      referencedProfileId,
-      submittedContentType,
-      title,
-    } = route.params || {}
-    let params = []
-    params.push(`area_id=${areaId || ''}`)
-    params.push(`category_id=${categoryId || ''}`)
-    params.push(`post[parent_post_id]=${parentPostId || ''}`)
-    params.push(`post[referenced_profile_id]=${referencedProfileId || ''}`)
-    params.push(`post[title]=${title || ''}`)
-    params.push(`resetToken=${this.resetToken}`)
-    const query = params.join('&')
-    const sourceUrl = `${Config.WEBSITE_HOST}/compose?${query}`
+    const sourceUrl =
+      Config.WEBSITE_HOST +
+      (route.params?.sourceUrl ?? route.path ?? '/compose')
+
+    const submittedContentType = route.params?.submittedContentType || 'post'
 
     return (
       <React.Fragment>
@@ -74,7 +62,7 @@ export class Compose extends React.Component {
         />
         {this.modalVisible && (
           <Success
-            contentType={submittedContentType || 'post'}
+            contentType={submittedContentType}
             navigateWithToken={navigateWithToken}
             onClose={() => {
               navigation.navigate('Forum')

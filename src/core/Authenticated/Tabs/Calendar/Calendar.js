@@ -11,7 +11,8 @@ export class Calendar extends React.Component {
     const accessToken = this.props.accessToken.toString()
 
     const sourceUrl =
-      Config.WEBSITE_HOST + (route.params?.sourceUrl ?? '/calendar')
+      Config.WEBSITE_HOST +
+      (route.params?.sourceUrl ?? route.path ?? '/calendar')
 
     return (
       <WebView

@@ -63,11 +63,7 @@ export class Post extends React.Component {
 
   handleReplyPress = (post) => {
     this.props.navigation.navigate('Compose', {
-      areaId: post.area_id,
-      categoryId: null,
-      parentPostId: post.id,
-      referencedProfileId: null,
-      title: this.reTitle(post.title),
+      sourceUrl: `/compose/${post.area_id}?post[parent_post_id]=${post.id}`,
     })
   }
 

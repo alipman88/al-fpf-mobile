@@ -147,11 +147,7 @@ describe('Post', () => {
     const wrapper = shallow(<Post {...defaultProps} />)
     wrapper.find(Button).last().simulate('press')
     expect(defaultProps.navigation.navigate).toHaveBeenCalledWith('Compose', {
-      areaId: defaultProps.post.area_id,
-      categoryId: null,
-      parentPostId: defaultProps.post.id,
-      referencedProfileId: null,
-      title: `Re: ${defaultProps.post.title}`,
+      sourceUrl: `/compose/${defaultProps.post.area_id}?post[parent_post_id]=${defaultProps.post.id}`,
     })
   })
 
