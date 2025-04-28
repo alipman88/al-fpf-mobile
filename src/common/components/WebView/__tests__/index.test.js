@@ -25,32 +25,6 @@ describe('WebView', () => {
     setOptions.mockReset()
   })
 
-  test('WebView forum requests are intercepted', () => {
-    render(<WebView {...defaultProps} />)
-    screen.getByTestId('webView').props.onShouldStartLoadWithRequest({
-      url: 'https://frontporchforum.com/1/forum/archive/123',
-    })
-
-    expect(navigate).toHaveBeenCalledWith('Forum', {
-      areaId: 1,
-      issueNum: 123,
-    })
-  })
-
-  test('WebView forum requests with area slugs are intercepted', () => {
-    const props = { ...defaultProps, areaIdsBySlug: { foo: 5 } }
-    render(<WebView {...props} />)
-    screen.getByTestId('webView').props.onShouldStartLoadWithRequest({
-      url: 'https://frontporchforum.com/foo/forum/archive/123',
-    })
-
-    expect(navigate).toHaveBeenCalledWith('Forum', {
-      areaId: 5,
-      areaSlug: 'foo',
-      issueNum: 123,
-    })
-  })
-
   test('WebView compose post requests are intercepted', () => {
     render(<WebView {...defaultProps} />)
     screen.getByTestId('webView').props.onShouldStartLoadWithRequest({

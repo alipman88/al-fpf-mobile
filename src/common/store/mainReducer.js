@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux'
 import { appMessage } from '@fpf/components/AppMessage/slice'
 import { areas } from '@fpf/common/areas/slice'
-import { issues } from '@fpf/common/issues/slice'
-import { posts } from '@fpf/common/posts/slice'
 import { products } from '@fpf/common/products/slice'
 import { profile } from '@fpf/common/profile/slice'
 import { purchases } from '@fpf/common/purchases/slice'
@@ -15,8 +13,6 @@ import { mailApp } from '@fpf/common/mailApp'
 export const mainReducer = combineReducers({
   appMessage: appMessage.reducer,
   areas: areas.reducer,
-  issues: issues.reducer,
-  posts: posts.reducer,
   products: products.reducer,
   profile: profile.reducer,
   purchases: purchases.reducer,
