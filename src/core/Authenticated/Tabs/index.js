@@ -83,30 +83,15 @@ export function Tabs() {
           })}
         />
         <Tab.Screen
-          name='Compose'
-          component={Compose}
-          listeners={{
-            tabPress: () => setDrawerEnabled(true),
-          }}
-          options={() => ({
-            title: 'Compose',
-            headerLeft: () => <DrawerNavIcon setOpen={setDrawerOpen} />,
-            tabBarLabel: 'Compose',
-            tabBarIcon: ({ focused }) => (
-              <NavIcon source={focused ? composeActive : composeDefault} />
-            ),
-          })}
-        />
-        <Tab.Screen
-          name='Search'
-          component={Search}
+          name='Calendar'
+          component={Calendar}
           listeners={{
             tabPress: () => setDrawerEnabled(false),
           }}
           options={() => ({
-            tabBarLabel: 'Search',
+            tabBarLabel: 'Calendar',
             tabBarIcon: ({ focused }) => (
-              <NavIcon source={focused ? searchActive : searchDefault} />
+              <NavIcon source={focused ? calendarActive : calendarDefault} />
             ),
           })}
         />
@@ -124,15 +109,30 @@ export function Tabs() {
           })}
         />
         <Tab.Screen
-          name='Calendar'
-          component={Calendar}
+          name='Search'
+          component={Search}
           listeners={{
             tabPress: () => setDrawerEnabled(false),
           }}
           options={() => ({
-            tabBarLabel: 'Calendar',
+            tabBarLabel: 'Search',
             tabBarIcon: ({ focused }) => (
-              <NavIcon source={focused ? calendarActive : calendarDefault} />
+              <NavIcon source={focused ? searchActive : searchDefault} />
+            ),
+          })}
+        />
+        <Tab.Screen
+          name='Compose'
+          component={Compose}
+          listeners={{
+            tabPress: () => setDrawerEnabled(true),
+          }}
+          options={() => ({
+            title: 'Compose',
+            headerLeft: () => <DrawerNavIcon setOpen={setDrawerOpen} />,
+            tabBarLabel: 'Compose',
+            tabBarIcon: ({ focused }) => (
+              <NavIcon source={focused ? composeActive : composeDefault} />
             ),
           })}
         />
