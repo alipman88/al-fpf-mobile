@@ -39,3 +39,11 @@ purposes.
 
   Note that individual devices will also cache the contents of this file upon
   app installation, and will automatically refresh once every week or so.
+
+## Application Settings
+
+Miscellaneous application settings are sent from the Rails app' API's
+`/api/v1/settings` endpoint
+(`fpf/src/controllers/api/v1/settings_controller.rb`), and received by
+`src/common/appSettings`. This integration could be expanded to include bits of
+data like a user's home city, which would be useful for WebView placeholders.

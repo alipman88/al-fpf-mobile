@@ -1,27 +1,33 @@
-## Notifications
+## Testing Firebase Notifications
 
-To send push notifications to a simulated development device through Firebase, log in to the mobile app and connect to staging.
-
-Connect to a staging ECS container, boot the rails console, and run the following script, adjusting the user email and device per your login account and device.
+Before testing push notifications, you may wish to log out of the mobile app and delete your app sessions, in order to start with a clean slate:
 
 ```ruby
-# initialize a Firebase connection 
-fcm = PushNotifier.initialize_fcm_connection
-
-# find the Firebase token for your app session
+# From the Rails console on staging
 user = User.find_by(email: 'email@example.com')
-app_session = user.app_sessions.find_by(device_name: 'Apple iPhone 15')
-token = app_session.fcm_token
-
-# pick some sent issue
-issue = Area.find_by(name: 'New Trial').issues.sent.last
-
-# build the notification content
-payload = PushNotifier.params_for_issue(issue).merge(token:)
-
-# send the notification to your device
-fcm.send_v1(payload)
+user.app_sessions.delete_all
 ```
+
+To send push notifications to a simulated development device through Firebase, log into the mobile app and connect to staging. Make sure you have enabled push notifications through the application settings (on your phone) and your FPF user settings (e.g. https://staging.frontporchforum.com/user/subscriptions).
+
+You may double-check the presence of your Firebase Cloud Messaging token:
+
+```ruby
+user.app_sessions.reload.pluck(:fcm_token)
+# => ['abc123']
+```
+
+Then, select an issue from an area you're subscribed to mobile notifications, and send notifications:
+
+(When run in a staging environment, this code will only send notifications to users of the staging mobile application.)
+
+```ruby
+PushNotifier.send_notifications_for(@issue)
+```
+
+You should receive a push notification. Opening the notification should load the appropriate issue in the mobile forum.
+
+## Testing Command Line iOS Notifications
 
 Additionally, iOS Notifications may be pushed directly from the command line using the xcrun utility (bypassing Firebase) – Save the following JSON to an `alert.json` file in the project's root directory:
 
