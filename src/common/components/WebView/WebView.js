@@ -8,16 +8,12 @@ import Spinner from 'react-native-loading-spinner-overlay'
 
 import { BackButton } from '@fpf/core/Authenticated/Settings/components/BackButton'
 import { Button } from '@fpf/components/Button'
-import {
-  composeRegex,
-  composePathParams,
-} from '@fpf/core/Authenticated/Tabs/Compose/parseUrl'
-import {
-  isIssuePath,
-  issuePathParams,
-} from '@fpf/core/Authenticated/Tabs/Forum/parseUrl'
 import { ErrorContainer, ErrorText } from './styledComponents'
 
+// Calendar URL regex
+const calendarRegex = /^(\/.+)?\/calendar/
+// Compose URL regex
+const composeRegex = /^\/compose(\/(?<areaId>\d+))?/
 // Directory URL regex
 const directoryRegex = /^\/(d|directory)(\/.*)?$/
 // Post submitted URL regex
@@ -101,7 +97,7 @@ export const WebView = ({
     // Compose URL
     if (route.name !== 'Compose' && composeRegex.test(requestPath)) {
       navigation.navigate('Compose', {
-        ...composePathParams(requestPath),
+        sourceUrl: requestPath,
       })
       return true
     }

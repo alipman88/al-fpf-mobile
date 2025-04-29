@@ -58,10 +58,8 @@ describe('WebView', () => {
     })
 
     expect(navigate).toHaveBeenCalledWith('Compose', {
-      areaId: 92,
-      categoryId: 5,
-      referencedProfileId: 123,
-      title: 'Recommending Pawnshop Productions',
+      sourceUrl:
+        '/compose/92?category_id=5&post%5Breferenced_profile_id%5D=123&post%5Btitle%5D=Recommending+Pawnshop+Productions',
     })
   })
 
