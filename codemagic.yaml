@@ -106,6 +106,7 @@ workflows:
       <<: *ios_environment
       groups:
         - staging
+        - browserstack_credentials
       vars:
         <<: *ios_vars
         <<: *staging_vars
@@ -149,6 +150,10 @@ workflows:
           xcode-project build-ipa \
             --workspace "$CM_BUILD_DIR/ios/$XCODE_WORKSPACE" \
             --scheme "$XCODE_SCHEME"
+
+      - name: Submit iOS ipa to Browserstack
+        script: |
+          curl -u "$BROWSERSTACK_USERNAME:$BROWSERSTACK_ACCESS_TOKEN" -X POST "https://api-cloud.browserstack.com/app-live/upload" -F "file=@$HOME/clone/build/ios/ipa/Front Porch Forum.ipa"
 
     artifacts: &ios_artifacts
       - build/ios/ipa/*.ipa
@@ -226,6 +231,7 @@ workflows:
       <<: *android_environment
       groups:
         - staging
+        - browserstack_credentials
         - google_credentials
       vars:
         <<: *android_vars
@@ -259,6 +265,10 @@ workflows:
 
           cd android
           ./gradlew bundleRelease
+
+      - name: Submit Android aab to Browserstack
+        script: |
+          curl -u "$BROWSERSTACK_USERNAME:$BROWSERSTACK_ACCESS_TOKEN" -X POST "https://api-cloud.browserstack.com/app-live/upload" -F "file=@$HOME/clone/android/app/build/outputs/bundle/release/app-release.aab"
 
     artifacts: &android_artifacts
       - android/app/build/outputs/**/*.aab
