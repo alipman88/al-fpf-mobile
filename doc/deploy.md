@@ -17,7 +17,22 @@
 6. Select "iOS Staging App" or "Android Staging App"
 7. Click "Start new build"
 
-TODO LATER: document how QA should access iOS and Android staging builds
+#### BrowserStack App Live
+
+Staging builds are automatically uploaded to BrowserStack. Its App Live service
+can be used to test our mobile app on a variety of real phones through the cloud.
+
+Authentication is configured via Noah's BrowserStack account, which has
+`Username` and `Access Key` values defined here:
+https://www.browserstack.com/accounts/profile/details
+
+Those values are stored in Codemagic fpf-mobile app environment variables
+in the `browserstack_credentials` group:
+https://codemagic.io/app/67d05c4d6f8452bacfd85e9c/settings
+
+Documentation:
+- https://docs.codemagic.io/integrations/browserstack-integration/
+- https://www.browserstack.com/app-live/rest-api
 
 ### Production deployment
 
