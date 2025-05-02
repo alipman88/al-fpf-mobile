@@ -34,102 +34,102 @@ const Tab = createBottomTabNavigator()
 
 export function Tabs() {
   return (
-      <Tab.Navigator
-        initialRouteName='Forum'
-        screenOptions={({ navigation }) => ({
-          tabBarActiveTintColor: '#D77400',
-          tabBarAllowFontScaling: false,
-          tabBarLabelStyle: {
-            fontSize: 13,
-          },
-          headerRight: () => (
-            <TopNavIcon
-              source={profileIcon}
-              width={26}
-              height={22}
+    <Tab.Navigator
+      initialRouteName='Forum'
+      screenOptions={({ navigation }) => ({
+        tabBarActiveTintColor: '#D77400',
+        tabBarAllowFontScaling: false,
+        tabBarLabelStyle: {
+          fontSize: 13,
+        },
+        headerRight: () => (
+          <TopNavIcon
+            source={profileIcon}
+            width={26}
+            height={22}
+            onPress={() => {
+              navigation.navigate('Settings')
+            }}
+          />
+        ),
+        headerTitleStyle: {
+          fontFamily: 'ProximaNova-SemiBold',
+          fontSize: 16,
+          color: '#355768',
+          backgroundColor: headerBackgroundForEnv,
+        },
+      })}
+    >
+      <Tab.Screen
+        name='Forum'
+        component={Forum}
+        options={({ navigation }) => ({
+          title: 'Forum',
+          headerLeft: () => (
+            <DrawerNavIcon
               onPress={() => {
-                navigation.navigate('Settings')
+                navigation.navigate('Forum', {
+                  sourceUrl: `/forum?cache-bust=${Date.now()}`,
+                })
               }}
             />
           ),
-          headerTitleStyle: {
-            fontFamily: 'ProximaNova-SemiBold',
-            fontSize: 16,
-            color: '#355768',
-            backgroundColor: headerBackgroundForEnv,
-          },
+          tabBarLabel: 'Forum',
+          tabBarIcon: ({ focused }) => (
+            <NavIcon source={focused ? homeActive : homeDefault} />
+          ),
         })}
-      >
-        <Tab.Screen
-          name='Forum'
-          component={Forum}
-          options={({ navigation }) => ({
-            title: 'Forum',
-            headerLeft: () => (
-              <DrawerNavIcon
-                onPress={() => {
-                  navigation.navigate('Forum', {
-                    sourceUrl: `/forum?cache-bust=${Date.now()}`,
-                  })
-                }}
-              />
-            ),
-            tabBarLabel: 'Forum',
-            tabBarIcon: ({ focused }) => (
-              <NavIcon source={focused ? homeActive : homeDefault} />
-            ),
-          })}
-        />
-        <Tab.Screen
-          name='Calendar'
-          component={Calendar}
-          options={() => ({
-            tabBarLabel: 'Calendar',
-            tabBarIcon: ({ focused }) => (
-              <NavIcon source={focused ? calendarActive : calendarDefault} />
-            ),
-          })}
-        />
-        <Tab.Screen
-          name='Directory'
-          component={Directory}
-          options={() => ({
-            tabBarLabel: 'Directory',
-            tabBarIcon: ({ focused }) => (
-              <NavIcon source={focused ? directoryActive : directoryDefault} />
-            ),
-          })}
-        />
-        <Tab.Screen
-          name='Search'
-          component={Search}
-          options={() => ({
-            tabBarLabel: 'Search',
-            tabBarIcon: ({ focused }) => (
-              <NavIcon source={focused ? searchActive : searchDefault} />
-            ),
-          })}
-        />
-        <Tab.Screen
-          name='Compose'
-          component={Compose}
-          options={({ navigation }) => ({
-            title: 'Compose',
-            headerLeft: () => (
-              <DrawerNavIcon
-                onPress={() => {
-                  navigation.navigate('Forum', {
-                    sourceUrl: `/forum?cache-bust=${Date.now()}`,
-                  })
-                }}
-              />
-            ),
-            tabBarLabel: 'Compose',
-            tabBarIcon: ({ focused }) => (
-              <NavIcon source={focused ? composeActive : composeDefault} />
-            ),
-          })}
-        />
-      </Tab.Navigator>
+      />
+      <Tab.Screen
+        name='Calendar'
+        component={Calendar}
+        options={() => ({
+          tabBarLabel: 'Calendar',
+          tabBarIcon: ({ focused }) => (
+            <NavIcon source={focused ? calendarActive : calendarDefault} />
+          ),
+        })}
+      />
+      <Tab.Screen
+        name='Directory'
+        component={Directory}
+        options={() => ({
+          tabBarLabel: 'Directory',
+          tabBarIcon: ({ focused }) => (
+            <NavIcon source={focused ? directoryActive : directoryDefault} />
+          ),
+        })}
+      />
+      <Tab.Screen
+        name='Search'
+        component={Search}
+        options={() => ({
+          tabBarLabel: 'Search',
+          tabBarIcon: ({ focused }) => (
+            <NavIcon source={focused ? searchActive : searchDefault} />
+          ),
+        })}
+      />
+      <Tab.Screen
+        name='Compose'
+        component={Compose}
+        options={({ navigation }) => ({
+          title: 'Compose',
+          headerLeft: () => (
+            <DrawerNavIcon
+              onPress={() => {
+                navigation.navigate('Forum', {
+                  sourceUrl: `/forum?cache-bust=${Date.now()}`,
+                })
+              }}
+            />
+          ),
+          tabBarLabel: 'Compose',
+          tabBarIcon: ({ focused }) => (
+            <NavIcon source={focused ? composeActive : composeDefault} />
+          ),
+        })}
+      />
+    </Tab.Navigator>
   )
 }
