@@ -44,6 +44,7 @@ export const WebView = ({
   navigation,
   route,
   useBackButton = true,
+  transferPageTitle = false,
   areaIdsBySlug,
   ...restProps
 }) => {
@@ -51,6 +52,13 @@ export const WebView = ({
   let [stack, setStack] = React.useState([source.uri])
   let [showError, setShowError] = React.useState(false)
   let [webViewLoading, setWebViewLoading] = React.useState(true)
+
+  const [pageTitle, setPageTitle] = React.useState('')
+  React.useEffect(() => {
+    if (pageTitle) {
+      navigation.setOptions({ title: pageTitle })
+    }
+  }, [pageTitle, navigation])
 
   const currentURI = stack[stack.length - 1]
   const newSource = { ...source, uri: currentURI }
@@ -230,6 +238,11 @@ export const WebView = ({
             navigation.setOptions({ headerLeft: backButton })
           }
         }}
+        onNavigationStateChange={(navState) => {
+          if (transferPageTitle && navState.title) {
+            setPageTitle(navState.title)
+          }
+        }}
       />
       {showError && <ErrorView reload={reset} />}
     </>
@@ -241,6 +254,7 @@ WebView.propTypes = {
   route: PropTypes.object.isRequired,
   source: PropTypes.object,
   useBackButton: PropTypes.bool,
+  transferPageTitle: PropTypes.bool,
   areaIdsBySlug: PropTypes.object.isRequired,
   placeholder: PropTypes.node,
 }

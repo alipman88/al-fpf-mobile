@@ -52,6 +52,13 @@ export function Tabs() {
             }}
           />
         ),
+        // react-navigation wraps the title text in a container with a fixed
+        // max-width that's slightly too narrow on small iOS devices (e.g iPhone
+        // 13 mini). Although we cannot pass custom styling to this wrapper
+        // container, setting headerBackButtonDisplayMode to 'minimal' slightly
+        // increases the available width such that our longest title ("Unified
+        // Towns and Gores Forum") will not be ellipsized.
+        headerBackButtonDisplayMode: 'minimal',
         headerTitleStyle: {
           fontFamily: 'ProximaNova-SemiBold',
           fontSize: 16,
