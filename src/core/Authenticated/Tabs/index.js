@@ -64,7 +64,6 @@ export function Tabs() {
         name='Forum'
         component={Forum}
         options={({ navigation }) => ({
-          title: 'Forum',
           headerLeft: () => (
             <DrawerNavIcon
               onPress={() => {
@@ -84,7 +83,6 @@ export function Tabs() {
         name='Calendar'
         component={Calendar}
         options={() => ({
-          tabBarLabel: 'Calendar',
           tabBarIcon: ({ focused }) => (
             <NavIcon source={focused ? calendarActive : calendarDefault} />
           ),
@@ -94,7 +92,6 @@ export function Tabs() {
         name='Directory'
         component={Directory}
         options={() => ({
-          tabBarLabel: 'Directory',
           tabBarIcon: ({ focused }) => (
             <NavIcon source={focused ? directoryActive : directoryDefault} />
           ),
@@ -104,7 +101,6 @@ export function Tabs() {
         name='Search'
         component={Search}
         options={() => ({
-          tabBarLabel: 'Search',
           tabBarIcon: ({ focused }) => (
             <NavIcon source={focused ? searchActive : searchDefault} />
           ),
@@ -114,7 +110,6 @@ export function Tabs() {
         name='Compose'
         component={Compose}
         options={({ navigation }) => ({
-          title: 'Compose',
           headerLeft: () => (
             <DrawerNavIcon
               onPress={() => {
@@ -124,7 +119,6 @@ export function Tabs() {
               }}
             />
           ),
-          tabBarLabel: 'Compose',
           tabBarIcon: ({ focused }) => (
             <NavIcon source={focused ? composeActive : composeDefault} />
           ),
