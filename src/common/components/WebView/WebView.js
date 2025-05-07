@@ -8,23 +8,16 @@ import Spinner from 'react-native-loading-spinner-overlay'
 
 import { BackButton } from '@fpf/core/Authenticated/Settings/components/BackButton'
 import { Button } from '@fpf/components/Button'
-import {
-  composeRegex,
-  composePathParams,
-} from '@fpf/core/Authenticated/Tabs/Compose/parseUrl'
-import {
-  isIssuePath,
-  issuePathParams,
-} from '@fpf/core/Authenticated/Tabs/Forum/parseUrl'
 import { ErrorContainer, ErrorText } from './styledComponents'
 
-// Directory URL regex
-const directoryRegex = /^\/(d|directory)(\/.*)?$/
-// Post submitted URL regex
-const postSubmittedRegex =
-  /(\?|&)mobile_submitted_content_type=(?<contentType>post|event)/
-// Search URL regex
-const searchRegex = /^\/search\/?(\?.*)?$/
+import {
+  calendarRegex,
+  composeRegex,
+  directoryRegex,
+  forumRegex,
+  postSubmittedRegex,
+  searchRegex,
+} from './pathRegexes'
 
 /**
  * Render a generic error view with a reload button.
@@ -98,10 +91,18 @@ export const WebView = ({
    * @param {boolean} true if navigating, false if not handled.
    */
   const navigateForRequest = (requestPath) => {
+    // Calendar URL
+    if (route.name !== 'Calendar' && calendarRegex.test(requestPath)) {
+      navigation.navigate('Calendar', {
+        sourceUrl: requestPath,
+      })
+      return true
+    }
+
     // Compose URL
     if (route.name !== 'Compose' && composeRegex.test(requestPath)) {
       navigation.navigate('Compose', {
-        ...composePathParams(requestPath),
+        sourceUrl: requestPath,
       })
       return true
     }
@@ -117,17 +118,10 @@ export const WebView = ({
       return true
     }
 
-    // Issue URL
-    if (isIssuePath(requestPath)) {
-      const params = issuePathParams(requestPath)
-
-      // If the URL includes an area slug rather than an area id, translate it
-      if (params.areaSlug && !params.areaId) {
-        params.areaId = areaIdsBySlug[params.areaSlug]
-      }
-
+    // Forum URL
+    if (route.name !== 'Forum' && forumRegex.test(requestPath)) {
       navigation.navigate('Forum', {
-        ...params,
+        sourceUrl: requestPath,
       })
       return true
     }
@@ -162,6 +156,7 @@ export const WebView = ({
     '^/compose',
     '^/directory',
     '^/d/',
+    '/forum',
     '^/search',
   ]
 
@@ -216,7 +211,7 @@ export const WebView = ({
             stack = [...stack, request.url]
             setStack(stack)
 
-            return false
+            return true
           }
 
           // Open unpermitted requests in a mobile browser

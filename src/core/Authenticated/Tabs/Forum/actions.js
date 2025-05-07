@@ -1,3 +1,4 @@
+// src/core/Authenticated/Tabs/Forum/actions.js
 import * as api from '@fpf/common/api'
 import { currentUser } from '@fpf/common/currentUser'
 
