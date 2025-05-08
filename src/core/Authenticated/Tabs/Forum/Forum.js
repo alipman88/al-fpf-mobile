@@ -106,6 +106,7 @@ export class Forum extends React.Component {
         }}
         placeholder=<ForumPlaceholder />
         useBackButton={false}
+        transferPageTitle={true}
       />
     )
   }

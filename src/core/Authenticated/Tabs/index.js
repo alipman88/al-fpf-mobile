@@ -52,6 +52,13 @@ export function Tabs() {
             }}
           />
         ),
+        // react-navigation wraps the title text in a container with a fixed
+        // max-width that's slightly too narrow on small iOS devices (e.g iPhone
+        // 13 mini). Although we cannot pass custom styling to this wrapper
+        // container, setting headerBackButtonDisplayMode to 'minimal' slightly
+        // increases the available width such that our longest title ("Unified
+        // Towns and Gores Forum") will not be ellipsized.
+        headerBackButtonDisplayMode: 'minimal',
         headerTitleStyle: {
           fontFamily: 'ProximaNova-SemiBold',
           fontSize: 16,
@@ -64,7 +71,6 @@ export function Tabs() {
         name='Forum'
         component={Forum}
         options={({ navigation }) => ({
-          title: 'Forum',
           headerLeft: () => (
             <DrawerNavIcon
               onPress={() => {
@@ -84,7 +90,6 @@ export function Tabs() {
         name='Calendar'
         component={Calendar}
         options={() => ({
-          tabBarLabel: 'Calendar',
           tabBarIcon: ({ focused }) => (
             <NavIcon source={focused ? calendarActive : calendarDefault} />
           ),
@@ -94,7 +99,6 @@ export function Tabs() {
         name='Directory'
         component={Directory}
         options={() => ({
-          tabBarLabel: 'Directory',
           tabBarIcon: ({ focused }) => (
             <NavIcon source={focused ? directoryActive : directoryDefault} />
           ),
@@ -104,7 +108,6 @@ export function Tabs() {
         name='Search'
         component={Search}
         options={() => ({
-          tabBarLabel: 'Search',
           tabBarIcon: ({ focused }) => (
             <NavIcon source={focused ? searchActive : searchDefault} />
           ),
@@ -114,7 +117,6 @@ export function Tabs() {
         name='Compose'
         component={Compose}
         options={({ navigation }) => ({
-          title: 'Compose',
           headerLeft: () => (
             <DrawerNavIcon
               onPress={() => {
@@ -124,7 +126,6 @@ export function Tabs() {
               }}
             />
           ),
-          tabBarLabel: 'Compose',
           tabBarIcon: ({ focused }) => (
             <NavIcon source={focused ? composeActive : composeDefault} />
           ),

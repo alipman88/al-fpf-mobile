@@ -8,6 +8,11 @@ When using a mobile browser and visiting a URL that may be served through the
 mobile app, users will be prompted to open the mobile app and will be directed
 to the appropriate content within the mobile app.
 
+### Page Titles
+
+To automatically transfer page titles from pages loaded within a WebView to the
+mobile app title bar, set the WebView's `transferPageTitle` property to `true`.
+
 ### Updating Rails app URLs
 
 When URLs used by the mobile application are added or changed, the following
