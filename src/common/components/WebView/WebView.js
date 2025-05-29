@@ -70,6 +70,7 @@ export const WebView = ({
     'https://m.stripe.network',
     'https://bid.g.doubleclick.net',
     Config.WEBSITE_HOST,
+    'mailto:',
   ]
 
   // Reset the web view to its initial page
@@ -189,6 +190,11 @@ export const WebView = ({
         onError={() => setShowError(true)}
         onHttpError={() => setShowError(true)}
         onShouldStartLoadWithRequest={(request) => {
+          if (request.url.startsWith('mailto:')) {
+            Linking.openURL(request.url)
+            return false
+          }
+
           if (!request.url.startsWith(Config.WEBSITE_HOST)) return false
 
           const requestPath = request.url.replace(Config.WEBSITE_HOST, '')
