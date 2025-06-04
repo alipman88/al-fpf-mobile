@@ -179,6 +179,7 @@ export const WebView = ({
         applicationNameForUserAgent={`FpfMobileApp/802.${DeviceInfo.getVersion()}`}
         startInLoadingState={true}
         scalesPageToFit={false}
+        decelerationRate={0.998}
         basicAuthCredential={{
           username: 'staging',
           password: Config.BASIC_AUTH_PASSWORD,
