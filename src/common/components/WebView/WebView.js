@@ -157,9 +157,7 @@ export const WebView = ({
   // Whitelisted WebView paths -
   // Sections of frontporchforum.com that should load inside the webview.
   // (External URLs and any other areas of the FPF website should open in a
-  // browser tab.) When updating these paths, be sure to update the
-  // @mobile_app_permitted_paths array in the Rails app's
-  // ApplicationController#handle_mobile_app_request method.
+  // browser tab.)
   const whitelistedPaths = [
     '/calendar',
     '^/compose',
