@@ -61,7 +61,7 @@ export function Tabs() {
         headerBackButtonDisplayMode: 'minimal',
         headerTitleStyle: {
           fontFamily: 'ProximaNova-SemiBold',
-          fontSize: 16,
+          fontSize: 20,
           color: '#355768',
           backgroundColor: headerBackgroundForEnv,
         },
