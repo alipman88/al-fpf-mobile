@@ -20,7 +20,3 @@ export const getAreas = () => async (dispatch, getState) => {
     dispatch(appMessage.actions.setAppError(responseError(e)))
   }
 }
-
-export const resetAreas = (navigation) => async (dispatch, getState) => {
-  dispatch(slice.actions.resetAreas())
-}

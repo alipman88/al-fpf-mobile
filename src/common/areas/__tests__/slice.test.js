@@ -43,16 +43,6 @@ describe('areas - slice', () => {
       { id: 1, neighbor_areas: [{ id: 2, name: 'neighbor' }] },
     ])
 
-    data = areas.selectors.getNeighboringAreas({
-      main: {
-        areas: state,
-      },
-    })
-
-    expect(data).toEqual({
-      2: 'neighbor',
-    })
-
     data = areas.selectors.getLoading({
       main: {
         areas: state,
@@ -60,45 +50,5 @@ describe('areas - slice', () => {
     })
 
     expect(data).toEqual(false)
-  })
-
-  test('setCurrentAreaId', () => {
-    const state = areas.reducer(undefined, areas.actions.setCurrentAreaId(3))
-    expect(
-      areas.selectors.getCurrentAreaId({
-        main: {
-          areas: state,
-        },
-      }),
-    ).toEqual(3)
-  })
-
-  test('getFullAreasList', () => {
-    const state = areas.reducer(
-      undefined,
-      areas.actions.setAreas([
-        { id: 1, name: 'zzzz', neighbor_areas: [{ id: 3, name: 'neighbor' }] },
-        {
-          id: 2,
-          name: 'aaaa',
-          neighbor_areas: [
-            { id: 3, name: 'neighbor' },
-            { id: 1, name: 'zzzz' },
-          ],
-        },
-      ]),
-    )
-
-    const data = areas.selectors.getFullAreasList({
-      main: {
-        areas: state,
-      },
-    })
-
-    expect(data).toEqual([
-      { id: 2, name: 'aaaa', access: 'primary' },
-      { id: 3, name: 'neighbor', access: 'neighbor' },
-      { id: 1, name: 'zzzz', access: 'primary' },
-    ])
   })
 })

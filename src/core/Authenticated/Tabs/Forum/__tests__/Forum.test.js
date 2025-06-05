@@ -12,7 +12,6 @@ jest.mock('@react-navigation/native', () => ({
 describe('Forum', () => {
   const defaultProps = {
     accessToken: 'abc',
-    setupForumData: jest.fn(),
     navigation: {
       navigate: jest.fn(),
       setParams: jest.fn(),
@@ -22,87 +21,10 @@ describe('Forum', () => {
     navigateWithToken: jest.fn(),
     fcmToken: '',
     sendNewFCMToken: jest.fn(),
-    currentIssueId: 12,
-    currentAreaId: 1,
-    issues: [{ id: 11 }, { id: 12 }, { id: 13 }],
-    areas: [
-      { id: 1, name: 'Sparta' },
-      { id: 2, name: 'Athena' },
-    ],
-    getIssues: jest.fn(),
-    getContents: jest.fn(),
-    getAds: jest.fn(),
-    setCurrentIssueId: jest.fn(),
-    setCurrentAreaId: jest.fn(),
-    fetchSpecificIssue: jest.fn(),
-    toggleIssueUnread: jest.fn(),
-    posts: {
-      12: [
-        {
-          id: 1,
-          content: 'Test test test testereeno',
-          title: 'Test',
-          categories: ['test'],
-          user_first_name: 'test',
-          user_last_name: 'test',
-          user_profile_name: 'Mayor, Test Ontario',
-        },
-        {
-          id: 2,
-          content: 'Test test test testereeno',
-          title: 'Test',
-          categories: ['test'],
-          user_first_name: 'test',
-          user_last_name: 'test',
-          user_profile_name: 'Mayor, Test Ontario',
-        },
-        {
-          id: 3,
-          content: 'Test test test testereeno',
-          title: 'Test',
-          categories: ['test'],
-          user_first_name: 'test',
-          user_last_name: 'test',
-          user_profile_name: 'Mayor, Test Ontario',
-        },
-        {
-          id: 4,
-          content: 'Test test test testereeno',
-          title: 'Test',
-          categories: ['test'],
-          user_first_name: 'test',
-          user_last_name: 'test',
-          user_profile_name: 'Mayor, Test Ontario',
-        },
-      ],
-    },
-    neighboringAreas: {},
-    ads: {
-      12: [
-        {
-          id: 1,
-        },
-        {
-          id: 2,
-        },
-        {
-          id: 3,
-        },
-      ],
-    },
-    featuredAdCampaigns: {},
-    sharedPosts: {
-      12: [],
-    },
   }
 
   afterEach(() => {
-    // defaultProps.setupForumData.mockReset()
     defaultProps.sendNewFCMToken.mockReset()
-    // defaultProps.getIssues.mockReset()
-    // defaultProps.getContents.mockReset()
-    // defaultProps.setCurrentIssueId.mockReset()
-    // defaultProps.setCurrentAreaId.mockReset()
     defaultProps.navigation.setParams.mockReset()
   })
 
