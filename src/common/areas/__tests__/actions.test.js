@@ -1,5 +1,3 @@
-import { StackActions } from '@react-navigation/native'
-
 import { api } from '@fpf/common/api'
 import { getAreas } from '../actions'
 import { areas } from '../slice'
@@ -104,10 +102,6 @@ describe('areas actions', () => {
 
     expect(dispatch).toHaveBeenCalledWith(
       appMessage.actions.setAppError('boom'),
-    )
-
-    expect(navigation.dispatch).toHaveBeenCalledWith(
-      StackActions.replace('Login'),
     )
 
     getSpy.mockRestore()

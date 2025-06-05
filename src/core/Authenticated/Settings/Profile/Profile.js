@@ -114,7 +114,7 @@ export class Profile extends React.Component {
                 {profile.area_ids
                   .filter((id) => id !== profile.home_nf)
                   .map((areaId) => (
-                    <FieldText key={areaId}>{areas[areaId].name}</FieldText>
+                    <FieldText key={areaId}>{areas[areaId]?.name}</FieldText>
                   ))}
               </Field>
             </React.Fragment>
