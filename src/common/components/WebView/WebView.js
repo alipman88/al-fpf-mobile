@@ -244,7 +244,13 @@ export const WebView = ({
           }
         }}
         onNavigationStateChange={(navState) => {
-          if (transferPageTitle && navState.title) {
+          if (
+            transferPageTitle &&
+            navState.title &&
+            // Android briefly uses the document path as the title, and we don't
+            // want to set the nav title to "frontporchforum.com/forum"
+            !navState?.url?.endsWith(navState.title)
+          ) {
             setPageTitle(navState.title)
           }
         }}
