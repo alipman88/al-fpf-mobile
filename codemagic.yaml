@@ -265,6 +265,7 @@ workflows:
 
           cd android
           ./gradlew bundleRelease
+          ./gradlew assembleRelease
 
       - name: Submit Android aab to Browserstack
         script: |
