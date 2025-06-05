@@ -20,7 +20,7 @@ export class ForumPlaceholder extends React.Component {
           style={{ paddingTop: 90, backgroundColor: WebColors.gray100 }}
         >
           <Card style={{ height: 200, paddingTop: 15, paddingLeft: 21 }}>
-            <H3 style={{ color: WebColors.blue600 }}>In This Issue •</H3>
+            <H3 style={{ color: WebColors.blue600 }}>In This Issue</H3>
           </Card>
           <Card style={{ height: 180 }}></Card>
           <Card style={{ height: 180 }}></Card>
