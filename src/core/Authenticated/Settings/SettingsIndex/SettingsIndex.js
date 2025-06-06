@@ -40,11 +40,10 @@ export class SettingsIndex extends React.Component {
   }
 
   async logoutUser() {
-    this.props.logoutUser(
-      this.props.navigation,
-      { fcm_token: this.props.fcmToken },
-      this.setLoading,
-    )
+    this.setLoading(true)
+    this.props
+      .logoutUser(this.props.navigation)
+      .finally(() => this.setLoading(false))
   }
 
   setLoading = (loadingVal) => {
@@ -61,13 +60,15 @@ export class SettingsIndex extends React.Component {
             <Navigation>
               <FieldHeading>Account</FieldHeading>
               <FieldLabel style={{ marginTop: 12 }}>My account</FieldLabel>
-              <NavLink
-                linkText={`${user.first_name} ${user.last_name}`}
-                onPress={() => navigation.navigate('Account')}
-                hasBorder={true}
-              />
+              {user?.id && (
+                <NavLink
+                  linkText={`${user.first_name} ${user.last_name}`}
+                  onPress={() => navigation.navigate('Account')}
+                  hasBorder={true}
+                />
+              )}
               <FieldLabel>My profile(s)</FieldLabel>
-              {user.profiles.map((profile, i, arr) => (
+              {user?.profiles?.map((profile, i, arr) => (
                 <NavLink
                   linkText={getProfileDisplayName(profile)}
                   key={profile.id}
@@ -78,11 +79,7 @@ export class SettingsIndex extends React.Component {
                 />
               ))}
               <TouchableOpacity
-                onPress={() =>
-                  navigateWithToken('/user/submissions', (loading) =>
-                    this.setState({ loading }),
-                  )
-                }
+                onPress={() => navigateWithToken('/user/submissions')}
               >
                 <ExternalLinkContainer style={{ marginTop: 18 }}>
                   <ViewPostings>My Submissions</ViewPostings>
@@ -147,5 +144,4 @@ SettingsIndex.propTypes = {
   user: PropTypes.object.isRequired,
   getProfiles: PropTypes.func.isRequired,
   logoutUser: PropTypes.func.isRequired,
-  fcmToken: PropTypes.string,
 }

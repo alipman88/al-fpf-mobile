@@ -14,8 +14,9 @@ describe('SettingsIndex', () => {
     navigateWithToken: jest.fn(),
     resetAction: jest.fn(),
     getProfiles: jest.fn(),
-    logoutUser: jest.fn(),
+    logoutUser: jest.fn().mockResolvedValue(),
     user: {
+      id: 123,
       first_name: 'John',
       last_name: 'Smith',
       profiles: [
@@ -55,7 +56,6 @@ describe('SettingsIndex', () => {
     wrapper.find(TouchableOpacity).at(0).simulate('press')
     expect(defaultProps.navigateWithToken).toHaveBeenCalledWith(
       '/user/submissions',
-      expect.any(Function),
     )
   })
 
