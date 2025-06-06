@@ -1,6 +1,6 @@
 import { ActionSheetIOS, Linking, Platform } from 'react-native'
 
-import { composeEmail, parseMailto } from '../actions'
+import { composeEmail } from '../actions'
 
 describe('mailApp - actions', () => {
   const dispatch = jest.fn()
@@ -9,33 +9,6 @@ describe('mailApp - actions', () => {
   afterEach(() => {
     dispatch.mockReset()
     Platform.OS = originalPlatform
-  })
-
-  describe('parseMailto', () => {
-    test('parses a mailto url', () => {
-      expect(parseMailto('mailto:')).toEqual({})
-
-      expect(parseMailto('mailto:me@bar.com')).toEqual({ email: 'me@bar.com' })
-
-      expect(parseMailto('mailto:?subject=foo')).toEqual({ subject: 'foo' })
-
-      expect(parseMailto('mailto:me@bar.com?subject=foobar')).toEqual({
-        email: 'me@bar.com',
-        subject: 'foobar',
-      })
-
-      expect(parseMailto('mailto:me@bar.com?subject=foobar&body=baz')).toEqual({
-        email: 'me@bar.com',
-        subject: 'foobar',
-        body: 'baz',
-      })
-    })
-
-    test('handles invalid content', () => {
-      expect(parseMailto(null)).toEqual(null)
-      expect(parseMailto('')).toEqual(null)
-      expect(parseMailto('http://foo.com')).toEqual(null)
-    })
   })
 
   describe('composeEmail', () => {
@@ -115,6 +88,8 @@ describe('mailApp - actions', () => {
     })
 
     test('opens a gmail url', async () => {
+      Platform.OS = 'ios'
+
       const canOpenURLSpy = jest
         .spyOn(Linking, 'canOpenURL')
         .mockResolvedValue(true)
@@ -129,9 +104,9 @@ describe('mailApp - actions', () => {
         getState,
       )
 
-      expect(openURLSpy).toHaveBeenCalledWith('googlegmail://co?subject=&to=')
+      expect(openURLSpy).toHaveBeenCalledWith('googlegmail://co?')
       expect(openURLSpy).toHaveBeenCalledWith(
-        'googlegmail://co?subject=bar&to=foo@bar.com',
+        'googlegmail://co?to=foo@bar.com&subject=bar',
       )
 
       openURLSpy.mockRestore()

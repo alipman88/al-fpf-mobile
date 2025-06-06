@@ -24,12 +24,19 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-		<string>message</string>
-		<string>readdle-spark</string>
-		<string>airmail</string>
-		<string>ms-outlook</string>
-		<string>googlegmail</string>
-		<string>mailto</string>
+    <string>mailto</string>
+    <string>message</string>
+    <string>readdle-spark</string>
+    <string>airmail</string>
+    <string>ms-outlook</string>
+    <string>googlegmail</string>
+    <string>inbox-gmail</string>
+    <string>ymail</string>
+    <string>superhuman</string>
+    <string>yandexmail</string>
+    <string>fastmail</string>
+    <string>protonmail</string>
+    <string>szn-email</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
