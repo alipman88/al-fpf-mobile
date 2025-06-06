@@ -16,6 +16,7 @@ import { Container } from './Container'
 import { Offline } from './Offline'
 import { purchaseUpdated, purchaseError } from '@fpf/common/purchases'
 import { sendDeviceData } from '@fpf/common/session'
+import { getAreas } from '@fpf/common/areas'
 import { getProfiles } from '@fpf/common/profile'
 import { subscriptionSkus } from '@fpf/common/types/subscriptionSkus'
 import { setApplicationIconBadgeNumber } from '@fpf/common/notifications'
@@ -100,6 +101,7 @@ export class App extends React.Component {
 
       if (currentUser.selectors.getAccessToken(store.getState())) {
         store.dispatch(sendDeviceData())
+        store.dispatch(getAreas())
         store.dispatch(getProfiles())
       }
     }
