@@ -46,6 +46,7 @@ export const WebView = ({
   useBackButton = true,
   transferPageTitle = false,
   areaIdsBySlug,
+  logoutUser,
   ...restProps
 }) => {
   const webViewRef = React.useRef(null)
@@ -189,6 +190,11 @@ export const WebView = ({
         onError={() => setShowError(true)}
         onHttpError={() => setShowError(true)}
         onShouldStartLoadWithRequest={(request) => {
+          if (request.url.includes('/login')) {
+            logoutUser(navigation)
+            return false
+          }
+
           if (request.url.startsWith('mailto:')) {
             Linking.openURL(request.url)
             return false
@@ -267,5 +273,6 @@ WebView.propTypes = {
   useBackButton: PropTypes.bool,
   transferPageTitle: PropTypes.bool,
   areaIdsBySlug: PropTypes.object.isRequired,
+  logoutUser: PropTypes.func.isRequired,
   placeholder: PropTypes.node,
 }
