@@ -16,6 +16,7 @@ describe('SettingsIndex', () => {
     getProfiles: jest.fn(),
     logoutUser: jest.fn().mockResolvedValue(),
     user: {
+      id: 123,
       first_name: 'John',
       last_name: 'Smith',
       profiles: [

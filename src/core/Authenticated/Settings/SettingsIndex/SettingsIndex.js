@@ -60,13 +60,15 @@ export class SettingsIndex extends React.Component {
             <Navigation>
               <FieldHeading>Account</FieldHeading>
               <FieldLabel style={{ marginTop: 12 }}>My account</FieldLabel>
-              <NavLink
-                linkText={`${user.first_name} ${user.last_name}`}
-                onPress={() => navigation.navigate('Account')}
-                hasBorder={true}
-              />
+              {user?.id && (
+                <NavLink
+                  linkText={`${user.first_name} ${user.last_name}`}
+                  onPress={() => navigation.navigate('Account')}
+                  hasBorder={true}
+                />
+              )}
               <FieldLabel>My profile(s)</FieldLabel>
-              {user.profiles.map((profile, i, arr) => (
+              {user?.profiles?.map((profile, i, arr) => (
                 <NavLink
                   linkText={getProfileDisplayName(profile)}
                   key={profile.id}
