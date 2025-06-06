@@ -14,6 +14,7 @@ describe('WebView', () => {
   const defaultProps = {
     areaIdsBySlug: {},
     navigation: { navigate, setOptions },
+    logoutUser: jest.fn(),
     route: { name: 'foo' },
     source: {
       uri: 'https://frontporchforum.com/directory',
