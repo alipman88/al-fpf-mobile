@@ -1,4 +1,4 @@
-import { chooseMailApp } from './actions'
+import { composeEmail } from './actions'
 import { mailApp } from './slice'
 
-export { chooseMailApp, mailApp }
+export { composeEmail, mailApp }

@@ -46,6 +46,7 @@ export const WebView = ({
   useBackButton = true,
   transferPageTitle = false,
   areaIdsBySlug,
+  composeEmail,
   logoutUser,
   ...restProps
 }) => {
@@ -196,7 +197,7 @@ export const WebView = ({
           }
 
           if (request.url.startsWith('mailto:')) {
-            Linking.openURL(request.url)
+            composeEmail({ mailto: request.url })
             return false
           }
 
@@ -273,6 +274,7 @@ WebView.propTypes = {
   useBackButton: PropTypes.bool,
   transferPageTitle: PropTypes.bool,
   areaIdsBySlug: PropTypes.object.isRequired,
+  composeEmail: PropTypes.func.isRequired,
   logoutUser: PropTypes.func.isRequired,
   placeholder: PropTypes.node,
 }

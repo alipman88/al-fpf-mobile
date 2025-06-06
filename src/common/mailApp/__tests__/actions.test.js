@@ -1,6 +1,6 @@
 import { ActionSheetIOS, Linking, Platform } from 'react-native'
 
-import { chooseMailApp } from '../actions'
+import { composeEmail, parseMailto } from '../actions'
 
 describe('mailApp - actions', () => {
   const dispatch = jest.fn()
@@ -11,7 +11,34 @@ describe('mailApp - actions', () => {
     Platform.OS = originalPlatform
   })
 
-  describe('chooseMailApp', () => {
+  describe('parseMailto', () => {
+    test('parses a mailto url', () => {
+      expect(parseMailto('mailto:')).toEqual({})
+
+      expect(parseMailto('mailto:me@bar.com')).toEqual({ email: 'me@bar.com' })
+
+      expect(parseMailto('mailto:?subject=foo')).toEqual({ subject: 'foo' })
+
+      expect(parseMailto('mailto:me@bar.com?subject=foobar')).toEqual({
+        email: 'me@bar.com',
+        subject: 'foobar',
+      })
+
+      expect(parseMailto('mailto:me@bar.com?subject=foobar&body=baz')).toEqual({
+        email: 'me@bar.com',
+        subject: 'foobar',
+        body: 'baz',
+      })
+    })
+
+    test('handles invalid content', () => {
+      expect(parseMailto(null)).toEqual(null)
+      expect(parseMailto('')).toEqual(null)
+      expect(parseMailto('http://foo.com')).toEqual(null)
+    })
+  })
+
+  describe('composeEmail', () => {
     test('opens a mailto url with no apps installed (Android)', async () => {
       Platform.OS = 'android'
 
@@ -21,8 +48,8 @@ describe('mailApp - actions', () => {
 
       const openURLSpy = jest.spyOn(Linking, 'openURL')
 
-      await chooseMailApp()(dispatch, () => ({}))
-      await chooseMailApp({ toEmail: 'foo@bar.com', subject: 'foo bar' })(
+      await composeEmail()(dispatch, () => ({}))
+      await composeEmail({ email: 'foo@bar.com', subject: 'foo bar' })(
         dispatch,
         () => ({}),
       )
@@ -51,8 +78,8 @@ describe('mailApp - actions', () => {
 
       const openURLSpy = jest.spyOn(Linking, 'openURL')
 
-      await chooseMailApp()(dispatch, () => ({}))
-      await chooseMailApp({ toEmail: 'foo@bar.com', subject: 'bar' })(
+      await composeEmail()(dispatch, () => ({}))
+      await composeEmail({ email: 'foo@bar.com', subject: 'bar' })(
         dispatch,
         () => ({}),
       )
@@ -74,8 +101,8 @@ describe('mailApp - actions', () => {
 
       const openURLSpy = jest.spyOn(Linking, 'openURL')
 
-      await chooseMailApp()(dispatch, () => ({}))
-      await chooseMailApp({ toEmail: 'foo@bar.com', subject: 'bar' })(
+      await composeEmail()(dispatch, () => ({}))
+      await composeEmail({ email: 'foo@bar.com', subject: 'bar' })(
         dispatch,
         () => ({}),
       )
@@ -96,8 +123,8 @@ describe('mailApp - actions', () => {
 
       const getState = () => ({ main: { mailApp: { app: 'gmail' } } })
 
-      await chooseMailApp()(dispatch, getState)
-      await chooseMailApp({ toEmail: 'foo@bar.com', subject: 'bar' })(
+      await composeEmail()(dispatch, getState)
+      await composeEmail({ email: 'foo@bar.com', subject: 'bar' })(
         dispatch,
         getState,
       )

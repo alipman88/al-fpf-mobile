@@ -28,20 +28,20 @@ const titles = {
   outlook: 'Outlook',
 }
 
-function getComposeUrl(app, subject = '', toEmail = '') {
+function getComposeUrl(app, subject = '', email = '') {
   subject = encodeURIComponent(subject)
 
   switch (app) {
     case 'gmail':
-      return `${prefixes[app]}co?subject=${subject}&to=${toEmail}`
+      return `${prefixes[app]}co?subject=${subject}&to=${email}`
     case 'spark':
-      return `${prefixes[app]}compose?subject=${subject}&recipient=${toEmail}`
+      return `${prefixes[app]}compose?subject=${subject}&recipient=${email}`
     case 'airmail':
-      return `${prefixes[app]}compose?subject=${subject}&to=${toEmail}`
+      return `${prefixes[app]}compose?subject=${subject}&to=${email}`
     case 'outlook':
-      return `${prefixes[app]}compose?subject=${subject}&to=${toEmail}`
+      return `${prefixes[app]}compose?subject=${subject}&to=${email}`
     default:
-      return `mailto:${toEmail}?subject=${subject}`
+      return `mailto:${email}?subject=${subject}`
   }
 }
 
@@ -51,13 +51,13 @@ function getComposeUrl(app, subject = '', toEmail = '') {
  * @param {string} app
  * @returns {Promise<boolean>}
  */
-function isAppInstalled(app, subject, toEmail) {
+function isAppInstalled(app, subject, email) {
   return new Promise((resolve) => {
     if (!(app in prefixes)) {
       return resolve(false)
     }
 
-    const url = getComposeUrl(app, subject, toEmail)
+    const url = getComposeUrl(app, subject, email)
     Linking.canOpenURL(url)
       .then((isSupported) => resolve(isSupported))
       .catch(() => resolve(false))
@@ -76,12 +76,12 @@ function askAppChoice(
   message = 'Which app would you like to open?',
   cancelLabel = 'Cancel',
   subject = '',
-  toEmail = '',
+  email = '',
 ) {
   return new Promise(async (resolve) => {
     const availableApps = []
     for (let app in prefixes) {
-      const avail = await isAppInstalled(app, subject, toEmail)
+      const avail = await isAppInstalled(app, subject, email)
       if (avail) {
         availableApps.push(app)
       }
@@ -115,6 +115,40 @@ function askAppChoice(
 }
 
 /**
+ * Parses the given mailto url into an object with keys for the mailto parts, e.g.
+ * "mailto:foo@bar.com?subject=Hi" returns:
+ *  { email: "foo@bar.com", suject: "Hi" }
+ *
+ * @param {String} url - mailto url
+ * @return {Object | null}
+ */
+export function parseMailto(url) {
+  if (!url) return null
+
+  try {
+    const urlObject = new URL(url)
+    if (urlObject.protocol !== 'mailto:') {
+      return null
+    }
+
+    const email = urlObject.pathname
+    const params = new URLSearchParams(urlObject.search)
+    const subject = params.get('subject')
+    const body = params.get('body')
+
+    const parsed = {}
+    if (email) parsed.email = email
+    if (subject) parsed.subject = subject
+    if (body) parsed.body = body
+
+    return parsed
+  } catch (e) {
+    console.error(`Invalid mailto URL: ${e}`)
+    return null
+  }
+}
+
+/**
  * Compose a message in an email app, or let the user choose what app to open.
  * Choosing an app is currently only supported by iOS.  Other platforms will
  * link to the default mailto handler.
@@ -123,25 +157,30 @@ function askAppChoice(
  *     title: string, // of the alert
  *     message: string, // of the alert
  *     cancelLabel: string,
- *     toEmail: string,
+ *     email: string,
  *     subject: string
+ *     mailto: string, // mailto URL to extract email and subject
  * }} options
  */
-export const chooseMailApp =
+export const composeEmail =
   (options = {}) =>
   async (dispatch, getState) => {
     if (!options || typeof options !== 'object') {
       throw new EmailException(
-        'First parameter of `chooseMailApp` should contain object with options.',
+        'First parameter of `composeEmail` should contain object with options.',
       )
     }
 
-    const { subject, toEmail } = options
+    if (options.mailto) {
+      options = Object.assign(parseMailto(options.mailto), options)
+    }
+
+    const { subject, email } = options
 
     // Get the current preferred app, and double check that it's available
     let app = mailApp.selectors.getPreferredApp(getState())
     if (app) {
-      const available = await isAppInstalled(app, subject, toEmail)
+      const available = await isAppInstalled(app, subject, email)
       // preferred app is not available, so let's have the user choose again
       if (!available) {
         app = null
@@ -158,7 +197,7 @@ export const chooseMailApp =
         message,
         cancelLabel,
         subject,
-        toEmail,
+        email,
       ))
 
       // User clicked cancel button when asked to select app - take no action
@@ -168,12 +207,12 @@ export const chooseMailApp =
 
       // No obvious mail app was available, but perhaps a mailto link will still work
       if (status === 'unavailable') {
-        app = `mailto:${toEmail}?subject=${subject}`
+        app = `mailto:${email}?subject=${subject}`
       }
 
       // Use user-selected app to open mailto link
       dispatch(mailApp.actions.setPreferredApp(app))
     }
 
-    return Linking.openURL(getComposeUrl(app, subject, toEmail))
+    return Linking.openURL(getComposeUrl(app, subject, email))
   }
