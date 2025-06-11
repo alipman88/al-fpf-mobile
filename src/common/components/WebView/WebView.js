@@ -190,6 +190,16 @@ export const WebView = ({
         renderLoading={() => <Spinner visible={true} />}
         onError={() => setShowError(true)}
         onHttpError={() => setShowError(true)}
+        onContentProcessDidTerminate={() => {
+          // https://github.com/react-native-webview/react-native-webview/issues/3062#issuecomment-1647308356
+          console.log('onContentProcessDidTerminate')
+          webViewRef?.current?.reload()
+        }}
+        onRenderProcessGone={() => {
+          // https://github.com/react-native-webview/react-native-webview/issues/3062#issuecomment-1711645611
+          console.log('onRenderProcessGone')
+          webViewRef?.current?.reload()
+        }}
         onShouldStartLoadWithRequest={(request) => {
           if (request.url.includes('/login')) {
             logoutUser(navigation)
