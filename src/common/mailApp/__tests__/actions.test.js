@@ -1,6 +1,6 @@
 import { ActionSheetIOS, Linking, Platform } from 'react-native'
 
-import { chooseMailApp } from '../actions'
+import { composeEmail } from '../actions'
 
 describe('mailApp - actions', () => {
   const dispatch = jest.fn()
@@ -11,7 +11,7 @@ describe('mailApp - actions', () => {
     Platform.OS = originalPlatform
   })
 
-  describe('chooseMailApp', () => {
+  describe('composeEmail', () => {
     test('opens a mailto url with no apps installed (Android)', async () => {
       Platform.OS = 'android'
 
@@ -21,8 +21,8 @@ describe('mailApp - actions', () => {
 
       const openURLSpy = jest.spyOn(Linking, 'openURL')
 
-      await chooseMailApp()(dispatch, () => ({}))
-      await chooseMailApp({ toEmail: 'foo@bar.com', subject: 'foo bar' })(
+      await composeEmail()(dispatch, () => ({}))
+      await composeEmail({ email: 'foo@bar.com', subject: 'foo bar' })(
         dispatch,
         () => ({}),
       )
@@ -51,8 +51,8 @@ describe('mailApp - actions', () => {
 
       const openURLSpy = jest.spyOn(Linking, 'openURL')
 
-      await chooseMailApp()(dispatch, () => ({}))
-      await chooseMailApp({ toEmail: 'foo@bar.com', subject: 'bar' })(
+      await composeEmail()(dispatch, () => ({}))
+      await composeEmail({ email: 'foo@bar.com', subject: 'bar' })(
         dispatch,
         () => ({}),
       )
@@ -74,8 +74,8 @@ describe('mailApp - actions', () => {
 
       const openURLSpy = jest.spyOn(Linking, 'openURL')
 
-      await chooseMailApp()(dispatch, () => ({}))
-      await chooseMailApp({ toEmail: 'foo@bar.com', subject: 'bar' })(
+      await composeEmail()(dispatch, () => ({}))
+      await composeEmail({ email: 'foo@bar.com', subject: 'bar' })(
         dispatch,
         () => ({}),
       )
@@ -88,6 +88,8 @@ describe('mailApp - actions', () => {
     })
 
     test('opens a gmail url', async () => {
+      Platform.OS = 'ios'
+
       const canOpenURLSpy = jest
         .spyOn(Linking, 'canOpenURL')
         .mockResolvedValue(true)
@@ -96,15 +98,15 @@ describe('mailApp - actions', () => {
 
       const getState = () => ({ main: { mailApp: { app: 'gmail' } } })
 
-      await chooseMailApp()(dispatch, getState)
-      await chooseMailApp({ toEmail: 'foo@bar.com', subject: 'bar' })(
+      await composeEmail()(dispatch, getState)
+      await composeEmail({ email: 'foo@bar.com', subject: 'bar' })(
         dispatch,
         getState,
       )
 
-      expect(openURLSpy).toHaveBeenCalledWith('googlegmail://co?subject=&to=')
+      expect(openURLSpy).toHaveBeenCalledWith('googlegmail://co?')
       expect(openURLSpy).toHaveBeenCalledWith(
-        'googlegmail://co?subject=bar&to=foo@bar.com',
+        'googlegmail://co?to=foo@bar.com&subject=bar',
       )
 
       openURLSpy.mockRestore()
