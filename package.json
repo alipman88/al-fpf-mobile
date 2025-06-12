@@ -7,7 +7,7 @@
     "startdebug": "REACT_DEBUGGER=\"open -g 'rndebugger://set-debugger-loc?port=8081' ||\" yarn start",
     "android": "npx react-native run-android",
     "ios": "npx react-native run-ios",
-    "test": "TZ=utc jest && ./node_modules/.bin/eslint --ext .js src/",
+    "test": "TZ=utc jest -c jest.config.ios.js && jest -c jest.config.android.js && ./node_modules/.bin/eslint --ext .js src/",
     "list": ""
   },
   "workspaces": [
@@ -103,19 +103,6 @@
     "prettier": "^3.2.5",
     "react-dom": "18.3.1",
     "react-test-renderer": "18.3.1"
-  },
-  "jest": {
-    "preset": "react-native",
-    "verbose": true,
-    "setupFiles": [
-      "./jest.setup.js"
-    ],
-    "setupFilesAfterEnv": [
-      "@testing-library/jest-native/extend-expect"
-    ],
-    "transformIgnorePatterns": [
-      "node_modules/(?!(jest-)?@?react-native|react-navigation|@react-native-community|@react-native-picker|react-native-autolink|autolinker|decode-uri-component|split-on-first|filter-obj)"
-    ]
   },
   "packageManager": "yarn@4.6.0"
 }

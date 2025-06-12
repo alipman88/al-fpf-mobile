@@ -1,4 +1,5 @@
 import React from 'react'
+import { Platform } from 'react-native'
 import messaging from '@react-native-firebase/messaging'
 import { shallow } from 'enzyme'
 import { waitFor } from '@testing-library/react-native'
@@ -47,7 +48,9 @@ describe('Forum', () => {
 
     const wrapper = shallow(<Forum {...defaultProps} />)
     await wrapper.instance().componentDidMount()
-    expect(messaging().requestPermission).toHaveBeenCalled()
+    if (Platform.OS === 'ios') {
+      expect(messaging().requestPermission).toHaveBeenCalled()
+    }
 
     spy.mockRestore()
   })

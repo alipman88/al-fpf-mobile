@@ -1,4 +1,5 @@
 import React from 'react'
+import { Platform } from 'react-native'
 import { shallow } from 'enzyme'
 
 import { KeyboardOpen } from '@fpf/components/KeyboardOpen'
@@ -12,8 +13,14 @@ describe('KeyboardAwareScrollView', () => {
         open: false,
       }),
     )
-    expect(wrapper.props().contentContainerStyle).toEqual({
-      flex: 1,
-    })
+
+    let expectedStyle = null
+    if (Platform.OS === 'android') {
+      expectedStyle = [{ flex: 1 }, { paddingBottom: 0 }]
+    } else {
+      expectedStyle = { flex: 1 }
+    }
+
+    expect(wrapper.props().contentContainerStyle).toEqual(expectedStyle)
   })
 })
