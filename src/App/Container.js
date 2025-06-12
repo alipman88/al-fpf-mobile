@@ -52,11 +52,9 @@ function ContainerComponent({ accessToken, handleNavigationChange }) {
             Forum: {
               path: 'forum',
               alias: [
-                // LATER[TECH-6434]: Expand forum routes once forum is ported to webview:
-                // ':area_slug/forum/:archive?/:issue_id?',
-                //
-                // (Remember to also update fpf-mobile/android/app/src/main/AndroidManifest.xml and
-                // fpf/public/.well-known/apple-app-site-association.)
+                ':area/forum',
+                ':area/forum/archive',
+                ':area/forum/archive/:number',
               ],
             },
             Search: {
