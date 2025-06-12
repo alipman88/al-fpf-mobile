@@ -1,6 +1,6 @@
 [
   {
     "language": "en-US",
-    "text": "Improved scrolling speed on forum tab"
+    "text": "Bug fixes:\n- Better loading of tabs\n- Support for more email apps\n- More natural scroll speed"
   }
 ]
