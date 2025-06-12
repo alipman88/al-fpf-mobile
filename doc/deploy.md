@@ -41,7 +41,7 @@ Documentation:
   because the production branch includes details that can't be merged to staging)
 3. In [Codemagic](https://codemagic.io/apps), click "Start new build" which opens
   the "Specify build configuration" modal
-4. Select the staging branch
+4. Select the production branch
 5. Select "iOS Production App" or "Android Production App"
 6. Click "Start new build"
 7. For the iOS build, you may not need to do any of this, but in case it doesn't get
