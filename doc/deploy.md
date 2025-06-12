@@ -10,12 +10,8 @@
     - `fpf-mobile/android/app/build.gradle`
 2. Update the release notes in `release_notes.json` and commit (see for more info:
   https://docs.codemagic.io/yaml-notification/publish-release-notes/)
-3. Merge `master` to `staging`
-4. In [Codemagic](https://codemagic.io/apps), click "Start new build" which opens
-  the "Specify build configuration" modal
-5. Select the staging branch
-6. Select "iOS Staging App" or "Android Staging App"
-7. Click "Start new build"
+3. Merge `master` to `staging`. This will automatically start iOS and Android
+   staging builds in Codemagic.
 
 #### BrowserStack App Live
 
@@ -38,13 +34,9 @@ Documentation:
 
 1. Double-check that the version number and release notes are up-to-date
 2. Merge `staging` to `production` (which will require a non-fast forward merge
-  because the production branch includes details that can't be merged to staging)
-3. In [Codemagic](https://codemagic.io/apps), click "Start new build" which opens
-  the "Specify build configuration" modal
-4. Select the production branch
-5. Select "iOS Production App" or "Android Production App"
-6. Click "Start new build"
-7. For the iOS build, you may not need to do any of this, but in case it doesn't get
+   because the production branch includes details that can't be merged to staging).
+   This will automatically start iOS and Android production builds in Codemagic.
+3. For the iOS build, you may not need to do any of this, but in case it doesn't get
   automatically submitted for review:
   - Go to [App Store Connect](https://appstoreconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1458651656)
   - Ensure that the new version is shown in the "Prepare for Submission" status
@@ -56,21 +48,21 @@ Documentation:
   - Click "Add for Review"
   - Click "Submit to App Review"
   - Wait for a few days until you receive a review sucessfully completed email
-8. For the Android build, you may not need to do any of this, but in case it doesn't get
+4. For the Android build, you may not need to do any of this, but in case it doesn't get
   automatically submitted for review:
   - Go to [Google Play Console](https://play.google.com/console/u/0/developers/7669883795652962257/app/4973842490929321153/releases/overview) -> "Releases overview"
   - Ensure that the new version is shown in the "Latest releases" table with a
     release status of "Available on Google Play".  This may take a few hours.
-9. Tag the release:
+5. Tag the release:
 
         git tag -a v1.2.3 -m "1.2.3 release"
         git push --tags
 
-10. Move all the issues with the current version tag into the `Released` status
-11. Update the [release notes google doc](https://docs.google.com/document/d/1lPN1-SK39X_PIaMrJmF0BbjYv6cCirBEdBiwAa2fcfg/edit)
+6. Move all the issues with the current version tag into the `Released` status
+7. Update the [release notes google doc](https://docs.google.com/document/d/1lPN1-SK39X_PIaMrJmF0BbjYv6cCirBEdBiwAa2fcfg/edit)
     to set the current date and move the "Releases" header above the now-released notes,
     then create a new subheader for the next release under the "Upcoming" header
-12. Post the release notes doc link the Slack #general channel
+8. Post the release notes doc link the Slack #general channel
 
 Stores:
 - [iOS App Store](https://apps.apple.com/us/app/front-porch-forum/id1458651656)
