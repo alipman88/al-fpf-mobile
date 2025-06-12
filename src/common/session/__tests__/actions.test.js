@@ -1,3 +1,5 @@
+import { Platform } from 'react-native'
+
 import * as api from '@fpf/common/api'
 import { currentUser } from '@fpf/common/currentUser'
 import { login, sendDeviceData } from '../actions'
@@ -24,7 +26,7 @@ describe('session actions', () => {
     await login()(dispatch, getState)
 
     expect(postSpy).toHaveBeenCalledWith('/login', {
-      os: 'ios',
+      os: Platform.OS,
       device_name: 'Apple iPhone X',
       device_id: '123abc',
       fcm_token: 'fcm-123',
@@ -48,7 +50,7 @@ describe('session actions', () => {
     expect(postSpy).toHaveBeenCalledWith(
       '/app_sessions',
       {
-        os: 'ios',
+        os: Platform.OS,
         device_name: 'Apple iPhone X',
         device_id: '123abc',
         fcm_token: 'fcm-123',
