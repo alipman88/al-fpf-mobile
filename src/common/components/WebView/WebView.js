@@ -1,4 +1,10 @@
 import React from 'react'
+import {
+  RefreshControl,
+  Dimensions,
+  ScrollView,
+  StyleSheet,
+} from 'react-native'
 import { Config } from '@fpf/common/config'
 import { Linking } from 'react-native'
 import { WebView as BaseWebView } from 'react-native-webview'
@@ -34,6 +40,11 @@ const ErrorView = ({ reload }) => {
 ErrorView.propTypes = {
   reload: PropTypes.func.isRequired,
 }
+
+// Style the ScrollView and WebView to take up the full view height
+const styles = StyleSheet.create({
+  view: { flex: 1, height: '100%' },
+})
 
 /**
  * Render a native web view.
@@ -89,6 +100,16 @@ export const WebView = ({
       setStack(stack.slice(0, -1))
     }
   }
+
+  // Handle pull down to reload the webview
+  // https://github.com/react-native-webview/react-native-webview/issues/103#issuecomment-610731592
+  const [height, setHeight] = React.useState(Dimensions.get('screen').height)
+  const [isRefreshEnabled, setRefreshEnabled] = React.useState(true)
+  const [refreshing, setRefreshing] = React.useState(false)
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true)
+    webViewRef?.current?.reload()
+  }, [])
 
   if (source.uri !== stack[0]) {
     setStack([source.uri])
@@ -170,7 +191,17 @@ export const WebView = ({
   ]
 
   return (
-    <>
+    <ScrollView
+      onLayout={(e) => setHeight(e.nativeEvent.layout.height)}
+      refreshControl={
+        <RefreshControl
+          onRefresh={onRefresh}
+          refreshing={refreshing}
+          enabled={isRefreshEnabled}
+        />
+      }
+      style={styles.view}
+    >
       {webViewLoading && placeholder}
       <BaseWebView
         {...restProps}
@@ -182,12 +213,15 @@ export const WebView = ({
         startInLoadingState={true}
         scalesPageToFit={false}
         decelerationRate={0.998}
+        // Only support pull to refresh when scrolled to the top of the webview
+        onScroll={(e) => setRefreshEnabled(e.nativeEvent.contentOffset.y === 0)}
+        style={[styles.view, { height }, restProps.style]}
         basicAuthCredential={{
           username: 'staging',
           password: Config.BASIC_AUTH_PASSWORD,
         }}
         setBuiltInZoomControls={false}
-        renderLoading={() => <Spinner visible={true} />}
+        renderLoading={() => !refreshing && <Spinner visible={true} />}
         onError={() => setShowError(true)}
         onHttpError={() => setShowError(true)}
         onContentProcessDidTerminate={() => {
@@ -250,6 +284,7 @@ export const WebView = ({
         }}
         onLoadEnd={() => {
           setWebViewLoading(false)
+          setRefreshing(false)
 
           // Show the back button when appropriate
           if (useBackButton) {
@@ -273,7 +308,7 @@ export const WebView = ({
         }}
       />
       {showError && <ErrorView reload={reset} />}
-    </>
+    </ScrollView>
   )
 }
 
