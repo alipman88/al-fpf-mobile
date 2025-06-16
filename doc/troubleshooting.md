@@ -22,6 +22,10 @@ Xcode caches various files to speed up the build process. Over time, these cache
 2. Delete the contents of `~/Library/Developer/Xcode/DerivedData`.
 3. Delete and reinstall pods (`cd ios; rm -rf Pods; pod install; cd ..`)
 
+#### Cleaning `ios/build` directory
+
+Deleting the `ios/build` directory may resolve ios build errors referncing missing C/C++ header files in the node_modules directory, e.g. "node_modules/react-native/React/Fabric/RCTThirdPartyFabricComponentsProvider.h file not found".
+
 ## Android
 
 ### Build Errors
