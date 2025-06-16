@@ -47,16 +47,17 @@
           <data android:host="staging2.frontporchforum.com" />
           <data android:pathPattern="/calendar" />
           <data android:pathPattern="/.*/calendar" />
-          <data android:pathPattern="/calendar/events/*" />
+          <data android:pathPattern="/calendar/events/.*" />
           <data android:pathPattern="/compose" />
           <data android:pathPattern="/compose/.*" />
           <data android:pathPattern="/directory" />
           <data android:pathPattern="/directory/categories" />
-          <data android:pathPattern="/directory/categories/*" />
+          <data android:pathPattern="/directory/categories/.*" />
           <data android:pathPattern="/directory/favorites" />
-          <data android:pathPattern="/d/*" />
+          <data android:pathPattern="/d/.*" />
           <data android:pathPattern="/forum" />
           <data android:pathPattern="/.*/forum" />
+          <data android:pathPattern="/.*/forum/.*" />
           <data android:pathPattern="/search" />
         </intent-filter>
         </activity>
