@@ -59,10 +59,14 @@ Documentation:
         git push --tags
 
 6. Move all the issues with the current version tag into the `Released` status
-7. Update the [release notes google doc](https://docs.google.com/document/d/1lPN1-SK39X_PIaMrJmF0BbjYv6cCirBEdBiwAa2fcfg/edit)
-    to set the current date and move the "Releases" header above the now-released notes,
-    then create a new subheader for the next release under the "Upcoming" header
+7. Update the [release notes google doc](https://docs.google.com/document/d/1lPN1-SK39X_PIaMrJmF0BbjYv6cCirBEdBiwAa2fcfg/edit):
+   - move the "Releases" header above the now-released notes
+   - create a new subheader for the next release under the "Upcoming" header
+   - set the dates to TBD
 8. Post the release notes doc link the Slack #general channel
+9. When the app is accepted by Google and Apple, update the dates in the release notes
+   - Google status: https://play.google.com/console/u/0/developers/6825462354203181907/app/4973842490929321153/tracks/production
+   - Apple status: https://appstoreconnect.apple.com/apps/1458651656/distribution/reviewsubmissions
 
 Stores:
 - [iOS App Store](https://apps.apple.com/us/app/front-porch-forum/id1458651656)
