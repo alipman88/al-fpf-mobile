@@ -1,11 +1,12 @@
 import React from 'react'
+import { Platform } from 'react-native'
 import PropTypes from 'prop-types'
+import messaging from '@react-native-firebase/messaging'
 
 import { Config } from '@fpf/common/config'
 import { WebView } from '@fpf/components/WebView'
 import { ForumPlaceholder } from './ForumPlaceholder'
 
-import messaging from '@react-native-firebase/messaging'
 import {
   hasMessagingPermission,
   requestMessagingPermission,
@@ -14,12 +15,6 @@ import {
 export class Forum extends React.Component {
   async componentDidMount() {
     this.configureNotifications()
-
-    // Check for notification that triggered the application to open
-    const remoteMessage = await messaging().getInitialNotification()
-    if (remoteMessage) {
-      this.handleNotificationOpen(remoteMessage)
-    }
   }
 
   componentWillUnmount() {
@@ -27,18 +22,13 @@ export class Forum extends React.Component {
       this.unsubscribeTokenRefresh()
       delete this.unsubscribeTokenRefresh
     }
-
-    if (this.unsubscribeNotificationOpenedApp) {
-      this.unsubscribeNotificationOpenedApp()
-      delete this.unsubscribeNotificationOpenedApp
-    }
   }
 
   /**
    * Configure Firebase messaging and notifications:
    * - request permission from the user if not already granted
    * - send notification token to the server if changed, and listen for new token
-   * - listen for background and foreground notifications
+   * - listen for changes to the token
    */
   async configureNotifications() {
     // Request permission for remote notifications
@@ -53,8 +43,14 @@ export class Forum extends React.Component {
     }
 
     const fcmToken = await messaging().getToken()
+    console.log('fcm token:', fcmToken)
     if (this.props.fcmToken !== fcmToken) {
       this.props.sendNewFCMToken(fcmToken)
+    }
+
+    if (Platform.OS === 'ios') {
+      const apnsToken = await messaging().getAPNSToken()
+      console.log('apns token:', apnsToken)
     }
 
     // Listen for firebase notification token change, and send to server
@@ -63,28 +59,6 @@ export class Forum extends React.Component {
         this.props.sendNewFCMToken(fcmToken)
       },
     )
-
-    // Listen for app background notification, and handle the notification
-    this.unsubscribeNotificationOpenedApp = messaging().onNotificationOpenedApp(
-      (remoteMessage) => {
-        this.handleNotificationOpen(remoteMessage)
-      },
-    )
-  }
-
-  /**
-   * Handle a notification message that was used to open the app (or bring it to
-   * the foreground) by fetching the issue specified in the message data and
-   * navigating to that issue.
-   *
-   * @param remoteMessage {RemoteMessage} Firebase message
-   */
-  handleNotificationOpen(remoteMessage) {
-    const { navigation } = this.props
-    const { area_id, issue_number } = JSON.parse(remoteMessage.data.payload)
-
-    const sourceUrl = `/${area_id}/forum/archive/${issue_number}`
-    navigation.navigate('Forum', { sourceUrl })
   }
 
   render() {

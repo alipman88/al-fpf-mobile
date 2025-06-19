@@ -40,7 +40,6 @@ describe('Forum', () => {
     const wrapper = shallow(<Forum {...defaultProps} />)
     await wrapper.instance().componentDidMount()
     expect(messaging().onTokenRefresh).toHaveBeenCalled()
-    expect(messaging().onNotificationOpenedApp).toHaveBeenCalled()
   })
 
   test('user has not given messaging permission, should ask firebase for it', async () => {
@@ -49,25 +48,11 @@ describe('Forum', () => {
     const wrapper = shallow(<Forum {...defaultProps} />)
     await wrapper.instance().componentDidMount()
     if (Platform.OS === 'ios') {
-      expect(messaging().requestPermission).toHaveBeenCalled()
+      await waitFor(() =>
+        expect(messaging().requestPermission).toHaveBeenCalled(),
+      )
     }
 
     spy.mockRestore()
-  })
-
-  describe('handleNotificationOpen', () => {
-    test('calls to fetch for the issue from the notificationOpen event', () => {
-      const wrapper = shallow(<Forum {...defaultProps} />)
-      const payload = { area_id: '5', issue_id: '6', issue_number: '340' }
-      wrapper.instance().handleNotificationOpen({
-        data: {
-          payload: JSON.stringify(payload),
-        },
-      })
-
-      expect(defaultProps.navigation.navigate).toHaveBeenCalledWith('Forum', {
-        sourceUrl: '/5/forum/archive/340',
-      })
-    })
   })
 })

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Linking } from 'react-native'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {
@@ -6,6 +7,7 @@ import {
   DefaultTheme,
   useNavigationContainerRef,
 } from '@react-navigation/native'
+import messaging from '@react-native-firebase/messaging'
 
 import { currentUser } from '@fpf/common/currentUser'
 import { RootStack } from '@fpf/core/rootStack'
@@ -17,6 +19,44 @@ const navTheme = {
     ...DefaultTheme.colors,
     background: '#fff',
   },
+}
+
+/**
+ * Given a notification's data object, returns a URL to route to via react-navigation.
+ *
+ * @param {RemoteMessage object} notification message
+ * @returns {String | null}
+ */
+export function buildDeepLinkFromNotification(message) {
+  let data = message?.data || {}
+
+  // The Rails app sends notifications with a structure like:
+  // data: {
+  //   payload: '{ "area_id": 123 }'
+  // }
+  //
+  // But sometimes Firebase seems to automatically decode this JSON string payload
+  // and hoist it to the message data level. This code is meant to be flexible
+  // enough to handle either situation.
+  if (data.payload) {
+    data = data.payload
+
+    if (typeof data === 'string') {
+      try {
+        data = JSON.parse(data)
+      } catch (error) {
+        console.error('Could not parse notification payload:', error)
+      }
+    }
+  }
+
+  const { area_id, issue_number } = data
+
+  if (area_id && issue_number) {
+    return `https://frontporchforum.com/${area_id}/forum/archive/${issue_number}?cache-bust=${Date.now()}`
+  }
+
+  return null
 }
 
 function ContainerComponent({ accessToken, handleNavigationChange }) {
@@ -63,6 +103,45 @@ function ContainerComponent({ accessToken, handleNavigationChange }) {
           },
         },
       },
+    },
+
+    // Configure deep linking and notification routing support
+    //
+    // https://reactnavigation.org/docs/navigation-container/#linkinggetinitialurl
+    // https://rnfirebase.io/messaging/notifications#handling-interaction
+    async getInitialURL() {
+      const url = await Linking.getInitialURL()
+      if (typeof url === 'string') {
+        return url
+      }
+
+      // getInitialNotification: When the application is opened from a quit state.
+      const message = await messaging().getInitialNotification()
+      const notifUrl = buildDeepLinkFromNotification(message)
+      if (notifUrl) {
+        return notifUrl
+      }
+    },
+    subscribe(listener) {
+      // Listen to incoming links from deep linking
+      const linkingSubscription = Linking.addEventListener('url', ({ url }) => {
+        listener(url)
+      })
+
+      // onNotificationOpenedApp: When the application is running, but in the background.
+      const unsubscribe = messaging().onNotificationOpenedApp(
+        async (message) => {
+          const notifUrl = buildDeepLinkFromNotification(message)
+          if (notifUrl) {
+            listener(notifUrl)
+          }
+        },
+      )
+
+      return () => {
+        linkingSubscription.remove()
+        unsubscribe()
+      }
     },
   }
 

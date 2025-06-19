@@ -68,6 +68,9 @@ yarn-error.log
 # Environment for react-native-config
 .env
 
+# ios alert file for testing
+ios/alert.json
+
 # IDEs
 .vscode
 

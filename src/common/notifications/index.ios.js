@@ -32,6 +32,8 @@ export async function requestMessagingPermission() {
 
 /**
  * Sets the app badge number to the given value. Only relevant to iOS. Async function.
+ * NOTE: this functionality isn't available via @react-native-firebase, so we use
+ * push-notification-ios instead to set the badge number.
  *
  * @param value {number}
  */
