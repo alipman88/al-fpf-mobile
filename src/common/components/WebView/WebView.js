@@ -11,6 +11,7 @@ import { WebView as BaseWebView } from 'react-native-webview'
 import PropTypes from 'prop-types'
 import DeviceInfo from 'react-native-device-info'
 import Spinner from 'react-native-loading-spinner-overlay'
+import { useIsFocused } from '@react-navigation/native'
 
 import { BackButton } from '@fpf/core/Authenticated/Settings/components/BackButton'
 import { Button } from '@fpf/components/Button'
@@ -24,6 +25,29 @@ import {
   postSubmittedRegex,
   searchRegex,
 } from './pathRegexes'
+
+// Whitelisted origins - these include external domains we whitelist
+// so they don't open an empty browser tab.
+const whitelistedOrigins = [
+  'https://js.stripe.com',
+  'https://m.stripe.network',
+  'https://bid.g.doubleclick.net',
+  Config.WEBSITE_HOST,
+  'mailto:',
+]
+
+// Whitelisted WebView paths -
+// Sections of frontporchforum.com that should load inside the webview.
+// (External URLs and any other areas of the FPF website should open in a
+// browser tab.)
+const whitelistedPaths = [
+  '/calendar',
+  '^/compose',
+  '^/directory',
+  '^/d/',
+  '/forum',
+  '^/search',
+]
 
 /**
  * Render a generic error view with a reload button.
@@ -50,7 +74,11 @@ const styles = StyleSheet.create({
  * Render a native web view.
  */
 export const WebView = ({
-  source,
+  initialUrl,
+  rootUrl,
+  headers,
+  reloadRootOnTabPress,
+  scrollTopOnTabPress,
   placeholder,
   navigation,
   route,
@@ -62,10 +90,32 @@ export const WebView = ({
   ...restProps
 }) => {
   const webViewRef = React.useRef(null)
-  let [stack, setStack] = React.useState([source.uri])
-  let [showError, setShowError] = React.useState(false)
-  let [webViewLoading, setWebViewLoading] = React.useState(true)
+  const [showError, setShowError] = React.useState(false)
+  const [webViewLoading, setWebViewLoading] = React.useState(true)
+  const [stack, setStack] = React.useState([...new Set([rootUrl, initialUrl])])
+  const currentUrl = stack[stack.length - 1]
+  const isFocused = useIsFocused()
 
+  // Reset the web view to its initial page
+  const reset = () => {
+    setStack([...new Set([rootUrl, initialUrl])])
+    setShowError(false)
+    webViewRef.current?.reload()
+  }
+
+  // When the initialUrl changes, push it to the stack (unless it's already at
+  // the top of the stack). We want to preserve the previous stack and the back
+  // button.
+  const prevInitialUrlRef = React.useRef() // track prev prop value
+  React.useEffect(() => {
+    if (initialUrl !== prevInitialUrlRef.current && initialUrl !== currentUrl) {
+      setStack((s) => [...s, initialUrl])
+    }
+
+    prevInitialUrlRef.current = initialUrl
+  }, [initialUrl, currentUrl])
+
+  // Update the nav header title to the page title
   const [pageTitle, setPageTitle] = React.useState('')
   React.useEffect(() => {
     if (pageTitle) {
@@ -73,25 +123,37 @@ export const WebView = ({
     }
   }, [pageTitle, navigation])
 
-  const currentURI = stack[stack.length - 1]
-  const newSource = { ...source, uri: currentURI }
+  // Handle a tab press when the tab is already focused
+  React.useEffect(() => {
+    return navigation.addListener('tabPress', (e) => {
+      if (isFocused) {
+        if (reloadRootOnTabPress) {
+          e.preventDefault()
 
-  // Whitelisted origins - these include external domains we whitelist
-  // so they don't open an empty browser tab.
-  const whitelistedOrigins = [
-    'https://js.stripe.com',
-    'https://m.stripe.network',
-    'https://bid.g.doubleclick.net',
-    Config.WEBSITE_HOST,
-    'mailto:',
-  ]
+          setStack([rootUrl])
+          setShowError(false)
+          webViewRef.current?.reload()
+        } else if (scrollTopOnTabPress) {
+          e.preventDefault()
 
-  // Reset the web view to its initial page
-  const reset = () => {
-    setStack([source.uri])
-    setShowError(false)
-    webViewRef.current.reload()
-  }
+          // Scroll to the top of the webview (using injected javascript)
+          // (react-navigation is supposed to handle this but doesn't for some reason)
+          if (webViewRef.current) {
+            webViewRef.current.injectJavaScript(`
+             window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+             true; // Return true to indicate success
+           `)
+          }
+        }
+      }
+    })
+  }, [
+    rootUrl,
+    isFocused,
+    reloadRootOnTabPress,
+    scrollTopOnTabPress,
+    navigation,
+  ])
 
   const onBackPress = () => {
     // Note that we can't use WebView's goBack because we reset the source of
@@ -110,10 +172,6 @@ export const WebView = ({
     setRefreshing(true)
     webViewRef?.current?.reload()
   }, [])
-
-  if (source.uri !== stack[0]) {
-    setStack([source.uri])
-  }
 
   /**
    * Some request paths should be handled by navigating to an appropriate section
@@ -177,18 +235,8 @@ export const WebView = ({
     return false
   }
 
-  // Whitelisted WebView paths -
-  // Sections of frontporchforum.com that should load inside the webview.
-  // (External URLs and any other areas of the FPF website should open in a
-  // browser tab.)
-  const whitelistedPaths = [
-    '/calendar',
-    '^/compose',
-    '^/directory',
-    '^/d/',
-    '/forum',
-    '^/search',
-  ]
+  console.log('stack', stack)
+  console.log('currentUrl', currentUrl)
 
   return (
     <ScrollView
@@ -206,7 +254,7 @@ export const WebView = ({
       <BaseWebView
         {...restProps}
         ref={webViewRef}
-        source={newSource}
+        source={{ uri: currentUrl, headers }}
         testID='webView'
         originWhitelist={whitelistedOrigins}
         applicationNameForUserAgent={`FpfMobileApp/802.${DeviceInfo.getVersion()}`}
@@ -226,15 +274,16 @@ export const WebView = ({
         onHttpError={() => setShowError(true)}
         onContentProcessDidTerminate={() => {
           // https://github.com/react-native-webview/react-native-webview/issues/3062#issuecomment-1647308356
-          console.log('onContentProcessDidTerminate')
+          console.error('onContentProcessDidTerminate')
           webViewRef?.current?.reload()
         }}
         onRenderProcessGone={() => {
           // https://github.com/react-native-webview/react-native-webview/issues/3062#issuecomment-1711645611
-          console.log('onRenderProcessGone')
+          console.error('onRenderProcessGone')
           webViewRef?.current?.reload()
         }}
         onShouldStartLoadWithRequest={(request) => {
+          console.log('should load request?', request.url)
           if (request.url.includes('/login')) {
             logoutUser(navigation)
             return false
@@ -264,18 +313,23 @@ export const WebView = ({
             // and re-send headers.
 
             // The WebView's URL hasn't changed - allow it to load
-            if (request.url === currentURI) return true
+            if (request.url === currentUrl) {
+              console.log('will load request', request.url)
+              return true
+            }
 
             // POST requests should be allowed to load. As the request object does not
             // expose its HTTP method, a dummy method=post param may be appended to URLs
             // when submitting a form on the Rails side.
             if (/(\?|&)method=post/.test(request.url)) return true
 
-            // The URL has changed - change state to ensure headers are sent
-            stack = [...stack, request.url]
-            setStack(stack)
-
-            return true
+            // The URL has changed - change state to ensure headers are sent.
+            // This state change will re-render this component which will cause
+            // the request to be initiated a few lines above here.
+            setStack([...stack, request.url])
+            // Tell WebView to not run this request since we're going to run
+            // this request at the next render
+            return false // TODO(NMH): this is broken for forum
           }
 
           // Open unpermitted requests in a mobile browser
@@ -283,6 +337,7 @@ export const WebView = ({
           return false
         }}
         onLoadEnd={() => {
+          console.log('onLoadEnd') // TODO(NMH): testing
           setWebViewLoading(false)
           setRefreshing(false)
 
@@ -296,6 +351,7 @@ export const WebView = ({
           }
         }}
         onNavigationStateChange={(navState) => {
+          console.log('navStateChange', navState) // TODO(NMH): testing
           if (
             transferPageTitle &&
             navState.title &&
@@ -313,9 +369,13 @@ export const WebView = ({
 }
 
 WebView.propTypes = {
+  initialUrl: PropTypes.string.isRequired,
+  rootUrl: PropTypes.string.isRequired,
+  headers: PropTypes.object,
+  reloadRootOnTabPress: PropTypes.bool,
+  scrollTopOnTabPress: PropTypes.bool,
   navigation: PropTypes.object.isRequired,
   route: PropTypes.object.isRequired,
-  source: PropTypes.object,
   useBackButton: PropTypes.bool,
   transferPageTitle: PropTypes.bool,
   areaIdsBySlug: PropTypes.object.isRequired,

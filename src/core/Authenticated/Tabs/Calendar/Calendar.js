@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import { Config } from '@fpf/common/config'
 import { WebView } from '@fpf/components/WebView'
+
 import { CalendarPlaceholder } from './CalendarPlaceholder'
 
 export class Calendar extends React.Component {
@@ -10,20 +11,18 @@ export class Calendar extends React.Component {
     const { navigation, route } = this.props
     const accessToken = this.props.accessToken.toString()
 
-    const sourceUrl =
+    const initialUrl =
       Config.WEBSITE_HOST +
       (route.params?.sourceUrl ?? route.path ?? '/calendar')
 
     return (
       <WebView
+        rootUrl={`${Config.WEBSITE_HOST}/calendar`}
+        initialUrl={initialUrl}
+        headers={{ authorization: accessToken }}
+        reloadRootOnTabPress={true}
         navigation={navigation}
         route={route}
-        source={{
-          uri: sourceUrl,
-          headers: {
-            authorization: accessToken,
-          },
-        }}
         placeholder=<CalendarPlaceholder />
       />
     )

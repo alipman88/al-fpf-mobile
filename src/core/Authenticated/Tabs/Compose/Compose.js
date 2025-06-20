@@ -40,7 +40,7 @@ export class Compose extends React.Component {
   render() {
     const { navigation, navigateWithToken, route } = this.props
     const accessToken = this.props.accessToken.toString()
-    const sourceUrl =
+    const initialUrl =
       Config.WEBSITE_HOST +
       (route.params?.sourceUrl ?? route.path ?? '/compose')
 
@@ -49,14 +49,12 @@ export class Compose extends React.Component {
     return (
       <React.Fragment>
         <WebView
+          rootUrl={`${Config.WEBSITE_HOST}/compose`}
+          initialUrl={initialUrl}
+          headers={{ authorization: accessToken }}
+          scrollTopOnTabPress={true}
           navigation={navigation}
           route={route}
-          source={{
-            uri: sourceUrl,
-            headers: {
-              authorization: accessToken,
-            },
-          }}
           placeholder=<ComposePlaceholder />
           useBackButton={false}
         />
