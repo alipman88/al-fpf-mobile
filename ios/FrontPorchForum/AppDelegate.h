@@ -2,9 +2,6 @@
 #import <RCTAppDelegate.h>
 #import <UIKit/UIKit.h>
 
-// FPF addition, plus the interface below
-#import <UserNotifications/UNUserNotificationCenter.h>
-
-@interface AppDelegate : RCTAppDelegate <UNUserNotificationCenterDelegate>
+@interface AppDelegate : RCTAppDelegate
 
 @end

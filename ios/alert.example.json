@@ -1,0 +1,13 @@
+{
+  "Simulator Target Bundle": "com.FrontPorchForum.FrontPorchForum",
+  "aps" : {
+    "alert" : {
+      "title": "New Montpelier FPF issue available!",
+      "body": "Issue #6599"
+    },
+    "mutable-content": 1,
+    "badge": 1
+  },
+  "payload": "{\"area_id\":448,\"issue_id\":546420,\"issue_number\":6599}",
+  "gcm.message_id": "0:11111111111111111111111111111111"
+}

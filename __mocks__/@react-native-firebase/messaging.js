@@ -1,5 +1,6 @@
 const methods = {
   getToken: jest.fn().mockResolvedValue('fcmToken'),
+  getAPNSToken: jest.fn().mockResolvedValue('apnsToken'),
   setBackgroundMessageHandler: jest.fn(),
   hasPermission: jest.fn().mockResolvedValue(1),
   requestPermission: jest.fn().mockResolvedValue(true),
