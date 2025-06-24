@@ -1,6 +1,6 @@
 [
   {
     "language": "en-US",
-    "text": "Changes:\n- Enable swipe-down-to-refresh gesture\n- Allow more URLs to be opened via app"
+    "text": "Changes:\n- Tab buttons now reload the current tab\n- Fixed showing issues from notifications"
   }
 ]
