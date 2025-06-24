@@ -24,6 +24,7 @@ export class ComposePlaceholder extends React.Component {
           placeholder='Selection required'
           placeholderStyle={{ color: WebColors.gray800, fontSize: 16 }}
           style={{ marginBottom: 20, borderRadius: 0 }}
+          onValueChange={() => {}}
         />
         <Label>Subject</Label>
         <TextInput style={{ marginBottom: 20 }} />
