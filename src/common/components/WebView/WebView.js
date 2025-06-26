@@ -2,6 +2,7 @@ import React from 'react'
 import {
   RefreshControl,
   Dimensions,
+  Linking,
   ScrollView,
   StyleSheet,
 } from 'react-native'
@@ -146,6 +147,7 @@ export const WebView = ({
   useBackButton = true,
   transferPageTitle = false,
   areaIdsBySlug,
+  navigateWithToken,
   composeEmail,
   logoutUser,
   ...restProps
@@ -272,27 +274,29 @@ export const WebView = ({
           webViewRef?.current?.reload()
         }}
         onShouldStartLoadWithRequest={(request) => {
-          if (request.url.includes('/login')) {
-            logoutUser(navigation)
-            return false
-          }
-
           if (request.url.startsWith('mailto:')) {
             composeEmail({ mailto: request.url })
             return false
           }
 
           if (!request.url.startsWith(Config.WEBSITE_HOST)) {
+            Linking.openURL(request.url)
             return false
           }
 
           const requestPath = request.url.replace(Config.WEBSITE_HOST, '')
+
+          if (requestPath.startsWith('/login')) {
+            logoutUser(navigation)
+            return false
+          }
 
           if (navigateForRequest(requestPath, route, navigation)) {
             return false
           }
 
           if (!whitelistedPaths.find((path) => requestPath.match(path))) {
+            navigateWithToken(requestPath)
             return false
           }
 
@@ -341,6 +345,7 @@ WebView.propTypes = {
   useBackButton: PropTypes.bool,
   transferPageTitle: PropTypes.bool,
   areaIdsBySlug: PropTypes.object.isRequired,
+  navigateWithToken: PropTypes.func.isRequired,
   composeEmail: PropTypes.func.isRequired,
   logoutUser: PropTypes.func.isRequired,
   placeholder: PropTypes.node,
