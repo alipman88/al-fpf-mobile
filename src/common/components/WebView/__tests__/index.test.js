@@ -3,6 +3,10 @@ import { render, screen } from '@testing-library/react-native'
 
 import { WebView } from '../WebView'
 
+jest.mock('@react-navigation/native', () => ({
+  useIsFocused: jest.fn().mockReturnValue(true),
+}))
+
 describe('WebView', () => {
   const setState = jest.fn()
   const useStateMock = (initState) => [initState, setState]
@@ -13,13 +17,12 @@ describe('WebView', () => {
 
   const defaultProps = {
     areaIdsBySlug: {},
-    navigation: { navigate, setOptions },
+    navigation: { navigate, setOptions, addListener: jest.fn() },
     composeEmail: jest.fn(),
     logoutUser: jest.fn(),
     route: { name: 'foo' },
-    source: {
-      uri: 'https://frontporchforum.com/directory',
-    },
+    initialUrl: 'https://frontporchforum.com/directory',
+    rootUrl: 'https://frontporchforum.com/directory',
   }
 
   afterEach(() => {

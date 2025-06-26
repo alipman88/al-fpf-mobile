@@ -65,19 +65,17 @@ export class Forum extends React.Component {
     const { navigation, route } = this.props
     const accessToken = this.props.accessToken.toString()
 
-    const sourceUrl =
+    const initialUrl =
       Config.WEBSITE_HOST + (route.params?.sourceUrl ?? route.path ?? '/forum')
 
     return (
       <WebView
+        rootUrl={`${Config.WEBSITE_HOST}/forum`}
+        initialUrl={initialUrl}
+        headers={{ authorization: accessToken }}
+        reloadRootOnTabPress={true}
         navigation={navigation}
         route={route}
-        source={{
-          uri: sourceUrl,
-          headers: {
-            authorization: accessToken,
-          },
-        }}
         placeholder=<ForumPlaceholder />
         useBackButton={false}
         transferPageTitle={true}
