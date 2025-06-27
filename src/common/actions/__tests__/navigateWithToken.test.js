@@ -27,7 +27,7 @@ describe('navigateWithToken', () => {
     expect(getState).toHaveBeenCalled()
 
     expect(openUrlSpy).toHaveBeenCalledWith(
-      'https://frontporchforum.com/path?test=true&temporary_login_token=abc123',
+      'https://frontporchforum.com/path?test=true&temporary_login_token=abc123&app_info=FpfMobileApp%2F802.1.0&utm_medium=app',
     )
     expect(dispatch).toHaveBeenCalledWith(spinner.actions.setVisibility(false))
 

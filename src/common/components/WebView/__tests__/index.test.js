@@ -18,6 +18,7 @@ describe('WebView', () => {
   const defaultProps = {
     areaIdsBySlug: {},
     navigation: { navigate, setOptions, addListener: jest.fn() },
+    navigateWithToken: jest.fn(),
     composeEmail: jest.fn(),
     logoutUser: jest.fn(),
     route: { name: 'foo' },
