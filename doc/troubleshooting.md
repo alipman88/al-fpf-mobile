@@ -14,6 +14,8 @@ When you open the developer menu in the app, and click to start debugging, the R
 
 ### Build Errors
 
+Use the clean.sh script to clean the mobile app's build environment & re-install a number of dependencies, including Xcode derived data and the `ios/build` directory (described below).
+
 #### Cleaning Xcode derived data
 
 Xcode caches various files to speed up the build process. Over time, these cached files can accumulate and lead to build errors. When encountering an iOS build error, try the following:
