@@ -247,6 +247,7 @@ export const WebView = ({
         source={{ uri: sourceUrl, headers }}
         testID='webView'
         originWhitelist={whitelistedOrigins}
+        webviewDebuggingEnabled={Config.ENVIRONMENT !== 'production'}
         applicationNameForUserAgent={`FpfMobileApp/802.${DeviceInfo.getVersion()}`}
         startInLoadingState={true}
         scalesPageToFit={false}
