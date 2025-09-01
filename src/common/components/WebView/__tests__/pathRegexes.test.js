@@ -3,6 +3,7 @@ import {
   composeRegex,
   directoryRegex,
   forumRegex,
+  postsRegex,
   postSubmittedRegex,
   searchRegex,
 } from '../pathRegexes'
@@ -58,6 +59,20 @@ describe('parseUrl', () => {
       expect(forumRegex.test('/moretown/forum/archive/123')).toBeTruthy()
 
       expect(forumRegex.test('/moretown')).toBeFalsy()
+    })
+  })
+
+  describe('postsRegex', () => {
+    test('it matches Posts URLs', () => {
+      expect(postsRegex.test('/posts')).toBeTruthy()
+      expect(postsRegex.test('/winooski/posts/123')).toBeTruthy()
+      expect(postsRegex.test('/moretown/posts/456')).toBeTruthy()
+      expect(postsRegex.test('/area-with-dashes/posts/789')).toBeTruthy()
+
+      expect(postsRegex.test('/posts/invalid')).toBeFalsy()
+      expect(postsRegex.test('/forum')).toBeFalsy()
+      expect(postsRegex.test('/moretown')).toBeFalsy()
+      expect(postsRegex.test('/postsother')).toBeFalsy()
     })
   })
 

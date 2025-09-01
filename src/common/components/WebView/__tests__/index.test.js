@@ -100,4 +100,76 @@ describe('WebView', () => {
 
     expect(navigate).not.toHaveBeenCalled()
   })
+
+  test('WebView forum requests are intercepted', () => {
+    render(<WebView {...defaultProps} />)
+    screen.getByTestId('webView').props.onShouldStartLoadWithRequest({
+      url: 'https://frontporchforum.com/forum',
+    })
+
+    expect(navigate).toHaveBeenCalledWith('Forum', {
+      sourceUrl: '/forum',
+    })
+
+    screen.getByTestId('webView').props.onShouldStartLoadWithRequest({
+      url: 'https://frontporchforum.com/winooski/forum',
+    })
+
+    expect(navigate).toHaveBeenCalledWith('Forum', {
+      sourceUrl: '/winooski/forum',
+    })
+  })
+
+  test('WebView forum requests are not intercepted when in Forum view already', () => {
+    render(
+      <WebView
+        {...defaultProps}
+        route={{ ...defaultProps.route, name: 'Forum' }}
+      />,
+    )
+    screen.getByTestId('webView').props.onShouldStartLoadWithRequest({
+      url: 'https://frontporchforum.com/forum',
+    })
+
+    expect(navigate).not.toHaveBeenCalled()
+  })
+
+  test('WebView posts requests are intercepted and routed to Forum', () => {
+    render(<WebView {...defaultProps} />)
+    screen.getByTestId('webView').props.onShouldStartLoadWithRequest({
+      url: 'https://frontporchforum.com/posts',
+    })
+
+    expect(navigate).toHaveBeenCalledWith('Forum', {
+      sourceUrl: '/posts',
+    })
+
+    screen.getByTestId('webView').props.onShouldStartLoadWithRequest({
+      url: 'https://frontporchforum.com/winooski/posts/123',
+    })
+
+    expect(navigate).toHaveBeenCalledWith('Forum', {
+      sourceUrl: '/winooski/posts/123',
+    })
+  })
+
+  test('WebView posts requests are not intercepted when in Forum view already', () => {
+    render(
+      <WebView
+        {...defaultProps}
+        route={{ ...defaultProps.route, name: 'Forum' }}
+      />,
+    )
+    screen.getByTestId('webView').props.onShouldStartLoadWithRequest({
+      url: 'https://frontporchforum.com/posts',
+    })
+
+    expect(navigate).not.toHaveBeenCalled()
+
+    screen.getByTestId('webView').props.onShouldStartLoadWithRequest({
+      url: 'https://frontporchforum.com/winooski/posts/123',
+    })
+
+    expect(navigate).not.toHaveBeenCalled()
+  })
 })

@@ -6,6 +6,8 @@ const composeRegex = /^\/compose(\/(?<areaId>\d+))?/
 const directoryRegex = /^\/(d|directory)(\/.*)?$/
 // Forum URL regex
 const forumRegex = /^(\/.+)?\/forum/
+// Posts URL regex - matches /posts and /:area_name/posts/:post_id
+const postsRegex = /^(\/posts$|\/.+\/posts(\/\d+)?$)/
 // Post submitted URL regex
 const postSubmittedRegex =
   /(\?|&)mobile_submitted_content_type=(?<contentType>post|event)/
@@ -17,6 +19,7 @@ export {
   composeRegex,
   directoryRegex,
   forumRegex,
+  postsRegex,
   postSubmittedRegex,
   searchRegex,
 }
