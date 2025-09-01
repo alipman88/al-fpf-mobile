@@ -95,6 +95,8 @@ function ContainerComponent({ accessToken, handleNavigationChange }) {
                 ':area/forum',
                 ':area/forum/archive',
                 ':area/forum/archive/:number',
+                'posts',
+                ':area/post/:post_id',
               ],
             },
             Search: {

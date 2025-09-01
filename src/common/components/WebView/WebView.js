@@ -22,6 +22,8 @@ import {
   composeRegex,
   directoryRegex,
   forumRegex,
+  postsRegex,
+  areaPostRegex,
   postSubmittedRegex,
   searchRegex,
 } from './pathRegexes'
@@ -46,6 +48,8 @@ const whitelistedPaths = [
   '^/directory',
   '^/d/',
   '/forum',
+  '^/posts',
+  '^/.+/post/.+',
   '^/search',
 ]
 
@@ -106,7 +110,12 @@ const navigateForRequest = (requestPath, route, navigation) => {
   }
 
   // Forum URL
-  if (route.name !== 'Forum' && forumRegex.test(requestPath)) {
+  if (
+    route.name !== 'Forum' &&
+    (forumRegex.test(requestPath) ||
+      postsRegex.test(requestPath) ||
+      areaPostRegex.test(requestPath))
+  ) {
     navigation.navigate('Forum', {
       sourceUrl: requestPath,
     })
