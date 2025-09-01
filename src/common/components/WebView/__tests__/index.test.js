@@ -43,6 +43,32 @@ describe('WebView', () => {
     })
   })
 
+  test('WebView submitted content type requests are intercepted and reset Compose tab', () => {
+    render(<WebView {...defaultProps} />)
+    screen.getByTestId('webView').props.onShouldStartLoadWithRequest({
+      url: 'https://frontporchforum.com/compose?mobile_submitted_content_type=post',
+    })
+
+    expect(navigate).toHaveBeenCalledWith('Compose', {
+      postSubmittedConfirmation: true,
+      submittedContentType: 'post',
+      sourceUrl: '/compose',
+    })
+  })
+
+  test('WebView submitted event type requests are intercepted and reset Compose tab', () => {
+    render(<WebView {...defaultProps} />)
+    screen.getByTestId('webView').props.onShouldStartLoadWithRequest({
+      url: 'https://frontporchforum.com/compose?mobile_submitted_content_type=event',
+    })
+
+    expect(navigate).toHaveBeenCalledWith('Compose', {
+      postSubmittedConfirmation: true,
+      submittedContentType: 'event',
+      sourceUrl: '/compose',
+    })
+  })
+
   test('WebView search requests are intercepted', () => {
     render(<WebView {...defaultProps} />)
     screen.getByTestId('webView').props.onShouldStartLoadWithRequest({

@@ -86,21 +86,22 @@ const navigateForRequest = (requestPath, route, navigation) => {
     return true
   }
 
-  // Compose URL
-  if (route.name !== 'Compose' && composeRegex.test(requestPath)) {
-    navigation.navigate('Compose', {
-      sourceUrl: requestPath,
-    })
-    return true
-  }
-
-  // Content submitted URL
+  // Content submitted URL - check this before compose URL
   const submittedContentType =
     requestPath.match(postSubmittedRegex)?.groups?.contentType
   if (submittedContentType) {
     navigation.navigate('Compose', {
       postSubmittedConfirmation: true,
       submittedContentType,
+      sourceUrl: '/compose',
+    })
+    return true
+  }
+
+  // Compose URL
+  if (route.name !== 'Compose' && composeRegex.test(requestPath)) {
+    navigation.navigate('Compose', {
+      sourceUrl: requestPath,
     })
     return true
   }
