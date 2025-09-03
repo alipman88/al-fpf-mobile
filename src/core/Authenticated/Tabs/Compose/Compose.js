@@ -40,9 +40,12 @@ export class Compose extends React.Component {
   render() {
     const { navigation, navigateWithToken, route } = this.props
     const accessToken = this.props.accessToken.toString()
-    const initialUrl =
+    const baseUrl =
       Config.WEBSITE_HOST +
       (route.params?.sourceUrl ?? route.path ?? '/compose')
+
+    // Add resetToken as query parameter to trigger WebView reload when reset() is called
+    const initialUrl = `${baseUrl}${baseUrl.includes('?') ? '&' : '?'}resetToken=${this.resetToken}`
 
     const submittedContentType = route.params?.submittedContentType || 'post'
 
