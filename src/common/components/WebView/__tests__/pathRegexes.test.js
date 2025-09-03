@@ -3,6 +3,8 @@ import {
   composeRegex,
   directoryRegex,
   forumRegex,
+  postsRegex,
+  areaPostRegex,
   postSubmittedRegex,
   searchRegex,
 } from '../pathRegexes'
@@ -58,6 +60,32 @@ describe('parseUrl', () => {
       expect(forumRegex.test('/moretown/forum/archive/123')).toBeTruthy()
 
       expect(forumRegex.test('/moretown')).toBeFalsy()
+    })
+  })
+
+  describe('postsRegex', () => {
+    test('it matches Posts URLs', () => {
+      expect(postsRegex.test('/posts')).toBeTruthy()
+
+      expect(postsRegex.test('/winooski/post/123')).toBeFalsy()
+      expect(postsRegex.test('/moretown/post/456')).toBeFalsy()
+      expect(postsRegex.test('/area-with-dashes/post/789')).toBeFalsy()
+      expect(postsRegex.test('/forum')).toBeFalsy()
+      expect(postsRegex.test('/moretown')).toBeFalsy()
+    })
+  })
+
+  describe('areaPostRegex', () => {
+    test('it matches Area Post URLs', () => {
+      expect(areaPostRegex.test('/winooski/post/123')).toBeTruthy()
+      expect(areaPostRegex.test('/moretown/post/456')).toBeTruthy()
+      expect(areaPostRegex.test('/area-with-dashes/post/789')).toBeTruthy()
+
+      expect(areaPostRegex.test('/post')).toBeFalsy()
+      expect(areaPostRegex.test('/posts')).toBeFalsy()
+      expect(areaPostRegex.test('/posts/invalid')).toBeFalsy()
+      expect(areaPostRegex.test('/forum')).toBeFalsy()
+      expect(areaPostRegex.test('/moretown')).toBeFalsy()
     })
   })
 

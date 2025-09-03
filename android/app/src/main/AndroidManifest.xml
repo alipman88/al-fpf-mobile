@@ -58,6 +58,8 @@
           <data android:pathPattern="/forum" />
           <data android:pathPattern="/.*/forum" />
           <data android:pathPattern="/.*/forum/.*" />
+          <data android:pathPattern="/posts" />
+          <data android:pathPattern="/.*/post/.*" />
           <data android:pathPattern="/search" />
         </intent-filter>
         </activity>
