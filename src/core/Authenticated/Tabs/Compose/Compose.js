@@ -40,9 +40,11 @@ export class Compose extends React.Component {
   render() {
     const { navigation, navigateWithToken, route } = this.props
     const accessToken = this.props.accessToken.toString()
-    const initialUrl =
-      Config.WEBSITE_HOST +
-      (route.params?.sourceUrl ?? route.path ?? '/compose')
+    const initialUrl = new URL(
+      route.params?.sourceUrl ?? route.path ?? '/compose',
+      Config.WEBSITE_HOST,
+    )
+    initialUrl.searchParams.set('resetToken', this.resetToken)
 
     const submittedContentType = route.params?.submittedContentType || 'post'
 
@@ -50,7 +52,7 @@ export class Compose extends React.Component {
       <React.Fragment>
         <WebView
           rootUrl={`${Config.WEBSITE_HOST}/compose`}
-          initialUrl={initialUrl}
+          initialUrl={initialUrl.toString()}
           headers={{ authorization: accessToken }}
           scrollTopOnTabPress={true}
           navigation={navigation}
