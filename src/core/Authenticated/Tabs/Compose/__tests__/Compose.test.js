@@ -88,4 +88,75 @@ describe('Compose', () => {
       resetToken: 1, // 0 + 1
     })
   })
+
+  test('blur() calls reset() when modalVisible is true', () => {
+    const propsWithModal = {
+      ...defaultProps,
+      route: {
+        ...defaultProps.route,
+        params: { submittedContentType: 'post' },
+      },
+    }
+
+    const wrapper = shallow(<Compose {...propsWithModal} />)
+    const instance = wrapper.instance()
+    const resetSpy = jest.spyOn(instance, 'reset')
+
+    // Call blur method
+    instance.blur()
+
+    expect(resetSpy).toHaveBeenCalled()
+  })
+
+  test('blur() calls reset() when postSubmittedConfirmation is true', () => {
+    const propsWithConfirmation = {
+      ...defaultProps,
+      route: {
+        ...defaultProps.route,
+        params: { postSubmittedConfirmation: true },
+      },
+    }
+
+    const wrapper = shallow(<Compose {...propsWithConfirmation} />)
+    const instance = wrapper.instance()
+    const resetSpy = jest.spyOn(instance, 'reset')
+
+    // Call blur method
+    instance.blur()
+
+    expect(resetSpy).toHaveBeenCalled()
+  })
+
+  test('blur() calls reset() when both modalVisible and postSubmittedConfirmation are true', () => {
+    const propsWithBoth = {
+      ...defaultProps,
+      route: {
+        ...defaultProps.route,
+        params: {
+          submittedContentType: 'post',
+          postSubmittedConfirmation: true,
+        },
+      },
+    }
+
+    const wrapper = shallow(<Compose {...propsWithBoth} />)
+    const instance = wrapper.instance()
+    const resetSpy = jest.spyOn(instance, 'reset')
+
+    // Call blur method
+    instance.blur()
+
+    expect(resetSpy).toHaveBeenCalled()
+  })
+
+  test('blur() does not call reset() when neither modalVisible nor postSubmittedConfirmation are true', () => {
+    const wrapper = shallow(<Compose {...defaultProps} />)
+    const instance = wrapper.instance()
+    const resetSpy = jest.spyOn(instance, 'reset')
+
+    // Call blur method
+    instance.blur()
+
+    expect(resetSpy).not.toHaveBeenCalled()
+  })
 })

@@ -23,7 +23,8 @@ export class Compose extends React.Component {
   }
 
   blur() {
-    if (this.modalVisible) {
+    const { route } = this.props
+    if (this.modalVisible || route.params?.postSubmittedConfirmation) {
       this.reset()
     }
   }
